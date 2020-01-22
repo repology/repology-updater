@@ -284,11 +284,9 @@ class PackageMaker(PackageMakerBase):
             name=names.name,
             srcname=names.srcname,
             binname=names.binname,
-            basename=names.basename,
-            keyname=names.keyname,
+            trackname=names.trackname,
             visiblename=names.visiblename,
             projectname_seed=names.projectname_seed,
-            trackname=names.trackname,
 
             version=self._package.version,
             origversion=self._package.version,

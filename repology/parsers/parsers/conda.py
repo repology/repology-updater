@@ -29,7 +29,7 @@ class CondaRepodataJsonParser(Parser):
             for pkgfilename, pkgdata in json.load(jsonfile)['packages'].items():
                 pkg = factory.begin(pkgfilename)
 
-                pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(pkgdata['name'], NameType.GENERIC_GEN_NAME)
                 pkg.set_version(pkgdata['version'])
                 pkg.add_licenses(pkgdata.get('license', ''))
 

@@ -358,11 +358,9 @@ CREATE TABLE packages (
 	name text NULL,
 	srcname text NULL,
 	binname text NULL,
-	basename text NULL,
-	keyname text NULL,
+	trackname text NOT NULL,
 	visiblename text NOT NULL,
 	projectname_seed text NOT NULL,
-	trackname text NULL,
 
 	origversion text NOT NULL,
 	rawversion text NOT NULL,

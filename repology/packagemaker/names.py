@@ -26,9 +26,6 @@ class NameType:
     IGNORED: ClassVar[int] = 0  # special type which is always ignored
     UNSUPPORTED: ClassVar[int] = 1  # special type which always fails
 
-    # Unclassified, process all cases and remove
-    GENERIC_PKGNAME: ClassVar[int] = 10
-
     # Common patterns: single name
     GENERIC_GEN_NAME: ClassVar[int] = 1000
     GENERIC_SRC_NAME: ClassVar[int] = 1001
@@ -213,8 +210,6 @@ class _NameMapping:
     name: Optional[int] = None
     srcname: Optional[int] = None
     binname: Optional[int] = None
-    basename: Optional[int] = None
-    keyname: Optional[int] = None
     trackname: Optional[int] = None
 
 
@@ -223,8 +218,6 @@ class MappedNames:
     name: Optional[str] = None
     srcname: Optional[str] = None
     binname: Optional[str] = None
-    basename: Optional[str] = None
-    keyname: Optional[str] = None
     visiblename: Optional[str] = None
     projectname_seed: Optional[str] = None
     trackname: Optional[str] = None
@@ -232,11 +225,6 @@ class MappedNames:
 
 _MAPPINGS = [
     # Generic
-    _NameMapping(
-        name=NameType.GENERIC_PKGNAME,
-        visiblename=NameType.GENERIC_PKGNAME,
-        projectname_seed=NameType.GENERIC_PKGNAME,
-    ),
     _NameMapping(
         srcname=NameType.GENERIC_NOBN_NAME,
         binname=NameType.GENERIC_NOBN_NAME,

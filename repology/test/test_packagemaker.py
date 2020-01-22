@@ -37,7 +37,7 @@ class TestPackage:
 
     def __enter__(self) -> PackageMaker:
         self._package_maker = self._factory.begin()
-        self._package_maker.add_name('dummy_package', NameType.GENERIC_PKGNAME)
+        self._package_maker.add_name('dummy_package', NameType.GENERIC_GEN_NAME)
         self._package_maker.set_version('0dummy0')
         return self._package_maker
 
@@ -56,7 +56,7 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.add_name('foo', NameType.GENERIC_PKGNAME)
+            maker.add_name('foo', NameType.GENERIC_GEN_NAME)
             maker.set_version('1.0')
             maker.set_summary('foo package')
             maker.add_maintainers(None, 'a@com', [None, ['b@com']], None, 'c@com')
@@ -118,8 +118,8 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.add_name('foo', NameType.GENERIC_PKGNAME)
-            maker.add_name('bar', NameType.GENERIC_PKGNAME)
+            maker.add_name('foo', NameType.GENERIC_GEN_NAME)
+            maker.add_name('bar', NameType.GENERIC_GEN_NAME)
             maker.set_version('1.0')
             maker.set_version('1.1')
             maker.set_summary('Foo')
@@ -133,7 +133,7 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.add_name(0, NameType.GENERIC_PKGNAME)
+            maker.add_name(0, NameType.GENERIC_GEN_NAME)
             maker.set_version(0)
             maker.set_summary(0)
 
@@ -146,7 +146,7 @@ class TestPackageMaker(unittest.TestCase):
 
         with pkg as maker:
             with self.assertRaises(RuntimeError):
-                maker.add_name([123], NameType.GENERIC_PKGNAME)
+                maker.add_name([123], NameType.GENERIC_GEN_NAME)
             with self.assertRaises(RuntimeError):
                 maker.set_version([123])
             with self.assertRaises(RuntimeError):
@@ -156,9 +156,9 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.add_name('foo', NameType.GENERIC_PKGNAME)
-            maker.add_name('', NameType.GENERIC_PKGNAME)
-            maker.add_name(None, NameType.GENERIC_PKGNAME)
+            maker.add_name('foo', NameType.GENERIC_GEN_NAME)
+            maker.add_name('', NameType.GENERIC_GEN_NAME)
+            maker.add_name(None, NameType.GENERIC_GEN_NAME)
             maker.set_version('1.0')
             maker.set_version('')
             maker.set_version(None)

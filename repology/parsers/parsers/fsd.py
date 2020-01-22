@@ -106,7 +106,7 @@ class FreeSoftwareDirectoryXMLParser(Parser):
 
                 num_accepted += 1
 
-                pkg.add_name(page, NameType.GENERIC_PKGNAME)
+                pkg.add_name(page, NameType.GENERIC_GEN_NAME)
                 pkg.set_version(version)
                 pkg.set_summary(entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Short_description'))
 

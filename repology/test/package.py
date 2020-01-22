@@ -43,7 +43,7 @@ def spawn_package(
 ) -> Package:
     m = PackageFactory().begin()
 
-    m.add_name(name, NameType.GENERIC_PKGNAME)
+    m.add_name(name, NameType.GENERIC_GEN_NAME)
     m.set_version(version)
 
     m.set_flags(flags)

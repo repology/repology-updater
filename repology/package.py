@@ -135,13 +135,11 @@ class Package:
         'subrepo',
 
         'name',
-        'basename',
-        'keyname',
-        'visiblename',
-        'projectname_seed',
-        'trackname',
         'srcname',
         'binname',
+        'trackname',
+        'visiblename',
+        'projectname_seed',
 
         'origversion',
         'rawversion',
@@ -177,11 +175,9 @@ class Package:
     name: Optional[str]
     srcname: Optional[str]
     binname: Optional[str]
-    basename: Optional[str]
-    keyname: Optional[str]
+    trackname: Optional[str]
     visiblename: str
     projectname_seed: str
-    trackname: Optional[str]
 
     origversion: str
     rawversion: str
@@ -226,8 +222,6 @@ class Package:
                  name: Optional[str] = None,
                  srcname: Optional[str] = None,
                  binname: Optional[str] = None,
-                 basename: Optional[str] = None,
-                 keyname: Optional[str] = None,
                  trackname: Optional[str] = None,
 
                  arch: Optional[str] = None,
@@ -253,11 +247,9 @@ class Package:
         self.name = name
         self.srcname = srcname
         self.binname = binname
-        self.basename = basename
-        self.keyname = keyname
+        self.trackname = trackname
         self.visiblename = visiblename
         self.projectname_seed = projectname_seed
-        self.trackname = trackname
 
         self.origversion = origversion
         self.rawversion = rawversion

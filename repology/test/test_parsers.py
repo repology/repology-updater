@@ -43,11 +43,9 @@ class TestParsers(unittest.TestCase):
             'name': None,
             'srcname': None,
             'binname': None,
+            # trackname must be filled
             # visiblename must be filled
             # proectname_seed must be filled
-            'basename': None,
-            'keyname': None,
-            'trackname': None,
 
             # version must be filled
             # origversion must be filled
