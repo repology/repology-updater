@@ -348,6 +348,7 @@ _MAPPINGS = [
     _NameMapping(
         binname=NameType.OPENWRT_PACKAGE,
         srcname=NameType.OPENWRT_SOURCE,
+        trackname=NameType.OPENWRT_SOURCE,
         visiblename=NameType.OPENWRT_PACKAGE,
         projectname_seed=NameType.OPENWRT_SOURCEDIR,
     ),
