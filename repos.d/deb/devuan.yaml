@@ -60,6 +60,25 @@
       url: https://devuan.org/
   tags: [ all, production, devuan ]
 
+- name: devuan_4_0
+  type: repository
+  desc: Devuan 4.0 (Chimaera)
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '88839c'
+  minpackages: 27000
+  sources:
+    - name: [ chimaera/main, chimaera/contrib, chimaera/non-free, chimaera-updates/main, chimaera-updates/contrib, chimaera-updates/non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Devuan home
+      url: https://devuan.org/
+  tags: [ all, production, devuan ]
+
 - name: devuan_unstable
   type: repository
   desc: Devuan Unstable
