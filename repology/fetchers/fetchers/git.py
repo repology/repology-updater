@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,17 +20,24 @@ from typing import List, Optional
 
 from repology.fetchers import PersistentDirFetcher
 from repology.logger import Logger
-from repology.subprocess import get_subprocess_output, run_subprocess
+from repology.subprocess import Runner
 
 
 class GitFetcher(PersistentDirFetcher):
-    def __init__(self, url: str, branch: str = 'master', sparse_checkout: Optional[List[str]] = None, fetch_timeout: int = 600) -> None:
-        self.url = url
-        self.branch = branch
-        self.sparse_checkout = sparse_checkout
-        self.fetch_timeout = fetch_timeout
+    _url: str
+    _branch: str
+    _sparse_checkout: Optional[List[str]]
+    _timeout_arg: str
+    _depth_arg: Optional[str]
 
-    def _setup_sparse_checkout(self, statepath: str, logger: Logger) -> None:
+    def __init__(self, url: str, branch: str = 'master', sparse_checkout: Optional[List[str]] = None, fetch_timeout: int = 600, depth: Optional[int] = 1) -> None:
+        self._url = url
+        self._branch = branch
+        self._sparse_checkout = sparse_checkout
+        self._timeout_arg = str(fetch_timeout)
+        self._depth_arg = None if depth is None else f'--depth={depth}'
+
+    def _setup_sparse_checkout(self, statepath: str) -> None:
         sparse_checkout_path = os.path.join(statepath, '.git', 'info', 'sparse-checkout')
 
         # We always enable sparse checkout, as it's harder to
@@ -38,10 +45,9 @@ class GitFetcher(PersistentDirFetcher):
         # than to leave it enabled with all files whitelisted
         #
         # See https://stackoverflow.com/questions/36190800/how-to-disable-sparse-checkout-after-enabled/36195275
-        run_subprocess(['git', 'config', 'core.sparsecheckout', 'true'], cwd=statepath, logger=logger)
         with open(sparse_checkout_path, 'w') as sparse_checkout_file:
-            if self.sparse_checkout:
-                for item in self.sparse_checkout:
+            if self._sparse_checkout:
+                for item in self._sparse_checkout:
                     print(item, file=sparse_checkout_file)
             else:
                 print('/*', file=sparse_checkout_file)
@@ -49,23 +55,29 @@ class GitFetcher(PersistentDirFetcher):
             os.fsync(sparse_checkout_file.fileno())
 
     def _do_fetch(self, statepath: str, logger: Logger) -> bool:
-        run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statepath], logger=logger)
-        self._setup_sparse_checkout(statepath, logger)
-        run_subprocess(['git', 'checkout'], cwd=statepath, logger=logger)
+        Runner(logger=logger).run('timeout', self._timeout_arg, 'git', 'clone', '--progress', '--no-checkout', self._depth_arg, '--branch', self._branch, self._url, statepath)
+
+        r = Runner(logger=logger, cwd=statepath)
+
+        r.run('git', 'config', 'core.sparsecheckout', 'true')
+        self._setup_sparse_checkout(statepath)
+        r.run('git', 'checkout')
 
         return True
 
     def _do_update(self, statepath: str, logger: Logger) -> bool:
-        old_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statepath, logger=logger).strip()
+        r = Runner(logger=logger, cwd=statepath)
 
-        run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statepath, logger=logger)
-        run_subprocess(['git', 'checkout'], cwd=statepath, logger=logger)  # needed for reset to not fail on changed sparse checkout
-        self._setup_sparse_checkout(statepath, logger)
-        run_subprocess(['git', 'reset', '--hard', 'origin/' + self.branch], cwd=statepath, logger=logger)
-        run_subprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statepath, logger=logger)
-        run_subprocess(['git', 'prune'], cwd=statepath, logger=logger)
+        old_head = r.get('git', 'rev-parse', 'HEAD').strip()
 
-        new_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statepath, logger=logger).strip()
+        r.run('timeout', self._timeout_arg, 'git', 'fetch', '--progress', self._depth_arg)
+        r.run('git', 'checkout')  # needed for reset to not fail on changed sparse checkout
+        self._setup_sparse_checkout(statepath)
+        r.run('git', 'reset', '--hard', f'origin/{self._branch}')
+        r.run('git', 'reflog', 'expire', '--expire=0', '--all')
+        r.run('git', 'prune')
+
+        new_head = r.get('git', 'rev-parse', 'HEAD').strip()
 
         if new_head == old_head:
             logger.log('HEAD has not changed: {}'.format(new_head))

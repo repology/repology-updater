@@ -176,6 +176,7 @@ schemas = {
                     'branch': str,
                     'subrepo': str,
                     'sparse_checkout': [str],
+                    'depth': Any(int, None),
 
                     # some common fetcher args
                     'fetch_timeout': Any(int, float),
