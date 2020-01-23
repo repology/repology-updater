@@ -184,6 +184,26 @@
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
+- name: packman_opensuse_leap_15_2
+  type: repository
+  desc: PackMan openSUSE Leap 15.2
+  family: opensuse  # XXX: own family?
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 500
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.2/
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{srcname}'
+  tags: [all, production, packman]
+
 - name: packman_opensuse_tumbleweed
   type: repository
   desc: PackMan openSUSE Tumbleweed
