@@ -37,7 +37,7 @@
   type: repository
   desc: Kwort 4.3.4
   family: kwort
-  minpackages: 30  # why so little ???
+  minpackages: 200
   sources:
     - name: europa.kdb
       fetcher: FileFetcher
