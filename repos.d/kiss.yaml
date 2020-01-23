@@ -13,6 +13,7 @@
       parser: KissGitParser
       url: 'https://github.com/kisslinux/repo.git'
       maintainer_from_git: true
+      depth: null
       sparse_checkout: [ '**/version', '**/sources' ]
   repolinks:
     - desc: KISS Linux home
@@ -36,8 +37,9 @@
     - name: repo
       fetcher: GitFetcher
       parser: KissGitParser
-      maintainer_from_git: true
       url: 'https://github.com/kisslinux/community.git'
+      maintainer_from_git: true
+      depth: null
       sparse_checkout: [ '**/version', '**/sources' ]
   repolinks:
     - desc: KISS Linux home
