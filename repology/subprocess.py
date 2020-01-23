@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -67,3 +67,18 @@ def get_subprocess_output(command: List[str], logger: Logger, cwd: Optional[str]
             raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
 
     return res
+
+
+class Runner:
+    _logger: Logger
+    _cwd: Optional[str]
+
+    def __init__(self, logger: Logger, cwd: Optional[str] = None) -> None:
+        self._logger = logger
+        self._cwd = cwd
+
+    def run(self, *args: Optional[str]) -> None:
+        run_subprocess([arg for arg in args if arg is not None], logger=self._logger, cwd=self._cwd)
+
+    def get(self, *args: Optional[str]) -> str:
+        return get_subprocess_output([arg for arg in args if arg is not None], logger=self._logger, cwd=self._cwd)
