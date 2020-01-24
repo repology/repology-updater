@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -36,7 +36,7 @@ class RsyncFetcher(Fetcher):
             return False
 
         args = [
-            '--verbose',
+            '--info=stats2',
             '--archive',
             '--compress',
             '--delete',
