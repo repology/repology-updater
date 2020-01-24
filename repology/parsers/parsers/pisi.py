@@ -42,9 +42,10 @@ class PisiParser(Parser):
                 name = safe_findtext(root, './Source/Name')
                 pkgdir = os.path.dirname(relpath)
 
-                if name != os.path.split(relpath)[-2]:
+                pathname = relpath.split(os.sep)[-2]
+                if name != pathname:
                     # there's only one exception ATOW
-                    pkg.log(f'name "{name}" package directory "{os.path.split(relpath)[-2]}"', Logger.ERROR)
+                    pkg.log(f'name "{name}" != package directory "{pathname}"', Logger.ERROR)
 
                 pkg.add_name(name, NameType.PISI_NAME)
                 pkg.add_name(pkgdir, NameType.PISI_PKGDIR)
