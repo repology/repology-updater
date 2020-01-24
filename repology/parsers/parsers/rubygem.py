@@ -1,5 +1,5 @@
 # Copyright (C) 2017 Steve Wills <steve@mouf.net>
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,7 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable
+from collections import Counter
+from typing import Dict, Iterable
 
 import rubymarshal.reader
 
@@ -27,13 +28,15 @@ from repology.transformer import PackageTransformer
 
 class RubyGemParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        skipped_gemplats: Dict[str, int] = Counter()
+
         with open(path, 'rb') as fd:
             for gemname, gemversion, gemplat in rubymarshal.reader.load(fd):
                 gemname = str(gemname)
 
                 with factory.begin(gemname) as pkg:
                     if gemplat != 'ruby':
-                        pkg.log('skipped, gemplat != ruby')
+                        skipped_gemplats[gemplat] += 1
                         continue
 
                     gemversion = str(gemversion.marshal_dump()[0])
@@ -43,3 +46,6 @@ class RubyGemParser(Parser):
                     pkg.add_homepages('https://rubygems.org/gems/' + gemname)
 
                     yield pkg
+
+        for gemplat, count in sorted(skipped_gemplats.items()):
+            factory.log(f'skipped {count} occurrence(s) of gemplat {gemplat}')
