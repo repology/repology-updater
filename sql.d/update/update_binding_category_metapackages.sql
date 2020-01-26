@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -16,9 +16,14 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Update binding tables: per-category
+-- @param partial=False
+-- @param analyze=True
 --------------------------------------------------------------------------------
-DELETE FROM category_metapackages;
+DELETE FROM category_metapackages
+{% if partial %}
+WHERE effname IN (SELECT effname FROM changed_projects)
+{% endif %}
+;
 
 INSERT INTO category_metapackages (
 	category,
@@ -29,8 +34,17 @@ SELECT
 	category,
 	effname,
 	max(num_families) = 1
-FROM packages INNER JOIN metapackages USING(effname)
+FROM
+{% if partial %}
+	changed_projects INNER JOIN packages USING(effname)
+{% else %}
+	packages
+{% endif %}
+	INNER JOIN metapackages USING(effname)
 WHERE category IS NOT NULL AND num_repos_nonshadow > 0
-GROUP BY effname, category;
+GROUP BY effname, category
+ORDER BY effname;
 
+{% if analyze %}
 ANALYZE category_metapackages;
+{% endif %}

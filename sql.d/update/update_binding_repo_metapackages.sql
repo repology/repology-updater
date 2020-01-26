@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -16,9 +16,14 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Update binding tables: per-repository
+-- @param partial=False
+-- @param analyze=True
 --------------------------------------------------------------------------------
-DELETE FROM repo_metapackages;
+DELETE FROM repo_metapackages
+{% if partial %}
+WHERE effname IN (SELECT effname FROM changed_projects)
+{% endif %}
+;
 
 INSERT INTO repo_metapackages(
 	repository_id,
@@ -39,7 +44,13 @@ SELECT
 	count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0,
 
 	max(num_families) = 1
-FROM packages INNER JOIN metapackages USING(effname)
+FROM
+{% if partial %}
+    changed_projects INNER JOIN packages USING(effname)
+{% else %}
+    packages
+{% endif %}
+	INNER JOIN metapackages USING(effname)
 WHERE num_repos_nonshadow > 0
 GROUP BY effname, repo
 -- Reorder according to primary key
@@ -47,4 +58,6 @@ GROUP BY effname, repo
 -- * Leads to better query performance (see repology-benchmark)
 ORDER BY repository_id, effname;
 
+{% if analyze %}
 ANALYZE repo_metapackages;
+{% endif %}

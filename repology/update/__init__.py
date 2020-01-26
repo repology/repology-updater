@@ -62,15 +62,19 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
         elif isinstance(change, RemovedProject):
             remove_project(database, change)
 
+        database.queue_project_change(change.effname)
+
         if stats.total - prev_total >= 10000 or prev_total == 0:
             logger.log(f'  at "{change.effname}": {stats}')
             prev_total = stats.total
 
     logger.log(f'  done: {stats}')
 
-    if stats.change_fraction >= 0.05:
-        logger.log('performing extra actions after huge change')
-        database.update_handle_huge_change()
+    enable_partial = stats.change_fraction < 0.25
+    enable_analyze = stats.change_fraction > 0.05
+
+    logger.log('finalizing projects update')
+    database.update_post_packages(enable_partial, enable_analyze)
 
     logger.log('updating field statistics')
 
@@ -87,16 +91,16 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     database.update_maintainers()
 
     logger.log('updating binding table repo_metapackages')
-    database.update_binding_repo_metapackages()
+    database.update_binding_repo_metapackages(enable_partial, enable_analyze)
 
     logger.log('updating binding table category_metapackages')
-    database.update_binding_category_metapackages()
+    database.update_binding_category_metapackages(enable_partial, enable_analyze)
 
     logger.log('updating binding table maintainer_metapackages')
-    database.update_binding_maintainer_metapackages()
+    database.update_binding_maintainer_metapackages(enable_partial, enable_analyze)
 
     logger.log('updating binding table maintainer_and_repo_metapackages')
-    database.update_binding_maintainer_and_repo_metapackages()
+    database.update_binding_maintainer_and_repo_metapackages(enable_partial, enable_analyze)
 
     logger.log('updating url relations')
     database.update_url_relations()

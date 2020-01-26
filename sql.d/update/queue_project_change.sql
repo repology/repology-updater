@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -16,12 +16,12 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
---
+-- @param effname
 --------------------------------------------------------------------------------
 
-SET SESSION work_mem = '128MB';
-
-CREATE TEMPORARY TABLE changed_projects (
-	effname text NOT NULL
+INSERT INTO changed_projects (
+	effname
 )
-ON COMMIT DROP;
+VALUES (
+	%(effname)s
+);

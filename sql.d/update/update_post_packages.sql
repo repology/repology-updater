@@ -16,7 +16,13 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
---
+-- @param partial=False
+-- @param analyze=True
 --------------------------------------------------------------------------------
 
+{% if analyze %}
 ANALYZE packages;
+ANALYZE changed_projects;
+{% else %}
+SELECT 1;  -- don't generate empty query otherwise (which breaks psycopg)
+{% endif %}
