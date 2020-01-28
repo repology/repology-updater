@@ -41,6 +41,31 @@ FROM (
 	FROM repositories
 ) AS snapshot;
 
+INSERT INTO repositories_history_new (
+	repository_id,
+	ts,
+	num_problems,
+	num_maintainers,
+	num_projects,
+	num_projects_unique,
+	num_projects_newest,
+	num_projects_outdated,
+	num_projects_comparable,
+	num_projects_problematic
+)
+SELECT
+	id,
+	now(),
+	num_problems,
+	num_maintainers,
+	num_metapackages,
+	num_metapackages_unique,
+	num_metapackages_newest,
+	num_metapackages_outdated,
+	num_metapackages_comparable,
+	num_metapackages_problematic
+FROM repositories;
+
 -- global statistics
 INSERT INTO statistics_history (
 	ts,

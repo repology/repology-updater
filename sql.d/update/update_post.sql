@@ -134,3 +134,41 @@ ON CONFLICT (oldname, newname) DO NOTHING;
 --------------------------------------------------------------------------------
 DELETE FROM links
 WHERE last_extracted < now() - INTERVAL '1' MONTH;
+
+--------------------------------------------------------------------------------
+-- Remove duplicate history entries
+--------------------------------------------------------------------------------
+{% macro fields() %}
+	num_problems,
+	num_maintainers,
+	num_projects,
+	num_projects_unique,
+	num_projects_newest,
+	num_projects_outdated,
+	num_projects_comparable,
+	num_projects_problematic
+{% endmacro %}
+
+WITH duplicate_rows AS (
+    SELECT
+        repository_id,
+        ts
+    FROM (
+        SELECT
+            repository_id,
+            ts,
+            row({{ fields() }}) AS cur,
+            lead(row({{ fields() }}), 1) OVER w AS next,
+            lag(row({{ fields() }}), 1) OVER w AS prev
+        FROM repositories_history_new
+		-- don't unnecessarily thin out whole table each time -
+		-- just process last day worth of history
+		WHERE ts > now() - interval '1' day
+        WINDOW w AS (PARTITION by repository_id ORDER BY ts)
+    ) AS tmp
+    WHERE cur = next AND cur = prev
+)
+DELETE FROM repositories_history_new USING duplicate_rows
+WHERE
+	repositories_history_new.repository_id = duplicate_rows.repository_id AND
+	repositories_history_new.ts = duplicate_rows.ts;

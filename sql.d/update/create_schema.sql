@@ -636,6 +636,23 @@ CREATE TABLE repositories_history (
 	snapshot jsonb NOT NULL
 );
 
+DROP TABLE IF EXISTS repositories_history_new CASCADE;
+
+CREATE TABLE repositories_history_new (
+	repository_id smallint NOT NULL,
+	ts timestamp with time zone NOT NULL,
+	num_problems integer,
+	num_maintainers integer,
+	num_projects integer,
+	num_projects_unique integer,
+	num_projects_newest integer,
+	num_projects_outdated integer,
+	num_projects_comparable integer,
+	num_projects_problematic integer,
+
+	PRIMARY KEY(repository_id, ts)
+);
+
 --------------------------------------------------------------------------------
 -- Tables binding metapackages and other entities
 --------------------------------------------------------------------------------
