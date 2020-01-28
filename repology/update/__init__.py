@@ -70,7 +70,14 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
 
     logger.log(f'  done: {stats}')
 
+    # Fraction picked experimentally: at change size of around 100k of 400k projects
+    # time of partial update of most binding tables approaches or exceeds full update
+    # time. In fact this doesn't matter much, as general update is arond 0.001 (0.1%),
+    # and a few cases of > 0.01 (1%) are when new repositories are added, othewise it's
+    # 1 (100%) when Package format changes or when database is filled for the first time.
     enable_partial = stats.change_fraction < 0.25
+
+    # This was picked randomly
     enable_analyze = stats.change_fraction > 0.05
 
     logger.log('finalizing projects update')
