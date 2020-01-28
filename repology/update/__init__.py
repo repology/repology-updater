@@ -27,6 +27,28 @@ from repology.update.changes import ProjectsChangeStatistics, RemovedProject, Up
 from repology.update.hashes import iter_project_hashes
 
 
+class ChangedProjectsAccumulator:
+    _BATCH_SIZE = 1000
+
+    _database: Database
+    _effnames: List[str]
+
+    def __init__(self, database: Database) -> None:
+        self._database = database
+        self._effnames = []
+
+    def add(self, effname: str) -> None:
+        self._effnames.append(effname)
+
+        if len(self._effnames) >= ChangedProjectsAccumulator._BATCH_SIZE:
+            self.flush()
+
+    def flush(self) -> None:
+        if self._effnames:
+            self._database.queue_project_changes(self._effnames)
+            self._effnames = []
+
+
 def update_project(database: Database, change: UpdatedProject) -> None:
     fill_packageset_versions(change.packages)
 
@@ -52,6 +74,8 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     prev_total = 0
     stats = ProjectsChangeStatistics()
 
+    changed_projects = ChangedProjectsAccumulator(database)
+
     for change in iter_changed_projects(iter_project_hashes(database), projects, stats):
         if isinstance(change, UpdatedProject):
             update_project(database, change)
@@ -62,12 +86,13 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
         elif isinstance(change, RemovedProject):
             remove_project(database, change)
 
-        database.queue_project_change(change.effname)
+        changed_projects.add(change.effname)
 
         if stats.total - prev_total >= 10000 or prev_total == 0:
             logger.log(f'  at "{change.effname}": {stats}')
             prev_total = stats.total
 
+    changed_projects.flush()
     logger.log(f'  done: {stats}')
 
     # Fraction picked experimentally: at change size of around 100k of 400k projects
