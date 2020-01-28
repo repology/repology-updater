@@ -65,16 +65,20 @@
     - desc: DPorts repository on GitHub
       url: https://github.com/DragonFlyBSD/DPorts
   packagelinks:
-    - desc: FreshPorts page
+    - desc: DPorts git
+      url: 'https://github.com/DragonFlyBSD/DPorts/tree/master/{srcname}'
+    - desc: DPorts Makefile
+      url: 'https://github.com/DragonFlyBSD/DPorts/blob/master/{srcname}/Makefile'
+    - desc: Synth build log
+      url: 'http://sting.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
+    - desc: FreeBSD FreshPorts page
       url: 'https://www.freshports.org/{srcname}'
-    - desc: SVNWeb
+    - desc: FreeBSD SVNWeb
       url: 'https://svnweb.freebsd.org/ports/head/{srcname}/'
-    - desc: Port's Makefile
+    - desc: FreeBSD Port's Makefile
       url: 'https://svnweb.freebsd.org/ports/head/{srcname}/Makefile?view=co'
-    - desc: PortsMon
+    - desc: FreeBSD PortsMon
       url: 'http://portsmon.freebsd.org/portoverview.py?category={srcname|dirname}&portname={srcname|basename}'
     - desc: Related bugs in FreeBSD bugzilla
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={srcname}'
-    - desc: Synth build log
-      url: 'http://sting.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
   tags: [ all, production ]
