@@ -15,14 +15,24 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+-- XXX: AS METARIALIZED here yields a bit better performance;
+-- may add it when we swith to Pg12 everywhere and require it
+WITH metapackages_with_related AS (
+	SELECT DISTINCT metapackage_id
+	FROM url_relations
+	WHERE EXISTS (
+		SELECT *
+		FROM url_relations related
+		WHERE related.urlhash = url_relations.urlhash AND
+			related.metapackage_id != url_relations.metapackage_id
+	)
+)
 UPDATE metapackages
 SET
-   has_related = EXISTS (
-           SELECT *  -- returns other effnames for these urls
-           FROM url_relations
-           WHERE urlhash IN (
-                   SELECT urlhash  -- returns urls for this effname
-                   FROM url_relations
-                   WHERE metapackage_id = metapackages.id
-           ) AND metapackage_id != metapackages.id
-   );
+	has_related = EXISTS (
+		SELECT * FROM metapackages_with_related WHERE metapackages_with_related.metapackage_id = id
+	)
+WHERE
+	has_related != EXISTS (
+        SELECT * FROM metapackages_with_related WHERE metapackages_with_related.metapackage_id = id
+    );
