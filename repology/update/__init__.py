@@ -137,6 +137,9 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     logger.log('updating url relations')
     database.update_url_relations()
 
+    logger.log('updating projects has_related flag')
+    database.update_projects_has_related()
+
     logger.log('updating problems')
     database.update_problems()
 

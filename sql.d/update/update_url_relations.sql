@@ -50,16 +50,3 @@ FROM
 WHERE metapackages_for_url > 1;
 
 ANALYZE url_relations;
-
--- update flags for metapackages
-UPDATE metapackages
-SET
-	has_related = EXISTS (
-		SELECT *  -- returns other effnames for these urls
-		FROM url_relations
-		WHERE urlhash IN (
-			SELECT urlhash  -- returns urls for this effname
-			FROM url_relations
-			WHERE metapackage_id = metapackages.id
-		) AND metapackage_id != metapackages.id
-	);
