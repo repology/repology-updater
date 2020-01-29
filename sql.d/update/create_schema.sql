@@ -628,15 +628,24 @@ CREATE INDEX ON reports(updated DESC);
 --------------------------------------------------------------------------------
 -- Url relations
 --------------------------------------------------------------------------------
+DROP TABLE IF EXISTS url_relations_all CASCADE;
+
+CREATE TABLE url_relations_all (
+	metapackage_id integer NOT NULL,
+	urlhash bigint NOT NULL
+);
+
+CREATE INDEX ON url_relations_all(metapackage_id);
+
 DROP TABLE IF EXISTS url_relations CASCADE;
 
 CREATE TABLE url_relations (
 	metapackage_id integer NOT NULL,
-	urlhash bigint NOT NULL,
-	PRIMARY KEY(metapackage_id, urlhash)
+	urlhash bigint NOT NULL
 );
 
-CREATE INDEX ON url_relations(urlhash, metapackage_id);
+CREATE UNIQUE INDEX ON url_relations(metapackage_id, urlhash);
+CREATE UNIQUE INDEX ON url_relations(urlhash, metapackage_id);
 
 --------------------------------------------------------------------------------
 -- Redirects

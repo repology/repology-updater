@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -15,9 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
---------------------------------------------------------------------------------
--- Update related urls
---------------------------------------------------------------------------------
+-- Filter related urls which have more than single project
 DELETE
 FROM url_relations;
 
@@ -26,27 +24,12 @@ INTO url_relations
 SELECT
 	metapackage_id,
 	urlhash
-FROM
-(
+FROM (
 	SELECT
-		metapackage_id,
-		urlhash,
-		count(*) OVER (PARTITION BY urlhash) AS metapackages_for_url
-	FROM
-	(
-		SELECT DISTINCT
-			(SELECT id FROM metapackages WHERE metapackages.effname = packages.effname) AS metapackage_id,
-			(
-				'x' || left(
-					md5(
-						simplify_url(homepage)
-					), 16
-				)
-			)::bit(64)::bigint AS urlhash
-		FROM packages
-		WHERE homepage ~ '^https?://'
-	) AS tmp2
-) AS tmp1
-WHERE metapackages_for_url > 1;
+		*,
+		count(*) OVER(PARTITION BY urlhash) AS num_projects_for_url
+	FROM url_relations_all
+) AS tmp
+WHERE num_projects_for_url > 1;
 
 ANALYZE url_relations;

@@ -167,8 +167,11 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     logger.log('updating binding table maintainer_and_repo_metapackages')
     database.update_binding_maintainer_and_repo_metapackages(enable_partial, enable_analyze)
 
-    logger.log('updating url relations')
-    database.update_url_relations()
+    logger.log('updating url relations (all)')
+    database.update_url_relations_all(enable_partial, enable_analyze)
+
+    logger.log('updating url relations (filtered)')
+    database.update_url_relations_filtered(enable_partial, enable_analyze)
 
     logger.log('updating projects has_related flag')
     database.update_projects_has_related()
