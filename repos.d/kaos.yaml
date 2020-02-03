@@ -5,6 +5,7 @@
   type: repository
   desc: KaOS
   family: kaos
+  ruleset: kaos
   default_maintainer: demm@kaosx.us
   color: "1d6fa5"
   minpackages: 1900
@@ -32,6 +33,7 @@
   type: repository
   desc: KaOS Build
   family: kaos
+  ruleset: [kaos, kaos_build]
   default_maintainer: demm@kaosx.us
   minpackages: 10
   sources:
