@@ -52,7 +52,6 @@ class ChangedProjectsAccumulator:
 def update_project(database: Database, change: UpdatedProject) -> None:
     fill_packageset_versions(change.packages)
 
-    database.remove_packages(change.effname)
     database.add_packages(change.packages)
 
     database.update_project_hash(change.effname, change.hash)

@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -20,7 +20,7 @@
 -- @param many objects
 --
 --------------------------------------------------------------------------------
-INSERT INTO packages(
+INSERT INTO incoming_packages (
 	-- parsed, immutable
 	repo,
 	family,

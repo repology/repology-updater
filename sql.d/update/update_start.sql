@@ -25,3 +25,43 @@ CREATE TEMPORARY TABLE changed_projects (
 	effname text NOT NULL
 )
 ON COMMIT DROP;
+
+CREATE TEMPORARY TABLE incoming_packages (
+	-- parsed, immutable
+    repo text NOT NULL,
+    family text NOT NULL,
+    subrepo text,
+
+    name text NULL,
+    srcname text NULL,
+    binname text NULL,
+    trackname text NOT NULL,
+    visiblename text NOT NULL,
+    projectname_seed text NOT NULL,
+
+    origversion text NOT NULL,
+    rawversion text NOT NULL,
+
+    arch text,
+
+    maintainers text[],
+    category text,
+    comment text,
+    homepage text,
+    licenses text[],
+    downloads text[],
+
+    extrafields jsonb NOT NULL,
+
+    -- calculated
+    effname text NOT NULL,
+    version text NOT NULL,
+    versionclass smallint,
+
+    flags integer NOT NULL,
+    shadow bool NOT NULL,
+
+    flavors text[],
+    branch text NULL
+)
+ON COMMIT DROP;

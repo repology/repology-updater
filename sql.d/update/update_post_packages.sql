@@ -21,8 +21,90 @@
 --------------------------------------------------------------------------------
 
 {% if analyze %}
-ANALYZE packages;
 ANALYZE changed_projects;
-{% else %}
-SELECT 1;  -- don't generate empty query otherwise (which breaks psycopg)
+{% endif %}
+
+DELETE
+FROM packages
+{% if partial %}
+WHERE effname IN (SELECT effname FROM changed_projects)
+{% endif %}
+;
+
+INSERT INTO packages (
+	repo,
+	family,
+	subrepo,
+
+	name,
+	srcname,
+	binname,
+	trackname,
+	visiblename,
+	projectname_seed,
+
+	origversion,
+	rawversion,
+
+	arch,
+
+	maintainers,
+	category,
+	comment,
+	homepage,
+	licenses,
+	downloads,
+
+	extrafields,
+
+	effname,
+
+	version,
+	versionclass,
+
+	flags,
+	shadow,
+
+	flavors,
+	branch
+) SELECT
+	repo,
+	family,
+	subrepo,
+
+	name,
+	srcname,
+	binname,
+	trackname,
+	visiblename,
+	projectname_seed,
+
+	origversion,
+	rawversion,
+
+	arch,
+
+	maintainers,
+	category,
+	comment,
+	homepage,
+	licenses,
+	downloads,
+
+	extrafields,
+
+	effname,
+
+	version,
+	versionclass,
+
+	flags,
+	shadow,
+
+	flavors,
+	branch
+FROM incoming_packages;
+
+{% if analyze %}
+ANALYZE packages;
 {% endif %}
