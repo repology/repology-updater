@@ -21,6 +21,7 @@ from typing import Iterable
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.xml import safe_findtext
 from repology.transformer import PackageTransformer
 
 
@@ -29,24 +30,24 @@ class FDroidParser(Parser):
         root = xml.etree.ElementTree.parse(path)
 
         for application in root.findall('application'):
-            app = factory.begin()
+            with factory.begin() as app:
+                app.add_name(safe_findtext(application, 'id'), NameType.FDROID_ID)
+                # org.primftpd: name="primiti\nve ftpd"
+                app.add_name(safe_findtext(application, 'name').replace('\n', ''), NameType.FDROID_NAME)
+                app.add_licenses(application.findtext('license'))
+                app.add_categories(application.findtext('category'))
+                app.add_homepages(application.findtext('web'))
+                app.set_summary(application.findtext('summary'))
 
-            app.add_name(application.find('name').text, NameType.FDROID_NAME)  # type: ignore
-            app.add_name(application.find('id').text, NameType.FDROID_ID)  # type: ignore
-            app.add_licenses(application.find('license').text)  # type: ignore
-            app.add_categories(application.find('category').text)  # type: ignore
-            app.add_homepages(application.find('web').text)  # type: ignore
-            app.set_summary(application.find('summary').text)  # type: ignore
+                upstream_version_code = int(safe_findtext(application, 'marketvercode'))
+                for package in application.findall('package'):
+                    version_code = int(safe_findtext(package, 'versioncode'))
+                    version = package.findtext('version')
 
-            upstream_version_code = int(application.find('marketvercode').text)  # type: ignore
-            for package in application.findall('package'):
-                version_code = int(package.find('versioncode').text)  # type: ignore
-                version = package.find('version').text  # type: ignore
+                    if version:
+                        pkg = app.clone()
 
-                if version:
-                    pkg = app.clone()
+                        pkg.set_version(version)
+                        pkg.set_flags(PackageFlags.DEVEL if version_code > upstream_version_code else 0)
 
-                    pkg.set_version(version)
-                    pkg.set_flags(PackageFlags.DEVEL if version_code > upstream_version_code else 0)
-
-                    yield pkg
+                        yield pkg
