@@ -104,13 +104,15 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     # This was picked randomly
     enable_analyze = stats.change_fraction > 0.05
 
-    logger.log('finalizing projects update')
-    database.update_post_packages(enable_partial, enable_analyze)
-
     logger.log('updating field statistics')
-
     for repo, field_stats in field_stats_per_repo.items():
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
+
+    # Note: before this, packages table still contains old versions of packages,
+    # while new versions reside in incoming_packages temporary table
+    logger.log('applying updated packages')
+    database.update_apply_packages(enable_partial, enable_analyze)
+    # Note: after this, packages table contain new versions of packages
 
     logger.log('updating metapackages')
     database.update_metapackages()
