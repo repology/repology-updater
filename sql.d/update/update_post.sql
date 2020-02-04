@@ -133,7 +133,7 @@ ON CONFLICT (oldname, newname) DO NOTHING;
 -- Clean up stale links
 --------------------------------------------------------------------------------
 DELETE FROM links
-WHERE last_extracted < now() - INTERVAL '1' MONTH;
+WHERE orphaned_since < now() - INTERVAL '1' MONTH;
 
 --------------------------------------------------------------------------------
 -- Remove duplicate history entries

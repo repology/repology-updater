@@ -108,6 +108,9 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     for repo, field_stats in field_stats_per_repo.items():
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
 
+    logger.log('updating links')
+    database.update_links()
+
     # Note: before this, packages table still contains old versions of packages,
     # while new versions reside in incoming_packages temporary table
     logger.log('applying updated packages')
@@ -143,9 +146,6 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
 
     logger.log('updating problems')
     database.update_problems()
-
-    logger.log('updating links')
-    database.update_links()
 
     logger.log('updating statistics')
     database.update_statistics()

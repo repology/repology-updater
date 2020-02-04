@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -15,22 +15,20 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-INSERT INTO links (
-	url
+WITH actual_links AS (
+	SELECT
+		unnest(downloads) AS url
+	FROM packages
+	UNION
+	SELECT
+		homepage AS url
+	FROM packages
+	WHERE
+		homepage IS NOT NULL
 )
-SELECT
-	unnest(downloads) AS url
-FROM incoming_packages
-UNION
-SELECT
-	homepage AS url
-FROM incoming_packages
-WHERE
-	homepage IS NOT NULL AND
-	repo NOT IN('cpan', 'metacpan', 'pypi', 'rubygems', 'cran') AND
-	-- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
-	homepage NOT LIKE '%%mran.revolutionanalytics.com/snapshot/20%%'
--- XXX: might want to change following ON CONFLICT clause to
--- WHERE NOT EXISTS (SELECT * FROM links WHERE links.url = url)
--- as soon as we have generated id column for links table
-ON CONFLICT(url) DO NOTHING;
+UPDATE links
+SET
+	orphaned_since = now()
+WHERE NOT EXISTS (
+	SELECT * FROM actual_links WHERE actual_links.url = links.url
+);
