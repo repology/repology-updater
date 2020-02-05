@@ -449,6 +449,17 @@ CREATE TABLE metapackages_events (
 
 CREATE INDEX ON metapackages_events(effname, ts DESC, type DESC);
 
+DROP TABLE IF EXISTS metapackages_events2 CASCADE;
+
+CREATE TABLE metapackages_events2 (
+	effname text NOT NULL,
+	ts timestamp with time zone NOT NULL,
+	type metapackage_event_type NOT NULL,
+	data jsonb NOT NULL
+);
+
+CREATE INDEX ON metapackages_events2(effname, ts DESC, type DESC);
+
 -- triggers
 CREATE TRIGGER metapackage_create
 	AFTER INSERT ON metapackages
