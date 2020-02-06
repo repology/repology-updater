@@ -38,4 +38,5 @@ SELECT
 	maintainer_name
 FROM old
 RIGHT OUTER JOIN new USING(maintainer_name)
-WHERE old.maintainer_name IS NULL;
+WHERE old.maintainer_name IS NULL
+ON CONFLICT(maintainer) DO NOTHING;
