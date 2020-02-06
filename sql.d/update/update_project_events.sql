@@ -18,7 +18,9 @@
 WITH old AS (
 	SELECT
 		effname,
-	    array_agg(DISTINCT version ORDER BY version) FILTER(
+		-- XXX: technical dept warning: since we don't distinguish "newest unique" and "devel unique" statuses, we have
+		-- to use flags here. Better solution should be implemented in future
+		array_agg(DISTINCT version ORDER BY version) FILTER(
 			WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)
 		) AS devel_versions,
 		array_agg(DISTINCT repo ORDER BY repo) FILTER(
@@ -83,7 +85,7 @@ WITH old AS (
 		EXISTS(SELECT unnest(new.newest_repos) INTERSECT SELECT unnest(old.all_repos)) AS newest_repo_seen_before
 	FROM old FULL OUTER JOIN new USING(effname)
 )
-INSERT INTO metapackages_events2 (
+INSERT INTO metapackages_events (
 	effname,
 	ts,
 	type,

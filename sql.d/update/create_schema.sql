@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -136,212 +136,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
--- Creates events on metapackage version state changes
-CREATE OR REPLACE FUNCTION metapackage_create_event(effname text, type metapackage_event_type, data jsonb) RETURNS void AS $$
-BEGIN
-	INSERT INTO metapackages_events (
-		effname,
-		ts,
-		type,
-		data
-	) SELECT
-		effname,
-		now(),
-		type,
-		jsonb_strip_nulls(data);
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION metapackage_create_events_trigger() RETURNS trigger AS $$
-DECLARE
-	catch_up text[];
-	repos_added text[];
-	repos_removed text[];
-BEGIN
-	-- history_start
-	IF (NEW.all_repos IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.all_repos IS NULL)) THEN
-		PERFORM metapackage_create_event(NEW.effname, 'history_start'::metapackage_event_type,
-			jsonb_build_object(
-				'devel_versions', NEW.devel_versions,
-				'newest_versions', NEW.newest_versions,
-				'devel_repos', NEW.devel_repos,
-				'newest_repos', NEW.newest_repos,
-				'all_repos', NEW.all_repos
-			)
-		);
-
-		RETURN NULL;
-	END IF;
-
-	-- history_end
-	IF (NEW.all_repos IS NULL AND OLD.all_repos IS NOT NULL) THEN
-		PERFORM metapackage_create_event(NEW.effname, 'history_end'::metapackage_event_type,
-			jsonb_build_object(
-				'last_repos', OLD.all_repos
-			)
-		);
-
-		RETURN NULL;
-	END IF;
-
-	-- repos_update
-	repos_added := (SELECT get_added_active_repos(OLD.all_repos, NEW.all_repos));
-	repos_removed := (SELECT get_added_active_repos(NEW.all_repos, OLD.all_repos));
-	IF (repos_added != repos_removed) THEN
-		PERFORM metapackage_create_event(NEW.effname, 'repos_update'::metapackage_event_type,
-			jsonb_build_object(
-				'repos_added', repos_added,
-				'repos_removed', repos_removed
-			)
-		);
-	END IF;
-
-	-- version_update & catch_up for devel
-	IF (version_set_changed(OLD.devel_versions, NEW.devel_versions)) THEN
-		PERFORM metapackage_create_event(NEW.effname, 'version_update'::metapackage_event_type,
-			jsonb_build_object(
-				'branch', 'devel',
-				'versions', NEW.devel_versions,
-				'repos', NEW.devel_repos,
-				'passed',
-					CASE
-						WHEN
-							-- only account if the repository hasn't just appeared
-							EXISTS (SELECT unnest(NEW.devel_repos) INTERSECT SELECT unnest(OLD.all_repos))
-						THEN
-							extract(epoch FROM now() - OLD.devel_version_update)
-						ELSE NULL
-					END
-			)
-		);
-	ELSE
-		catch_up := (SELECT get_added_active_repos(OLD.devel_repos, NEW.devel_repos));
-		IF (catch_up != '{}') THEN
-			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
-				jsonb_build_object(
-					'branch', 'devel',
-					'repos', catch_up,
-					'lag',
-						CASE
-							WHEN
-								-- only account if the repository hasn't just appeared
-								EXISTS (SELECT unnest(NEW.devel_repos) INTERSECT SELECT unnest(OLD.all_repos))
-							THEN
-								extract(epoch FROM now() - OLD.devel_version_update)
-							ELSE NULL
-						END
-				)
-			);
-		END IF;
-	END IF;
-
-	-- version_update & catch_up for newest
-	IF (version_set_changed(OLD.newest_versions, NEW.newest_versions)) THEN
-		PERFORM metapackage_create_event(NEW.effname, 'version_update'::metapackage_event_type,
-			jsonb_build_object(
-				'branch', 'newest',
-				'versions', NEW.newest_versions,
-				'repos', NEW.newest_repos,
-				'passed',
-					CASE
-						WHEN
-							-- only account if the repository hasn't just appeared
-							EXISTS (SELECT unnest(NEW.newest_repos) INTERSECT SELECT unnest(OLD.all_repos))
-						THEN
-							extract(epoch FROM now() - OLD.newest_version_update)
-						ELSE NULL
-					END
-			)
-		);
-	ELSE
-		catch_up := (SELECT get_added_active_repos(OLD.newest_repos, NEW.newest_repos));
-		IF (catch_up != '{}') THEN
-			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
-				jsonb_build_object(
-					'branch', 'newest',
-					'repos', catch_up,
-					'lag',
-						CASE
-							WHEN
-								-- only account if the repository hasn't just appeared
-								EXISTS (SELECT unnest(NEW.newest_repos) INTERSECT SELECT unnest(OLD.all_repos))
-							THEN
-								extract(epoch FROM now() - OLD.newest_version_update)
-							ELSE NULL
-						END
-				)
-			);
-		END IF;
-	END IF;
-
-	RETURN NULL;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION maintainer_repo_metapackages_create_event(maintainer_id integer, repository_id smallint, metapackage_id integer, type maintainer_repo_metapackages_event_type, data jsonb) RETURNS void AS $$
-BEGIN
-	INSERT INTO maintainer_repo_metapackages_events (
-		maintainer_id,
-		repository_id,
-		ts,
-		metapackage_id,
-		type,
-		data
-	) SELECT
-		maintainer_id,
-		repository_id,
-		now(),
-		metapackage_id,
-		type,
-		jsonb_strip_nulls(data);
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION maintainer_repo_metapackages_create_events_trigger() RETURNS trigger AS $$
-BEGIN
-	-- remove
-	IF (TG_OP = 'DELETE') THEN
-		IF (EXISTS (SELECT * FROM repositories WHERE id = OLD.repository_id AND state = 'active'::repository_state)) THEN
-			PERFORM maintainer_repo_metapackages_create_event(OLD.maintainer_id, OLD.repository_id, OLD.metapackage_id, 'removed'::maintainer_repo_metapackages_event_type, '{}'::jsonb);
-		END IF;
-		RETURN NULL;
-	END IF;
-
-	IF (NOT EXISTS (SELECT * FROM repositories WHERE id = NEW.repository_id AND state = 'active'::repository_state)) THEN
-		RETURN NULL;
-	END IF;
-
-	-- add
-	IF (TG_OP = 'INSERT') THEN
-		PERFORM maintainer_repo_metapackages_create_event(NEW."maintainer_id", NEW.repository_id, NEW.metapackage_id, 'added'::maintainer_repo_metapackages_event_type, '{}'::jsonb);
-	END IF;
-
-	-- update
-	IF (NEW.versions_uptodate IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.versions_uptodate[1] IS DISTINCT FROM NEW.versions_uptodate[1])) THEN
-		PERFORM maintainer_repo_metapackages_create_event(NEW.maintainer_id, NEW.repository_id, NEW.metapackage_id, 'uptodate'::maintainer_repo_metapackages_event_type,
-			jsonb_build_object('version', NEW.versions_uptodate[1])
-		);
-	END IF;
-
-	IF (NEW.versions_outdated IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.versions_outdated[1] IS DISTINCT FROM NEW.versions_outdated[1])) THEN
-		PERFORM maintainer_repo_metapackages_create_event(NEW.maintainer_id, NEW.repository_id, NEW.metapackage_id, 'outdated'::maintainer_repo_metapackages_event_type,
-			jsonb_build_object(
-				'version', NEW.versions_outdated[1],
-				'newest_versions', (SELECT devel_versions||newest_versions FROM metapackages WHERE id = NEW.metapackage_id)
-			)
-		);
-	END IF;
-
-	IF (NEW.versions_ignored IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.versions_ignored[1] IS DISTINCT FROM NEW.versions_ignored[1])) THEN
-		PERFORM maintainer_repo_metapackages_create_event(NEW.maintainer_id, NEW.repository_id, NEW.metapackage_id, 'ignored'::maintainer_repo_metapackages_event_type,
-			jsonb_build_object('version', NEW.versions_ignored[1])
-		);
-	END IF;
-
-	RETURN NULL;
-END;
-$$ LANGUAGE plpgsql;
-
 -- Checks statuses and flags mask and returns whether it should be treated as ignored
 CREATE OR REPLACE FUNCTION is_ignored_by_masks(statuses_mask integer, flags_mask integer) RETURNS boolean AS $$
 BEGIN
@@ -418,6 +212,7 @@ CREATE TABLE metapackages (
 	last_seen timestamp with time zone NOT NULL DEFAULT now(),
 	orphaned_at timestamp with time zone,
 
+	-- XXX: these are still used for events
 	devel_versions text[],
 	devel_repos text[],
 	devel_version_update timestamp with time zone,
@@ -444,46 +239,6 @@ CREATE INDEX metapackages_recently_added_idx ON metapackages(first_seen DESC, ef
 
 -- index for recently_removed
 CREATE INDEX metapackages_recently_removed_idx ON metapackages(last_seen DESC, effname) WHERE (num_repos = 0);
-
--- events
-DROP TABLE IF EXISTS metapackages_events CASCADE;
-
-CREATE TABLE metapackages_events (
-	effname text NOT NULL,
-	ts timestamp with time zone NOT NULL,
-	type metapackage_event_type NOT NULL,
-	data jsonb NOT NULL
-);
-
-CREATE INDEX ON metapackages_events(effname, ts DESC, type DESC);
-
-DROP TABLE IF EXISTS metapackages_events2 CASCADE;
-
-CREATE TABLE metapackages_events2 (
-	effname text NOT NULL,
-	ts timestamp with time zone NOT NULL,
-	type metapackage_event_type NOT NULL,
-	data jsonb NOT NULL
-);
-
-CREATE INDEX ON metapackages_events2(effname, ts DESC, type DESC);
-
--- triggers
-CREATE TRIGGER metapackage_create
-	AFTER INSERT ON metapackages
-	FOR EACH ROW
-EXECUTE PROCEDURE metapackage_create_events_trigger();
-
-CREATE TRIGGER metapackage_update
-	AFTER UPDATE ON metapackages
-	FOR EACH ROW WHEN (
-		OLD.devel_versions IS DISTINCT FROM NEW.devel_versions OR
-		OLD.devel_repos IS DISTINCT FROM NEW.devel_repos OR
-		OLD.newest_versions IS DISTINCT FROM NEW.newest_versions OR
-		OLD.newest_repos IS DISTINCT FROM NEW.newest_repos OR
-		OLD.all_repos IS DISTINCT FROM NEW.all_repos
-	)
-EXECUTE PROCEDURE metapackage_create_events_trigger();
 
 --------------------------------------------------------------------------------
 -- Maintainers
@@ -748,27 +503,22 @@ CREATE TABLE maintainer_and_repo_metapackages (
 CREATE INDEX ON maintainer_and_repo_metapackages(effname);
 
 --------------------------------------------------------------------------------
--- Additional derived tables
+-- Events
 --------------------------------------------------------------------------------
-DROP TABLE IF EXISTS maintainer_repo_metapackages CASCADE;
 
---- XXX: don't mix up with maintainer_and_repo_metapackages, see comment above
-CREATE TABLE maintainer_repo_metapackages (
-	maintainer_id integer NOT NULL,
-	repository_id smallint NOT NULL,
-	metapackage_id integer NOT NULL,
+-- project events
+DROP TABLE IF EXISTS metapackages_events CASCADE;
 
-	first_seen timestamp with time zone NOT NULL,
-	last_seen timestamp with time zone NOT NULL,
-
-	versions_uptodate text[],
-	versions_outdated text[],
-	versions_ignored text[],
-
-	PRIMARY KEY(maintainer_id, repository_id, metapackage_id)
+CREATE TABLE metapackages_events (
+	effname text NOT NULL,
+	ts timestamp with time zone NOT NULL,
+	type metapackage_event_type NOT NULL,
+	data jsonb NOT NULL
 );
 
--- events
+CREATE INDEX ON metapackages_events(effname, ts DESC, type DESC);
+
+-- maintainer events
 DROP TABLE IF EXISTS maintainer_repo_metapackages_events CASCADE;
 
 CREATE TABLE maintainer_repo_metapackages_events (
@@ -785,38 +535,6 @@ CREATE TABLE maintainer_repo_metapackages_events (
 );
 
 CREATE INDEX ON maintainer_repo_metapackages_events(maintainer_id, repository_id, ts DESC, type DESC);
-
-DROP TABLE IF EXISTS maintainer_repo_metapackages_events2 CASCADE;
-
-CREATE TABLE maintainer_repo_metapackages_events2 (
-	id integer GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-
-	maintainer_id integer NOT NULL,
-	repository_id smallint NOT NULL,
-
-	ts timestamp with time zone NOT NULL,
-
-	metapackage_id integer NOT NULL,
-	type maintainer_repo_metapackages_event_type NOT NULL,
-	data jsonb NOT NULL
-);
-
-CREATE INDEX ON maintainer_repo_metapackages_events2(maintainer_id, repository_id, ts DESC, type DESC);
-
--- triggers
-CREATE TRIGGER maintainer_repo_metapackage_addremove
-	AFTER INSERT OR DELETE ON maintainer_repo_metapackages
-	FOR EACH ROW
-EXECUTE PROCEDURE maintainer_repo_metapackages_create_events_trigger();
-
-CREATE TRIGGER maintainer_repo_metapackage_update
-	AFTER UPDATE ON maintainer_repo_metapackages
-	FOR EACH ROW WHEN (
-		OLD.versions_uptodate IS DISTINCT FROM NEW.versions_uptodate OR
-		OLD.versions_outdated IS DISTINCT FROM NEW.versions_outdated OR
-		OLD.versions_ignored IS DISTINCT FROM NEW.versions_ignored
-	)
-EXECUTE PROCEDURE maintainer_repo_metapackages_create_events_trigger();
 
 --------------------------------------------------------------------------------
 -- Statistics

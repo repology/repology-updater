@@ -64,7 +64,7 @@ WITH old AS (
 	-- because of how repositories are updated.
 	--WHERE (SELECT state FROM repositories WHERE name = coalesce(new.repo, old.repo)) IN ('active'::repository_state, 'readded'::repository_state)
 )
-INSERT INTO maintainer_repo_metapackages_events2 (
+INSERT INTO maintainer_repo_metapackages_events (
 	maintainer_id, repository_id, metapackage_id, ts,
 	type,
 	data
