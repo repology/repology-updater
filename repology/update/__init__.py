@@ -58,7 +58,6 @@ def update_project(database: Database, change: UpdatedProject) -> None:
 
 
 def remove_project(database: Database, change: RemovedProject) -> None:
-    database.remove_packages(change.effname)
     database.remove_project_hash(change.effname)
 
 
