@@ -409,6 +409,7 @@ CREATE TABLE metapackages (
 	has_related boolean NOT NULL DEFAULT false,
 	first_seen timestamp with time zone NOT NULL DEFAULT now(),
 	last_seen timestamp with time zone NOT NULL DEFAULT now(),
+	orphaned_at timestamp with time zone,
 
 	devel_versions text[],
 	devel_repos text[],

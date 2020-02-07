@@ -76,6 +76,7 @@ DO UPDATE SET
 	max_repos = greatest(metapackages.max_repos, EXCLUDED.num_repos),
 	max_families = greatest(metapackages.max_families, EXCLUDED.num_families),
 	last_seen = now(),
+	orphaned_at = NULL,
 
 	devel_versions = EXCLUDED.devel_versions,
 	devel_repos = EXCLUDED.devel_repos,
@@ -135,7 +136,8 @@ SET
 	newest_versions = NULL,
 	newest_repos = NULL,
 	newest_version_update = NULL,
-	all_repos = NULL
+	all_repos = NULL,
+	orphaned_at = now()
 WHERE
 	last_seen != now();
 
