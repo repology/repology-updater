@@ -917,3 +917,21 @@ CREATE TABLE project_hashes (
 	effname text NOT NULL PRIMARY KEY,
 	hash bigint NOT NULL
 );
+
+--------------------------------------------------------------------------------
+-- Trackname versions
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS repo_track_versions CASCADE;
+
+CREATE TABLE repo_track_versions (
+	repository_id smallint NOT NULL,
+	refcount smallint NOT NULL,
+	trackname text NOT NULL,
+	version text NOT NULL,
+	start_ts timestamp with time zone NOT NULL DEFAULT now(),
+	end_ts timestamp with time zone,
+	any_statuses integer NOT NULL DEFAULT 0,
+	any_flags integer NOT NULL DEFAULT 0,
+
+	PRIMARY KEY(repository_id, trackname, version)
+);
