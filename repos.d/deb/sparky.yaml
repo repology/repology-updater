@@ -16,6 +16,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'https://sparkylinux.org/repo/dists/testing/main/source/Sources.gz'
+      compression: gz
   repolinks:
     - desc: SparkyLinux home
       url: https://sparkylinux.org/
