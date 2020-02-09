@@ -111,7 +111,7 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
 
     logger.log('updating track versions')
-    database.update_track_versions()
+    database.update_track_versions(enable_partial, enable_analyze)
 
     logger.log('updating project events')
     database.update_project_events()

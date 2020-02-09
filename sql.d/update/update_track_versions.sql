@@ -15,6 +15,10 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+-- @param partial=False
+-- @param analyze=True
+--------------------------------------------------------------------------------
 WITH old AS (
 	SELECT
 		(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
@@ -70,3 +74,7 @@ WHERE
 	repo_track_versions.any_statuses != EXCLUDED.any_statuses OR
 	repo_track_versions.any_flags != EXCLUDED.any_flags OR
 	EXCLUDED.refcount != 0;
+
+{% if analyze %}
+ANALYZE repo_track_versions;
+{% endif %}
