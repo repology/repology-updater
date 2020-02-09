@@ -342,6 +342,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Checks statuses and flags mask and returns whether it should be treated as ignored
+CREATE OR REPLACE FUNCTION is_ignored_by_masks(statuses_mask integer, flags_mask integer) RETURNS boolean AS $$
+BEGIN
+	RETURN (statuses_mask & ((1<<3) | (1<<7) | (1<<8) | (1<<9) | (1<<10)))::boolean OR (flags_mask & ((1<<2) | (1<<3) | (1<<4) | (1<<5) | (1<<7)))::boolean;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+
 --------------------------------------------------------------------------------
 -- Main packages table
 --------------------------------------------------------------------------------
@@ -934,4 +941,20 @@ CREATE TABLE repo_track_versions (
 	any_flags integer NOT NULL DEFAULT 0,
 
 	PRIMARY KEY(repository_id, trackname, version)
+);
+
+--------------------------------------------------------------------------------
+-- Project releases
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS project_releases CASCADE;
+
+CREATE TABLE project_releases (
+	effname text NOT NULL,
+	version text NOT NULL,
+	trusted boolean NOT NULL,
+	start_ts timestamp with time zone,
+	trusted_start_ts timestamp with time zone,
+	end_ts timestamp with time zone,
+
+	PRIMARY KEY(effname, version)
 );

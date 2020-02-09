@@ -113,6 +113,9 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     logger.log('updating track versions')
     database.update_track_versions(enable_partial, enable_analyze)
 
+    logger.log('updating project releases')
+    database.update_project_releases(enable_partial, enable_analyze)
+
     logger.log('updating project events')
     database.update_project_events()
 
