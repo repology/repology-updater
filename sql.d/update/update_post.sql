@@ -92,7 +92,7 @@ WITH preserved_runs AS (
 	) AS tmp
 	WHERE
 		-- keep failed runs for some time (assuming someone may keep a link to them)
-		(status = 'failed'::run_status AND start_ts > now() - INTERVAL '7' DAY) OR
+		(status = 'failed'::run_status AND start_ts > now() - INTERVAL '31' DAY) OR
 		-- keep last run of any kind (limiting age here allows last failed runs to expire)
 		(start_ts > now() - INTERVAL '31' DAY AND status_depth = 1) OR
 		-- keep normal runs for some time
