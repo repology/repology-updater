@@ -103,6 +103,9 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     # This was picked randomly
     enable_analyze = stats.change_fraction > 0.05
 
+    logger.log(f'update mode is {"partial" if enable_partial else "full"}')
+    logger.log(f'explicit analyze is {"enabled" if enable_analyze else "disabled"}')
+
     logger.log('updating field statistics')
     for repo, field_stats in field_stats_per_repo.items():
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
