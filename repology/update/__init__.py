@@ -158,6 +158,9 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     logger.log('updating problems')
     database.update_problems()
 
+    logger.log('updating problem counts')
+    database.update_repositories_problem_counts()
+
     logger.log('updating statistics')
     database.update_statistics()
 

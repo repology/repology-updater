@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -150,8 +150,3 @@ SELECT DISTINCT
 FROM packages
 WHERE
 	homepage SIMILAR TO 'https?://search.cpan.org(/%%)?';
-
--- update counts for repositories
-UPDATE repositories
-SET
-	num_problems = (SELECT count(DISTINCT effname) FROM problems WHERE repo = repositories.name);
