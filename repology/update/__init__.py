@@ -156,7 +156,7 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     database.update_projects_has_related()
 
     logger.log('updating problems')
-    database.update_problems()
+    database.update_problems(enable_partial, enable_analyze)
 
     logger.log('updating problem counts')
     database.update_repositories_problem_counts()

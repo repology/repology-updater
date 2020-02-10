@@ -16,12 +16,15 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Update problems
+-- @param partial=False
+-- @param analyze=True
 --------------------------------------------------------------------------------
 
--- pre-cleanup
-DELETE
-FROM problems;
+DELETE FROM problems
+{% if partial %}
+WHERE effname IN (SELECT effname FROM changed_projects)
+{% endif %}
+;
 
 -- add different kinds of problems
 INSERT INTO problems (
@@ -69,7 +72,12 @@ SELECT DISTINCT
 			ELSE 'HTTP error ' || links.ipv4_status_code
 		END ||
 		') for more than a month.'
-FROM packages
+FROM
+{% if partial %}
+    changed_projects INNER JOIN packages USING(effname)
+{% else %}
+    packages
+{% endif %}
 INNER JOIN links ON (packages.homepage = links.url)
 WHERE
 	NOT links.ipv4_success AND
@@ -97,7 +105,12 @@ SELECT DISTINCT
 		'" is a permanent redirect to "' ||
 		links.ipv4_permanent_redirect_target ||
 		'" and should be updated'
-FROM packages
+FROM
+{% if partial %}
+    changed_projects INNER JOIN packages USING(effname)
+{% else %}
+    packages
+{% endif %}
 INNER JOIN links ON (packages.homepage = links.url)
 WHERE
 	replace(links.url, 'http://', 'https://') = links.ipv4_permanent_redirect_target;
@@ -110,7 +123,12 @@ SELECT DISTINCT
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
-FROM packages
+FROM
+{% if partial %}
+    changed_projects INNER JOIN packages USING(effname)
+{% else %}
+    packages
+{% endif %}
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
 	homepage SIMILAR TO 'https?://code.google.com(/%%)?';
@@ -123,7 +141,12 @@ SELECT DISTINCT
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
-FROM packages
+FROM
+{% if partial %}
+    changed_projects INNER JOIN packages USING(effname)
+{% else %}
+    packages
+{% endif %}
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?';
 
@@ -135,7 +158,12 @@ SELECT DISTINCT
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
-FROM packages
+FROM
+{% if partial %}
+    changed_projects INNER JOIN packages USING(effname)
+{% else %}
+    packages
+{% endif %}
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
 
@@ -147,6 +175,15 @@ SELECT DISTINCT
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to CPAN which was discontinued. The link should be updated to https://metacpan.org (probably along with download URLs). See https://www.perl.com/article/saying-goodbye-to-search-cpan-org/ for details.'
-FROM packages
+FROM
+{% if partial %}
+    changed_projects INNER JOIN packages USING(effname)
+{% else %}
+    packages
+{% endif %}
 WHERE
 	homepage SIMILAR TO 'https?://search.cpan.org(/%%)?';
+
+{% if analyze %}
+ANALYZE problems;
+{% endif %}
