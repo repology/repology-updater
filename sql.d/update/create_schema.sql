@@ -926,6 +926,21 @@ CREATE TABLE project_hashes (
 );
 
 --------------------------------------------------------------------------------
+-- Tracknames
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS repo_tracks CASCADE;
+
+CREATE TABLE repo_tracks (
+	repository_id smallint NOT NULL,
+	refcount smallint NOT NULL,
+	start_ts timestamp with time zone NOT NULL DEFAULT now(),
+	end_ts timestamp with time zone,
+	trackname text NOT NULL,
+
+	PRIMARY KEY(repository_id, trackname)
+);
+
+--------------------------------------------------------------------------------
 -- Trackname versions
 --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS repo_track_versions CASCADE;

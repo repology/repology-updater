@@ -110,6 +110,9 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     for repo, field_stats in field_stats_per_repo.items():
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
 
+    logger.log('updating tracks')
+    database.update_tracks(enable_partial, enable_analyze)
+
     logger.log('updating track versions')
     database.update_track_versions(enable_partial, enable_analyze)
 
