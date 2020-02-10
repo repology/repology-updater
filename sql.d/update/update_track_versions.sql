@@ -24,7 +24,7 @@ WITH old AS (
 		(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
 		trackname,
 		version,
-		count(DISTINCT effname) AS refcount
+		count(*) AS refcount
 	FROM packages
 	WHERE effname IN (SELECT effname FROM changed_projects)
 	GROUP BY repo, trackname, version
@@ -33,7 +33,7 @@ WITH old AS (
 		(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
 		trackname,
 		version,
-		count(DISTINCT effname) AS refcount,
+		count(*) AS refcount,
 		bit_or(1 << versionclass) AS any_statuses,
 		bit_or(flags) AS any_flags
 	FROM incoming_packages
