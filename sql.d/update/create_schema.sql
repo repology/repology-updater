@@ -966,7 +966,6 @@ DROP TABLE IF EXISTS project_releases CASCADE;
 CREATE TABLE project_releases (
 	effname text NOT NULL,
 	version text NOT NULL,
-	trusted boolean NOT NULL,
 	start_ts timestamp with time zone,
 	trusted_start_ts timestamp with time zone,
 	end_ts timestamp with time zone,

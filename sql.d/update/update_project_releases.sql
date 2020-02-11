@@ -31,7 +31,6 @@ WITH tracknames AS (
 INSERT INTO project_releases (
 	effname,
 	version,
-	trusted,
 	start_ts,
 	trusted_start_ts,
 	end_ts
@@ -39,7 +38,6 @@ INSERT INTO project_releases (
 SELECT
 	effname,
 	version,
-	NOT is_ignored_by_masks(bit_or(any_statuses), bit_and(any_flags)),
 	min(start_ts),
 	min(start_ts) FILTER (WHERE NOT is_ignored_by_masks(any_statuses, any_flags)),
 	max(end_ts)
