@@ -973,3 +973,15 @@ CREATE TABLE project_releases (
 
 	PRIMARY KEY(effname, version)
 );
+
+--------------------------------------------------------------------------------
+-- Project turnover
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS project_turnover CASCADE;
+
+CREATE TABLE project_turnover (
+	effname text NOT NULL,
+	delta smallint NOT NULL,
+	ts timestamp with time zone NOT NULL DEFAULT now(),
+	family text NOT NULL
+);

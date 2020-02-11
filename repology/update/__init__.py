@@ -122,6 +122,9 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     logger.log('updating project events')
     database.update_project_events()
 
+    logger.log('updating projects turnover')
+    database.update_projects_turnover()
+
     logger.log('updating links')
     database.update_links()
 
