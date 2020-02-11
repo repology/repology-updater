@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -18,68 +18,20 @@
 --------------------------------------------------------------------------------
 -- Update aggregate tables: metapackages, pass1
 --------------------------------------------------------------------------------
-INSERT
-INTO metapackages (
-	effname,
-	num_repos,
-	num_repos_nonshadow,
-	num_families,
-	num_repos_newest,
-	num_families_newest,
-	max_repos,
-	max_families,
-	first_seen,
-	last_seen,
-
-	devel_versions,
-	devel_repos,
-	devel_version_update,
-
-	newest_versions,
-	newest_repos,
-	newest_version_update,
-
-	all_repos
-)
-SELECT
-	effname,
-	count(DISTINCT repo),
-	count(DISTINCT repo) FILTER (WHERE NOT shadow),
-	count(DISTINCT family),
-	count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5),
-	count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5),
-	count(DISTINCT repo),
-	count(DISTINCT family),
-	now(),
-	now(),
-
-	-- XXX: technical dept warning: since we don't distinguish "newest unique" and "newest devel" statuses, we have
-	-- to use flags here. Better solution should be implemented in future
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
-	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
-	NULL,  -- first time we see this metapackage, time of version update is not known yet
-
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
-	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
-	NULL,
-
-	array_agg(DISTINCT repo ORDER BY repo)
-FROM packages
-GROUP BY effname
-ON CONFLICT (effname)
-DO UPDATE SET
-	num_repos = EXCLUDED.num_repos,
-	num_repos_nonshadow = EXCLUDED.num_repos_nonshadow,
-	num_families = EXCLUDED.num_families,
-	num_repos_newest = EXCLUDED.num_repos_newest,
-	num_families_newest = EXCLUDED.num_families_newest,
-	max_repos = greatest(metapackages.max_repos, EXCLUDED.num_repos),
-	max_families = greatest(metapackages.max_families, EXCLUDED.num_families),
+UPDATE metapackages
+SET
+	num_repos = tmp.num_repos,
+	num_repos_nonshadow = tmp.num_repos_nonshadow,
+	num_families = tmp.num_families,
+	num_repos_newest = tmp.num_repos_newest,
+	num_families_newest = tmp.num_families_newest,
+	max_repos = greatest(max_repos, tmp.num_repos),
+	max_families = greatest(max_families, tmp.num_families),
 	last_seen = now(),
 	orphaned_at = NULL,
 
-	devel_versions = EXCLUDED.devel_versions,
-	devel_repos = EXCLUDED.devel_repos,
+	devel_versions = tmp.devel_versions,
+	devel_repos = tmp.devel_repos,
 	devel_version_update =
 		-- We want version update time to be as reliable as possible so
 		-- the policy is that it's better to have no known last update time
@@ -91,33 +43,55 @@ DO UPDATE SET
 		CASE
 			WHEN
 				-- no change (both defined and equal)
-				version_compare2(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) = 0
+				version_compare2(tmp.devel_versions[1], metapackages.devel_versions[1]) = 0
 			THEN metapackages.devel_version_update
 			WHEN
 				-- trusted update (both should be defined)
-				version_compare2(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) > 0 AND
-				EXCLUDED.devel_repos && metapackages.all_repos
+				version_compare2(tmp.devel_versions[1], metapackages.devel_versions[1]) > 0 AND
+				tmp.devel_repos && metapackages.all_repos
 			THEN now()
 			ELSE NULL -- else reset
 		END,
 
-	newest_versions = EXCLUDED.newest_versions,
-	newest_repos = EXCLUDED.newest_repos,
+	newest_versions = tmp.newest_versions,
+	newest_repos = tmp.newest_repos,
 	newest_version_update =
 		CASE
 			WHEN
 				-- no change (both defined and equal)
-				version_compare2(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) = 0
+				version_compare2(tmp.newest_versions[1], metapackages.newest_versions[1]) = 0
 			THEN metapackages.newest_version_update
 			WHEN
 				-- trusted update (both should be defined)
-				version_compare2(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) > 0 AND
-				EXCLUDED.newest_repos && metapackages.all_repos
+				version_compare2(tmp.newest_versions[1], metapackages.newest_versions[1]) > 0 AND
+				tmp.newest_repos && metapackages.all_repos
 			THEN now()
 			ELSE NULL -- else reset
 		END,
 
-	all_repos = EXCLUDED.all_repos;
+	all_repos = tmp.all_repos
+FROM (
+	SELECT
+		effname,
+		count(DISTINCT repo) AS num_repos,
+		count(DISTINCT repo) FILTER (WHERE NOT shadow) AS num_repos_nonshadow,
+		count(DISTINCT family) AS num_families,
+		count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5) AS num_repos_newest,
+		count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5) AS num_families_newest,
+
+		-- XXX: technical dept warning: since we don't distinguish "newest unique" and "newest devel" statuses, we have
+		-- to use flags here. Better solution should be implemented in future
+		array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)) AS devel_versions,
+		array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)) AS devel_repos,
+
+		array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)) AS newest_versions,
+		array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)) AS newest_repos,
+
+		array_agg(DISTINCT repo ORDER BY repo) AS all_repos
+	FROM packages
+	GROUP BY effname
+) AS tmp
+WHERE metapackages.effname = tmp.effname;
 
 --------------------------------------------------------------------------------
 -- Update aggregate tables: metapackages, finalize
