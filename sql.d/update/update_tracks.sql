@@ -40,6 +40,7 @@ WITH old AS (
 		trackname,
 		coalesce(new.refcount, 0) - coalesce(old.refcount, 0) AS delta_refcount
 	FROM old FULL OUTER JOIN new USING(repository_id, trackname)
+	WHERE coalesce(new.refcount, 0) != coalesce(old.refcount, 0)
 )
 INSERT INTO repo_tracks (
 	repository_id,
@@ -54,9 +55,7 @@ FROM delta
 ON CONFLICT (repository_id, trackname)
 DO UPDATE SET
 	refcount = repo_tracks.refcount + EXCLUDED.refcount,
-	end_ts = CASE WHEN repo_tracks.refcount + EXCLUDED.refcount = 0 THEN now() ELSE NULL END
-WHERE
-	EXCLUDED.refcount != 0;
+	end_ts = CASE WHEN repo_tracks.refcount + EXCLUDED.refcount = 0 THEN now() ELSE NULL END;
 
 {% if analyze %}
 ANALYZE repo_tracks;
