@@ -14,13 +14,13 @@ which updates the repository information. See also the
 
 ## Dependencies
 
-  - [Python](https://www.python.org/) 3.7+
+  - [Python](https://www.python.org/) 3.8+
   - Python module [Jinja2](http://jinja.pocoo.org/)
   - Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
   - Python module [psycopg2](http://initd.org/psycopg/)
   - Python module [pyyaml](http://pyyaml.org/)
   - Python module [xxhash](https://github.com/ifduyue/python-xxhash)
-  - [PostgreSQL](https://www.postgresql.org/) 10.0+
+  - [PostgreSQL](https://www.postgresql.org/) 12.0+
   - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
 Needed for fetching/parsing repository data:
