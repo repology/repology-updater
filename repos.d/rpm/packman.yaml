@@ -230,7 +230,7 @@
   family: opensuse  # XXX: own family?
   ruleset: [opensuse, packman]
   color: 'dbda04'
-  minpackages: 600
+  minpackages: 200
   sources:
     - name: all
       fetcher: RepodataFetcher
