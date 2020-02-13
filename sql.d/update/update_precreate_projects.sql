@@ -38,4 +38,5 @@ SELECT
 	effname
 FROM old
 RIGHT OUTER JOIN new USING(effname)
-WHERE old.effname IS NULL;
+WHERE old.effname IS NULL
+ON CONFLICT(effname) DO NOTHING;
