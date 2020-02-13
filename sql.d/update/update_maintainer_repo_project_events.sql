@@ -58,11 +58,7 @@ WITH old AS (
 		new.versions_outdated AS new_versions_outdated,
 		new.versions_ignored AS new_versions_ignored
 	FROM old FULL OUTER JOIN new USING(effname,repo,maintainer)
-	-- XXX: enable this after some testing
-	-- the purpose is to duplicate old logic (for proper
-	-- comparison) which have similar condition but it is broken
-	-- because of how repositories are updated.
-	--WHERE (SELECT state FROM repositories WHERE name = coalesce(new.repo, old.repo)) IN ('active'::repository_state, 'readded'::repository_state)
+	WHERE (SELECT state FROM repositories WHERE name = coalesce(new.repo, old.repo)) IN ('active'::repository_state, 'readded'::repository_state)
 )
 INSERT INTO maintainer_repo_metapackages_events (
 	maintainer_id, repository_id, metapackage_id, ts,
