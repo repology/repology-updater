@@ -42,6 +42,7 @@ class SolusIndexParser(Parser):
 
                 pkg.add_name(entry.findtext('./Source/Name'), NameType.SOLUS_SOURCE_NAME)
                 pkg.add_maintainers(entry.findtext('./Source/Packager/Email'))
+                pkg.add_homepages(entry.findtext('./Source/Homepage'))
                 pkg.set_arch(entry.findtext('./Architecture'))
 
                 yield pkg
