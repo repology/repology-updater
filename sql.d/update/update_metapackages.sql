@@ -25,8 +25,6 @@ SET
 	num_families = tmp.num_families,
 	num_repos_newest = tmp.num_repos_newest,
 	num_families_newest = tmp.num_families_newest,
-	max_repos = greatest(max_repos, tmp.num_repos),
-	max_families = greatest(max_families, tmp.num_families),
 	last_seen = now(),
 	orphaned_at = NULL,
 
