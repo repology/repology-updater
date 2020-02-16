@@ -59,6 +59,11 @@ message CMakeBuilder {
   // Additional flag to pass to cmake(1), e.g.:
   // extra_cmake_flag: "-DKICAD_SCRIPTING_WXPYTHON_PHOENIX:BOOL=true"
   repeated string extra_cmake_flag = 1;
+
+  // Enable if this package does not support building from a separate directory
+  // (sometimes called “out-of-tree build”). A bug should be reported with the
+  // package upstream.
+  optional bool copy_to_builddir = 2;
 }
 
 message MesonBuilder {
@@ -174,6 +179,12 @@ message Union {
   optional string pkg = 2; // required
 }
 
+message Pull {
+  // URL (https:// preferred, http:// accepted) to a Debian repository Packages
+  // file. E.g. https://dl.google.com/linux/chrome/deb/dists/stable/main/binary-amd64/Packages
+  optional string debian_packages = 1;
+}
+
 message Build {
 
   // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -183,6 +194,9 @@ message Build {
   // A https URL to the upstream archive that should be built. Currently, only
   // tar.gz archives are supported.
   optional string source = 1;
+
+  // Details about how to pull a new version.
+  optional Pull pull = 19;
 
   // A SHA256 hash of the upstream archive, for verifying integrity.
   optional string hash = 2;
@@ -268,5 +282,5 @@ message Build {
   // guarantee ABI compatibility across versions.
   repeated Union runtime_union = 15;
 
-  // NEXT FREE FIELD NUMBER: 19
+  // NEXT FREE FIELD NUMBER: 20
 }
