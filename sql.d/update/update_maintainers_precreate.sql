@@ -15,28 +15,27 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- XXX: this is temporary solution to have all referenced maintainers
--- available for update queries which are run later. All maintainers
--- update code should be moved here in future
+--------------------------------------------------------------------------------
+-- @param analyze=True
+--------------------------------------------------------------------------------
 
 WITH old AS (
 	SELECT
 		unnest(maintainers) AS maintainer_name
-	FROM packages
-	WHERE effname IN (SELECT effname FROM changed_projects)
-	GROUP BY maintainer_name
+	FROM old_packages
 ), new AS (
 	SELECT
 		unnest(maintainers) AS maintainer_name
 	FROM incoming_packages
-	GROUP BY maintainer_name
 )
-INSERT INTO maintainers (
-	maintainer
-)
+INSERT INTO maintainers(maintainer)
 SELECT
 	maintainer_name
-FROM old
-RIGHT OUTER JOIN new USING(maintainer_name)
+FROM old RIGHT OUTER JOIN new USING(maintainer_name)
 WHERE old.maintainer_name IS NULL
-ON CONFLICT(maintainer) DO NOTHING;
+ON CONFLICT(maintainer)
+DO NOTHING;
+
+{% if analyze %}
+ANALYZE maintainers;
+{% endif %}
