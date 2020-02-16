@@ -182,7 +182,7 @@ SET
 
 	num_repos = 0,
 
-	orphaned_at = now()
+	orphaned_at = coalesce(orphaned_at, now())
 WHERE
 	last_seen != now();
 

@@ -109,7 +109,7 @@ SET
 	newest_repos = NULL,
 	newest_version_update = NULL,
 	all_repos = NULL,
-	orphaned_at = now()
+	orphaned_at = coalesce(orphaned_at, now())
 WHERE
 	last_seen != now();
 
