@@ -16,8 +16,18 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Update aggregate tables: metapackages, pass1
+-- @param partial=False
+-- @param analyze=True
 --------------------------------------------------------------------------------
+
+-- create new
+INSERT INTO metapackages(effname)
+SELECT effname
+FROM metapackages RIGHT OUTER JOIN changed_projects USING(effname)
+WHERE metapackages.effname IS NULL
+ON CONFLICT(effname) DO NOTHING;
+
+-- update
 UPDATE metapackages
 SET
 	num_repos = tmp.num_repos,
@@ -25,8 +35,6 @@ SET
 	num_families = tmp.num_families,
 	num_repos_newest = tmp.num_repos_newest,
 	num_families_newest = tmp.num_families_newest,
-	last_seen = now(),
-	orphaned_at = NULL,
 
 	devel_versions = tmp.devel_versions,
 	devel_repos = tmp.devel_repos,
@@ -67,7 +75,9 @@ SET
 			ELSE NULL -- else reset
 		END,
 
-	all_repos = tmp.all_repos
+	all_repos = tmp.all_repos,
+
+	orphaned_at = NULL
 FROM (
 	SELECT
 		effname,
@@ -86,14 +96,12 @@ FROM (
 		array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)) AS newest_repos,
 
 		array_agg(DISTINCT repo ORDER BY repo) AS all_repos
-	FROM packages
+	FROM incoming_packages
 	GROUP BY effname
 ) AS tmp
 WHERE metapackages.effname = tmp.effname;
 
---------------------------------------------------------------------------------
--- Update aggregate tables: metapackages, finalize
---------------------------------------------------------------------------------
+-- orphan
 UPDATE metapackages
 SET
 	num_repos = 0,
@@ -101,16 +109,23 @@ SET
 	num_families = 0,
 	num_repos_newest = 0,
 	num_families_newest = 0,
+
 	has_related = false,
+
 	devel_versions = NULL,
 	devel_repos = NULL,
 	devel_version_update = NULL,
+
 	newest_versions = NULL,
 	newest_repos = NULL,
 	newest_version_update = NULL,
-	all_repos = NULL,
-	orphaned_at = coalesce(orphaned_at, now())
-WHERE
-	last_seen != now();
 
+	all_repos = NULL,
+
+	orphaned_at = now()
+FROM (SELECT DISTINCT effname FROM incoming_packages) alive_projects RIGHT OUTER JOIN changed_projects USING(effname)
+WHERE metapackages.effname = changed_projects.effname AND alive_projects.effname IS NULL;
+
+{% if analyze %}
 ANALYZE metapackages;
+{% endif %}

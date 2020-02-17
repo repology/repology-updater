@@ -114,8 +114,8 @@ def update_repology(database: Database, projects: Optional[Iterable[List[Package
     logger.log('preparing updated packages')
     database.update_prepare_packages(enable_partial)
 
-    logger.log('updating projects (precreate)')
-    database.update_precreate_projects()
+    logger.log('updating projects')
+    database.update_projects(enable_partial, enable_analyze)
 
     logger.log('updating maintainers (precreate)')
     database.update_precreate_maintainers()
@@ -152,9 +152,6 @@ def update_repology(database: Database, projects: Optional[Iterable[List[Package
     logger.log('applying updated packages')
     database.update_apply_packages(enable_partial, enable_analyze)
     # Note: after this, packages table contain new versions of packages
-
-    logger.log('updating metapackages')
-    database.update_metapackages()
 
     logger.log('updating repositories')
     database.update_repositories()
