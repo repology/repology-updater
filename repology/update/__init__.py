@@ -135,6 +135,9 @@ def update_repology(database: Database, projects: Optional[Iterable[List[Package
     logger.log('updating maintainer events')
     database.update_maintainer_events()
 
+    logger.log('updating repositry events')
+    database.update_repository_events()
+
     logger.log('updating projects turnover')
     database.update_projects_turnover()
 
