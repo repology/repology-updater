@@ -236,7 +236,7 @@ CREATE INDEX ON metapackages(num_families_newest) WHERE (num_repos_nonshadow > 0
 CREATE INDEX metapackages_recently_added_idx ON metapackages(first_seen DESC, effname) WHERE (num_repos_nonshadow > 0);
 
 -- index for recently_removed
-CREATE INDEX metapackages_recently_removed_idx ON metapackages(last_seen DESC, effname) WHERE (num_repos = 0);
+CREATE INDEX metapackages_recently_removed_idx ON metapackages(orphaned_at DESC, effname) WHERE (orphaned_at IS NOT NULL);
 
 --------------------------------------------------------------------------------
 -- Maintainers
@@ -296,7 +296,7 @@ CREATE INDEX maintainers_maintainer_trgm ON maintainers USING gin (maintainer gi
 CREATE INDEX maintainers_recently_added_idx ON maintainers(first_seen DESC, maintainer) WHERE (num_packages > 0);
 
 -- index for recently_removed
-CREATE INDEX maintainers_recently_removed_idx ON maintainers(last_seen DESC, maintainer) WHERE (num_packages = 0);
+CREATE INDEX maintainers_recently_removed_idx ON maintainers(orphaned_at DESC, maintainer) WHERE (orphaned_at IS NOT NULL);
 
 --------------------------------------------------------------------------------
 -- Runs and logs
