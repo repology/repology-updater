@@ -128,6 +128,9 @@ class UpdateProcess:
         self._logger.log('updating maintainers')
         self._database.update_maintainers(self._enable_explicit_analyze)
 
+        self._logger.log('updating repositories')
+        self._database.update_repositories()
+
         self._logger.log('updating tracks')
         self._database.update_tracks(self._enable_partial_update, self._enable_explicit_analyze)
 
@@ -164,9 +167,6 @@ class UpdateProcess:
         self._database.update_apply_packages(self._enable_partial_update, self._enable_explicit_analyze)
         # Note: after this, packages table contain new versions of packages
 
-        self._logger.log('updating repositories')
-        self._database.update_repositories()
-
         self._logger.log('updating binding table repo_metapackages')
         self._database.update_binding_repo_metapackages(self._enable_partial_update, self._enable_explicit_analyze)
 
@@ -194,8 +194,11 @@ class UpdateProcess:
         self._logger.log('updating problems')
         self._database.update_problems(self._enable_partial_update, self._enable_explicit_analyze)
 
-        self._logger.log('updating problem counts')
+        self._logger.log('updating repository problem counts')
         self._database.update_repositories_problem_counts()
+
+        self._logger.log('updating repository maintainer counts')
+        self._database.update_repositories_maintainer_counts()
 
         self._logger.log('updating statistics (global)')
         self._database.update_statistics_global()
