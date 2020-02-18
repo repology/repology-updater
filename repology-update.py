@@ -21,7 +21,7 @@ import argparse
 import sys
 from datetime import timedelta
 from timeit import default_timer as timer
-from typing import Any, Callable, List, TypeVar
+from typing import Any, Callable, Iterable, List, TypeVar
 
 from repology.config import config
 from repology.database import Database
@@ -211,6 +211,36 @@ def update_repositories(env: Environment) -> None:
     database.commit()
 
 
+def handle_totals(env: Environment, do_fix: bool) -> None:
+    logger = env.get_main_logger()
+    database = env.get_main_database_connection()
+
+    logger.log(f'{"fixing" if do_fix else "checking"} totals')
+
+    def list_discrepancies(where: str, discrepancies: Iterable[Any]) -> None:
+        if not discrepancies:
+            logger.get_indented().log(f'no discrepancies detected in {where}')
+
+        for discrepancy in discrepancies:
+            if 'name' in discrepancy:
+                logger.get_indented().log(f'discrepancy detected in {where} "{discrepancy["name"]}"')
+            else:
+                logger.get_indented().log(f'discrepancy detected in {where}')
+
+            common_keys = set(discrepancy['actual'].keys()) | set(discrepancy['expected'].keys())
+            for key in sorted(common_keys):
+                actual = discrepancy['actual'].get(key)
+                expected = discrepancy['expected'].get(key)
+
+                if actual != expected:
+                    logger.get_indented().get_indented().log(f'{key}: "{actual}" != "{expected}"')
+
+    list_discrepancies('repositories', database.totals_repositories(do_fix))
+    list_discrepancies('statistics', database.totals_statistics(do_fix))
+
+    database.commit()
+
+
 def database_update(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
@@ -271,6 +301,8 @@ def parse_arguments() -> argparse.Namespace:
 
     grp = parser.add_argument_group('Extra update actions')
     grp.add_argument('-R', '--repositories', action='store_true', help='update repositories')
+    grp.add_argument('--check-totals', action='store_true', help='check total counts')
+    grp.add_argument('--fix-totals', action='store_true', help='fix total counts')
 
     grp = parser.add_argument_group('Informational queries')
     grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
@@ -322,6 +354,9 @@ def main() -> int:
 
     if options.dump_rules:
         dump_rules(env)
+
+    if options.check_totals or options.fix_totals:
+        handle_totals(env, options.fix_totals)
 
     env.get_main_logger().log('total time taken: {:.2f} seconds'.format((timer() - start)))
 
