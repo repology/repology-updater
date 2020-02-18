@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Optional
 
 from repology.database import Database
 from repology.fieldstats import FieldStatistics
@@ -61,37 +61,38 @@ def remove_project(database: Database, change: RemovedProject) -> None:
     database.remove_project_hash(change.effname)
 
 
-def update_repology(database: Database, projects: Iterable[List[Package]], logger: Logger) -> None:
+def update_repology(database: Database, projects: Optional[Iterable[List[Package]]], logger: Logger) -> None:
     logger.log('starting the update')
     database.update_start()
 
     logger.log('updating projects')
 
     field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(FieldStatistics)
-
-    prev_total = 0
     stats = ProjectsChangeStatistics()
 
-    changed_projects = ChangedProjectsAccumulator(database)
+    if projects is not None:
+        prev_total = 0
 
-    for change in iter_changed_projects(iter_project_hashes(database), projects, stats):
-        if isinstance(change, UpdatedProject):
-            update_project(database, change)
+        changed_projects = ChangedProjectsAccumulator(database)
 
-            for package in change.packages:
-                field_stats_per_repo[package.repo].add(package)
+        for change in iter_changed_projects(iter_project_hashes(database), projects, stats):
+            if isinstance(change, UpdatedProject):
+                update_project(database, change)
 
-        elif isinstance(change, RemovedProject):
-            remove_project(database, change)
+                for package in change.packages:
+                    field_stats_per_repo[package.repo].add(package)
 
-        changed_projects.add(change.effname)
+            elif isinstance(change, RemovedProject):
+                remove_project(database, change)
 
-        if stats.total - prev_total >= 10000 or prev_total == 0:
-            logger.log(f'  at "{change.effname}": {stats}')
-            prev_total = stats.total
+            changed_projects.add(change.effname)
 
-    changed_projects.flush()
-    logger.log(f'  done: {stats}')
+            if stats.total - prev_total >= 10000 or prev_total == 0:
+                logger.log(f'  at "{change.effname}": {stats}')
+                prev_total = stats.total
+
+        changed_projects.flush()
+        logger.log(f'  done: {stats}')
 
     # Fraction picked experimentally: at change size of around 100k of 400k projects
     # time of partial update of most binding tables approaches or exceeds full update
