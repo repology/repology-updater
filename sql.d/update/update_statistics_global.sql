@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -15,11 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
---------------------------------------------------------------------------------
--- Update global statistics
---------------------------------------------------------------------------------
 UPDATE statistics SET
-	num_packages = (SELECT count(*) FROM packages),
 	num_metapackages = (SELECT count(*) FROM metapackages WHERE num_repos_nonshadow > 0),
 	num_problems = (SELECT count(*) FROM problems),
 	num_maintainers = (SELECT count(*) FROM maintainers WHERE num_packages > 0);

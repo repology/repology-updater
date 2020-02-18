@@ -144,6 +144,9 @@ def update_repology(database: Database, projects: Optional[Iterable[List[Package
     logger.log('updating links')
     database.update_links()
 
+    logger.log('updating statistics (delta)')
+    database.update_statistics_delta()
+
     # Note: before this, packages table still contains old versions of packages,
     # while new versions reside in incoming_packages temporary table
     logger.log('applying updated packages')
@@ -186,8 +189,8 @@ def update_repology(database: Database, projects: Optional[Iterable[List[Package
     logger.log('updating problem counts')
     database.update_repositories_problem_counts()
 
-    logger.log('updating statistics')
-    database.update_statistics()
+    logger.log('updating statistics (global)')
+    database.update_statistics_global()
 
     logger.log('updating histories')
     database.update_histories()
