@@ -41,6 +41,9 @@ class CygwinParser(Parser):
                 if 'maintainers' in packagedata:
                     pkg.add_maintainers([m.replace('.', '').replace(' ', '.') + '@cygwin' for m in packagedata['maintainers']])
 
+                if 'homepage' in packagedata:
+                    pkg.add_homepages(packagedata['homepage'])
+
                 for maturity in ['stable', 'test']:
                     if maturity not in packagedata['versions']:
                         continue
