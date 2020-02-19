@@ -44,9 +44,6 @@ SELECT
 	outdated,
 	problematic
 FROM
-{% if partial %}
-    changed_projects INNER JOIN
-{% endif %}
 	(
 		SELECT
 			unnest(maintainers) AS maintainer,
@@ -55,9 +52,9 @@ FROM
 			count(*) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) > 0 AS newest,
 			count(*) FILTER (WHERE versionclass = 2) > 0 AS outdated,
 			count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0 AS problematic
-		FROM packages
+		FROM {% if partial %}incoming_packages{% else %}packages{% endif %}
 		GROUP BY unnest(maintainers), repo, effname
-	) AS tmp{% if partial %} USING(effname){% endif %}
+	) AS tmp
 	INNER JOIN metapackages USING(effname)
 WHERE num_repos_nonshadow > 0;
 

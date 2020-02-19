@@ -35,11 +35,7 @@ SELECT
 	effname,
 	max(num_families) = 1
 FROM
-{% if partial %}
-	changed_projects INNER JOIN packages USING(effname)
-{% else %}
-	packages
-{% endif %}
+	{% if partial %}incoming_packages{% else %}packages{% endif %}
 	INNER JOIN metapackages USING(effname)
 WHERE category IS NOT NULL AND num_repos_nonshadow > 0
 GROUP BY effname, category
