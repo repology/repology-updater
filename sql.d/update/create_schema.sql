@@ -514,7 +514,7 @@ CREATE TABLE metapackages_events (
 	data jsonb NOT NULL
 );
 
-CREATE INDEX ON metapackages_events(effname, ts DESC, type DESC);
+CREATE INDEX ON metapackages_events(effname, ts DESC);
 
 -- maintainer events
 DROP TABLE IF EXISTS maintainer_repo_metapackages_events CASCADE;
@@ -532,7 +532,7 @@ CREATE TABLE maintainer_repo_metapackages_events (
 	data jsonb NOT NULL
 );
 
-CREATE INDEX ON maintainer_repo_metapackages_events(maintainer_id, repository_id, ts DESC, type DESC);
+CREATE INDEX ON maintainer_repo_metapackages_events(maintainer_id, repository_id, ts DESC);
 
 -- repository events
 DROP TABLE IF EXISTS repository_events CASCADE;
@@ -549,7 +549,7 @@ CREATE TABLE repository_events (
 	data jsonb NOT NULL
 );
 
-CREATE INDEX ON repository_events(repository_id, ts DESC, type DESC);
+CREATE INDEX ON repository_events(repository_id, ts DESC);
 
 --------------------------------------------------------------------------------
 -- Statistics
