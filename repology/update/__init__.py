@@ -112,7 +112,7 @@ def update_repology(database: Database, projects: Optional[Iterable[List[Package
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
 
     logger.log('preparing updated packages')
-    database.update_prepare_packages()
+    database.update_prepare_packages(enable_partial)
 
     logger.log('updating projects (precreate)')
     database.update_precreate_projects()

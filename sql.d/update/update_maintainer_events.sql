@@ -24,8 +24,7 @@ WITH old AS (
 		array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass IN (1, 4, 5)) AS versions_uptodate,
 		array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 2) AS versions_outdated,
 		array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass IN (3, 7, 8)) AS versions_ignored
-	FROM packages
-	WHERE effname IN (SELECT effname FROM changed_projects)
+	FROM old_packages
 	GROUP BY effname,repo,maintainer
 ), new AS (
 	SELECT

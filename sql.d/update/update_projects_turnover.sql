@@ -30,9 +30,8 @@ FROM (
 		(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
 		trackname,
 		family
-	FROM packages
-	WHERE effname IN (SELECT effname FROM changed_projects)
-		AND (SELECT state FROM repositories WHERE repositories.name = repo) = 'active'
+	FROM old_packages
+	WHERE (SELECT state FROM repositories WHERE repositories.name = repo) = 'active'
 ) AS tmp
 INNER JOIN repo_tracks USING(repository_id, trackname)
 GROUP BY effname, family

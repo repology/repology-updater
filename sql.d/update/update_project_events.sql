@@ -33,8 +33,7 @@ WITH old AS (
 			WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)
 		) AS newest_repos,
 		array_agg(DISTINCT repo ORDER BY repo) AS all_repos
-	FROM packages
-	WHERE effname IN (SELECT effname FROM changed_projects)
+	FROM old_packages
 	GROUP BY effname
 ), new AS (
 	SELECT

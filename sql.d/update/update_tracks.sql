@@ -24,8 +24,7 @@ WITH old AS (
 		(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
 		trackname,
 		count(*) AS refcount
-	FROM packages
-	WHERE effname IN (SELECT effname FROM changed_projects)
+	FROM old_packages
 	GROUP BY repo, trackname
 ), new AS (
 	SELECT
