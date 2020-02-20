@@ -40,7 +40,7 @@ WITH old AS (
 		(SELECT id FROM repositories WHERE name = coalesce(new.repo, old.repo)) AS repository_id,
 		(SELECT id FROM metapackages WHERE effname = coalesce(new.effname, old.effname)) AS project_id,
 
-		coalesce(new.effname, old.effname) AS effname,
+		effname,
 
 		old.effname IS NULL AS is_added,
 		new.effname IS NULL AS is_removed,
@@ -54,7 +54,7 @@ WITH old AS (
 		new.versions_outdated AS new_versions_outdated,
 		new.versions_ignored AS new_versions_ignored
 	FROM old FULL OUTER JOIN new USING(effname,repo)
-	WHERE (SELECT state FROM repositories WHERE name = coalesce(new.repo, old.repo)) IN ('active'::repository_state, 'readded'::repository_state)
+	WHERE (SELECT state FROM repositories WHERE name = coalesce(new.repo, old.repo)) = 'active'::repository_state
 )
 INSERT INTO repository_events (
 	repository_id, metapackage_id, ts,
