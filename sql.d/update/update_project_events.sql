@@ -56,7 +56,7 @@ WITH old AS (
 ), diff AS (
 	SELECT
 		-- effname
-		coalesce(new.effname, old.effname) AS effname,
+		effname,
 
 		-- flags
 		old.effname IS NULL AS is_added,
@@ -74,6 +74,9 @@ WITH old AS (
 
 		-- old state
 		old.all_repos AS old_all_repos,
+
+		old.devel_versions[1] AS prev_devel_version,
+		old.newest_versions[1] AS prev_newest_version,
 
 		-- delta
 		get_added_active_repos(old.all_repos, new.all_repos) AS added_repos,
@@ -145,8 +148,15 @@ SELECT
 		'passed',
 			CASE
 				WHEN devel_repo_seen_before
-					THEN extract(epoch FROM now() - (SELECT devel_version_update FROM metapackages WHERE metapackages.effname = diff.effname))
-					ELSE NULL
+				THEN
+					extract(epoch FROM
+						now() - (
+							SELECT trusted_start_ts
+							FROM project_releases
+							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_devel_version
+						)
+					)
+				ELSE NULL
 			END
 	))
 FROM diff WHERE is_changed AND is_devel_update
@@ -164,8 +174,15 @@ SELECT
 		'lag',
 			CASE
 				WHEN devel_repo_seen_before
-					THEN extract(epoch FROM now() - (SELECT devel_version_update FROM metapackages WHERE metapackages.effname = diff.effname))
-					ELSE NULL
+				THEN
+					extract(epoch FROM
+						now() - (
+							SELECT trusted_start_ts
+							FROM project_releases
+							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_devel_version
+						)
+					)
+				ELSE NULL
 			END
 	))
 FROM diff WHERE is_changed AND NOT is_devel_update AND devel_catchup != '{}'
@@ -184,8 +201,15 @@ SELECT
 		'passed',
 			CASE
 				WHEN newest_repo_seen_before
-					THEN extract(epoch FROM now() - (SELECT newest_version_update FROM metapackages WHERE metapackages.effname = diff.effname))
-					ELSE NULL
+				THEN
+					extract(epoch FROM
+						now() - (
+							SELECT trusted_start_ts
+							FROM project_releases
+							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_newest_version
+						)
+					)
+				ELSE NULL
 			END
 	))
 FROM diff WHERE is_changed AND is_newest_update
@@ -203,8 +227,15 @@ SELECT
 		'lag',
 			CASE
 				WHEN newest_repo_seen_before
-					THEN extract(epoch FROM now() - (SELECT newest_version_update FROM metapackages WHERE metapackages.effname = diff.effname))
-					ELSE NULL
+				THEN
+					extract(epoch FROM
+						now() - (
+							SELECT trusted_start_ts
+							FROM project_releases
+							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_newest_version
+						)
+					)
+				ELSE NULL
 			END
 	))
 FROM diff WHERE is_changed AND NOT is_newest_update AND newest_catchup != '{}'
