@@ -213,20 +213,9 @@ CREATE TABLE metapackages (
 	num_repos_newest smallint NOT NULL DEFAULT 0,
 	num_families_newest smallint NOT NULL DEFAULT 0,
 	has_related boolean NOT NULL DEFAULT false,
+
 	first_seen timestamp with time zone NOT NULL DEFAULT now(),
-	last_seen timestamp with time zone NOT NULL DEFAULT now(),
-	orphaned_at timestamp with time zone,
-
-	-- XXX: these are still used for events
-	devel_versions text[],
-	devel_repos text[],
-	devel_version_update timestamp with time zone,
-
-	newest_versions text[],
-	newest_repos text[],
-	newest_version_update timestamp with time zone,
-
-	all_repos text[]
+	orphaned_at timestamp with time zone
 );
 
 -- indexes for metapackage queries
