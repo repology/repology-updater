@@ -683,6 +683,18 @@ CREATE TABLE project_redirects (
 	PRIMARY KEY(oldname, newname)
 );
 
+DROP TABLE IF EXISTS project_redirects2 CASCADE;
+
+CREATE TABLE project_redirects2 (
+	project_id integer NOT NULL,
+	repository_id smallint NOT NULL,
+	is_actual boolean NOT NULL,
+	trackname text NOT NULL
+);
+
+CREATE UNIQUE INDEX ON project_redirects2 (project_id, repository_id, trackname);
+CREATE INDEX ON project_redirects2 (repository_id, trackname) WHERE is_actual;
+
 --------------------------------------------------------------------------------
 -- Hashes
 --------------------------------------------------------------------------------

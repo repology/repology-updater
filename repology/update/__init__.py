@@ -152,6 +152,9 @@ class UpdateProcess:
         self._logger.log('updating statistics (delta)')
         self._database.update_statistics_delta()
 
+        self._logger.log('updating redirects')
+        self._database.update_redirects(self._enable_partial_update, self._enable_explicit_analyze)
+
         # Note: before this, packages table still contains old versions of packages,
         # while new versions reside in incoming_packages temporary table
         self._logger.log('applying updated packages')
