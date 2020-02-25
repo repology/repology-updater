@@ -80,3 +80,16 @@ ENABLE_SAFETY_CHECKS = True
 # For instance, it's used in repository fetcher User-Agent
 #
 REPOLOGY_HOME = 'https://repology.org'
+
+#
+# Point of time before which all history times are treated
+# as unreliable
+#
+# When a new instance is initialized, historical data (such
+# as information on known software releases) is initialized
+# with current time, and it is not accurate because releases
+# actually appeared in the past. Set this to unix time after
+# the first instance update to make such unreliable timestamps
+# ignored
+#
+HISTORY_CUTOFF_TIMESTAMP = 0

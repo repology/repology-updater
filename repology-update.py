@@ -246,6 +246,8 @@ def database_update(env: Environment) -> None:
     database = env.get_main_database_connection()
 
     with UpdateProcess(database, logger) as update:
+        update.set_history_cutoff_timestamp(env.get_options().history_cutoff_timestamp)
+
         if not env.get_options().skip_packages:
             update.push_packages(env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger))
 
@@ -310,6 +312,7 @@ def parse_arguments() -> argparse.Namespace:
     grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
     grp.add_argument('--disable-safety-checks', action='store_false', dest='enable_safety_checks', default=not config['ENABLE_SAFETY_CHECKS'], help='disable safety checks on processed repository data')
     grp.add_argument('--skip-packages', action='store_true', help='skip pushing updated packages, but run update code')
+    grp.add_argument('--history-cutoff-timestamp', default=config['HISTORY_CUTOFF_TIMESTAMP'], help='timestamp before which history is untrusted')
 
     grp.add_argument('--fatal', action='store_true', help='treat single repository processing failure as fatal')
 

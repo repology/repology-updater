@@ -55,6 +55,7 @@ class UpdateProcess:
 
     _enable_partial_update: bool = True
     _enable_explicit_analyze: bool = False
+    _history_cutoff_timestamp: int = 0
 
     def __init__(self, database: Database, logger: Logger) -> None:
         self._database = database
@@ -134,7 +135,7 @@ class UpdateProcess:
         self._database.update_project_releases(self._enable_partial_update, self._enable_explicit_analyze)
 
         self._logger.log('updating project events')
-        self._database.update_project_events()
+        self._database.update_project_events(self._history_cutoff_timestamp)
 
         self._logger.log('updating maintainer events')
         self._database.update_maintainer_events()
@@ -207,6 +208,9 @@ class UpdateProcess:
 
         def push_packages(self, projects: Iterable[List[Package]]) -> None:
             self._update._push_packages(projects)
+
+        def set_history_cutoff_timestamp(self, timestamp: int) -> None:
+            self._update._history_cutoff_timestamp = timestamp
 
     def __enter__(self) -> 'UpdateProcess.UpdateManipulator':
         self._start_update()

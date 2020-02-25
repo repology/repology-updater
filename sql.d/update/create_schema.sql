@@ -143,6 +143,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
+-- Similar to nullif, but with less comparison
+CREATE OR REPLACE FUNCTION nullifless(value1 double precision, value2 double precision) RETURNS double precision AS $$
+BEGIN
+	RETURN CASE WHEN value1 < value2 THEN NULL ELSE value1 END;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+
 --------------------------------------------------------------------------------
 -- Main packages table
 --------------------------------------------------------------------------------

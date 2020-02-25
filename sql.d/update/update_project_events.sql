@@ -15,6 +15,10 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+-- @param history_cutoff_timestamp
+--------------------------------------------------------------------------------
+
 WITH old AS (
 	SELECT
 		effname,
@@ -146,18 +150,21 @@ SELECT
 		'versions', devel_versions,
 		'repos', devel_repos,
 		'passed',
-			CASE
-				WHEN devel_repo_seen_before
-				THEN
-					extract(epoch FROM
-						now() - (
-							SELECT trusted_start_ts
-							FROM project_releases
-							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_devel_version
+			nullifless(
+				CASE
+					WHEN devel_repo_seen_before
+					THEN
+						extract(epoch FROM
+							now() - (
+								SELECT trusted_start_ts
+								FROM project_releases
+								WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_devel_version
+							)
 						)
-					)
-				ELSE NULL
-			END
+					ELSE NULL
+				END,
+				%(history_cutoff_timestamp)s
+			)
 	))
 FROM diff WHERE is_changed AND is_devel_update
 --------------------------------------------------------------------------------
@@ -172,18 +179,21 @@ SELECT
 		'branch', 'devel',
 		'repos', devel_catchup,
 		'lag',
-			CASE
-				WHEN devel_repo_seen_before
-				THEN
-					extract(epoch FROM
-						now() - (
-							SELECT trusted_start_ts
-							FROM project_releases
-							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_devel_version
+			nullifless(
+				CASE
+					WHEN devel_repo_seen_before
+					THEN
+						extract(epoch FROM
+							now() - (
+								SELECT trusted_start_ts
+								FROM project_releases
+								WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_devel_version
+							)
 						)
-					)
-				ELSE NULL
-			END
+					ELSE NULL
+				END,
+				%(history_cutoff_timestamp)s
+			)
 	))
 FROM diff WHERE is_changed AND NOT is_devel_update AND devel_catchup != '{}'
 --------------------------------------------------------------------------------
@@ -199,18 +209,21 @@ SELECT
 		'versions', newest_versions,
 		'repos', newest_repos,
 		'passed',
-			CASE
-				WHEN newest_repo_seen_before
-				THEN
-					extract(epoch FROM
-						now() - (
-							SELECT trusted_start_ts
-							FROM project_releases
-							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_newest_version
+			nullifless(
+				CASE
+					WHEN newest_repo_seen_before
+					THEN
+						extract(epoch FROM
+							now() - (
+								SELECT trusted_start_ts
+								FROM project_releases
+								WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_newest_version
+							)
 						)
-					)
-				ELSE NULL
-			END
+					ELSE NULL
+				END,
+				%(history_cutoff_timestamp)s
+			)
 	))
 FROM diff WHERE is_changed AND is_newest_update
 --------------------------------------------------------------------------------
@@ -225,18 +238,21 @@ SELECT
 		'branch', 'newest',
 		'repos', newest_catchup,
 		'lag',
-			CASE
-				WHEN newest_repo_seen_before
-				THEN
-					extract(epoch FROM
-						now() - (
-							SELECT trusted_start_ts
-							FROM project_releases
-							WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_newest_version
+			nullifless(
+				CASE
+					WHEN newest_repo_seen_before
+					THEN
+						extract(epoch FROM
+							now() - (
+								SELECT trusted_start_ts
+								FROM project_releases
+								WHERE project_releases.effname = diff.effname AND project_releases.version = diff.prev_newest_version
+							)
 						)
-					)
-				ELSE NULL
-			END
+					ELSE NULL
+				END,
+				%(history_cutoff_timestamp)s
+			)
 	))
 FROM diff WHERE is_changed AND NOT is_newest_update AND newest_catchup != '{}'
 ;
