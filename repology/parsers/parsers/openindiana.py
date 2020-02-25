@@ -42,7 +42,7 @@ def _parse_actions(actions: List[str]) -> Dict[str, List[str]]:
     variables: Dict[str, List[str]] = defaultdict(list)
 
     for action in actions:
-        match = re.fullmatch('set(?: last-fmri=[^ ]+)? name=([^ ]+)( value=.*)', action)
+        match = re.fullmatch('set(?: last-fmri=[^ ]+)? name=([^ ]+)(?: refresh_fmri=[^ ]+)?( value=.*)', action)
         if match is None:
             raise RuntimeError(f'cannot parse action "{action}"')
 
