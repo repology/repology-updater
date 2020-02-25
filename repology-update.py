@@ -31,7 +31,7 @@ from repology.querymgr import QueryManager
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
-from repology.update import update_repology
+from repology.update import UpdateProcess
 
 
 T = TypeVar('T')
@@ -245,11 +245,9 @@ def database_update(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
-    update_repology(
-        database=database,
-        projects=None if env.get_options().skip_packages else env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger),
-        logger=logger,
-    )
+    with UpdateProcess(database, logger) as update:
+        if not env.get_options().skip_packages:
+            update.push_packages(env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger))
 
     for reponame in env.get_enabled_repo_names():
         database.mark_repository_updated(reponame)
