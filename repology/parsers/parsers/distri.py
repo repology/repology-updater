@@ -38,7 +38,7 @@ class DistriGitParser(Parser):
 
                 with open(protofile) as f:
                     build = BuildMessage()
-                    ParseTextFormat(f.read(), build)
+                    ParseTextFormat(f.read(), build, allow_unknown_field=True)
 
                 pkg.set_version(build.version, lambda ver: ver.rsplit('-', 1)[0])
                 pkg.add_downloads(build.source)
