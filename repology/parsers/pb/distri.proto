@@ -183,6 +183,10 @@ message Pull {
   // URL (https:// preferred, http:// accepted) to a Debian repository Packages
   // file. E.g. https://dl.google.com/linux/chrome/deb/dists/stable/main/binary-amd64/Packages
   optional string debian_packages = 1;
+
+  // URL (https:// preferred, http:// accepted) to a page listing at least the
+  // latest release (or multiple releases).
+  optional string releases_url = 2;
 }
 
 message Build {
