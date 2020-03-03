@@ -38,7 +38,8 @@ WITH old AS (
 		trackname,
 		new.effname IS NOT NULL AS is_actual
 	FROM old FULL OUTER JOIN new USING(effname, repo, trackname)
-	WHERE old.effname IS NULL OR new.effname IS NULL
+	WHERE (old.effname IS NULL OR new.effname IS NULL) AND
+		repo IN (SELECT name FROM repositories WHERE state = 'active'::repository_state)
 )
 INSERT INTO project_redirects2 (
 	project_id,
