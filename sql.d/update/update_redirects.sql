@@ -21,25 +21,40 @@
 --------------------------------------------------------------------------------
 WITH old AS (
 	SELECT DISTINCT
-		effname,
 		repo,
-		trackname
+		trackname,
+		effname
 	FROM old_packages
 ), new AS (
 	SELECT DISTINCT
-		effname,
-		repo,
-		trackname
-	FROM incoming_packages
-), diff AS (
-	SELECT
-		effname,
 		repo,
 		trackname,
-		new.effname IS NOT NULL AS is_actual
-	FROM old FULL OUTER JOIN new USING(effname, repo, trackname)
-	WHERE (old.effname IS NULL OR new.effname IS NULL) AND
-		repo IN (SELECT name FROM repositories WHERE state = 'active'::repository_state)
+		effname
+	FROM incoming_packages
+), diff AS (
+	-- the outer query ignores facts of plain package adds and removes
+	-- to/from a specific repository; this would generate single
+	-- (repository,trackname,effname,(added/removed)) item which would
+	-- be useless for the purpose of redirects, as we only care for
+	-- project name changes here, which would be generate at least two
+	-- events for old and new effname
+	SELECT
+		repo,
+		trackname,
+		effname,
+		is_actual
+	FROM (
+		SELECT
+			repo,
+			trackname,
+			effname,
+			new.effname IS NOT NULL AS is_actual,
+			count(*) OVER (PARTITION BY repo, trackname) AS changes_per_track
+		FROM old FULL OUTER JOIN new USING(repo, trackname, effname)
+		WHERE (old.effname IS NULL OR new.effname IS NULL) AND
+			repo IN (SELECT name FROM repositories WHERE state = 'active'::repository_state)
+	) AS tmp
+	WHERE changes_per_track > 1
 )
 INSERT INTO project_redirects2 (
 	project_id,
