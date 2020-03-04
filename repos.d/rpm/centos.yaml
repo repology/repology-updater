@@ -17,13 +17,9 @@
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/
-    - desc: CentOS packages
-      url: http://centos-packages.com/6/
   packagelinks:
     - desc: Package sources in CentOS git
       url: 'https://git.centos.org/rpms/{srcname}/tree/c6'
-#    - desc: Package details on centos-packages.com
-#      url: 'http://centos-packages.com/6/package/{srcname}/'
   tags: [ all, production, centos, rpm ]
 
 - name: centos_7
@@ -42,13 +38,9 @@
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/
-    - desc: CentOS packages
-      url: http://centos-packages.com/7/
   packagelinks:
     - desc: Package sources in CentOS git
       url: 'https://git.centos.org/rpms/{srcname}/tree/c7'
-#    - desc: Package details on centos-packages.com
-#      url: 'http://centos-packages.com/7/package/{srcname}/'
   tags: [ all, production, centos, rpm ]
 
 - name: centos_8
@@ -67,11 +59,7 @@
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/
-    - desc: CentOS packages
-      url: http://centos-packages.com/8/
   packagelinks:
     - desc: Package sources in CentOS git
       url: 'https://git.centos.org/rpms/{srcname}/tree/c8'
-#    - desc: Package details on centos-packages.com
-#      url: 'http://centos-packages.com/8/package/{srcname}/'
   tags: [ all, production, centos, rpm ]
