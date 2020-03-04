@@ -1,4 +1,4 @@
--- Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -19,6 +19,9 @@
 --
 -- @param id
 -- @param status
+-- @param num_lines
+-- @param num_warnings
+-- @param num_errors
 -- @param no_changes=False
 -- @param utime=None
 -- @param stime=None
@@ -33,9 +36,9 @@ SET
 	no_changes = %(no_changes)s,
 	finish_ts = now(),
 
-	num_lines = (SELECT count(*) FROM log_lines WHERE run_id = id),
-	num_warnings = (SELECT count(*) FROM log_lines WHERE run_id = id AND severity='warning'),
-	num_errors = (SELECT count(*) FROM log_lines WHERE run_id = id AND severity='error'),
+	num_lines = %(num_lines)s,
+	num_warnings = %(num_warnings)s,
+	num_errors = %(num_errors)s,
 
 	utime = %(utime)s,
 	stime = %(stime)s,

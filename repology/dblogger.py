@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -112,17 +112,24 @@ class RunHandler(Logger):
     _run_id: int
     _start_rusage: Any
     _logger: Logger
-    _no_changes: bool
+    _no_changes: bool = False
+    _num_lines: int = 0
+    _num_warnings: int = 0
+    _num_errors: int = 0
 
     def __init__(self, db: Database, reponame: str, run_type: str) -> None:
         self._db = db
         self._run_id = self._db.start_run(reponame, run_type)
         self._start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         self._logger = RealtimeDatabaseLogger(self._db, self._run_id)
-        self._no_changes = False
 
     def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
         self._logger._log(message, severity, indent, prefix)
+        self._num_lines += 1
+        if severity == Logger.WARNING:
+            self._num_warnings += 1
+        if severity == Logger.ERROR:
+            self._num_errors += 1
 
     def set_no_changes(self) -> None:
         self._no_changes = True
@@ -131,9 +138,12 @@ class RunHandler(Logger):
         end_rusage = resource.getrusage(resource.RUSAGE_SELF)
 
         self._db.finish_run(
-            self._run_id,
-            status,
-            self._no_changes,
+            id=self._run_id,
+            status=status,
+            num_lines=self._num_lines,
+            num_warnings=self._num_warnings,
+            num_errors=self._num_errors,
+            no_changes=self._no_changes,
             utime=datetime.timedelta(seconds=end_rusage.ru_utime - self._start_rusage.ru_utime),
             stime=datetime.timedelta(seconds=end_rusage.ru_stime - self._start_rusage.ru_stime),
             maxrss=end_rusage.ru_maxrss,

@@ -336,7 +336,7 @@ CREATE TABLE log_lines (
 	severity log_severity NOT NULL,
 	message text NOT NULL,
 
-	PRIMARY KEY(run_id, lineno, timestamp, severity)
+	PRIMARY KEY(run_id, lineno)
 );
 
 --------------------------------------------------------------------------------
