@@ -56,7 +56,7 @@ WITH old AS (
 	) AS tmp
 	WHERE changes_per_track > 1
 )
-INSERT INTO project_redirects2 (
+INSERT INTO project_redirects (
 	project_id,
     repository_id,
     trackname,
@@ -72,5 +72,5 @@ ON CONFLICT(project_id, repository_id, trackname)
 DO UPDATE SET is_actual = EXCLUDED.is_actual;
 
 {% if analyze %}
-ANALYZE project_redirects2;
+ANALYZE project_redirects;
 {% endif %}

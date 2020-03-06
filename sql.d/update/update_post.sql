@@ -59,21 +59,6 @@ WHERE run_id NOT IN (
 );
 
 --------------------------------------------------------------------------------
--- Update redirects
---------------------------------------------------------------------------------
-INSERT
-INTO project_redirects (
-	oldname,
-	newname
-)
-SELECT DISTINCT
-	projectname_seed,
-	effname
-FROM packages
-WHERE projectname_seed != effname
-ON CONFLICT (oldname, newname) DO NOTHING;
-
---------------------------------------------------------------------------------
 -- Clean up stale links
 --------------------------------------------------------------------------------
 DELETE FROM links

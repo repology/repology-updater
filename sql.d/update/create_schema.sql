@@ -666,23 +666,24 @@ CREATE UNIQUE INDEX ON url_relations(urlhash, metapackage_id);
 DROP TABLE IF EXISTS project_redirects CASCADE;
 
 CREATE TABLE project_redirects (
-	oldname text NOT NULL,
-	newname text NOT NULL,
-	manual bool NOT NULL DEFAULT FALSE,
-	PRIMARY KEY(oldname, newname)
-);
-
-DROP TABLE IF EXISTS project_redirects2 CASCADE;
-
-CREATE TABLE project_redirects2 (
 	project_id integer NOT NULL,
 	repository_id smallint NOT NULL,
 	is_actual boolean NOT NULL,
 	trackname text NOT NULL
 );
 
-CREATE UNIQUE INDEX ON project_redirects2 (project_id, repository_id, trackname);
-CREATE INDEX ON project_redirects2 (repository_id, trackname) WHERE is_actual;
+CREATE UNIQUE INDEX ON project_redirects (project_id, repository_id, trackname);
+CREATE INDEX ON project_redirects (repository_id, trackname) WHERE is_actual;
+
+DROP TABLE IF EXISTS project_redirects_manual CASCADE;
+
+CREATE TABLE project_redirects_manual (
+	oldname text NOT NULL,
+	newname text NOT NULL,
+	PRIMARY KEY(oldname, newname)
+);
+
+CREATE INDEX ON project_redirects_manual(newname);
 
 --------------------------------------------------------------------------------
 -- Hashes
