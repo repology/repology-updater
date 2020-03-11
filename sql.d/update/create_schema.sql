@@ -267,12 +267,6 @@ CREATE TABLE maintainers (
 	num_projects_outdated_per_repo jsonb NOT NULL DEFAULT '{}',
 	num_projects_problematic_per_repo jsonb NOT NULL DEFAULT '{}',
 
-	bestrepo text,
-	bestrepo_num_projects integer NOT NULL DEFAULT 0,
-	bestrepo_num_projects_newest integer NULL DEFAULT 0,
-	bestrepo_num_projects_outdated integer NULL DEFAULT 0,
-	bestrepo_num_projects_problematic integer NULL DEFAULT 0,
-
 	num_projects_per_category jsonb NOT NULL DEFAULT '{}',
 
 	num_repos integer NOT NULL DEFAULT 0,

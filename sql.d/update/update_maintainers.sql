@@ -74,11 +74,6 @@ SET
 	num_projects_newest_per_repo = tmp.num_projects_newest_per_repo,
 	num_projects_outdated_per_repo = tmp.num_projects_outdated_per_repo,
 	num_projects_problematic_per_repo = tmp.num_projects_problematic_per_repo,
-	bestrepo = tmp.bestrepo,
-	bestrepo_num_projects = tmp.bestrepo_num_projects,
-	bestrepo_num_projects_newest = tmp.bestrepo_num_projects_newest,
-	bestrepo_num_projects_outdated = tmp.bestrepo_num_projects_outdated,
-	bestrepo_num_projects_problematic = tmp.bestrepo_num_projects_problematic,
 	num_repos = tmp.num_repos
 FROM (
 	SELECT
@@ -88,34 +83,19 @@ FROM (
 		json_object_agg(repo, num_projects_newest) AS num_projects_newest_per_repo,
 		json_object_agg(repo, num_projects_outdated) AS num_projects_outdated_per_repo,
 		json_object_agg(repo, num_projects_problematic) AS num_projects_problematic_per_repo,
-		min(bestrepo) AS bestrepo,
-		min(bestrepo_num_projects) AS bestrepo_num_projects,
-		min(bestrepo_num_projects_newest) AS bestrepo_num_projects_newest,
-		min(bestrepo_num_projects_outdated) AS bestrepo_num_projects_outdated,
-		min(bestrepo_num_projects_problematic) AS bestrepo_num_projects_problematic,
 		count(DISTINCT repo) AS num_repos
 	FROM (
 		SELECT
-			*,
-			first_value(repo) OVER (PARTITION BY maintainer ORDER BY num_projects_newest DESC, num_projects_outdated, repository_weight DESC) AS bestrepo,
-			first_value(num_projects) OVER (PARTITION BY maintainer ORDER BY num_projects_newest DESC, num_projects_outdated, repository_weight DESC) AS bestrepo_num_projects,
-			first_value(num_projects_newest) OVER (PARTITION BY maintainer ORDER BY num_projects_newest DESC, num_projects_outdated, repository_weight DESC) AS bestrepo_num_projects_newest,
-			first_value(num_projects_outdated) OVER (PARTITION BY maintainer ORDER BY num_projects_newest DESC, num_projects_outdated, repository_weight DESC) AS bestrepo_num_projects_outdated,
-			first_value(num_projects_problematic) OVER (PARTITION BY maintainer ORDER BY num_projects_newest DESC, num_projects_outdated, repository_weight DESC) AS bestrepo_num_projects_problematic
-		FROM (
-			SELECT
-				unnest(maintainers) AS maintainer,
-				repo,
-				min(repositories.num_metapackages_newest) AS repository_weight,
-				count(*) AS num_packages,
-				count(DISTINCT effname) AS num_projects,
-				count(DISTINCT effname) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
-				count(DISTINCT effname) FILTER (WHERE versionclass = 2) AS num_projects_outdated,
-				count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
-			FROM packages INNER JOIN repositories ON (packages.repo = repositories.name)
-			GROUP BY maintainer, repo
-		) AS maintainer_repos
-	) AS maintainer_repos_with_bestrepo
+			unnest(maintainers) AS maintainer,
+			repo,
+			count(*) AS num_packages,
+			count(DISTINCT effname) AS num_projects,
+			count(DISTINCT effname) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
+			count(DISTINCT effname) FILTER (WHERE versionclass = 2) AS num_projects_outdated,
+			count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
+		FROM packages
+		GROUP BY maintainer, repo
+	) AS maintainer_repos
 	GROUP BY maintainer
 ) AS tmp
 WHERE maintainers.maintainer = tmp.maintainer;
@@ -171,12 +151,6 @@ SET
 	num_projects_newest_per_repo = '{}',
 	num_projects_outdated_per_repo = '{}',
 	num_projects_problematic_per_repo = '{}',
-
-	bestrepo = NULL,
-	bestrepo_num_projects = 0,
-	bestrepo_num_projects_newest = 0,
-	bestrepo_num_projects_outdated = 0,
-	bestrepo_num_projects_problematic = 0,
 
 	num_projects_per_category = '{}',
 
