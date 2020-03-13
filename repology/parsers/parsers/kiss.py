@@ -26,10 +26,6 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
-def _is_good_download(download: str) -> bool:
-    return '://' in download
-
-
 class KissGitParser(Parser):
     _maintainer_from_git: bool
 
@@ -47,12 +43,15 @@ class KissGitParser(Parser):
                     pkg.set_version(version)
 
                 with open(os.path.join(rootdir, 'sources')) as f:
-                    pkg.add_downloads(
-                        filter(
-                            _is_good_download,
-                            (line.strip().split()[0] for line in f)
-                        )
-                    )
+                    for line in f:
+                        line = line.strip()
+                        if not line or line.startswith('#'):
+                            continue
+
+                        url, *rest = line.split()
+
+                        if '://' in url:
+                            pkg.add_downloads(url)
 
                 pkgpath = os.path.relpath(rootdir, path)
 
