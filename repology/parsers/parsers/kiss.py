@@ -35,7 +35,7 @@ class KissGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for versionpath in walk_tree(path, name='version'):
             rootdir = os.path.dirname(versionpath)
-            with factory.begin(rootdir) as pkg:
+            with factory.begin(os.path.relpath(rootdir, path)) as pkg:
                 pkg.add_name(os.path.basename(rootdir), NameType.KISS_NAME)
 
                 with open(versionpath) as f:
