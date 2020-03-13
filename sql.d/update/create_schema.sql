@@ -78,6 +78,14 @@ CREATE TYPE log_severity AS enum(
 	'error'
 );
 
+DROP TYPE IF EXISTS project_name_type CASCADE;
+
+CREATE TYPE project_name_type AS enum(
+	'name',
+	'srcname',
+	'binname'
+);
+
 --------------------------------------------------------------------------------
 -- functions
 --------------------------------------------------------------------------------
@@ -753,3 +761,18 @@ CREATE TABLE project_turnover (
 	ts timestamp with time zone NOT NULL DEFAULT now(),
 	family text NOT NULL
 );
+
+--------------------------------------------------------------------------------
+-- Project names
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS project_names CASCADE;
+
+CREATE TABLE project_names (
+	project_id integer NOT NULL,
+	repository_id smallint NOT NULL,
+	name_type project_name_type NOT NULL,
+	name text NOT NULL
+);
+
+CREATE INDEX ON project_names(project_id);
+CREATE INDEX ON project_names(name, repository_id);
