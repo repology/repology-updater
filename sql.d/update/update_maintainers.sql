@@ -25,6 +25,7 @@ SET
 	num_projects_newest_per_repo = tmp.num_projects_newest_per_repo,
 	num_projects_outdated_per_repo = tmp.num_projects_outdated_per_repo,
 	num_projects_problematic_per_repo = tmp.num_projects_problematic_per_repo,
+	counts_per_repo = tmp.counts_per_repo,
 	num_repos = tmp.num_repos
 FROM (
 	SELECT
@@ -34,6 +35,15 @@ FROM (
 		json_object_agg(repo, num_projects_newest) AS num_projects_newest_per_repo,
 		json_object_agg(repo, num_projects_outdated) AS num_projects_outdated_per_repo,
 		json_object_agg(repo, num_projects_problematic) AS num_projects_problematic_per_repo,
+		json_object_agg(repo,
+			json_build_array(
+				num_packages,
+				num_projects,
+				num_projects_newest,
+				num_projects_outdated,
+				num_projects_problematic
+			)
+		) AS counts_per_repo,
 		count(DISTINCT repo) AS num_repos
 	FROM (
 		SELECT
@@ -59,6 +69,8 @@ SET
 	num_projects_newest_per_repo = '{}',
 	num_projects_outdated_per_repo = '{}',
 	num_projects_problematic_per_repo = '{}',
+
+	counts_per_repo = '{}',
 
 	num_repos = 0
 WHERE
