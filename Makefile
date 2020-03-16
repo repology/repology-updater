@@ -9,6 +9,9 @@ test::
 	python3 -m unittest discover
 
 test-make-dump::
+	psql -U repology_test -At -c "select tablename from pg_tables where schemaname = 'public'" | \
+		sed -e 's|.*|drop table & cascade;|' | psql -U repology_test
+
 	env REPOLOGY_CONFIG=./repology-test.conf.default ./repology-update.py -ippd
 	pg_dump -U repology_test -c \
 		| grep -v '^CREATE EXTENSION' \
