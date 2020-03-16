@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -79,7 +79,7 @@ class UpdateProcess:
             if isinstance(change, UpdatedProject):
                 fill_packageset_versions(change.packages)
                 self._database.add_packages(change.packages)
-                self._database.update_project_hash(change.effname, change.hash)
+                self._database.update_project_hash(change.effname, change.hash_)
 
                 for package in change.packages:
                     field_stats_per_repo[package.repo].add(package)

@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -79,7 +79,7 @@ class NpackdXmlParser(Parser):
                     pkg.add_downloads((e.text for e in entry.findall('url')))
 
                     # from previously parsed <license> and <package> entries
-                    pkg.add_licenses(licenses[license] for license in packages[pkgname].licenses)
+                    pkg.add_licenses(licenses[license_] for license_ in packages[pkgname].licenses)
                     pkg.add_categories(_filter_categories(packages[pkgname].categories))
                     pkg.add_homepages(packages[pkgname].urls)
 

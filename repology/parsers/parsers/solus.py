@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -24,7 +24,7 @@ from repology.transformer import PackageTransformer
 
 
 def _expand_multiline_licenses(text: str) -> Iterable[str]:
-    return (license.lstrip('- ') for license in text.split('\n'))
+    return (license_.lstrip('- ') for license_ in text.split('\n'))
 
 
 class SolusIndexParser(Parser):
