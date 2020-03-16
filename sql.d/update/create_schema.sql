@@ -268,13 +268,6 @@ CREATE TABLE maintainers (
 	num_projects_outdated integer NOT NULL DEFAULT 0,
 	num_projects_problematic integer NOT NULL DEFAULT 0,
 
-	num_packages_per_repo jsonb NOT NULL DEFAULT '{}',
-
-	num_projects_per_repo jsonb NOT NULL DEFAULT '{}',
-	num_projects_newest_per_repo jsonb NOT NULL DEFAULT '{}',
-	num_projects_outdated_per_repo jsonb NOT NULL DEFAULT '{}',
-	num_projects_problematic_per_repo jsonb NOT NULL DEFAULT '{}',
-
 	-- XXX: replaces *_per_repo
 	-- packages, projects, projects_newest, projects_outdated, projects_problematic
 	counts_per_repo jsonb NOT NULL DEFAULT '{}',

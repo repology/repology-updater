@@ -20,21 +20,11 @@
 --------------------------------------------------------------------------------
 UPDATE maintainers
 SET
-	num_packages_per_repo = tmp.num_packages_per_repo,
-	num_projects_per_repo = tmp.num_projects_per_repo,
-	num_projects_newest_per_repo = tmp.num_projects_newest_per_repo,
-	num_projects_outdated_per_repo = tmp.num_projects_outdated_per_repo,
-	num_projects_problematic_per_repo = tmp.num_projects_problematic_per_repo,
 	counts_per_repo = tmp.counts_per_repo,
 	num_repos = tmp.num_repos
 FROM (
 	SELECT
 		maintainer,
-		json_object_agg(repo, num_packages) AS num_packages_per_repo,
-		json_object_agg(repo, num_projects) AS num_projects_per_repo,
-		json_object_agg(repo, num_projects_newest) AS num_projects_newest_per_repo,
-		json_object_agg(repo, num_projects_outdated) AS num_projects_outdated_per_repo,
-		json_object_agg(repo, num_projects_problematic) AS num_projects_problematic_per_repo,
 		json_object_agg(repo,
 			json_build_array(
 				num_packages,
@@ -63,13 +53,6 @@ WHERE maintainers.maintainer = tmp.maintainer;
 
 UPDATE maintainers
 SET
-	num_packages_per_repo = '{}',
-
-	num_projects_per_repo = '{}',
-	num_projects_newest_per_repo = '{}',
-	num_projects_outdated_per_repo = '{}',
-	num_projects_problematic_per_repo = '{}',
-
 	counts_per_repo = '{}',
 
 	num_repos = 0
