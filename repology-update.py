@@ -227,6 +227,10 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
             else:
                 logger.get_indented().log(f'discrepancy detected in {where}')
 
+            if discrepancy['expected'] is None:
+                logger.get_indented().get_indented().log(f'entry not expected')
+                continue
+
             common_keys = set(discrepancy['actual'].keys()) | set(discrepancy['expected'].keys())
             for key in sorted(common_keys):
                 actual = discrepancy['actual'].get(key)
@@ -236,6 +240,7 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
                     logger.get_indented().get_indented().log(f'{key}: "{actual}" != "{expected}"')
 
     list_discrepancies('repositories', database.totals_repositories(do_fix))
+    list_discrepancies('maintainers', database.totals_maintainers(do_fix))
     list_discrepancies('statistics', database.totals_statistics(do_fix))
 
     database.commit()
