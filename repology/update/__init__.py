@@ -126,7 +126,7 @@ class UpdateProcess:
         self._database.update_maintainers_precreate(self._enable_explicit_analyze)
 
         self._logger.log('updating maintainers')
-        self._database.update_maintainers_2(self._enable_explicit_analyze)
+        self._database.update_maintainers(self._enable_explicit_analyze)
 
         self._logger.log('updating tracks')
         self._database.update_tracks(self._enable_partial_update, self._enable_explicit_analyze)
@@ -166,9 +166,6 @@ class UpdateProcess:
 
         self._logger.log('updating repositories')
         self._database.update_repositories()
-
-        self._logger.log('updating maintainers (legacy)')
-        self._database.update_maintainers()
 
         self._logger.log('updating binding table repo_metapackages')
         self._database.update_binding_repo_metapackages(self._enable_partial_update, self._enable_explicit_analyze)
