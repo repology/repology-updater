@@ -70,7 +70,30 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
   tags: [ all, production, openmandriva, rpm ]
 
+- name: openmandriva_rolling
+  type: repository
+  desc: OpenMandriva Rolling
+  statsgroup: OpenMandriva
+  family: openmandriva
+  ruleset: [openmandriva, rpm]
+  color: '045e9d'
+  minpackages: 10000
+  sources:
+    - name: [ main/release, non-free/release, restricted/release, unsupported/release ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://abf-downloads.openmandriva.org/rolling/repository/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: OpenMandriva home
+      url: https://openmandriva.org/
+  packagelinks:
+    - desc: Package repository
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
+  tags: [ all, production, openmandriva, rpm ]
+
 - name: openmandriva_cooker
+  sortname: openmandriva_zcooker
   type: repository
   desc: OpenMandriva Cooker
   statsgroup: OpenMandriva
