@@ -702,6 +702,7 @@ CREATE TABLE repo_tracks (
 	repository_id smallint NOT NULL,
 	refcount smallint NOT NULL,
 	start_ts timestamp with time zone NOT NULL DEFAULT now(),
+	restart_ts timestamp with time zone,
 	end_ts timestamp with time zone,
 	trackname text NOT NULL,
 

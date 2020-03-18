@@ -20,36 +20,36 @@ INSERT INTO project_turnover (
 	delta,
 	family
 )
-SELECT
-	effname,
-	-1,
-	family
-FROM (
 	SELECT
 		effname,
-		(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
-		trackname,
+		-1,
 		family
-	FROM old_packages
-	WHERE (SELECT state FROM repositories WHERE repositories.name = repo) = 'active'
-) AS tmp
-INNER JOIN repo_tracks USING(repository_id, trackname)
-GROUP BY effname, family
-HAVING bool_and(coalesce(repo_tracks.end_ts = now(), FALSE))
+	FROM (
+		SELECT
+			effname,
+			(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
+			trackname,
+			family
+		FROM old_packages
+		WHERE (SELECT state FROM repositories WHERE repositories.name = repo) = 'active'
+	) AS tmp
+	INNER JOIN repo_tracks USING(repository_id, trackname)
+	GROUP BY effname, family
+	HAVING bool_and(coalesce(repo_tracks.end_ts = now(), FALSE))
 UNION ALL
-SELECT
-	effname,
-	1,
-	family
-FROM (
 	SELECT
 		effname,
-		(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
-		trackname,
+		1,
 		family
-	FROM incoming_packages
-	WHERE (SELECT state FROM repositories WHERE repositories.name = repo) = 'active'
-) AS tmp
-INNER JOIN repo_tracks USING(repository_id, trackname)
-GROUP BY effname, family
-HAVING bool_and(coalesce(repo_tracks.start_ts = now(), FALSE));
+	FROM (
+		SELECT
+			effname,
+			(SELECT id FROM repositories WHERE repositories.name = repo) AS repository_id,
+			trackname,
+			family
+		FROM incoming_packages
+		WHERE (SELECT state FROM repositories WHERE repositories.name = repo) = 'active'
+	) AS tmp
+	INNER JOIN repo_tracks USING(repository_id, trackname)
+	GROUP BY effname, family
+	HAVING bool_and(coalesce(coalesce(repo_tracks.restart_ts, repo_tracks.start_ts) = now(), FALSE));

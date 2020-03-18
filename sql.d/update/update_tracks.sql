@@ -54,6 +54,7 @@ FROM delta
 ON CONFLICT (repository_id, trackname)
 DO UPDATE SET
 	refcount = repo_tracks.refcount + EXCLUDED.refcount,
+	restart_ts = CASE WHEN repo_tracks.refcount = 0 THEN now() ELSE repo_tracks.restart_ts END,
 	end_ts = CASE WHEN repo_tracks.refcount + EXCLUDED.refcount = 0 THEN now() ELSE NULL END;
 
 {% if analyze %}
