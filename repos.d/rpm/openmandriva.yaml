@@ -48,6 +48,28 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
   tags: [ all, production, openmandriva, rpm ]
 
+- name: openmandriva_4_1
+  type: repository
+  desc: OpenMandriva 4.1
+  statsgroup: OpenMandriva
+  family: openmandriva
+  ruleset: [openmandriva, rpm]
+  color: '045e9d'
+  minpackages: 12000
+  sources:
+    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://abf-downloads.openmandriva.org/4.1/repository/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: OpenMandriva home
+      url: https://openmandriva.org/
+  packagelinks:
+    - desc: Package repository
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
+  tags: [ all, production, openmandriva, rpm ]
+
 - name: openmandriva_cooker
   type: repository
   desc: OpenMandriva Cooker
