@@ -3,7 +3,7 @@
 ###########################################################################
 - name: openmandriva_3
   type: repository
-  desc: OpenMandriva 3.x
+  desc: OpenMandriva 3.0
   statsgroup: OpenMandriva
   family: openmandriva
   ruleset: [openmandriva, rpm]
@@ -27,7 +27,7 @@
 
 - name: openmandriva_4
   type: repository
-  desc: OpenMandriva 4.x
+  desc: OpenMandriva 4.0
   statsgroup: OpenMandriva
   family: openmandriva
   ruleset: [openmandriva, rpm]
