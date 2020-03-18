@@ -1,22 +1,42 @@
 ###########################################################################
 # SparkyLinux
+#
+# See https://wiki.sparkylinux.org/doku.php/repository
 ###########################################################################
 
-# Though we reserve place for sparky_{unstable,stable} here, we only add
-# testing as a main repo (see https://sparkylinux.org/repo/). Unstable and
-# stable repos are almost empty
-- name: sparky_testing
+# Note that the most packages reside in `core' repository which is common for
+# all Sparky flavors
+- name: sparky_stable
   type: repository
-  desc: Sparky
+  desc: Sparky Stable
   family: debuntu
   color: '949393'
-  minpackages: 10
+  minpackages: 200
   sources:
-    - name: Sources
+    - name: [core, stable]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'https://sparkylinux.org/repo/dists/testing/main/source/Sources.gz'
+      url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
       compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: SparkyLinux home
+      url: https://sparkylinux.org/
+  tags: [ all, production, sparky ]
+
+- name: sparky_testing
+  type: repository
+  desc: Sparky Testing
+  family: debuntu
+  color: '949393'
+  minpackages: 200
+  sources:
+    - name: [core, testing]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
   repolinks:
     - desc: SparkyLinux home
       url: https://sparkylinux.org/
