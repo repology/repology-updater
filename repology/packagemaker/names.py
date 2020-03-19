@@ -115,6 +115,8 @@ class NameType:
     NIX_PNAME: ClassVar[int] = 250
     NIX_ATTRIBUTE_PATH: ClassVar[int] = 251
 
+    CONAN_RECIPE_NAME: ClassVar[int] = 260
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -438,6 +440,13 @@ _MAPPINGS = [
         trackname=NameType.NIX_ATTRIBUTE_PATH,
         visiblename=NameType.NIX_PNAME,
         projectname_seed=NameType.NIX_PNAME,
+    ),
+    # Conan
+    _NameMapping(
+        srcname=NameType.CONAN_RECIPE_NAME,
+        trackname=NameType.CONAN_RECIPE_NAME,
+        visiblename=NameType.CONAN_RECIPE_NAME,
+        projectname_seed=NameType.CONAN_RECIPE_NAME,
     ),
 ]
 

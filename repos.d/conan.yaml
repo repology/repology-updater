@@ -1,0 +1,24 @@
+###########################################################################
+# ConanCenter
+###########################################################################
+- name: conancenter
+  type: repository
+  desc: ConanCenter
+  family: conan
+  ruleset: conan
+  minpackages: 400
+  sources:
+    - name: conan-center-index
+      fetcher: GitFetcher
+      parser: ConanGitParser
+      url: https://github.com/conan-io/conan-center-index.git
+      sparse_checkout: [ 'recipes/**/config.yml', 'recipes/**/conandata.yml' ]
+  repolinks:
+    - desc: JFrog ConanCenter
+      url: https://conan.io/center/
+    - desc: Conan-Center Index repository on GitHub
+      url: https://github.com/conan-io/conan-center-index
+  packagelinks:
+    - desc: Recipe directory
+      url: 'https://github.com/conan-io/conan-center-index/tree/master/recipes/{srcname}'
+  tags: [ all, production ]
