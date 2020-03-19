@@ -1,11 +1,103 @@
 ###########################################################################
 # Alpine Linux aports
+#
+# https://wiki.alpinelinux.org/wiki/Alpine_Linux:Releases
 ###########################################################################
+- name: alpine_3_8
+  sortname: alpine_3_08
+  type: repository
+  desc: Alpine Linux 3.8
+  family: alpine
+  minpackages: 8500
+  default_maintainer: fallback-mnt-alpine@repology
+  sources:
+    - name: [ community, main ]
+      fetcher: TarFetcher
+      parser: ApkIndexParser
+      url: 'http://dl-3.alpinelinux.org/alpine/v3.8/{source}/x86_64/APKINDEX.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
+      url: https://pkgs.alpinelinux.org/packages
+  packagelinks:
+    - desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}
+  tags: [ all, production, alpine ]
+
+- name: alpine_3_9
+  sortname: alpine_3_09
+  type: repository
+  desc: Alpine Linux 3.9
+  family: alpine
+  minpackages: 9000
+  default_maintainer: fallback-mnt-alpine@repology
+  sources:
+    - name: [ community, main ]
+      fetcher: TarFetcher
+      parser: ApkIndexParser
+      url: 'http://dl-3.alpinelinux.org/alpine/v3.9/{source}/x86_64/APKINDEX.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
+      url: https://pkgs.alpinelinux.org/packages
+  packagelinks:
+    - desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}
+  tags: [ all, production, alpine ]
+
+- name: alpine_3_10
+  type: repository
+  desc: Alpine Linux 3.10
+  family: alpine
+  minpackages: 9000
+  default_maintainer: fallback-mnt-alpine@repology
+  sources:
+    - name: [ community, main ]
+      fetcher: TarFetcher
+      parser: ApkIndexParser
+      url: 'http://dl-3.alpinelinux.org/alpine/v3.10/{source}/x86_64/APKINDEX.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
+      url: https://pkgs.alpinelinux.org/packages
+  packagelinks:
+    - desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}
+  tags: [ all, production, alpine ]
+
+- name: alpine_3_11
+  type: repository
+  desc: Alpine Linux 3.11
+  family: alpine
+  minpackages: 10000
+  default_maintainer: fallback-mnt-alpine@repology
+  sources:
+    - name: [ community, main ]
+      fetcher: TarFetcher
+      parser: ApkIndexParser
+      url: 'http://dl-3.alpinelinux.org/alpine/v3.11/{source}/x86_64/APKINDEX.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
+      url: https://pkgs.alpinelinux.org/packages
+  packagelinks:
+    - desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}
+  tags: [ all, production, alpine ]
+
 - name: alpine_edge
   type: repository
   desc: Alpine Linux Edge
   family: alpine
-  minpackages: 4300
+  minpackages: 15000
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main, testing ]
