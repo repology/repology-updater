@@ -148,12 +148,6 @@ WITH old AS (
 		coalesce(old_state.num_projects_outdated, 0) + coalesce(delta.num_projects_outdated, 0) AS num_projects_outdated,
 		coalesce(old_state.num_projects_problematic, 0) + coalesce(delta.num_projects_problematic, 0) AS num_projects_problematic
 	FROM old_state FULL OUTER JOIN delta USING(maintainer_name, repo)
-	WHERE
-		coalesce(old_state.num_packages, 0) + coalesce(delta.num_packages, 0) != 0 OR
-		coalesce(old_state.num_projects, 0) + coalesce(delta.num_projects, 0) != 0 OR
-		coalesce(old_state.num_projects_newest, 0) + coalesce(delta.num_projects_newest, 0) != 0 OR
-		coalesce(old_state.num_projects_outdated, 0) + coalesce(delta.num_projects_outdated, 0) != 0 OR
-		coalesce(old_state.num_projects_problematic, 0) + coalesce(delta.num_projects_problematic, 0) != 0
 )
 UPDATE maintainers
 SET
@@ -170,8 +164,8 @@ FROM (
 				num_projects_outdated,
 				num_projects_problematic
 			)
-		) AS counts_per_repo,
-		count(DISTINCT repo) AS num_repos
+		) FILTER(WHERE num_packages > 0) AS counts_per_repo,
+		count(DISTINCT repo) FILTER(WHERE num_packages > 0) AS num_repos
 	FROM new_state
 	GROUP BY maintainer_name
 ) AS tmp
@@ -214,8 +208,6 @@ WITH old AS (
 		category,
 		coalesce(old_state.num_projects, 0) + coalesce(delta.num_projects, 0) AS num_projects
 	FROM old_state FULL OUTER JOIN delta USING(maintainer_name, category)
-	WHERE
-		coalesce(old_state.num_projects, 0) + coalesce(delta.num_projects, 0) != 0
 )
 UPDATE maintainers
 SET
@@ -223,7 +215,7 @@ SET
 FROM (
 	SELECT
 		maintainer_name,
-		json_object_agg(category, num_projects) AS num_projects_per_category
+		json_object_agg(category, num_projects) FILTER (WHERE num_projects > 0) AS num_projects_per_category
 	FROM new_state
 	GROUP BY maintainer_name
 ) AS tmp
