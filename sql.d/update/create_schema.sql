@@ -769,3 +769,21 @@ CREATE TABLE project_names (
 
 CREATE INDEX ON project_names(project_id);
 CREATE INDEX ON project_names(name, repository_id);
+
+--------------------------------------------------------------------------------
+-- Complete repository/projects/maintainers listing
+--------------------------------------------------------------------------------
+-- this is similar to maintainer_repo_metapackages, however
+-- is more lightweight by not needing to store effname, flags
+-- and some indexes; it also covers all projects, including
+-- shadow ones
+
+DROP TABLE IF EXISTS repository_project_maintainers CASCADE;
+
+CREATE TABLE repository_project_maintainers (
+	maintainer_id integer NOT NULL,
+	project_id integer NOT NULL,
+	repository_id smallint NOT NULL
+);
+
+CREATE INDEX ON repository_project_maintainers(project_id);

@@ -20,7 +20,7 @@ WITH repository_maintainer_counts AS MATERIALIZED (
 	SELECT
 		repository_id,
 		count(DISTINCT maintainer_id) AS num_maintainers
-	FROM maintainer_and_repo_metapackages
+	FROM repository_project_maintainers
 	GROUP BY repository_id
 )
 UPDATE repositories

@@ -197,6 +197,9 @@ class UpdateProcess:
         self._logger.log('updating repository problem counts')
         self._database.update_repositories_problem_counts()
 
+        self._logger.log('updating repository maintainers')
+        self._database.update_repository_maintainers(self._enable_partial_update, self._enable_explicit_analyze)
+
         self._logger.log('updating repository maintainer counts')
         self._database.update_repositories_maintainer_counts()
 
