@@ -270,9 +270,9 @@ CREATE TABLE maintainers (
 
 	-- XXX: replaces *_per_repo
 	-- packages, projects, projects_newest, projects_outdated, projects_problematic
-	counts_per_repo jsonb NOT NULL DEFAULT '{}',
+	counts_per_repo jsonb,
 
-	num_projects_per_category jsonb NOT NULL DEFAULT '{}',
+	num_projects_per_category jsonb,
 
 	num_repos integer NOT NULL DEFAULT 0,
 
