@@ -8,19 +8,19 @@
   family: homebrew
   ruleset: [homebrew, macosx]
   color: 'fdb130'
-  minpackages: 4300
+  minpackages: 4500
   sources:
-    - name: homebrew.json
+    - name: formula.json
       fetcher: FileFetcher
       parser: HomebrewJsonParser
       url: https://formulae.brew.sh/api/formula.json
   repolinks:
     - desc: Homebrew home
       url: https://brew.sh/
-    - desc: Homebrew on GitHub
-      url: https://github.com/homebrew
     - desc: Homebrew Formulae
       url: https://formulae.brew.sh/
+    - desc: Homebrew Formulae repository on GitHub
+      url: https://github.com/Homebrew/homebrew-core
   packagelinks:
     - desc: Formula page
       url: 'https://formulae.brew.sh/formula/{srcname}'
