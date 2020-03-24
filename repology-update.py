@@ -228,7 +228,7 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
                 logger.get_indented().log(f'discrepancy detected in {where}')
 
             if discrepancy['expected'] is None:
-                logger.get_indented().get_indented().log(f'entry not expected')
+                logger.get_indented().get_indented().log('entry not expected')
                 continue
 
             common_keys = set(discrepancy['actual'].keys()) | set(discrepancy['expected'].keys())
