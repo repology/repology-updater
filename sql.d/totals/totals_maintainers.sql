@@ -90,7 +90,7 @@ WITH expected AS (
 {% if do_fix %}
 -- note: these changes are not shown to SELECT below due to how CTE work
 , fix AS (
-	UPDATE repositories
+	UPDATE maintainers
 	SET
 		num_packages = expected.num_packages,
 		num_packages_newest = expected.num_packages_newest,
@@ -144,8 +144,8 @@ WHERE
 	actual.num_projects_outdated != coalesce(expected.num_projects_outdated, 0) OR
 	actual.num_projects_problematic != coalesce(expected.num_projects_problematic, 0) OR
 
-	actual.counts_per_repo != coalesce(expected.counts_per_repo, '{}'::jsonb) OR
-	actual.num_projects_per_category != coalesce(expected.num_projects_per_category, '{}'::jsonb) OR
+	actual.counts_per_repo IS DISTINCT FROM expected.counts_per_repo OR
+	actual.num_projects_per_category IS DISTINCT FROM expected.num_projects_per_category OR
 
 	actual.num_repos != coalesce(expected.num_repos, 0);
 ;
