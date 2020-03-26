@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import brotli
 import bz2
 import functools
 import gzip
@@ -30,6 +31,13 @@ from repology.config import config
 
 USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
 STREAM_CHUNK_SIZE = 10240
+
+
+def brotli_open(f):
+    class BrotliDecompress:
+        def read(chunk):
+            return brotli.process(f.read(chunk))
+    return BrotliDecompress
 
 
 class PoliteHTTP:
@@ -110,6 +118,8 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] =
         decompressor_open = lzma.open
     elif compression == 'bz2':
         decompressor_open = bz2.open
+    elif compression == 'br':
+        decompressor_open = brotli_open
     else:
         raise ValueError('Unsupported compression {}'.format(compression))
 
