@@ -277,8 +277,6 @@ CREATE TABLE maintainers (
 	num_repos integer NOT NULL DEFAULT 0,
 
 	first_seen timestamp with time zone NOT NULL DEFAULT now(),
-	last_seen timestamp with time zone NOT NULL DEFAULT now(),
-
 	orphaned_at timestamp with time zone
 );
 
