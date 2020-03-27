@@ -231,7 +231,7 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
                 logger.get_indented().get_indented().log('entry not expected')
                 continue
 
-            common_keys = set(discrepancy['actual'].keys()) | set(discrepancy['expected'].keys())
+            common_keys = set(discrepancy['actual'].keys()) & set(discrepancy['expected'].keys())
             for key in sorted(common_keys):
                 actual = discrepancy['actual'].get(key)
                 expected = discrepancy['expected'].get(key)

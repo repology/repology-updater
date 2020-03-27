@@ -19,7 +19,7 @@
 -- @param do_fix=False
 -- @returns array of dicts
 --------------------------------------------------------------------------------
-WITH expected AS (
+WITH expected_alive AS (
 	SELECT
 		*
 	FROM
@@ -86,6 +86,38 @@ WITH expected AS (
 		) AS by_category_inner
 		GROUP BY maintainer
 	) AS by_category USING (maintainer)
+), expected AS (
+		SELECT
+			*
+		FROM expected_alive
+	UNION ALL
+		SELECT
+			maintainer,
+
+			0 AS num_packages,
+			0 AS num_packages_newest,
+			0 AS num_packages_outdated,
+			0 AS num_packages_ignored,
+			0 AS num_packages_unique,
+			0 AS num_packages_devel,
+			0 AS num_packages_legacy,
+			0 AS num_packages_incorrect,
+			0 AS num_packages_untrusted,
+			0 AS num_packages_noscheme,
+			0 AS num_packages_rolling,
+
+			0 AS num_projects,
+			0 AS num_projects_newest,
+			0 AS num_projects_outdated,
+			0 AS num_projects_problematic,
+
+			NULL::jsonb AS counts_per_repo,
+
+			0 AS num_repos,
+
+			NULL::jsonb AS num_projects_per_category
+		FROM maintainers
+		WHERE NOT EXISTS (SELECT * FROM expected_alive WHERE expected_alive.maintainer = maintainers.maintainer)
 )
 {% if do_fix %}
 -- note: these changes are not shown to SELECT below due to how CTE work
