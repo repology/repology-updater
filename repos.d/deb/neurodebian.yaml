@@ -1,0 +1,188 @@
+###########################################################################
+# NeuroDebian
+###########################################################################
+- name: neurodebian_data
+  type: repository
+  desc: NeuroDebian data
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 5
+  sources:
+    - name: [ data/main, data/contrib, data/non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  # XXX: uses binary package names
+  #packagelinks:
+  #  - desc: Package details
+  #    url: 'http://neuro.debian.net/pkgs/{srcname}.html'
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_debian_8
+  sortname: neurodebian_debian_08
+  type: repository
+  desc: NeuroDebian Debian 8
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 200
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/jessie/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_debian_9
+  sortname: neurodebian_debian_09
+  type: repository
+  desc: NeuroDebian Debian 9
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 200
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/stretch/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_debian_10
+  type: repository
+  desc: NeuroDebian Debian 10
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 50
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/buster/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_debian_unstable
+  type: repository
+  desc: NeuroDebian Debian Unstable
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 200
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/sid/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_ubuntu_14_04
+  type: repository
+  desc: NeuroDebian Ubuntu 14.04
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 100
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/trusty/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_ubuntu_16_04
+  type: repository
+  desc: NeuroDebian Ubuntu 16.04
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 100
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/xenial/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_ubuntu_18_04
+  type: repository
+  desc: NeuroDebian Ubuntu 18.04
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 50
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/bionic/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
+
+- name: neurodebian_ubuntu_19_04
+  type: repository
+  desc: NeuroDebian Ubuntu 19.04
+  statsgroup: Debian+derivs
+  family: debuntu
+  minpackages: 30
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://neurodebian.ovgu.de/debian/dists/disco/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: NeuroDebian home
+      url: http://neuro.debian.net/index.html
+    - desc: NeuroDebian packages
+      url: http://neuro.debian.net/pkgs.html
+  tags: [ all, production, neurodebian ]
