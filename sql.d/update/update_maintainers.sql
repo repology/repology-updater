@@ -156,8 +156,8 @@ SET
 FROM (
 	SELECT
 		maintainer_name,
-		json_object_agg(repo,
-			json_build_array(
+		jsonb_object_agg(repo,
+			jsonb_build_array(
 				num_packages,
 				num_projects,
 				num_projects_newest,
@@ -215,7 +215,7 @@ SET
 FROM (
 	SELECT
 		maintainer_name,
-		json_object_agg(category, num_projects) FILTER (WHERE num_projects > 0) AS num_projects_per_category
+		jsonb_object_agg(category, num_projects) FILTER (WHERE num_projects > 0) AS num_projects_per_category
 	FROM new_state
 	GROUP BY maintainer_name
 ) AS tmp
