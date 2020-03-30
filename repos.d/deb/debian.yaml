@@ -25,7 +25,7 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/oldstable/source/{srcname}'
-    - desc: Related bugs in Debian bugzilla
+    - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=oldstable'
@@ -57,7 +57,7 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/source/{srcname}'
-    - desc: Related bugs in Debian bugzilla
+    - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable'
@@ -89,7 +89,7 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/source/{srcname}'
-    - desc: Related bugs in Debian bugzilla
+    - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable-backports'
@@ -121,7 +121,7 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/source/{srcname}'
-    - desc: Related bugs in Debian bugzilla
+    - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=testing'
@@ -153,7 +153,7 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/source/{srcname}'
-    - desc: Related bugs in Debian bugzilla
+    - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=unstable'
@@ -186,7 +186,7 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/source/{srcname}'
-    - desc: Related bugs in Debian bugzilla
+    - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=exprimental'
