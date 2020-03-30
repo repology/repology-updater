@@ -77,7 +77,6 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             # XXX: but log this
             logger.log('failed to DELETE scroll, server reply follows:\n' + e.response.text, severity=Logger.ERROR)
             logger.log(e.response.text, severity=Logger.ERROR)
-            pass
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         try:
