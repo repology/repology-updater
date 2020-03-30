@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/repology/repology-updater.svg?branch=master)](https://travis-ci.org/repology/repology-updater)
 [![codecov](https://codecov.io/gh/repology/repology-updater/branch/master/graph/badge.svg)](https://codecov.io/gh/repology/repology-updater)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ac95ded5d51f4181bf65dc90b0eb5e12)](https://www.codacy.com/manual/AMDmi3/repology-updater)
 
 Repology is a service which monitors *a lot* of package repositories
 and other sources and aggregates data on software package versions,
