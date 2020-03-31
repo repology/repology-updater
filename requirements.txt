@@ -1,5 +1,6 @@
 Jinja2
 PyYAML
+brotli
 jsonslicer
 libversion
 lxml
