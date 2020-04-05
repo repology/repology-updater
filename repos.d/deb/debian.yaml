@@ -6,6 +6,7 @@
   desc: Debian Oldstable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 20000
   sources:
@@ -38,6 +39,7 @@
   desc: Debian Stable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 25000
   sources:
@@ -70,6 +72,7 @@
   desc: Debian Stable Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 0
   sources:
@@ -102,6 +105,7 @@
   desc: Debian Testing
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 27000
   sources:
@@ -134,6 +138,7 @@
   desc: Debian Unstable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 30000
   sources:
@@ -167,6 +172,7 @@
   desc: Debian Experimental
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 300
   sources:
