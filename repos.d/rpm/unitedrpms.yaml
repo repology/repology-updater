@@ -3,26 +3,6 @@
 #
 # See https://sourceforge.net/projects/unitedrpms/files/
 ###########################################################################
-- name: unitedrpms_29
-  type: repository
-  desc: UnitedRPMs Fedora 29
-  family: fedora
-  ruleset: [fedora, unitedrpms]
-  color: '261d22'
-  minpackages: 150
-  sources:
-    - name: repo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://downloads.sourceforge.net/project/unitedrpms/29/srpm/
-      subrepo: release
-  repolinks:
-    - desc: UnitedRPMs home
-      url: https://unitedrpms.github.io/
-    - desc: GitHub organization
-      url: https://github.com/UnitedRPMs
-  tags: [ all, production, unitedrpms, rpm ]
-
 - name: unitedrpms_30
   type: repository
   desc: UnitedRPMs Fedora 30
