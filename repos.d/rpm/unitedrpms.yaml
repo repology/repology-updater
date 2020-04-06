@@ -14,7 +14,8 @@
     - name: repo
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://downloads.sourceforge.net/project/unitedrpms/30/srpm/
+      #url: https://downloads.sourceforge.net/project/unitedrpms/30/srpm/
+      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/30/srpm/
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -34,7 +35,8 @@
     - name: repo
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://downloads.sourceforge.net/project/unitedrpms/31/srpm/
+      #url: https://downloads.sourceforge.net/project/unitedrpms/31/srpm/
+      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/31/srpm/
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -54,7 +56,8 @@
     - name: repo
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://downloads.sourceforge.net/project/unitedrpms/32/srpm/
+      #url: https://downloads.sourceforge.net/project/unitedrpms/32/srpm/
+      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/32/srpm/
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -74,7 +77,8 @@
     - name: repo
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://downloads.sourceforge.net/project/unitedrpms/33/srpm/
+      #url: https://downloads.sourceforge.net/project/unitedrpms/33/srpm/
+      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/33/srpm/
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
