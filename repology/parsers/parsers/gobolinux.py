@@ -40,6 +40,9 @@ def _expand_mirrors(url: str) -> str:
 class GoboLinuxGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for recipe_name in os.listdir(path):
+            if recipe_name.startswith('.'):
+                continue
+
             pkg = factory.begin()
 
             pkg.add_name(recipe_name, NameType.GOBOLINUX_RECIPE)
