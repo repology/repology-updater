@@ -39,13 +39,12 @@ def _expand_mirrors(url: str) -> str:
 
 class GoboLinuxGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        trunk_path = os.path.join(path, 'trunk')
-        for recipe_name in os.listdir(trunk_path):
+        for recipe_name in os.listdir(path):
             pkg = factory.begin()
 
             pkg.add_name(recipe_name, NameType.GOBOLINUX_RECIPE)
 
-            package_path = os.path.join(trunk_path, recipe_name)
+            package_path = os.path.join(path, recipe_name)
 
             maxversion: Optional[str] = None
             for version_name in os.listdir(package_path):

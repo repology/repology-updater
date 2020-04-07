@@ -11,7 +11,7 @@
       fetcher: GitFetcher
       parser: GoboLinuxGitParser
       url: https://github.com/gobolinux/Recipes.git
-      sparse_checkout: [ 'trunk/**/Recipe', 'trunk/**/Description' ]
+      sparse_checkout: [ '**/Recipe', '**/Description' ]
   repolinks:
     - desc: GoboLinux home
       url: http://gobolinux.org/
@@ -19,5 +19,5 @@
       url: https://github.com/gobolinux/Recipes
   packagelinks:
     - desc: Git
-      url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{origversion}'
+      url: 'https://github.com/gobolinux/Recipes/tree/master/{name}/{origversion}'
   tags: [ all, production, have_testdata ]
