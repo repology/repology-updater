@@ -1,4 +1,35 @@
 ###########################################################################
+# GURU
+###########################################################################
+- name: gentoo_ovl_guru
+  type: repository
+  desc: Gentoo overlay GURU
+  family: gentoo
+  color: '62548f'
+  minpackages: 100
+  default_maintainer: guru@gentoo.org
+  sources:
+    - name: guru-overlay
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      require_md5cache_metadata: true
+      require_xml_metadata: false
+      url: https://github.com/gentoo-mirror/guru.git
+  repolinks:
+    - desc: Gentoo wiki page for Project GURU
+      url: https://wiki.gentoo.org/wiki/Project:GURU
+    - desc: Git repository
+      url: https://gitweb.gentoo.org/repo/proj/guru.git
+    - desc: Github sync repository mirror
+      url: https://github.com/gentoo-mirror/guru
+  packagelinks:
+    - desc: Package details
+      url: 'https://gpo.zugaina.org/Overlays/guru/{srcname}'
+    - desc: View ebuild
+      url: 'https://gitweb.gentoo.org/repo/proj/guru.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+  tags: [ all, production, gentoo-overlays ]
+
+###########################################################################
 # Pentoo
 ###########################################################################
 - name: gentoo_ovl_pentoo
