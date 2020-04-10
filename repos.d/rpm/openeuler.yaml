@@ -1,0 +1,20 @@
+###########################################################################
+# openEuler
+###########################################################################
+- name: openeuler_20_03
+  type: repository
+  desc: openEuler 20.03
+  statsgroup: openEuler
+  family: centos
+  ruleset: [centos, rpm, openeuler]
+  minpackages: 1500
+  sources:
+    - name: source
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://repo.openeuler.org/openEuler-20.03-LTS/source/
+      subrepo: '{source}'
+  repolinks:
+    - desc: openEuler home
+      url: https://openeuler.org/en/
+  tags: [ all, production, openeuler, rpm ]
