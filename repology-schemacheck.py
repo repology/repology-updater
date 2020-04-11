@@ -128,6 +128,7 @@ rulesets = families + [
     'gnuelpa',
     'hyperbola',
     'kaos_build',
+    'liguros',
     'macosx',
     'macosxbins',
     'maemo',
