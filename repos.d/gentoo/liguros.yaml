@@ -1,16 +1,14 @@
 ###########################################################################
 # Liguros
 ###########################################################################
-# Stable
-#########
 - name: liguros_20_1
   type: repository
-  desc: Liguros Stable - 20.1
+  desc: LiGurOS 20.1
   statsgroup: Gentoo
   family: gentoo
   ruleset: [gentoo, liguros]
   color: '1de9b6'
-  minpackages: 35000
+  minpackages: 28000
   default_maintainer: fallback-mnt-liguros@repology
   sources:
     - name:
@@ -33,21 +31,19 @@
       url: https://gitlab.com/liguros/
   packagelinks:
     - desc: Git directory
-      url: 'https://gitlab.com/liguros/{subrepo}/-/tree/{branch}/{srcname}'
+      url: 'https://gitlab.com/liguros/{subrepo}/-/tree/20.1-release/{srcname}'
     - desc: View ebuild
-      url: 'https://gitlab.com/liguros/{subrepo}/-/blob/{branch}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+      url: 'https://gitlab.com/liguros/{subrepo}/-/blob/20.1-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, liguros ]
 
-# Develop
-#########
 - name: liguros_20_7
   type: repository
-  desc: Liguros Development - 20.7
+  desc: LiGurOS 20.7
   statsgroup: Gentoo
   family: gentoo
   ruleset: [gentoo, liguros]
   color: '1de9b6'
-  minpackages: 35000
+  minpackages: 28000
   default_maintainer: fallback-mnt-liguros@repology
   sources:
     - name:
@@ -70,7 +66,7 @@
       url: https://gitlab.com/liguros/
   packagelinks:
     - desc: Git directory
-      url: 'https://gitlab.com/liguros/{subrepo}/-/tree/{branch}/{srcname}'
+      url: 'https://gitlab.com/liguros/{subrepo}/-/tree/20.7-release/{srcname}'
     - desc: View ebuild
-      url: 'https://gitlab.com/liguros/{subrepo}/-/blob/{branch}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+      url: 'https://gitlab.com/liguros/{subrepo}/-/blob/20.7-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, liguros ]
