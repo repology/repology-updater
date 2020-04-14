@@ -7,6 +7,7 @@
   sortname: alpine_3_08
   type: repository
   desc: Alpine Linux 3.8
+  statsgroup: Alpine
   family: alpine
   minpackages: 8500
   default_maintainer: fallback-mnt-alpine@repology
@@ -30,6 +31,7 @@
   sortname: alpine_3_09
   type: repository
   desc: Alpine Linux 3.9
+  statsgroup: Alpine
   family: alpine
   minpackages: 9000
   default_maintainer: fallback-mnt-alpine@repology
@@ -52,6 +54,7 @@
 - name: alpine_3_10
   type: repository
   desc: Alpine Linux 3.10
+  statsgroup: Alpine
   family: alpine
   minpackages: 9000
   default_maintainer: fallback-mnt-alpine@repology
@@ -74,6 +77,7 @@
 - name: alpine_3_11
   type: repository
   desc: Alpine Linux 3.11
+  statsgroup: Alpine
   family: alpine
   minpackages: 10000
   default_maintainer: fallback-mnt-alpine@repology
@@ -96,6 +100,7 @@
 - name: alpine_edge
   type: repository
   desc: Alpine Linux Edge
+  statsgroup: Alpine
   family: alpine
   minpackages: 15000
   default_maintainer: fallback-mnt-alpine@repology
