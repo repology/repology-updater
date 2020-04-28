@@ -28,7 +28,7 @@
   statsgroup: CentOS
   family: centos
   color: '932279'
-  minpackages: 3000
+  minpackages: 2500
   sources:
     - name: [ os, updates, extras ]
       fetcher: RepodataFetcher
