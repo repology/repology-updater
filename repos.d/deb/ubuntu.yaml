@@ -424,3 +424,92 @@
     - desc: Package builds on launchpad
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
+
+- name: ubuntu_20_10
+  type: repository
+  desc: Ubuntu 20.10
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 29000
+  sources:
+    - name: [ groovy/main, groovy/multiverse, groovy/restricted, groovy/universe, groovy-updates/main, groovy-updates/multiverse, groovy-updates/restricted, groovy-updates/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in groovy
+      url: https://packages.ubuntu.com/groovy/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'https://packages.ubuntu.com/source/groovy/{srcname}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_20_10_backports
+  type: repository
+  desc: Ubuntu 20.10 Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ groovy-backports/main, groovy-backports/multiverse, groovy-backports/restricted, groovy-backports/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in groovy
+      url: https://packages.ubuntu.com/groovy/
+  packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  tags: [ all, ubuntu ]  # empty
+
+- name: ubuntu_20_10_proposed
+  type: repository
+  desc: Ubuntu 20.10 Proposed
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ groovy-proposed/main, groovy-proposed/multiverse, groovy-proposed/restricted, groovy-proposed/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in groovy
+      url: https://packages.ubuntu.com/groovy/
+  packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  tags: [ all, production, ubuntu ]
