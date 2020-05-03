@@ -168,6 +168,8 @@ class Package:
         'branch',
     ]
 
+    _hashable_slots: ClassVar[List[str]] = [slot for slot in __slots__ if slot != 'versionclass']
+
     repo: str
     family: str
     subrepo: Optional[str]
@@ -321,9 +323,9 @@ class Package:
             xxhash.xxh64_intdigest(
                 json.dumps(
                     {
-                        slot: getattr(self, slot)
-                        for slot in self.__slots__
-                        if slot != 'versionclass'
+                        slot: value
+                        for slot in Package._hashable_slots
+                        if (value := getattr(self, slot)) is not None
                     },
                     sort_keys=True
                 )
