@@ -100,7 +100,7 @@ def main() -> int:
             print(
                 options.field_separator.join(
                     (
-                        format_package_field(field, getattr(package, field)) for field in options.fields
+                        format_package_field(field, getattr(package, field, None)) for field in options.fields
                     )
                 )
             )

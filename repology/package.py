@@ -325,7 +325,7 @@ class Package:
                     {
                         slot: value
                         for slot in Package._hashable_slots
-                        if (value := getattr(self, slot)) is not None
+                        if (value := getattr(self, slot, None)) is not None
                     },
                     sort_keys=True
                 )
@@ -338,9 +338,9 @@ class Package:
     # XXX: add signature to this, see https://github.com/python/mypy/issues/6523
     @property
     def __dict__(self):  # type: ignore
-        return {slot: getattr(self, slot) for slot in self.__slots__}
+        return {slot: getattr(self, slot, None) for slot in self.__slots__}
 
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, Package):
             return NotImplemented
-        return all((getattr(self, slot) == getattr(other, slot) for slot in self.__slots__))
+        return all((getattr(self, slot, None) == getattr(other, slot, None) for slot in self.__slots__))
