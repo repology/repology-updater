@@ -17,4 +17,7 @@
   repolinks:
     - desc: openEuler home
       url: https://openeuler.org/en/
+  packagelinks:
+    - desc: Package git
+      url: 'https://gitee.com/src-openeuler/{srcname}/tree/openEuler-20.03-LTS/'
   tags: [ all, production, openeuler, rpm ]
