@@ -788,3 +788,17 @@ CREATE TABLE repository_project_maintainers (
 );
 
 CREATE INDEX ON repository_project_maintainers(project_id);
+
+--------------------------------------------------------------------------------
+-- CPE data
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS project_cpe CASCADE;
+
+CREATE TABLE project_cpe (
+	effname text NOT NULL,
+	cpe_vendor text NOT NULL,
+	cpe_product text NOT NULL
+);
+
+CREATE INDEX ON project_cpe(effname);
+CREATE INDEX ON project_cpe(cpe_vendor, cpe_product);

@@ -182,6 +182,9 @@ class UpdateProcess:
         self._logger.log('updating project names')
         self._database.update_names(self._enable_partial_update, self._enable_explicit_analyze)
 
+        self._logger.log('updating cpe information')
+        self._database.update_cpe(self._enable_partial_update, self._enable_explicit_analyze)
+
         self._logger.log('updating url relations (all)')
         self._database.update_url_relations_all(self._enable_partial_update, self._enable_explicit_analyze)
 
