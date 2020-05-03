@@ -18,7 +18,7 @@
 import os
 import xml.etree.ElementTree
 from dataclasses import dataclass, field
-from typing import Dict, Iterable, List, Set, Tuple
+from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -82,7 +82,6 @@ _link_templates_by_upstream_type = {
     'bitbucket': 'https://bitbucket.org/{}',
     'cpan': 'https://metacpan.org/release/{}',
     'cpan-module': None,  # should be handled by cpan
-    'cpe': None,  # not an url
     'ctan': 'https://www.ctan.org/pkg/{}',
     'freecode': 'http://freecode.com/projects/{}',
     'freshmeat': 'http://freshmeat.net/projects/{}/',
@@ -103,6 +102,18 @@ class _ParsedXmlMetadata:
     maintainers: List[str] = field(default_factory=list)
     upstreams: List[str] = field(default_factory=list)
     unsupported_upstream_types: Set[str] = field(default_factory=set)
+    cpe: Optional[str] = None
+
+    def handle_upstream(self, type_: str, value: str) -> None:
+        if type_ == 'cpe':
+            self.cpe = value
+        elif type_ in _link_templates_by_upstream_type:
+            link_template = _link_templates_by_upstream_type[type_]
+
+            if link_template is not None:
+                self.upstreams.append(link_template.format(value.strip()))
+        else:
+            self.unsupported_upstream_types.add(type_)
 
 
 def _parse_xml_metadata(path: str) -> _ParsedXmlMetadata:
@@ -119,19 +130,8 @@ def _parse_xml_metadata(path: str) -> _ParsedXmlMetadata:
 
     for entry in meta.findall('upstream'):
         for remote_id_node in entry.findall('remote-id'):
-            if not remote_id_node.text:
-                continue
-
-            upstream_type = remote_id_node.attrib['type']
-
-            if upstream_type not in _link_templates_by_upstream_type:
-                output.unsupported_upstream_types.add(upstream_type)
-                continue
-
-            link_template = _link_templates_by_upstream_type[upstream_type]
-
-            if link_template:
-                output.upstreams.append(link_template.format(remote_id_node.text.strip()))
+            if remote_id_node.text:
+                output.handle_upstream(remote_id_node.attrib['type'], remote_id_node.text.strip())
 
     return output
 
@@ -179,6 +179,10 @@ class GentooGitParser(Parser):
                 xml_metadata = _ParsedXmlMetadata()
 
             pkg.add_maintainers(xml_metadata.maintainers)
+
+            if xml_metadata.cpe is not None:
+                cpe = xml_metadata.cpe.split(':')
+                pkg.add_cpe(cpe[2], cpe[3])
 
             for ebuild in _iter_ebuilds(path, category, package):
                 subpkg = pkg.clone(append_ident='/' + ebuild)
