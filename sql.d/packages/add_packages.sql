@@ -47,6 +47,9 @@ INSERT INTO incoming_packages (
 
 	extrafields,
 
+	cpe_vendor,
+	cpe_product,
+
 	-- calculated
 	effname,
 
@@ -84,6 +87,9 @@ INSERT INTO incoming_packages (
 	%(downloads)s,
 
 	%(extrafields)s,
+
+	%(cpe_vendor)s,
+	%(cpe_product)s,
 
 	-- calculated
 	%(effname)s,

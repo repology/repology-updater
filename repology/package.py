@@ -155,6 +155,9 @@ class Package:
 
         'extrafields',
 
+        'cpe_vendor',
+        'cpe_product',
+
         # calculated
         'effname',
 
@@ -194,6 +197,9 @@ class Package:
     downloads: List[str]
 
     extrafields: Dict[str, str]
+
+    cpe_vendor: Optional[str]
+    cpe_product: Optional[str]
 
     effname: str
 
@@ -237,6 +243,9 @@ class Package:
 
                  extrafields: Optional[Dict[str, str]] = None,
 
+                 cpe_vendor: Optional[str] = None,
+                 cpe_product: Optional[str] = None,
+
                  flags: int = 0,
                  shadow: bool = False,
                  flavors: Optional[List[str]] = None,
@@ -266,6 +275,9 @@ class Package:
         self.downloads = downloads if downloads else []
 
         self.extrafields = extrafields if extrafields else {}
+
+        self.cpe_vendor = cpe_vendor
+        self.cpe_product = cpe_product
 
         # calculated
         self.effname = effname

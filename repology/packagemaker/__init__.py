@@ -51,6 +51,9 @@ class PackageTemplate:
 
         'extrafields',
 
+        'cpe_vendor',
+        'cpe_product',
+
         'flavors',
     ]
 
@@ -72,6 +75,9 @@ class PackageTemplate:
 
     extrafields: Dict[str, str]
 
+    cpe_vendor: Optional[str]
+    cpe_product: Optional[str]
+
     flavors: List[str]
 
     def __init__(self) -> None:
@@ -92,6 +98,9 @@ class PackageTemplate:
         self.flags = 0
 
         self.extrafields = {}
+
+        self.cpe_vendor = None
+        self.cpe_product = None
 
         self.flavors = []
 
@@ -262,6 +271,10 @@ class PackageMaker(PackageMakerBase):
     def set_extra_field(self, key: str, value: str) -> None:
         self._package.extrafields[key] = value
 
+    def add_cpe(self, vendor: str, product: str) -> None:
+        self._package.cpe_vendor = vendor
+        self._package.cpe_product = product
+
     def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
         maintainers: List[str] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else []
 
@@ -307,6 +320,9 @@ class PackageMaker(PackageMakerBase):
             shadow=shadow,
 
             extrafields=self._package.extrafields,
+
+            cpe_vendor=self._package.cpe_vendor,
+            cpe_product=self._package.cpe_product,
 
             flavors=self._package.flavors,
 

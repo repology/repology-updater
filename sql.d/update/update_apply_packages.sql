@@ -57,6 +57,9 @@ INSERT INTO packages (
 
 	extrafields,
 
+	cpe_vendor,
+	cpe_product,
+
 	effname,
 
 	version,
@@ -92,6 +95,9 @@ INSERT INTO packages (
 	downloads,
 
 	extrafields,
+
+	cpe_vendor,
+	cpe_product,
 
 	effname,
 

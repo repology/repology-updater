@@ -67,6 +67,9 @@ class TestParsers(unittest.TestCase):
             'branch': None,
 
             'extrafields': {},
+
+            'cpe_vendor': None,
+            'cpe_product': None,
         }
 
         # not relevant here

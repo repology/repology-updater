@@ -53,6 +53,9 @@ CREATE TEMPORARY TABLE incoming_packages (
 
     extrafields jsonb NOT NULL,
 
+	cpe_vendor text NULL,
+	cpe_product text NULL,
+
     -- calculated
     effname text NOT NULL,
     version text NOT NULL,
