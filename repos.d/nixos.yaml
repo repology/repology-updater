@@ -13,7 +13,7 @@
     - name: packages.json
       fetcher: FileFetcher
       parser: NixJsonParser
-      url: https://channels.nixos.org/nixos-19.09/packages.json.br
+      url: https://channels.nixos.org/nixos-20.03/packages.json.br
   repolinks:
     - desc: NixOS home
       url: http://nixos.org/
@@ -23,7 +23,7 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - desc: Package source (release branch)  # XXX: branch name needs manual maintenance
-      url: 'https://github.com/NixOS/nixpkgs/blob/release-19.09/{posfile}#L{posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/release-20.03/{posfile}#L{posline}'
     - desc: Package source (master branch, imprecise link)
       url: 'https://github.com/NixOS/nixpkgs/blob/master/{posfile}#L{posline}'
   tags: [ all, production, nix ]
