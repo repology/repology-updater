@@ -119,6 +119,21 @@ class TestParsers(unittest.TestCase):
             0
         )
 
+    def test_hash(self) -> None:
+        self.assertEqual(
+            spawn_package(name='foo', version='1.0', downloads=['http://foo']).get_classless_hash(),
+            spawn_package(name='foo', version='1.0', downloads=['http://foo']).get_classless_hash(),
+        )
+
+        self.assertNotEqual(
+            spawn_package(name='foo', version='1.0').get_classless_hash(),
+            spawn_package(name='foo', version='1.1').get_classless_hash(),
+        )
+        self.assertNotEqual(
+            spawn_package(name='foo', version='1.0').get_classless_hash(),
+            spawn_package(name='foO', version='1.0').get_classless_hash(),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
