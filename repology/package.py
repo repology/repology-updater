@@ -321,16 +321,19 @@ class Package:
         return cast(
             int,
             xxhash.xxh64_intdigest(
+                # least-overhead stable binary encoding of meaningful Package fields (I could come with)
                 json.dumps(
-                    {
-                        slot: value
-                        for slot in Package._hashable_slots
-                        if (value := getattr(self, slot, None)) is not None
-                    },
-                    sort_keys=True
+                    sum(
+                        (
+                            [slot, value]
+                            for slot in Package._hashable_slots
+                            if (value := getattr(self, slot, None)) is not None
+                        ),
+                        []
+                    )
                 )
             )
-        ) & 0x7fffffffffffffff
+        ) & 0x7fffffffffffffff  # to fit into PostgreSQL integer
 
     def __repr__(self) -> str:
         return 'Package(repo={}, name={}, version={})'.format(self.repo, self.name, self.version)
