@@ -51,6 +51,9 @@
       url: 'https://abf.io/import/{srcname}/tree/rosa2016.1'
   tags: [ all, production, rosa ]
 
+# rosa2019.05 is replacing rosa2019.0, but repos of rosa2019.0 will continue to exist
+# rosa2019.0 is an rpm5-based platform, rosa2019.05 is its fork switched on rpm4
+# 201900 < 201905 < 201910
 - name: rosa_2019_0
   type: repository
   desc: Rosa 2019.0
@@ -60,7 +63,12 @@
   color: '3757a1'
   minpackages: 6500
   sources:
-    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
+    # - rosa2019.0 and rosa2019.05 are platforms for special purposes (certification), restricted is merged into
+    # main and is removed because it makes no sense there as US patent do not work in Russia which is the only
+    # region where certified distros will be distributed;
+    # - contrib does not exist there;
+    # - non-free may be removed later, testing and updates may become not empty later
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates ]
       fetcher: FileFetcher
       parser: RosaInfoXmlParser
       url: 'http://abf-downloads.rosalinux.ru/rosa2019.0/repository/SRPMS/{source}/media_info/info.xml.lzma'
@@ -74,7 +82,34 @@
       url: 'https://abf.io/import/{srcname}/tree/rosa2019.0'
   tags: [ all, production, rosa ]
 
-# Note: since Rosa 2019.1, use of urpmi metadate (info.xml) is discouraged
+# Note: since Rosa 2019.05, use of urpmi metadate (info.xml) is discouraged
+- name: rosa_2019_05
+  type: repository
+  desc: Rosa 2019.05
+  statsgroup: Rosa
+  family: rosa
+  ruleset: [rosa, rpm]
+  color: '3757a1'
+  minpackages: 6500
+  sources:
+    # - rosa2019.0 and rosa2019.05 are platforms for special purposes (certification), restricted is merged into
+    # main and is removed because it makes no sense there as US patent do not work in Russia which is the only
+    # region where certified distros will be distributed;
+    # - contrib does not exist there;
+    # - non-free may be removed later, testing and updates may become not empty later
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://abf-downloads.rosalinux.ru/rosa2019.05/repository/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rosa Linux home
+      url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/import/{srcname}/tree/rosa2019.05'
+  tags: [ all, production, rosa ]
+
 - name: rosa_2019_1
   type: repository
   desc: Rosa 2019.1
