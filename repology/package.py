@@ -82,6 +82,7 @@ class PackageFlags:
     WEAK_DEVEL: ClassVar[int] = 1 << 13
     STABLE: ClassVar[int] = 1 << 14
     ALTVER: ClassVar[int] = 1 << 15
+    VULNERABLE: ClassVar[int] = 1 << 16
 
     ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
