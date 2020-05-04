@@ -102,8 +102,8 @@
   type: repository
   desc: Rosa Server 6.9
   statsgroup: Rosa Server
-  family: rosa
-  ruleset: [rosa, rpm]
+  family: centos
+  ruleset: [centos, rpm, rosa]
   color: '3757a1'
   minpackages: 3000
   default_maintainer: fallback-mnt-rosa@repology
@@ -116,14 +116,17 @@
   repolinks:
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/server/{srcname}/tree/rosa-server69'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_7_3
   type: repository
   desc: Rosa Server 7.3
   statsgroup: Rosa Server
-  family: rosa
-  ruleset: [rosa, rpm]
+  family: centos
+  ruleset: [centos, rpm, rosa]
   color: '3757a1'
   minpackages: 3000
   default_maintainer: fallback-mnt-rosa@repology
@@ -136,14 +139,17 @@
   repolinks:
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/server7/{srcname}/tree/rosa-server73'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_7_5
   type: repository
   desc: Rosa Server 7.5
   statsgroup: Rosa Server
-  family: rosa
-  ruleset: [rosa, rpm]
+  family: centos
+  ruleset: [centos, rpm, rosa]
   color: '3757a1'
   minpackages: 4200 # XXX
   default_maintainer: fallback-mnt-rosa@repology
@@ -156,4 +162,7 @@
   repolinks:
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/server7/{srcname}/tree/rosa-server75'
   tags: [ all, production, rosa ]
