@@ -802,3 +802,30 @@ CREATE TABLE project_cpe (
 
 CREATE INDEX ON project_cpe(effname);
 CREATE INDEX ON project_cpe(cpe_vendor, cpe_product);
+
+--------------------------------------------------------------------------------
+-- vulnerability data
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS vulnerability_sources CASCADE;
+
+CREATE TABLE vulnerability_sources (
+	url text NOT NULL,
+	etag text NULL,
+	last_update timestamp with time zone NULL,
+	max_last_modified text NOT NULL DEFAULT ''
+);
+
+DROP TABLE IF EXISTS vulnerabilities CASCADE;
+
+CREATE TABLE vulnerabilities (
+	cve_id text NOT NULL,
+	cpe_vendor text NOT NULL,
+	cpe_product text NOT NULL,
+	start_version text NULL,
+	end_version text NOT NULL,
+	start_version_excluded boolean NOT NULL DEFAULT false,
+	end_version_excluded boolean NOT NULL DEFAULT false
+);
+
+CREATE INDEX ON vulnerabilities(cve_id);
+CREATE INDEX ON vulnerabilities(cpe_vendor, cpe_product);
