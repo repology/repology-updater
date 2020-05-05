@@ -55,13 +55,14 @@ class GitFetcher(PersistentDirFetcher):
             os.fsync(sparse_checkout_file.fileno())
 
     def _do_fetch(self, statepath: str, logger: Logger) -> bool:
-        Runner(logger=logger).run('timeout', self._timeout_arg, 'git', 'clone', '--progress', '--no-checkout', self._depth_arg, '--branch', self._branch, self._url, statepath)
+        Runner(logger=logger).run('timeout', self._timeout_arg, 'git', 'clone', '--recursive', '--progress', '--no-checkout', self._depth_arg, '--branch', self._branch, self._url, statepath)
 
         r = Runner(logger=logger, cwd=statepath)
 
         r.run('git', 'config', 'core.sparsecheckout', 'true')
         self._setup_sparse_checkout(statepath)
         r.run('git', 'checkout')
+        r.run('timeout', self._timeout_arg, 'git', 'submodule', 'update', '--init', '--recursive')
 
         return True
 
