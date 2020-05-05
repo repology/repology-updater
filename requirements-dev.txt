@@ -1,4 +1,4 @@
-flake8
+flake8>=3.8.0a2
 flake8-builtins!=1.1.0
 flake8-import-order
 flake8-quotes
