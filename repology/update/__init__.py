@@ -112,7 +112,7 @@ class UpdateProcess:
 
     def _finish_update(self) -> None:
         self._logger.log(
-            f'update mode is {"partial" if self._enable_partial_update else "full"},'
+            f'update mode is {"partial" if self._enable_partial_update else "full"}, '
             f'explicit analyze is {"enabled" if self._enable_explicit_analyze else "disabled"}'
         )
 
