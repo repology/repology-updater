@@ -52,3 +52,29 @@
     - desc: Package directory on GitHub
       url: 'https://github.com/kisslinux/community/tree/master/{path}'
   tags: [ all, production, kiss ]
+
+- name: kiss_universe
+  type: repository
+  desc: KISS Linux Universe
+  family: kiss
+  ruleset: kiss
+  minpackages: 20
+  sources:
+    - name: repo
+      fetcher: GitFetcher
+      parser: KissGitParser
+      url: 'https://github.com/jedahan/kiss-universe.git'
+      maintainer_from_git: true
+      depth: null
+      branch: main
+  repolinks:
+    - desc: KISS Linux home
+      url: https://getkiss.org/
+    - desc: KISS Linux - Package System
+      url: https://getkiss.org/pages/package-system/
+    - desc: Universe Repository on GitHub
+      url: https://github.com/jedahan/kiss-universe
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/jedahan/kiss-universe/tree/{branch}/{path}'
+  tags: [ all, production, kiss ]
