@@ -33,7 +33,8 @@ INSERT INTO maintainer_and_repo_metapackages (
 
 	newest,
 	outdated,
-	problematic
+	problematic,
+	vulnerable
 )
 SELECT
 	(SELECT id FROM maintainers WHERE maintainer = tmp.maintainer),
@@ -42,7 +43,8 @@ SELECT
 
 	newest,
 	outdated,
-	problematic
+	problematic,
+	vulnerable
 FROM
 	(
 		SELECT
@@ -51,7 +53,8 @@ FROM
 			effname,
 			count(*) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) > 0 AS newest,
 			count(*) FILTER (WHERE versionclass = 2) > 0 AS outdated,
-			count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0 AS problematic
+			count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0 AS problematic,
+			count(*) FILTER (WHERE (flags & (1 << 16))::boolean) > 0 AS vulnerable
 		FROM {% if partial %}incoming_packages{% else %}packages{% endif %}
 		GROUP BY unnest(maintainers), repo, effname
 	) AS tmp

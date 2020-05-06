@@ -32,8 +32,9 @@ INSERT INTO repo_metapackages(
 	newest,
 	outdated,
 	problematic,
+	"unique",
 
-	"unique"
+	vulnerable
 )
 SELECT
 	(SELECT id FROM repositories WHERE name = repo) AS repository_id,
@@ -43,7 +44,9 @@ SELECT
 	count(*) FILTER (WHERE versionclass = 2) > 0,
 	count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0,
 
-	max(num_families) = 1
+	max(num_families) = 1,
+
+	count(*) FILTER (WHERE (flags & (1 << 16))::boolean) > 0
 FROM
 	{% if partial %}incoming_packages{% else %}packages{% endif %}
 	INNER JOIN metapackages USING(effname)

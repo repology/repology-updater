@@ -438,6 +438,7 @@ CREATE TABLE repo_metapackages (
 	outdated boolean NOT NULL,
 	problematic boolean NOT NULL,
 	"unique" boolean NOT NULL,
+	vulnerable boolean NOT NULL,
 
 	PRIMARY KEY(repository_id, effname) -- best performance when clustered by pkey
 );
@@ -450,6 +451,7 @@ DROP TABLE IF EXISTS category_metapackages CASCADE;
 CREATE TABLE category_metapackages (
 	category text NOT NULL,
 	effname text NOT NULL,
+
 	"unique" boolean NOT NULL,
 
 	PRIMARY KEY(category, effname)
@@ -467,6 +469,8 @@ CREATE TABLE maintainer_metapackages (
 	newest boolean NOT NULL,
 	outdated boolean NOT NULL,
 	problematic boolean NOT NULL,
+	vulnerable boolean NOT NULL,
+
 	PRIMARY KEY(maintainer_id, effname)
 );
 
@@ -491,6 +495,8 @@ CREATE TABLE maintainer_and_repo_metapackages (
 	newest boolean NOT NULL,
 	outdated boolean NOT NULL,
 	problematic boolean NOT NULL,
+	vulnerable boolean NOT NULL,
+
 	PRIMARY KEY(maintainer_id, repository_id, effname)
 );
 
