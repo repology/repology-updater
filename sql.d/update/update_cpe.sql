@@ -16,16 +16,10 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param partial=False
 -- @param analyze=True
 --------------------------------------------------------------------------------
-{% set packages = 'incoming_packages' if partial else 'packages' %}
-
 DELETE FROM project_cpe
-{% if partial %}
-WHERE effname IN (SELECT effname FROM changed_projects)
-{% endif %}
-;
+WHERE effname IN (SELECT effname FROM changed_projects);
 
 INSERT INTO project_cpe (
 	effname,
@@ -36,7 +30,7 @@ SELECT DISTINCT
     effname,
     cpe_vendor,
 	cpe_product
-FROM {{ packages }}
+FROM incoming_packages
 WHERE cpe_vendor IS NOT NULL AND cpe_product IS NOT NULL;
 
 {% if analyze %}
