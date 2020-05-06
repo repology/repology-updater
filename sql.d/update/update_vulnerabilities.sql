@@ -33,11 +33,8 @@ WITH target AS (
 						CASE WHEN vulnerabilities.start_version_excluded THEN 0 ELSE -1 END,
 						true
 					) AND
-					coalesce(
-						version_compare2(packages.version, vulnerabilities.end_version) <
-						CASE WHEN vulnerabilities.end_version_excluded THEN 0 ELSE 1 END,
-						true
-					)
+					version_compare2(packages.version, vulnerabilities.end_version) <
+					CASE WHEN vulnerabilities.end_version_excluded THEN 0 ELSE 1 END
 			)
 		) AS vulnerable
 	FROM packages INNER JOIN project_cpe USING(effname)
