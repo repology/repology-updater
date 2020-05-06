@@ -812,7 +812,8 @@ CREATE TABLE vulnerability_sources (
 	url text NOT NULL,
 	etag text NULL,
 	last_update timestamp with time zone NULL,
-	max_last_modified text NOT NULL DEFAULT ''
+	max_last_modified text NOT NULL DEFAULT '',
+	total_updates integer NOT NULL DEFAULT 0
 );
 
 DROP TABLE IF EXISTS vulnerabilities CASCADE;
