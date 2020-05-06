@@ -16,14 +16,10 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param partial=False
 -- @param analyze=True
 --------------------------------------------------------------------------------
 DELETE FROM repo_metapackages
-{% if partial %}
-WHERE effname IN (SELECT effname FROM changed_projects)
-{% endif %}
-;
+WHERE effname IN (SELECT effname FROM changed_projects);
 
 INSERT INTO repo_metapackages(
 	repository_id,
@@ -47,9 +43,8 @@ SELECT
 	max(num_families) = 1,
 
 	count(*) FILTER (WHERE (flags & (1 << 16))::boolean) > 0
-FROM
-	{% if partial %}incoming_packages{% else %}packages{% endif %}
-	INNER JOIN metapackages USING(effname)
+FROM incoming_packages
+INNER JOIN metapackages USING(effname)
 WHERE num_repos_nonshadow > 0
 GROUP BY effname, repo
 -- Reorder according to primary key

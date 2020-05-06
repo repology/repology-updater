@@ -16,16 +16,12 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param partial=False
 -- @param analyze=True
 --------------------------------------------------------------------------------
-{% set packages = 'incoming_packages' if partial else 'packages' %}
-
 DELETE FROM repository_project_maintainers
-{% if partial %}
-WHERE project_id IN (SELECT id FROM metapackages WHERE effname IN (SELECT effname FROM changed_projects))
-{% endif %}
-;
+WHERE project_id IN (
+	SELECT id FROM metapackages WHERE effname IN (SELECT effname FROM changed_projects)
+);
 
 INSERT INTO repository_project_maintainers (
 	maintainer_id,
@@ -41,7 +37,7 @@ FROM (
 		unnest(maintainers) AS maintainer,
 		repo,
 		effname
-	FROM {{ packages }}
+	FROM incoming_packages
 ) AS tmp;
 
 {% if analyze %}

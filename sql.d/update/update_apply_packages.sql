@@ -16,7 +16,6 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param partial=False
 -- @param analyze=True
 --------------------------------------------------------------------------------
 
@@ -24,12 +23,8 @@
 ANALYZE changed_projects;
 {% endif %}
 
-DELETE
-FROM packages
-{% if partial %}
-WHERE effname IN (SELECT effname FROM changed_projects)
-{% endif %}
-;
+DELETE FROM packages
+WHERE effname IN (SELECT effname FROM changed_projects);
 
 INSERT INTO packages (
 	repo,

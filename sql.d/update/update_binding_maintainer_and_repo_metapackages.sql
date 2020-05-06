@@ -16,14 +16,10 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param partial=False
 -- @param analyze=True
 --------------------------------------------------------------------------------
 DELETE FROM maintainer_and_repo_metapackages
-{% if partial %}
-WHERE effname IN (SELECT effname FROM changed_projects)
-{% endif %}
-;
+WHERE effname IN (SELECT effname FROM changed_projects);
 
 --- XXX: don't mix up with maintainer_repo_metapackages table update from update_post
 INSERT INTO maintainer_and_repo_metapackages (
@@ -55,7 +51,7 @@ FROM
 			count(*) FILTER (WHERE versionclass = 2) > 0 AS outdated,
 			count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0 AS problematic,
 			count(*) FILTER (WHERE (flags & (1 << 16))::boolean) > 0 AS vulnerable
-		FROM {% if partial %}incoming_packages{% else %}packages{% endif %}
+		FROM incoming_packages
 		GROUP BY unnest(maintainers), repo, effname
 	) AS tmp
 	INNER JOIN metapackages USING(effname)

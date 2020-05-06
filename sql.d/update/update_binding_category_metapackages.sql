@@ -16,14 +16,10 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param partial=False
 -- @param analyze=True
 --------------------------------------------------------------------------------
 DELETE FROM category_metapackages
-{% if partial %}
-WHERE effname IN (SELECT effname FROM changed_projects)
-{% endif %}
-;
+WHERE effname IN (SELECT effname FROM changed_projects);
 
 INSERT INTO category_metapackages (
 	category,
@@ -34,9 +30,8 @@ SELECT
 	category,
 	effname,
 	max(num_families) = 1
-FROM
-	{% if partial %}incoming_packages{% else %}packages{% endif %}
-	INNER JOIN metapackages USING(effname)
+FROM incoming_packages
+INNER JOIN metapackages USING(effname)
 WHERE category IS NOT NULL AND num_repos_nonshadow > 0
 GROUP BY effname, category
 ORDER BY effname;

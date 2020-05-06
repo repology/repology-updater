@@ -53,7 +53,6 @@ class UpdateProcess:
     _database: Database
     _logger: Logger
 
-    _enable_partial_update: bool = True
     _enable_explicit_analyze: bool = False
     _history_cutoff_timestamp: int = 0
 
@@ -100,27 +99,17 @@ class UpdateProcess:
         for repo, field_stats in field_stats_per_repo.items():
             self._database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
 
-        # Fraction picked experimentally: at change size of around 100k of 400k projects
-        # time of partial update of most binding tables approaches or exceeds full update
-        # time. In fact this doesn't matter much, as general update is arond 0.001 (0.1%),
-        # and a few cases of > 0.01 (1%) are when new repositories are added, othewise it's
-        # 1 (100%) when Package format changes or when database is filled for the first time.
-        self._enable_partial_update = stats.change_fraction < 0.25
-
         # This was picked randomly
         self._enable_explicit_analyze = stats.change_fraction > 0.05
 
     def _finish_update(self) -> None:
-        self._logger.log(
-            f'update mode is {"partial" if self._enable_partial_update else "full"}, '
-            f'explicit analyze is {"enabled" if self._enable_explicit_analyze else "disabled"}'
-        )
+        self._logger.log(f'explicit analyze is {"enabled" if self._enable_explicit_analyze else "disabled"}')
 
         self._logger.log('preparing updated packages')
-        self._database.update_prepare_packages(self._enable_partial_update)
+        self._database.update_prepare_packages()
 
         self._logger.log('updating projects')
-        self._database.update_projects(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_projects(self._enable_explicit_analyze)
 
         self._logger.log('updating maintainers (precreate)')
         self._database.update_maintainers_precreate(self._enable_explicit_analyze)
@@ -132,13 +121,13 @@ class UpdateProcess:
         self._database.update_repositories()
 
         self._logger.log('updating tracks')
-        self._database.update_tracks(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_tracks(self._enable_explicit_analyze)
 
         self._logger.log('updating track versions')
-        self._database.update_track_versions(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_track_versions(self._enable_explicit_analyze)
 
         self._logger.log('updating project releases')
-        self._database.update_project_releases(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_project_releases(self._enable_explicit_analyze)
 
         self._logger.log('updating project events')
         self._database.update_project_events(self._history_cutoff_timestamp)
@@ -159,7 +148,7 @@ class UpdateProcess:
         self._database.update_statistics_delta()
 
         self._logger.log('updating redirects')
-        self._database.update_redirects(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_redirects(self._enable_explicit_analyze)
 
         self._logger.log('updating cpe information')
         self._database.update_cpe(self._enable_explicit_analyze)
@@ -170,41 +159,41 @@ class UpdateProcess:
         # Note: before this, packages table still contains old versions of packages,
         # while new versions reside in incoming_packages temporary table
         self._logger.log('applying updated packages')
-        self._database.update_apply_packages(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_apply_packages(self._enable_explicit_analyze)
         # Note: after this, packages table contain new versions of packages
 
         self._logger.log('updating binding table repo_metapackages')
-        self._database.update_binding_repo_metapackages(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_binding_repo_metapackages(self._enable_explicit_analyze)
 
         self._logger.log('updating binding table category_metapackages')
-        self._database.update_binding_category_metapackages(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_binding_category_metapackages(self._enable_explicit_analyze)
 
         self._logger.log('updating binding table maintainer_metapackages')
-        self._database.update_binding_maintainer_metapackages(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_binding_maintainer_metapackages(self._enable_explicit_analyze)
 
         self._logger.log('updating binding table maintainer_and_repo_metapackages')
-        self._database.update_binding_maintainer_and_repo_metapackages(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_binding_maintainer_and_repo_metapackages(self._enable_explicit_analyze)
 
         self._logger.log('updating project names')
-        self._database.update_names(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_names(self._enable_explicit_analyze)
 
         self._logger.log('updating url relations (all)')
-        self._database.update_url_relations_all(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_url_relations_all(self._enable_explicit_analyze)
 
         self._logger.log('updating url relations (filtered)')
-        self._database.update_url_relations_filtered(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_url_relations_filtered(self._enable_explicit_analyze)
 
         self._logger.log('updating projects has_related flag')
         self._database.update_projects_has_related()
 
         self._logger.log('updating problems')
-        self._database.update_problems(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_problems(self._enable_explicit_analyze)
 
         self._logger.log('updating repository problem counts')
         self._database.update_repositories_problem_counts()
 
         self._logger.log('updating repository maintainers')
-        self._database.update_repository_maintainers(self._enable_partial_update, self._enable_explicit_analyze)
+        self._database.update_repository_maintainers(self._enable_explicit_analyze)
 
         self._logger.log('updating repository maintainer counts')
         self._database.update_repositories_maintainer_counts()

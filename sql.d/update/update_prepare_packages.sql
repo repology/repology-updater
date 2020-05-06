@@ -15,17 +15,9 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
---------------------------------------------------------------------------------
--- @param partial=False
---------------------------------------------------------------------------------
-
 CREATE INDEX ON incoming_packages(effname);
 
-{% if partial %}
 CREATE TEMPORARY TABLE old_packages ON COMMIT DROP AS
-{% else %}
-CREATE TEMPORARY VIEW old_packages AS
-{% endif %}
 SELECT *
 FROM packages
 WHERE effname IN (SELECT effname FROM changed_projects);

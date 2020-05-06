@@ -16,16 +16,12 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param partial=False
 -- @param analyze=True
 --------------------------------------------------------------------------------
-{% set packages = 'incoming_packages' if partial else 'packages' %}
-
 DELETE FROM project_names
-{% if partial %}
-WHERE project_id IN (SELECT id FROM metapackages WHERE effname IN (SELECT effname FROM changed_projects))
-{% endif %}
-;
+WHERE project_id IN (
+	SELECT id FROM metapackages WHERE effname IN (SELECT effname FROM changed_projects)
+);
 
 INSERT INTO project_names (
 	project_id,
@@ -39,11 +35,11 @@ SELECT
     name_type,
     name
 FROM (
-    SELECT effname, repo, 'name'::project_name_type AS name_type, name FROM {{ packages }} WHERE name IS NOT NULL
+    SELECT effname, repo, 'name'::project_name_type AS name_type, name FROM incoming_packages WHERE name IS NOT NULL
     UNION
-    SELECT effname, repo, 'srcname'::project_name_type AS name_type, srcname FROM {{ packages }} WHERE srcname IS NOT NULL
+    SELECT effname, repo, 'srcname'::project_name_type AS name_type, srcname FROM incoming_packages WHERE srcname IS NOT NULL
     UNION
-    SELECT effname, repo, 'binname'::project_name_type AS name_type, binname FROM {{ packages }} WHERE binname IS NOT NULL
+    SELECT effname, repo, 'binname'::project_name_type AS name_type, binname FROM incoming_packages WHERE binname IS NOT NULL
 ) AS tmp;
 
 {% if analyze %}
