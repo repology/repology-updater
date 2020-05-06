@@ -24,7 +24,7 @@ WITH target AS (
 				-- of rows per vendor/product; to fix this, we need to extend index onto version
 				-- field, but for this we need to improve postgresql-libversion first
 				SELECT *
-				FROM vulnerabilities
+				FROM vulnerabilities_simplified AS vulnerabilities
 				WHERE
 					vulnerabilities.cpe_vendor = project_cpe.cpe_vendor AND
 					vulnerabilities.cpe_product = project_cpe.cpe_product AND

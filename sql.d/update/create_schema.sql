@@ -829,3 +829,16 @@ CREATE TABLE vulnerabilities (
 
 CREATE INDEX ON vulnerabilities(cve_id);
 CREATE INDEX ON vulnerabilities(cpe_vendor, cpe_product);
+
+DROP TABLE IF EXISTS vulnerabilities_simplified CASCADE;
+
+CREATE TABLE vulnerabilities_simplified (
+	cpe_vendor text NOT NULL,
+	cpe_product text NOT NULL,
+	start_version text NULL,
+	end_version text NOT NULL,
+	start_version_excluded boolean NOT NULL DEFAULT false,
+	end_version_excluded boolean NOT NULL DEFAULT false
+);
+
+CREATE INDEX ON vulnerabilities_simplified(cpe_vendor, cpe_product);
