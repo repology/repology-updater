@@ -812,6 +812,8 @@ CREATE INDEX ON project_cpe(cpe_vendor, cpe_product);
 --------------------------------------------------------------------------------
 -- vulnerability data
 --------------------------------------------------------------------------------
+
+-- update status of vulnerability sources
 DROP TABLE IF EXISTS vulnerability_sources CASCADE;
 
 CREATE TABLE vulnerability_sources (
@@ -852,6 +854,7 @@ CREATE TABLE vulnerabilities_simplified (
 CREATE INDEX ON vulnerabilities_simplified(cpe_vendor, cpe_product);
 -- </deprecated>
 
+-- raw cve information
 DROP TABLE IF EXISTS cves CASCADE;
 
 CREATE TABLE cves (
@@ -860,7 +863,7 @@ CREATE TABLE cves (
 	matches jsonb NOT NULL
 );
 
-
+-- optimized vulnerable version ranges for lookups
 DROP TABLE IF EXISTS vulnerable_versions CASCADE;
 
 CREATE TABLE vulnerable_versions (
