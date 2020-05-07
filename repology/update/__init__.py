@@ -111,6 +111,12 @@ class UpdateProcess:
         self._logger.log('preparing updated packages')
         self._database.update_prepare_packages()
 
+        self._logger.log('updating CPE information')
+        self._database.update_cpe(self._enable_explicit_analyze)
+
+        self._logger.log('updating vulnerabilities')
+        self._database.update_vulnerabilities()
+
         self._logger.log('updating projects')
         self._database.update_projects(self._enable_explicit_analyze)
 
@@ -152,12 +158,6 @@ class UpdateProcess:
 
         self._logger.log('updating redirects')
         self._database.update_redirects(self._enable_explicit_analyze)
-
-        self._logger.log('updating cpe information')
-        self._database.update_cpe(self._enable_explicit_analyze)
-
-        self._logger.log('updating vulnerabilities')
-        self._database.update_vulnerabilities()
 
         # Note: before this, packages table still contains old versions of packages,
         # while new versions reside in incoming_packages temporary table
