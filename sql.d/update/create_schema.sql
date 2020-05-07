@@ -833,8 +833,11 @@ DROP TABLE IF EXISTS cves CASCADE;
 CREATE TABLE cves (
 	cve_id text NOT NULL PRIMARY KEY,
 	last_modified text NOT NULL,
-	matches jsonb NOT NULL
+	matches jsonb NOT NULL,
+	cpe_pairs text[]
 );
+
+CREATE INDEX ON cves USING gin (cpe_pairs);
 
 -- cve updates queue
 DROP TABLE IF EXISTS cve_updates CASCADE;
