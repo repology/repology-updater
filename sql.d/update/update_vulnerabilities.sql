@@ -21,19 +21,18 @@ SET
 WHERE
 	versionclass != 10 -- ROLLING
 	AND EXISTS (
-		-- XXX: this lookup is rather slow because vulnerabilities may contains a lot
-		-- of rows per vendor/product; to fix this, we need to extend index onto version
-		-- field, but for this we need to improve postgresql-libversion first
+		-- XXX: this lookup could be faster if vulnerable_versions had version fields
+		-- included into index
 		SELECT *
-		FROM vulnerabilities_simplified AS vulnerabilities INNER JOIN project_cpe USING (cpe_vendor, cpe_product)
+		FROM vulnerable_versions INNER JOIN project_cpe USING (cpe_vendor, cpe_product)
 		WHERE
 			project_cpe.effname = incoming_packages.effname AND
 			coalesce(
-				version_compare2(incoming_packages.version, vulnerabilities.start_version) >
-				CASE WHEN vulnerabilities.start_version_excluded THEN 0 ELSE -1 END,
+				version_compare2(incoming_packages.version, vulnerable_versions.start_version) >
+				CASE WHEN vulnerable_versions.start_version_excluded THEN 0 ELSE -1 END,
 				true
 			) AND
-			version_compare2(incoming_packages.version, vulnerabilities.end_version) <
-			CASE WHEN vulnerabilities.end_version_excluded THEN 0 ELSE 1 END
+			version_compare2(incoming_packages.version, vulnerable_versions.end_version) <
+			CASE WHEN vulnerable_versions.end_version_excluded THEN 0 ELSE 1 END
 	)
 ;

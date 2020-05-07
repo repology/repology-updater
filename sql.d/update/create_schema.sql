@@ -815,13 +815,13 @@ CREATE INDEX ON project_cpe(cpe_vendor, cpe_product);
 DROP TABLE IF EXISTS vulnerability_sources CASCADE;
 
 CREATE TABLE vulnerability_sources (
-	url text NOT NULL,
+	url text NOT NULL PRIMARY KEY,
 	etag text NULL,
 	last_update timestamp with time zone NULL,
-	max_last_modified text NOT NULL DEFAULT '',
 	total_updates integer NOT NULL DEFAULT 0
 );
 
+-- <deprecated>
 DROP TABLE IF EXISTS vulnerabilities CASCADE;
 
 CREATE TABLE vulnerabilities (
@@ -837,6 +837,7 @@ CREATE TABLE vulnerabilities (
 CREATE INDEX ON vulnerabilities(cve_id);
 CREATE INDEX ON vulnerabilities(cpe_vendor, cpe_product);
 
+
 DROP TABLE IF EXISTS vulnerabilities_simplified CASCADE;
 
 CREATE TABLE vulnerabilities_simplified (
@@ -849,3 +850,26 @@ CREATE TABLE vulnerabilities_simplified (
 );
 
 CREATE INDEX ON vulnerabilities_simplified(cpe_vendor, cpe_product);
+-- </deprecated>
+
+DROP TABLE IF EXISTS cves CASCADE;
+
+CREATE TABLE cves (
+	cve_id text NOT NULL PRIMARY KEY,
+	last_modified text NOT NULL,
+	matches jsonb NOT NULL
+);
+
+
+DROP TABLE IF EXISTS vulnerable_versions CASCADE;
+
+CREATE TABLE vulnerable_versions (
+	cpe_vendor text NOT NULL,
+	cpe_product text NOT NULL,
+	start_version text NULL,
+	end_version text NOT NULL,
+	start_version_excluded boolean NOT NULL DEFAULT false,
+	end_version_excluded boolean NOT NULL DEFAULT false
+);
+
+CREATE INDEX ON vulnerable_versions(cpe_vendor, cpe_product);
