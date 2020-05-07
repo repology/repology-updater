@@ -64,6 +64,9 @@ class UpdateProcess:
         self._logger.log('starting the update')
         self._database.update_start()
 
+        self._logger.log('forcing updates for projects affected by changed CVEs')
+        self._database.update_force_project_updates_by_cve()
+
     def _push_packages(self, projects: Iterable[List[Package]]) -> None:
         self._logger.log('updating projects')
 

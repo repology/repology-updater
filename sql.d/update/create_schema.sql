@@ -863,6 +863,13 @@ CREATE TABLE cves (
 	matches jsonb NOT NULL
 );
 
+-- cve updates queue
+DROP TABLE IF EXISTS cve_updates CASCADE;
+
+CREATE TABLE cve_updates (
+	cve_id text NOT NULL
+);
+
 -- optimized vulnerable version ranges for lookups
 DROP TABLE IF EXISTS vulnerable_versions CASCADE;
 
