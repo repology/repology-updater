@@ -38,11 +38,13 @@ WITH expected_alive AS (
 			count(*) FILTER (WHERE versionclass = 8) AS num_packages_untrusted,
 			count(*) FILTER (WHERE versionclass = 9) AS num_packages_noscheme,
 			count(*) FILTER (WHERE versionclass = 10) AS num_packages_rolling,
+			count(*) FILTER (WHERE (flags & (1 << 16))::boolean) AS num_packages_vulnerable,
 
 			count(DISTINCT effname) AS num_projects,
 			count(DISTINCT effname) FILTER(WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
 			count(DISTINCT effname) FILTER(WHERE versionclass = 2) AS num_projects_outdated,
-			count(DISTINCT effname) FILTER(WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
+			count(DISTINCT effname) FILTER(WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic,
+			count(DISTINCT effname) FILTER(WHERE (flags & (1 << 16))::boolean) AS num_projects_vulnerable
 		FROM packages
 		GROUP BY maintainer
 	) AS plain INNER JOIN (
@@ -54,7 +56,8 @@ WITH expected_alive AS (
 					num_projects,
 					num_projects_newest,
 					num_projects_outdated,
-					num_projects_problematic
+					num_projects_problematic,
+					num_projects_vulnerable
 				)
 			) AS counts_per_repo,
 			count(DISTINCT repo) AS num_repos
@@ -66,7 +69,8 @@ WITH expected_alive AS (
 				count(DISTINCT effname) AS num_projects,
 				count(DISTINCT effname) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
 				count(DISTINCT effname) FILTER (WHERE versionclass = 2) AS num_projects_outdated,
-				count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
+				count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic,
+				count(DISTINCT effname) FILTER(WHERE (flags & (1 << 16))::boolean) AS num_projects_vulnerable
 			FROM packages
 			GROUP BY maintainer, repo
 		) AS by_repo_inner
@@ -105,11 +109,13 @@ WITH expected_alive AS (
 			0 AS num_packages_untrusted,
 			0 AS num_packages_noscheme,
 			0 AS num_packages_rolling,
+			0 AS num_packages_vulnerable,
 
 			0 AS num_projects,
 			0 AS num_projects_newest,
 			0 AS num_projects_outdated,
 			0 AS num_projects_problematic,
+			0 AS num_projects_vulnerable,
 
 			NULL::jsonb AS counts_per_repo,
 
@@ -135,11 +141,13 @@ WITH expected_alive AS (
 		num_packages_untrusted = expected.num_packages_untrusted,
 		num_packages_noscheme = expected.num_packages_noscheme,
 		num_packages_rolling = expected.num_packages_rolling,
+		num_packages_vulnerable = expected.num_packages_vulnerable,
 
 		num_projects = expected.num_projects,
 		num_projects_newest = expected.num_projects_newest,
 		num_projects_outdated = expected.num_projects_outdated,
 		num_projects_problematic = expected.num_projects_problematic,
+		num_projects_vulnerable = expected.num_projects_vulnerable,
 
 		counts_per_repo = expected.counts_per_repo,
 
@@ -170,11 +178,13 @@ WHERE
 	actual.num_packages_untrusted != coalesce(expected.num_packages_untrusted, 0) OR
 	actual.num_packages_noscheme != coalesce(expected.num_packages_noscheme, 0) OR
 	actual.num_packages_rolling != coalesce(expected.num_packages_rolling, 0) OR
+	actual.num_packages_vulnerable != coalesce(expected.num_packages_vulnerable, 0) OR
 
 	actual.num_projects != coalesce(expected.num_projects, 0) OR
 	actual.num_projects_newest != coalesce(expected.num_projects_newest, 0) OR
 	actual.num_projects_outdated != coalesce(expected.num_projects_outdated, 0) OR
 	actual.num_projects_problematic != coalesce(expected.num_projects_problematic, 0) OR
+	actual.num_projects_vulnerable != coalesce(expected.num_projects_vulnerable, 0) OR
 
 	actual.counts_per_repo IS DISTINCT FROM expected.counts_per_repo OR
 	actual.num_projects_per_category IS DISTINCT FROM expected.num_projects_per_category OR

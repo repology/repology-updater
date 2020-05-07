@@ -34,6 +34,7 @@ WITH expected AS (
 		sum(num_packages_untrusted) AS num_packages_untrusted,
 		sum(num_packages_noscheme) AS num_packages_noscheme,
 		sum(num_packages_rolling) AS num_packages_rolling,
+		sum(num_packages_vulnerable) AS num_packages_vulnerable,
 
 		count(*) AS num_metapackages,
 		count(*) FILTER (WHERE "unique") AS num_metapackages_unique,
@@ -51,7 +52,8 @@ WITH expected AS (
 			num_packages_ignored > 0 OR
 			num_packages_incorrect > 0 OR
 			num_packages_untrusted > 0
-		) AS num_metapackages_problematic
+		) AS num_metapackages_problematic,
+		count(*) FILTER (WHERE num_packages_vulnerable > 0) AS num_metapackages_vulnerable
 	FROM (
 		SELECT
 			repo,
@@ -67,6 +69,7 @@ WITH expected AS (
 			count(*) FILTER (WHERE versionclass = 8) AS num_packages_untrusted,
 			count(*) FILTER (WHERE versionclass = 9) AS num_packages_noscheme,
 			count(*) FILTER (WHERE versionclass = 10) AS num_packages_rolling,
+			count(*) FILTER (WHERE (flags & (1 << 16))::boolean) AS num_packages_vulnerable,
 			max(num_families) = 1 AS "unique"
 		FROM packages INNER JOIN metapackages USING(effname)
 		WHERE num_repos_nonshadow > 0
@@ -90,13 +93,15 @@ WITH expected AS (
 		num_packages_untrusted = expected.num_packages_untrusted,
 		num_packages_noscheme = expected.num_packages_noscheme,
 		num_packages_rolling = expected.num_packages_rolling,
+		num_packages_vulnerable = expected.num_packages_vulnerable,
 
 		num_metapackages = expected.num_metapackages,
 		num_metapackages_unique = expected.num_metapackages_unique,
 		num_metapackages_newest = expected.num_metapackages_newest,
 		num_metapackages_outdated = expected.num_metapackages_outdated,
 		num_metapackages_comparable = expected.num_metapackages_comparable,
-		num_metapackages_problematic = expected.num_metapackages_problematic
+		num_metapackages_problematic = expected.num_metapackages_problematic,
+		num_metapackages_vulnerable = expected.num_metapackages_vulnerable
 	FROM expected
 	WHERE repositories.name = expected.name
 )
@@ -121,11 +126,13 @@ WHERE
 	actual.num_packages_untrusted != coalesce(expected.num_packages_untrusted, 0) OR
 	actual.num_packages_noscheme != coalesce(expected.num_packages_noscheme, 0) OR
 	actual.num_packages_rolling != coalesce(expected.num_packages_rolling, 0) OR
+	actual.num_packages_vulnerable != coalesce(expected.num_packages_vulnerable, 0) OR
 
 	actual.num_metapackages != coalesce(expected.num_metapackages, 0) OR
 	actual.num_metapackages_unique != coalesce(expected.num_metapackages_unique, 0) OR
 	actual.num_metapackages_newest != coalesce(expected.num_metapackages_newest, 0) OR
 	actual.num_metapackages_outdated != coalesce(expected.num_metapackages_outdated, 0) OR
 	actual.num_metapackages_comparable != coalesce(expected.num_metapackages_comparable, 0) OR
-	actual.num_metapackages_problematic != coalesce(expected.num_metapackages_problematic, 0)
+	actual.num_metapackages_problematic != coalesce(expected.num_metapackages_problematic, 0) OR
+	actual.num_metapackages_vulnerable != coalesce(expected.num_metapackages_vulnerable, 0)
 ;
