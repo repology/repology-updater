@@ -265,11 +265,13 @@ CREATE TABLE maintainers (
 	num_packages_untrusted integer NOT NULL DEFAULT 0,
 	num_packages_noscheme integer NOT NULL DEFAULT 0,
 	num_packages_rolling integer NOT NULL DEFAULT 0,
+	num_packages_vulnerable integer NOT NULL DEFAULT 0,
 
 	num_projects integer NOT NULL DEFAULT 0,
 	num_projects_newest integer NOT NULL DEFAULT 0,
 	num_projects_outdated integer NOT NULL DEFAULT 0,
 	num_projects_problematic integer NOT NULL DEFAULT 0,
+	num_projects_vulnerable integer NOT NULL DEFAULT 0,
 
 	-- XXX: replaces *_per_repo
 	-- packages, projects, projects_newest, projects_outdated, projects_problematic
@@ -360,6 +362,7 @@ CREATE TABLE repositories (
 	num_packages_untrusted integer NOT NULL DEFAULT 0,
 	num_packages_noscheme integer NOT NULL DEFAULT 0,
 	num_packages_rolling integer NOT NULL DEFAULT 0,
+	num_packages_vulnerable integer NOT NULL DEFAULT 0,
 
 	num_metapackages integer NOT NULL DEFAULT 0,
 	num_metapackages_unique integer NOT NULL DEFAULT 0,
@@ -367,6 +370,7 @@ CREATE TABLE repositories (
 	num_metapackages_outdated integer NOT NULL DEFAULT 0,
 	num_metapackages_comparable integer NOT NULL DEFAULT 0,
 	num_metapackages_problematic integer NOT NULL DEFAULT 0,
+	num_metapackages_vulnerable integer NOT NULL DEFAULT 0,
 
 	num_problems integer NOT NULL DEFAULT 0,
 	num_maintainers integer NOT NULL DEFAULT 0,

@@ -35,11 +35,13 @@ WITH old AS (
 		count(*) FILTER (WHERE versionclass = 8) AS num_packages_untrusted,
 		count(*) FILTER (WHERE versionclass = 9) AS num_packages_noscheme,
 		count(*) FILTER (WHERE versionclass = 10) AS num_packages_rolling,
+		count(*) FILTER (WHERE (flags & (1 << 16))::boolean) AS num_packages_vulnerable,
 
 		count(DISTINCT effname) AS num_projects,
 		count(DISTINCT effname) FILTER(WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
 		count(DISTINCT effname) FILTER(WHERE versionclass = 2) AS num_projects_outdated,
-		count(DISTINCT effname) FILTER(WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
+		count(DISTINCT effname) FILTER(WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic,
+		count(DISTINCT effname) FILTER(WHERE (flags & (1 << 16))::boolean) AS num_projects_vulnerable
 	FROM old_packages
 	GROUP BY maintainer_name
 ), new AS (
@@ -57,11 +59,13 @@ WITH old AS (
 		count(*) FILTER (WHERE versionclass = 8) AS num_packages_untrusted,
 		count(*) FILTER (WHERE versionclass = 9) AS num_packages_noscheme,
 		count(*) FILTER (WHERE versionclass = 10) AS num_packages_rolling,
+		count(*) FILTER (WHERE (flags & (1 << 16))::boolean) AS num_packages_vulnerable,
 
 		count(DISTINCT effname) AS num_projects,
 		count(DISTINCT effname) FILTER(WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
 		count(DISTINCT effname) FILTER(WHERE versionclass = 2) AS num_projects_outdated,
-		count(DISTINCT effname) FILTER(WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
+		count(DISTINCT effname) FILTER(WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic,
+		count(DISTINCT effname) FILTER(WHERE (flags & (1 << 16))::boolean) AS num_projects_vulnerable
 	FROM incoming_packages
 	GROUP BY maintainer_name
 )
@@ -78,11 +82,13 @@ SET
 	num_packages_untrusted = maintainers.num_packages_untrusted + coalesce(new.num_packages_untrusted, 0) - coalesce(old.num_packages_untrusted, 0),
 	num_packages_noscheme = maintainers.num_packages_noscheme + coalesce(new.num_packages_noscheme, 0) - coalesce(old.num_packages_noscheme, 0),
 	num_packages_rolling = maintainers.num_packages_rolling + coalesce(new.num_packages_rolling, 0) - coalesce(old.num_packages_rolling, 0),
+	num_packages_vulnerable = maintainers.num_packages_vulnerable + coalesce(new.num_packages_vulnerable, 0) - coalesce(old.num_packages_vulnerable, 0),
 
 	num_projects = maintainers.num_projects + coalesce(new.num_projects, 0) - coalesce(old.num_projects, 0),
 	num_projects_newest = maintainers.num_projects_newest + coalesce(new.num_projects_newest, 0) - coalesce(old.num_projects_newest, 0),
 	num_projects_outdated = maintainers.num_projects_outdated + coalesce(new.num_projects_outdated, 0) - coalesce(old.num_projects_outdated, 0),
 	num_projects_problematic = maintainers.num_projects_problematic + coalesce(new.num_projects_problematic, 0) - coalesce(old.num_projects_problematic, 0),
+	num_projects_vulnerable = maintainers.num_projects_vulnerable + coalesce(new.num_projects_vulnerable, 0) - coalesce(old.num_projects_vulnerable, 0),
 
 	orphaned_at = CASE WHEN maintainers.num_packages + coalesce(new.num_packages, 0) - coalesce(old.num_packages, 0) = 0 THEN now() ELSE NULL END
 FROM old FULL OUTER JOIN new USING(maintainer_name)
@@ -97,7 +103,8 @@ WITH old AS (
 		count(DISTINCT effname) AS num_projects,
 		count(DISTINCT effname) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
 		count(DISTINCT effname) FILTER (WHERE versionclass = 2) AS num_projects_outdated,
-		count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
+		count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic,
+		count(DISTINCT effname) FILTER (WHERE (flags & (1 << 16))::boolean) AS num_projects_vulnerable
 	FROM old_packages
 	GROUP BY maintainer_name, repo
 ), new AS (
@@ -108,7 +115,8 @@ WITH old AS (
 		count(DISTINCT effname) AS num_projects,
 		count(DISTINCT effname) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) AS num_projects_newest,
 		count(DISTINCT effname) FILTER (WHERE versionclass = 2) AS num_projects_outdated,
-		count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic
+		count(DISTINCT effname) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) AS num_projects_problematic,
+		count(DISTINCT effname) FILTER (WHERE (flags & (1 << 16))::boolean) AS num_projects_vulnerable
 	FROM incoming_packages
 	GROUP BY maintainer_name, repo
 ), delta AS (
@@ -119,14 +127,16 @@ WITH old AS (
 		coalesce(new.num_projects, 0) - coalesce(old.num_projects, 0) AS num_projects,
 		coalesce(new.num_projects_newest, 0) - coalesce(old.num_projects_newest, 0) AS num_projects_newest,
 		coalesce(new.num_projects_outdated, 0) - coalesce(old.num_projects_outdated, 0) AS num_projects_outdated,
-		coalesce(new.num_projects_problematic, 0) - coalesce(old.num_projects_problematic, 0) AS num_projects_problematic
+		coalesce(new.num_projects_problematic, 0) - coalesce(old.num_projects_problematic, 0) AS num_projects_problematic,
+		coalesce(new.num_projects_vulnerable, 0) - coalesce(old.num_projects_vulnerable, 0) AS num_projects_vulnerable
 	FROM old FULL OUTER JOIN new USING(maintainer_name, repo)
 	WHERE
 		coalesce(new.num_packages, 0) - coalesce(old.num_packages, 0) != 0 OR
 		coalesce(new.num_projects, 0) - coalesce(old.num_projects, 0) != 0 OR
 		coalesce(new.num_projects_newest, 0) - coalesce(old.num_projects_newest, 0) != 0 OR
 		coalesce(new.num_projects_outdated, 0) - coalesce(old.num_projects_outdated, 0) != 0 OR
-		coalesce(new.num_projects_problematic, 0) - coalesce(old.num_projects_problematic, 0) != 0
+		coalesce(new.num_projects_problematic, 0) - coalesce(old.num_projects_problematic, 0) != 0 OR
+		coalesce(new.num_projects_vulnerable, 0) - coalesce(old.num_projects_vulnerable, 0) != 0
 ), old_state AS (
 	SELECT
 		maintainer AS maintainer_name,
@@ -135,7 +145,8 @@ WITH old AS (
 		((jsonb_each_text(counts_per_repo)).value::jsonb->>1)::integer AS num_projects,
 		((jsonb_each_text(counts_per_repo)).value::jsonb->>2)::integer AS num_projects_newest,
 		((jsonb_each_text(counts_per_repo)).value::jsonb->>3)::integer AS num_projects_outdated,
-		((jsonb_each_text(counts_per_repo)).value::jsonb->>4)::integer AS num_projects_problematic
+		((jsonb_each_text(counts_per_repo)).value::jsonb->>4)::integer AS num_projects_problematic,
+		((jsonb_each_text(counts_per_repo)).value::jsonb->>5)::integer AS num_projects_vulnerable
 	FROM maintainers
 	WHERE maintainer IN (SELECT maintainer_name FROM delta)
 ), new_state AS (
@@ -146,7 +157,8 @@ WITH old AS (
 		coalesce(old_state.num_projects, 0) + coalesce(delta.num_projects, 0) AS num_projects,
 		coalesce(old_state.num_projects_newest, 0) + coalesce(delta.num_projects_newest, 0) AS num_projects_newest,
 		coalesce(old_state.num_projects_outdated, 0) + coalesce(delta.num_projects_outdated, 0) AS num_projects_outdated,
-		coalesce(old_state.num_projects_problematic, 0) + coalesce(delta.num_projects_problematic, 0) AS num_projects_problematic
+		coalesce(old_state.num_projects_problematic, 0) + coalesce(delta.num_projects_problematic, 0) AS num_projects_problematic,
+		coalesce(old_state.num_projects_vulnerable, 0) + coalesce(delta.num_projects_vulnerable, 0) AS num_projects_vulnerable
 	FROM old_state FULL OUTER JOIN delta USING(maintainer_name, repo)
 )
 UPDATE maintainers
@@ -162,7 +174,8 @@ FROM (
 				num_projects,
 				num_projects_newest,
 				num_projects_outdated,
-				num_projects_problematic
+				num_projects_problematic,
+				num_projects_vulnerable
 			)
 		) FILTER(WHERE num_packages > 0) AS counts_per_repo,
 		count(DISTINCT repo) FILTER(WHERE num_packages > 0) AS num_repos
