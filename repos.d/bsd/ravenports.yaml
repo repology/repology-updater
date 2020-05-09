@@ -22,6 +22,8 @@
   packagelinks:
     - desc: Ravenports Catalog entry
       url: 'http://ravenports.ironwolf.systems/catalog/bucket_{bucket}/{name}/{variant}/'
+    - desc: Port directory in Ravensource
+      url: 'https://github.com/jrmarino/ravensource/tree/master/bucket_{bucket}/{name}'
     - desc: Port buildsheet
       url: 'https://github.com/jrmarino/Ravenports/blob/master/bucket_{bucket}/{name}'
   tags: [ all, production ]
