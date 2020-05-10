@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -38,5 +38,8 @@ class RavenportsJsonParser(Parser):
 
                 pkg.set_extra_field('bucket', packagedata['bucket'])
                 pkg.set_extra_field('variant', packagedata['variants'][0]['label'])
+
+                if 'cpe' in packagedata:
+                    pkg.add_cpe(packagedata['cpe']['vendor'], packagedata['cpe']['product'])
 
                 yield pkg
