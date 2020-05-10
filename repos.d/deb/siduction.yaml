@@ -1,0 +1,54 @@
+###########################################################################
+# Siduction
+###########################################################################
+- name: siduction_unstable
+  sortname: siduction_0
+  type: repository
+  desc: Siduction
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, siduction]
+  minpackages: 250
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://packages.siduction.org/extra/dists/unstable/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: 'extra {source}'
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://packages.siduction.org/fixes/dists/unstable/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: 'fixes {source}'
+  repolinks:
+    - desc: Siduction home
+      url: https://siduction.org/
+  tags: [ all, production, siduction ]
+
+- name: siduction_experimental
+  sortname: siduction_1
+  type: repository
+  desc: Siduction Experimental
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, siduction]
+  minpackages: 10
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://packages.siduction.org/extra/dists/experimental/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: 'extra {source}'
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://packages.siduction.org/fixes/dists/experimental/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: 'fixes {source}'
+  repolinks:
+    - desc: Siduction home
+      url: https://siduction.org/
+  tags: [ all, production, siduction ]
