@@ -802,6 +802,16 @@ CREATE INDEX ON repository_project_maintainers(project_id);
 --------------------------------------------------------------------------------
 -- CPE data
 --------------------------------------------------------------------------------
+DROP TABLE IF EXISTS manual_cpes CASCADE;
+
+CREATE TABLE manual_cpes (
+	effname text NOT NULL,
+	cpe_vendor text NOT NULL,
+	cpe_product text NOT NULL
+);
+
+CREATE UNIQUE INDEX ON manual_cpes(effname, cpe_vendor, cpe_product);
+
 DROP TABLE IF EXISTS project_cpe CASCADE;
 
 CREATE TABLE project_cpe (
