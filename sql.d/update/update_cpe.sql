@@ -26,19 +26,12 @@ INSERT INTO project_cpe (
 	cpe_vendor,
 	cpe_product
 )
-	SELECT DISTINCT
-		effname,
-		cpe_vendor,
-		cpe_product
-	FROM incoming_packages
-	WHERE cpe_vendor IS NOT NULL AND cpe_product IS NOT NULL
-UNION
-	SELECT
-		effname,
-		cpe_vendor,
-		cpe_product
-	FROM manual_cpes
-	WHERE effname IN (SELECT effname FROM changed_projects);
+SELECT DISTINCT
+	effname,
+	cpe_vendor,
+	cpe_product
+FROM incoming_packages
+WHERE cpe_vendor IS NOT NULL AND cpe_product IS NOT NULL;
 
 {% if analyze %}
 ANALYZE project_cpe;

@@ -24,9 +24,9 @@ WHERE
 		-- XXX: this lookup could be faster if vulnerable_versions had version fields
 		-- included into index
 		SELECT *
-		FROM vulnerable_versions INNER JOIN project_cpe USING (cpe_vendor, cpe_product)
+		FROM vulnerable_versions INNER JOIN all_cpes USING (cpe_vendor, cpe_product)
 		WHERE
-			project_cpe.effname = incoming_packages.effname AND
+			all_cpes.effname = incoming_packages.effname AND
 			coalesce(
 				version_compare2(incoming_packages.version, vulnerable_versions.start_version) >
 				CASE WHEN vulnerable_versions.start_version_excluded THEN 0 ELSE -1 END,

@@ -811,6 +811,7 @@ CREATE TABLE manual_cpes (
 );
 
 CREATE UNIQUE INDEX ON manual_cpes(effname, cpe_vendor, cpe_product);
+CREATE INDEX ON manual_cpes(cpe_vendor, cpe_product);
 
 DROP TABLE IF EXISTS project_cpe CASCADE;
 
@@ -822,6 +823,14 @@ CREATE TABLE project_cpe (
 
 CREATE INDEX ON project_cpe(effname);
 CREATE INDEX ON project_cpe(cpe_vendor, cpe_product);
+
+DROP VIEW IF EXISTS all_cpes CASCADE;
+
+CREATE VIEW all_cpes AS (
+	SELECT * FROM manual_cpes
+	UNION
+	SELECT * FROM project_cpe
+);
 
 --------------------------------------------------------------------------------
 -- vulnerability data
