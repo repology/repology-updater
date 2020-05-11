@@ -29,7 +29,7 @@
   desc: Stackage Nightly
   family: hackage
   color: "293845"
-  minpackages: 1000
+  minpackages: 2400
   sources:
     - name: nightly.html
       fetcher: FileFetcher
