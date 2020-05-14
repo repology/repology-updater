@@ -35,6 +35,8 @@ SET
 	num_repos_newest = tmp.num_repos_newest,
 	num_families_newest = tmp.num_families_newest,
 
+	has_cves = tmp.has_cves,
+
 	orphaned_at = NULL
 FROM (
 	SELECT
@@ -43,7 +45,8 @@ FROM (
 		count(DISTINCT repo) FILTER (WHERE NOT shadow) AS num_repos_nonshadow,
 		count(DISTINCT family) AS num_families,
 		count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5) AS num_repos_newest,
-		count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5) AS num_families_newest
+		count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5) AS num_families_newest,
+		EXISTS(SELECT * FROM all_cpes INNER JOIN vulnerable_versions USING(cpe_vendor, cpe_product) WHERE all_cpes.effname = incoming_packages.effname) AS has_cves
 	FROM incoming_packages
 	GROUP BY effname
 ) AS tmp
@@ -59,6 +62,7 @@ SET
 	num_families_newest = 0,
 
 	has_related = false,
+	has_cves = false,
 
 	orphaned_at = now()
 FROM (SELECT DISTINCT effname FROM incoming_packages) alive_projects RIGHT OUTER JOIN changed_projects USING(effname)

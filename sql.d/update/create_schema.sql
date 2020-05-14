@@ -224,6 +224,7 @@ CREATE TABLE metapackages (
 	num_repos_newest smallint NOT NULL DEFAULT 0,
 	num_families_newest smallint NOT NULL DEFAULT 0,
 	has_related boolean NOT NULL DEFAULT false,
+	has_cves boolean NOT NULL DEFAULT false,
 
 	first_seen timestamp with time zone NOT NULL DEFAULT now(),
 	orphaned_at timestamp with time zone
