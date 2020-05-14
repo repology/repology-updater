@@ -1,0 +1,24 @@
+###########################################################################
+# KISS Linux Games
+###########################################################################
+- name: kiss_games
+  type: repository
+  desc: KISS Linux Games
+  family: kiss
+  ruleset: kiss
+  minpackages: 30
+  sources:
+    - name: repo
+      fetcher: GitFetcher
+      parser: KissGitParser
+      url: 'https://github.com/sdsddsd1/kiss-games.git'
+      maintainer_from_git: true
+      depth: null
+      sparse_checkout: [ '**/version', '**/sources' ]
+  repolinks:
+    - desc: Main Repositories on GitHub
+      url: https://github.com/sdsddsd1/kiss-games
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/sdsddsd1/kiss-games/tree/master/{path}'
+  tags: [ all, production, kiss ]
