@@ -630,7 +630,9 @@ CREATE TABLE problems (
 	name text NOT NULL,
 	effname text NOT NULL,
 	maintainer text,
-	problem text NOT NULL
+	problem text NOT NULL,  -- XXX: deprecated in favor of type + data
+	"type" problem_type NULL,  -- XXX: switch to not null after all problems are regenerated
+	data jsonb NULL
 );
 
 CREATE INDEX ON problems(effname);
