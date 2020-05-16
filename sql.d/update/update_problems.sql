@@ -23,14 +23,7 @@ DELETE FROM problems
 WHERE effname IN (SELECT effname FROM changed_projects);
 
 -- add different kinds of problems
-INSERT INTO problems (
-	package_id,
-	repo,
-	name,
-	effname,
-	maintainer,
-	problem
-)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem, "type", data)
 SELECT DISTINCT
 	packages.id,
 	packages.repo,
@@ -67,7 +60,9 @@ SELECT DISTINCT
 			WHEN links.ipv4_status_code=-505 THEN 'SSL incomplete certificate chain'
 			ELSE 'HTTP error ' || links.ipv4_status_code
 		END ||
-		') for more than a month.'
+		') for more than a month.',
+	'homepage_dead'::problem_type,
+	jsonb_build_object('url', links.url, 'code', links.ipv4_status_code)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 INNER JOIN links ON (packages.homepage = links.url)
@@ -78,14 +73,7 @@ WHERE
 		links.ipv4_last_success < now() - INTERVAL '30' DAY
 	);
 
-INSERT INTO problems (
-	package_id,
-	repo,
-	name,
-	effname,
-	maintainer,
-	problem
-)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem, "type", data)
 SELECT DISTINCT
 	packages.id,
 	packages.repo,
@@ -96,61 +84,71 @@ SELECT DISTINCT
 		links.url ||
 		'" is a permanent redirect to "' ||
 		links.ipv4_permanent_redirect_target ||
-		'" and should be updated'
+		'" and should be updated',
+	'homepage_permanent_https_redirect'::problem_type,
+	jsonb_build_object('url', links.url, 'target', links.ipv4_permanent_redirect_target)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 INNER JOIN links ON (packages.homepage = links.url)
 WHERE
 	replace(links.url, 'http://', 'https://') = links.ipv4_permanent_redirect_target;
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem, "type", data)
 SELECT DISTINCT
 	id,
 	repo,
 	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
+	'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.',
+	'homepage_discontinued_google'::problem_type,
+	jsonb_build_object('url', homepage)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
 	homepage SIMILAR TO 'https?://code.google.com(/%%)?';
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem, "type", data)
 SELECT DISTINCT
 	id,
 	repo,
 	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
+	'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).',
+	'homepage_discontinued_codeplex'::problem_type,
+	jsonb_build_object('url', homepage)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?';
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem, "type", data)
 SELECT DISTINCT
 	id,
 	repo,
 	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
+	'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).',
+	'homepage_discontinued_gna'::problem_type,
+	jsonb_build_object('url', homepage)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem, "type", data)
 SELECT DISTINCT
 	id,
 	repo,
 	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' || homepage || '" points to CPAN which was discontinued. The link should be updated to https://metacpan.org (probably along with download URLs). See https://www.perl.com/article/saying-goodbye-to-search-cpan-org/ for details.'
+	'Homepage link "' || homepage || '" points to CPAN which was discontinued. The link should be updated to https://metacpan.org (probably along with download URLs). See https://www.perl.com/article/saying-goodbye-to-search-cpan-org/ for details.',
+	'homepage_discontinued_cpan'::problem_type,
+	jsonb_build_object('url', homepage)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 WHERE
