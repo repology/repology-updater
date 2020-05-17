@@ -154,6 +154,65 @@ INNER JOIN packages USING(effname)
 WHERE
 	homepage SIMILAR TO 'https?://search.cpan.org(/%%)?';
 
+INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
+SELECT DISTINCT
+	id,
+	repo,
+	visiblename,
+	effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'cpe_unreferenced'::problem_type,
+	jsonb_build_object('vendor', cpe_vendor, 'product', cpe_product, 'suggestions',
+		(
+			SELECT jsonb_agg(DISTINCT jsonb_build_object('vendor', cpe_vendor, 'product', cpe_product))
+			FROM all_cpes
+			INNER JOIN vulnerable_versions USING (cpe_vendor, cpe_product)
+			WHERE all_cpes.effname = packages.effname
+		)
+	)
+FROM changed_projects
+INNER JOIN packages USING(effname)
+WHERE
+    cpe_vendor IS NOT NULL AND
+    cpe_product IS NOT NULL AND
+    NOT EXISTS (
+        SELECT *
+        FROM vulnerable_versions
+        WHERE
+            vulnerable_versions.cpe_vendor = packages.cpe_vendor AND
+            vulnerable_versions.cpe_product = packages.cpe_product
+    );
+
+INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
+SELECT DISTINCT
+	id,
+	repo,
+	visiblename,
+	effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'cpe_missing'::problem_type,
+	jsonb_build_object('suggestions',
+		(
+			SELECT jsonb_agg(DISTINCT jsonb_build_object('vendor', cpe_vendor, 'product', cpe_product))
+			FROM all_cpes
+			INNER JOIN vulnerable_versions USING (cpe_vendor, cpe_product)
+			WHERE all_cpes.effname = packages.effname
+		)
+	)
+FROM changed_projects
+INNER JOIN packages USING(effname)
+WHERE
+	(
+		SELECT used_package_fields @> ARRAY['cpe_vendor'] FROM repositories WHERE repositories.name = packages.repo
+	) AND
+    cpe_vendor IS NULL AND
+    EXISTS (
+        SELECT *
+        FROM all_cpes
+		INNER JOIN vulnerable_versions USING (cpe_vendor, cpe_product)
+		WHERE all_cpes.effname = packages.effname
+    );
+
 {% if analyze %}
 ANALYZE problems;
 {% endif %}

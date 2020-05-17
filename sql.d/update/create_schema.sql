@@ -94,7 +94,9 @@ CREATE TYPE problem_type AS enum(
 	'homepage_discontinued_google',
 	'homepage_discontinued_codeplex',
 	'homepage_discontinued_gna',
-	'homepage_discontinued_cpan'
+	'homepage_discontinued_cpan',
+	'cpe_unreferenced',
+	'cpe_missing'
 );
 
 --------------------------------------------------------------------------------
