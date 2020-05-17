@@ -632,8 +632,7 @@ CREATE TABLE problems (
 	name text NOT NULL,
 	effname text NOT NULL,
 	maintainer text,
-	problem text NULL,  -- XXX: deprecated in favor of type + data
-	"type" problem_type NULL,  -- XXX: switch to not null after all problems are regenerated
+	"type" problem_type NOT NULL,
 	data jsonb NULL
 );
 
