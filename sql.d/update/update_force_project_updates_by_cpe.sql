@@ -15,6 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+-- <deprecated>
 WITH updated_cpes AS (
 	SELECT
 		jsonb_array_elements(matches)->>0 AS cpe_vendor,
@@ -29,3 +30,13 @@ WHERE effname IN (
 );
 
 DELETE FROM cve_updates;
+-- </deprecated>
+
+UPDATE project_hashes
+SET hash = -1
+WHERE effname IN (
+	SELECT effname
+	FROM all_cpes INNER JOIN cpe_updates USING (cpe_vendor, cpe_product)
+);
+
+DELETE FROM cpe_updates;
