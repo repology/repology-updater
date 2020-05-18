@@ -1,0 +1,40 @@
+###########################################################################
+# BlackBox Linux
+#
+# https://launchpad.net/~backbox
+###########################################################################
+- name: blackbox_6
+  type: repository
+  desc: BlackBox 6
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '32638f'
+  minpackages: 10
+  sources:
+    - name: main
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ppa.launchpad.net/backbox/six/ubuntu/dists/bionic/main/source/Sources.xz'
+      compression: xz
+  repolinks:
+    - desc: BlackBox Linux home
+      url: https://linux.backbox.org/
+  tags: [ all, production, blackbox ]
+
+- name: blackbox_7
+  type: repository
+  desc: BlackBox 7
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '32638f'
+  minpackages: 10
+  sources:
+    - name: main
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ppa.launchpad.net/backbox/seven/ubuntu/dists/focal/main/source/Sources.xz'
+      compression: xz
+  repolinks:
+    - desc: BlackBox Linux home
+      url: https://linux.backbox.org/
+  tags: [ all, production, blackbox ]
