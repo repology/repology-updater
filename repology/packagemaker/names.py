@@ -170,6 +170,8 @@ class NameType:
 
     SALIX_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
+    ATARAXIA_NAME: ClassVar[int] = GENERIC_SRC_NAME
+
     MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 
