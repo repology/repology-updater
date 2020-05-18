@@ -15,23 +15,6 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- <deprecated>
-WITH updated_cpes AS (
-	SELECT
-		jsonb_array_elements(matches)->>0 AS cpe_vendor,
-		jsonb_array_elements(matches)->>1 AS cpe_product
-	FROM cves INNER JOIN cve_updates USING (cve_id)
-)
-UPDATE project_hashes
-SET hash = -1
-WHERE effname IN (
-	SELECT effname
-	FROM project_cpe INNER JOIN updated_cpes USING (cpe_vendor, cpe_product)
-);
-
-DELETE FROM cve_updates;
--- </deprecated>
-
 UPDATE project_hashes
 SET hash = -1
 WHERE effname IN (

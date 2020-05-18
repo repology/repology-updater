@@ -874,13 +874,6 @@ CREATE TABLE cves (
 
 CREATE INDEX ON cves USING gin (cpe_pairs);
 
--- cve updates queue (deprecated)
-DROP TABLE IF EXISTS cve_updates CASCADE;
-
-CREATE TABLE cve_updates (
-	cve_id text NOT NULL
-);
-
 -- cpe updates queue (used to force updates of related projects)
 DROP TABLE IF EXISTS cpe_updates CASCADE;
 
