@@ -603,6 +603,14 @@ class Rule:
 
             self._actions.append(altver_action)
 
+        if 'vulnerable' in ruledata:
+            vulnerable_flag: Final = ruledata['vulnerable']
+
+            def vulnerable_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.VULNERABLE, vulnerable_flag)
+
+            self._actions.append(vulnerable_action)
+
         if 'last' in ruledata:
             def last_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 match_context.last = True

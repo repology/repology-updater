@@ -116,6 +116,19 @@ class TestPackageTransformer(unittest.TestCase):
             PackageSample(name='p2', version='1.0', flags=Pf.ALTVER).expect(flags=Pf.ALTVER),
         )
 
+    def test_vulnerable(self) -> None:
+        self._check_transformer(
+            '[ { name: p1, vulnerable: true } ]',
+            PackageSample(name='p1', version='1.0').expect(flags=Pf.VULNERABLE),
+            PackageSample(name='p2', version='1.0').expect(flags=0),
+        )
+
+    def test_un_vulnerable(self) -> None:
+        # not implemented yet; in fact, this should generate different
+        # flag which should be checked along with VULNERABLE, e.g.
+        # vulnerable = flags & (Pf.VULNERABLE | Pf.INVULNERABLE) == Pf.VULNERABLE
+        pass
+
     def test_setbranch(self) -> None:
         self._check_transformer(
             '[ { setbranch: "9.x" } ]',
