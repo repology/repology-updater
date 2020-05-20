@@ -866,8 +866,8 @@ DROP TABLE IF EXISTS cves CASCADE;
 
 CREATE TABLE cves (
 	cve_id text NOT NULL PRIMARY KEY,
-	published text NOT NULL,
-	last_modified text NOT NULL,
+	published timestamp with time zone NOT NULL,
+	last_modified timestamp with time zone NOT NULL,
 	matches jsonb NOT NULL,
 	cpe_pairs text[],
 	added_ts timestamp with time zone NOT NULL DEFAULT now()
