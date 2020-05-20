@@ -869,8 +869,7 @@ CREATE TABLE cves (
 	published timestamp with time zone NOT NULL,
 	last_modified timestamp with time zone NOT NULL,
 	matches jsonb NOT NULL,
-	cpe_pairs text[],
-	added_ts timestamp with time zone NOT NULL DEFAULT now()
+	cpe_pairs text[]
 );
 
 CREATE INDEX ON cves USING gin (cpe_pairs);
