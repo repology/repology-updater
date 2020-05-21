@@ -868,7 +868,7 @@ CREATE TABLE cves (
 	cve_id text NOT NULL PRIMARY KEY,
 	published timestamp with time zone NOT NULL,
 	last_modified timestamp with time zone NOT NULL,
-	matches jsonb NOT NULL,
+	matches jsonb,
 	cpe_pairs text[]
 );
 
