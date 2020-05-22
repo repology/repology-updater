@@ -858,7 +858,8 @@ CREATE TABLE vulnerability_sources (
 	url text NOT NULL PRIMARY KEY,
 	etag text NULL,
 	last_update timestamp with time zone NULL,
-	total_updates integer NOT NULL DEFAULT 0
+	total_updates integer NOT NULL DEFAULT 0,
+	"type" text NOT NULL
 );
 
 -- raw cve information
@@ -873,6 +874,15 @@ CREATE TABLE cves (
 );
 
 CREATE INDEX ON cves USING gin (cpe_pairs);
+
+-- cpe dictionary
+DROP TABLE IF EXISTS cpe_dictionary CASCADE;
+
+CREATE TABLE cpe_dictionary (
+	cpe_vendor text NOT NULL,
+	cpe_product text NOT NULL,
+	PRIMARY KEY(cpe_vendor, cpe_product)
+);
 
 -- cpe updates queue (used to force updates of related projects)
 DROP TABLE IF EXISTS cpe_updates CASCADE;

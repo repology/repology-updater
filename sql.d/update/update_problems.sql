@@ -141,6 +141,13 @@ WHERE
         WHERE
             vulnerable_versions.cpe_vendor = packages.cpe_vendor AND
             vulnerable_versions.cpe_product = packages.cpe_product
+    ) AND
+    NOT EXISTS (
+        SELECT *
+        FROM cpe_dictionary
+        WHERE
+            cpe_dictionary.cpe_vendor = packages.cpe_vendor AND
+            cpe_dictionary.cpe_product = packages.cpe_product
     );
 
 INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
