@@ -17,6 +17,9 @@
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
+  packagelinks:
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
   tags: [ all, production, epel ]
 
 - name: epel_7
@@ -35,6 +38,9 @@
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
+  packagelinks:
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
   tags: [ all, production, epel ]
 
 - name: epel_8
@@ -53,4 +59,7 @@
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
+  packagelinks:
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
   tags: [ all, production, epel ]
