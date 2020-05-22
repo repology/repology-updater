@@ -1,0 +1,25 @@
+###########################################################################
+# winget
+###########################################################################
+- name: winget
+  type: repository
+  desc: winget
+  family: winget
+  ruleset: [winget, windows]
+  minpackages: 150
+  sources:
+    - name: winget-pkgs
+      fetcher: GitFetcher
+      parser: WingetGitParser
+      url: https://github.com/microsoft/winget-pkgs.git
+      sparse_checkout: [ 'manifests/**/*.yaml' ]
+  shadow: true
+  repolinks:
+    - desc: winget-pkgs repository
+      url: https://github.com/microsoft/winget-pkgs
+  packagelinks:
+    - desc: Port directory
+      url: 'https://github.com/microsoft/winget-pkgs/tree/master/manifests/{srcname}'
+    - desc: Manifest file
+      url: 'https://github.com/microsoft/winget-pkgs/blob/master/manifests/{srcname}/{version}.yaml'
+  tags: [ all, production ]

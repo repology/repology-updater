@@ -110,6 +110,7 @@ families = [
     'vcpkg',
     'void',
     'wikidata',
+    'winget',
     'yacp',
 ]
 

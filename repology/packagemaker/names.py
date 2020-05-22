@@ -117,6 +117,11 @@ class NameType:
 
     CONAN_RECIPE_NAME: ClassVar[int] = 260
 
+    WINGET_ID: ClassVar[int] = IGNORED
+    WINGET_ID_NAME: ClassVar[int] = 271
+    WINGET_NAME: ClassVar[int] = 272
+    WINGET_PATH: ClassVar[int] = 273
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -449,6 +454,13 @@ _MAPPINGS = [
         trackname=NameType.CONAN_RECIPE_NAME,
         visiblename=NameType.CONAN_RECIPE_NAME,
         projectname_seed=NameType.CONAN_RECIPE_NAME,
+    ),
+    # Winget
+    _NameMapping(
+        srcname=NameType.WINGET_PATH,
+        trackname=NameType.WINGET_PATH,
+        visiblename=NameType.WINGET_NAME,
+        projectname_seed=NameType.WINGET_ID_NAME,
     ),
 ]
 
