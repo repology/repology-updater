@@ -15,6 +15,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -45,6 +46,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -75,6 +77,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -107,6 +110,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -137,6 +141,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -169,6 +174,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -199,6 +205,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -231,6 +238,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -260,6 +268,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -291,6 +300,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -320,6 +330,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -349,6 +360,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -380,6 +392,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -409,6 +422,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -438,6 +452,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -469,6 +484,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -498,6 +514,7 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      fetch_timeout: 5
       compression: gz
       subrepo: '{source}'
   repolinks:
