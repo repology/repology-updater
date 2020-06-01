@@ -207,6 +207,12 @@ CREATE TABLE packages (
 
 	cpe_vendor text NULL,
 	cpe_product text NULL,
+	cpe_edition text NULL,
+	cpe_lang text NULL,
+	cpe_sw_edition text NULL,
+	cpe_target_sw text NULL,
+	cpe_target_hw text NULL,
+	cpe_other text NULL,
 
 	-- calculated
 	effname text NOT NULL,
