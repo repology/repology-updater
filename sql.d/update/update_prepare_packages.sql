@@ -15,9 +15,14 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+ANALYZE changed_projects;
+ANALYZE incoming_packages;
+
 CREATE INDEX ON incoming_packages(effname);
 
 CREATE TEMPORARY TABLE old_packages ON COMMIT DROP AS
 SELECT *
 FROM packages
 WHERE effname IN (SELECT effname FROM changed_projects);
+
+ANALYZE old_packages;
