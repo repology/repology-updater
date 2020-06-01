@@ -122,33 +122,66 @@ SELECT DISTINCT
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'cpe_unreferenced'::problem_type,
-	jsonb_build_object('vendor', cpe_vendor, 'product', cpe_product, 'suggestions',
+	jsonb_build_object(
+		'cpe',
+		jsonb_build_object(
+			'cpe_vendor', coalesce(cpe_vendor, '*'),
+			'cpe_product', coalesce(cpe_product, '*'),
+			'cpe_edition', coalesce(cpe_edition, '*'),
+			'cpe_lang', coalesce(cpe_lang, '*'),
+			'cpe_sw_edition', coalesce(cpe_sw_edition, '*'),
+			'cpe_target_sw', coalesce(cpe_target_sw, '*'),
+			'cpe_target_hw', coalesce(cpe_target_hw, '*'),
+			'cpe_other', coalesce(cpe_other, '*')
+		),
+		'suggestions',
 		(
-			SELECT jsonb_agg(DISTINCT jsonb_build_object('vendor', cpe_vendor, 'product', cpe_product))
-			FROM all_cpes
-			INNER JOIN vulnerable_versions USING (cpe_vendor, cpe_product)
-			WHERE all_cpes.effname = packages.effname
+			SELECT jsonb_agg(DISTINCT
+				jsonb_build_object(
+					'cpe_vendor', cpe_vendor,
+					'cpe_product', cpe_product,
+					'cpe_edition', cpe_edition,
+					'cpe_lang', cpe_lang,
+					'cpe_sw_edition', cpe_sw_edition,
+					'cpe_target_sw', cpe_target_sw,
+					'cpe_target_hw', cpe_target_hw,
+					'cpe_other', cpe_other
+				)
+			)
+			FROM vulnerable_projects
+			WHERE effname = packages.effname
 		)
 	)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 WHERE
-    cpe_vendor IS NOT NULL AND
-    cpe_product IS NOT NULL AND
-    NOT EXISTS (
-        SELECT *
-        FROM vulnerable_versions
-        WHERE
-            vulnerable_versions.cpe_vendor = packages.cpe_vendor AND
-            vulnerable_versions.cpe_product = packages.cpe_product
-    ) AND
-    NOT EXISTS (
-        SELECT *
-        FROM cpe_dictionary
-        WHERE
-            cpe_dictionary.cpe_vendor = packages.cpe_vendor AND
-            cpe_dictionary.cpe_product = packages.cpe_product
-    );
+	cpe_product IS NOT NULL
+	AND NOT EXISTS (
+		SELECT *
+		FROM vulnerable_cpes
+		WHERE
+			cpe_product = packages.cpe_product AND
+			coalesce(cpe_vendor = nullif(packages.cpe_vendor, '*')) AND
+			coalesce(nullif(cpe_edition, '*') = nullif(packages.cpe_edition, '*'), TRUE) AND
+			coalesce(nullif(cpe_lang, '*') = nullif(packages.cpe_lang, '*'), TRUE) AND
+			coalesce(nullif(cpe_sw_edition, '*') = nullif(packages.cpe_sw_edition, '*'), TRUE) AND
+			coalesce(nullif(cpe_target_sw, '*') = nullif(packages.cpe_target_sw, '*'), TRUE) AND
+			coalesce(nullif(cpe_target_hw, '*') = nullif(packages.cpe_target_hw, '*'), TRUE) AND
+			coalesce(nullif(cpe_other, '*') = nullif(packages.cpe_other, '*'), TRUE)
+	)
+	AND NOT EXISTS (
+		SELECT *
+		FROM cpe_dictionary
+		WHERE
+			cpe_product = packages.cpe_product AND
+			coalesce(cpe_vendor = nullif(packages.cpe_vendor, '*')) AND
+			coalesce(nullif(cpe_edition, '*') = nullif(packages.cpe_edition, '*'), TRUE) AND
+			coalesce(nullif(cpe_lang, '*') = nullif(packages.cpe_lang, '*'), TRUE) AND
+			coalesce(nullif(cpe_sw_edition, '*') = nullif(packages.cpe_sw_edition, '*'), TRUE) AND
+			coalesce(nullif(cpe_target_sw, '*') = nullif(packages.cpe_target_sw, '*'), TRUE) AND
+			coalesce(nullif(cpe_target_hw, '*') = nullif(packages.cpe_target_hw, '*'), TRUE) AND
+			coalesce(nullif(cpe_other, '*') = nullif(packages.cpe_other, '*'), TRUE)
+	);
 
 INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
 SELECT DISTINCT
@@ -160,25 +193,30 @@ SELECT DISTINCT
 	'cpe_missing'::problem_type,
 	jsonb_build_object('suggestions',
 		(
-			SELECT jsonb_agg(DISTINCT jsonb_build_object('vendor', cpe_vendor, 'product', cpe_product))
-			FROM all_cpes
-			INNER JOIN vulnerable_versions USING (cpe_vendor, cpe_product)
-			WHERE all_cpes.effname = packages.effname
+			SELECT jsonb_agg(DISTINCT
+				jsonb_build_object(
+					'cpe_vendor', cpe_vendor,
+					'cpe_product', cpe_product,
+					'cpe_edition', cpe_edition,
+					'cpe_lang', cpe_lang,
+					'cpe_sw_edition', cpe_sw_edition,
+					'cpe_target_sw', cpe_target_sw,
+					'cpe_target_hw', cpe_target_hw,
+					'cpe_other', cpe_other
+				)
+			)
+			FROM vulnerable_projects
+			WHERE effname = packages.effname
 		)
 	)
 FROM changed_projects
 INNER JOIN packages USING(effname)
 WHERE
 	(
-		SELECT used_package_fields @> ARRAY['cpe_vendor'] FROM repositories WHERE repositories.name = packages.repo
-	) AND
-    cpe_vendor IS NULL AND
-    EXISTS (
-        SELECT *
-        FROM all_cpes
-		INNER JOIN vulnerable_versions USING (cpe_vendor, cpe_product)
-		WHERE all_cpes.effname = packages.effname
-    );
+		SELECT used_package_fields @> ARRAY['cpe_product'] FROM repositories WHERE name = packages.repo
+	)
+	AND cpe_product IS NULL
+	AND EXISTS (SELECT * FROM vulnerable_projects WHERE effname = packages.effname);
 
 {% if analyze %}
 ANALYZE problems;

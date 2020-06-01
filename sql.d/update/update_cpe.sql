@@ -24,14 +24,26 @@ WHERE effname IN (SELECT effname FROM changed_projects);
 INSERT INTO project_cpe (
 	effname,
 	cpe_vendor,
-	cpe_product
+    cpe_product,
+    cpe_edition,
+    cpe_lang,
+    cpe_sw_edition,
+    cpe_target_sw,
+    cpe_target_hw,
+    cpe_other
 )
 SELECT DISTINCT
 	effname,
 	cpe_vendor,
-	cpe_product
+    cpe_product,
+    cpe_edition,
+    cpe_lang,
+    cpe_sw_edition,
+    cpe_target_sw,
+    cpe_target_hw,
+    cpe_other
 FROM incoming_packages
-WHERE cpe_vendor IS NOT NULL AND cpe_product IS NOT NULL;
+WHERE cpe_product IS NOT NULL;
 
 {% if analyze %}
 ANALYZE project_cpe;

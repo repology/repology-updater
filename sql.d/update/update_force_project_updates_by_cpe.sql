@@ -19,7 +19,7 @@ UPDATE project_hashes
 SET hash = -1
 WHERE effname IN (
 	SELECT effname
-	FROM all_cpes INNER JOIN cpe_updates USING (cpe_vendor, cpe_product)
+	FROM manual_cpes INNER JOIN cpe_updates USING (cpe_vendor, cpe_product)
 );
 
 DELETE FROM cpe_updates;

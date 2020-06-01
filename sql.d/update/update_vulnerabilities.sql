@@ -21,18 +21,16 @@ SET
 WHERE
 	versionclass != 10 -- ROLLING
 	AND EXISTS (
-		-- XXX: this lookup could be faster if vulnerable_versions had version fields
-		-- included into index
 		SELECT *
-		FROM vulnerable_versions INNER JOIN all_cpes USING (cpe_vendor, cpe_product)
+		FROM vulnerable_projects
 		WHERE
-			all_cpes.effname = incoming_packages.effname AND
+			vulnerable_projects.effname = incoming_packages.effname AND
 			coalesce(
-				version_compare2(incoming_packages.version, vulnerable_versions.start_version) >
-				CASE WHEN vulnerable_versions.start_version_excluded THEN 0 ELSE -1 END,
+				version_compare2(incoming_packages.version, vulnerable_projects.start_version) >
+				CASE WHEN vulnerable_projects.start_version_excluded THEN 0 ELSE -1 END,
 				true
 			) AND
-			version_compare2(incoming_packages.version, vulnerable_versions.end_version) <
-			CASE WHEN vulnerable_versions.end_version_excluded THEN 0 ELSE 1 END
+			version_compare2(incoming_packages.version, vulnerable_projects.end_version) <
+			CASE WHEN vulnerable_projects.end_version_excluded THEN 0 ELSE 1 END
 	)
 ;

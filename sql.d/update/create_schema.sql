@@ -828,30 +828,35 @@ DROP TABLE IF EXISTS manual_cpes CASCADE;
 CREATE TABLE manual_cpes (
 	effname text NOT NULL,
 	cpe_vendor text NOT NULL,
-	cpe_product text NOT NULL
+	cpe_product text NOT NULL,
+	cpe_edition text NOT NULL,
+	cpe_lang text NOT NULL,
+	cpe_sw_edition text NOT NULL,
+	cpe_target_sw text NOT NULL,
+	cpe_target_hw text NOT NULL,
+	cpe_other text NOT NULL
 );
 
-CREATE UNIQUE INDEX ON manual_cpes(effname, cpe_vendor, cpe_product);
-CREATE INDEX ON manual_cpes(cpe_vendor, cpe_product);
+CREATE UNIQUE INDEX ON manual_cpes(effname, cpe_product, cpe_vendor, cpe_edition, cpe_lang, cpe_sw_edition, cpe_target_sw, cpe_target_hw, cpe_other);
+CREATE INDEX ON manual_cpes(cpe_product, cpe_vendor);
+
 
 DROP TABLE IF EXISTS project_cpe CASCADE;
 
 CREATE TABLE project_cpe (
 	effname text NOT NULL,
-	cpe_vendor text NOT NULL,
-	cpe_product text NOT NULL
+	cpe_vendor text,
+	cpe_product text NOT NULL,
+	cpe_edition text,
+	cpe_lang text,
+	cpe_sw_edition text,
+	cpe_target_sw text,
+	cpe_target_hw text,
+	cpe_other text
 );
 
 CREATE INDEX ON project_cpe(effname);
-CREATE INDEX ON project_cpe(cpe_vendor, cpe_product);
-
-DROP VIEW IF EXISTS all_cpes CASCADE;
-
-CREATE VIEW all_cpes AS (
-	SELECT * FROM manual_cpes
-	UNION
-	SELECT * FROM project_cpe
-);
+CREATE INDEX ON project_cpe(cpe_product, cpe_vendor);
 
 --------------------------------------------------------------------------------
 -- vulnerability data
@@ -887,8 +892,15 @@ DROP TABLE IF EXISTS cpe_dictionary CASCADE;
 CREATE TABLE cpe_dictionary (
 	cpe_vendor text NOT NULL,
 	cpe_product text NOT NULL,
-	PRIMARY KEY(cpe_vendor, cpe_product)
+	cpe_edition text NOT NULL,
+	cpe_lang text NOT NULL,
+	cpe_sw_edition text NOT NULL,
+	cpe_target_sw text NOT NULL,
+	cpe_target_hw text NOT NULL,
+	cpe_other text NOT NULL
 );
+
+CREATE UNIQUE INDEX ON cpe_dictionary(cpe_product, cpe_vendor, cpe_edition, cpe_lang, cpe_sw_edition, cpe_target_sw, cpe_target_hw, cpe_other);
 
 -- cpe updates queue (used to force updates of related projects)
 DROP TABLE IF EXISTS cpe_updates CASCADE;
@@ -899,15 +911,51 @@ CREATE TABLE cpe_updates (
 );
 
 -- optimized vulnerable version ranges for lookups
-DROP TABLE IF EXISTS vulnerable_versions CASCADE;
+DROP TABLE IF EXISTS vulnerable_cpes CASCADE;
 
-CREATE TABLE vulnerable_versions (
+CREATE TABLE vulnerable_cpes (
 	cpe_vendor text NOT NULL,
 	cpe_product text NOT NULL,
+	cpe_edition text NOT NULL,
+	cpe_lang text NOT NULL,
+	cpe_sw_edition text NOT NULL,
+	cpe_target_sw text NOT NULL,
+	cpe_target_hw text NOT NULL,
+	cpe_other text NOT NULL,
+
 	start_version text NULL,
 	end_version text NOT NULL,
 	start_version_excluded boolean NOT NULL DEFAULT false,
 	end_version_excluded boolean NOT NULL DEFAULT false
 );
 
-CREATE INDEX ON vulnerable_versions(cpe_vendor, cpe_product);
+CREATE INDEX ON vulnerable_cpes(cpe_product, cpe_vendor);
+
+DROP VIEW IF EXISTS vulnerable_projects CASCADE;
+
+CREATE VIEW vulnerable_projects AS
+	SELECT
+		effname,
+
+		vulnerable_cpes.cpe_product,
+		vulnerable_cpes.cpe_vendor,
+		vulnerable_cpes.cpe_edition,
+		vulnerable_cpes.cpe_lang,
+		vulnerable_cpes.cpe_sw_edition,
+		vulnerable_cpes.cpe_target_sw,
+		vulnerable_cpes.cpe_target_hw,
+		vulnerable_cpes.cpe_other,
+
+		start_version,
+		end_version,
+		start_version_excluded,
+		end_version_excluded
+    FROM vulnerable_cpes INNER JOIN manual_cpes ON
+		vulnerable_cpes.cpe_product = manual_cpes.cpe_product AND
+		vulnerable_cpes.cpe_vendor = manual_cpes.cpe_vendor AND
+		coalesce(nullif(vulnerable_cpes.cpe_edition, '*') = nullif(manual_cpes.cpe_edition, '*'), TRUE) AND
+		coalesce(nullif(vulnerable_cpes.cpe_lang, '*') = nullif(manual_cpes.cpe_lang, '*'), TRUE) AND
+		coalesce(nullif(vulnerable_cpes.cpe_sw_edition, '*') = nullif(manual_cpes.cpe_sw_edition, '*'), TRUE) AND
+		coalesce(nullif(vulnerable_cpes.cpe_target_sw, '*') = nullif(manual_cpes.cpe_target_sw, '*'), TRUE) AND
+		coalesce(nullif(vulnerable_cpes.cpe_target_hw, '*') = nullif(manual_cpes.cpe_target_hw, '*'), TRUE) AND
+		coalesce(nullif(vulnerable_cpes.cpe_other, '*') = nullif(manual_cpes.cpe_other, '*'), TRUE);

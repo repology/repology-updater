@@ -46,7 +46,7 @@ FROM (
 		count(DISTINCT family) AS num_families,
 		count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5) AS num_repos_newest,
 		count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5) AS num_families_newest,
-		EXISTS(SELECT * FROM all_cpes INNER JOIN vulnerable_versions USING(cpe_vendor, cpe_product) WHERE all_cpes.effname = incoming_packages.effname) AS has_cves
+		EXISTS(SELECT * FROM vulnerable_projects WHERE vulnerable_projects.effname = incoming_packages.effname) AS has_cves
 	FROM incoming_packages
 	GROUP BY effname
 ) AS tmp
