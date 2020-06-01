@@ -924,7 +924,7 @@ CREATE TABLE vulnerable_cpes (
 	cpe_other text NOT NULL,
 
 	start_version text NULL,
-	end_version text NOT NULL,
+	end_version text NULL,
 	start_version_excluded boolean NOT NULL DEFAULT false,
 	end_version_excluded boolean NOT NULL DEFAULT false
 );

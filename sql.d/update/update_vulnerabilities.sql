@@ -30,7 +30,10 @@ WHERE
 				CASE WHEN vulnerable_projects.start_version_excluded THEN 0 ELSE -1 END,
 				true
 			) AND
-			version_compare2(incoming_packages.version, vulnerable_projects.end_version) <
-			CASE WHEN vulnerable_projects.end_version_excluded THEN 0 ELSE 1 END
+			coalesce(
+				version_compare2(incoming_packages.version, vulnerable_projects.end_version) <
+				CASE WHEN vulnerable_projects.end_version_excluded THEN 0 ELSE 1 END,
+				true
+			)
 	)
 ;
