@@ -443,6 +443,7 @@ CREATE TABLE repositories_history_new (
 	num_projects_outdated integer,
 	num_projects_comparable integer,
 	num_projects_problematic integer,
+	num_projects_vulnerable integer,
 
 	PRIMARY KEY(repository_id, ts)
 );

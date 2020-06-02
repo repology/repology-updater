@@ -37,7 +37,8 @@ FROM (
 		num_metapackages_comparable,
 		num_metapackages_problematic,
 		num_problems,
-		num_maintainers
+		num_maintainers,
+		num_metapackages_vulnerable
 	FROM repositories
 ) AS snapshot;
 
@@ -51,7 +52,8 @@ INSERT INTO repositories_history_new (
 	num_projects_newest,
 	num_projects_outdated,
 	num_projects_comparable,
-	num_projects_problematic
+	num_projects_problematic,
+	num_projects_vulnerable
 )
 SELECT
 	id,
@@ -63,7 +65,8 @@ SELECT
 	num_metapackages_newest,
 	num_metapackages_outdated,
 	num_metapackages_comparable,
-	num_metapackages_problematic
+	num_metapackages_problematic,
+	num_metapackages_vulnerable
 FROM repositories;
 
 -- global statistics
