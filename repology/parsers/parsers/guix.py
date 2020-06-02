@@ -39,6 +39,8 @@ class GuixJsonParser(Parser):
                 pkg.set_extra_field('loc_path', path)
                 pkg.set_extra_field('loc_line', lineno)
 
+                pkg.add_cpe(product=pkgdata.get('cpe_name'))
+
                 if 'source' in pkgdata:
                     source = pkgdata['source']
 
