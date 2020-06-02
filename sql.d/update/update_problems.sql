@@ -161,7 +161,7 @@ WHERE
 		FROM vulnerable_cpes
 		WHERE
 			cpe_product = packages.cpe_product AND
-			coalesce(cpe_vendor = nullif(packages.cpe_vendor, '*')) AND
+			coalesce(nullif(cpe_vendor, '*') = nullif(packages.cpe_vendor, '*'), TRUE) AND
 			coalesce(nullif(cpe_edition, '*') = nullif(packages.cpe_edition, '*'), TRUE) AND
 			coalesce(nullif(cpe_lang, '*') = nullif(packages.cpe_lang, '*'), TRUE) AND
 			coalesce(nullif(cpe_sw_edition, '*') = nullif(packages.cpe_sw_edition, '*'), TRUE) AND
@@ -174,7 +174,7 @@ WHERE
 		FROM cpe_dictionary
 		WHERE
 			cpe_product = packages.cpe_product AND
-			coalesce(cpe_vendor = nullif(packages.cpe_vendor, '*')) AND
+			coalesce(nullif(cpe_vendor, '*') = nullif(packages.cpe_vendor, '*'), TRUE) AND
 			coalesce(nullif(cpe_edition, '*') = nullif(packages.cpe_edition, '*'), TRUE) AND
 			coalesce(nullif(cpe_lang, '*') = nullif(packages.cpe_lang, '*'), TRUE) AND
 			coalesce(nullif(cpe_sw_edition, '*') = nullif(packages.cpe_sw_edition, '*'), TRUE) AND
