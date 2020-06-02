@@ -16,9 +16,7 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
---
 -- @param many objects
---
 --------------------------------------------------------------------------------
 INSERT INTO incoming_packages (
 	-- parsed, immutable
@@ -49,6 +47,12 @@ INSERT INTO incoming_packages (
 
 	cpe_vendor,
 	cpe_product,
+	cpe_edition,
+	cpe_lang,
+	cpe_sw_edition,
+	cpe_target_sw,
+	cpe_target_hw,
+	cpe_other,
 
 	-- calculated
 	effname,
@@ -90,6 +94,12 @@ INSERT INTO incoming_packages (
 
 	%(cpe_vendor)s,
 	%(cpe_product)s,
+	%(cpe_edition)s,
+	%(cpe_lang)s,
+	%(cpe_sw_edition)s,
+	%(cpe_target_sw)s,
+	%(cpe_target_hw)s,
+	%(cpe_other)s,
 
 	-- calculated
 	%(effname)s,

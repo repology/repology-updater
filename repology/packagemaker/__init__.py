@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -53,6 +53,12 @@ class PackageTemplate:
 
         'cpe_vendor',
         'cpe_product',
+        'cpe_edition',
+        'cpe_lang',
+        'cpe_sw_edition',
+        'cpe_target_sw',
+        'cpe_target_hw',
+        'cpe_other',
 
         'flavors',
     ]
@@ -77,6 +83,12 @@ class PackageTemplate:
 
     cpe_vendor: Optional[str]
     cpe_product: Optional[str]
+    cpe_edition: Optional[str]
+    cpe_lang: Optional[str]
+    cpe_sw_edition: Optional[str]
+    cpe_target_sw: Optional[str]
+    cpe_target_hw: Optional[str]
+    cpe_other: Optional[str]
 
     flavors: List[str]
 
@@ -101,6 +113,12 @@ class PackageTemplate:
 
         self.cpe_vendor = None
         self.cpe_product = None
+        self.cpe_edition = None
+        self.cpe_lang = None
+        self.cpe_sw_edition = None
+        self.cpe_target_sw = None
+        self.cpe_target_hw = None
+        self.cpe_other = None
 
         self.flavors = []
 
@@ -271,9 +289,15 @@ class PackageMaker(PackageMakerBase):
     def set_extra_field(self, key: str, value: str) -> None:
         self._package.extrafields[key] = value
 
-    def add_cpe(self, vendor: str, product: str) -> None:
+    def add_cpe(self, vendor: Optional[str] = None, product: Optional[str] = None, edition: Optional[str] = None, lang: Optional[str] = None, sw_edition: Optional[str] = None, target_sw: Optional[str] = None, target_hw: Optional[str] = None, other: Optional[str] = None) -> None:
         self._package.cpe_vendor = vendor
         self._package.cpe_product = product
+        self._package.cpe_edition = edition
+        self._package.cpe_lang = lang
+        self._package.cpe_sw_edition = sw_edition
+        self._package.cpe_target_sw = target_sw
+        self._package.cpe_target_hw = target_hw
+        self._package.cpe_other = other
 
     def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
         maintainers: List[str] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else []
@@ -323,6 +347,12 @@ class PackageMaker(PackageMakerBase):
 
             cpe_vendor=self._package.cpe_vendor,
             cpe_product=self._package.cpe_product,
+            cpe_edition=self._package.cpe_edition,
+            cpe_lang=self._package.cpe_lang,
+            cpe_sw_edition=self._package.cpe_sw_edition,
+            cpe_target_sw=self._package.cpe_target_sw,
+            cpe_target_hw=self._package.cpe_target_hw,
+            cpe_other=self._package.cpe_other,
 
             flavors=self._package.flavors,
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -158,6 +158,12 @@ class Package:
 
         'cpe_vendor',
         'cpe_product',
+        'cpe_edition',
+        'cpe_lang',
+        'cpe_sw_edition',
+        'cpe_target_sw',
+        'cpe_target_hw',
+        'cpe_other',
 
         # calculated
         'effname',
@@ -201,6 +207,12 @@ class Package:
 
     cpe_vendor: Optional[str]
     cpe_product: Optional[str]
+    cpe_edition: Optional[str]
+    cpe_lang: Optional[str]
+    cpe_sw_edition: Optional[str]
+    cpe_target_sw: Optional[str]
+    cpe_target_hw: Optional[str]
+    cpe_other: Optional[str]
 
     effname: str
 
@@ -246,6 +258,12 @@ class Package:
 
                  cpe_vendor: Optional[str] = None,
                  cpe_product: Optional[str] = None,
+                 cpe_edition: Optional[str] = None,
+                 cpe_lang: Optional[str] = None,
+                 cpe_sw_edition: Optional[str] = None,
+                 cpe_target_sw: Optional[str] = None,
+                 cpe_target_hw: Optional[str] = None,
+                 cpe_other: Optional[str] = None,
 
                  flags: int = 0,
                  shadow: bool = False,
@@ -279,6 +297,12 @@ class Package:
 
         self.cpe_vendor = cpe_vendor
         self.cpe_product = cpe_product
+        self.cpe_edition = cpe_edition
+        self.cpe_lang = cpe_lang
+        self.cpe_sw_edition = cpe_sw_edition
+        self.cpe_target_sw = cpe_target_sw
+        self.cpe_target_hw = cpe_target_hw
+        self.cpe_other = cpe_other
 
         # calculated
         self.effname = effname

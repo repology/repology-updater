@@ -70,6 +70,12 @@ class TestParsers(unittest.TestCase):
 
             'cpe_vendor': None,
             'cpe_product': None,
+            'cpe_edition': None,
+            'cpe_lang': None,
+            'cpe_sw_edition': None,
+            'cpe_target_sw': None,
+            'cpe_target_hw': None,
+            'cpe_other': None,
         }
 
         # not relevant here
