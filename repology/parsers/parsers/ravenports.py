@@ -40,6 +40,9 @@ class RavenportsJsonParser(Parser):
                 pkg.set_extra_field('variant', packagedata['variants'][0]['label'])
 
                 if 'cpe' in packagedata:
-                    pkg.add_cpe(packagedata['cpe']['vendor'], packagedata['cpe']['product'])
+                    pkg.add_cpe(**{
+                        key: packagedata['cpe'].get(key)
+                        for key in ['vendor', 'product', 'edition', 'lang', 'sw_edition', 'target_sw', 'target_hw', 'other']
+                    })
 
                 yield pkg
