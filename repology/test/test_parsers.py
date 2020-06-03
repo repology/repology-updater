@@ -43,6 +43,7 @@ class TestParsers(unittest.TestCase):
             'name': None,
             'srcname': None,
             'binname': None,
+            'binnames': None,
             # trackname must be filled
             # visiblename must be filled
             # proectname_seed must be filled
@@ -262,6 +263,7 @@ class TestParsers(unittest.TestCase):
                 'category': 'devel',
                 'family': 'debuntu',
                 'srcname': 'a52dec',
+                'binnames': ['liba52-0.7.4', 'liba52-0.7.4-dev'],
                 'trackname': 'a52dec',
                 'visiblename': 'a52dec',
                 'projectname_seed': 'a52dec',

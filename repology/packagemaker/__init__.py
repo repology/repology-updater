@@ -39,6 +39,8 @@ class PackageTemplate:
         'origversion',
         'rawversion',
 
+        'binnames',
+
         'arch',
         'summary',
         'maintainers',
@@ -69,6 +71,8 @@ class PackageTemplate:
     origversion: Optional[str]
     rawversion: Optional[str]
 
+    binnames: List[str]
+
     arch: Optional[str]
     summary: Optional[str]
     maintainers: List[str]
@@ -98,6 +102,8 @@ class PackageTemplate:
         self.version = None
         self.origversion = None
         self.rawversion = None
+
+        self.binnames = []
 
         self.arch = None
         self.summary = None
@@ -233,6 +239,10 @@ class PackageMaker(PackageMakerBase):
     def add_name(self, name: str, name_type: int) -> None:
         self._name_mapper.add_name(name, name_type)
 
+    @_omnivorous_setter('binname', str, nzs.strip, nzs.forbid_newlines)
+    def add_binnames(self, *args: Any) -> None:
+        _extend_unique(self._package.binnames, args)
+
     @_simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
         self._package.rawversion = version
@@ -323,6 +333,7 @@ class PackageMaker(PackageMakerBase):
             name=names.name,
             srcname=names.srcname,
             binname=names.binname,
+            binnames=self._package.binnames if self._package.binnames else None,
             trackname=names.trackname,
             visiblename=names.visiblename,
             projectname_seed=names.projectname_seed,

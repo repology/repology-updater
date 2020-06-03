@@ -138,6 +138,7 @@ class Package:
         'name',
         'srcname',
         'binname',
+        'binnames',
         'trackname',
         'visiblename',
         'projectname_seed',
@@ -187,6 +188,7 @@ class Package:
     name: Optional[str]
     srcname: Optional[str]
     binname: Optional[str]
+    binnames: Optional[List[str]]
     trackname: Optional[str]
     visiblename: str
     projectname_seed: str
@@ -243,6 +245,7 @@ class Package:
                  name: Optional[str] = None,
                  srcname: Optional[str] = None,
                  binname: Optional[str] = None,
+                 binnames: Optional[List[str]] = None,
                  trackname: Optional[str] = None,
 
                  arch: Optional[str] = None,
@@ -277,6 +280,7 @@ class Package:
         self.name = name
         self.srcname = srcname
         self.binname = binname
+        self.binnames = binnames
         self.trackname = trackname
         self.visiblename = visiblename
         self.projectname_seed = projectname_seed

@@ -35,6 +35,7 @@ CREATE TEMPORARY TABLE incoming_packages (
     name text NULL,
     srcname text NULL,
     binname text NULL,
+    binnames text[] NULL,
     trackname text NOT NULL,
     visiblename text NOT NULL,
     projectname_seed text NOT NULL,

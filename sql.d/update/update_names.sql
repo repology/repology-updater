@@ -40,6 +40,8 @@ FROM (
     SELECT effname, repo, 'srcname'::project_name_type AS name_type, srcname FROM incoming_packages WHERE srcname IS NOT NULL
     UNION
     SELECT effname, repo, 'binname'::project_name_type AS name_type, binname FROM incoming_packages WHERE binname IS NOT NULL
+    UNION
+    SELECT effname, repo, 'binname'::project_name_type AS name_type, unnest(binnames) FROM incoming_packages WHERE binnames IS NOT NULL
 ) AS tmp;
 
 {% if analyze %}

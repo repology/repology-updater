@@ -104,6 +104,7 @@ class DebianSourcesParser(Parser):
         assert('Binary' in pkgdata)
         assert('Source' not in pkgdata)
         pkg.add_name(pkgdata['Package'], NameType.DEBIAN_SOURCE_PACKAGE)
+        pkg.add_binnames(pkgdata['Binary'].split(', '))
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgdata in _iter_packages(path):
