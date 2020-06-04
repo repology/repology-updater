@@ -836,7 +836,8 @@ CREATE TABLE manual_cpes (
 	cpe_sw_edition text NOT NULL,
 	cpe_target_sw text NOT NULL,
 	cpe_target_hw text NOT NULL,
-	cpe_other text NOT NULL
+	cpe_other text NOT NULL,
+	added_ts timestamptz NOT NULL DEFAULT now()
 );
 
 CREATE UNIQUE INDEX ON manual_cpes(effname, cpe_product, cpe_vendor, cpe_edition, cpe_lang, cpe_sw_edition, cpe_target_sw, cpe_target_hw, cpe_other);
