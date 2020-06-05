@@ -62,10 +62,7 @@ INSERT INTO incoming_packages (
 	versionclass,
 
 	flags,
-	shadow,
-
-	flavors,
-	branch
+	shadow
 ) VALUES (
 	-- parsed, immutable
 	%(repo)s,
@@ -110,8 +107,5 @@ INSERT INTO incoming_packages (
 	%(versionclass)s,
 
 	%(flags)s,
-	%(shadow)s,
-
-	%(flavors)s,
-	%(branch)s
+	%(shadow)s
 )

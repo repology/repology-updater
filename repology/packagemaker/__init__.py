@@ -310,7 +310,7 @@ class PackageMaker(PackageMakerBase):
         self._package.cpe_other = other
 
     def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
-        maintainers: List[str] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else []
+        maintainers: Optional[List[str]] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else None
 
         names = self._name_mapper.get_mapped_names()
 
@@ -348,13 +348,13 @@ class PackageMaker(PackageMakerBase):
             category=self._package.categories[0] if self._package.categories else None,  # XXX: convert to array
             comment=self._package.summary,
             homepage=self._package.homepages[0] if self._package.homepages else None,  # XXX: convert to array
-            licenses=self._package.licenses,
-            downloads=self._package.downloads,
+            licenses=self._package.licenses if self._package.licenses else None,
+            downloads=self._package.downloads if self._package.downloads else None,
 
             flags=self._package.flags,
             shadow=shadow,
 
-            extrafields=self._package.extrafields,
+            extrafields=self._package.extrafields if self._package.extrafields else None,
 
             cpe_vendor=self._package.cpe_vendor,
             cpe_product=self._package.cpe_product,

@@ -198,14 +198,14 @@ class Package:
 
     arch: Optional[str]
 
-    maintainers: List[str]
+    maintainers: Optional[List[str]]
     category: Optional[str]
     comment: Optional[str]
     homepage: Optional[str]
-    licenses: List[str]
-    downloads: List[str]
+    licenses: Optional[List[str]]
+    downloads: Optional[List[str]]
 
-    extrafields: Dict[str, str]
+    extrafields: Optional[Dict[str, str]]
 
     cpe_vendor: Optional[str]
     cpe_product: Optional[str]
@@ -290,14 +290,14 @@ class Package:
 
         self.arch = arch
 
-        self.maintainers = maintainers if maintainers else []
+        self.maintainers = maintainers
         self.category = category
         self.comment = comment
         self.homepage = homepage
-        self.licenses = licenses if licenses else []
-        self.downloads = downloads if downloads else []
+        self.licenses = licenses
+        self.downloads = downloads
 
-        self.extrafields = extrafields if extrafields else {}
+        self.extrafields = extrafields
 
         self.cpe_vendor = cpe_vendor
         self.cpe_product = cpe_product

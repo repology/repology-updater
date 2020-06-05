@@ -52,7 +52,7 @@ CREATE TEMPORARY TABLE incoming_packages (
     licenses text[],
     downloads text[],
 
-    extrafields jsonb NOT NULL,
+    extrafields jsonb,
 
 	cpe_vendor text NULL,
 	cpe_product text NULL,

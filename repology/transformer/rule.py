@@ -173,7 +173,7 @@ class Rule:
             maintainers: Final = as_lowercase_set(ruledata['maintainer'])
 
             def maintainer_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-                return not maintainers.isdisjoint(set((m.lower() for m in package.maintainers)))
+                return package.maintainers is not None and not maintainers.isdisjoint(set((m.lower() for m in package.maintainers)))
 
             self._matchers.append(maintainer_matcher)
 
@@ -376,9 +376,10 @@ class Rule:
                 if package.homepage and wwwpat.fullmatch(package.homepage):
                     return True
 
-                for download in package.downloads:
-                    if wwwpat.fullmatch(download):
-                        return True
+                if package.downloads is not None:
+                    for download in package.downloads:
+                        if wwwpat.fullmatch(download):
+                            return True
 
                 return False
 
@@ -392,10 +393,13 @@ class Rule:
                     for wwwpart in wwwparts:
                         if wwwpart in package.homepage.lower():
                             return True
-                for download in package.downloads:
-                    for wwwpart in wwwparts:
-                        if wwwpart in download.lower():
-                            return True
+
+                if package.downloads is not None:
+                    for download in package.downloads:
+                        for wwwpart in wwwparts:
+                            if wwwpart in download.lower():
+                                return True
+
                 return False
 
             self._matchers.append(wwwpart_matcher)
