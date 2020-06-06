@@ -23,7 +23,8 @@ INSERT
 INTO url_relations
 SELECT
 	metapackage_id,
-	urlhash
+	urlhash,
+	rank
 FROM (
 	SELECT
 		*,

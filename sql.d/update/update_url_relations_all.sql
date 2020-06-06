@@ -24,17 +24,25 @@ WHERE metapackage_id IN (SELECT id FROM metapackages WHERE effname IN (SELECT ef
 
 INSERT
 INTO url_relations_all
-SELECT DISTINCT
-    (SELECT id FROM metapackages WHERE metapackages.effname = incoming_packages.effname) AS metapackage_id,
-    (
-        'x' || left(
-            md5(
-                simplify_url(homepage)
-            ), 16
-        )
-    )::bit(64)::bigint AS urlhash
-FROM incoming_packages
-WHERE homepage ~ '^https?://';
+SELECT
+	metapackage_id,
+	urlhash,
+	num_families::float / max(num_families) OVER ()
+FROM (
+	SELECT
+		(SELECT id FROM metapackages WHERE metapackages.effname = incoming_packages.effname) AS metapackage_id,
+		(
+			'x' || left(
+				md5(
+					simplify_url(homepage)
+				), 16
+			)
+		)::bit(64)::bigint AS urlhash,
+		count(DISTINCT family) num_families
+	FROM incoming_packages
+	WHERE homepage ~ '^https?://'
+	GROUP BY metapackage_id, urlhash
+) AS tmp;
 
 {% if analyze %}
 ANALYZE url_relations_all;
