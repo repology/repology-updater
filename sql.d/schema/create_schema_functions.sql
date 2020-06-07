@@ -82,3 +82,85 @@ BEGIN
 	RETURN CASE WHEN value1 < value2 THEN NULL ELSE value1 END;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+
+-- Used for related packages discovery
+CREATE OR REPLACE FUNCTION project_get_related(source_project_id integer, maxresults integer)
+	RETURNS TABLE(
+		project_id integer,
+		rank float
+	)
+AS $$
+DECLARE
+	continue boolean := true;
+BEGIN
+	-- Seed the algorithm with base project
+	CREATE TEMPORARY TABLE related ON COMMIT DROP AS
+	SELECT
+		source_project_id AS metapackage_id,
+		1.0::float AS rank;
+
+	-- Recursively discover new projects through project homepage links,
+	-- calculating rank along the way.
+	-- The rank calculation algorithm is roughly as follows:
+	WHILE continue LOOP
+		CREATE TEMPORARY TABLE new_related ON COMMIT DROP AS
+		WITH pass1 AS (
+			-- Step 1 - follow links for known projects
+			SELECT
+				urlhash,
+				-- 1.2. Weight from multiple projects on a single link is summed.
+				sum(tmp.rank) AS rank,
+				count(*) AS incoming_projects
+			FROM (
+				SELECT
+					urlhash,
+					-- 1.1. For each project taking part in this iteration, take it's rank and
+					-- divide it among its links, taking link rank into account.
+					related.rank / (SELECT count(*) FROM related) / count(*) OVER (PARTITION BY metapackage_id) * url_relations.rank AS rank
+				FROM related INNER JOIN url_relations USING(metapackage_id)
+			) AS tmp
+			GROUP BY urlhash
+		), pass2 AS (
+			-- Step 2 - projects from links discovered on step 1
+			SELECT
+				metapackage_id,
+				-- 2.2. Similar to 1.2, rank passed by all links to a single project is summed
+				sum(tmp.rank) AS rank
+			FROM (
+				SELECT
+					metapackage_id,
+					-- 2.1. Now, for each link, divide its rank among the projects it points
+					-- to, ignoring projects the rank came from on this iteration.
+					-- Link weights are not accounted for second time.
+					pass1.rank / (nullif(count(*) OVER (PARTITION BY urlhash), incoming_projects) - incoming_projects) AS rank
+				FROM pass1 INNER JOIN url_relations USING(urlhash)
+			) AS tmp
+			GROUP BY metapackage_id
+		)
+		-- 3. Merge with result of previous iteration
+		SELECT
+			metapackage_id,
+			greatest(related.rank, pass2.rank) AS rank
+		FROM related
+		FULL OUTER JOIN pass2 USING(metapackage_id)
+		ORDER BY rank DESC, metapackage_id
+		LIMIT maxresults;
+
+		-- If we couldn't find any more relevant projects on this step, stop
+		SELECT INTO continue (SELECT sum(new_related.rank) FROM new_related) > (SELECT sum(related.rank) FROM related);
+
+		DROP TABLE related;
+		ALTER TABLE new_related RENAME TO related;
+	END LOOP;
+
+	RETURN QUERY
+	SELECT
+		metapackage_id,
+		-- Since it's common for the ranks calculated above to be very small (like 1e-8),
+		-- perform logarithmic conversion to make them more human-readable. It mapping is
+		-- as follows: 1.0 → 100, 0.1 → 90, 0.01 → 80, 0.001 → 70 etc., but never less
+		-- than zero
+		greatest(0.0, 100.0 + log(related.rank) * 10.0)
+	FROM
+		related;
+END; $$ LANGUAGE plpgsql;
