@@ -525,7 +525,7 @@ DROP TABLE IF EXISTS url_relations_all CASCADE;
 CREATE TABLE url_relations_all (
 	metapackage_id integer NOT NULL,
 	urlhash bigint NOT NULL,
-	rank float NOT NULL
+	weight float NOT NULL
 );
 
 CREATE INDEX ON url_relations_all(metapackage_id);
@@ -536,7 +536,7 @@ DROP TABLE IF EXISTS url_relations CASCADE;
 CREATE TABLE url_relations (
 	metapackage_id integer NOT NULL,
 	urlhash bigint NOT NULL,
-	rank float NOT NULL
+	weight float NOT NULL
 );
 
 CREATE UNIQUE INDEX ON url_relations(metapackage_id, urlhash);

@@ -115,8 +115,8 @@ BEGIN
 				SELECT
 					urlhash,
 					-- 1.1. For each project taking part in this iteration, take it's rank and
-					-- divide it among its links, taking link rank into account.
-					related.rank / (SELECT count(*) FROM related) / count(*) OVER (PARTITION BY metapackage_id) * url_relations.rank AS rank
+					-- divide it among its links, taking link weight into account.
+					related.rank / (SELECT count(*) FROM related) / count(*) OVER (PARTITION BY metapackage_id) * weight AS rank
 				FROM related INNER JOIN url_relations USING(metapackage_id)
 			) AS tmp
 			GROUP BY urlhash

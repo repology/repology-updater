@@ -24,7 +24,7 @@ INTO url_relations
 SELECT
 	metapackage_id,
 	urlhash,
-	rank
+	weight
 FROM (
 	SELECT
 		*,
