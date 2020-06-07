@@ -180,7 +180,9 @@ def database_init(env: Environment) -> None:
     database = env.get_main_database_connection()
 
     logger.log('(re)initializing database schema')
-    database.create_schema()
+    database.create_schema_types()
+    database.create_schema_functions()
+    database.create_schema_tables()
 
     logger.get_indented().log('committing changes')
     database.commit()
