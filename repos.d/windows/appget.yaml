@@ -1,0 +1,27 @@
+###########################################################################
+# AppGet
+###########################################################################
+- name: appget
+  type: repository
+  desc: AppGet
+  family: appget
+  ruleset: [appget, windows]
+  minpackages: 1200
+  sources:
+    - name: appget.packages
+      fetcher: GitFetcher
+      parser: AppgetGitParser
+      url: https://github.com/appget/appget.packages/
+      sparse_checkout: [ 'manifests/**/*.yaml' ]
+  shadow: true
+  repolinks:
+    - desc: appget.packages repository
+      url: https://github.com/appget/appget.packages/
+  packagelinks:
+    - desc: Manifest directory
+      url: 'https://github.com/appget/appget.packages/tree/master/manifests/{srcname}'
+    - desc: Manifest file
+      url: 'https://github.com/appget/appget.packages/blob/master/manifests/{srcname}/{yamlname}.yaml'
+    - desc: Package page
+      url: 'https://appget.net/packages/i/{srcname}'
+  tags: [ all, production ]

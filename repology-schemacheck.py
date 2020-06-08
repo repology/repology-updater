@@ -32,6 +32,7 @@ families = [
     'alpine',
     'anitya',
     'aosc',
+    'appget',
     'arch',
     'ataraxia',
     'buckaroo',
