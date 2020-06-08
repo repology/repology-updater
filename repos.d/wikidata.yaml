@@ -144,6 +144,7 @@
                           # blacklist
                           IF(
                             ?versionPlatformItem = wd:Q189210 ||   # web application
+                            ?versionPlatformItem = wd:Q7096284 ||  # Web Platform
                             ?versionPlatformItem = wd:Q4885200 ||  # Windows Phone
                             ?versionPlatformItem = wd:Q14116 ||    # macOS
                             ?versionPlatformItem = wd:Q1406 ||     # Microsoft Windows
