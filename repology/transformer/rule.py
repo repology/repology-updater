@@ -270,6 +270,14 @@ class Rule:
 
             self._matchers.append(verlonger_matcher)
 
+        if 'vercomps' in ruledata:
+            vercomps: Final[int] = ruledata['vercomps']
+
+            def vercomps_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return len(re.split('[^a-zA-Z0-9]', package.version)) == vercomps
+
+            self._matchers.append(vercomps_matcher)
+
         # ver* matchers
         if 'vergt' in ruledata:
             vergt: Final[str] = ruledata['vergt']
