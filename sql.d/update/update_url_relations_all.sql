@@ -27,7 +27,7 @@ INTO url_relations_all
 SELECT
 	metapackage_id,
 	urlhash,
-	num_families::float / max(num_families) OVER ()
+	num_families::float / max(num_families) OVER (PARTITION BY metapackage_id)
 FROM (
 	SELECT
 		(SELECT id FROM metapackages WHERE metapackages.effname = incoming_packages.effname) AS metapackage_id,
