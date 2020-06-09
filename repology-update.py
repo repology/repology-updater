@@ -220,8 +220,7 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
     logger.log(f'{"fixing" if do_fix else "checking"} totals')
 
     def list_discrepancies(where: str, discrepancies: Iterable[Any]) -> None:
-        if not discrepancies:
-            logger.get_indented().log(f'no discrepancies detected in {where}')
+        count = 0
 
         for discrepancy in discrepancies:
             if 'name' in discrepancy:
@@ -240,6 +239,10 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
 
                 if actual != expected:
                     logger.get_indented().get_indented().log(f'{key}: "{actual}" != "{expected}"')
+
+            count += 1
+
+        logger.get_indented().log(f'{count or "no"} discrepancies detected in {where}')
 
     list_discrepancies('repositories', database.totals_repositories(do_fix))
     list_discrepancies('maintainers', database.totals_maintainers(do_fix))
