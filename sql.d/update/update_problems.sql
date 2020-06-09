@@ -29,7 +29,7 @@ SELECT DISTINCT
 	packages.repo,
 	packages.visiblename,
 	packages.effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'homepage_dead'::problem_type,
 	jsonb_build_object('url', links.url, 'code', links.ipv4_status_code)
 FROM changed_projects
@@ -48,7 +48,7 @@ SELECT DISTINCT
 	packages.repo,
 	packages.visiblename,
 	packages.effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'homepage_permanent_https_redirect'::problem_type,
 	jsonb_build_object('url', links.url, 'target', links.ipv4_permanent_redirect_target)
 FROM changed_projects
@@ -63,7 +63,7 @@ SELECT DISTINCT
 	repo,
 	visiblename,
 	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'homepage_discontinued_google'::problem_type,
 	jsonb_build_object('url', homepage)
 FROM changed_projects
@@ -78,7 +78,7 @@ SELECT DISTINCT
 	repo,
 	visiblename,
 	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'homepage_discontinued_codeplex'::problem_type,
 	jsonb_build_object('url', homepage)
 FROM changed_projects
@@ -92,7 +92,7 @@ SELECT DISTINCT
 	repo,
 	visiblename,
 	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'homepage_discontinued_gna'::problem_type,
 	jsonb_build_object('url', homepage)
 FROM changed_projects
@@ -106,7 +106,7 @@ SELECT DISTINCT
 	repo,
 	visiblename,
 	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'homepage_discontinued_cpan'::problem_type,
 	jsonb_build_object('url', homepage)
 FROM changed_projects
@@ -120,7 +120,7 @@ SELECT DISTINCT
 	repo,
 	visiblename,
 	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'cpe_unreferenced'::problem_type,
 	jsonb_build_object(
 		'cpe',
@@ -189,7 +189,7 @@ SELECT DISTINCT
 	repo,
 	visiblename,
 	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	unnest(coalesce(packages.maintainers, '{null}'::text[])),
 	'cpe_missing'::problem_type,
 	jsonb_build_object('suggestions',
 		(
