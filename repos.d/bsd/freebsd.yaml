@@ -48,6 +48,7 @@
   desc: DPorts
   statsgroup: FreeBSD Ports
   family: freebsd
+  ruleset: [freebsd,dports]
   color: '9eff11'
   minpackages: 29000
   sources:
