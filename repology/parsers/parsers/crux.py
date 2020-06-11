@@ -15,68 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
-
-class CRUXParser(Parser):
+class CRUXPortsJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for pkgdir in os.listdir(path):
-            pkgpath = os.path.join(path, pkgdir, 'Pkgfile')
-            if not os.path.exists(pkgpath):
-                continue
-
-            with open(pkgpath, 'r', encoding='utf-8', errors='ignore') as pkgfile:
-                pkg = factory.begin()
-
-                name = None
-                version = None
-
-                for line in pkgfile:
-                    line = line.strip()
-                    if line.startswith('# Description:'):
-                        pkg.set_summary(line.split(':', 1)[1])
-
-                    if line.startswith('# URL:'):
-                        pkg.add_homepages(line.split(':', 1)[1])
-
-                    if line.startswith('# Maintainer:'):
-                        maintainer = line.split(':', 1)[1].strip()
-                        if ',' in maintainer:
-                            _, email = maintainer.split(',', 1)
-                            pkg.add_maintainers(extract_maintainers(email))
-                        else:
-                            pkg.log('unexpected Maintainer format "{}"'.format(maintainer), severity=Logger.ERROR)
-
-                    if line.startswith('name=') and name is None:
-                        if name:
-                            raise RuntimeError('duplicate name')
-
-                        name = line.split('=', 1)[1]
-                        if name != pkgdir:
-                            raise RuntimeError('unexpectedly, package name "{}" != package dir "{}"'.format(name, pkgdir))
-
-                    if line.startswith('version='):
-                        if version:
-                            raise RuntimeError('duplicate version')
-
-                        version = line.split('=', 1)[1]
-
-                if name and '$' in name:
-                    pkg.log('name contains variables, unable to parse: {}'.format(name), severity=Logger.ERROR)
-                    continue
-
-                if version and '$' in version:
-                    pkg.log('version contains variables, unable to parse: {}'.format(version), severity=Logger.ERROR)
-                    continue
-
-                pkg.add_name(name, NameType.CRUX_NAME)
-                pkg.set_version(version)
+        for port in iter_json_list(path, ('ports', None)):
+            with factory.begin() as pkg:
+                pkg.add_name(port['name'], NameType.CRUX_NAME)
+                pkg.set_summary(port['description'])
+                pkg.set_version(port['version'])
+                if port['maintainer'] == '':
+                    pkg.log('Missing maintainer for port "{}"'.format(port['name']), severity=Logger.ERROR)
+                else:
+                    pkg.add_maintainers(extract_maintainers(port['maintainer']))
+                pkg.add_homepages(port['url'])
+                pkg.set_subrepo(port['repository'])
 
                 yield pkg

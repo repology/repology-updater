@@ -3,98 +3,20 @@
 #
 # https://crux.nu/ports/
 ###########################################################################
-- name: crux_32
+- name: crux
   type: repository
-  desc: CRUX 3.2
-  statsgroup: CRUX
+  desc: CRUX
   family: crux
   minpackages: 1000
+  update_period: 6h
   sources:
-    - name: [ core, opt, xorg, contrib ]
-      fetcher: RsyncFetcher
-      parser: CRUXParser
-      url: 'crux.nu::ports/{source}/3.2/'
-      subrepo: '{source}'
+    - name: CRUX-ports-JSON
+      fetcher: FileFetcher
+      parser: CRUXPortsJsonParser
+      url: https://crux.ninja/portdb/repology/
   repolinks:
     - desc: CRUX home
       url: https://crux.nu/
     - desc: CRUX port browser
-      url: https://crux.nu/portdb
-  packagelinks:
-    - desc: Port directory
-      url: 'https://crux.nu/ports/crux-3.2/{subrepo}/{name}'
-    - desc: Pkgfile
-      url: 'https://crux.nu/ports/crux-3.2/{subrepo}/{name}/Pkgfile'
-  tags: [ all, production, crux ]
-
-- name: crux_33
-  type: repository
-  desc: CRUX 3.3
-  statsgroup: CRUX
-  family: crux
-  minpackages: 1000
-  sources:
-    - name: [ core, opt, xorg, contrib ]
-      fetcher: RsyncFetcher
-      parser: CRUXParser
-      url: 'crux.nu::ports/{source}/3.3/'
-      subrepo: '{source}'
-  repolinks:
-    - desc: CRUX home
-      url: https://crux.nu/
-    - desc: CRUX port browser
-      url: https://crux.nu/portdb
-  packagelinks:
-    - desc: Port directory
-      url: 'https://crux.nu/ports/crux-3.3/{subrepo}/{name}'
-    - desc: Pkgfile
-      url: 'https://crux.nu/ports/crux-3.3/{subrepo}/{name}/Pkgfile'
-  tags: [ all, production, crux ]
-
-- name: crux_34
-  type: repository
-  desc: CRUX 3.4
-  statsgroup: CRUX
-  family: crux
-  minpackages: 1000
-  sources:
-    - name: [ core, opt, xorg, contrib ]
-      fetcher: RsyncFetcher
-      parser: CRUXParser
-      url: 'crux.nu::ports/{source}/3.4/'
-      subrepo: '{source}'
-  repolinks:
-    - desc: CRUX home
-      url: https://crux.nu/
-    - desc: CRUX port browser
-      url: https://crux.nu/portdb
-  packagelinks:
-    - desc: Port directory
-      url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}'
-    - desc: Pkgfile
-      url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}/Pkgfile'
-  tags: [ all, production, crux ]
-
-- name: crux_35
-  type: repository
-  desc: CRUX 3.5
-  statsgroup: CRUX
-  family: crux
-  minpackages: 1000
-  sources:
-    - name: [ core, opt, xorg, contrib ]
-      fetcher: RsyncFetcher
-      parser: CRUXParser
-      url: 'crux.nu::ports/{source}/3.5/'
-      subrepo: '{source}'
-  repolinks:
-    - desc: CRUX home
-      url: https://crux.nu/
-    - desc: CRUX port browser
-      url: https://crux.nu/portdb
-  packagelinks:
-    - desc: Port directory
-      url: 'https://crux.nu/ports/{subrepo}/3.5/{name}'
-    - desc: Pkgfile
-      url: 'https://crux.nu/ports/{subrepo}/3.5/{name}/Pkgfile'
+      url: https://crux.nu/portdb/
   tags: [ all, production, crux ]
