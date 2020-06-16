@@ -3,20 +3,52 @@
 #
 # https://crux.nu/ports/
 ###########################################################################
-- name: crux
+- name: crux_34
   type: repository
-  desc: CRUX
+  desc: CRUX 3.4
+  statsgroup: CRUX
   family: crux
+  ruleset: crux
   minpackages: 1000
   update_period: 6h
   sources:
     - name: CRUX-ports-JSON
       fetcher: FileFetcher
       parser: CRUXPortsJsonParser
-      url: https://crux.ninja/portdb/repology/
+      url: https://crux.nu/files/repology-3.4.json
   repolinks:
     - desc: CRUX home
       url: https://crux.nu/
     - desc: CRUX port browser
       url: https://crux.nu/portdb/
+  packagelinks:
+    - desc: Port Directory
+      url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}/'
+    - desc: Pkgfile
+      url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}/Pkgfile'
+  tags: [ all, production, crux ]
+
+- name: crux_35
+  type: repository
+  desc: CRUX 3.5
+  statsgroup: CRUX
+  family: crux
+  ruleset: crux
+  minpackages: 1000
+  update_period: 6h
+  sources:
+    - name: CRUX-ports-JSON
+      fetcher: FileFetcher
+      parser: CRUXPortsJsonParser
+      url: https://crux.nu/files/repology-3.5.json
+  repolinks:
+    - desc: CRUX home
+      url: https://crux.nu/
+    - desc: CRUX port browser
+      url: https://crux.nu/portdb/
+  packagelinks:
+    - desc: Port Directory
+      url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{name}/'
+    - desc: Pkgfile
+      url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{name}/Pkgfile'
   tags: [ all, production, crux ]

@@ -38,5 +38,6 @@ class CRUXPortsJsonParser(Parser):
                     pkg.add_maintainers(extract_maintainers(port['maintainer']))
                 pkg.add_homepages(port['url'])
                 pkg.set_subrepo(port['repository'])
+                pkg.add_downloads(port['sources'])
 
                 yield pkg
