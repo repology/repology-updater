@@ -1,0 +1,24 @@
+###########################################################################
+# KISS Linux eudaldgr
+###########################################################################
+- name: kiss_eudaldgr
+  type: repository
+  desc: KISS Linux eudaldgr
+  family: kiss
+  ruleset: kiss
+  minpackages: 50
+  sources:
+    - name: repo
+      fetcher: GitFetcher
+      parser: KissGitParser
+      url: 'https://github.com/eudaldgr/kiss-repo.git'
+      maintainer_from_git: true
+      depth: null
+      sparse_checkout: [ '**/version', '**/sources' ]
+  repolinks:
+    - desc: Repository on GitHub
+      url: https://github.com/eudaldgr/kiss-repo
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/eudaldgr/kiss-repo/tree/master/{path}'
+  tags: [ all, production, kiss ]
