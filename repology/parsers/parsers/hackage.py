@@ -97,6 +97,12 @@ def _iter_cabal_hier(path: str) -> Iterable[Dict[str, str]]:
                 yield _parse_cabal_file(cabaldata)
 
 
+def _extract_tarinfo(tar: tarfile.TarFile, tarinfo: tarfile.TarInfo) -> str:
+    if (extracted := tar.extractfile(tarinfo)) is None:
+        raise RuntimeError(f'cannot extract {tarinfo.name}')
+    return extracted.read().decode('utf-8-sig')
+
+
 def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
     preferred_versions: Dict[str, str] = {}
 
@@ -106,18 +112,13 @@ def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
 
     with tarfile.open(path, 'r|*') as tar:
         for tarinfo in tar:
-            def read_tar() -> str:
-                extracted = tar.extractfile(tarinfo)
-                assert(extracted is not None)
-                return extracted.read().decode('utf-8')
-
             tarpath = tarinfo.name.split('/')
 
             if tarpath[-1] == 'preferred-versions':
                 if current_name is not None:
                     raise RuntimeError('format assumption failed: preferred-versions go before all packages')
 
-                preferred_versions[tarpath[0]] = read_tar()
+                preferred_versions[tarpath[0]] = _extract_tarinfo(tar, tarinfo)
             elif tarpath[-1].endswith('.cabal'):
                 name, version = tarpath[0:2]
 
@@ -130,11 +131,11 @@ def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
 
                     current_name = name
                     maxversion = version
-                    maxversion_data = read_tar()
+                    maxversion_data = _extract_tarinfo(tar, tarinfo)
                 else:
                     if maxversion is None or version_compare(version, maxversion) > 0:
                         maxversion = version
-                        maxversion_data = read_tar()
+                        maxversion_data = _extract_tarinfo(tar, tarinfo)
 
         if maxversion_data is not None:
             yield _parse_cabal_file(StringIO(maxversion_data))
