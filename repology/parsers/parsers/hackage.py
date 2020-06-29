@@ -20,7 +20,7 @@ import re
 import tarfile
 from abc import abstractmethod
 from io import StringIO
-from typing import Dict, IO, Iterable, Optional
+from typing import Any, Dict, IO, Iterable, List, Optional
 
 from libversion import version_compare
 
@@ -141,6 +141,42 @@ def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
             yield _parse_cabal_file(StringIO(maxversion_data))
 
 
+def _iter_hackage_tarfile_multipass(path: str) -> Iterable[Dict[str, str]]:
+    preferred_versions: Dict[str, str] = {}
+    latest_versions: Dict[str, List[Any]] = {}  # name -> [version, count]
+
+    # Pass 1: gather preferred versions
+    with tarfile.open(path, 'r|*') as tar:
+        for tarinfo in tar:
+            tarpath = tarinfo.name.split('/')
+            if tarpath[-1] == 'preferred-versions':
+                preferred_versions[tarpath[0]] = _extract_tarinfo(tar, tarinfo)
+
+    # Pass 2: gather latest versions
+    with tarfile.open(path, 'r|*') as tar:
+        for tarinfo in tar:
+            tarpath = tarinfo.name.split('/')
+            if tarpath[-1].endswith('.cabal'):
+                name, version = tarpath[0:2]
+                if name not in latest_versions or version_compare(version, latest_versions[name][0]) > 0:
+                    latest_versions[name] = [version, 1]
+                else:
+                    latest_versions[name][1] += 1
+
+    # Pass 3: extract cabal files
+    with tarfile.open(path, 'r|*') as tar:
+        for tarinfo in tar:
+            tarpath = tarinfo.name.split('/')
+            if tarpath[-1].endswith('.cabal'):
+                name, version = tarpath[0:2]
+
+                if version == latest_versions[name][0]:
+                    if latest_versions[name][1] > 1:
+                        latest_versions[name][1] -= 1
+                    else:
+                        yield _parse_cabal_file(StringIO(_extract_tarinfo(tar, tarinfo)))
+
+
 class HackageParserBase(Parser):
     @abstractmethod
     def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
@@ -174,3 +210,8 @@ class HackageParser(HackageParserBase):
 class HackageTarParser(HackageParserBase):
     def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
         yield from _iter_hackage_tarfile(path)
+
+
+class HackageTar01Parser(HackageParserBase):
+    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+        yield from _iter_hackage_tarfile_multipass(path)

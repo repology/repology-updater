@@ -11,8 +11,8 @@
   sources:
     - name: hackage
       fetcher: FileFetcher
-      parser: HackageTarParser
-      url: https://hackage.haskell.org/packages/index.tar.gz
+      parser: HackageTar01Parser
+      url: http://hackage.haskell.org/01-index.tar.gz
   shadow: true
   repolinks:
     - desc: Haskell Language
