@@ -7,6 +7,7 @@
   desc: openSUSE Leap 42.3
   statsgroup: openSUSE
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   valid_till: 2019-01-31
   minpackages: 10000
@@ -49,6 +50,7 @@
   desc: openSUSE Leap 15.0
   statsgroup: openSUSE
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   valid_till: 2019-11-25
   minpackages: 11000
@@ -91,6 +93,7 @@
   desc: openSUSE Leap 15.1
   statsgroup: openSUSE
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 10500
   sources:
@@ -132,6 +135,7 @@
   desc: openSUSE Leap 15.2
   statsgroup: openSUSE
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 10500
   sources:
@@ -173,6 +177,7 @@
   desc: openSUSE Tumbleweed
   statsgroup: openSUSE
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 10000
   sources:

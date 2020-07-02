@@ -6,6 +6,7 @@
   type: repository
   desc: openSUSE Education Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 300
   sources:
@@ -25,6 +26,7 @@
   type: repository
   desc: openSUSE Emulators Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 100
   sources:
@@ -44,6 +46,7 @@
   type: repository
   desc: openSUSE Games Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 600
   sources:
@@ -66,6 +69,7 @@
   type: repository
   desc: openSUSE Graphics Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 150
   sources:
@@ -85,6 +89,7 @@
   type: repository
   desc: openSUSE Multimedia:Apps Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 200
   sources:
@@ -104,6 +109,7 @@
   type: repository
   desc: openSUSE Multimedia:Libs Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 200
   sources:
@@ -123,6 +129,7 @@
   type: repository
   desc: openSUSE Network Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 200
   sources:
@@ -142,6 +149,7 @@
   type: repository
   desc: openSUSE Science Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 600
   sources:
@@ -161,6 +169,7 @@
   type: repository
   desc: openSUSE Security Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 150
   sources:
@@ -180,6 +189,7 @@
   type: repository
   desc: openSUSE Hardware:SDR Tumbleweed
   family: opensuse
+  ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 120
   sources:
