@@ -45,7 +45,7 @@ class GuixJsonParser(Parser):
                     source = pkgdata['source']
 
                     if source['type'] == 'url':
-                        pkg.add_downloads(source['url'])
+                        pkg.add_downloads(source['urls'])
                         if re.fullmatch('.*-[0-9]+\\.[0-9a-f]{4,}', pkgdata['version']):
                             # snapshot pattern with plain url
                             pkg.set_flags(PackageFlags.IGNORE)  # e.g. snapshot
