@@ -615,6 +615,14 @@ class Rule:
 
             self._actions.append(altver_action)
 
+        if 'altscheme' in ruledata:
+            altscheme_flag: Final = ruledata['altscheme']
+
+            def altscheme_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.ALTSCHEME, altscheme_flag)
+
+            self._actions.append(altscheme_action)
+
         if 'vulnerable' in ruledata:
             vulnerable_flag: Final = ruledata['vulnerable']
 

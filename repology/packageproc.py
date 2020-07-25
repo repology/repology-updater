@@ -118,39 +118,7 @@ class _Section:
             return package.version_compare(self.first)
 
 
-def fill_packageset_versions(packages: Sequence[Package]) -> None:
-    # global flags #1
-    project_is_unique = packageset_is_unique(packages)
-
-    # preprocessing: rolling versions
-    packages_to_process = []
-
-    for package in packages:
-        if package.has_flag(PackageFlags.ROLLING):
-            package.versionclass = PackageStatus.ROLLING
-        else:
-            packages_to_process.append(package)
-
-    # we always work on packages sorted by version
-    packages = packageset_sort_by_version(packages_to_process)
-
-    # global flags #2
-
-    # The idea here is that if package versions are compared only within a single family
-    # (so this is calculated after rolling packages are removed, since they do not
-    # participate in comparison), and all versions are ignored, it makes sense to unignore
-    # them, because unique/latest/outdated versions are more informative than just ignored
-    # (the best part is actually a possibility of outdated packages)
-    #
-    # Actually, this is a hack to partially revert the effect of global ignore of .*git.*
-    # versions. That is why I couldn't decide on whether only `ignored` status or all ignored-
-    # like statuses may be unignored.
-    #
-    # The proper solution would be to allow rules decide whether they may be unignored. This,
-    # however, brings in more complex flag handling, as in `soft` and `hard` ignores, so I'd
-    # like to postpone it for now
-    project_should_unignore = packageset_may_be_unignored(packages)
-
+def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bool, project_should_unignore: bool) -> None:
     #
     # Pass 1: calculate section boundaries
     #
@@ -289,6 +257,52 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
 
                 if branch_key is not None and branch_key not in first_package_in_branch:
                     first_package_in_branch[branch_key] = package
+
+
+def fill_packageset_versions(packages: Sequence[Package]) -> None:
+    # global flags #1
+    project_is_unique = packageset_is_unique(packages)
+
+    # preprocessing: rolling versions
+    packages_to_process = []
+
+    for package in packages:
+        if package.has_flag(PackageFlags.ROLLING):
+            package.versionclass = PackageStatus.ROLLING
+        else:
+            packages_to_process.append(package)
+
+    # we always work on packages sorted by version
+    packages = packageset_sort_by_version(packages_to_process)
+
+    # global flags #2
+
+    # The idea here is that if package versions are compared only within a single family
+    # (so this is calculated after rolling packages are removed, since they do not
+    # participate in comparison), and all versions are ignored, it makes sense to unignore
+    # them, because unique/latest/outdated versions are more informative than just ignored
+    # (the best part is actually a possibility of outdated packages)
+    #
+    # Actually, this is a hack to partially revert the effect of global ignore of .*git.*
+    # versions. That is why I couldn't decide on whether only `ignored` status or all ignored-
+    # like statuses may be unignored.
+    #
+    # The proper solution would be to allow rules decide whether they may be unignored. This,
+    # however, brings in more complex flag handling, as in `soft` and `hard` ignores, so I'd
+    # like to postpone it for now
+    project_should_unignore = packageset_may_be_unignored(packages)
+
+    # Process altscheme and normal packages independently
+    _fill_packageset_versions(
+        [package for package in packages if package.flags & PackageFlags.ALTSCHEME],
+        project_is_unique,
+        project_should_unignore
+    )
+    _fill_packageset_versions(
+        [package for package in packages if not package.flags & PackageFlags.ALTSCHEME],
+        project_is_unique,
+        project_should_unignore
+    )
 
 
 def packageset_sort_by_version(packages: Sequence[Package]) -> List[Package]:

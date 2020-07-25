@@ -320,6 +320,14 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='0', version='1.0').expect(versionclass=Ps.LEGACY),
         )
 
+    def test_altscheme(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='1', version='1235', flags=Pf.ALTSCHEME).expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='0', version='1.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='1234', flags=Pf.ALTSCHEME).expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='0', version='1.0').expect(versionclass=Ps.LEGACY),
+        )
+
     def test_branch_off(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
@@ -387,6 +395,17 @@ class TestPackageProc(unittest.TestCase):
 
             PackageSample(repo='1', version='10.2', flavors=['b'], branch='10.x').expect(versionclass=Ps.LEGACY),
             PackageSample(repo='1', version='10.1', flavors=['a'], branch='10.x').expect(versionclass=Ps.OUTDATED),
+        )
+
+    def test_sublimetext_case(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='0', version='101', flags=Pf.ALTSCHEME).expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='100', flags=Pf.ALTSCHEME).expect(versionclass=Ps.OUTDATED),
+
+            PackageSample(repo='2', version='99', flags=Pf.DEVEL | Pf.INCORRECT).expect(versionclass=Ps.INCORRECT),
+
+            PackageSample(repo='3', version='10.101', flags=Pf.INCORRECT).expect(versionclass=Ps.INCORRECT),
+            PackageSample(repo='4', version='10').expect(versionclass=Ps.NEWEST),
         )
 
 
