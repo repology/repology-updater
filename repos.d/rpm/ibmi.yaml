@@ -1,0 +1,18 @@
+###########################################################################
+# IBM i
+###########################################################################
+- name: ibmi
+  type: repository
+  desc: IBM i
+  family: ibmi
+  ruleset: ibmi
+  minpackages: 150
+  sources:
+    - name: main
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo/'
+  repolinks:
+    - desc: IBM i Open Source
+      url: 'https://bitbucket.org/ibmi/opensource/src/master/'
+  tags: [ all, production, rpm ]
