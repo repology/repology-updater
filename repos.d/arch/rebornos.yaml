@@ -1,0 +1,19 @@
+###########################################################################
+# RebornOS
+###########################################################################
+- name: rebornos
+  type: repository
+  desc: RebornOS
+  statsgroup: Arch+derivs
+  family: arch
+  ruleset: [arch, rebornos]
+  minpackages: 300
+  sources:
+    - name: main
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: 'https://repo.rebornos.org/RebornOS/Reborn-OS.db.tar.xz'
+  repolinks:
+    - desc: RebornOS home
+      url: https://rebornos.org/
+  tags: [ all, production ]
