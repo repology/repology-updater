@@ -67,6 +67,9 @@ class WingetGitParser(Parser):
                 except UnicodeDecodeError:
                     pkg.log('Cannot read file, probably UTF-16 garbage', Logger.ERROR)
                     continue
+                except yaml.MarkedYAMLError as e:
+                    pkg.log(f'YAML error at line {e.problem_mark.line}: {e.problem}', Logger.ERROR)
+                    continue
 
                 pkg.add_name(pkgdata['Id'], NameType.WINGET_ID)
                 pkg.add_name(pkgdata['Id'].split('.', 1)[-1], NameType.WINGET_ID_NAME)
