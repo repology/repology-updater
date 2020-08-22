@@ -160,7 +160,7 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[Dict[str, str]]:
                 name, version = tarpath[0:2]
                 if name not in latest_versions or version_compare(version, latest_versions[name][0]) > 0:
                     latest_versions[name] = [version, 1]
-                else:
+                elif version == latest_versions[name][0]:
                     latest_versions[name][1] += 1
 
     # Pass 3: extract cabal files
