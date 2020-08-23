@@ -158,7 +158,7 @@ class NameType:
 
     RAVENPORTS_NAMEBASE: ClassVar[int] = GENERIC_GEN_NAME
 
-    SCOOP_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    SCOOP_NAME: ClassVar[int] = GENERIC_BIN_NAME
 
     CRUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
