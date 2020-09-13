@@ -59,6 +59,36 @@
   tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################
+# src_prepare-overlay
+###########################################################################
+- name: src_prepare
+  type: repository
+  desc: Gentoo overlay - src_prepare
+  family: gentoo
+  color: '62548f'
+  minpackages: 100
+  default_maintainer: y0rune@aol.com
+  sources:
+    - name: guru-overlay
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      require_md5cache_metadata: true
+      require_xml_metadata: false
+      url: https://gitlab.com/src_prepare/src_prepare-overlay.git
+  repolinks:
+    - desc: Gentoo wiki page for Project src_prepare
+      url: https://src_prepare.gitlab.io/why.html
+    - desc: Gitlab repository
+      url: https://gitlab.com/src_prepare/src_prepare-overlay
+  packagelinks:
+    - desc: Package details
+      url: 'https://gpo.zugaina.org/Overlays/src_prepare-overlay/{srcname}'
+    - desc: View ebuild
+      url: 'https://gitlab.com/src_prepare/src_prepare-overlay/-/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+  tags: [ all, production, gentoo-overlays ]
+
+
+###########################################################################
 # Disabled overlays (not really useful)
 ###########################################################################
 - name: gentoo_ovl_games
