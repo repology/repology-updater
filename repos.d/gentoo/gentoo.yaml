@@ -8,7 +8,7 @@
   family: gentoo
   color: '62548f'
   default_maintainer: maintainer-needed@gentoo.org
-  minpackages: 30000
+  minpackages: 28000
   sources:
     - name: gentoo
       fetcher: GitFetcher

@@ -8,7 +8,7 @@
   family: gentoo
   ruleset: [gentoo, funtoo]
   color: '4e4e71'
-  minpackages: 33000
+  minpackages: 31000
   default_maintainer: fallback-mnt-funtoo@repology
   sources:
     - name:
