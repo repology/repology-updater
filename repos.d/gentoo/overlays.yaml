@@ -72,8 +72,8 @@
     - name: gentoo-science
       fetcher: GitFetcher
       parser: GentooGitParser
-      require_md5cache_metadata: false
-      require_xml_metadata: false
+      require_md5cache_metadata: true
+      require_xml_metadata: true
       url: git://github.com/gentoo-mirror/science.git
   repolinks:
     - desc: Gentoo wiki page for Project Science
