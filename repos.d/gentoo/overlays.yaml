@@ -66,7 +66,7 @@
   desc: Gentoo Science overlay
   family: gentoo
   color: 'f7a8b8'
-  minpackages: 100
+  minpackages: 800
   default_maintainer: sci@gentoo.org
   sources:
     - name: gentoo-science
