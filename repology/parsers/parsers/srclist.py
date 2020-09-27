@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable
+from typing import Any, Iterable
 
 import rpm
 
+from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -28,17 +29,21 @@ from repology.transformer import PackageTransformer
 
 class SrcListParser(Parser):
     def __init__(self, encoding: str = 'utf-8') -> None:
-        self.encoding = encoding
+        self._encoding = encoding
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for header in rpm.readHeaderListFromFile(path):
             with factory.begin() as pkg:
                 assert(header.isSource())  # binary packages not supported yet
 
+                def sanitize_key(key: Any) -> Any:
+                    return rpm.tagnames[key].lower() if key in rpm.tagnames else key
+
+                def sanitize_value(value: Any) -> Any:
+                    return value.decode(self._encoding, errors='ignore') if isinstance(value, bytes) else value
+
                 pkgdata = {
-                    rpm.tagnames[key].lower() if key in rpm.tagnames else key:
-                    value.decode(self.encoding, errors='ignore') if isinstance(value, bytes) else value
-                    for key, value in dict(header).items()
+                    sanitize_key(key): sanitize_value(value) for key, value in dict(header).items()
                 }
 
                 # For Sisyphus (but not PCLinuxOS), there is pkgdata[1000011], which contains
@@ -57,7 +62,14 @@ class SrcListParser(Parser):
                     pkg.add_maintainers(extract_maintainers(pkgdata['packager']))  # XXX: may have multiple maintainers
 
                 pkg.add_categories(pkgdata['group'])
-                pkg.set_summary(pkgdata['summary'])
+
+                try:
+                    # e.g. PCLinuxOS summaries may contain surrogate garbage
+                    pkgdata['summary'].encode('utf-8')
+                    pkg.set_summary(pkgdata['summary'])
+                except:
+                    pkg.log('incorrect UTF in summary', Logger.ERROR)
+
                 pkg.set_arch(pkgdata['arch'])
 
                 yield pkg
