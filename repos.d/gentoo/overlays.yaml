@@ -59,6 +59,35 @@
   tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################
+# Science
+###########################################################################
+- name: gentoo_ovl_science
+  type: repository
+  desc: Gentoo Science overlay
+  family: gentoo
+  color: 'f7a8b8'
+  minpackages: 800
+  default_maintainer: sci@gentoo.org
+  sources:
+    - name: gentoo-science
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      require_md5cache_metadata: true
+      require_xml_metadata: true
+      url: git://github.com/gentoo-mirror/science.git
+  repolinks:
+    - desc: Gentoo wiki page for Project Science
+      url: https://wiki.gentoo.org/wiki/Project:Science
+    - desc: GitHub page
+      url: https://github.com/gentoo-mirror/science
+  packagelinks:
+    - desc: Package details
+      url: 'https://gpo.zugaina.org/Overlays/science/{srcname}'
+    - desc: View ebuild
+      url: 'https://gitweb.gentoo.org/proj/sci.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+  tags: [ all, production, gentoo-overlays ]
+
+###########################################################################
 # Disabled overlays (not really useful)
 ###########################################################################
 - name: gentoo_ovl_games
