@@ -8,6 +8,7 @@
   type: repository
   desc: RPM Fusion Fedora 28
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 400
   sources:
     - name: free-release
@@ -49,6 +50,7 @@
   type: repository
   desc: RPM Fusion Fedora 29
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 400
   sources:
     - name: free-release
@@ -90,6 +92,7 @@
   type: repository
   desc: RPM Fusion Fedora 30
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 400
   sources:
     - name: free-release
@@ -131,6 +134,7 @@
   type: repository
   desc: RPM Fusion Fedora 31
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 300
   sources:
     - name: free-release
@@ -172,6 +176,7 @@
   type: repository
   desc: RPM Fusion Fedora Rawhide
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 300
   sources:
     - name: free-development
@@ -196,6 +201,7 @@
   type: repository
   desc: RPM Fusion EL 6
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 50
   sources:
     - name: free-updates
@@ -227,6 +233,7 @@
   type: repository
   desc: RPM Fusion EL 7
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 100
   sources:
     - name: free-updates
@@ -258,6 +265,7 @@
   type: repository
   desc: RPM Fusion EL 8
   family: fedora
+  ruleset: [fedora,rpm]
   minpackages: 50
   sources:
     - name: free-updates
