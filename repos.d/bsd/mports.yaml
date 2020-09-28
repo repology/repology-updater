@@ -1,0 +1,27 @@
+###########################################################################
+# MidnightBSD mports
+###########################################################################
+- name: mports
+  type: repository
+  desc: MidnightBSD mports
+  statsgroup: MidnightBSD mports
+  singular: MidnightBSD port
+  family: freebsd
+  minpackages: 4000
+  sources:
+    - name: latest
+      fetcher: FileFetcher
+      parser: MportsJsonParser
+      url: http://www.midnightbsd.org/magus/api/latest
+      allow_zero_size: false
+  repolinks:
+    - desc: MidnightBSD home
+      url: http://www.midnightbsd.org/
+    - desc: Magus, the MidnightBSD package cluster
+      url: 'http://www.midnightbsd.org/magus/'
+  packagelinks:
+    - desc: Port directory on GitHub
+      url: 'https://github.com/MidnightBSD/mports/tree/master/{srcname}/'
+    - desc: Port Makefile
+      url: 'https://github.com/MidnightBSD/mports/blob/master/{srcname}/Makefile'
+  tags: [ all, production ]
