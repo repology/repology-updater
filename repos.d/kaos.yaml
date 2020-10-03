@@ -1,5 +1,5 @@
 ###########################################################################
-# GNU Guix
+# KaOS
 ###########################################################################
 - name: kaos
   type: repository
@@ -11,9 +11,9 @@
   minpackages: 1900
   sources:
     - name: [ apps, core, main ]
-      fetcher: FileFetcher
-      parser: KaOSHTMLParser
-      url: "http://kaosx.tk/packages/index.php?subdir={source}&sortby=name"
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: "https://repo.kaosx.us/{source}/{source}.db"
       subrepo: "{source}"
   repolinks:
     - desc: KaOS Home
@@ -38,9 +38,9 @@
   minpackages: 10
   sources:
     - name: [ build ]
-      fetcher: FileFetcher
-      parser: KaOSHTMLParser
-      url: "http://kaosx.tk/packages/index.php?subdir={source}&sortby=name"
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: "https://repo.kaosx.us/{source}/{source}.db"
       subrepo: "{source}"
   repolinks:
     - desc: KaOS Home
