@@ -51,5 +51,30 @@
       url: https://github.com/KaOSx
   packagelinks:
     - desc: KaOS Package Viewer
-      url: "https://kaosx.us/packages/view.php?repo=build&name={binname}-{rawversion}"
+      url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
+  tags: [ all, production ]
+
+- name: kaos_kde_next
+  type: repository
+  desc: KaOS KDE-next
+  family: kaos
+  ruleset: [kaos]
+  default_maintainer: demm@kaosx.us
+  minpackages: 0
+  sources:
+    - name: [ kde-next ]
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: "https://repo.kaosx.us/{source}/{source}.db"
+      subrepo: "{source}"
+  repolinks:
+    - desc: KaOS Home
+      url: https://kaosx.us/
+    - desc: KaOS - packages
+      url: http://kaosx.tk/packages/
+    - desc: GitHub organisation
+      url: https://github.com/KaOSx
+  packagelinks:
+    - desc: KaOS Package Viewer
+      url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
   tags: [ all, production ]
