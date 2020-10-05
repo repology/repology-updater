@@ -7,7 +7,7 @@
   statsgroup: MidnightBSD mports
   singular: MidnightBSD port
   family: freebsd
-  minpackages: 4000
+  minpackages: 3000
   sources:
     - name: latest
       fetcher: FileFetcher
