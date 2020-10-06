@@ -56,7 +56,7 @@
 
 - name: kaos_kde_next
   type: repository
-  desc: KaOS KDE-next
+  desc: KaOS kde-next
   family: kaos
   ruleset: [kaos]
   default_maintainer: demm@kaosx.us
