@@ -2,11 +2,11 @@ language: python
 dist: focal
 sudo: required
 addons:
-  #postgresql: "10"  # 12 is needed, installed manually below
+  postgresql: "12"
   apt:
     packages:
       - libyajl-dev  # for jsonslicer python module
-      #- postgresql-server-dev-10  # for postgresql-libversion  # 12 is needed, installed manually below
+      - postgresql-server-dev-12  # for postgresql-libversion
       #- python3-rpm  # stock package is python3.5, useless for us
       - libnss3-dev  # for rpm
       - libnspr4-dev  # for rpm
@@ -26,14 +26,6 @@ matrix:
   allow_failures:
     - python: nightly
 before_install:
-  - sudo service postgresql stop
-  - wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-  - sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-  - sudo apt-get update
-  - sudo apt-get install postgresql-12 postgresql-server-dev-12
-  - sudo sed -i -e 's|#*port = .*|port = 5432|' /etc/postgresql/12/main/postgresql.conf
-  - sudo sed -i -e 's|peer|trust|' /etc/postgresql/12/main/pg_hba.conf
-  - sudo pg_ctlcluster 12 main restart
 
   - export REAL_PYTHON=$(basename $(dirname $(python-config --configdir)))
   - |-
