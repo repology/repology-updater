@@ -14,6 +14,7 @@ addons:
       - libpopt-dev  # for rpm
       - libarchive-dev  # for rpm
       - libdb5.3-dev  # for rpm
+      - libgcrypt-dev  # for rpm
 env:
   global:
     - REPOLOGY_CONFIG=repology-test.conf.default
@@ -35,7 +36,7 @@ before_install:
     mkdir -p dep-rpm
     (
         cd dep-rpm &&
-        wget -qO- http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.2.1.tar.bz2 | tar -x -j -f- --strip-components 1 &&
+        wget -qO- http://ftp.rpm.org/releases/rpm-4.16.x/rpm-4.16.0.tar.bz2 | tar -x -j -f- --strip-components 1 &&
         env PYTHON_CFLAGS="$(python-config --cflags)" PYTHON_LIBS="-L$(python-config --configdir) $(python-config --ldflags)" ./configure --enable-python --without-lua --prefix=${PYTHONPREFIX} &&
         make &&
         sudo make install
