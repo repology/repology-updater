@@ -1,12 +1,12 @@
 language: python
-dist: bionic
+dist: focal
 sudo: required
 addons:
-  #postgresql: "10"  # 12 is needed, installed manually below
+  postgresql: "12"
   apt:
     packages:
       - libyajl-dev  # for jsonslicer python module
-      #- postgresql-server-dev-10  # for postgresql-libversion  # 12 is needed, installed manually below
+      - postgresql-server-dev-12  # for postgresql-libversion
       #- python3-rpm  # stock package is python3.5, useless for us
       - libnss3-dev  # for rpm
       - libnspr4-dev  # for rpm
@@ -14,6 +14,7 @@ addons:
       - libpopt-dev  # for rpm
       - libarchive-dev  # for rpm
       - libdb5.3-dev  # for rpm
+      - libgcrypt-dev  # for rpm
 env:
   global:
     - REPOLOGY_CONFIG=repology-test.conf.default
@@ -22,29 +23,23 @@ matrix:
   include:
     - python: 3.8
       env: COVERAGE=yes
+    - python: 3.9-dev
     - python: nightly
   allow_failures:
     - python: nightly
 before_install:
-  - sudo service postgresql stop
-  - wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-  - sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-  - sudo apt-get update
-  - sudo apt-get install postgresql-12 postgresql-server-dev-12
-  - sudo sed -i -e 's|#*port = .*|port = 5432|' /etc/postgresql/12/main/postgresql.conf
-  - sudo sed -i -e 's|peer|trust|' /etc/postgresql/12/main/pg_hba.conf
-  - sudo pg_ctlcluster 12 main restart
+  # fix half-broken python setup, where python-config is not tied to the current python version
+  - export PYTHONPREFIX="$(dirname $(realpath $(which python)))/.."
+  - export PATH="${PYTHONPREFIX}/bin:${PATH}"
 
-  - export REAL_PYTHON=$(basename $(dirname $(python-config --configdir)))
   - |-
     mkdir -p dep-rpm
     (
         cd dep-rpm &&
-        wget -qO- http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.2.1.tar.bz2 | tar -x -j -f- --strip-components 1 &&
-        env PYTHON_CFLAGS="$(python-config --cflags)" PYTHON_LIBS="-L$(python-config --configdir) $(python-config --ldflags)" ./configure --enable-python --without-lua &&
+        wget -qO- http://ftp.rpm.org/releases/rpm-4.16.x/rpm-4.16.0.tar.bz2 | tar -x -j -f- --strip-components 1 &&
+        env PYTHON_CFLAGS="$(python-config --cflags)" PYTHON_LIBS="-L$(python-config --configdir) $(python-config --ldflags)" ./configure --enable-python --without-lua --prefix=${PYTHONPREFIX} &&
         make &&
-        sudo make install &&
-        cp -Rfv "/usr/local/lib/${REAL_PYTHON}/site-packages/rpm" "${VIRTUAL_ENV}/lib/${REAL_PYTHON}/site-packages/"
+        sudo make install
     )
   - |-
     mkdir -p dep-libversion
