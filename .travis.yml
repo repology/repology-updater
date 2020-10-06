@@ -1,5 +1,5 @@
 language: python
-dist: bionic
+dist: focal
 sudo: required
 addons:
   #postgresql: "10"  # 12 is needed, installed manually below
