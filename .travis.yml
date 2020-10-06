@@ -22,21 +22,23 @@ matrix:
   include:
     - python: 3.8
       env: COVERAGE=yes
+    - python: 3.9-dev
     - python: nightly
   allow_failures:
     - python: nightly
 before_install:
+  # fix half-broken python setup, where python-config is not tied to the current python version
+  - export PYTHONPREFIX="$(dirname $(realpath $(which python)))/.."
+  - export PATH="${PYTHONPREFIX}/bin:${PATH}"
 
-  - export REAL_PYTHON=$(basename $(dirname $(python-config --configdir)))
   - |-
     mkdir -p dep-rpm
     (
         cd dep-rpm &&
         wget -qO- http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.2.1.tar.bz2 | tar -x -j -f- --strip-components 1 &&
-        env PYTHON_CFLAGS="$(python-config --cflags)" PYTHON_LIBS="-L$(python-config --configdir) $(python-config --ldflags)" ./configure --enable-python --without-lua &&
+        env PYTHON_CFLAGS="$(python-config --cflags)" PYTHON_LIBS="-L$(python-config --configdir) $(python-config --ldflags)" ./configure --enable-python --without-lua --prefix=${PYTHONPREFIX} &&
         make &&
-        sudo make install &&
-        cp -Rfv "/usr/local/lib/${REAL_PYTHON}/site-packages/rpm" "${VIRTUAL_ENV}/lib/${REAL_PYTHON}/site-packages/"
+        sudo make install
     )
   - |-
     mkdir -p dep-libversion
