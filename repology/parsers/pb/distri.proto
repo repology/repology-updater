@@ -28,6 +28,8 @@
 // https://developers.google.com/protocol-buffers/docs/proto
 syntax = "proto2";
 
+option go_package = ".;pb";
+
 package pb;
 
 message BuildStep {
@@ -38,11 +40,6 @@ message BuildStep {
 message CBuilder {
   // Additional flag to pass to `configure`.
   repeated string extra_configure_flag = 1;
-
-  // Enable if this package does not support building from a separate directory
-  // (sometimes called “out-of-tree build”). A bug should be reported with the
-  // package upstream.
-  optional bool copy_to_builddir = 2;
 
   // Additional flag to pass to `make`.
   repeated string extra_make_flag = 4;
@@ -59,11 +56,6 @@ message CMakeBuilder {
   // Additional flag to pass to cmake(1), e.g.:
   // extra_cmake_flag: "-DKICAD_SCRIPTING_WXPYTHON_PHOENIX:BOOL=true"
   repeated string extra_cmake_flag = 1;
-
-  // Enable if this package does not support building from a separate directory
-  // (sometimes called “out-of-tree build”). A bug should be reported with the
-  // package upstream.
-  optional bool copy_to_builddir = 2;
 }
 
 message MesonBuilder {
@@ -179,6 +171,11 @@ message Union {
   optional string pkg = 2; // required
 }
 
+message RegexpReplaceAll {
+  optional string expr = 1;
+  optional string repl = 2;
+}
+
 message Pull {
   // URL (https:// preferred, http:// accepted) to a Debian repository Packages
   // file. E.g. https://dl.google.com/linux/chrome/deb/dists/stable/main/binary-amd64/Packages
@@ -187,6 +184,20 @@ message Pull {
   // URL (https:// preferred, http:// accepted) to a page listing at least the
   // latest release (or multiple releases).
   optional string releases_url = 2;
+
+  // Go regexp (see https://golang.org/pkg/regexp/) for matching upstream
+  // releases. The first capture group is expected to capture the upstream
+  // version number.
+  optional string release_regexp = 3;
+
+  // Go regexp (see https://golang.org/pkg/regexp/) for replacing matches in the
+  // version number. Can be used e.g. to convert _ to . (see pkgs/nss).
+  optional RegexpReplaceAll release_replace_all = 4;
+
+  // Enforce version numbers to conform to SemVer by filtering out non-conforming
+  // version numbers. This is useful for projects which have now committed to
+  // SemVer but have previous, non-conforming releases still available.
+  optional bool force_semver = 5;
 }
 
 message Build {
@@ -224,6 +235,24 @@ message Build {
   // `build.textproto`) to apply after extracting the upstream archive. The
   // order of directives is the order in which the patches are applied.
   repeated string cherry_pick = 6;
+
+  // Enable writable_sourcedir if the package modifies files in its SourceDir
+  // (instead of only placing files in the build directory).
+  // A bug should be reported with the package upstream.
+  //
+  // Frequently also requires enabling in_tree_build.
+  optional bool writable_sourcedir = 20;
+
+  // Enable if this package does not support building from a separate directory
+  // (sometimes called “out-of-tree build”). A bug should be reported with the
+  // package upstream.
+  optional bool in_tree_build = 21;
+
+  // By default, distri build will fail if there are empty .debug files.
+  // Use this option to acknowledge the failure and add a free-form note
+  // (for human consumption) with details.
+  // E.g. ack_missing_dwarf: "TODO" if the failure is not yet understood.
+  optional string ack_missing_dwarf = 22;
 
   // ┌─────────────────────────────────────────────────────────────────────────┐
   // │ builder                                                                 │
@@ -286,5 +315,5 @@ message Build {
   // guarantee ABI compatibility across versions.
   repeated Union runtime_union = 15;
 
-  // NEXT FREE FIELD NUMBER: 20
+  // NEXT FREE FIELD NUMBER: 23
 }
