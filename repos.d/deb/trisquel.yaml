@@ -114,3 +114,41 @@
     - desc: Trisquel home
       url: https://trisquel.info/
   tags: [ all, production, trisquel ]
+
+- name: trisquel_9_0
+  type: repository
+  desc: Trisquel 9.0
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '669fe7'
+  minpackages: 26000
+  sources:
+    - name: [ etiona/main, etiona-updates/main ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
+
+- name: trisquel_9_0_backports
+  type: repository
+  desc: Trisquel 9.0 backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '669fe7'
+  minpackages: 20
+  sources:
+    - name: [ etiona-backports/main ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
