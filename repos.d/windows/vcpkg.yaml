@@ -6,13 +6,13 @@
   desc: Vcpkg
   family: vcpkg
   ruleset: [vcpkg, windows]
-  minpackages: 600
+  minpackages: 1200
   sources:
     - name: vcpkg
       fetcher: GitFetcher
       parser: VcpkgGitParser
       url: https://github.com/Microsoft/vcpkg.git
-      sparse_checkout: [ 'ports/*/CONTROL', 'ports/*/portfile.cmake' ]
+      sparse_checkout: [ 'ports/*/CONTROL', 'ports/*/vcpkg.json', 'ports/*/portfile.cmake' ]
   repolinks:
     - desc: Vcpkg GitHub repository
       url: https://github.com/Microsoft/vcpkg

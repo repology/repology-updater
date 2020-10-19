@@ -15,18 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import json
 import os
 import re
-from typing import Iterable
+from typing import Any, Dict, Iterable, cast
 
 from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def normalize_version(version: str) -> str:
+def _normalize_version(version: str) -> str:
     version = re.sub('[^0-9]*vcpkg.*$', '', version)  # vcpkg stuff
     version = re.sub('(alpha|beta|rc|patch)-([0-9]+)$', '\\1\\2', version)  # save from the following rule
     version = re.sub('-[0-9]+$', '', version)  # cut off revision
@@ -35,48 +37,93 @@ def normalize_version(version: str) -> str:
     return version
 
 
+def _read_control_file(path: str) -> Dict[str, Any]:
+    control_to_manifest_key_map = {
+        'Source': 'name',
+        'Version': 'version-string',
+        'Description': 'description',
+        'Homepage': 'homepage',
+    }
+
+    res: Dict[str, Any] = {}
+
+    with open(path, 'r', encoding='utf-8', errors='ignore') as controlfile:
+        for line in controlfile:
+            key, *rest = map(str.strip, line.strip().split(':', 1))
+
+            if len(rest) == 1 and key in control_to_manifest_key_map and control_to_manifest_key_map[key] not in res:
+                res[control_to_manifest_key_map[key]] = rest[0]
+
+    return res
+
+
+def _read_manifest_file(path: str) -> Dict[str, Any]:
+    with open(path) as manifestfile:
+        return cast(Dict[str, Any], json.load(manifestfile))
+
+
+def _grep_file(path: str, sample: str) -> bool:
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8', errors='ignore') as fd:
+            for line in fd:
+                if sample in line:
+                    return True
+
+    return False
+
+
 class VcpkgGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        has_control_files = False
+
         for pkgdir in os.listdir(os.path.join(path, 'ports')):
-            controlpath = os.path.join(path, 'ports', pkgdir, 'CONTROL')
-            if not os.path.exists(controlpath):
-                continue
+            with factory.begin(pkgdir) as pkg:
+                controlpath = os.path.join(path, 'ports', pkgdir, 'CONTROL')
+                manifestpath = os.path.join(path, 'ports', pkgdir, 'vcpkg.json')
 
-            pkg = factory.begin()
-
-            pkg.add_name(pkgdir, NameType.VCPKG_SOURCE)
-
-            with open(controlpath, 'r', encoding='utf-8', errors='ignore') as controlfile:
-                for line in controlfile:
-                    line = line.strip()
-                    if line.startswith('Source:'):
-                        source = line.split(':', 1)[1].strip()
-                        if source != pkgdir:
-                            raise RuntimeError(f'sanity check failed: source {source} != directory {pkgdir}')
-                    elif line.startswith('Version:') and not pkg.version:
-                        version = line.split(':', 1)[1].strip()
-                        if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
-                            pkg.set_version(version)
-                            pkg.set_flags(PackageFlags.IGNORE)
-                        else:
-                            pkg.set_version(version, normalize_version)
-                    elif line.startswith('Description:') and not pkg.summary:
-                        pkg.set_summary(line.split(':', 1)[1].strip())
-                    elif line.startswith('Homepage:'):
-                        pkg.add_homepages(line.split(':', 1)[1].strip())
-
-                if pkg.version is None:
-                    pkg.log('empty version', Logger.ERROR)
+                # read either of old-style control (CONTROL) or new-style manifest (vcpkg.json) file
+                if os.path.exists(manifestpath):
+                    pkgdata = _read_manifest_file(manifestpath)
+                elif os.path.exists(controlpath):
+                    has_control_files = True
+                    pkgdata = _read_control_file(controlpath)
+                else:
+                    pkg.log('neither control nor manifest file found', Logger.ERROR)
                     continue
 
-            # pretty much a hack to shut a bunch of fake versions up
-            portfilepath = os.path.join(path, 'ports', pkgdir, 'portfile.cmake')
-            if os.path.exists(portfilepath):
-                with open(portfilepath, 'r', encoding='utf-8', errors='ignore') as portfile:
-                    for line in portfile:
-                        if 'libimobiledevice-win32' in line:
-                            pkg.log('marking as untrusted, https://github.com/libimobiledevice-win32 accused of version faking', severity=Logger.WARNING)
-                            pkg.set_flags(PackageFlags.UNTRUSTED)
-                            break
+                if pkgdata['name'] != pkgdir:
+                    raise RuntimeError(f'sanity check failed: source {pkgdata["name"]} != directory {pkgdir}')
 
-            yield pkg
+                pkg.add_name(pkgdata['name'], NameType.VCPKG_SOURCE)
+
+                version = pkgdata['version-string']
+
+                if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
+                    pkg.set_version(version)
+                    pkg.set_flags(PackageFlags.IGNORE)
+                else:
+                    pkg.set_version(version, _normalize_version)
+
+                # handle description which may be either a string or a list of strings
+                description = pkgdata.get('description')
+
+                if isinstance(description, str):
+                    pkg.set_summary(description)
+                elif isinstance(description, list):
+                    pkg.set_summary(description[0])
+
+                pkg.add_homepages(pkgdata.get('homepage'))
+
+                for maintainer in pkgdata.get('maintainers', []):
+                    pkg.add_maintainers(extract_maintainers(maintainer))
+
+                # pretty much a hack to shut a bunch of fake versions up
+                portfilepath = os.path.join(path, 'ports', pkgdir, 'portfile.cmake')
+                if _grep_file(portfilepath, 'libimobiledevice-win32'):
+                    pkg.log('marking as untrusted, https://github.com/libimobiledevice-win32 accused of version faking', severity=Logger.WARNING)
+                    pkg.set_flags(PackageFlags.UNTRUSTED)
+
+                yield pkg
+
+        if not has_control_files:
+            factory.log("No CONTROL files seen in the repository, seems like it's time to refactor vcpkg parser and remove legacy bits")
