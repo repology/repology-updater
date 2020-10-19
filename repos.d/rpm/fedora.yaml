@@ -140,9 +140,6 @@
       url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
-# Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
-# here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
-# mirrors
 - name: fedora_30
   type: repository
   desc: Fedora 30
@@ -155,12 +152,12 @@
     - name: release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/releases/30/Everything/source/tree/
+      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/source/tree/
       subrepo: '{source}'
     - name: updates
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/updates/30/Everything/SRPMS/
+      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/30/Everything/SRPMS/
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -176,6 +173,9 @@
       url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
+# Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
+# here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
+# mirrors
 - name: fedora_31
   type: repository
   desc: Fedora 31
