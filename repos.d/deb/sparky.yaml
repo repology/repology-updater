@@ -11,7 +11,7 @@
   desc: Sparky Stable
   family: debuntu
   color: '949393'
-  minpackages: 200
+  minpackages: 150
   sources:
     - name: [core, stable]
       fetcher: FileFetcher
@@ -29,7 +29,7 @@
   desc: Sparky Testing
   family: debuntu
   color: '949393'
-  minpackages: 200
+  minpackages: 150
   sources:
     - name: [core, testing]
       fetcher: FileFetcher
