@@ -115,7 +115,7 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] =
     # choose decompressor
     decompressor_open: Callable[..., IO[AnyStr]]
     if compression == 'gz':
-        decompressor_open = gzip.open
+        decompressor_open = gzip.open  # type: ignore  # need to specify right overload here
     elif compression == 'xz':
         decompressor_open = lzma.open
     elif compression == 'bz2':
