@@ -122,8 +122,7 @@ class RepositoryProcessor:
 
                 # postprocess flavors
                 def strip_flavor(flavor: str) -> str:
-                    if flavor.startswith(package.effname + '-'):
-                        return flavor[len(package.effname) + 1:]
+                    flavor.removeprefix(package.effname + '-')
                     return flavor
 
                 package.flavors = sorted(set(map(strip_flavor, package.flavors)))
