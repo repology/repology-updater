@@ -21,9 +21,8 @@ env:
 cache: pip
 matrix:
   include:
-    - python: 3.8
-      env: COVERAGE=yes
     - python: 3.9-dev
+      env: COVERAGE=yes
     - python: nightly
   allow_failures:
     - python: nightly
