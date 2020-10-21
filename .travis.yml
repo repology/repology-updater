@@ -1,6 +1,6 @@
 language: python
+os: linux
 dist: focal
-sudo: required
 addons:
   postgresql: "12"
   apt:
@@ -19,7 +19,7 @@ env:
   global:
     - REPOLOGY_CONFIG=repology-test.conf.default
 cache: pip
-matrix:
+jobs:
   include:
     - python: 3.9-dev
       env: COVERAGE=yes
