@@ -101,8 +101,8 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
 
 class DebianSourcesParser(Parser):
     def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
-        assert('Binary' in pkgdata)
-        assert('Source' not in pkgdata)
+        if 'Binary' not in pkgdata or 'Source' in pkgdata:
+            raise RuntimeError('Sanity check failed, expected Package descriptions with Binary, but without Source field')
         pkg.add_name(pkgdata['Package'], NameType.DEBIAN_SOURCE_PACKAGE)
         pkg.add_binnames(pkgdata['Binary'].split(', '))
 
