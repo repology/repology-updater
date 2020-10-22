@@ -33,3 +33,27 @@
     - desc: ArchWiki search
       url: 'https://wiki.archlinux.org/index.php/Special:Search?search={binname}'
   tags: [ all, production ]
+
+- name: chaotic-aur
+  type: repository
+  desc: Chaotic-AUR
+  family: arch
+  ruleset: [ arch, aur ]
+  update_period: 3h
+  minpackages: 0
+  sources:
+    - name: chaotic-aur
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: https://lonewolf.pedrohlc.com/chaotic-aur/x86_64/chaotic-aur.db.tar.zst
+  repolinks:
+    - desc: Chaotic-AUR Home
+      url: https://lonewolf.pedrohlc.com/chaotic-aur/
+  packagelinks:
+    - desc: AUR package details
+      url: 'https://aur.archlinux.org/packages/{binname}'
+    - desc: View PKGBUILD
+      url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={binname}'
+    - desc: ArchWiki search
+      url: 'https://wiki.archlinux.org/index.php/Special:Search?search={binname}'
+  tags: [ all, production ]
