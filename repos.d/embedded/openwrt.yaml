@@ -95,7 +95,6 @@
       parser: OpenWrtPackagesParser
       url: 'https://downloads.openwrt.org/snapshots/packages/x86_64/{source}/Packages.manifest'
       subrepo: '{source}'
-  shadow: true
   repolinks:
     - desc: OpenWrt home
       url: https://openwrt.org/
