@@ -125,6 +125,8 @@ class NameType:
     APPGET_ID: ClassVar[int] = 280
     APPGET_NAME: ClassVar[int] = 281
 
+    GUIX_NAME: ClassVar[int] = 290
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -133,8 +135,6 @@ class NameType:
     VCPKG_SOURCE: ClassVar[int] = GENERIC_GEN_NAME
 
     GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_GEN_NAME
-
-    GUIX_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
     RUBYGEMS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
@@ -471,6 +471,14 @@ _MAPPINGS = [
         trackname=NameType.APPGET_ID,
         visiblename=NameType.APPGET_NAME,
         projectname_seed=NameType.APPGET_ID,
+    ),
+    # Guix
+    _NameMapping(
+        srcname=NameType.GUIX_NAME,
+        binname=NameType.GUIX_NAME,
+        trackname=NameType.GUIX_NAME,
+        visiblename=NameType.GUIX_NAME,
+        projectname_seed=NameType.GUIX_NAME,
     ),
 ]
 
