@@ -1,0 +1,76 @@
+name: CI
+on: [ push, pull_request ]
+jobs:
+  build:
+    env:
+      REPOLOGY_CONFIG: repology-test.conf.default
+      POSTGRESQL: 13
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        # depends for jsonslicer, postgresql-liversion, rpm4 respectively
+        run: |
+          sudo apt-get install libyajl-dev
+          sudo apt-get install postgresql-server-dev-$POSTGRESQL
+          sudo apt-get install libnss3-dev libnspr4-dev libmagic-dev libpopt-dev libarchive-dev libdb5.3-dev libgcrypt-dev
+      - name: Install libversion
+        run: |
+          mkdir _libversion
+          cd _libversion
+          wget -qO- https://github.com/repology/libversion/archive/master.tar.gz | tar -xzf- --strip-components 1
+          cmake .
+          make
+          sudo make install
+          sudo ldconfig
+      - name: Install postgresql-libversion
+        run: |
+          mkdir _postgresql-libversion
+          cd _postgresql-libversion
+          wget -qO- https://github.com/repology/postgresql-libversion/archive/master.tar.gz | tar -xzf- --strip-components 1
+          make
+          sudo make install
+      - name: Install rpm4
+        run: |
+          mkdir _rpm
+          cd _rpm
+          wget -qO- http://ftp.rpm.org/releases/rpm-4.16.x/rpm-4.16.0.tar.bz2 | tar -xjf- --strip-components 1
+          export PYTHON_CFLAGS="$(python3-config --cflags)" PYTHON_LIBS="$(python3-config --ldflags)"
+          ./configure --enable-python --without-lua --prefix=$pythonLocation
+          make
+          sudo make install
+      - name: Install python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          pip install codecov
+      - name: Checkout rules
+        run: git clone --depth=1 https://github.com/repology/repology-rules.git rules.d
+      - name: Prepare database
+        run: |
+          sudo sed -i -e 's|peer|trust|' /etc/postgresql/$POSTGRESQL/main/pg_hba.conf
+          sudo pg_ctlcluster $POSTGRESQL main restart
+          sudo -u postgres psql -c "CREATE DATABASE repology_test;"
+          sudo -u postgres psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"
+          sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
+          sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
+          sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS libversion"
+      - name: Check YAML schemas
+        run: make check
+      - name: Check with flake8
+        run: make flake8
+      - name: Check with mypy
+        run: make mypy
+      - name: Fill database with test data
+        run: ./repology-update.py --initdb --parse --database --postupdate
+      - name: Smoke test
+        run: |
+          ./repology-dump.py --help
+          ./repology-gensitemap.py --main > sitemap-main.xml
+          ./repology-gensitemap.py --metapackages > sitemap-metapackages.xml
+      - name: Run unittests
+        run: coverage run --source=repology --omit="repology/test/*,repology/fetchers/*" -m unittest discover
