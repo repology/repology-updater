@@ -144,7 +144,7 @@ class UpdateProcess:
         self._logger.log('updating maintainer events')
         self._database.update_maintainer_events()
 
-        self._logger.log('updating repositry events')
+        self._logger.log('updating repository events')
         self._database.update_repository_events()
 
         self._logger.log('updating projects turnover')
