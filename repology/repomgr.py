@@ -129,6 +129,7 @@ class RepositoryManager:
         return {
             repository['name']: {
                 'shadow': repository.get('shadow', False),
+                'incomplete': repository.get('incomplete', False),
                 'repolinks': repository.get('repolinks', []),
                 'packagelinks': repository.get('packagelinks', []),
                 'family': repository['family'],
@@ -147,6 +148,7 @@ class RepositoryManager:
                 'name': repository['name'],
                 'sortname': repository['sortname'],
                 'shadow': repository.get('shadow', False),
+                'incomplete': repository.get('incomplete', False),
                 'repolinks': repository.get('repolinks', []),
                 'packagelinks': repository.get('packagelinks', []),
                 'family': repository['family'],

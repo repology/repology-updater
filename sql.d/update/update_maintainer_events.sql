@@ -49,6 +49,8 @@ WITH old AS (
 		new.effname IS NULL AS is_removed,
 		old.effname IS NOT NULL AND new.effname IS NOT NULL AS is_changed,
 
+		(SELECT incomplete FROM repositories WHERE name = coalesce(new.repo, old.repo)) AS incomplete,
+
 		old.versions_uptodate AS old_versions_uptodate,
 		old.versions_outdated AS old_versions_outdated,
 		old.versions_ignored AS old_versions_ignored,
@@ -72,7 +74,7 @@ SELECT
 	'removed'::maintainer_repo_metapackages_event_type,
 	'{}'::jsonb
 FROM diff
-WHERE is_removed
+WHERE is_removed AND NOT incomplete
 --------------------------------------------------------------------------------
 -- added
 --------------------------------------------------------------------------------
@@ -82,7 +84,7 @@ SELECT
 	'added'::maintainer_repo_metapackages_event_type,
 	'{}'::jsonb
 FROM diff
-WHERE is_added
+WHERE is_added AND NOT incomplete
 --------------------------------------------------------------------------------
 -- updates
 --------------------------------------------------------------------------------

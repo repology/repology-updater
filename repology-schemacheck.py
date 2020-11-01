@@ -240,6 +240,7 @@ schemas = {
                 }
             ],
             'shadow': bool,
+            'incomplete': bool,
             'repolinks': [
                 {
                     Required('desc'): str,

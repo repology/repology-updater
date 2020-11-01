@@ -36,6 +36,7 @@ INSERT INTO repositories(
 	family,
 	color,
 	shadow,
+	incomplete,
 	repolinks,
 	packagelinks
 ) VALUES (
@@ -70,6 +71,7 @@ INSERT INTO repositories(
 	%(metadata)s::json->>'family',
 	%(metadata)s::json->>'color',
 	(%(metadata)s::json->>'shadow')::boolean,
+	(%(metadata)s::json->>'incomplete')::boolean,
 	%(metadata)s::json->'repolinks',
 	%(metadata)s::json->'packagelinks'
 );

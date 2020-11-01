@@ -73,7 +73,7 @@ BEGIN
 				SELECT unnest(oldrepos)
 			)
 			INTERSECT
-			SELECT name FROM repositories WHERE state = 'active'
+			SELECT name FROM repositories WHERE state = 'active' AND NOT incomplete
 		);
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;

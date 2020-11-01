@@ -33,6 +33,7 @@ SET
 	family = %(metadata)s::json->>'family',
 	color = %(metadata)s::json->>'color',
 	shadow = (%(metadata)s::json->>'shadow')::boolean,
+	incomplete = (%(metadata)s::json->>'incomplete')::boolean,
 	repolinks = %(metadata)s::json->'repolinks',
 	packagelinks = %(metadata)s::json->'packagelinks'
 WHERE

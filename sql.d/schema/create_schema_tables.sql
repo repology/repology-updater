@@ -261,6 +261,7 @@ CREATE TABLE repositories (
 	family text NOT NULL,
 	color text,
 	shadow boolean NOT NULL,
+	incomplete boolean NOT NULL DEFAULT FALSE,
 	repolinks jsonb NOT NULL,
 	packagelinks jsonb NOT NULL
 );
