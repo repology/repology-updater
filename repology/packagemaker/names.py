@@ -138,6 +138,8 @@ class NameType:
 
     RUBYGEMS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
+    PYPI_NAME: ClassVar[int] = GENERIC_GEN_NAME
+
     CPAN_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
     LUAROCKS_NAME: ClassVar[int] = GENERIC_GEN_NAME

@@ -5,17 +5,19 @@
   type: modules
   desc: PyPi
   family: pypi
-  minpackages: 10000  # XXX: unknown
+  minpackages: 12000
   sources:
-    - name: PyPi
+    - name: pypicache.json
       fetcher: FileFetcher
-      parser: PyPiHTMLParser
-      url: https://pypi.python.org/pypi/
+      parser: PyPiCacheJsonParser
+      url: https://pypicache.repology.org/pypicache.json.zst
+      compression: zstd
   shadow: true
+  incomplete: true
   repolinks:
     - desc: PyPI - the Python Package Index
       url: https://pypi.python.org/pypi
   packagelinks:
     - desc: PyPi page
       url: 'https://pypi.python.org/pypi/{name}/'
-  tags: []
+  tags: [all, production]
