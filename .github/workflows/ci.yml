@@ -70,7 +70,5 @@ jobs:
       - name: Smoke test
         run: |
           ./repology-dump.py --help
-          ./repology-gensitemap.py --main > sitemap-main.xml
-          ./repology-gensitemap.py --metapackages > sitemap-metapackages.xml
       - name: Run unittests
         run: coverage run --source=repology --omit="repology/test/*,repology/fetchers/*" -m unittest discover

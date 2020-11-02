@@ -22,7 +22,6 @@ setup(
     ],
     scripts=[
         'repology-dump.py',
-        'repology-gensitemap.py',
         'repology-update.py',
     ],
     classifiers=[
