@@ -72,3 +72,5 @@ jobs:
           ./repology-dump.py --help
       - name: Run unittests
         run: coverage run --source=repology --omit="repology/test/*,repology/fetchers/*" -m unittest discover
+      - name: Push coverage info
+        run: codecov

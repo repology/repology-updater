@@ -1,7 +1,6 @@
 # Repology
 
 ![CI](https://github.com/repology/repology-updater/workflows/CI/badge.svg)
-[![Build Status](https://travis-ci.org/repology/repology-updater.svg?branch=master)](https://travis-ci.org/repology/repology-updater)
 [![codecov](https://codecov.io/gh/repology/repology-updater/branch/master/graph/badge.svg)](https://codecov.io/gh/repology/repology-updater)
 
 Repology is a service which monitors *a lot* of package repositories
