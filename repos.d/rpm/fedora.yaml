@@ -251,10 +251,10 @@
   color: '294172'
   minpackages: 18000
   sources:
-    - name: development
+    - name: release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/development/33/Everything/source/tree/
+      url: https://mirror.yandex.ru/fedora/linux/releases/33/Everything/source/tree/
       subrepo: '{source}'
     - name: updates
       fetcher: RepodataFetcher
