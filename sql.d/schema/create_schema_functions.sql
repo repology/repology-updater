@@ -62,8 +62,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
--- Returns repositories which should be added to oldrepos to get newrepos and filters active ones
-CREATE OR REPLACE FUNCTION get_added_active_repos(oldrepos text[], newrepos text[]) RETURNS text[] AS $$
+-- Returns repositories which may be logged as added/removed for projects feed
+-- Ignores incomplete and inactive repos
+CREATE OR REPLACE FUNCTION get_added_repos_for_projects_feed(oldrepos text[], newrepos text[]) RETURNS text[] AS $$
 BEGIN
 	RETURN
 		array(

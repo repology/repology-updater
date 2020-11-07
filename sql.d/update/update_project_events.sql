@@ -83,10 +83,10 @@ WITH old AS (
 		old.newest_versions[1] AS prev_newest_version,
 
 		-- delta
-		get_added_active_repos(old.all_repos, new.all_repos) AS added_repos,
-		get_added_active_repos(new.all_repos, old.all_repos) AS removed_repos,
-		get_added_active_repos(old.devel_repos, new.devel_repos) AS devel_catchup,
-		get_added_active_repos(old.newest_repos, new.newest_repos) AS newest_catchup,
+		get_added_repos_for_projects_feed(old.all_repos, new.all_repos) AS added_repos,
+		get_added_repos_for_projects_feed(new.all_repos, old.all_repos) AS removed_repos,
+		get_added_repos_for_projects_feed(old.devel_repos, new.devel_repos) AS devel_catchup,
+		get_added_repos_for_projects_feed(old.newest_repos, new.newest_repos) AS newest_catchup,
 		EXISTS(SELECT unnest(new.devel_repos) INTERSECT SELECT unnest(old.all_repos)) AS devel_repo_seen_before,
 		EXISTS(SELECT unnest(new.newest_repos) INTERSECT SELECT unnest(old.all_repos)) AS newest_repo_seen_before
 	FROM old FULL OUTER JOIN new USING(effname)
