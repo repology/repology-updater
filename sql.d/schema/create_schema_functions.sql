@@ -65,7 +65,16 @@ $$ LANGUAGE plpgsql IMMUTABLE;
 -- Returns repositories which should be added to oldrepos to get newrepos and filters active ones
 CREATE OR REPLACE FUNCTION get_added_active_repos(oldrepos text[], newrepos text[]) RETURNS text[] AS $$
 BEGIN
-	RETURN array((SELECT unnest(newrepos) EXCEPT SELECT unnest(oldrepos)) INTERSECT SELECT name FROM repositories WHERE state = 'active');
+	RETURN
+		array(
+			(
+				SELECT unnest(newrepos)
+				EXCEPT
+				SELECT unnest(oldrepos)
+			)
+			INTERSECT
+			SELECT name FROM repositories WHERE state = 'active'
+		);
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
