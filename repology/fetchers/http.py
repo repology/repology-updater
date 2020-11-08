@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import bz2
+import contextlib
 import functools
 import gzip
 import lzma
@@ -27,6 +28,8 @@ from typing import Any, AnyStr, Callable, Dict, IO, Optional, Union, cast
 import brotli
 
 import requests
+
+import zstandard
 
 from repology.config import config
 
@@ -40,6 +43,13 @@ def _brotli_open(f: IO[bytes]) -> brotli.decompress:
             return cast(bytes, brotli.process(f.read(size)))
 
     return BrotliDecompress
+
+
+@contextlib.contextmanager
+def _zstd_open(f: IO[bytes]) -> IO[AnyStr]:
+    cctx = zstandard.ZstdDecompressor()
+    with cctx.stream_reader(f) as reader:
+        yield reader
 
 
 class PoliteHTTP:
@@ -122,6 +132,8 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] =
         decompressor_open = bz2.open
     elif compression == 'br':
         decompressor_open = _brotli_open
+    elif compression == 'zstd':
+        decompressor_open = _zstd_open
     else:
         raise ValueError('Unsupported compression {}'.format(compression))
 

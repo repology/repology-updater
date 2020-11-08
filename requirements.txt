@@ -10,3 +10,4 @@ pyparsing
 requests
 rubymarshal>=1.2.6
 xxhash
+zstandard
