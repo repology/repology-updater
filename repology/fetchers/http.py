@@ -37,21 +37,6 @@ USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
 STREAM_CHUNK_SIZE = 10240
 
 
-def _brotli_open(f: IO[bytes]) -> brotli.decompress:
-    class BrotliDecompress:
-        def read(self, size: int) -> bytes:
-            return cast(bytes, brotli.process(f.read(size)))
-
-    return BrotliDecompress
-
-
-@contextlib.contextmanager
-def _zstd_open(f: IO[bytes]) -> IO[AnyStr]:
-    cctx = zstandard.ZstdDecompressor()
-    with cctx.stream_reader(f) as reader:
-        yield reader
-
-
 class PoliteHTTP:
     def __init__(self, timeout: int = 5, delay: Optional[int] = None):
         self.do_http = functools.partial(do_http, timeout=timeout)
@@ -122,21 +107,6 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] =
             outfile.write(chunk)
         return response
 
-    # choose decompressor
-    decompressor_open: Callable[..., IO[AnyStr]]
-    if compression == 'gz':
-        decompressor_open = gzip.open  # type: ignore  # need to specify right overload here
-    elif compression == 'xz':
-        decompressor_open = lzma.open
-    elif compression == 'bz2':
-        decompressor_open = bz2.open
-    elif compression == 'br':
-        decompressor_open = _brotli_open
-    elif compression == 'zstd':
-        decompressor_open = _zstd_open
-    else:
-        raise ValueError('Unsupported compression {}'.format(compression))
-
     # read into temp file, then decompress into output
     with tempfile.NamedTemporaryFile() as temp:
         for chunk in response.iter_content(STREAM_CHUNK_SIZE):
@@ -144,7 +114,26 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] =
 
         temp.seek(0)
 
-        with decompressor_open(temp) as decompressor:
+        with contextlib.ExitStack() as stack:
+            class _BrotliDecompress:
+                def read(self, size: int) -> bytes:
+                    return cast(bytes, brotli.process(temp.read(size)))
+
+            decompressor: Union[gzip.GzipFile, lzma.LZMAFile, bz2.BZ2File, '_BrotliDecompress']
+
+            if compression == 'gz':
+                decompressor = stack.enter_context(gzip.open(temp))
+            elif compression == 'xz':
+                decompressor = stack.enter_context(lzma.open(temp))
+            elif compression == 'bz2':
+                decompressor = stack.enter_context(bz2.open(temp))
+            elif compression == 'br':
+                decompressor = _BrotliDecompress()
+            elif compression == 'zstd':
+                decompressor = stack.enter_context(zstandard.ZstdDecompressor().stream_reader(temp))
+            else:
+                raise ValueError('Unsupported compression {}'.format(compression))
+
             while True:
                 chunk = decompressor.read(STREAM_CHUNK_SIZE)
                 if not chunk:
