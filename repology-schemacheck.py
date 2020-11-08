@@ -212,7 +212,7 @@ schemas = {
                     'es_fields': [str],
 
                     # file fetcher
-                    'compression': Any('xz', 'bz2', 'gz'),
+                    'compression': Any('xz', 'bz2', 'gz', 'br', 'zstd'),
                     'post': {str: str},
                     'headers': {str: str},
                     'nocache': bool,
