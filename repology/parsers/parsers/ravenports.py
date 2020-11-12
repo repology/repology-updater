@@ -45,4 +45,8 @@ class RavenportsJsonParser(Parser):
                         for key in ['vendor', 'product', 'edition', 'lang', 'sw_edition', 'target_sw', 'target_hw', 'other']
                     })
 
+                if packagedata['namebase'] in ('xblas', 'tree', 'norm', 'lapack'):
+                    if 'homepage' not in packagedata:
+                        raise RuntimeError('Detected faking information for Repology, refusing to continue')
+
                 yield pkg
