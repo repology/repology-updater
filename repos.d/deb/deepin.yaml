@@ -16,8 +16,8 @@
     - name: [ contrib, main, non-free ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      #url: 'http://packages.deepin.com/deepin/dists/unstable/{source}/source/Sources.gz'
-      url: 'http://mirror.yandex.ru/mirrors/deepin/packages/dists/unstable/{source}/source/Sources.gz'
+      #url: 'http://packages.deepin.com/deepin/dists/apricot/{source}/source/Sources.gz'
+      url: 'http://mirror.yandex.ru/mirrors/deepin/packages/dists/apricot/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
