@@ -1,0 +1,40 @@
+###########################################################################
+# Apertis
+###########################################################################
+- name: apertis_v2020
+  type: repository
+  desc: Apertis v2020
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '3a5a80'
+  minpackages: 3500
+  sources:
+    - name: [ v2020/development, v2020/target, v2020/sdk, v2020/hmi, v2020-updates/development, v2020-updates/target, v2020-updates/sdk, v2020-updates/hmi ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Apertis home
+      url: https://www.apertis.org
+  tags: [ all, production, apertis ]
+
+- name: apertis_v2021
+  type: repository
+  desc: Trisquel v2021 Development
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '3a5a80'
+  minpackages: 3500
+  sources:
+    - name: [ v2021dev3/development, v2021dev3/target, v2021dev3/sdk, v2021dev3/hmi ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Apertis home
+      url: https://www.apertis.org
+  tags: [ all, production, apertis ]
