@@ -18,12 +18,12 @@
       subrepo: '{source}'
   repolinks:
     - desc: Apertis home
-      url: https://www.apertis.org
+      url: https://www.apertis.org/
   tags: [ all, production, apertis ]
 
 - name: apertis_v2021
   type: repository
-  desc: Trisquel v2021 Development
+  desc: Apertis v2021 Development
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, apertis]
@@ -38,5 +38,5 @@
       subrepo: '{source}'
   repolinks:
     - desc: Apertis home
-      url: https://www.apertis.org
+      url: https://www.apertis.org/
   tags: [ all, production, apertis ]
