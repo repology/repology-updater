@@ -31,6 +31,10 @@ from repology.packagemaker.normalizers import NormalizerFunction
 __all__ = ['NameType', 'PackageFactory', 'PackageMaker']
 
 
+_MAX_URL_LENGTH = 2047
+_MAX_SUMMARY_LENGTH = 1024
+
+
 class PackageTemplate:
     __slots__ = [
         'subrepo',
@@ -262,7 +266,7 @@ class PackageMaker(PackageMakerBase):
     def set_subrepo(self, subrepo: str) -> None:
         self._package.subrepo = subrepo
 
-    @_simple_setter('summary', str, nzs.strip)
+    @_simple_setter('summary', str, nzs.strip, nzs.limit_length(_MAX_SUMMARY_LENGTH))
     def set_summary(self, summary: str) -> None:
         self._package.summary = summary
 
@@ -274,7 +278,7 @@ class PackageMaker(PackageMakerBase):
     def add_categories(self, *args: Any) -> None:
         _extend_unique(self._package.categories, args)
 
-    @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
+    @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_homepages(self, *args: Any) -> None:
         _extend_unique(self._package.homepages, args)
 
@@ -282,7 +286,7 @@ class PackageMaker(PackageMakerBase):
     def add_licenses(self, *args: Any) -> None:
         _extend_unique(self._package.licenses, args)
 
-    @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
+    @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_downloads(self, *args: Any) -> None:
         _extend_unique(self._package.downloads, args)
 

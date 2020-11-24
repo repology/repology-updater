@@ -83,3 +83,12 @@ def forbid_newlines(value: str) -> NormalizerResult:
         return None, 'contains newlines'
     else:
         return value, None
+
+
+def limit_length(max_length: int) -> NormalizerFunction:
+    def normalizer(value: str) -> NormalizerResult:
+        if len(value) > max_length:
+            return None, 'too long'
+        else:
+            return value, None
+    return normalizer
