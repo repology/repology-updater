@@ -6,6 +6,7 @@
   desc: Apertis v2020
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, apertis]
   color: '3a5a80'
   minpackages: 3500
   sources:
@@ -25,6 +26,7 @@
   desc: Trisquel v2021 Development
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, apertis]
   color: '3a5a80'
   minpackages: 3500
   sources:
