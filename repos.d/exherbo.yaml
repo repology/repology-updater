@@ -6,81 +6,13 @@
   desc: Exherbo
   family: exherbo
   color: 'a1da91'
-  minpackages: 6000
+  minpackages: 8000
   default_maintainer: fallback-mnt-exherbo@repology
   sources:
-    # see https://git.exherbo.org/ (Exheres section)
-    - name:
-        - arbor
-        - bikeshed
-        - desktop
-        - emacs
-        - enlightenment
-        - games
-        - gnome
-        #- gstreamer  # deprecated & empty
-        - hardware
-        - haskell
-        - java
-        - kde
-        - lisp
-        - media
-        - mono
-        #- mozilla  # deprecated & empty
-        - net
-        - office
-        - perl
-        - php
-        - python
-        - ruby
-        - rust
-        - scientific
-        - selinux
-        - tcl
-        - texlive
-        - vim
-        - virtualization
-        - x11
-        - xfce
-        # Exherbo dev repos. These also contain exhereses and are official
-        # in the sense that they receive as much QA as the other repos do
-        - dev/alip
-        - dev/arkanoid
-        - dev/berniyh
-        - dev/ciaranm
-        - dev/cogitri
-        - dev/compnerd
-        - dev/dleverton
-        - dev/ferdy
-        - dev/heirecka
-        - dev/ingmar
-        - dev/keruspe
-        - dev/kimrhh
-        - dev/marv
-        - dev/mixi
-        - dev/moben
-        - dev/mrothe
-        - dev/olesalscheider
-        - dev/philantrop
-        - dev/pioto
-        - dev/pipping
-        - dev/pyro
-        - dev/rbrown
-        - dev/replica
-        - dev/sejo
-        - dev/sepek
-        - dev/somasis
-        - dev/spbecker
-        - dev/spoonb
-        - dev/tanderson
-        - dev/tridactyla
-        - dev/woutershep
-        - dev/zlin
-      fetcher: GitFetcher
-      parser: ExherboGitParser
-      url: 'git://git.exherbo.org/{source}.git'
-      sparse_checkout: [ 'metadata/about.conf', '**/*.exheres-0' ]
-      subrepo: '{source}'
+    - name: packages.json
+      fetcher: FileFetcher
+      parser: ExherboJsonParser
+      url: 'https://git.exherbo.org/summer/packages.json'
   repolinks:
     - desc: Exherbo home
       url: http://exherbo.org/
@@ -89,6 +21,8 @@
   packagelinks:
     - desc: Package details
       url: 'https://git.exherbo.org/summer/packages/{srcname}/index.html'
+    # XXX: these do not always work as not all repositories are located at git.exherbo.org
+    # need a generic way to provide direct linkt to .exheres file
     - desc: Package repository
       url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{srcname}'
     - desc: Exheres file

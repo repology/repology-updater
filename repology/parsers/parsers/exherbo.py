@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,14 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import re
-from typing import Iterable, List, Tuple
+from typing import Iterable
 
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
@@ -30,52 +29,20 @@ def _normalize_version(version: str) -> str:
     return re.sub('-r[0-9]+$', '', version)
 
 
-def _iter_exheres(path: str) -> Iterable[Tuple[str, str, str]]:
-    for category in os.listdir(path):
-        category_path = os.path.join(path, category)
-        if not os.path.isdir(category_path):
-            continue
-        if category == 'virtual' or category == 'metadata':
-            continue
-
-        for package in os.listdir(category_path):
-            package_path = os.path.join(category_path, package)
-            if not os.path.isdir(package_path):
-                continue
-
-            for exheres in os.listdir(package_path):
-                if not exheres.startswith(package + '-') and not exheres.endswith('.exheres-0'):
-                    continue
-
-                yield category, package, exheres
-
-
-def _get_repo_maintainers(path: str) -> List[str]:
-    with open(os.path.join(path, 'metadata/about.conf'), 'r', encoding='utf-8') as metadata:
-        for line in metadata:
-            if '=' in line:
-                key, value = map(lambda s: s.strip(), line.split('=', 1))
-
-                if key == 'owner':
-                    return extract_maintainers(value)
-
-    return []
-
-
-class ExherboGitParser(Parser):
+class ExherboJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        maintainers = _get_repo_maintainers(path)
+        for packagedata in iter_json_list(path, (None,)):
+            with factory.begin() as pkg:
+                pkg.add_name(packagedata['name'], NameType.EXHERBO_NAME)
+                pkg.add_name(packagedata['category'] + '/' + packagedata['name'], NameType.EXHERBO_FULL_NAME)
+                pkg.set_version(packagedata['version'], _normalize_version)
+                pkg.add_categories(packagedata['category'])
+                pkg.add_homepages(packagedata['homepage'].split())
+                pkg.add_downloads(packagedata['downloads'].split())
+                pkg.set_subrepo(packagedata['repository'])
+                pkg.set_summary(packagedata['summary'])
 
-        for category, package, exheres in _iter_exheres(os.path.join(path, 'packages')):
-            pkg = factory.begin('/'.join((category, package, exheres)))
+                if pkg.version == 'scm' or pkg.version.endswith('-scm'):  # XXX: to rules?
+                    pkg.set_flags(PackageFlags.ROLLING)
 
-            pkg.add_name(package, NameType.EXHERBO_NAME)
-            pkg.add_name(f'{category}/{package}', NameType.EXHERBO_FULL_NAME)
-            pkg.set_version(exheres[len(package) + 1:-10], _normalize_version)
-            pkg.add_categories(category)
-            pkg.add_maintainers(maintainers)
-
-            if pkg.version == 'scm' or pkg.version.endswith('-scm'):  # XXX: to rules?
-                pkg.set_flags(PackageFlags.ROLLING)
-
-            yield pkg
+                yield pkg
