@@ -110,7 +110,7 @@ update cycle consists of multiple steps, but in most cases you'll need
 to just run all of them:
 
 ```shell
-./repology-update.py --fetch --fetch --parse --database --postupdate
+./repology-update.py --fetch --parse --database --postupdate
 ```
 
   - `--fetch` tells the utility to fetch raw repository data
