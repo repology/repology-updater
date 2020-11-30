@@ -27,7 +27,7 @@ SELECT
 FROM incoming_packages
 WHERE
 	homepage IS NOT NULL AND
-	repo NOT IN('cpan', 'metacpan', 'pypi', 'rubygems', 'cran') AND
+	repo NOT IN('cpan', 'metacpan', 'rubygems', 'cran') AND
 	-- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
 	homepage NOT LIKE '%%mran.revolutionanalytics.com/snapshot/20%%'
 -- XXX: might want to change following ON CONFLICT clause to
