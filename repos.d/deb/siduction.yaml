@@ -8,7 +8,7 @@
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, siduction]
-  minpackages: 250
+  minpackages: 80
   sources:
     - name: [ main, contrib, non-free ]
       fetcher: FileFetcher
