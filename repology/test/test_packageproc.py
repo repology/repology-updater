@@ -312,6 +312,13 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='2', family='1', version='1.0', flags=Pf.IGNORE).expect(versionclass=Ps.OUTDATED),
         )
 
+    def test_suppress_ignored_noscheme(self) -> None:
+        # should not suppress noscheme
+        self._check_fill_versions(
+            PackageSample(repo='0', family='1', version='1.0', flags=Pf.NOSCHEME).expect(versionclass=Ps.NOSCHEME),
+            PackageSample(repo='1', family='1', version='2.0', flags=Pf.NOSCHEME).expect(versionclass=Ps.NOSCHEME),
+        )
+
     def test_altver(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='1', version='1.1.1234', flags=Pf.ALTVER).expect(versionclass=Ps.NEWEST),

@@ -65,7 +65,7 @@ def packageset_may_be_unignored(packages: Sequence[Package]) -> bool:
         if package.family != packages[0].family:
             return False
         # condition 2: must consist of ignored packages only
-        if not package.has_flag(PackageFlags.ANY_IGNORED):
+        if not package.has_flag(PackageFlags.ANY_IGNORED & ~PackageFlags.NOSCHEME):
             return False
 
     return True
