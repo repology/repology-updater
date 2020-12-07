@@ -139,7 +139,7 @@ CREATE TABLE maintainers (
 	num_projects_vulnerable integer NOT NULL DEFAULT 0,
 
 	-- XXX: replaces *_per_repo
-	-- packages, projects, projects_newest, projects_outdated, projects_problematic
+	-- packages, projects, projects_newest, projects_outdated, projects_problematic, projects_vulnerable
 	counts_per_repo jsonb,
 
 	num_projects_per_category jsonb,
