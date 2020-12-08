@@ -491,7 +491,7 @@ CREATE TABLE problems (
 
 CREATE INDEX ON problems(effname);
 CREATE INDEX ON problems(repo, effname);
-CREATE INDEX ON problems(maintainer);
+CREATE INDEX ON problems(repo, maintainer, effname);
 
 --------------------------------------------------------------------------------
 -- Reports
