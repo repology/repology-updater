@@ -34,7 +34,7 @@
   statsgroup: CRUX
   family: crux
   ruleset: crux
-  minpackages: 1000
+  minpackages: 1500
   update_period: 6h
   sources:
     - name: CRUX-ports-JSON
@@ -59,7 +59,7 @@
   statsgroup: CRUX
   family: crux
   ruleset: crux
-  minpackages: 1000
+  minpackages: 1500
   update_period: 6h
   sources:
     - name: CRUX-ports-JSON
