@@ -319,6 +319,12 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='1', family='1', version='2.0', flags=Pf.NOSCHEME).expect(versionclass=Ps.NOSCHEME),
         )
 
+        # even with other ignored flags
+        self._check_fill_versions(
+            PackageSample(repo='0', family='1', version='1.0', flags=Pf.NOSCHEME | Pf.IGNORE).expect(versionclass=Ps.NOSCHEME),
+            PackageSample(repo='1', family='1', version='2.0', flags=Pf.NOSCHEME | Pf.IGNORE).expect(versionclass=Ps.NOSCHEME),
+        )
+
     def test_altver(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='1', version='1.1.1234', flags=Pf.ALTVER).expect(versionclass=Ps.NEWEST),
