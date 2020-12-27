@@ -29,10 +29,10 @@
       url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}'
   packagelinks:
     - desc: Git directory of package
-      url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}/{srcname}'
+      url: 'https://gitlab.com/liguros/liguros-repo/-/tree/develop/{srcname}'
     - desc: View ebuild
-      url: 'https://gitlab.com/liguros/{source}/-/blob/{branch}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, development, liguros ]
+      url: 'https://gitlab.com/liguros/liguros-repo/-/blob/develop/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+  tags: [ all, production, liguros ]
 
 - name: liguros_21_1
   type: repository
@@ -62,7 +62,7 @@
       url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}'
   packagelinks:
     - desc: Git directory of package
-      url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}/{srcname}'
+      url: 'https://gitlab.com/liguros/liguros-repo/-/tree/stable/{srcname}'
     - desc: View ebuild
-      url: 'https://gitlab.com/liguros/{source}/-/blob/{branch}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+      url: 'https://gitlab.com/liguros/liguros-repo/-/blob/stable/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, liguros ]
