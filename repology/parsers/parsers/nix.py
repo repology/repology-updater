@@ -72,6 +72,7 @@ _BLACKLIST1 = {
     'MPH': ['2B-Damase'],
     'x86': ['64bit'],
     'fuse': ['7z-ng'],
+    'av': ['98'],
 }
 
 _BLACKLIST2 = {
