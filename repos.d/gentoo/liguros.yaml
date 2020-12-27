@@ -1,40 +1,38 @@
 ###########################################################################
 # Liguros
 ###########################################################################
-- name: liguros_20_7
+- name: liguros_21_7
   type: repository
-  desc: LiGurOS 20.7
+  desc: LiGurOS 21.7
   statsgroup: Gentoo
   family: gentoo
   ruleset: [gentoo, liguros]
   color: '1de9b6'
   minpackages: 28000
+  valid_till: 2022-02-01
   default_maintainer: fallback-mnt-liguros@repology
   sources:
     - name:
-        - core-kit
-        - python-kit
-        - python-modules-kit
-        - nokit
+        - liguros-repo
       fetcher: GitFetcher
       parser: GentooGitParser
-      require_md5cache_metadata: true
+      require_md5cache_metadata: false
       require_xml_metadata: false
       url: 'https://gitlab.com/liguros/{source}.git'
-      branch: 20.7-release
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
-      subrepo: '{source}'
+      branch: develop
   repolinks:
     - desc: LiGurOS
       url: https://liguros.gitlab.io/
     - desc: GitLab Organization
       url: https://gitlab.com/liguros/
+    - desc: Official LiGurOS ebuild repository
+      url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}'
   packagelinks:
-    - desc: Git directory
-      url: 'https://gitlab.com/liguros/{subrepo}/-/tree/20.7-release/{srcname}'
+    - desc: Git directory of package
+      url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}/{srcname}'
     - desc: View ebuild
-      url: 'https://gitlab.com/liguros/{subrepo}/-/blob/20.7-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production, liguros ]
+      url: 'https://gitlab.com/liguros/{source}/-/blob/{branch}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+  tags: [ all, development, liguros ]
 
 - name: liguros_21_1
   type: repository
@@ -44,29 +42,27 @@
   ruleset: [gentoo, liguros]
   color: '1de9b6'
   minpackages: 28000
+  valid_till: 2021-08-01
   default_maintainer: fallback-mnt-liguros@repology
   sources:
     - name:
-        - core-kit
-        - python-kit
-        - python-modules-kit
-        - nokit
+        - liguros-repo
       fetcher: GitFetcher
       parser: GentooGitParser
-      require_md5cache_metadata: true
+      require_md5cache_metadata: false
       require_xml_metadata: false
       url: 'https://gitlab.com/liguros/{source}.git'
-      branch: 21.1-release
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
-      subrepo: '{source}'
+      branch: stable
   repolinks:
     - desc: LiGurOS
       url: https://liguros.gitlab.io/
     - desc: GitLab Organization
       url: https://gitlab.com/liguros/
+    - desc: Official LiGurOS ebuild repository
+      url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}'
   packagelinks:
-    - desc: Git directory
-      url: 'https://gitlab.com/liguros/{subrepo}/-/tree/21.1-release/{srcname}'
+    - desc: Git directory of package
+      url: 'https://gitlab.com/liguros/{source}/-/tree/{branch}/{srcname}'
     - desc: View ebuild
-      url: 'https://gitlab.com/liguros/{subrepo}/-/blob/21.1-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+      url: 'https://gitlab.com/liguros/{source}/-/blob/{branch}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, liguros ]
