@@ -6,7 +6,7 @@
   desc: freshcode.club
   singular: freshcode.club entry
   family: freshcode
-  minpackages: 1400
+  minpackages: 1300
   sources:
     - name: feed
       fetcher: FileFetcher
