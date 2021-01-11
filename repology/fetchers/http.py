@@ -119,7 +119,13 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] =
                 def read(self, size: int) -> bytes:
                     return cast(bytes, brotli.process(temp.read(size)))
 
-            decompressor: Union[gzip.GzipFile, lzma.LZMAFile, bz2.BZ2File, '_BrotliDecompress']
+            decompressor: Union[
+                gzip.GzipFile,
+                lzma.LZMAFile,
+                bz2.BZ2File,
+                '_BrotliDecompress',
+                zstandard.ZstdDecompressionReader
+            ]
 
             if compression == 'gz':
                 decompressor = stack.enter_context(gzip.open(temp))
