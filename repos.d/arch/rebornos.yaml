@@ -12,7 +12,8 @@
     - name: main
       fetcher: TarFetcher
       parser: ArchDBParser
-      url: 'https://repo.rebornos.org/RebornOS/Reborn-OS.db.tar.xz'
+      url: 'https://mirrors.dotsrc.org/osdn/storage/g/r/re/rebornos/repo/RebornOS/Reborn-OS.db.tar.xz'
+      # url: 'https://repo.rebornos.org/RebornOS/Reborn-OS.db.tar.xz'  # old dead url
   repolinks:
     - desc: RebornOS home
       url: https://rebornos.org/
