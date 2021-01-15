@@ -96,8 +96,6 @@
                     )
 
                     # Version type (stable, unstable, ...)
-                    # we reduce it to just two flags which indicate
-                    # whether there's stable or unstable types
                     OPTIONAL {
                       ?versionItem pq:P548 ?versionTypeItem .
                       BIND(
@@ -107,9 +105,25 @@
                           ?versionTypeItem = wd:Q18434478 ||  # maintenance version
                           ?versionTypeItem = wd:Q20631656 ||  # release
                           ?versionTypeItem = wd:Q48028851 ||  # patch version
-                          ?versionTypeItem = wd:Q55567596,    # bug-fix version
+                          ?versionTypeItem = wd:Q55567596 ||  # bug-fix version
+                          ?versionTypeItem = wd:Q51937413,    # general availability version
                           '|S',
-                          '|U'
+                          IF(
+                            ?versionTypeItem = wd:Q1072356 ||   # release candidate version
+                            ?versionTypeItem = wd:Q2122918 ||   # software alpha version
+                            ?versionTypeItem = wd:Q21727724 ||  # unstable version
+                            ?versionTypeItem = wd:Q23356219 ||  # pre-alpha version
+                            ?versionTypeItem = wd:Q3295609 ||   # beta version
+                            ?versionTypeItem = wd:Q51930650,    # pre-release version
+                            '|U',
+                            IF(
+                              ?versionTypeItem = wd:Q6736813 ||  # legacy version
+                              ?versionTypeItem = wd:Q21683863 || # obsolete version
+                              ?versionTypeItem = wd:Q56514665,   # initial version
+                              '',   # ignore meaningless types
+                              '|X'  # devel/daily/rolling and incorrect
+                            )
+                          )
                         )
                         AS ?versionTypeSuffix
                       )
@@ -212,3 +226,6 @@
 #
 # - Entries with Repology project name defined, but with no versions
 # https://query.wikidata.org/#SELECT %3Fproject %3FprojectLabel %3Frepology_project%20 WHERE {%0A%20 %3Fproject wdt%3AP6931 %3Frepology_project .%0A%20 FILTER NOT EXISTS { %3Fproject wdt%3AP348 %3Fversion . }%0A%20 SERVICE wikibase%3Alabel { bd%3AserviceParam wikibase%3Alanguage 'en'. }%0A}
+#
+# - All version types
+# https://query.wikidata.org/#SELECT%20%3Fitem%20%3FitemLabel%20%7B%0A%20%20%3Fitem%20wdt%3AP31%20wd%3AQ28530564%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%22%20%7D%0A%7D%20ORDER%20BY%20%3Fitem

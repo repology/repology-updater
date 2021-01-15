@@ -67,7 +67,9 @@ class WikidataJsonParser(Parser):
 
                     verpkg = pkg.clone()
 
-                    is_devel = 'U' in flags
+                    is_version_stable = 'S' in flags
+                    is_version_unstable = 'U' in flags
+                    is_version_bad = 'X' in flags
                     is_foreign_os_release = 'o' in flags and 'O' not in flags
                     is_foreign_platform_release = 'p' in flags and 'P' not in flags
                     is_preferred = 'R' in flags
@@ -80,7 +82,11 @@ class WikidataJsonParser(Parser):
                         verpkg.log('version {} skipped due to bad Platform'.format(version), severity=Logger.NOTICE)
                         continue
 
-                    verpkg.set_flags(PackageFlags.DEVEL, is_devel)
+                    if is_version_bad:
+                        verpkg.log('version {} skipped due to bad Version Type'.format(version), severity=Logger.ERROR)
+                        continue
+
+                    verpkg.set_flags(PackageFlags.DEVEL, is_version_unstable and not is_version_stable)
                     verpkg.set_version(version)
                     verpkg.add_downloads(sorted(flag for flag in flags if len(flag) > 1))
 
