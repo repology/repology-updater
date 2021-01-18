@@ -165,7 +165,8 @@
                             ?versionPlatformItem = wd:Q94 ||       # Android
                             ?versionPlatformItem = wd:Q48493 ||    # iOS
                             ?versionPlatformItem = wd:Q2766 ||     # iPhone
-                            ?versionPlatformItem = wd:Q2796,       # iPad
+                            ?versionPlatformItem = wd:Q2796 ||     # iPad
+                            ?versionPlatformItem = wd:Q13361286,   # XBox one
                             '|p',
                             ''
                           ),
