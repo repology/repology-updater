@@ -124,6 +124,7 @@ rulesets = families + [
     'aur',
     'blackarch',
     'bunsenlabs',
+    'calculate',
     'deb_multimedia',
     'debian',
     'deepin',
