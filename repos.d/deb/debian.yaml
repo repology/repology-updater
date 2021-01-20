@@ -26,6 +26,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/oldstable/source/{srcname}'
+    - desc: Package on Debian Sources
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
@@ -59,6 +61,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/source/{srcname}'
+    - desc: Package on Debian Sources
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
@@ -92,6 +96,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/source/{srcname}'
+    - desc: Package on Debian Sources
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
@@ -125,6 +131,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/source/{srcname}'
+    - desc: Package on Debian Sources
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
@@ -158,6 +166,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/source/{srcname}'
+    - desc: Package on Debian Sources
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
@@ -192,6 +202,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/source/{srcname}'
+    - desc: Package on Debian Sources
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - desc: Related bugs in Debian bug tracker
       url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
