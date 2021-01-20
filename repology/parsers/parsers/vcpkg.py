@@ -96,7 +96,12 @@ class VcpkgGitParser(Parser):
 
                 pkg.add_name(pkgdata['name'], NameType.VCPKG_SOURCE)
 
-                version = pkgdata['version-string']
+                for key in ['version', 'version-string', 'version-semver', 'version-date']:
+                    if key in pkgdata:
+                        version = pkgdata[key]
+                        break
+                else:
+                    raise RuntimeError('none of expected version schemes found')
 
                 if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
                     pkg.set_version(version)
