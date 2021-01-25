@@ -297,3 +297,24 @@
     - desc: Linux Mint home
       url: https://linuxmint.com/
   tags: [ all, production, mint ]
+
+- name: lmde_4
+  type: repository
+  desc: LMDE 4
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu,mint]
+  color: '87cf3e'
+  minpackages: 100
+  default_maintainer: root@linuxmint.com
+  sources:
+    - name: [ backport, import, main, romeo, upstream ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/debbie/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
