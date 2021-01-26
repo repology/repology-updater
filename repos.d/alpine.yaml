@@ -125,7 +125,7 @@
   desc: Alpine Linux 3.13
   statsgroup: Alpine
   family: alpine
-  minpackages: 11000
+  minpackages: 12000
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main ]
