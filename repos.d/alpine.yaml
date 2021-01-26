@@ -120,6 +120,29 @@
       url: https://pkgs.alpinelinux.org/packages?name={binname}
   tags: [ all, production, alpine ]
 
+- name: alpine_3_13
+  type: repository
+  desc: Alpine Linux 3.13
+  statsgroup: Alpine
+  family: alpine
+  minpackages: 11000
+  default_maintainer: fallback-mnt-alpine@repology
+  sources:
+    - name: [ community, main ]
+      fetcher: TarFetcher
+      parser: ApkIndexParser
+      url: 'http://dl-3.alpinelinux.org/alpine/v3.13/{source}/x86_64/APKINDEX.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
+      url: https://pkgs.alpinelinux.org/packages
+  packagelinks:
+    - desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}
+  tags: [ all, production, alpine ]
+
 - name: alpine_edge
   type: repository
   desc: Alpine Linux Edge
