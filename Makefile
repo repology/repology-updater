@@ -24,8 +24,6 @@ flake8:
 
 mypy:
 	${MYPY} repology-update.py repology-dump.py repology
-	${MYPY} repology/fetchers/fetchers
-	${MYPY} repology/parsers/parsers
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")
