@@ -2,8 +2,9 @@
 # Liguros
 ###########################################################################
 - name: liguros_stable
+  sortname: liguros__stable
   type: repository
-  desc: LiGurOS 21.1
+  desc: LiGurOS stable
   statsgroup: Gentoo
   family: gentoo
   ruleset: [gentoo, liguros]
@@ -18,6 +19,7 @@
       require_xml_metadata: false
       url: 'https://gitlab.com/liguros/{source}.git'
       branch: stable
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
   repolinks:
     - desc: LiGurOS
       url: https://liguros.gitlab.io/
@@ -49,6 +51,7 @@
       require_xml_metadata: false
       url: 'https://gitlab.com/liguros/{source}.git'
       branch: develop
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
   repolinks:
     - desc: LiGurOS
       url: https://liguros.gitlab.io/
