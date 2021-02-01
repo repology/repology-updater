@@ -1,0 +1,31 @@
+###########################################################################
+# SageMath
+###########################################################################
+- name: sagemath
+  type: repository
+  desc: SageMath
+  family: sagemath
+  ruleset: sagemath
+  minpackages: 200
+  sources:
+    - name: sage
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/sagemath/sage.git'
+        sparse_checkout: ['build/pkgs']
+        branch: develop
+      parser:
+        class: SageMathParser
+  repolinks:
+    - desc: SageMath home
+      url: https://www.sagemath.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://doc.sagemath.org/html/en/reference/spkg/{srcname}.html'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/sagemath/sage/tree/develop/build/pkgs/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/sagemath/sage/blob/develop/build/pkgs/{srcname}/spkg-install.in'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/sagemath/sage/develop/build/pkgs/{srcname}/spkg-install.in'
+  tags: [ all, production ]

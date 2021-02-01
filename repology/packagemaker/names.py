@@ -127,6 +127,9 @@ class NameType:
 
     GUIX_NAME: ClassVar[int] = 290
 
+    SAGEMATH_NAME: ClassVar[int] = 300
+    SAGEMATH_PROJECT_NAME: ClassVar[int] = 301
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -481,6 +484,14 @@ _MAPPINGS = [
         trackname=NameType.GUIX_NAME,
         visiblename=NameType.GUIX_NAME,
         projectname_seed=NameType.GUIX_NAME,
+    ),
+    # Sagemath
+    _NameMapping(
+        srcname=NameType.SAGEMATH_NAME,
+        binname=NameType.SAGEMATH_NAME,
+        trackname=NameType.SAGEMATH_NAME,
+        visiblename=NameType.SAGEMATH_NAME,
+        projectname_seed=NameType.SAGEMATH_PROJECT_NAME,
     ),
 ]
 

@@ -99,6 +99,7 @@ families = [
     'rosa',
     'rubygems',
     'rudix',
+    'sagemath',
     'salix',
     'scoop',
     'sisyphus',
