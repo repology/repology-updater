@@ -83,6 +83,7 @@ families = [
     'npackd',
     'openbsd',
     'openindiana',
+    'openmamba',
     'openmandriva',
     'openpkg',
     'opensuse',
