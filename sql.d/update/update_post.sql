@@ -61,8 +61,8 @@ WHERE run_id NOT IN (
 --------------------------------------------------------------------------------
 -- Clean up stale links
 --------------------------------------------------------------------------------
-DELETE FROM links
-WHERE orphaned_since < now() - INTERVAL '1' MONTH;
+--DELETE FROM links
+--WHERE orphaned_since < now() - INTERVAL '1' MONTH;
 
 --------------------------------------------------------------------------------
 -- Remove duplicate history entries

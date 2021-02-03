@@ -454,8 +454,11 @@ DROP TABLE IF EXISTS links CASCADE;
 
 CREATE TABLE links (
 	url text NOT NULL PRIMARY KEY,
+	refcount smallint NOT NULL,
+
 	first_extracted timestamp with time zone NOT NULL DEFAULT now(),
 	orphaned_since timestamp with time zone,
+
 	next_check timestamp with time zone NOT NULL DEFAULT now(),
 	last_checked timestamp with time zone,
 
@@ -472,7 +475,7 @@ CREATE TABLE links (
 	ipv6_permanent_redirect_target text
 );
 
-CREATE INDEX ON links(next_check);
+CREATE INDEX ON links(next_check) WHERE (refcount > 0);
 
 --------------------------------------------------------------------------------
 -- Problems

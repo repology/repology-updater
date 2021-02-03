@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -15,22 +15,59 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+WITH old_raw AS (
+	SELECT unnest(downloads) AS url
+	FROM old_packages
+	UNION ALL
+	SELECT homepage AS url
+	FROM old_packages
+	WHERE
+		homepage IS NOT NULL AND
+		repo NOT IN('cpan', 'metacpan', 'rubygems', 'cran') AND
+		-- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
+		homepage NOT LIKE '%%mran.revolutionanalytics.com/snapshot/20%%'
+), new_raw AS (
+	SELECT unnest(downloads) AS url
+	FROM incoming_packages
+	UNION ALL
+	SELECT homepage AS url
+	FROM incoming_packages
+	WHERE
+		homepage IS NOT NULL AND
+		repo NOT IN('cpan', 'metacpan', 'rubygems', 'cran') AND
+		-- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
+		homepage NOT LIKE '%%mran.revolutionanalytics.com/snapshot/20%%'
+), old AS (
+	SELECT
+		url,
+		count(*) AS refcount
+	FROM old_raw
+	GROUP BY url
+), new AS (
+	SELECT
+		url,
+		count(*) AS refcount
+	FROM new_raw
+	GROUP BY url
+), delta AS (
+	SELECT
+		url,
+		coalesce(new.refcount, 0) - coalesce(old.refcount, 0) AS delta_refcount
+	FROM old FULL OUTER JOIN new USING(url)
+)
 INSERT INTO links (
-	url
+	url,
+	refcount
 )
 SELECT
-	unnest(downloads) AS url
-FROM incoming_packages
-UNION
-SELECT
-	homepage AS url
-FROM incoming_packages
-WHERE
-	homepage IS NOT NULL AND
-	repo NOT IN('cpan', 'metacpan', 'rubygems', 'cran') AND
-	-- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
-	homepage NOT LIKE '%%mran.revolutionanalytics.com/snapshot/20%%'
--- XXX: might want to change following ON CONFLICT clause to
--- WHERE NOT EXISTS (SELECT * FROM links WHERE links.url = url)
--- as soon as we have generated id column for links table
-ON CONFLICT(url) DO NOTHING;
+	url,
+	delta_refcount
+FROM delta
+ON CONFLICT (url)
+DO UPDATE SET
+	refcount = links.refcount + EXCLUDED.refcount,
+	orphaned_since = CASE WHEN links.refcount + EXCLUDED.refcount = 0 THEN now() ELSE NULL END;
+
+{% if analyze %}
+ANALYZE links;
+{% endif %}

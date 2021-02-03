@@ -247,6 +247,7 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
     list_discrepancies('repositories', database.totals_repositories(do_fix))
     list_discrepancies('maintainers', database.totals_maintainers(do_fix))
     list_discrepancies('statistics', database.totals_statistics(do_fix))
+    list_discrepancies('links', database.totals_links(do_fix))
 
     database.commit()
 
