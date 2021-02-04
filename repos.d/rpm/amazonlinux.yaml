@@ -6,6 +6,7 @@
   desc: Amazon Linux 1
   statsgroup: Amazon
   family: fedora
+  ruleset: [fedora, rpm]
   minpackages: 2000
   sources:
     - name: [ main, updates ]
@@ -23,6 +24,7 @@
   desc: Amazon Linux 2
   statsgroup: Amazon
   family: fedora
+  ruleset: [fedora, rpm]
   minpackages: 2000
   sources:
     - name: core

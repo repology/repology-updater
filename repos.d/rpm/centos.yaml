@@ -6,6 +6,7 @@
   desc: CentOS 6
   statsgroup: CentOS
   family: centos
+  ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
   sources:
@@ -27,6 +28,7 @@
   desc: CentOS 7
   statsgroup: CentOS
   family: centos
+  ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2500
   sources:
@@ -48,6 +50,7 @@
   desc: CentOS 8
   statsgroup: CentOS
   family: centos
+  ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
   sources:

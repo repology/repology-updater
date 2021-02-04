@@ -5,6 +5,7 @@
   type: repository
   desc: Scientific Linux 7.x
   family: centos
+  ruleset: [centos, rpm]
   color: '000096'
   minpackages: 4000
   sources:
