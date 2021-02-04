@@ -223,8 +223,8 @@ def handle_totals(env: Environment, do_fix: bool) -> None:
         count = 0
 
         for discrepancy in discrepancies:
-            if 'name' in discrepancy:
-                logger.get_indented().log(f'discrepancy detected in {where} "{discrepancy["name"]}"')
+            if 'key' in discrepancy:
+                logger.get_indented().log(f'discrepancy detected in {where} "{discrepancy["key"]}"')
             else:
                 logger.get_indented().log(f'discrepancy detected in {where}')
 

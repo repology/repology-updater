@@ -48,7 +48,7 @@ WITH expected AS (
 )
 {% endif %}
 SELECT
-	url,
+	url AS key,
 	row_to_json(actual) AS actual,
 	row_to_json(expected) AS expected
 FROM

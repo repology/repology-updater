@@ -159,7 +159,7 @@ WITH expected_alive AS (
 )
 {% endif %}
 SELECT
-	maintainer AS name,
+	maintainer AS key,
 	row_to_json(actual) AS actual,
 	row_to_json(expected) AS expected
 FROM

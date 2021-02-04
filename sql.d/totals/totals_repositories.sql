@@ -107,7 +107,7 @@ WITH expected AS (
 )
 {% endif %}
 SELECT
-	name,
+	name AS key,
 	row_to_json(actual) AS actual,
 	row_to_json(expected) AS expected
 FROM
