@@ -54,6 +54,7 @@ WITH old_raw AS (
 		url,
 		coalesce(new.refcount, 0) - coalesce(old.refcount, 0) AS delta_refcount
 	FROM old FULL OUTER JOIN new USING(url)
+	WHERE coalesce(new.refcount, 0) != coalesce(old.refcount, 0)
 )
 INSERT INTO links (
 	url,
