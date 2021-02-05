@@ -6,7 +6,7 @@
   desc: EPEL 6
   statsgroup: EPEL
   family: fedora
-  ruleset: [fedora, epel]
+  ruleset: [fedora, rpm, epel]
   color: 'ff0000'
   minpackages: 5000
   sources:
@@ -27,7 +27,7 @@
   desc: EPEL 7
   statsgroup: EPEL
   family: fedora
-  ruleset: [fedora, epel]
+  ruleset: [fedora, rpm, epel]
   color: 'ff0000'
   minpackages: 6000
   sources:
@@ -48,7 +48,7 @@
   desc: EPEL 8
   statsgroup: EPEL
   family: fedora
-  ruleset: [fedora, epel]
+  ruleset: [fedora, rpm, epel]
   color: 'ff0000'
   minpackages: 150
   sources:

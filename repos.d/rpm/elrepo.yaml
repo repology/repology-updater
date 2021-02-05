@@ -5,6 +5,7 @@
   type: repository
   desc: ELRepo el7
   family: centos
+  ruleset: [centos, rpm]
   color: '1938ad'
   minpackages: 80
   sources:
@@ -25,6 +26,7 @@
   type: repository
   desc: ELRepo el7 Extras
   family: centos
+  ruleset: [centos, rpm]
   color: '1938ad'
   minpackages: 0
   sources:
@@ -44,6 +46,7 @@
   type: repository
   desc: ELRepo el7 Testing
   family: centos
+  ruleset: [centos, rpm]
   color: '1938ad'
   minpackages: 0
   sources:
@@ -63,6 +66,7 @@
   type: repository
   desc: ELRepo el8
   family: centos
+  ruleset: [centos, rpm]
   color: '1938ad'
   minpackages: 0
   sources:
@@ -82,6 +86,7 @@
   type: repository
   desc: ELRepo el8 Extras
   family: centos
+  ruleset: [centos, rpm]
   color: '1938ad'
   minpackages: 0
   sources:
@@ -101,6 +106,7 @@
   type: repository
   desc: ELRepo el8 Testing
   family: centos
+  ruleset: [centos, rpm]
   color: '1938ad'
   minpackages: 0
   sources:

@@ -7,7 +7,7 @@
   type: repository
   desc: PackMan Fedora 26
   family: fedora
-  ruleset: [fedora, packman]
+  ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
   sources:
@@ -27,7 +27,7 @@
   type: repository
   desc: PackMan Fedora 27
   family: fedora
-  ruleset: [fedora, packman]
+  ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
   sources:
@@ -47,7 +47,7 @@
   type: repository
   desc: PackMan Fedora 28
   family: fedora
-  ruleset: [fedora, packman]
+  ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
   sources:
@@ -67,7 +67,7 @@
   type: repository
   desc: PackMan Fedora 29
   family: fedora
-  ruleset: [fedora, packman]
+  ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
   sources:
@@ -87,7 +87,7 @@
   type: repository
   desc: PackMan Fedora 30
   family: fedora
-  ruleset: [fedora, packman]
+  ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
   sources:
@@ -107,7 +107,7 @@
   type: repository
   desc: PackMan Factory
   family: opensuse
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 0
   sources:
@@ -128,7 +128,7 @@
   type: repository
   desc: PackMan openSUSE Leap 42.3
   family: opensuse  # XXX: own family?
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 900
   sources:
@@ -148,7 +148,7 @@
   type: repository
   desc: PackMan openSUSE Leap 15.0
   family: opensuse  # XXX: own family?
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 800
   sources:
@@ -168,7 +168,7 @@
   type: repository
   desc: PackMan openSUSE Leap 15.1
   family: opensuse  # XXX: own family?
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 500
   sources:
@@ -188,7 +188,7 @@
   type: repository
   desc: PackMan openSUSE Leap 15.2
   family: opensuse  # XXX: own family?
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 500
   sources:
@@ -208,7 +208,7 @@
   type: repository
   desc: PackMan openSUSE Tumbleweed
   family: opensuse  # XXX: own family?
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 450
   sources:
@@ -228,7 +228,7 @@
   type: repository
   desc: PackMan SLE 12
   family: opensuse  # XXX: own family?
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 200
   sources:
@@ -248,7 +248,7 @@
   type: repository
   desc: PackMan SLE 15
   family: opensuse  # XXX: own family?
-  ruleset: [opensuse, packman]
+  ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 250
   sources:

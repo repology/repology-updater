@@ -5,7 +5,7 @@
   type: repository
   desc: RPM Sphere
   family: fedora
-  ruleset: [fedora,rpmsphere]
+  ruleset: [fedora, rpm, rpmsphere]
   minpackages: 2500
   sources:
     - name: source
