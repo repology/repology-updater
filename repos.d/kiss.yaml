@@ -11,7 +11,7 @@
     - name: repo
       fetcher: GitFetcher
       parser: KissGitParser
-      url: 'https://github.com/kisslinux/repo.git'
+      url: 'https://github.com/kiss-community/repo-main.git'
       maintainer_from_git: true
       depth: null
       sparse_checkout: [ '**/version', '**/sources' ]
@@ -21,10 +21,10 @@
     - desc: KISS Linux - Package System
       url: https://k1ss.org/package-system/
     - desc: Main Repositories on GitHub
-      url: https://github.com/kisslinux/repo
+      url: https://github.com/kiss-community/repo-main
   packagelinks:
     - desc: Package directory on GitHub
-      url: 'https://github.com/kisslinux/repo/tree/master/{path}'
+      url: 'https://github.com/kiss-community/repo-main/tree/master/{path}'
   tags: [ all, production, kiss ]
 
 - name: kiss_community
@@ -37,18 +37,18 @@
     - name: repo
       fetcher: GitFetcher
       parser: KissGitParser
-      url: 'https://github.com/kisslinux/community.git'
+      url: 'https://github.com/kiss-community/repo-community.git'
       maintainer_from_git: true
       depth: null
       sparse_checkout: [ '**/version', '**/sources' ]
   repolinks:
     - desc: KISS Linux home
-      url: https://getkiss.org/
+      url: https://k1ss.org/
     - desc: KISS Linux - Package System
-      url: https://getkiss.org/pages/package-system/
+      url: https://k1ss.org/package-system/
     - desc: Community Repository on GitHub
-      url: https://github.com/kisslinux/community
+      url: https://github.com/kiss-community/repo-community
   packagelinks:
     - desc: Package directory on GitHub
-      url: 'https://github.com/kisslinux/community/tree/master/{path}'
+      url: 'https://github.com/kiss-community/repo-community/tree/main/{path}'
   tags: [ all, production, kiss ]
