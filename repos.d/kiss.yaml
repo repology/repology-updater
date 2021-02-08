@@ -38,6 +38,7 @@
       fetcher: GitFetcher
       parser: KissGitParser
       url: 'https://github.com/kiss-community/repo-community.git'
+      branch: main
       maintainer_from_git: true
       depth: null
       sparse_checkout: [ '**/version', '**/sources' ]
