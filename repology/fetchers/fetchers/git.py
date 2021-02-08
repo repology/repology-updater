@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import shutil
 from typing import List, Optional
 
 from repology.fetchers import PersistentDirFetcher
@@ -74,6 +75,13 @@ class GitFetcher(PersistentDirFetcher):
 
     def _do_update(self, statepath: str, logger: Logger) -> bool:
         r = Runner(logger=logger, cwd=statepath)
+
+        old_url = r.get('git', 'remote', 'get-url', 'origin').strip()
+
+        if old_url != self._url:
+            logger.log(f'repository URL has changed {old_url} -> {self._url}, will clone from scratch')
+            shutil.rmtree(statepath)
+            return self._do_fetch(statepath, logger)
 
         old_head = r.get('git', 'rev-parse', 'HEAD').strip()
 
