@@ -40,4 +40,7 @@ class CRUXPortsJsonParser(Parser):
                 pkg.set_subrepo(port['repository'])
                 pkg.add_downloads(port['sources'])
 
+                if '${' in port['name']:
+                    raise RuntimeError(f'bad port name {port["name"]}')
+
                 yield pkg
