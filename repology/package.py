@@ -125,6 +125,8 @@ class PackageFlags:
                 PackageFlags.WEAK_DEVEL: 'WEAK_DEVEL',
                 PackageFlags.STABLE: 'STABLE',
                 PackageFlags.ALTVER: 'ALTVER',
+                PackageFlags.VULNERABLE: 'VULNERABLE',
+                PackageFlags.ALTSCHEME: 'ALTSCHEME',
             }.items() if val & var
         )
 
