@@ -11,7 +11,7 @@
     - name: packages.json
       fetcher: FileFetcher
       parser: TermuxJsonParser
-      url: https://dl.bintray.com/termux/metadata/repology/packages.json
+      url: https://raw.githubusercontent.com/termux/repology-metadata/master/packages.json
   repolinks:
     - desc: Termux home
       url: https://termux.com/
