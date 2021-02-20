@@ -161,61 +161,60 @@ class GentooGitParser(Parser):
         normalize_version = VersionStripper().strip_right_greedy('-')
 
         for category, package in _iter_packages(path):
-            pkg = factory.begin(category + '/' + package)
+            with factory.begin(category + '/' + package) as pkg:
+                pkg.add_name(package, NameType.GENTOO_NAME)
+                pkg.add_name(category + '/' + package, NameType.GENTOO_FULL_NAME)
+                pkg.add_categories(category)
 
-            pkg.add_name(package, NameType.GENTOO_NAME)
-            pkg.add_name(category + '/' + package, NameType.GENTOO_FULL_NAME)
-            pkg.add_categories(category)
-
-            xml_metadata_path = os.path.join(path, category, package, 'metadata.xml')
-            if os.path.isfile(xml_metadata_path):
-                xml_metadata = _parse_xml_metadata(xml_metadata_path)
-                for upstream_type in xml_metadata.unsupported_upstream_types:
-                    pkg.log(f'Unsupported upstream type {upstream_type}', Logger.ERROR)
-            elif self._require_xml_metadata:
-                pkg.log('cannot find metadata ({}), package dropped'.format(os.path.relpath(xml_metadata_path, path)), Logger.ERROR)
-                continue
-            else:
-                xml_metadata = _ParsedXmlMetadata()
-
-            pkg.add_maintainers(xml_metadata.maintainers)
-
-            if xml_metadata.cpe is not None:
-                cpe = xml_metadata.cpe.split(':')
-                pkg.add_cpe(cpe[2], cpe[3])
-
-            for ebuild in _iter_ebuilds(path, category, package):
-                subpkg = pkg.clone(append_ident='/' + ebuild)
-
-                subpkg.set_version(ebuild[len(package) + 1:], normalize_version)
-                if subpkg.version.endswith('9999'):
-                    subpkg.set_flags(PackageFlags.ROLLING)
-
-                md5cache_metadata_path = os.path.join(path, 'metadata', 'md5-cache', category, ebuild)
-
-                if os.path.isfile(md5cache_metadata_path):
-                    md5cache_metadata = _parse_md5cache_metadata(md5cache_metadata_path)
-
-                    subpkg.set_summary(md5cache_metadata.get('DESCRIPTION'))
-
-                    if 'LICENSE' in md5cache_metadata:
-                        if '(' in md5cache_metadata['LICENSE']:
-                            # XXX: conditionals and OR's: need more
-                            # complex parsing and backend support
-                            subpkg.add_licenses(md5cache_metadata['LICENSE'])
-                        else:
-                            subpkg.add_licenses(md5cache_metadata['LICENSE'].split(' '))
-
-                    if 'SRC_URI' in md5cache_metadata:
-                        # skip local files
-                        subpkg.add_downloads(filter(lambda s: '/' in s, _parse_conditional_expr(md5cache_metadata['SRC_URI'])))
-
-                    subpkg.add_homepages(md5cache_metadata.get('HOMEPAGE', '').split(' '))
-                elif self._require_md5cache_metadata:
-                    subpkg.log('cannot find metadata ({}), package dropped'.format(os.path.relpath(md5cache_metadata_path, path)), Logger.ERROR)
+                xml_metadata_path = os.path.join(path, category, package, 'metadata.xml')
+                if os.path.isfile(xml_metadata_path):
+                    xml_metadata = _parse_xml_metadata(xml_metadata_path)
+                    for upstream_type in xml_metadata.unsupported_upstream_types:
+                        pkg.log(f'Unsupported upstream type {upstream_type}', Logger.ERROR)
+                elif self._require_xml_metadata:
+                    pkg.log('cannot find metadata ({}), package dropped'.format(os.path.relpath(xml_metadata_path, path)), Logger.ERROR)
                     continue
+                else:
+                    xml_metadata = _ParsedXmlMetadata()
 
-                # upstreams should be added after "real" homepages
-                subpkg.add_homepages(xml_metadata.upstreams)
+                pkg.add_maintainers(xml_metadata.maintainers)
 
-                yield subpkg
+                if xml_metadata.cpe is not None:
+                    cpe = xml_metadata.cpe.split(':')
+                    pkg.add_cpe(cpe[2], cpe[3])
+
+                for ebuild in _iter_ebuilds(path, category, package):
+                    subpkg = pkg.clone(append_ident='/' + ebuild)
+
+                    subpkg.set_version(ebuild[len(package) + 1:], normalize_version)
+                    if subpkg.version.endswith('9999'):
+                        subpkg.set_flags(PackageFlags.ROLLING)
+
+                    md5cache_metadata_path = os.path.join(path, 'metadata', 'md5-cache', category, ebuild)
+
+                    if os.path.isfile(md5cache_metadata_path):
+                        md5cache_metadata = _parse_md5cache_metadata(md5cache_metadata_path)
+
+                        subpkg.set_summary(md5cache_metadata.get('DESCRIPTION'))
+
+                        if 'LICENSE' in md5cache_metadata:
+                            if '(' in md5cache_metadata['LICENSE']:
+                                # XXX: conditionals and OR's: need more
+                                # complex parsing and backend support
+                                subpkg.add_licenses(md5cache_metadata['LICENSE'])
+                            else:
+                                subpkg.add_licenses(md5cache_metadata['LICENSE'].split(' '))
+
+                        if 'SRC_URI' in md5cache_metadata:
+                            # skip local files
+                            subpkg.add_downloads(filter(lambda s: '/' in s, _parse_conditional_expr(md5cache_metadata['SRC_URI'])))
+
+                        subpkg.add_homepages(md5cache_metadata.get('HOMEPAGE', '').split(' '))
+                    elif self._require_md5cache_metadata:
+                        subpkg.log('cannot find metadata ({}), package dropped'.format(os.path.relpath(md5cache_metadata_path, path)), Logger.ERROR)
+                        continue
+
+                    # upstreams should be added after "real" homepages
+                    subpkg.add_homepages(xml_metadata.upstreams)
+
+                    yield subpkg
