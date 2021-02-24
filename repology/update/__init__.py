@@ -49,6 +49,12 @@ class ChangedProjectsAccumulator:
             self._effnames = []
 
 
+def adapt_package(package: Package) -> Dict[str, Any]:
+    res = package.__dict__
+    del res['links']  # to be implemented later
+    return res  # type: ignore
+
+
 class UpdateProcess:
     _database: Database
     _logger: Logger
@@ -80,7 +86,7 @@ class UpdateProcess:
         for change in iter_changed_projects(iter_project_hashes(self._database), projects, stats):
             if isinstance(change, UpdatedProject):
                 fill_packageset_versions(change.packages)
-                self._database.add_packages(change.packages)
+                self._database.add_packages(map(adapt_package, change.packages))
                 self._database.update_project_hash(change.effname, change.hash_)
 
                 for package in change.packages:
