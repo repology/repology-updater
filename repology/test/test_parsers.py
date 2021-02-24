@@ -77,6 +77,8 @@ class TestParsers(unittest.TestCase):
             'cpe_target_sw': None,
             'cpe_target_hw': None,
             'cpe_other': None,
+
+            'links': None,
         }
 
         # not relevant here
