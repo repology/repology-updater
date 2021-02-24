@@ -70,12 +70,15 @@ class ChunkedSerializer:
 
 
 def _stream_deserialize(path: str) -> Iterator[Package]:
-    with open(path, 'rb') as fd:
-        unpickler = pickle.Unpickler(fd)
-        count = unpickler.load()
+    try:
+        with open(path, 'rb') as fd:
+            unpickler = pickle.Unpickler(fd)
+            count = unpickler.load()
 
-        for _ in range(count):
-            yield unpickler.load()
+            for _ in range(count):
+                yield unpickler.load()
+    except Exception as e:
+        raise RuntimeError(f'Failed to deserialize packages from {path}') from e
 
 
 def heap_deserialize(paths: Iterable[str]) -> Iterator[List[Package]]:
