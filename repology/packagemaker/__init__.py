@@ -18,7 +18,7 @@
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Dict, Iterable, List, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type, TypeVar
 
 from repology.logger import Logger, NoopLogger
 from repology.package import Package, PackageStatus
@@ -212,13 +212,24 @@ def _simple_setter(fieldname: str, want_type: Type[Any], *normalizers: Normalize
     return inner
 
 
-def _extend_unique(existing: List[str], iterable: Iterable[str]) -> None:
+T = TypeVar('T')
+
+
+def _extend_unique(existing: List[T], iterable: Iterable[T]) -> None:
     seen = set(existing) if existing else set()
 
     for value in iterable:
         if value not in seen:
             seen.add(value)
             existing.append(value)
+
+
+def _unicalize(items: Iterable[T]) -> Iterator[T]:
+    prev = None
+    for item in items:
+        if item != prev:
+            prev = item
+            yield item
 
 
 class PackageMaker(PackageMakerBase):
