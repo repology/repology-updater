@@ -59,6 +59,8 @@ CREATE TABLE packages (
 	cpe_target_hw text NULL,
 	cpe_other text NULL,
 
+	links json NULL,
+
 	-- calculated
 	effname text NOT NULL,
 	version text NOT NULL,

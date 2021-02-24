@@ -174,3 +174,27 @@ BEGIN
 	FROM
 		related;
 END; $$ LANGUAGE plpgsql;
+
+-- Translates string urls to link ids within links package field
+CREATE OR REPLACE FUNCTION translate_links(links json) RETURNS json AS $$
+BEGIN
+	RETURN
+		(
+			WITH expanded AS (
+				SELECT
+					json_array_elements(links)->0 AS link_type,
+					json_array_elements(links)->>1 AS url
+			), translated AS (
+				SELECT
+					link_type,
+					(SELECT id FROM links WHERE links.url = expanded.url) AS link_id
+				FROM expanded
+			), joined AS (
+				SELECT
+					json_build_array(link_type, link_id) AS link
+				FROM translated
+			)
+			SELECT json_agg(link) FROM joined
+		);
+END;
+$$ LANGUAGE plpgsql STABLE RETURNS NULL ON NULL INPUT;

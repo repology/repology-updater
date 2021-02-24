@@ -18,6 +18,8 @@
 from collections import defaultdict
 from typing import Any, Dict, Iterable, List
 
+import psycopg2
+
 from repology.database import Database
 from repology.fieldstats import FieldStatistics
 from repology.logger import Logger
@@ -51,7 +53,8 @@ class ChangedProjectsAccumulator:
 
 def adapt_package(package: Package) -> Dict[str, Any]:
     res = package.__dict__
-    del res['links']  # to be implemented later
+    if (links := res.get('links')) is not None:
+        res['links'] = psycopg2.extras.Json(links)
     return res  # type: ignore
 
 
@@ -114,9 +117,17 @@ class UpdateProcess:
     def _finish_update(self) -> None:
         self._logger.log(f'explicit analyze is {"enabled" if self._enable_explicit_analyze else "disabled"}')
 
+        # Create new objects referenced from packages by id
+        self._logger.log('creating new links')
+        self._database.update_create_links(self._enable_explicit_analyze)
+
+        self._logger.log('translating incoming packages')
+        self._database.update_translate_packages()
+
         self._logger.log('preparing updated packages')
         self._database.update_prepare_packages()
 
+        # General update
         self._logger.log('updating CPE information')
         self._database.update_cpe(self._enable_explicit_analyze)
 
@@ -156,8 +167,11 @@ class UpdateProcess:
         self._logger.log('updating projects turnover')
         self._database.update_projects_turnover()
 
-        self._logger.log('updating links')
-        self._database.update_links()
+        self._logger.log('updating links (legacy)')
+        self._database.update_links_legacy(self._enable_explicit_analyze)
+
+        self._logger.log('updating links (unified)')
+        self._database.update_links_unified(self._enable_explicit_analyze)
 
         self._logger.log('updating statistics (delta)')
         self._database.update_statistics_delta()

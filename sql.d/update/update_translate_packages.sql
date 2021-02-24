@@ -1,4 +1,4 @@
--- Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -15,18 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
---------------------------------------------------------------------------------
--- @param analyze=True
---------------------------------------------------------------------------------
-
-{% if analyze %}
-ANALYZE changed_projects;
-{% endif %}
-
-DELETE FROM packages
-WHERE effname IN (SELECT effname FROM changed_projects);
-
-INSERT INTO packages (
+INSERT INTO incoming_packages (
 	repo,
 	family,
 	subrepo,
@@ -71,7 +60,8 @@ INSERT INTO packages (
 
 	flags,
 	shadow
-) SELECT
+)
+SELECT
 	repo,
 	family,
 	subrepo,
@@ -107,7 +97,7 @@ INSERT INTO packages (
 	cpe_target_hw,
 	cpe_other,
 
-	links,
+	translate_links(links),
 
 	effname,
 
@@ -116,8 +106,4 @@ INSERT INTO packages (
 
 	flags,
 	shadow
-FROM incoming_packages;
-
-{% if analyze %}
-ANALYZE packages;
-{% endif %}
+FROM incoming_packages_raw;
