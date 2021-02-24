@@ -16,13 +16,13 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
---
 -- @param repo
 -- @param fields
---
+-- @param link_types
 --------------------------------------------------------------------------------
 UPDATE repositories
 SET
-	used_package_fields=%(fields)s
+	used_package_fields=%(fields)s,
+	used_package_link_types=%(link_types)s
 WHERE
 	name=%(repo)s;

@@ -109,7 +109,11 @@ class UpdateProcess:
 
         self._logger.log('updating field statistics')
         for repo, field_stats in field_stats_per_repo.items():
-            self._database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
+            self._database.update_repository_used_package_fields(
+                repo,
+                field_stats.get_used_fields(),
+                field_stats.get_used_link_types()
+            )
 
         # This was picked randomly
         self._enable_explicit_analyze = stats.change_fraction > 0.05

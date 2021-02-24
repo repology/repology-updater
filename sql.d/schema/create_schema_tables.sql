@@ -249,6 +249,7 @@ CREATE TABLE repositories (
 	last_updated timestamp with time zone NULL,
 
 	used_package_fields text[],
+	used_package_link_types integer[],
 
 	ruleset_hash text NULL,
 
