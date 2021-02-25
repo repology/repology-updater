@@ -21,21 +21,10 @@
 --------------------------------------------------------------------------------
 WITH expected AS (
 	SELECT
-		url,
-		count(*) AS refcount
-	FROM (
-		SELECT unnest(downloads) AS url
-		FROM packages
-		UNION ALL
-		SELECT homepage AS url
-		FROM packages
-		WHERE
-			homepage IS NOT NULL AND
-			repo NOT IN('cpan', 'metacpan', 'rubygems', 'cran') AND
-			-- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
-			homepage NOT LIKE '%%mran.revolutionanalytics.com/snapshot/20%%'
-	) AS raw
-	GROUP BY url
+        (json_array_elements(links)->>1)::integer AS id,
+        count(*) AS refcount
+    FROM packages
+    GROUP BY id
 )
 {% if do_fix %}
 -- note: these changes are not shown to SELECT below due to how CTE work
@@ -44,7 +33,7 @@ WITH expected AS (
 	SET
 		refcount = expected.refcount
 	FROM expected
-	WHERE links.url = expected.url
+	WHERE links.id = expected.id
 )
 {% endif %}
 SELECT
@@ -52,7 +41,7 @@ SELECT
 	row_to_json(actual) AS actual,
 	row_to_json(expected) AS expected
 FROM
-	expected FULL OUTER JOIN links actual using(url)
+	expected FULL OUTER JOIN links actual USING(id)
 WHERE
 	actual.refcount != coalesce(expected.refcount, 0)
 ;
