@@ -21,7 +21,7 @@
 
 import unittest
 
-from repology.package import Package, PackageFlags
+from repology.package import LinkType, Package, PackageFlags
 
 from .package import spawn_package
 
@@ -38,6 +38,20 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(
             spawn_package(name='a'),
             spawn_package(name='a')
+        )
+        self.assertEqual(
+            spawn_package(
+                links=[
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
+                ]
+            ),
+            spawn_package(
+                links=[
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                ]
+            )
         )
 
         self.assertNotEqual(
@@ -121,8 +135,22 @@ class TestParsers(unittest.TestCase):
 
     def test_hash(self) -> None:
         self.assertEqual(
-            spawn_package(name='foo', version='1.0', downloads=['http://foo']).get_classless_hash(),
-            spawn_package(name='foo', version='1.0', downloads=['http://foo']).get_classless_hash(),
+            spawn_package(
+                name='foo',
+                version='1.0',
+                links=[
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
+                ]
+            ).get_classless_hash(),
+            spawn_package(
+                name='foo',
+                version='1.0',
+                links=[
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                ]
+            ).get_classless_hash()
         )
 
         self.assertNotEqual(

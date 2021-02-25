@@ -56,18 +56,12 @@ WITH old_raw AS (
 	FROM old FULL OUTER JOIN new USING(url)
 	WHERE coalesce(new.refcount, 0) != coalesce(old.refcount, 0)
 )
-INSERT INTO links (
-	url,
-	refcount
-)
-SELECT
-	url,
-	delta_refcount
+UPDATE links
+SET
+	refcount = refcount + delta_refcount,
+	orphaned_since = CASE WHEN refcount + delta_refcount = 0 THEN now() ELSE NULL END
 FROM delta
-ON CONFLICT (url)
-DO UPDATE SET
-	refcount = links.refcount + EXCLUDED.refcount,
-	orphaned_since = CASE WHEN links.refcount + EXCLUDED.refcount = 0 THEN now() ELSE NULL END;
+WHERE links.url = delta.url;
 
 {% if analyze %}
 ANALYZE links;

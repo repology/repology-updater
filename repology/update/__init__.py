@@ -18,6 +18,8 @@
 from collections import defaultdict
 from typing import Any, Dict, Iterable, List
 
+import psycopg2
+
 from repology.database import Database
 from repology.fieldstats import FieldStatistics
 from repology.logger import Logger
@@ -47,6 +49,13 @@ class ChangedProjectsAccumulator:
         if self._effnames:
             self._database.queue_project_changes(self._effnames)
             self._effnames = []
+
+
+def adapt_package(package: Package) -> Dict[str, Any]:
+    res = package.__dict__
+    if (links := res.get('links')) is not None:
+        res['links'] = psycopg2.extras.Json(links)
+    return res  # type: ignore
 
 
 class UpdateProcess:
@@ -80,7 +89,7 @@ class UpdateProcess:
         for change in iter_changed_projects(iter_project_hashes(self._database), projects, stats):
             if isinstance(change, UpdatedProject):
                 fill_packageset_versions(change.packages)
-                self._database.add_packages(change.packages)
+                self._database.add_packages(map(adapt_package, change.packages))
                 self._database.update_project_hash(change.effname, change.hash_)
 
                 for package in change.packages:
@@ -100,7 +109,11 @@ class UpdateProcess:
 
         self._logger.log('updating field statistics')
         for repo, field_stats in field_stats_per_repo.items():
-            self._database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
+            self._database.update_repository_used_package_fields(
+                repo,
+                field_stats.get_used_fields(),
+                field_stats.get_used_link_types()
+            )
 
         # This was picked randomly
         self._enable_explicit_analyze = stats.change_fraction > 0.05
@@ -108,9 +121,17 @@ class UpdateProcess:
     def _finish_update(self) -> None:
         self._logger.log(f'explicit analyze is {"enabled" if self._enable_explicit_analyze else "disabled"}')
 
+        # Create new objects referenced from packages by id
+        self._logger.log('creating new links')
+        self._database.update_create_links(self._enable_explicit_analyze)
+
+        self._logger.log('translating incoming packages')
+        self._database.update_translate_packages()
+
         self._logger.log('preparing updated packages')
         self._database.update_prepare_packages()
 
+        # General update
         self._logger.log('updating CPE information')
         self._database.update_cpe(self._enable_explicit_analyze)
 
@@ -150,8 +171,11 @@ class UpdateProcess:
         self._logger.log('updating projects turnover')
         self._database.update_projects_turnover()
 
-        self._logger.log('updating links')
-        self._database.update_links()
+        self._logger.log('updating links (legacy)')
+        self._database.update_links_legacy(self._enable_explicit_analyze)
+
+        self._logger.log('updating links (unified)')
+        self._database.update_links_unified(self._enable_explicit_analyze)
 
         self._logger.log('updating statistics (delta)')
         self._database.update_statistics_delta()

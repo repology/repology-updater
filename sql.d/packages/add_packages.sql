@@ -16,9 +16,9 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param many objects
+-- @param many dicts
 --------------------------------------------------------------------------------
-INSERT INTO incoming_packages (
+INSERT INTO incoming_packages_raw (
 	-- parsed, immutable
 	repo,
 	family,
@@ -54,6 +54,8 @@ INSERT INTO incoming_packages (
 	cpe_target_sw,
 	cpe_target_hw,
 	cpe_other,
+
+	links,
 
 	-- calculated
 	effname,
@@ -99,6 +101,8 @@ INSERT INTO incoming_packages (
 	%(cpe_target_sw)s,
 	%(cpe_target_hw)s,
 	%(cpe_other)s,
+
+	%(links)s,
 
 	-- calculated
 	%(effname)s,

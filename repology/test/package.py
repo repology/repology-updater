@@ -20,7 +20,7 @@
 # mypy: no-disallow-untyped-calls
 
 import unittest
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from repology.package import Package
 from repology.packagemaker import NameType, PackageFactory
@@ -40,6 +40,7 @@ def spawn_package(
     flavors: Optional[List[str]] = None,
     branch: Optional[str] = None,
     downloads: Optional[List[str]] = None,
+    links: Optional[List[Tuple[int, str]]] = None,
 ) -> Package:
     m = PackageFactory().begin()
 
@@ -52,6 +53,10 @@ def spawn_package(
     m.add_categories(category)
     m.add_maintainers(maintainers)
     m.add_downloads(downloads)
+
+    if links:
+        for link_type, url in links:
+            m.add_link(link_type, url)
 
     p = m.spawn(repo=repo, family=family if family is not None else repo)
 

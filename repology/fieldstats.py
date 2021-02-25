@@ -23,10 +23,12 @@ from repology.package import Package
 class FieldStatistics:
     _interesting_fields: Set[str]
     _used_fields: Set[str]
+    _used_link_types: Set[int]
 
     def __init__(self) -> None:
         self._interesting_fields = set(Package.__slots__)
         self._used_fields = set()
+        self._used_link_types = set()
 
     def add(self, package: Package) -> None:
         new_fields = False
@@ -36,8 +38,15 @@ class FieldStatistics:
                 self._used_fields.add(field)
                 new_fields = True
 
+        if (links := getattr(package, 'links')):
+            for link_type, _ in links:
+                self._used_link_types.add(link_type)
+
         if new_fields:
             self._interesting_fields -= self._used_fields
 
     def get_used_fields(self) -> List[str]:
         return list(self._used_fields)
+
+    def get_used_link_types(self) -> List[int]:
+        return list(self._used_link_types)

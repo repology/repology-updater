@@ -1,4 +1,4 @@
--- Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -16,13 +16,24 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- @param repo
--- @param fields
--- @param link_types
+-- @param analyze=True
 --------------------------------------------------------------------------------
-UPDATE repositories
-SET
-	used_package_fields=%(fields)s,
-	used_package_link_types=%(link_types)s
-WHERE
-	name=%(repo)s;
+
+WITH "all" AS (
+	SELECT DISTINCT json_array_elements(links)->>1 AS url FROM incoming_packages_raw
+), new AS (
+	SELECT url
+	FROM "all"
+	WHERE NOT EXISTS (
+		SELECT *
+		FROM links
+		WHERE links.url = "all".url
+	)
+)
+INSERT INTO links(url)
+SELECT url
+FROM new;
+
+{% if analyze %}
+ANALYZE links;
+{% endif %}

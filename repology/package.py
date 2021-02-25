@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
-from typing import Any, ClassVar, Dict, List, Optional, cast
+from typing import Any, ClassVar, Dict, List, Optional, Tuple, cast
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -131,6 +131,27 @@ class PackageFlags:
         )
 
 
+class LinkType:
+    UPSTREAM_HOMEPAGE: ClassVar[int] = 0
+    UPSTREAM_DOWNLOAD: ClassVar[int] = 1
+    UPSTREAM_REPOSITORY: ClassVar[int] = 2
+    UPSTREAM_ISSUE_TRACKER: ClassVar[int] = 3
+    MODULE_COLLECTION_PAGE: ClassVar[int] = 4
+    PACKAGE_HOMEPAGE: ClassVar[int] = 5
+    PACKAGE_DOWNLOAD: ClassVar[int] = 6
+    PACKAGE_REPOSITORY: ClassVar[int] = 7
+    PACKAGE_ISSUE_TRACKER: ClassVar[int] = 8
+    PACKAGE_RECIPE: ClassVar[int] = 9
+    PACKAGE_RECIPE_RAW: ClassVar[int] = 10
+    PACKAGE_PATCH: ClassVar[int] = 11
+    PACKAGE_PATCH_RAW: ClassVar[int] = 12
+    PACKAGE_BUILD_LOG: ClassVar[int] = 13
+    PACKAGE_BUILD_LOG_RAW: ClassVar[int] = 14
+    PACKAGE_NEW_VERSION_CHECKER: ClassVar[int] = 15
+    DOCUMENTATION: ClassVar[int] = 16
+    OTHER: ClassVar[int] = 99
+
+
 class Package:
     __slots__ = [
         # parsed, immutable
@@ -168,6 +189,8 @@ class Package:
         'cpe_target_sw',
         'cpe_target_hw',
         'cpe_other',
+
+        'links',
 
         # calculated
         'effname',
@@ -218,6 +241,8 @@ class Package:
     cpe_target_sw: Optional[str]
     cpe_target_hw: Optional[str]
     cpe_other: Optional[str]
+
+    links: Optional[List[Tuple[int, str]]]
 
     effname: str
 
@@ -271,6 +296,8 @@ class Package:
                  cpe_target_hw: Optional[str] = None,
                  cpe_other: Optional[str] = None,
 
+                 links: Optional[List[Tuple[int, str]]] = None,
+
                  flags: int = 0,
                  shadow: bool = False,
                  flavors: Optional[List[str]] = None,
@@ -310,6 +337,8 @@ class Package:
         self.cpe_target_sw = cpe_target_sw
         self.cpe_target_hw = cpe_target_hw
         self.cpe_other = cpe_other
+
+        self.links = links
 
         # calculated
         self.effname = effname

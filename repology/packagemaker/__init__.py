@@ -18,10 +18,10 @@
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Dict, Iterable, List, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, TypeVar
 
 from repology.logger import Logger, NoopLogger
-from repology.package import Package, PackageStatus
+from repology.package import LinkType, Package, PackageStatus
 from repology.packagemaker import normalizers as nzs
 from repology.packagemaker.names import NameMapper
 from repology.packagemaker.names import NameType as NameType
@@ -67,6 +67,8 @@ class PackageTemplate:
         'cpe_other',
 
         'flavors',
+
+        'links',
     ]
 
     subrepo: Optional[str]
@@ -100,6 +102,8 @@ class PackageTemplate:
 
     flavors: List[str]
 
+    links: List[Tuple[int, str]]
+
     def __init__(self) -> None:
         self.subrepo = None
 
@@ -131,6 +135,8 @@ class PackageTemplate:
         self.cpe_other = None
 
         self.flavors = []
+
+        self.links = []
 
 
 class PackageMakerBase(Logger):
@@ -212,13 +218,24 @@ def _simple_setter(fieldname: str, want_type: Type[Any], *normalizers: Normalize
     return inner
 
 
-def _extend_unique(existing: List[str], iterable: Iterable[str]) -> None:
+T = TypeVar('T')
+
+
+def _extend_unique(existing: List[T], iterable: Iterable[T]) -> None:
     seen = set(existing) if existing else set()
 
     for value in iterable:
         if value not in seen:
             seen.add(value)
             existing.append(value)
+
+
+def _unicalize(items: Iterable[T]) -> Iterator[T]:
+    prev = None
+    for item in items:
+        if item != prev:
+            prev = item
+            yield item
 
 
 class PackageMaker(PackageMakerBase):
@@ -281,6 +298,8 @@ class PackageMaker(PackageMakerBase):
     @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_homepages(self, *args: Any) -> None:
         _extend_unique(self._package.homepages, args)
+        for arg in args:
+            self.add_link(LinkType.UPSTREAM_HOMEPAGE, arg)
 
     @_omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
     def add_licenses(self, *args: Any) -> None:
@@ -289,10 +308,29 @@ class PackageMaker(PackageMakerBase):
     @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_downloads(self, *args: Any) -> None:
         _extend_unique(self._package.downloads, args)
+        for arg in args:
+            self.add_link(LinkType.UPSTREAM_DOWNLOAD, arg)
 
     @_omnivorous_setter('flavor', str, nzs.strip, nzs.warn_whitespace, nzs.forbid_newlines)
     def add_flavors(self, *args: Any) -> None:
         _extend_unique(self._package.flavors, args)
+
+    def add_link(self, link_type: int, url: Any) -> None:
+        if url is None:
+            return
+        if not isinstance(url, str):
+            raise RuntimeError('unexpected type {} for link (expected str)'.format(url.__class__.__name__))
+
+        link_normalizers = [
+            nzs.strip,
+            nzs.url,
+            nzs.warn_whitespace,
+            nzs.forbid_newlines,
+            nzs.limit_length(_MAX_URL_LENGTH)
+        ]
+
+        if normalized := self._apply_normalizers(url, 'link', link_normalizers):
+            self._package.links.append((link_type, normalized))
 
     def set_flags(self, mask: int, is_set: bool = True) -> None:
         if is_set:
@@ -370,6 +408,8 @@ class PackageMaker(PackageMakerBase):
             cpe_other=self._package.cpe_other,
 
             flavors=self._package.flavors,
+
+            links=list(_unicalize(sorted(self._package.links))),
 
             # XXX: see comment for PackageStatus.UNPROCESSED
             # XXX: duplicate code: PackageTransformer does the same

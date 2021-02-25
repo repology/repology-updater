@@ -26,6 +26,55 @@ CREATE TEMPORARY TABLE changed_projects (
 )
 ON COMMIT DROP;
 
+CREATE TEMPORARY TABLE incoming_packages_raw (
+	-- parsed, immutable
+    repo text NOT NULL,
+    family text NOT NULL,
+    subrepo text,
+
+    name text NULL,
+    srcname text NULL,
+    binname text NULL,
+    binnames text[] NULL,
+    trackname text NOT NULL,
+    visiblename text NOT NULL,
+    projectname_seed text NOT NULL,
+
+    origversion text NOT NULL,
+    rawversion text NOT NULL,
+
+    arch text,
+
+    maintainers text[],
+    category text,
+    comment text,
+    homepage text,
+    licenses text[],
+    downloads text[],
+
+    extrafields jsonb,
+
+	cpe_vendor text NULL,
+	cpe_product text NULL,
+	cpe_edition text NULL,
+	cpe_lang text NULL,
+	cpe_sw_edition text NULL,
+	cpe_target_sw text NULL,
+	cpe_target_hw text NULL,
+	cpe_other text NULL,
+
+	links json NULL,
+
+    -- calculated
+    effname text NOT NULL,
+    version text NOT NULL,
+    versionclass smallint,
+
+    flags integer NOT NULL,
+    shadow bool NOT NULL
+)
+ON COMMIT DROP;
+
 CREATE TEMPORARY TABLE incoming_packages (
 	-- parsed, immutable
     repo text NOT NULL,
@@ -63,15 +112,14 @@ CREATE TEMPORARY TABLE incoming_packages (
 	cpe_target_hw text NULL,
 	cpe_other text NULL,
 
+	links json NULL,
+
     -- calculated
     effname text NOT NULL,
     version text NOT NULL,
     versionclass smallint,
 
     flags integer NOT NULL,
-    shadow bool NOT NULL,
-
-    flavors text[],
-    branch text NULL
+    shadow bool NOT NULL
 )
 ON COMMIT DROP;
