@@ -56,7 +56,7 @@ def spawn_package(
 
     if links:
         for link_type, url in links:
-            m.add_link(link_type, url)
+            m.add_links(link_type, url)
 
     p = m.spawn(repo=repo, family=family if family is not None else repo)
 

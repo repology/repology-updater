@@ -298,8 +298,7 @@ class PackageMaker(PackageMakerBase):
     @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_homepages(self, *args: Any) -> None:
         _extend_unique(self._package.homepages, args)
-        for arg in args:
-            self.add_link(LinkType.UPSTREAM_HOMEPAGE, arg)
+        self.add_links(LinkType.UPSTREAM_HOMEPAGE, args)
 
     @_omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
     def add_licenses(self, *args: Any) -> None:
@@ -308,19 +307,13 @@ class PackageMaker(PackageMakerBase):
     @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_downloads(self, *args: Any) -> None:
         _extend_unique(self._package.downloads, args)
-        for arg in args:
-            self.add_link(LinkType.UPSTREAM_DOWNLOAD, arg)
+        self.add_links(LinkType.UPSTREAM_DOWNLOAD, args)
 
     @_omnivorous_setter('flavor', str, nzs.strip, nzs.warn_whitespace, nzs.forbid_newlines)
     def add_flavors(self, *args: Any) -> None:
         _extend_unique(self._package.flavors, args)
 
-    def add_link(self, link_type: int, url: Any) -> None:
-        if url is None:
-            return
-        if not isinstance(url, str):
-            raise RuntimeError('unexpected type {} for link (expected str)'.format(url.__class__.__name__))
-
+    def add_links(self, link_type: int, *args: Any) -> None:
         link_normalizers = [
             nzs.strip,
             nzs.url,
@@ -329,8 +322,10 @@ class PackageMaker(PackageMakerBase):
             nzs.limit_length(_MAX_URL_LENGTH)
         ]
 
-        if normalized := self._apply_normalizers(url, 'link', link_normalizers):
-            self._package.links.append((link_type, normalized))
+        urls = self._normalize_args(args, 'link', str, link_normalizers)
+
+        if urls:
+            self._package.links.extend((link_type, url) for url in urls)
 
     def set_flags(self, mask: int, is_set: bool = True) -> None:
         if is_set:
