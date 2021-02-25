@@ -22,7 +22,7 @@ from typing import Dict, Iterable
 from libversion import version_compare
 
 from repology.logger import Logger
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
@@ -49,7 +49,8 @@ class WikidataJsonParser(Parser):
                 pkg.add_name(label, NameType.WIKIDATA_LABEL)
                 pkg.set_summary(packagedata.get('projectDescription'))
                 pkg.add_licenses(sorted(packagedata.get('licenses', '').split('␞')))
-                pkg.add_homepages(sorted(packagedata.get('websites', '').split('␞')))
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, sorted(packagedata.get('websites', '').split('␞')))
+                pkg.add_links(LinkType.UPSTREAM_REPOSITORY, sorted(packagedata.get('repositories', '').split('␞')))
 
                 names = sorted(packagedata['repology_projects'].split('␞'))
 
@@ -88,7 +89,7 @@ class WikidataJsonParser(Parser):
 
                     verpkg.set_flags(PackageFlags.DEVEL, is_version_unstable and not is_version_stable)
                     verpkg.set_version(version)
-                    verpkg.add_downloads(sorted(flag for flag in flags if len(flag) > 1))
+                    pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, sorted(flag for flag in flags if len(flag) > 1))
 
                     # generate package for each repology project
                     for name in names:

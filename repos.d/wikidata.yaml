@@ -33,12 +33,13 @@
             ?projectDescription
             ?versions
             ?websites
+            ?repositories
             ?licenses
             ?repology_projects
           WHERE {
             {
               SELECT
-                # the following query returns (versions) x (websites) x (license) x (repology_projects)
+                # the following query returns (versions) x (websites) x (license) x (repology_projects) x ...
                 # entries which are then grouped by project, and we always need DISTINCT below to remove
                 # duplicates
                 ?project
@@ -54,6 +55,7 @@
                   AS ?versions
                 )
                 (GROUP_CONCAT(DISTINCT ?website; separator='␞') as ?websites)
+                (GROUP_CONCAT(DISTINCT ?repository; separator='␞') as ?repositories)
                 (GROUP_CONCAT(DISTINCT ?license; separator='␞') as ?licenses)
                 (SAMPLE(?repology_projects) as ?repology_projects)
               WHERE {
@@ -198,8 +200,11 @@
                   FILTER (LANG(?license) = 'en')
                 }
 
-                # Websites
+                # official website
                 OPTIONAL { ?project wdt:P856 ?website . }
+
+                # source code repository
+                OPTIONAL { ?project wdt:P1324 ?repository . }
               }
               GROUP BY ?project
             }

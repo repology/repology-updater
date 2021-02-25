@@ -19,6 +19,7 @@ import json
 import os
 from typing import Iterable
 
+from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
@@ -44,7 +45,8 @@ class CratesIOParser(Parser):
 
                     pkg.set_summary(crate['description'])
 
-                    pkg.add_homepages(crate['homepage'])
-                    pkg.add_homepages(crate['repository'])
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, crate['homepage'])
+                    pkg.add_links(LinkType.UPSTREAM_REPOSITORY, crate['repository'])
+                    pkg.add_links(LinkType.UPSTREAM_DOCUMENTATION, crate['documentation'])
 
                     yield pkg
