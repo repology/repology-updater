@@ -136,7 +136,7 @@ class LinkType:
     UPSTREAM_DOWNLOAD: ClassVar[int] = 1
     UPSTREAM_REPOSITORY: ClassVar[int] = 2
     UPSTREAM_ISSUE_TRACKER: ClassVar[int] = 3
-    MODULE_COLLECTION_PAGE: ClassVar[int] = 4
+    PROJECT_HOMEPAGE: ClassVar[int] = 4
     PACKAGE_HOMEPAGE: ClassVar[int] = 5
     PACKAGE_DOWNLOAD: ClassVar[int] = 6
     PACKAGE_REPOSITORY: ClassVar[int] = 7
@@ -148,7 +148,14 @@ class LinkType:
     PACKAGE_BUILD_LOG: ClassVar[int] = 13
     PACKAGE_BUILD_LOG_RAW: ClassVar[int] = 14
     PACKAGE_NEW_VERSION_CHECKER: ClassVar[int] = 15
-    DOCUMENTATION: ClassVar[int] = 16
+    UPSTREAM_DOCUMENTATION: ClassVar[int] = 16
+    UPSTREAM_CHANGELOG: ClassVar[int] = 17
+    PROJECT_DOWNLOAD: ClassVar[int] = 18
+    UPSTREAM_DONATION: ClassVar[int] = 19  # XXX: to be used sparingly not to provide obsolete funding info
+    UPSTREAM_DISCUSSION: ClassVar[int] = 20
+    UPSTREAM_COVERAGE: ClassVar[int] = 21
+    UPSTREAM_CI: ClassVar[int] = 22
+    UPSTREAM_WIKI: ClassVar[int] = 23
     OTHER: ClassVar[int] = 99
 
 
