@@ -21,7 +21,7 @@ import unittest
 from typing import Any, Iterator, Optional
 
 from repology.logger import AccumulatingLogger, Logger, NoopLogger
-from repology.package import Package
+from repology.package import LinkType, Package
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 
 
@@ -63,10 +63,11 @@ class TestPackageMaker(unittest.TestCase):
             maker.add_maintainers('d@com')
             maker.add_categories(None, 'foo', 'bar')
             maker.add_categories('baz')
-            maker.add_homepages('http://foo/', 'http://bar/')
+            maker.add_homepages('http://foo/', ['http://bar/'])
             maker.add_licenses(['GPLv2', 'GPLv3'])
             maker.add_licenses('MIT')
-            maker.add_downloads(None, [None, 'http://baz/'], ['ftp://quux/'])
+            maker.add_downloads(None, [None, 'http://baz/'], 'ftp://quux/')
+            maker.add_links(LinkType.OTHER, [['http://xxx/'], None], None, 'http://yyy/')
 
         self.assertEqual(pkg.name, 'foo')
         self.assertEqual(pkg.version, '1.0')
@@ -75,6 +76,17 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.homepage, 'http://foo/')  # XXX: convert to array
         self.assertEqual(pkg.licenses, ['GPLv2', 'GPLv3', 'MIT'])
         self.assertEqual(pkg.downloads, ['http://baz/', 'ftp://quux/'])
+        self.assertEqual(
+            pkg.links,
+            [
+                (LinkType.UPSTREAM_HOMEPAGE, 'http://bar/'),
+                (LinkType.UPSTREAM_HOMEPAGE, 'http://foo/'),
+                (LinkType.UPSTREAM_DOWNLOAD, 'ftp://quux/'),
+                (LinkType.UPSTREAM_DOWNLOAD, 'http://baz/'),
+                (LinkType.OTHER, 'http://xxx/'),
+                (LinkType.OTHER, 'http://yyy/'),
+            ]
+        )
 
     def test_validate_urls(self) -> None:
         logger = AccumulatingLogger()
