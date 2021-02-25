@@ -1,0 +1,21 @@
+###########################################################################
+# Artix
+###########################################################################
+- name: artix
+  type: repository
+  desc: Artix
+  statsgroup: Arch+derivs
+  family: arch
+  ruleset: [arch, artix]
+  color: '29add2'
+  minpackages: 4000
+  sources:
+    - name: [ system, world, galaxy ]
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: 'https://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.xz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Artix Linux home
+      url: https://artixlinux.org/
+  tags: [ all, production ]
