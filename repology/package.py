@@ -158,6 +158,16 @@ class LinkType:
     UPSTREAM_WIKI: ClassVar[int] = 23
     OTHER: ClassVar[int] = 99
 
+    @staticmethod
+    def is_relevant_for_rule_matching(val: int) -> bool:
+        return val in [
+            LinkType.PROJECT_DOWNLOAD,
+            LinkType.PROJECT_HOMEPAGE,
+            LinkType.UPSTREAM_DOWNLOAD,
+            LinkType.UPSTREAM_HOMEPAGE,
+            LinkType.UPSTREAM_REPOSITORY,
+        ]
+
 
 class Package:
     __slots__ = [

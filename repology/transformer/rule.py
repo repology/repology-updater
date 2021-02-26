@@ -20,7 +20,7 @@ from typing import AbstractSet, Any, Callable, Dict, Iterable, List, Match, Muta
 
 from libversion import LOWER_BOUND, UPPER_BOUND, version_compare
 
-from repology.package import Package, PackageFlags
+from repology.package import LinkType, Package, PackageFlags
 
 if TYPE_CHECKING:
     from typing_extensions import Final
@@ -381,12 +381,9 @@ class Rule:
             wwwpat: Final[Pattern[str]] = re.compile(ruledata['wwwpat'].replace('\n', '').lower(), re.ASCII)
 
             def wwwpat_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-                if package.homepage and wwwpat.fullmatch(package.homepage):
-                    return True
-
-                if package.downloads is not None:
-                    for download in package.downloads:
-                        if wwwpat.fullmatch(download):
+                if package.links is not None:
+                    for link_type, url in package.links:
+                        if LinkType.is_relevant_for_rule_matching(link_type) and wwwpat.fullmatch(url):
                             return True
 
                 return False
@@ -397,16 +394,13 @@ class Rule:
             wwwparts: Final = as_lowercase_list(ruledata['wwwpart'])
 
             def wwwpart_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-                if package.homepage:
-                    for wwwpart in wwwparts:
-                        if wwwpart in package.homepage.lower():
-                            return True
-
-                if package.downloads is not None:
-                    for download in package.downloads:
-                        for wwwpart in wwwparts:
-                            if wwwpart in download.lower():
-                                return True
+                if package.links is not None:
+                    for link_type, url in package.links:
+                        lower_url = url.lower()
+                        if LinkType.is_relevant_for_rule_matching(link_type):
+                            for wwwpart in wwwparts:
+                                if wwwpart in lower_url:
+                                    return True
 
                 return False
 
