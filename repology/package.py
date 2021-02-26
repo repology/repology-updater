@@ -84,6 +84,7 @@ class PackageFlags:
     ALTVER: ClassVar[int] = 1 << 15
     VULNERABLE: ClassVar[int] = 1 << 16
     ALTSCHEME: ClassVar[int] = 1 << 17
+    NOLEGACY: ClassVar[int] = 1 << 18
 
     ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 

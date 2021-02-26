@@ -297,6 +297,7 @@ schemas = {
             'any_is_patch': bool,
             'outdated': bool,
             'legacy': bool,
+            'nolegacy': bool,
             'incorrect': bool,
             'untrusted': bool,
             'noscheme': bool,

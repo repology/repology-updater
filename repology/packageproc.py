@@ -249,8 +249,11 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
                     )
 
                     legacy_allowed = (
-                        (non_first_in_section and not first_but_not_best_in_branch) or
-                        package.has_flag(PackageFlags.LEGACY)
+                        (
+                            non_first_in_section and not
+                            first_but_not_best_in_branch and not
+                            package.has_flag(PackageFlags.NOLEGACY)
+                        ) or package.has_flag(PackageFlags.LEGACY)
                     )
 
                     package.versionclass = PackageStatus.LEGACY if legacy_allowed else PackageStatus.OUTDATED

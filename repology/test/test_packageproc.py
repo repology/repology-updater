@@ -299,6 +299,14 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='3', version='1.0', flags=Pf.LEGACY).expect(versionclass=Ps.LEGACY),
         )
 
+    def test_versionclass_nolegacy(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='1', version='2.0').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='1.0', flags=Pf.NOLEGACY).expect(versionclass=Ps.OUTDATED),
+
+            PackageSample(repo='2', version='2.0').expect(versionclass=Ps.NEWEST),
+        )
+
     def test_suppress_ignored(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='1', family='1', version='2.0', flags=Pf.IGNORE).expect(versionclass=Ps.UNIQUE),

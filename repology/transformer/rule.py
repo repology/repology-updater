@@ -525,6 +525,14 @@ class Rule:
 
             self._actions.append(legacy_action)
 
+        if 'nolegacy' in ruledata:
+            nolegacy_flag: Final = ruledata['nolegacy']
+
+            def nolegacy_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.NOLEGACY, nolegacy_flag)
+
+            self._actions.append(nolegacy_action)
+
         if 'incorrect' in ruledata:
             incorrect_flag: Final = ruledata['incorrect']
 
