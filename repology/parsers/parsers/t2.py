@@ -21,7 +21,7 @@ from collections import defaultdict
 from typing import Dict, Iterable, List
 
 from repology.logger import Logger
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -114,5 +114,13 @@ class T2DescParser(Parser):
                         pkg.set_flags(PackageFlags.UNTRUSTED)
 
                     pkg.add_downloads(url)
+
+                for filename in os.listdir(os.path.dirname(desc_path)):
+                    # XXX: url base is hardcoded for now; fix
+                    if filename.endswith('.patch'):
+                        pkg.add_links(
+                            LinkType.PACKAGE_PATCH_RAW,
+                            f'http://svn.exactcode.de/t2/trunk/package/{pkgpath}/{filename}'
+                        )
 
                 yield pkg
