@@ -81,16 +81,16 @@ def _parse_descfile(path: str, logger: Logger) -> Dict[str, List[str]]:
 
 class T2DescParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for filename in walk_tree(path, suffix='.desc'):
-            rel_filename = os.path.relpath(filename, path)
-            with factory.begin(rel_filename) as pkg:
-                pkgpath = os.path.dirname(rel_filename)
+        for desc_path in walk_tree(path, suffix='.desc'):
+            rel_desc_path = os.path.relpath(desc_path, path)
+            with factory.begin(rel_desc_path) as pkg:
+                pkgpath = os.path.dirname(rel_desc_path)
                 name = os.path.basename(pkgpath)
 
-                if name + '.desc' != os.path.basename(rel_filename):
+                if name + '.desc' != os.path.basename(rel_desc_path):
                     raise RuntimeError('Path inconsistency (expected .../foo/foo.desc)')
 
-                data = _parse_descfile(filename, pkg)
+                data = _parse_descfile(desc_path, pkg)
 
                 pkg.add_name(name, NameType.T2_NAME)
                 pkg.add_name(pkgpath, NameType.T2_FULL_NAME)
