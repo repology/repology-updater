@@ -97,7 +97,7 @@ class T2DescParser(Parser):
                 pkg.set_summary(data['title'][0])
 
                 pkg.add_homepages((url.split()[0] for url in data.get('url', []) if url))
-                pkg.add_homepages(data.get('cv-url'))
+                #pkg.add_homepages(data.get('cv-url'))  # url used by version checker; may be garbage
                 pkg.add_licenses(data['license'])
                 pkg.add_maintainers(map(extract_maintainers, data['maintainer']))
                 pkg.add_categories(data['category'])
