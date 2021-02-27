@@ -51,6 +51,31 @@
       url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{srcname}'
   tags: [ all, production, mageia, rpm ]
 
+- name: mageia_8
+  type: repository
+  desc: Mageia 8
+  statsgroup: Mageia
+  family: mageia
+  ruleset: [mageia, rpm]
+  color: '262f45'
+  minpackages: 14000
+  sources:
+      # XXX: */backports_testing and */updates_testing not included, are these needed?
+    - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'https://mirrors.kernel.org/mageia/distrib/8/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Mageia home
+      url: https://www.mageia.org/en/
+    - desc: Mageia App Db
+      url: https://madb.mageia.org/
+  packagelinks:
+    - desc: Package details on madb.mageia.org
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/8/name/{srcname}'
+  tags: [ all, production, mageia, rpm ]
+
 - name: mageia_cauldron
   type: repository
   desc: Mageia Cauldron
