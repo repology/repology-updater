@@ -16,6 +16,7 @@
       require_md5cache_metadata: false
       require_xml_metadata: false
       url: https://github.com/calculatelinux/calculate.git
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
   repolinks:
     - desc: Calculate Linux home
       url: http://www.calculate-linux.org/

@@ -15,6 +15,7 @@
       require_md5cache_metadata: true
       require_xml_metadata: false
       url: https://github.com/gentoo-mirror/guru.git
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
   repolinks:
     - desc: Gentoo wiki page for Project GURU
       url: https://wiki.gentoo.org/wiki/Project:GURU
@@ -46,6 +47,7 @@
       require_md5cache_metadata: false
       require_xml_metadata: false
       url: git://github.com/pentoo/pentoo-overlay.git
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
   repolinks:
     - desc: Home page
       url: http://www.pentoo.ch/
@@ -75,6 +77,7 @@
       require_md5cache_metadata: true
       require_xml_metadata: true
       url: git://github.com/gentoo-mirror/science.git
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
   repolinks:
     - desc: Gentoo wiki page for Project Science
       url: https://wiki.gentoo.org/wiki/Project:Science
