@@ -17,6 +17,7 @@
 
 import os
 import re
+from collections import defaultdict
 from typing import Dict, Iterable, List
 
 from repology.logger import Logger
@@ -29,7 +30,7 @@ from repology.transformer import PackageTransformer
 
 
 def _parse_descfile(path: str, logger: Logger) -> Dict[str, List[str]]:
-    data: Dict[str, List[str]] = {}
+    data: Dict[str, List[str]] = defaultdict(list)
 
     # http://t2sde.org/handbook/html/t2.package.desc.html
     tag_map = {
@@ -66,12 +67,12 @@ def _parse_descfile(path: str, logger: Logger) -> Dict[str, List[str]]:
             if line.startswith('#'):
                 continue
 
-            match = re.fullmatch('\\[([^\\[\\]]+)\\]\\s*(.*?)', line, re.DOTALL)
+            match = re.fullmatch(r'\[([^\[\]]+)\]\s*(.*?)', line, re.DOTALL)
 
             if match:
                 tag = match.group(1).lower()
                 tag = tag_map.get(tag, tag)
-                data.setdefault(tag, []).append(match.group(2))
+                data[tag].append(match.group(2))
             elif line:
                 logger.log('unexpected line "{}"'.format(line), Logger.WARNING)
 
