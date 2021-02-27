@@ -14,7 +14,8 @@
       url: 'https://github.com/sdsddsd1/kiss-games.git'
       maintainer_from_git: true
       depth: null
-      sparse_checkout: [ '**/version', '**/sources' ]
+      sparse_checkout: [ '**/version', '**/sources', '**/patches', '**/build' ]
+      blob_prefix: 'https://github.com/sdsddsd1/kiss-games/blob/master/'
   repolinks:
     - desc: Repository on GitHub
       url: https://github.com/sdsddsd1/kiss-games

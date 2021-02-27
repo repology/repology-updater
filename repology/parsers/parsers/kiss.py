@@ -19,6 +19,7 @@ import os
 import subprocess
 from typing import Iterable
 
+from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -28,9 +29,11 @@ from repology.transformer import PackageTransformer
 
 class KissGitParser(Parser):
     _maintainer_from_git: bool
+    _blob_prefix: str
 
-    def __init__(self, maintainer_from_git: bool = False):
+    def __init__(self, blob_prefix: str, maintainer_from_git: bool = False):
         self._maintainer_from_git = maintainer_from_git
+        self._blob_prefix = blob_prefix
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for versionpath in walk_tree(path, name='version'):
@@ -70,5 +73,20 @@ class KissGitParser(Parser):
                         lastauthor, _ = git.communicate()
 
                     pkg.add_maintainers(extract_maintainers(lastauthor))
+
+                patchesdir_abs = os.path.join(rootdir, 'patches')
+                if os.path.exists(patchesdir_abs):
+                    patches = os.listdir(patchesdir_abs)
+
+                    # check if patches are referenced from the build script
+                    with open(os.path.join(rootdir, 'build')) as fd:
+                        build_script = fd.read()
+
+                    for patch in patches:
+                        if patch in build_script:
+                            pkg.add_links(
+                                LinkType.PACKAGE_PATCH,
+                                f'{self._blob_prefix}{pkgpath}/patches/{patch}'
+                            )
 
                 yield pkg

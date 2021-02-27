@@ -243,6 +243,7 @@ schemas = {
 
                     # kiss parser
                     'maintainer_from_git': bool,
+                    'blob_prefix': str,
                 }
             ],
             'shadow': bool,

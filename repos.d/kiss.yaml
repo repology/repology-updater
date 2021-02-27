@@ -14,7 +14,8 @@
       url: 'https://github.com/kiss-community/repo-main.git'
       maintainer_from_git: true
       depth: null
-      sparse_checkout: [ '**/version', '**/sources' ]
+      sparse_checkout: [ '**/version', '**/sources', '**/patches', '**/build' ]
+      blob_prefix: 'https://github.com/kiss-community/repo-main/blob/master/'
   repolinks:
     - desc: KISS Linux home
       url: https://k1ss.org/
@@ -41,7 +42,8 @@
       branch: main
       maintainer_from_git: true
       depth: null
-      sparse_checkout: [ '**/version', '**/sources' ]
+      sparse_checkout: [ '**/version', '**/sources', '**/patches', '**/build' ]
+      blob_prefix: 'https://github.com/kiss-community/repo-community/blob/main/'
   repolinks:
     - desc: KISS Linux home
       url: https://k1ss.org/
