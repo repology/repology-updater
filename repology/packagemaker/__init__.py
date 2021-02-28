@@ -18,7 +18,7 @@
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, TypeVar
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple, Type, TypeVar
 
 from repology.logger import Logger, NoopLogger
 from repology.package import LinkType, Package, PackageStatus
@@ -221,21 +221,26 @@ def _simple_setter(fieldname: str, want_type: Type[Any], *normalizers: Normalize
 T = TypeVar('T')
 
 
-def _extend_unique(existing: List[T], iterable: Iterable[T]) -> None:
-    seen = set(existing) if existing else set()
-
-    for value in iterable:
-        if value not in seen:
-            seen.add(value)
-            existing.append(value)
+def _as_opt_list(items: Iterable[T]) -> Optional[List[T]]:
+    return list(items) or None
 
 
-def _unicalize(items: Iterable[T]) -> Iterator[T]:
-    prev = None
+def _as_unique_list(items: Iterable[T]) -> List[T]:
+    seen = set()
+    res = []
     for item in items:
-        if item != prev:
-            prev = item
-            yield item
+        if item not in seen:
+            seen.add(item)
+            res.append(item)
+    return res
+
+
+def _as_opt_unique_list(items: Iterable[T]) -> Optional[List[T]]:
+    return _as_unique_list(items) or None
+
+
+def _as_opt_first_from_list(items: Iterable[T]) -> Optional[T]:
+    return next(iter(items), None)
 
 
 class PackageMaker(PackageMakerBase):
@@ -262,7 +267,7 @@ class PackageMaker(PackageMakerBase):
 
     @_omnivorous_setter('binname', str, nzs.strip, nzs.forbid_newlines)
     def add_binnames(self, *args: Any) -> None:
-        _extend_unique(self._package.binnames, args)
+        self._package.binnames.extend(args)
 
     @_simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
@@ -289,29 +294,29 @@ class PackageMaker(PackageMakerBase):
 
     @_omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines, nzs.tolower)
     def add_maintainers(self, *args: Any) -> None:
-        _extend_unique(self._package.maintainers, args)
+        self._package.maintainers.extend(args)
 
     @_omnivorous_setter('category', str, nzs.strip, nzs.forbid_newlines)
     def add_categories(self, *args: Any) -> None:
-        _extend_unique(self._package.categories, args)
+        self._package.categories.extend(args)
 
     @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_homepages(self, *args: Any) -> None:
-        _extend_unique(self._package.homepages, args)
+        self._package.homepages.extend(args)
         self.add_links(LinkType.UPSTREAM_HOMEPAGE, args)
 
     @_omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
     def add_licenses(self, *args: Any) -> None:
-        _extend_unique(self._package.licenses, args)
+        self._package.licenses.extend(args)
 
     @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_downloads(self, *args: Any) -> None:
-        _extend_unique(self._package.downloads, args)
+        self._package.downloads.extend(args)
         self.add_links(LinkType.UPSTREAM_DOWNLOAD, args)
 
     @_omnivorous_setter('flavor', str, nzs.strip, nzs.warn_whitespace, nzs.forbid_newlines)
     def add_flavors(self, *args: Any) -> None:
-        _extend_unique(self._package.flavors, args)
+        self._package.flavors.extend(args)
 
     def add_links(self, link_type: int, *args: Any) -> None:
         link_normalizers = [
@@ -347,7 +352,12 @@ class PackageMaker(PackageMakerBase):
         self._package.cpe_other = other
 
     def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
-        maintainers: Optional[List[str]] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else None
+        maintainers: Optional[List[str]] = None
+
+        if self._package.maintainers:
+            maintainers = _as_opt_unique_list(self._package.maintainers)
+        elif default_maintainer:
+            maintainers = [default_maintainer]
 
         names = self._name_mapper.get_mapped_names()
 
@@ -370,7 +380,7 @@ class PackageMaker(PackageMakerBase):
             name=names.name,
             srcname=names.srcname,
             binname=names.binname,
-            binnames=self._package.binnames if self._package.binnames else None,
+            binnames=_as_opt_unique_list(self._package.binnames),
             trackname=names.trackname,
             visiblename=names.visiblename,
             projectname_seed=names.projectname_seed,
@@ -382,11 +392,11 @@ class PackageMaker(PackageMakerBase):
             arch=self._package.arch,
 
             maintainers=maintainers,
-            category=self._package.categories[0] if self._package.categories else None,  # XXX: convert to array
+            category=_as_opt_first_from_list(self._package.categories),  # TODO: convert to array
             comment=self._package.summary,
-            homepage=self._package.homepages[0] if self._package.homepages else None,  # XXX: convert to array
-            licenses=self._package.licenses if self._package.licenses else None,
-            downloads=self._package.downloads if self._package.downloads else None,
+            homepage=_as_opt_first_from_list(self._package.homepages),  # TODO: deprecate
+            licenses=_as_opt_unique_list(self._package.licenses),
+            downloads=_as_opt_unique_list(self._package.downloads),  # TODO: deprecate
 
             flags=self._package.flags,
             shadow=shadow,
@@ -402,9 +412,9 @@ class PackageMaker(PackageMakerBase):
             cpe_target_hw=self._package.cpe_target_hw,
             cpe_other=self._package.cpe_other,
 
-            flavors=self._package.flavors,
+            flavors=_as_unique_list(self._package.flavors),  # TODO: convert to string
 
-            links=list(_unicalize(sorted(self._package.links))),
+            links=_as_opt_unique_list(self._package.links),
 
             # XXX: see comment for PackageStatus.UNPROCESSED
             # XXX: duplicate code: PackageTransformer does the same
