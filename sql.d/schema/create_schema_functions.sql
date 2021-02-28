@@ -48,7 +48,7 @@ BEGIN
 		'^www\.', ''
 	);
 END;
-$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+$$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE RETURNS NULL ON NULL INPUT;
 
 -- Checks whether version set has effectively changed
 CREATE OR REPLACE FUNCTION version_set_changed(old text[], new text[]) RETURNS bool AS $$
@@ -60,7 +60,7 @@ BEGIN
 			version_compare2(old[1], new[1]) != 0
 		) OR (old IS NULL) != (new IS NULL);
 END;
-$$ LANGUAGE plpgsql IMMUTABLE CALLED ON NULL INPUT;
+$$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE CALLED ON NULL INPUT;
 
 -- Returns repositories which may be logged as added/removed for projects feed
 -- Ignores incomplete and inactive repos
@@ -84,14 +84,14 @@ CREATE OR REPLACE FUNCTION is_ignored_by_masks(statuses_mask integer, flags_mask
 BEGIN
 	RETURN (statuses_mask & ((1<<3) | (1<<7) | (1<<8) | (1<<9) | (1<<10)))::boolean OR (flags_mask & ((1<<2) | (1<<3) | (1<<4) | (1<<5) | (1<<7)))::boolean;
 END;
-$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+$$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE RETURNS NULL ON NULL INPUT;
 
 -- Similar to nullif, but with less comparison
 CREATE OR REPLACE FUNCTION nullifless(value1 double precision, value2 double precision) RETURNS double precision AS $$
 BEGIN
 	RETURN CASE WHEN value1 < value2 THEN NULL ELSE value1 END;
 END;
-$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+$$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE RETURNS NULL ON NULL INPUT;
 
 -- Used for related packages discovery
 CREATE OR REPLACE FUNCTION project_get_related(source_project_id integer, maxresults integer)
