@@ -77,7 +77,7 @@ BEGIN
 			SELECT name FROM repositories WHERE state = 'active' AND NOT incomplete
 		);
 END;
-$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+$$ LANGUAGE plpgsql STABLE RETURNS NULL ON NULL INPUT;
 
 -- Checks statuses and flags mask and returns whether it should be treated as ignored
 CREATE OR REPLACE FUNCTION is_ignored_by_masks(statuses_mask integer, flags_mask integer) RETURNS boolean AS $$
