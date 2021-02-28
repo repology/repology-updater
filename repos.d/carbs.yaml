@@ -14,7 +14,8 @@
       url: 'https://github.com/CarbsLinux/repository.git'
       maintainer_from_git: true
       depth: null
-      sparse_checkout: [ '**/version', '**/sources' ]
+      sparse_checkout: [ '**/version', '**/sources', '**/patches', '**/build' ]
+      blob_prefix: 'https://github.com/CarbsLinux/repository/blob/master/'
   repolinks:
     - desc: Carbs Linux home
       url: https://carbslinux.org/
