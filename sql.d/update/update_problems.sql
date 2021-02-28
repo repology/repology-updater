@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -23,96 +23,92 @@ DELETE FROM problems
 WHERE effname IN (SELECT effname FROM changed_projects);
 
 -- add different kinds of problems
-INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
-SELECT DISTINCT
-	packages.id,
-	packages.repo,
-	packages.visiblename,
-	packages.effname,
-	unnest(coalesce(packages.maintainers, '{null}'::text[])),
-	'homepage_dead'::problem_type,
-	jsonb_build_object('url', links.url, 'code', links.ipv4_status_code)
-FROM changed_projects
-INNER JOIN packages USING(effname)
-INNER JOIN links ON (packages.homepage = links.url)
-WHERE
-	NOT links.ipv4_success AND
-	(
-		(links.ipv4_last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
-		links.ipv4_last_success < now() - INTERVAL '30' DAY
-	);
+WITH packages_links_expanded AS (
+	SELECT DISTINCT
+		id,
+		repo,
+		visiblename,
+		effname,
+		maintainers,
+		(json_array_elements(links)->>0)::integer AS link_type,
+		(json_array_elements(links)->>1)::integer AS link_id
+	FROM changed_projects INNER JOIN packages USING(effname)
+), packages_links_maintainers_expanded AS (
+	SELECT
+		id,
+		repo,
+		visiblename,
+		effname,
+		unnest(coalesce(maintainers, '{null}'::text[])) AS maintainer,
+		link_type,
+		link_id
+	FROM packages_links_expanded
+), packages_homepages AS (
+	SELECT DISTINCT
+		packages_links_maintainers_expanded.id,
+		repo,
+		visiblename,
+		effname,
+		maintainer,
+		url,
+		ipv4_status_code,
+		ipv4_success,
+		ipv4_last_success,
+		first_extracted,
+		ipv4_permanent_redirect_target
+	FROM packages_links_maintainers_expanded INNER JOIN links ON(links.id = link_id)
+	WHERE link_type = 0  -- UPSTREAM_HOMEPAGE
+), homepage_problems AS (
+	SELECT id, repo, visiblename, effname, maintainer,
+		'homepage_dead'::problem_type AS problem_type,
+		jsonb_build_object('url', url, 'code', ipv4_status_code) AS data
+	FROM packages_homepages
+	WHERE
+		NOT ipv4_success AND
+		(
+			(ipv4_last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
+			ipv4_last_success < now() - INTERVAL '30' DAY
+		)
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
-SELECT DISTINCT
-	packages.id,
-	packages.repo,
-	packages.visiblename,
-	packages.effname,
-	unnest(coalesce(packages.maintainers, '{null}'::text[])),
-	'homepage_permanent_https_redirect'::problem_type,
-	jsonb_build_object('url', links.url, 'target', links.ipv4_permanent_redirect_target)
-FROM changed_projects
-INNER JOIN packages USING(effname)
-INNER JOIN links ON (packages.homepage = links.url)
-WHERE
-	replace(links.url, 'http://', 'https://') = links.ipv4_permanent_redirect_target;
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'homepage_permanent_https_redirect'::problem_type AS problem_type,
+		jsonb_build_object('url', url, 'target', ipv4_permanent_redirect_target) AS data
+	FROM packages_homepages
+	WHERE
+		replace(url, 'http://', 'https://') = ipv4_permanent_redirect_target
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
-SELECT DISTINCT
-	id,
-	repo,
-	visiblename,
-	effname,
-	unnest(coalesce(packages.maintainers, '{null}'::text[])),
-	'homepage_discontinued_google'::problem_type,
-	jsonb_build_object('url', homepage)
-FROM changed_projects
-INNER JOIN packages USING(effname)
-WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
-	homepage SIMILAR TO 'https?://code.google.com(/%%)?';
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'homepage_discontinued_google'::problem_type AS problem_type,
+		jsonb_build_object('url', url) AS data
+	FROM packages_homepages
+	WHERE
+		url SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
+		url SIMILAR TO 'https?://code.google.com(/%%)?'
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
-SELECT DISTINCT
-	id,
-	repo,
-	visiblename,
-	effname,
-	unnest(coalesce(packages.maintainers, '{null}'::text[])),
-	'homepage_discontinued_codeplex'::problem_type,
-	jsonb_build_object('url', homepage)
-FROM changed_projects
-INNER JOIN packages USING(effname)
-WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?';
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'homepage_discontinued_codeplex'::problem_type AS problem_type,
+		jsonb_build_object('url', url) AS data
+	FROM packages_homepages
+	WHERE
+		url SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?'
 
-INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
-SELECT DISTINCT
-	id,
-	repo,
-	visiblename,
-	effname,
-	unnest(coalesce(packages.maintainers, '{null}'::text[])),
-	'homepage_discontinued_gna'::problem_type,
-	jsonb_build_object('url', homepage)
-FROM changed_projects
-INNER JOIN packages USING(effname)
-WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'homepage_discontinued_gna'::problem_type AS problem_type,
+		jsonb_build_object('url', url) AS data
+	FROM packages_homepages
+	WHERE
+		url SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?'
 
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'homepage_discontinued_cpan'::problem_type AS problem_type,
+		jsonb_build_object('url', url) AS data
+	FROM packages_homepages
+	WHERE
+		url SIMILAR TO 'https?://search.cpan.org(/%%)?'
+)
 INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
-SELECT DISTINCT
-	id,
-	repo,
-	visiblename,
-	effname,
-	unnest(coalesce(packages.maintainers, '{null}'::text[])),
-	'homepage_discontinued_cpan'::problem_type,
-	jsonb_build_object('url', homepage)
-FROM changed_projects
-INNER JOIN packages USING(effname)
-WHERE
-	homepage SIMILAR TO 'https?://search.cpan.org(/%%)?';
+SELECT id, repo, visiblename, effname, maintainer, problem_type, data
+FROM homepage_problems;
 
 INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
 SELECT DISTINCT
