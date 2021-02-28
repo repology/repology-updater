@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -60,7 +60,7 @@ BEGIN
 			version_compare2(old[1], new[1]) != 0
 		) OR (old IS NULL) != (new IS NULL);
 END;
-$$ LANGUAGE plpgsql IMMUTABLE;
+$$ LANGUAGE plpgsql IMMUTABLE CALLED ON NULL INPUT;
 
 -- Returns repositories which may be logged as added/removed for projects feed
 -- Ignores incomplete and inactive repos
@@ -173,7 +173,7 @@ BEGIN
 		greatest(0.0, 100.0 + log(related.rank) * 10.0)
 	FROM
 		related;
-END; $$ LANGUAGE plpgsql;
+END; $$ LANGUAGE plpgsql VOLATILE RETURNS NULL ON NULL INPUT;
 
 -- Translates string urls to link ids within links package field
 CREATE OR REPLACE FUNCTION translate_links(links json) RETURNS json AS $$
