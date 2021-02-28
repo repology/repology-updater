@@ -127,11 +127,6 @@ class RepositoryProcessor:
 
                 package.flavors = sorted(set(map(strip_flavor, package.flavors)))
 
-                # XXX: arch is not used anywhere yet, and until #711 is implemented,
-                # it just introduces package duplicates; it's a crude solution, but
-                # just drop it here
-                package.arch = None
-
                 yield package
 
         return postprocess_parsed_packages(
