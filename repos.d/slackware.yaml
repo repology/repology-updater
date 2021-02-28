@@ -94,8 +94,8 @@
       url: 'http://slackware.uk/slackwarearm/slackwarearm-14.2/{source}/PACKAGES.TXT'
       subrepo: '{source}'
   repolinks:
-    - desc: Slackware Home
-      url: http://www.slackware.com/
+    - desc: Slackware ARM / AARCH64
+      url: http://arm.slackware.com/
   tags: [ all, production, slackware ]
 
 - name: slackwarearm_current
@@ -113,6 +113,6 @@
       url: 'http://slackware.uk/slackwarearm/slackwarearm-current/{source}/PACKAGES.TXT'
       subrepo: '{source}'
   repolinks:
-    - desc: Slackware Home
-      url: http://www.slackware.com/
+    - desc: Slackware ARM / AARCH64
+      url: http://arm.slackware.com/
   tags: [ all, production, slackware ]
