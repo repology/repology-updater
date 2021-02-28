@@ -379,7 +379,10 @@ class PackageMaker(PackageMakerBase):
             origversion=self._package.version,
             rawversion=self._package.rawversion if self._package.rawversion is not None else self._package.version,
 
-            arch=self._package.arch,
+            # XXX: arch is not used anywhere yet, and until #711 is implemented,
+            # it just introduces package duplicates; it's a crude solution, but
+            # just drop it here
+            # arch=self._package.arch,
 
             maintainers=maintainers,
             category=self._package.categories[0] if self._package.categories else None,  # XXX: convert to array
