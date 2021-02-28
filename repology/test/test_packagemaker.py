@@ -67,7 +67,7 @@ class TestPackageMaker(unittest.TestCase):
             maker.add_licenses(['GPLv2', 'GPLv3'])
             maker.add_licenses('MIT')
             maker.add_downloads(None, [None, 'http://baz/'], 'ftp://quux/')
-            maker.add_links(LinkType.OTHER, [['http://xxx/'], None], None, 'http://yyy/')
+            maker.add_links(LinkType.OTHER, [['http://yyy/'], None], None, 'http://xxx/')
 
         self.assertEqual(pkg.name, 'foo')
         self.assertEqual(pkg.version, '1.0')
@@ -79,12 +79,12 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(
             pkg.links,
             [
-                (LinkType.UPSTREAM_HOMEPAGE, 'http://bar/'),
                 (LinkType.UPSTREAM_HOMEPAGE, 'http://foo/'),
-                (LinkType.UPSTREAM_DOWNLOAD, 'ftp://quux/'),
+                (LinkType.UPSTREAM_HOMEPAGE, 'http://bar/'),
                 (LinkType.UPSTREAM_DOWNLOAD, 'http://baz/'),
-                (LinkType.OTHER, 'http://xxx/'),
+                (LinkType.UPSTREAM_DOWNLOAD, 'ftp://quux/'),
                 (LinkType.OTHER, 'http://yyy/'),
+                (LinkType.OTHER, 'http://xxx/'),
             ]
         )
 

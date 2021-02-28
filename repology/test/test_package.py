@@ -43,13 +43,15 @@ class TestParsers(unittest.TestCase):
             spawn_package(
                 links=[
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
                 ]
             ),
             spawn_package(
                 links=[
-                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
                 ]
             )
         )
@@ -147,8 +149,8 @@ class TestParsers(unittest.TestCase):
                 name='foo',
                 version='1.0',
                 links=[
-                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://foo'),
+                    (LinkType.UPSTREAM_HOMEPAGE, 'http://bar'),
                 ]
             ).get_classless_hash()
         )
