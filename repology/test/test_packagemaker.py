@@ -73,9 +73,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.version, '1.0')
         self.assertEqual(pkg.maintainers, ['a@com', 'b@com', 'c@com', 'd@com'])
         self.assertEqual(pkg.category, 'foo')  # XXX: convert to array
-        self.assertEqual(pkg.homepage, 'http://foo/')  # XXX: convert to array
         self.assertEqual(pkg.licenses, ['GPLv2', 'GPLv3', 'MIT'])
-        self.assertEqual(pkg.downloads, ['http://baz/', 'ftp://quux/'])
         self.assertEqual(
             pkg.links,
             [
@@ -95,7 +93,14 @@ class TestPackageMaker(unittest.TestCase):
         with pkg as maker:
             maker.add_downloads('http://www.valid/', 'https://www.valid/some', 'ftp://ftp.valid/', 'invalid')
 
-        self.assertEqual(pkg.downloads, ['http://www.valid/', 'https://www.valid/some', 'ftp://ftp.valid/'])
+        self.assertEqual(
+            pkg.links,
+            [
+                (LinkType.UPSTREAM_DOWNLOAD, 'http://www.valid/'),
+                (LinkType.UPSTREAM_DOWNLOAD, 'https://www.valid/some'),
+                (LinkType.UPSTREAM_DOWNLOAD, 'ftp://ftp.valid/'),
+            ]
+        )
         self.assertEqual(len(logger.get()), 1)
         self.assertTrue('invalid' in logger.get()[0])
 
@@ -106,8 +111,13 @@ class TestPackageMaker(unittest.TestCase):
             maker.add_homepages('Http://Foo.coM')
             maker.add_downloads('Http://Foo.coM')
 
-        self.assertEqual(pkg.homepage, 'http://foo.com/')
-        self.assertEqual(pkg.downloads, ['http://foo.com/'])
+        self.assertEqual(
+            pkg.links,
+            [
+                (LinkType.UPSTREAM_HOMEPAGE, 'http://foo.com/'),
+                (LinkType.UPSTREAM_DOWNLOAD, 'http://foo.com/'),
+            ]
+        )
 
     def test_unicalization_with_order_preserved(self) -> None:
         pkg = TestPackage()

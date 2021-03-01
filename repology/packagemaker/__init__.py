@@ -302,7 +302,6 @@ class PackageMaker(PackageMakerBase):
 
     @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_homepages(self, *args: Any) -> None:
-        self._package.homepages.extend(args)
         self.add_links(LinkType.UPSTREAM_HOMEPAGE, args)
 
     @_omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
@@ -311,7 +310,6 @@ class PackageMaker(PackageMakerBase):
 
     @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_downloads(self, *args: Any) -> None:
-        self._package.downloads.extend(args)
         self.add_links(LinkType.UPSTREAM_DOWNLOAD, args)
 
     @_omnivorous_setter('flavor', str, nzs.strip, nzs.warn_whitespace, nzs.forbid_newlines)
