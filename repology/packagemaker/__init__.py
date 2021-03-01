@@ -395,9 +395,7 @@ class PackageMaker(PackageMakerBase):
             maintainers=maintainers,
             category=_as_opt_first_from_list(self._package.categories),  # TODO: convert to array
             comment=self._package.summary,
-            homepage=_as_opt_first_from_list(self._package.homepages),  # TODO: deprecate
             licenses=_as_opt_unique_list(self._package.licenses),
-            downloads=_as_opt_unique_list(self._package.downloads),  # TODO: deprecate
 
             flags=self._package.flags,
             shadow=shadow,

@@ -329,9 +329,7 @@ class Package:
                  maintainers: Optional[List[str]] = None,
                  category: Optional[str] = None,
                  comment: Optional[str] = None,
-                 homepage: Optional[str] = None,
                  licenses: Optional[List[str]] = None,
-                 downloads: Optional[List[str]] = None,
 
                  extrafields: Optional[Dict[str, str]] = None,
 
@@ -371,9 +369,7 @@ class Package:
         self.maintainers = maintainers
         self.category = category
         self.comment = comment
-        self.homepage = homepage
         self.licenses = licenses
-        self.downloads = downloads
 
         self.extrafields = extrafields
 
