@@ -22,27 +22,35 @@ DELETE
 FROM url_relations_all
 WHERE metapackage_id IN (SELECT id FROM metapackages WHERE effname IN (SELECT effname FROM changed_projects));
 
-INSERT
-INTO url_relations_all
-SELECT
-	metapackage_id,
-	urlhash,
-	num_families::float / max(num_families) OVER (PARTITION BY metapackage_id)
-FROM (
+WITH homepages AS (
 	SELECT
-		(SELECT id FROM metapackages WHERE metapackages.effname = incoming_packages.effname) AS metapackage_id,
+		effname,
+		(json_array_elements(links)->>0)::integer AS link_type,
+		json_array_elements(links)->>1 AS url,
+		family
+	FROM incoming_packages_raw
+), grouped AS (
+	SELECT
+		effname,
 		(
 			'x' || left(
 				md5(
-					simplify_url(homepage)
+					simplify_url(url)
 				), 16
 			)
 		)::bit(64)::bigint AS urlhash,
-		count(DISTINCT family) num_families
-	FROM incoming_packages
-	WHERE homepage ~ '^https?://'
-	GROUP BY metapackage_id, urlhash
-) AS tmp;
+		count(DISTINCT family) AS num_families
+	FROM homepages
+	WHERE link_type IN(0)  -- UPSTREAM_HOMEPAGE, may also add UPSTREAM_DOWNLOAD (1) and/or UPSTREAM_REPOSITORY (2)
+	GROUP BY effname, urlhash
+)
+INSERT
+INTO url_relations_all(metapackage_id, urlhash, weight)
+SELECT
+	(SELECT id FROM metapackages WHERE metapackages.effname = grouped.effname),
+	urlhash,
+	num_families::float / max(num_families) OVER (PARTITION BY effname)
+FROM grouped;
 
 {% if analyze %}
 ANALYZE url_relations_all;
