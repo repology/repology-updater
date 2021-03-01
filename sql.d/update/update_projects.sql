@@ -34,6 +34,7 @@ SET
 	num_families = tmp.num_families,
 	num_repos_newest = tmp.num_repos_newest,
 	num_families_newest = tmp.num_families_newest,
+	num_updates = num_updates + 1,
 
 	has_cves = tmp.has_cves,
 
