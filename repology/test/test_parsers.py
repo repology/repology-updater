@@ -58,9 +58,7 @@ class TestParsers(unittest.TestCase):
             'maintainers': None,
             'category': None,
             'comment': None,
-            'homepage': None,
             'licenses': None,
-            'downloads': None,
 
             'flags': 0,
             'shadow': False,

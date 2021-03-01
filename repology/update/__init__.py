@@ -171,11 +171,8 @@ class UpdateProcess:
         self._logger.log('updating projects turnover')
         self._database.update_projects_turnover()
 
-        self._logger.log('updating links (legacy)')
-        self._database.update_links_legacy(self._enable_explicit_analyze)
-
-        self._logger.log('updating links (unified)')
-        self._database.update_links_unified(self._enable_explicit_analyze)
+        self._logger.log('updating links')
+        self._database.update_links(self._enable_explicit_analyze)
 
         self._logger.log('updating statistics (delta)')
         self._database.update_statistics_delta()

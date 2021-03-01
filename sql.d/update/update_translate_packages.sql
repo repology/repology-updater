@@ -36,9 +36,7 @@ INSERT INTO incoming_packages (
 	maintainers,
 	category,
 	comment,
-	homepage,
 	licenses,
-	downloads,
 
 	extrafields,
 
@@ -82,9 +80,7 @@ SELECT
 	maintainers,
 	category,
 	comment,
-	homepage,
 	licenses,
-	downloads,
 
 	extrafields,
 

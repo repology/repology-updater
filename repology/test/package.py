@@ -33,13 +33,11 @@ def spawn_package(
     repo: str = 'dummyrepo',
     flags: int = 0,
     family: Optional[str] = None,
-    homepage: Optional[str] = None,
     comment: Optional[str] = None,
     category: Optional[str] = None,
     maintainers: Optional[List[str]] = None,
     flavors: Optional[List[str]] = None,
     branch: Optional[str] = None,
-    downloads: Optional[List[str]] = None,
     links: Optional[List[Tuple[int, str]]] = None,
 ) -> Package:
     m = PackageFactory().begin()
@@ -49,10 +47,8 @@ def spawn_package(
 
     m.set_flags(flags)
     m.set_summary(comment)
-    m.add_homepages(homepage)
     m.add_categories(category)
     m.add_maintainers(maintainers)
-    m.add_downloads(downloads)
 
     if links:
         for link_type, url in links:

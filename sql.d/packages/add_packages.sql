@@ -40,9 +40,7 @@ INSERT INTO incoming_packages_raw (
 	maintainers,
 	category,
 	comment,
-	homepage,
 	licenses,
-	downloads,
 
 	extrafields,
 
@@ -87,9 +85,7 @@ INSERT INTO incoming_packages_raw (
 	%(maintainers)s,
 	%(category)s,
 	%(comment)s,
-	%(homepage)s,
 	%(licenses)s,
-	%(downloads)s,
 
 	%(extrafields)s,
 

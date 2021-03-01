@@ -49,9 +49,7 @@ class PackageTemplate:
         'summary',
         'maintainers',
         'categories',
-        'homepages',
         'licenses',
-        'downloads',
 
         'flags',
 
@@ -83,9 +81,7 @@ class PackageTemplate:
     summary: Optional[str]
     maintainers: List[str]
     categories: List[str]
-    homepages: List[str]
     licenses: List[str]
-    downloads: List[str]
 
     flags: int
 
@@ -117,9 +113,7 @@ class PackageTemplate:
         self.summary = None
         self.maintainers = []
         self.categories = []
-        self.homepages = []
         self.licenses = []
-        self.downloads = []
 
         self.flags = 0
 

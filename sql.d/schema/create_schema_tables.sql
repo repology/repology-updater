@@ -44,9 +44,7 @@ CREATE TABLE packages (
 	maintainers text[],
 	category text,
 	comment text,
-	homepage text,
 	licenses text[],
-	downloads text[],
 
 	extrafields jsonb,
 

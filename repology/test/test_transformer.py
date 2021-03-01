@@ -21,7 +21,7 @@
 
 import unittest
 
-from repology.package import PackageFlags as Pf
+from repology.package import LinkType as Lt, PackageFlags as Pf
 from repology.repomgr import RepositoryManager
 from repology.transformer import PackageTransformer
 
@@ -360,36 +360,36 @@ class TestPackageTransformer(unittest.TestCase):
     def test_match_wwwpat(self) -> None:
         self._check_transformer(
             '[ { wwwpat: "https?://foo\\\\.com/.*", setname: bar } ]',
-            PackageSample(name='p1', version='1.0', homepage='https://foo.com/xxx').expect(effname='bar'),
-            PackageSample(name='p2', version='1.0', homepage='http://foo.com/').expect(effname='bar'),
-            PackageSample(name='p3', version='1.0', homepage='http://foo_com/xxx').expect(effname='p3'),
-            PackageSample(name='p1', version='1.0', downloads=['https://foo.com/xxx']).expect(effname='bar'),
-            PackageSample(name='p2', version='1.0', downloads=['http://foo.com/']).expect(effname='bar'),
-            PackageSample(name='p3', version='1.0', downloads=['http://foo_com/xxx']).expect(effname='p3'),
+            PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.com/xxx')]).expect(effname='bar'),
+            PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://foo.com/')]).expect(effname='bar'),
+            PackageSample(name='p3', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://foo_com/xxx')]).expect(effname='p3'),
+            PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_DOWNLOAD, 'https://foo.com/xxx')]).expect(effname='bar'),
+            PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_DOWNLOAD, 'http://foo.com/')]).expect(effname='bar'),
+            PackageSample(name='p3', version='1.0', links=[(Lt.UPSTREAM_DOWNLOAD, 'http://foo_com/xxx')]).expect(effname='p3'),
             PackageSample(name='p4', version='2.0').expect(effname='p4'),
         )
 
     def test_match_wwwpart(self) -> None:
         self._check_transformer(
             '[ { wwwpart: "foo", setname: bar } ]',
-            PackageSample(name='p1', version='1.0', homepage='http://foo/xxx').expect(effname='bar'),
-            PackageSample(name='p2', version='1.0', homepage='http://bar.com/yyy').expect(effname='p2'),
-            PackageSample(name='p1', version='1.0', downloads=['http://foo/xxx']).expect(effname='bar'),
-            PackageSample(name='p2', version='1.0', downloads=['http://bar.com/yyy']).expect(effname='p2'),
+            PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://foo/xxx')]).expect(effname='bar'),
+            PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://bar.com/yyy')]).expect(effname='p2'),
+            PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_DOWNLOAD, 'http://foo/xxx')]).expect(effname='bar'),
+            PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_DOWNLOAD, 'http://bar.com/yyy')]).expect(effname='p2'),
             PackageSample(name='p3', version='2.0').expect(effname='p3'),
         )
 
     def test_match_wwwpart_case(self) -> None:
         self._check_transformer(
             '[ { wwwpart: homepage1, setname: ok1 }, { wwwpart: HOMEPAGE2, setname: ok2 }, { wwwpart: homepage3, setname: ok3 }, { wwwpart: HOMEPAGE4, setname: ok4 } ]',
-            PackageSample(name='p1', version='1.0', homepage='http://homepage1').expect(effname='ok1'),
-            PackageSample(name='p2', version='1.0', homepage='http://HOMEPAGE1').expect(effname='ok1'),
-            PackageSample(name='p3', version='1.0', homepage='http://homepage2').expect(effname='ok2'),
-            PackageSample(name='p4', version='1.0', homepage='http://HOMEPAGE2').expect(effname='ok2'),
-            PackageSample(name='p5', version='1.0', homepage='http://homepage3').expect(effname='ok3'),
-            PackageSample(name='p6', version='1.0', homepage='http://HOMEPAGE3').expect(effname='ok3'),
-            PackageSample(name='p7', version='1.0', homepage='http://homepage4').expect(effname='ok4'),
-            PackageSample(name='p8', version='1.0', homepage='http://HOMEPAGE4').expect(effname='ok4'),
+            PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://homepage1')]).expect(effname='ok1'),
+            PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://HOMEPAGE1')]).expect(effname='ok1'),
+            PackageSample(name='p3', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://homepage2')]).expect(effname='ok2'),
+            PackageSample(name='p4', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://HOMEPAGE2')]).expect(effname='ok2'),
+            PackageSample(name='p5', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://homepage3')]).expect(effname='ok3'),
+            PackageSample(name='p6', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://HOMEPAGE3')]).expect(effname='ok3'),
+            PackageSample(name='p7', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://homepage4')]).expect(effname='ok4'),
+            PackageSample(name='p8', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://HOMEPAGE4')]).expect(effname='ok4'),
         )
 
     def test_match_summpart(self) -> None:

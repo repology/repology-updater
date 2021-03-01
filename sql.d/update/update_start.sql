@@ -48,9 +48,7 @@ CREATE TEMPORARY TABLE incoming_packages_raw (
     maintainers text[],
     category text,
     comment text,
-    homepage text,
     licenses text[],
-    downloads text[],
 
     extrafields jsonb,
 
@@ -97,9 +95,7 @@ CREATE TEMPORARY TABLE incoming_packages (
     maintainers text[],
     category text,
     comment text,
-    homepage text,
     licenses text[],
-    downloads text[],
 
     extrafields jsonb,
 

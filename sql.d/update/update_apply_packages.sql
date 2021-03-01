@@ -47,9 +47,7 @@ INSERT INTO packages (
 	maintainers,
 	category,
 	comment,
-	homepage,
 	licenses,
-	downloads,
 
 	extrafields,
 
@@ -92,9 +90,7 @@ INSERT INTO packages (
 	maintainers,
 	category,
 	comment,
-	homepage,
 	licenses,
-	downloads,
 
 	extrafields,
 

@@ -223,9 +223,7 @@ class Package:
         'maintainers',
         'category',
         'comment',
-        'homepage',
         'licenses',
-        'downloads',
 
         'extrafields',
 
@@ -275,9 +273,7 @@ class Package:
     maintainers: Optional[List[str]]
     category: Optional[str]
     comment: Optional[str]
-    homepage: Optional[str]
     licenses: Optional[List[str]]
-    downloads: Optional[List[str]]
 
     extrafields: Optional[Dict[str, str]]
 
