@@ -96,7 +96,7 @@ $$ LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE RETURNS NULL ON NULL INPUT;
 -- Used for related packages discovery
 CREATE OR REPLACE FUNCTION project_get_related(source_project_id integer, maxresults integer)
 	RETURNS TABLE(
-		project_id integer,
+		related_project_id integer,
 		rank float
 	)
 AS $$
@@ -114,45 +114,45 @@ BEGIN
 	-- The rank calculation algorithm is roughly as follows:
 	WHILE continue LOOP
 		CREATE TEMPORARY TABLE new_related ON COMMIT DROP AS
-		WITH pass1 AS (
-			-- Step 1 - follow links for known projects
+		-- Step 1 - follow links for known projects
+		WITH pass1_1 AS (
+			SELECT
+				urlhash,
+				-- 1.1. For each project taking part in this iteration, take it's rank and
+				-- divide it among its links, taking link weight into account.
+				related.rank / (SELECT count(*) FROM related) / count(*) OVER (PARTITION BY metapackage_id) * weight AS rank
+			FROM related INNER JOIN url_relations USING(metapackage_id)
+		), pass1_2 AS (
 			SELECT
 				urlhash,
 				-- 1.2. Weight from multiple projects on a single link is summed.
-				sum(tmp.rank) AS rank,
+				sum(pass1_1.rank) AS rank,
 				count(*) AS incoming_projects
-			FROM (
-				SELECT
-					urlhash,
-					-- 1.1. For each project taking part in this iteration, take it's rank and
-					-- divide it among its links, taking link weight into account.
-					related.rank / (SELECT count(*) FROM related) / count(*) OVER (PARTITION BY metapackage_id) * weight AS rank
-				FROM related INNER JOIN url_relations USING(metapackage_id)
-			) AS tmp
+			FROM pass1_1
 			GROUP BY urlhash
-		), pass2 AS (
-			-- Step 2 - projects from links discovered on step 1
+
+		-- Step 2 - projects from links discovered on step 1
+		), pass2_1 AS (
+			SELECT
+				metapackage_id,
+				-- 2.1. Now, for each link, divide its rank among the projects it points
+				-- to, ignoring projects the rank came from on this iteration.
+				-- Link weights are not accounted for second time.
+				pass1_2.rank / (nullif(count(*) OVER (PARTITION BY urlhash), incoming_projects) - incoming_projects) AS rank
+			FROM pass1_2 INNER JOIN url_relations USING(urlhash)
+		), pass2_2 AS (
 			SELECT
 				metapackage_id,
 				-- 2.2. Similar to 1.2, rank passed by all links to a single project is summed
-				sum(tmp.rank) AS rank
-			FROM (
-				SELECT
-					metapackage_id,
-					-- 2.1. Now, for each link, divide its rank among the projects it points
-					-- to, ignoring projects the rank came from on this iteration.
-					-- Link weights are not accounted for second time.
-					pass1.rank / (nullif(count(*) OVER (PARTITION BY urlhash), incoming_projects) - incoming_projects) AS rank
-				FROM pass1 INNER JOIN url_relations USING(urlhash)
-			) AS tmp
+				sum(pass2_1.rank) AS rank
+			FROM pass2_1
 			GROUP BY metapackage_id
 		)
 		-- 3. Merge with result of previous iteration
 		SELECT
 			metapackage_id,
-			greatest(related.rank, pass2.rank) AS rank
-		FROM related
-		FULL OUTER JOIN pass2 USING(metapackage_id)
+			greatest(related.rank, pass2_2.rank) AS rank
+		FROM related FULL OUTER JOIN pass2_2 USING(metapackage_id)
 		ORDER BY rank DESC, metapackage_id
 		LIMIT maxresults;
 
