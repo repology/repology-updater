@@ -85,7 +85,7 @@ class PackageTemplate:
 
     flags: int
 
-    extrafields: Dict[str, str]
+    extrafields: Dict[str, Any]
 
     cpe_vendor: Optional[str]
     cpe_product: Optional[str]
@@ -330,7 +330,7 @@ class PackageMaker(PackageMakerBase):
         else:
             self._package.flags &= ~mask
 
-    def set_extra_field(self, key: str, value: str) -> None:
+    def set_extra_field(self, key: str, value: Any) -> None:
         self._package.extrafields[key] = value
 
     def add_cpe(self, vendor: Optional[str] = None, product: Optional[str] = None, edition: Optional[str] = None, lang: Optional[str] = None, sw_edition: Optional[str] = None, target_sw: Optional[str] = None, target_hw: Optional[str] = None, other: Optional[str] = None) -> None:

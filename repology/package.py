@@ -308,7 +308,7 @@ class Package:
     comment: Optional[str]
     licenses: Optional[List[str]]
 
-    extrafields: Optional[Dict[str, str]]
+    extrafields: Optional[Dict[str, Any]]
 
     cpe_vendor: Optional[str]
     cpe_product: Optional[str]
@@ -360,7 +360,7 @@ class Package:
                  comment: Optional[str] = None,
                  licenses: Optional[List[str]] = None,
 
-                 extrafields: Optional[Dict[str, str]] = None,
+                 extrafields: Optional[Dict[str, Any]] = None,
 
                  cpe_vendor: Optional[str] = None,
                  cpe_product: Optional[str] = None,
