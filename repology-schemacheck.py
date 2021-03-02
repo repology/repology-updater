@@ -166,6 +166,14 @@ rulesets = families + [
     'windows',
 ]
 
+packagelinks = [
+    {
+        'desc': str,  # XXX: remove with complete switch to generalized links
+        'type': str,  # XXX: make mandatory with complete switch to generalized links
+        Required('url'): Url(),
+    }
+]
+
 schemas = {
     'repos': [
         {
@@ -251,6 +259,7 @@ schemas = {
                         'maintainer_from_git': bool,
                         'blob_prefix': str,
                     },
+                    'packagelinks': packagelinks,
                 }
             ],
             'shadow': bool,
@@ -261,12 +270,7 @@ schemas = {
                     Required('url'): Url(),
                 }
             ],
-            'packagelinks': [
-                {
-                    Required('desc'): str,
-                    Required('url'): Url(),
-                }
-            ],
+            'packagelinks': packagelinks,
             'tags': [
                 str
             ]

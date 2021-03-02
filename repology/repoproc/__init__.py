@@ -20,9 +20,10 @@ from typing import Iterable, Iterator, List, Optional
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import Fetcher
+from repology.linkformatter import format_package_links
 from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
-from repology.package import Package, PackageFlags
+from repology.package import LinkType, Package, PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
@@ -126,6 +127,21 @@ class RepositoryProcessor:
                     return flavor
 
                 package.flavors = sorted(set(map(strip_flavor, package.flavors)))
+
+                # add packagelinks
+                for pkglink in source.get('packagelinks', []) + repository.get('packagelinks', []):
+                    if 'type' in pkglink:  # XXX: will become mandatory
+                        link_type = LinkType.from_string(pkglink['type'])
+                        try:
+                            if package.links is None:
+                                package.links = []
+                            package.links.extend(
+                                (link_type, url)
+                                for url in format_package_links(package, pkglink['url'])
+                            )
+                        except Exception as e:
+                            packagemaker.log(f'cannot spawn package link from template "{pkglink["url"]}": {str(e)}', Logger.ERROR)
+                            raise
 
                 yield package
 
