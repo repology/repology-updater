@@ -9,10 +9,12 @@
   minpackages: 400
   sources:
     - name: conan-center-index
-      fetcher: GitFetcher
-      parser: ConanGitParser
-      url: https://github.com/conan-io/conan-center-index.git
-      sparse_checkout: [ 'recipes/**/config.yml', 'recipes/**/conandata.yml' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/conan-io/conan-center-index.git
+        sparse_checkout: [ 'recipes/**/config.yml', 'recipes/**/conandata.yml' ]
+      parser:
+        class: ConanGitParser
   repolinks:
     - desc: JFrog ConanCenter
       url: https://conan.io/center/

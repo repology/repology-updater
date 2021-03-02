@@ -13,9 +13,11 @@
   minpackages: 50
   sources:
     - name: rep.xml
-      fetcher: FileFetcher
-      parser: NpackdXmlParser
-      url: https://www.npackd.org/rep/xml?tag=unstable
+      fetcher:
+        class: FileFetcher
+        url: https://www.npackd.org/rep/xml?tag=unstable
+      parser:
+        class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/
@@ -34,9 +36,11 @@
   minpackages: 6500
   sources:
     - name: rep.xml
-      fetcher: FileFetcher
-      parser: NpackdXmlParser
-      url: https://www.npackd.org/rep/xml?tag=stable
+      fetcher:
+        class: FileFetcher
+        url: https://www.npackd.org/rep/xml?tag=stable
+      parser:
+        class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/
@@ -55,9 +59,11 @@
   minpackages: 150
   sources:
     - name: rep.xml
-      fetcher: FileFetcher
-      parser: NpackdXmlParser
-      url: https://www.npackd.org/rep/xml?tag=libs
+      fetcher:
+        class: FileFetcher
+        url: https://www.npackd.org/rep/xml?tag=libs
+      parser:
+        class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/
@@ -76,9 +82,11 @@
   minpackages: 2000
   sources:
     - name: rep.xml
-      fetcher: FileFetcher
-      parser: NpackdXmlParser
-      url: https://www.npackd.org/rep/xml?tag=stable64
+      fetcher:
+        class: FileFetcher
+        url: https://www.npackd.org/rep/xml?tag=stable64
+      parser:
+        class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/

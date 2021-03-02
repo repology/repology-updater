@@ -11,10 +11,12 @@
   minpackages: 26000
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://repo.pureos.net/pureos/dists/amber/main/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://repo.pureos.net/pureos/dists/amber/main/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: PureOS home
       url: https://pureos.net/
@@ -30,10 +32,12 @@
   minpackages: 26000
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://repo.pureos.net/pureos/dists/landing/main/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://repo.pureos.net/pureos/dists/landing/main/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: PureOS home
       url: https://pureos.net/

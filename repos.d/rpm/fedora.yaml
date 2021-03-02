@@ -18,14 +18,18 @@
   valid_till: 2018-05-29
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/26/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/26/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/26/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/26/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -51,14 +55,18 @@
   minpackages: 22000
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/27/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/27/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/27/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/27/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -84,14 +92,18 @@
   minpackages: 24000
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/28/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/28/Everything/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -117,14 +129,18 @@
   minpackages: 24000
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/29/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/29/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/29/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/29/Everything/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -150,14 +166,18 @@
   minpackages: 24000
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/30/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/30/Everything/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -183,14 +203,18 @@
   minpackages: 24000
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/31/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/31/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/31/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/31/Everything/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -219,14 +243,18 @@
   minpackages: 22000
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/releases/32/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/releases/32/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/updates/32/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/updates/32/Everything/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -252,14 +280,18 @@
   minpackages: 18000
   sources:
     - name: release
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/releases/33/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/releases/33/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/updates/33/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/updates/33/Everything/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -286,14 +318,18 @@
   minpackages: 18000
   sources:
     - name: development
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/development/34/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/development/34/Everything/source/tree/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
     - name: updates
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/updates/34/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/updates/34/Everything/SRPMS/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -320,9 +356,11 @@
   minpackages: 20000
   sources:
     - name: development
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/

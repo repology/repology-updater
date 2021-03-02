@@ -8,9 +8,11 @@
   minpackages: 12500  # about 2000 really, but a lot of versions
   sources:
     - name: manifest
-      fetcher: FileFetcher
-      parser: LuaRocksParser
-      url: https://luarocks.org/manifest
+      fetcher:
+        class: FileFetcher
+        url: https://luarocks.org/manifest
+      parser:
+        class: LuaRocksParser
   shadow: true
   repolinks:
     - desc: LuaRocks home

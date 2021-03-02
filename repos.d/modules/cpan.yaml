@@ -8,10 +8,12 @@
   minpackages: 30000
   sources:
     - name: CPAN
-      fetcher: FileFetcher
-      parser: CPANPackagesParser
-      url: http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
+        compression: gz
+      parser:
+        class: CPANPackagesParser
   shadow: true
   repolinks:
     - desc: CPAN
@@ -26,33 +28,35 @@
   minpackages: 30000
   sources:
     - name: metacpan.org
-      fetcher: ElasticSearchFetcher
-      url: https://fastapi.metacpan.org/v1/release/_search
-      scroll_url: https://fastapi.metacpan.org/_search/scroll
-      es_scroll: 1m
-      es_size: 5000
-      es_filter:
-        or:
-          - { term: { status: latest } }
-          - { term: { maturity: developer } }
-      es_fields:
-        # See https://github.com/metacpan/metacpan-api/blob/master/lib/MetaCPAN/Script/Mapping/CPAN/Release.pm
-        - abstract
-        - author
-        - distribution
-        - download_url
-        - license
-        - maturity
-        - resources.homepage
-        - status
-        - version
-        - name
-        # XXX: resources.repository.url
-        # XXX: resources.repository.web  # in most cases same ashomepage
-        # XXX: resources.bugtracker.web
-        # XXX: main_module  # == Pod?
-      fetch_delay: 1
-      parser: MetacpanAPIParser
+      fetcher:
+        class: ElasticSearchFetcher
+        url: https://fastapi.metacpan.org/v1/release/_search
+        scroll_url: https://fastapi.metacpan.org/_search/scroll
+        es_scroll: 1m
+        es_size: 5000
+        es_filter:
+          or:
+            - { term: { status: latest } }
+            - { term: { maturity: developer } }
+        es_fields:
+          # See https://github.com/metacpan/metacpan-api/blob/master/lib/MetaCPAN/Script/Mapping/CPAN/Release.pm
+          - abstract
+          - author
+          - distribution
+          - download_url
+          - license
+          - maturity
+          - resources.homepage
+          - status
+          - version
+          - name
+          # XXX: resources.repository.url
+          # XXX: resources.repository.web  # in most cases same as homepage
+          # XXX: resources.bugtracker.web
+          # XXX: main_module  # == Pod?
+        fetch_delay: 1
+      parser:
+        class: MetacpanAPIParser
   shadow: true
   repolinks:
     - desc: CPAN

@@ -10,10 +10,12 @@
   minpackages: 3000
   sources:
     - name: latest
-      fetcher: FileFetcher
-      parser: MportsJsonParser
-      url: http://www.midnightbsd.org/magus/api/latest
-      allow_zero_size: false
+      fetcher:
+        class: FileFetcher
+        url: http://www.midnightbsd.org/magus/api/latest
+        allow_zero_size: false
+      parser:
+        class: MportsJsonParser
   repolinks:
     - desc: MidnightBSD home
       url: http://www.midnightbsd.org/

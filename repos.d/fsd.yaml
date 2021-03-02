@@ -8,10 +8,12 @@
   minpackages: 1  # XXX: unknown, may vary depending on parser logic
   sources:
     - name: directory.xml
-      fetcher: FileFetcher
-      parser: FreeSoftwareDirectoryXMLParser
-      url: http://static.fsf.org/nosvn/directory/directory.xml.bz2
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: http://static.fsf.org/nosvn/directory/directory.xml.bz2
+        compression: bz2
+      parser:
+        class: FreeSoftwareDirectoryXMLParser
   shadow: true
   repolinks:
     - desc: Free Software Directory

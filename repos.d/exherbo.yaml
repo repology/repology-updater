@@ -10,9 +10,11 @@
   default_maintainer: fallback-mnt-exherbo@repology
   sources:
     - name: packages.json
-      fetcher: FileFetcher
-      parser: ExherboJsonParser
-      url: 'https://git.exherbo.org/summer/packages.json'
+      fetcher:
+        class: FileFetcher
+        url: 'https://git.exherbo.org/summer/packages.json'
+      parser:
+        class: ExherboJsonParser
   repolinks:
     - desc: Exherbo home
       url: http://exherbo.org/

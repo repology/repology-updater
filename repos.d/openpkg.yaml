@@ -8,10 +8,12 @@
   minpackages: 2100
   sources:
     - name: 00INDEX
-      fetcher: FileFetcher
-      parser: OpenPkgRdfParser
-      url: http://download.openpkg.org/packages/current/source/00INDEX.rdf.bz2
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: http://download.openpkg.org/packages/current/source/00INDEX.rdf.bz2
+        compression: bz2
+      parser:
+        class: OpenPkgRdfParser
   repolinks:
     - desc: OpenPKG Project
       url: http://www.openpkg.org/

@@ -9,10 +9,12 @@
   minpackages: 2000
   sources:
     - name: haikuports
-      fetcher: GitFetcher
-      parser: HaikuPortsFilenamesParser
-      url: https://github.com/haikuports/haikuports.git
-      sparse_checkout: [ '**/*.recipe' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/haikuports/haikuports.git
+        sparse_checkout: [ '**/*.recipe' ]
+      parser:
+        class: HaikuPortsFilenamesParser
   repolinks:
     - desc: HaikuPorts repository
       url: https://github.com/haikuports/haikuports

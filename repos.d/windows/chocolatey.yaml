@@ -9,10 +9,12 @@
   minpackages: 5000
   sources:
     - name: chocolatey
-      fetcher: ChocolateyFetcher
-      fetch_timeout: 60
-      parser: ChocolateyParser
-      url: https://chocolatey.org/api/v2/
+      fetcher:
+        class: ChocolateyFetcher
+        fetch_timeout: 60
+        url: https://chocolatey.org/api/v2/
+      parser:
+        class: ChocolateyParser
   shadow: true
   repolinks:
     - desc: Chocolatey - the package manager for Windows
@@ -33,8 +35,10 @@
   minpackages: 1  # XXX: unknown
   sources:
     - name: nuget
-      fetcher: ChocolateyFetcher
-      parser: ChocolateyParser
-      url: https://www.nuget.org/api/v2/
+      fetcher:
+        class: ChocolateyFetcher
+        url: https://www.nuget.org/api/v2/
+      parser:
+        class: ChocolateyParser
   shadow: true
   tags: [ all ]

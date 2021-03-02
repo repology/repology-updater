@@ -11,9 +11,11 @@
   minpackages: 4500
   sources:
     - name: formula.json
-      fetcher: FileFetcher
-      parser: HomebrewJsonParser
-      url: https://formulae.brew.sh/api/formula.json
+      fetcher:
+        class: FileFetcher
+        url: https://formulae.brew.sh/api/formula.json
+      parser:
+        class: HomebrewJsonParser
   repolinks:
     - desc: Homebrew home
       url: https://brew.sh/
@@ -37,9 +39,11 @@
   minpackages: 3300
   sources:
     - name: cask.json
-      fetcher: FileFetcher
-      parser: HomebrewCaskJsonParser
-      url: https://formulae.brew.sh/api/cask.json
+      fetcher:
+        class: FileFetcher
+        url: https://formulae.brew.sh/api/cask.json
+      parser:
+        class: HomebrewCaskJsonParser
   shadow: true
   repolinks:
     - desc: Homebrew home

@@ -9,9 +9,11 @@
   minpackages: 450
   sources:
     - name: packages.json
-      fetcher: FileFetcher
-      parser: TermuxJsonParser
-      url: https://raw.githubusercontent.com/termux/repology-metadata/master/packages.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/termux/repology-metadata/master/packages.json
+      parser:
+        class: TermuxJsonParser
   repolinks:
     - desc: Termux home
       url: https://termux.com/

@@ -12,11 +12,13 @@
   minpackages: 21000
   sources:
     - name: [ precise/main, precise/multiverse, precise/restricted, precise/universe, precise-updates/main, precise-updates/multiverse, precise-updates/restricted, precise-updates/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -43,11 +45,13 @@
   minpackages: 0
   sources:
     - name: [ precise-backports/main, precise-backports/multiverse, precise-backports/restricted, precise-backports/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -74,11 +78,13 @@
   minpackages: 23000
   sources:
     - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -107,11 +113,13 @@
   minpackages: 0
   sources:
     - name: [ trusty-backports/main, trusty-backports/multiverse, trusty-backports/restricted, trusty-backports/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -138,11 +146,13 @@
   minpackages: 26000
   sources:
     - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -171,11 +181,13 @@
   minpackages: 0
   sources:
     - name: [ xenial-backports/main, xenial-backports/multiverse, xenial-backports/restricted, xenial-backports/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -202,11 +214,13 @@
   minpackages: 29000
   sources:
     - name: [ bionic/main, bionic/multiverse, bionic/restricted, bionic/universe, bionic-updates/main, bionic-updates/multiverse, bionic-updates/restricted, bionic-updates/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -235,11 +249,13 @@
   minpackages: 0
   sources:
     - name: [ bionic-backports/main, bionic-backports/multiverse, bionic-backports/restricted, bionic-backports/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -265,11 +281,13 @@
   minpackages: 29000
   sources:
     - name: [ focal/main, focal/multiverse, focal/restricted, focal/universe, focal-updates/main, focal-updates/multiverse, focal-updates/restricted, focal-updates/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -297,11 +315,13 @@
   minpackages: 0
   sources:
     - name: [ focal-backports/main, focal-backports/multiverse, focal-backports/restricted, focal-backports/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -327,11 +347,13 @@
   minpackages: 0
   sources:
     - name: [ focal-proposed/main, focal-proposed/multiverse, focal-proposed/restricted, focal-proposed/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -357,11 +379,13 @@
   minpackages: 29000
   sources:
     - name: [ groovy/main, groovy/multiverse, groovy/restricted, groovy/universe, groovy-updates/main, groovy-updates/multiverse, groovy-updates/restricted, groovy-updates/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -389,11 +413,13 @@
   minpackages: 0
   sources:
     - name: [ groovy-backports/main, groovy-backports/multiverse, groovy-backports/restricted, groovy-backports/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
@@ -419,11 +445,13 @@
   minpackages: 0
   sources:
     - name: [ groovy-proposed/main, groovy-proposed/multiverse, groovy-proposed/restricted, groovy-proposed/universe ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      fetch_timeout: 5
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages

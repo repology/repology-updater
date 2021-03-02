@@ -9,9 +9,11 @@
   minpackages: 800
   sources:
     - name: repo.json
-      fetcher: FileFetcher
-      parser: AtaraxiaJsonParser
-      url: 'https://raw.githubusercontent.com/ataraxialinux/ataraxia/master/packages/repo'
+      fetcher:
+        class: FileFetcher
+        url: 'https://raw.githubusercontent.com/ataraxialinux/ataraxia/master/packages/repo'
+      parser:
+        class: AtaraxiaJsonParser
   repolinks:
     - desc: Ataraxia Linux home
       url: https://ataraxialinux.github.io/

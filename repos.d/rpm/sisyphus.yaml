@@ -11,10 +11,12 @@
   minpackages: 18000
   sources:
     - name: [ noarch, x86_64 ]
-      fetcher: FileFetcher
-      parser: SrcListParser
-      url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{source}/base/srclist.classic.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{source}/base/srclist.classic.xz'
+        compression: xz
+      parser:
+        class: SrcListParser
   repolinks:
     - desc: Sisyphus packages
       url: https://packages.altlinux.org/en/sisyphus/packages
@@ -37,10 +39,12 @@
   minpackages: 18000
   sources:
     - name: [ noarch, x86_64 ]
-      fetcher: FileFetcher
-      parser: SrcListParser
-      url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/p9/branch/{source}/base/srclist.classic.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/p9/branch/{source}/base/srclist.classic.xz'
+        compression: xz
+      parser:
+        class: SrcListParser
   repolinks:
     - desc: ALT p9 packages
       url: https://packages.altlinux.org/en/p9/packages
@@ -64,10 +68,12 @@
   minpackages: 1  # XXX: unknown
   sources:
     - name: [ noarch, x86_64 ]
-      fetcher: FileFetcher
-      parser: SrcListParser
-      url: 'http://ftp.altlinux.ru/pub/distributions/ALTLinux/autoimports/Sisyphus/{source}/base/srclist.autoimports.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.altlinux.ru/pub/distributions/ALTLinux/autoimports/Sisyphus/{source}/base/srclist.autoimports.xz'
+        compression: xz
+      parser:
+        class: SrcListParser
   repolinks:
     - desc: Sisyphus repository
       url: http://www.sisyphus.ru/en/

@@ -9,9 +9,11 @@
   minpackages: 200
   sources:
     - name: homebrew.json
-      fetcher: FileFetcher
-      parser: HomebrewJsonParser
-      url: https://brewsci.github.io/homebrew-bio/api/formula.json
+      fetcher:
+        class: FileFetcher
+        url: https://brewsci.github.io/homebrew-bio/api/formula.json
+      parser:
+        class: HomebrewJsonParser
   repolinks:
     - desc: Brewsci/bio home
       url: https://brewsci.github.io/homebrew-bio/

@@ -13,24 +13,32 @@
   minpackages: 10000
   sources:
     - name: oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/42.3/repo/oss/suse/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/42.3/repo/oss/suse/
+      parser:
+        class: RepodataParser
       subrepo: main/oss
     - name: non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
+      parser:
+        class: RepodataParser
       subrepo: main/non-oss
     - name: updates-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/42.3/oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/42.3/oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/oss
     - name: updates-non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/42.3/non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/42.3/non-oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home
@@ -56,24 +64,32 @@
   minpackages: 11000
   sources:
     - name: oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/15.0/repo/oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/15.0/repo/oss/
+      parser:
+        class: RepodataParser
       subrepo: main/oss
     - name: non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
+      parser:
+        class: RepodataParser
       subrepo: main/non-oss
     - name: updates-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/15.0/oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.0/oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/oss
     - name: updates-non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/15.0/non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.0/non-oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home
@@ -98,24 +114,32 @@
   minpackages: 10500
   sources:
     - name: oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/15.1/repo/oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/15.1/repo/oss/
+      parser:
+        class: RepodataParser
       subrepo: main/oss
     - name: non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/15.1/repo/non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/15.1/repo/non-oss/
+      parser:
+        class: RepodataParser
       subrepo: main/non-oss
     - name: updates-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/15.1/oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.1/oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/oss
     - name: updates-non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/15.1/non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.1/non-oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home
@@ -140,24 +164,32 @@
   minpackages: 10500
   sources:
     - name: oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/15.2/repo/oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/15.2/repo/oss/
+      parser:
+        class: RepodataParser
       subrepo: main/oss
     - name: non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/source/distribution/leap/15.2/repo/non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/source/distribution/leap/15.2/repo/non-oss/
+      parser:
+        class: RepodataParser
       subrepo: main/non-oss
     - name: updates-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/15.2/oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.2/oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/oss
     - name: updates-non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/update/leap/15.2/non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.2/non-oss/
+      parser:
+        class: RepodataParser
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home
@@ -185,13 +217,17 @@
     # http://download.opensuse.org/source/tumbleweed/repo/oss/
     # http://download.opensuse.org/tumbleweed/repo/src-oss/
     - name: src-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/tumbleweed/repo/src-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/tumbleweed/repo/src-oss/
+      parser:
+        class: RepodataParser
     - name: src-non-oss
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/tumbleweed/repo/src-non-oss/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/tumbleweed/repo/src-non-oss/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/

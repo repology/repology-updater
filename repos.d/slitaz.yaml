@@ -9,10 +9,12 @@
   minpackages: 5200
   sources:
     - name: repo.json
-      fetcher: FileFetcher
-      parser: SliTazJsonParser
-      url: http://mirror1.slitaz.org/packages/cooking/repo.json.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://mirror1.slitaz.org/packages/cooking/repo.json.gz
+        compression: gz
+      parser:
+        class: SliTazJsonParser
   repolinks:
     - desc: SliTaz home
       url: http://www.slitaz.org/
@@ -34,10 +36,12 @@
   minpackages: 5200
   sources:
     - name: repo.json
-      fetcher: FileFetcher
-      parser: SliTazJsonParser
-      url: http://mirror1.slitaz.org/packages/next/repo.json.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://mirror1.slitaz.org/packages/next/repo.json.gz
+        compression: gz
+      parser:
+        class: SliTazJsonParser
   repolinks:
     - desc: SliTaz home
       url: http://www.slitaz.org/

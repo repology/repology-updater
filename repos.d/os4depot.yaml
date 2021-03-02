@@ -12,9 +12,11 @@
   minpackages: 1
   sources:
     - name: FULLINDEX.readme
-      fetcher: FileFetcher
-      parser: OS4DepotIndexParser
-      url: 'http://os4depot.net/share/FULLINDEX.readme'
+      fetcher:
+        class: FileFetcher
+        url: 'http://os4depot.net/share/FULLINDEX.readme'
+      parser:
+        class: OS4DepotIndexParser
   shadow: true
   repolinks:
     - desc: OS4Depot home

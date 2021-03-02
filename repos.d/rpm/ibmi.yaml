@@ -9,9 +9,11 @@
   minpackages: 150
   sources:
     - name: main
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo/'
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: IBM i Open Source
       url: 'https://bitbucket.org/ibmi/opensource/src/master/'

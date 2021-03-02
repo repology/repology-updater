@@ -14,10 +14,12 @@
   minpackages: 150
   sources:
     - name: [core, stable]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: SparkyLinux home
@@ -32,10 +34,12 @@
   minpackages: 150
   sources:
     - name: [core, testing]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: SparkyLinux home

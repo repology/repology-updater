@@ -10,12 +10,14 @@
   default_maintainer: guru@gentoo.org
   sources:
     - name: guru-overlay
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: https://github.com/gentoo-mirror/guru.git
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/gentoo-mirror/guru.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
   repolinks:
     - desc: Gentoo wiki page for Project GURU
       url: https://wiki.gentoo.org/wiki/Project:GURU
@@ -42,12 +44,14 @@
   default_maintainer: fallback-mnt-pentoo@repology
   sources:
     - name: pentoo-overlay
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: false
-      require_xml_metadata: false
-      url: git://github.com/pentoo/pentoo-overlay.git
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: git://github.com/pentoo/pentoo-overlay.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: false
+        require_xml_metadata: false
   repolinks:
     - desc: Home page
       url: http://www.pentoo.ch/
@@ -72,12 +76,14 @@
   default_maintainer: sci@gentoo.org
   sources:
     - name: gentoo-science
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: true
-      url: git://github.com/gentoo-mirror/science.git
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: git://github.com/gentoo-mirror/science.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: true
   repolinks:
     - desc: Gentoo wiki page for Project Science
       url: https://wiki.gentoo.org/wiki/Project:Science
@@ -100,9 +106,11 @@
   minpackages: 1  #XXX: unknown
   sources:
     - name: games-overlay
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      url: https://github.com/hasufell/games-overlay.git
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/hasufell/games-overlay.git
+      parser:
+        class: GentooGitParser
   repolinks:
     - desc: Git repository
       url: https://github.com/hasufell/games-overlay
@@ -116,9 +124,11 @@
   minpackages: 1  #XXX: unknown
   sources:
     - name: gamerlay
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      url: https://anongit.gentoo.org/git/proj/gamerlay.git
+      fetcher:
+        class: GitFetcher
+        url: https://anongit.gentoo.org/git/proj/gamerlay.git
+      parser:
+        class: GentooGitParser
   repolinks:
     - desc: Git repository
       url: https://cgit.gentoo.org/proj/gamerlay.git/

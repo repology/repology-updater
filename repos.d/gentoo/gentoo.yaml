@@ -11,13 +11,15 @@
   minpackages: 28000
   sources:
     - name: gentoo
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      url: https://github.com/gentoo-mirror/gentoo.git
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
-      branch: stable
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/gentoo-mirror/gentoo.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+        branch: stable
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
   repolinks:
     - desc: Gentoo Linux home
       url: https://gentoo.org/

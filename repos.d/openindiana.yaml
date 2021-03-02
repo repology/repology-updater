@@ -9,9 +9,11 @@
   minpackages: 1800
   sources:
     - name: [hipster, hipster-encumbered]
-      fetcher: FileFetcher
-      parser: OpenIndianaSummaryJsonParser
-      url: "http://pkg.openindiana.org/{source}/catalog/1/catalog.summary.C"
+      fetcher:
+        class: FileFetcher
+        url: "http://pkg.openindiana.org/{source}/catalog/1/catalog.summary.C"
+      parser:
+        class: OpenIndianaSummaryJsonParser
       subrepo: "{source}"
   repolinks:
     - desc: OpenIndiana home

@@ -9,9 +9,11 @@
   minpackages: 600
   sources:
     - name: x86_64-PACKAGES.json
-      fetcher: FileFetcher
-      parser: SalixPackagesJsonParser
-      url: 'https://download.salixos.org/x86_64/14.2/PACKAGES.json'
+      fetcher:
+        class: FileFetcher
+        url: 'https://download.salixos.org/x86_64/14.2/PACKAGES.json'
+      parser:
+        class: SalixPackagesJsonParser
     # XXX: add 32 bit repo
   repolinks:
     - desc: Salix home

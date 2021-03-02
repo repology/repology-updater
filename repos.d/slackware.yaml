@@ -12,9 +12,11 @@
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
-      fetcher: FileFetcher
-      parser: SlackwarePackagesParser
-      url: 'https://mirrors.slackware.com/slackware/slackware-14.2/{source}/PACKAGES.TXT'
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirrors.slackware.com/slackware/slackware-14.2/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: Slackware Home
@@ -32,9 +34,11 @@
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
-      fetcher: FileFetcher
-      parser: SlackwarePackagesParser
-      url: 'https://mirrors.slackware.com/slackware/slackware-current/{source}/PACKAGES.TXT'
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirrors.slackware.com/slackware/slackware-current/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: Slackware Home
@@ -51,9 +55,11 @@
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware64,patches,extra]
-      fetcher: FileFetcher
-      parser: SlackwarePackagesParser
-      url: 'https://mirrors.slackware.com/slackware/slackware64-14.2/{source}/PACKAGES.TXT'
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirrors.slackware.com/slackware/slackware64-14.2/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: Slackware Home
@@ -70,9 +76,11 @@
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware64,patches,extra]
-      fetcher: FileFetcher
-      parser: SlackwarePackagesParser
-      url: 'https://mirrors.slackware.com/slackware/slackware64-current/{source}/PACKAGES.TXT'
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirrors.slackware.com/slackware/slackware64-current/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: Slackware Home
@@ -89,9 +97,11 @@
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
-      fetcher: FileFetcher
-      parser: SlackwarePackagesParser
-      url: 'http://slackware.uk/slackwarearm/slackwarearm-14.2/{source}/PACKAGES.TXT'
+      fetcher:
+        class: FileFetcher
+        url: 'http://slackware.uk/slackwarearm/slackwarearm-14.2/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: Slackware ARM / AARCH64
@@ -108,9 +118,11 @@
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
-      fetcher: FileFetcher
-      parser: SlackwarePackagesParser
-      url: 'http://slackware.uk/slackwarearm/slackwarearm-current/{source}/PACKAGES.TXT'
+      fetcher:
+        class: FileFetcher
+        url: 'http://slackware.uk/slackwarearm/slackwarearm-current/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: Slackware ARM / AARCH64

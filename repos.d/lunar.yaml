@@ -9,9 +9,11 @@
   minpackages: 3000
   sources:
     - name: distrowatch.txt
-      fetcher: FileFetcher
-      parser: LunarDistrowatchParser
-      url: 'http://www.lunar-linux.org/lunar/distrowatch.txt'
+      fetcher:
+        class: FileFetcher
+        url: 'http://www.lunar-linux.org/lunar/distrowatch.txt'
+      parser:
+        class: LunarDistrowatchParser
   repolinks:
     - desc: Lunar Linux home
       url: http://www.lunar-linux.org/

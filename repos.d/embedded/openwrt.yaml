@@ -11,13 +11,15 @@
   default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: FileFetcher
-      parser: OpenWrtPackagesParser
-      # the official URL is really
-      # 'https://downloads.openwrt.org/releases/17.01.7/packages/x86_64/{source}/Packages.manifest'
-      # but releases/17.01.*/packages is a link to ../packages-17.01 common to all 17.01 releases,
-      # so use it directly
-      url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
+      fetcher:
+        class: FileFetcher
+        # the official URL is really
+        # 'https://downloads.openwrt.org/releases/17.01.7/packages/x86_64/{source}/Packages.manifest'
+        # but releases/17.01.*/packages is a link to ../packages-17.01 common to all 17.01 releases,
+        # so use it directly
+        url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
+      parser:
+        class: OpenWrtPackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: OpenWrt home
@@ -37,13 +39,15 @@
   default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: FileFetcher
-      parser: OpenWrtPackagesParser
-      # the official URL is really
-      # 'https://downloads.openwrt.org/releases/18.06.4/packages/x86_64/{source}/Packages.manifest'
-      # but releases/18.06.*/packages is a link to ../packages-18.06 common to all 18.06 releases,
-      # so use it directly
-      url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
+      fetcher:
+        class: FileFetcher
+        # the official URL is really
+        # 'https://downloads.openwrt.org/releases/18.06.4/packages/x86_64/{source}/Packages.manifest'
+        # but releases/18.06.*/packages is a link to ../packages-18.06 common to all 18.06 releases,
+        # so use it directly
+        url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
+      parser:
+        class: OpenWrtPackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: OpenWrt home
@@ -69,9 +73,11 @@
   default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: FileFetcher
-      parser: OpenWrtPackagesParser
-      url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
+      fetcher:
+        class: FileFetcher
+        url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
+      parser:
+        class: OpenWrtPackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: OpenWrt home
@@ -91,9 +97,11 @@
   default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: FileFetcher
-      parser: OpenWrtPackagesParser
-      url: 'https://downloads.openwrt.org/snapshots/packages/x86_64/{source}/Packages.manifest'
+      fetcher:
+        class: FileFetcher
+        url: 'https://downloads.openwrt.org/snapshots/packages/x86_64/{source}/Packages.manifest'
+      parser:
+        class: OpenWrtPackagesParser
       subrepo: '{source}'
   repolinks:
     - desc: OpenWrt home

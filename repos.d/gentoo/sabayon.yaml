@@ -10,12 +10,14 @@
   default_maintainer: fallback-mnt-sabayon@repology
   sources:
     - name: sabayon
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: false
-      require_xml_metadata: false
-      url: https://github.com/Sabayon/sabayon-distro.git
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/Sabayon/sabayon-distro.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: false
+        require_xml_metadata: false
   repolinks:
     - desc: Sabayon Linux home
       url: https://www.sabayon.org/
@@ -35,12 +37,14 @@
   default_maintainer: fallback-mnt-sabayon@repology
   sources:
     - name: sabayon
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: false
-      require_xml_metadata: false
-      url: https://github.com/Sabayon/for-gentoo.git
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/Sabayon/for-gentoo.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: false
+        require_xml_metadata: false
   repolinks:
     - desc: Sabayon Linux home
       url: https://www.sabayon.org/

@@ -12,10 +12,12 @@
   minpackages: 20000
   sources:
     - name: [ jessie/main, jessie/contrib, jessie/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Devuan home
@@ -31,10 +33,12 @@
   minpackages: 20000
   sources:
     - name: [ ascii/main, ascii/contrib, ascii/non-free, ascii-updates/main, ascii-updates/contrib, ascii-updates/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Devuan home
@@ -50,10 +54,12 @@
   minpackages: 25000
   sources:
     - name: [ beowulf/main, beowulf/contrib, beowulf/non-free, beowulf-updates/main, beowulf-updates/contrib, beowulf-updates/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Devuan home
@@ -69,10 +75,12 @@
   minpackages: 27000
   sources:
     - name: [ chimaera/main, chimaera/contrib, chimaera/non-free, chimaera-updates/main, chimaera-updates/contrib, chimaera-updates/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Devuan home
@@ -88,10 +96,12 @@
   minpackages: 28000
   sources:
     - name: [ unstable/main, unstable/contrib, unstable/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Devuan home

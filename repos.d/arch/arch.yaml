@@ -10,9 +10,11 @@
   minpackages: 9500
   sources:
     - name: [ core, extra, community, multilib ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Arch Linux home
@@ -40,9 +42,11 @@
   minpackages: 1
   sources:
     - name: [ testing, community-testing, multilib-testing ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Arch Linux home

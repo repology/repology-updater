@@ -12,9 +12,11 @@
   sources:
       # XXX: */backports_testing and */updates_testing not included, are these needed?
     - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'https://mirrors.kernel.org/mageia/distrib/6/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://mirrors.kernel.org/mageia/distrib/6/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Mageia home
@@ -37,9 +39,11 @@
   sources:
       # XXX: */backports_testing and */updates_testing not included, are these needed?
     - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'https://mirrors.kernel.org/mageia/distrib/7/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://mirrors.kernel.org/mageia/distrib/7/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Mageia home
@@ -62,9 +66,11 @@
   sources:
       # XXX: */backports_testing and */updates_testing not included, are these needed?
     - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'https://mirrors.kernel.org/mageia/distrib/8/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://mirrors.kernel.org/mageia/distrib/8/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Mageia home
@@ -88,9 +94,11 @@
       # XXX: */updates_testing not included, are these needed?
       # XXX: */backports, */backports_testing and */updates don't gave repomd.xml indexes
     - name: [ core/release, nonfree/release, tainted/release ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Mageia home

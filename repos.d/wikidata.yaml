@@ -13,205 +13,207 @@
   minpackages: 3000
   sources:
     - name: result.json
-      fetcher: FileFetcher
-      fetch_timeout: 300
-      parser: WikidataJsonParser
-      url: 'https://query.wikidata.org/sparql'
-      post:
-        format: json
-        query: |
-          # SPARQL request to get software information
-          #
-          # It's nested: while the inner request gathers information
-          # for each version of specific software item, outer one aggregates
-          # versions for each software project
-          #
-          # You may paste this into https://query.wikidata.org to play with the query
-          SELECT
-            ?project
-            ?projectLabel
-            ?projectDescription
-            ?versions
-            ?websites
-            ?repositories
-            ?licenses
-            ?repology_projects
-          WHERE {
-            {
-              SELECT
-                # the following query returns (versions) x (websites) x (license) x (repology_projects) x ...
-                # entries which are then grouped by project, and we always need DISTINCT below to remove
-                # duplicates
-                ?project
-                (
-                  # concatenate all versions
-                  GROUP_CONCAT(DISTINCT
-                    # append flags to each version
-                    CONCAT(
-                      ?version,
-                      ?versionSuffixes
-                    ); separator='␞'
-                  )
-                  AS ?versions
-                )
-                (GROUP_CONCAT(DISTINCT ?website; separator='␞') as ?websites)
-                (GROUP_CONCAT(DISTINCT ?repository; separator='␞') as ?repositories)
-                (GROUP_CONCAT(DISTINCT ?license; separator='␞') as ?licenses)
-                (SAMPLE(?repology_projects) as ?repology_projects)
-              WHERE {
-                {
-                  SELECT
-                    ?project
-                    ?version
-                    (
+      fetcher:
+        class: FileFetcher
+        fetch_timeout: 300
+        url: 'https://query.wikidata.org/sparql'
+        post:
+          format: json
+          query: |
+            # SPARQL request to get software information
+            #
+            # It's nested: while the inner request gathers information
+            # for each version of specific software item, outer one aggregates
+            # versions for each software project
+            #
+            # You may paste this into https://query.wikidata.org to play with the query
+            SELECT
+              ?project
+              ?projectLabel
+              ?projectDescription
+              ?versions
+              ?websites
+              ?repositories
+              ?licenses
+              ?repology_projects
+            WHERE {
+              {
+                SELECT
+                  # the following query returns (versions) x (websites) x (license) x (repology_projects) x ...
+                  # entries which are then grouped by project, and we always need DISTINCT below to remove
+                  # duplicates
+                  ?project
+                  (
+                    # concatenate all versions
+                    GROUP_CONCAT(DISTINCT
+                      # append flags to each version
                       CONCAT(
-                        GROUP_CONCAT(DISTINCT ?versionRankSuffix; separator=''),
-                        GROUP_CONCAT(DISTINCT ?versionTypeSuffix; separator=''),
-                        GROUP_CONCAT(DISTINCT ?versionOSSuffix; separator=''),
-                        GROUP_CONCAT(DISTINCT ?versionPlatformSuffix; separator=''),
-                        GROUP_CONCAT(DISTINCT ?downloadLinkConcatenable; separator='')
-                      )
-                      as ?versionSuffixes
+                        ?version,
+                        ?versionSuffixes
+                      ); separator='␞'
                     )
-                    (GROUP_CONCAT(DISTINCT ?repology_project; separator='␞') as ?repology_projects)
-                  WHERE {
-                    ?project wdt:P6931 ?repology_project .
-
-                    # Versions for specific project
-                    ?project p:P348 ?versionItem .
-
-                    # Version number
-                    ?versionItem ps:P348 ?version .
-
-                    # Version rank
-                    ?versionItem wikibase:rank ?versionRank .
-
-                    FILTER (?versionRank != wikibase:DeprecatedRank)
-
-                    BIND(
-                      IF(
-                        ?versionRank = wikibase:PreferredRank,
-                        '|R',
-                        ''
+                    AS ?versions
+                  )
+                  (GROUP_CONCAT(DISTINCT ?website; separator='␞') as ?websites)
+                  (GROUP_CONCAT(DISTINCT ?repository; separator='␞') as ?repositories)
+                  (GROUP_CONCAT(DISTINCT ?license; separator='␞') as ?licenses)
+                  (SAMPLE(?repology_projects) as ?repology_projects)
+                WHERE {
+                  {
+                    SELECT
+                      ?project
+                      ?version
+                      (
+                        CONCAT(
+                          GROUP_CONCAT(DISTINCT ?versionRankSuffix; separator=''),
+                          GROUP_CONCAT(DISTINCT ?versionTypeSuffix; separator=''),
+                          GROUP_CONCAT(DISTINCT ?versionOSSuffix; separator=''),
+                          GROUP_CONCAT(DISTINCT ?versionPlatformSuffix; separator=''),
+                          GROUP_CONCAT(DISTINCT ?downloadLinkConcatenable; separator='')
+                        )
+                        as ?versionSuffixes
                       )
-                      AS ?versionRankSuffix
-                    )
-
-                    # Version type (stable, unstable, ...)
-                    OPTIONAL {
-                      ?versionItem pq:P548 ?versionTypeItem .
+                      (GROUP_CONCAT(DISTINCT ?repology_project; separator='␞') as ?repology_projects)
+                    WHERE {
+                      ?project wdt:P6931 ?repology_project .
+  
+                      # Versions for specific project
+                      ?project p:P348 ?versionItem .
+  
+                      # Version number
+                      ?versionItem ps:P348 ?version .
+  
+                      # Version rank
+                      ?versionItem wikibase:rank ?versionRank .
+  
+                      FILTER (?versionRank != wikibase:DeprecatedRank)
+  
                       BIND(
                         IF(
-                          ?versionTypeItem = wd:Q2804309 ||   # stable version
-                          ?versionTypeItem = wd:Q15726348 ||  # long-term support version
-                          ?versionTypeItem = wd:Q18434478 ||  # maintenance version
-                          ?versionTypeItem = wd:Q20631656 ||  # release
-                          ?versionTypeItem = wd:Q48028851 ||  # patch version
-                          ?versionTypeItem = wd:Q55567596 ||  # bug-fix version
-                          ?versionTypeItem = wd:Q51937413,    # general availability version
-                          '|S',
+                          ?versionRank = wikibase:PreferredRank,
+                          '|R',
+                          ''
+                        )
+                        AS ?versionRankSuffix
+                      )
+  
+                      # Version type (stable, unstable, ...)
+                      OPTIONAL {
+                        ?versionItem pq:P548 ?versionTypeItem .
+                        BIND(
                           IF(
-                            ?versionTypeItem = wd:Q1072356 ||   # release candidate version
-                            ?versionTypeItem = wd:Q2122918 ||   # software alpha version
-                            ?versionTypeItem = wd:Q21727724 ||  # unstable version
-                            ?versionTypeItem = wd:Q23356219 ||  # pre-alpha version
-                            ?versionTypeItem = wd:Q3295609 ||   # beta version
-                            ?versionTypeItem = wd:Q51930650,    # pre-release version
-                            '|U',
+                            ?versionTypeItem = wd:Q2804309 ||   # stable version
+                            ?versionTypeItem = wd:Q15726348 ||  # long-term support version
+                            ?versionTypeItem = wd:Q18434478 ||  # maintenance version
+                            ?versionTypeItem = wd:Q20631656 ||  # release
+                            ?versionTypeItem = wd:Q48028851 ||  # patch version
+                            ?versionTypeItem = wd:Q55567596 ||  # bug-fix version
+                            ?versionTypeItem = wd:Q51937413,    # general availability version
+                            '|S',
                             IF(
-                              ?versionTypeItem = wd:Q6736813 ||  # legacy version
-                              ?versionTypeItem = wd:Q21683863 || # obsolete version
-                              ?versionTypeItem = wd:Q56514665,   # initial version
-                              '',   # ignore meaningless types
-                              '|X'  # devel/daily/rolling and incorrect
+                              ?versionTypeItem = wd:Q1072356 ||   # release candidate version
+                              ?versionTypeItem = wd:Q2122918 ||   # software alpha version
+                              ?versionTypeItem = wd:Q21727724 ||  # unstable version
+                              ?versionTypeItem = wd:Q23356219 ||  # pre-alpha version
+                              ?versionTypeItem = wd:Q3295609 ||   # beta version
+                              ?versionTypeItem = wd:Q51930650,    # pre-release version
+                              '|U',
+                              IF(
+                                ?versionTypeItem = wd:Q6736813 ||  # legacy version
+                                ?versionTypeItem = wd:Q21683863 || # obsolete version
+                                ?versionTypeItem = wd:Q56514665,   # initial version
+                                '',   # ignore meaningless types
+                                '|X'  # devel/daily/rolling and incorrect
+                              )
                             )
                           )
+                          AS ?versionTypeSuffix
                         )
-                        AS ?versionTypeSuffix
-                      )
-                    }
-                    # remove these (non-)versions completely
-                    FILTER (COALESCE(?versionTypeItem != wd:Q3133388, TRUE))  # trunk
-
-                    # Version os
-                    # See VLC package; there's different versioning schemas for different OSes
-                    # and we need to filter out e.g. iOS releases
-                    # As with version types, we reduct this to just two flags: where there was
-                    # Linux release and whether there were non-Linux release. When parsing, we'll
-                    # ignore versions with OS defined, but no Linux
-                    OPTIONAL {
-                      ?versionItem pq:P306 ?versionOSItem  .
-                      BIND(
-                        IF(
-                          ?versionOSItem = wd:Q388,  # Linux
-                          '|O',
-                          '|o'
-                        )
-                        AS ?versionOSSuffix
-                      )
-                    }
-                    # same for platform
-                    # we go blacklist way here though as people use too much unrelated stuff
-                    # as platform (hardware platforms, operating systems, gui toolkits etc)
-                    OPTIONAL {
-                      ?versionItem pq:P400 ?versionPlatformItem  .
-                      BIND(
-                        CONCAT(
-                          # blacklist
+                      }
+                      # remove these (non-)versions completely
+                      FILTER (COALESCE(?versionTypeItem != wd:Q3133388, TRUE))  # trunk
+  
+                      # Version os
+                      # See VLC package; there's different versioning schemas for different OSes
+                      # and we need to filter out e.g. iOS releases
+                      # As with version types, we reduct this to just two flags: where there was
+                      # Linux release and whether there were non-Linux release. When parsing, we'll
+                      # ignore versions with OS defined, but no Linux
+                      OPTIONAL {
+                        ?versionItem pq:P306 ?versionOSItem  .
+                        BIND(
                           IF(
-                            ?versionPlatformItem = wd:Q189210 ||   # web application
-                            ?versionPlatformItem = wd:Q7096284 ||  # Web Platform
-                            ?versionPlatformItem = wd:Q4885200 ||  # Windows Phone
-                            ?versionPlatformItem = wd:Q14116 ||    # macOS
-                            ?versionPlatformItem = wd:Q1406 ||     # Microsoft Windows
-                            ?versionPlatformItem = wd:Q94 ||       # Android
-                            ?versionPlatformItem = wd:Q48493 ||    # iOS
-                            ?versionPlatformItem = wd:Q2766 ||     # iPhone
-                            ?versionPlatformItem = wd:Q2796 ||     # iPad
-                            ?versionPlatformItem = wd:Q13361286,   # XBox one
-                            '|p',
-                            ''
-                          ),
-                          # whitelist
-                          IF(
-                            ?versionPlatformItem = wd:Q388,        # Linux
-                            '|P',
-                            ''
+                            ?versionOSItem = wd:Q388,  # Linux
+                            '|O',
+                            '|o'
                           )
+                          AS ?versionOSSuffix
                         )
-                        AS ?versionPlatformSuffix
-                      )
+                      }
+                      # same for platform
+                      # we go blacklist way here though as people use too much unrelated stuff
+                      # as platform (hardware platforms, operating systems, gui toolkits etc)
+                      OPTIONAL {
+                        ?versionItem pq:P400 ?versionPlatformItem  .
+                        BIND(
+                          CONCAT(
+                            # blacklist
+                            IF(
+                              ?versionPlatformItem = wd:Q189210 ||   # web application
+                              ?versionPlatformItem = wd:Q7096284 ||  # Web Platform
+                              ?versionPlatformItem = wd:Q4885200 ||  # Windows Phone
+                              ?versionPlatformItem = wd:Q14116 ||    # macOS
+                              ?versionPlatformItem = wd:Q1406 ||     # Microsoft Windows
+                              ?versionPlatformItem = wd:Q94 ||       # Android
+                              ?versionPlatformItem = wd:Q48493 ||    # iOS
+                              ?versionPlatformItem = wd:Q2766 ||     # iPhone
+                              ?versionPlatformItem = wd:Q2796 ||     # iPad
+                              ?versionPlatformItem = wd:Q13361286,   # XBox one
+                              '|p',
+                              ''
+                            ),
+                            # whitelist
+                            IF(
+                              ?versionPlatformItem = wd:Q388,        # Linux
+                              '|P',
+                              ''
+                            )
+                          )
+                          AS ?versionPlatformSuffix
+                        )
+                      }
+  
+                      # download links
+                      OPTIONAL {
+                        ?versionItem pq:P4945 ?downloadLink .
+  
+                        BIND(CONCAT('|', STR(?downloadLink)) AS ?downloadLinkConcatenable)
+                      }
                     }
-
-                    # download links
-                    OPTIONAL {
-                      ?versionItem pq:P4945 ?downloadLink .
-
-                      BIND(CONCAT('|', STR(?downloadLink)) AS ?downloadLinkConcatenable)
-                    }
+                    GROUP BY ?project ?version
                   }
-                  GROUP BY ?project ?version
+  
+                  # Licenses, resolved to labels (e.g. human readable names)
+                  OPTIONAL {
+                    ?project wdt:P275 ?licenseItem .
+                    ?licenseItem rdfs:label ?license .
+                    FILTER (LANG(?license) = 'en')
+                  }
+  
+                  # official website
+                  OPTIONAL { ?project wdt:P856 ?website . }
+  
+                  # source code repository
+                  OPTIONAL { ?project wdt:P1324 ?repository . }
                 }
-
-                # Licenses, resolved to labels (e.g. human readable names)
-                OPTIONAL {
-                  ?project wdt:P275 ?licenseItem .
-                  ?licenseItem rdfs:label ?license .
-                  FILTER (LANG(?license) = 'en')
-                }
-
-                # official website
-                OPTIONAL { ?project wdt:P856 ?website . }
-
-                # source code repository
-                OPTIONAL { ?project wdt:P1324 ?repository . }
+                GROUP BY ?project
               }
-              GROUP BY ?project
+  
+              # provides ?projectLabel and ?projectDescription
+              SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. }
             }
-
-            # provides ?projectLabel and ?projectDescription
-            SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. }
-          }
+      parser:
+        class: WikidataJsonParser
   repolinks:
     - desc: Wikidata home
       url: "https://wikidata.org/"

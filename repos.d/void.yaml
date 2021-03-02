@@ -15,9 +15,11 @@
   default_maintainer: fallback-mnt-void@repology
   sources:
     - name: [ x86_64, nonfree/x86_64 ]
-      fetcher: TarFetcher
-      parser: VoidLinuxPlistParser
-      url: 'https://alpha.de.repo.voidlinux.org/current/{source}-repodata'
+      fetcher:
+        class: TarFetcher
+        url: 'https://alpha.de.repo.voidlinux.org/current/{source}-repodata'
+      parser:
+        class: VoidLinuxPlistParser
       subrepo: '{source}'
   repolinks:
     - desc: Void Linux home

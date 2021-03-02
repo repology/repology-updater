@@ -9,10 +9,12 @@
   minpackages: 8500
   sources:
     - name: eopkg-index.xml
-      fetcher: FileFetcher
-      parser: SolusIndexParser
-      url: https://packages.getsol.us/unstable/eopkg-index.xml.xz
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: https://packages.getsol.us/unstable/eopkg-index.xml.xz
+        compression: xz
+      parser:
+        class: SolusIndexParser
   repolinks:
     - desc: Solus home
       url: https://getsol.us/home/

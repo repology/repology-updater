@@ -11,10 +11,12 @@
   minpackages: 3500
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://dl.astralinux.ru/astra/stable/orel/repository/dists/orel/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://dl.astralinux.ru/astra/stable/orel/repository/dists/orel/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Astra Linux home (in Russian)
@@ -29,10 +31,12 @@
   minpackages: 3500
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://dl.astralinux.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://dl.astralinux.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Astra Linux home (in Russian)

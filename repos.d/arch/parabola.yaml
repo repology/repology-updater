@@ -11,10 +11,12 @@
   minpackages: 10000
   sources:
     - name: [ core, extra, community, libre, pcr ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      #url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
-      url: 'https://mirror.yandex.ru/mirrors/parabola/{source}/os/x86_64/{source}.db.tar.gz'
+      fetcher:
+        class: TarFetcher
+        #url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.yandex.ru/mirrors/parabola/{source}/os/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Parabola GNU/Linux-libre home
@@ -36,10 +38,12 @@
   minpackages: 1
   sources:
     - name: [ testing, libre-testing ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      #url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
-      url: 'https://mirror.yandex.ru/mirrors/parabola/{source}/os/x86_64/{source}.db.tar.gz'
+      fetcher:
+        class: TarFetcher
+        #url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.yandex.ru/mirrors/parabola/{source}/os/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Parabola GNU/Linux-libre home

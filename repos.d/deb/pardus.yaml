@@ -11,36 +11,44 @@
   minpackages: 25000
   sources:
     - name: [main,contrib,non-free]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/pardus/dists/onyedi/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/pardus/dists/onyedi/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
-      # taken from https://wiki.debian.org/Derivatives/Census/Pardus,
-      # otherwise it's unclear how 'guvenlik' is updates to 'pardus'
+    # following urls were taken from https://wiki.debian.org/Derivatives/Census/Pardus,
+    # otherwise it's unclear how 'guvenlik' is related to 'pardus'
     - name: updates-main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/main/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/main/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'updates/main'
     - name: updates-contrib
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/contrib/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/contrib/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'updates/contrib'
     - name: updates-non-free
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/non-free/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/non-free/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'updates/non-free'
   repolinks:
     - desc: Pardus home
       url: https://www.pardus.org.tr/
   tags: [ all, production, pardus ]
-  
+
 - name: pardus_19
   type: repository
   desc: Pardus 19
@@ -51,30 +59,38 @@
   minpackages: 25000
   sources:
     - name: [main,contrib,non-free]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/pardus/dists/ondokuz/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/pardus/dists/ondokuz/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
-      # taken from https://wiki.debian.org/Derivatives/Census/Pardus,
-      # otherwise it's unclear how 'guvenlik' is updates to 'pardus'
+    # following urls were taken from https://wiki.debian.org/Derivatives/Census/Pardus,
+    # otherwise it's unclear how 'guvenlik' is related to 'pardus'
     - name: updates-main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/main/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/main/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'updates/main'
     - name: updates-contrib
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/contrib/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/contrib/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'updates/contrib'
     - name: updates-non-free
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/non-free/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/non-free/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'updates/non-free'
   repolinks:
     - desc: Pardus home

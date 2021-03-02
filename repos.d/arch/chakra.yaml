@@ -10,9 +10,11 @@
   minpackages: 4200
   sources:
     - name: [ core, desktop, gtk ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Chakra home
@@ -33,9 +35,11 @@
   minpackages: 0
   sources:
     - name: [ staging ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Chakra home
@@ -54,9 +58,11 @@
   minpackages: 0
   sources:
     - name: [ testing ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Chakra home

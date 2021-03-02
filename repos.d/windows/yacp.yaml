@@ -9,10 +9,12 @@
   minpackages: 1850
   sources:
     - name: yacp
-      fetcher: FileFetcher
-      parser: YACPJsonParser
-      url: https://yacp.osdn.jp/packages.json.xz
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: https://yacp.osdn.jp/packages.json.xz
+        compression: xz
+      parser:
+        class: YACPJsonParser
   repolinks:
     - desc: Yet Another Cygwin Ports GitHub repository
       url: https://github.com/fd00/yacp

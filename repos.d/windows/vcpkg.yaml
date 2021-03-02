@@ -9,10 +9,12 @@
   minpackages: 1200
   sources:
     - name: vcpkg
-      fetcher: GitFetcher
-      parser: VcpkgGitParser
-      url: https://github.com/Microsoft/vcpkg.git
-      sparse_checkout: [ 'ports/*/CONTROL', 'ports/*/vcpkg.json', 'ports/*/portfile.cmake' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/Microsoft/vcpkg.git
+        sparse_checkout: [ 'ports/*/CONTROL', 'ports/*/vcpkg.json', 'ports/*/portfile.cmake' ]
+      parser:
+        class: VcpkgGitParser
   repolinks:
     - desc: Vcpkg GitHub repository
       url: https://github.com/Microsoft/vcpkg

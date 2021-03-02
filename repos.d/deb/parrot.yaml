@@ -24,10 +24,12 @@
   minpackages: 27000
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://deb.parrotsec.org/parrot/dists/stable/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://deb.parrotsec.org/parrot/dists/stable/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Parrot Project home

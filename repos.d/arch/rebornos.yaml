@@ -10,10 +10,12 @@
   minpackages: 300
   sources:
     - name: main
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'https://mirrors.dotsrc.org/osdn/storage/g/r/re/rebornos/repo/RebornOS/Reborn-OS.db.tar.xz'
-      # url: 'https://repo.rebornos.org/RebornOS/Reborn-OS.db.tar.xz'  # old dead url
+      fetcher:
+        class: TarFetcher
+        # url: 'https://repo.rebornos.org/RebornOS/Reborn-OS.db.tar.xz'  # old dead url
+        url: 'https://mirrors.dotsrc.org/osdn/storage/g/r/re/rebornos/repo/RebornOS/Reborn-OS.db.tar.xz'
+      parser:
+        class: ArchDBParser
   repolinks:
     - desc: RebornOS home
       url: https://rebornos.org/

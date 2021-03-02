@@ -10,9 +10,11 @@
   # default_maintainer is set from the parser
   sources:
     - name: hackage
-      fetcher: FileFetcher
-      parser: HackageTar01Parser
-      url: http://hackage.haskell.org/01-index.tar.gz
+      fetcher:
+        class: FileFetcher
+        url: http://hackage.haskell.org/01-index.tar.gz
+      parser:
+        class: HackageTar01Parser
   shadow: true
   repolinks:
     - desc: Haskell Language
@@ -32,9 +34,11 @@
   minpackages: 2350
   sources:
     - name: nightly.html
-      fetcher: FileFetcher
-      parser: StackageHTMLParser
-      url: https://www.stackage.org/nightly
+      fetcher:
+        class: FileFetcher
+        url: https://www.stackage.org/nightly
+      parser:
+        class: StackageHTMLParser
   shadow: true
   repolinks:
     - desc: Stackage
@@ -54,9 +58,11 @@
   minpackages: 2450
   sources:
     - name: lts.html
-      fetcher: FileFetcher
-      parser: StackageHTMLParser
-      url: https://www.stackage.org/lts
+      fetcher:
+        class: FileFetcher
+        url: https://www.stackage.org/lts
+      parser:
+        class: StackageHTMLParser
   shadow: true
   repolinks:
     - desc: Stackage

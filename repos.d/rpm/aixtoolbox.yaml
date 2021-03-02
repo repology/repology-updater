@@ -9,9 +9,11 @@
   minpackages: 250
   sources:
     - name: aixtoolbox
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'https://public.dhe.ibm.com/aix/freeSoftware/aixtoolbox/SRPMS/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://public.dhe.ibm.com/aix/freeSoftware/aixtoolbox/SRPMS/'
+      parser:
+        class: RepodataParser
       # In future may also support binary packages:
       # https://public.dhe.ibm.com/aix/freeSoftware/aixtoolbox/RPMS/ppc/
       # https://public.dhe.ibm.com/aix/freeSoftware/aixtoolbox/RPMS/noarch/

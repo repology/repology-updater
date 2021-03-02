@@ -9,10 +9,12 @@
   minpackages: 350
   sources:
     - name: distri
-      fetcher: GitFetcher
-      parser: DistriGitParser
-      url: 'https://github.com/distr1/distri.git'
-      sparse_checkout: [ 'pkgs/*/build.textproto' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/distr1/distri.git'
+        sparse_checkout: [ 'pkgs/*/build.textproto' ]
+      parser:
+        class: DistriGitParser
   repolinks:
     - desc: distri home
       url: https://distr1.org/

@@ -9,9 +9,11 @@
   minpackages: 500
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://repo.merproject.org/obs/mer:/core/latest_aarch64/
+      fetcher:
+        class: RepodataFetcher
+        url: http://repo.merproject.org/obs/mer:/core/latest_aarch64/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: Mer Project home
       url: http://merproject.org/

@@ -15,10 +15,12 @@
   minpackages: 27000
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
-      fetcher: FileFetcher
-      parser: RosaInfoXmlParser
-      url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
+        compression: xz
+      parser:
+        class: RosaInfoXmlParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -38,10 +40,12 @@
   minpackages: 21000
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
-      fetcher: FileFetcher
-      parser: RosaInfoXmlParser
-      url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
+        compression: xz
+      parser:
+        class: RosaInfoXmlParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -63,9 +67,11 @@
   sources:
     # note */updates and */testing repositories are empty ATOW
     - name: [ main/release, non-free/release, restricted/release, contrib/release ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://abf-downloads.rosalinux.ru/rosa2019.1/repository/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://abf-downloads.rosalinux.ru/rosa2019.1/repository/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -86,9 +92,11 @@
   default_maintainer: fallback-mnt-rosa@repology
   sources:
     - name: [ base/release, base/updates, contrib/release, contrib/updates, extra/release, extra/updates ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirror.rosalab.ru/rosa/server/6.9/repository/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirror.rosalab.ru/rosa/server/6.9/repository/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -109,9 +117,11 @@
   default_maintainer: fallback-mnt-rosa@repology
   sources:
     - name: [ base/release, extra/release ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirror.rosalab.ru/rosa/server/7.3/repository/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirror.rosalab.ru/rosa/server/7.3/repository/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -132,9 +142,11 @@
   default_maintainer: fallback-mnt-rosa@repology
   sources:
     - name: [ base/release, extra/release ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirror.rosalab.ru/rosa/server/7.5/repository/SRPMS/{source}/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirror.rosalab.ru/rosa/server/7.5/repository/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home

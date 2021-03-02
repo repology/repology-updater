@@ -186,64 +186,71 @@ schemas = {
                 {
                     Required('name'): Any(str, [str]),
                     'disabled': bool,
-                    Required('fetcher'): str,
-                    Required('parser'): str,
-                    'url': str,  # not Url(), as there may be rsync or cvs addresses
 
-                    # git fetcher args
-                    'branch': str,
                     'subrepo': str,
-                    'sparse_checkout': [str],
-                    'depth': Any(int, None),
 
-                    # some common fetcher args
-                    'fetch_timeout': Any(int, float),
+                    Required('fetcher'): {
+                        Required('class'): str,
 
-                    # rpm parser(s)
-                    'src': bool,
-                    'binary': bool,
-                    'arch_from_filename': bool,
+                        'url': str,  # not Url(), as there may be rsync or cvs addresses
 
-                    # srclist parser
-                    'encoding': Any('utf-8', 'cp1251'),
+                        # git
+                        'branch': str,
+                        'sparse_checkout': [str],
+                        'depth': Any(int, None),
 
-                    # misc dsv parsers
-                    'numfields': int,
+                        # elasticsearch
+                        'scroll_url': str,
+                        'es_scroll': str,
+                        'es_size': int,
+                        'es_filter': dict,
+                        'es_fields': [str],
 
-                    # elasticsearch fetcher
-                    'scroll_url': str,
-                    'es_scroll': str,
-                    'es_size': int,
-                    'es_filter': dict,
-                    'es_fields': [str],
+                        # common fetcher args
+                        'fetch_timeout': Any(int, float),
 
-                    # file fetcher
-                    'compression': Any('xz', 'bz2', 'gz', 'br', 'zstd'),
-                    'post': {str: str},
-                    'headers': {str: str},
-                    'nocache': bool,
-                    'allow_zero_size': bool,
+                        # file
+                        'compression': Any('xz', 'bz2', 'gz', 'br', 'zstd'),
+                        'post': {str: str},
+                        'headers': {str: str},
+                        'nocache': bool,
+                        'allow_zero_size': bool,
 
-                    # crates_io fetcher
-                    'fetch_delay': Any(int, float),
+                        # crates_io
+                        'fetch_delay': Any(int, float),
 
-                    # aur fetcher
-                    'max_api_url_length': int,
+                        # aur
+                        'max_api_url_length': int,
 
-                    # rsync fetcher
-                    'rsync_include': str,
-                    'rsync_exclude': str,
+                        # rsync
+                        'rsync_include': str,
+                        'rsync_exclude': str,
+                    },
+                    Required('parser'): {
+                        Required('class'): str,
 
-                    # gentoo parser
-                    'require_md5cache_metadata': bool,
-                    'require_xml_metadata': bool,
+                        # rpm
+                        'src': bool,
+                        'binary': bool,
+                        'arch_from_filename': bool,
 
-                    # openbsd parser
-                    'path_to_database': Any(None, str),
+                        # srclist
+                        'encoding': Any('utf-8', 'cp1251'),
 
-                    # kiss parser
-                    'maintainer_from_git': bool,
-                    'blob_prefix': str,
+                        # misc dsv parsers
+                        'numfields': int,
+
+                        # gentoo
+                        'require_md5cache_metadata': bool,
+                        'require_xml_metadata': bool,
+
+                        # openbsd
+                        'path_to_database': Any(None, str),
+
+                        # kiss
+                        'maintainer_from_git': bool,
+                        'blob_prefix': str,
+                    },
                 }
             ],
             'shadow': bool,

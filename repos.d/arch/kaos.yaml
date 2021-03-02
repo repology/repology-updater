@@ -11,9 +11,11 @@
   minpackages: 1900
   sources:
     - name: [ apps, core, main ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: "https://repo.kaosx.us/{source}/{source}.db"
+      fetcher:
+        class: TarFetcher
+        url: "https://repo.kaosx.us/{source}/{source}.db"
+      parser:
+        class: ArchDBParser
       subrepo: "{source}"
   repolinks:
     - desc: KaOS Home
@@ -38,9 +40,11 @@
   minpackages: 10
   sources:
     - name: [ build ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: "https://repo.kaosx.us/{source}/{source}.db"
+      fetcher:
+        class: TarFetcher
+        url: "https://repo.kaosx.us/{source}/{source}.db"
+      parser:
+        class: ArchDBParser
       subrepo: "{source}"
   repolinks:
     - desc: KaOS Home
@@ -63,9 +67,11 @@
   minpackages: 0
   sources:
     - name: [ kde-next ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: "https://repo.kaosx.us/{source}/{source}.db"
+      fetcher:
+        class: TarFetcher
+        url: "https://repo.kaosx.us/{source}/{source}.db"
+      parser:
+        class: ArchDBParser
       subrepo: "{source}"
   repolinks:
     - desc: KaOS Home

@@ -8,10 +8,12 @@
   minpackages: 3500
   sources:
     - name: recipes
-      fetcher: GitFetcher
-      parser: GoboLinuxGitParser
-      url: https://github.com/gobolinux/Recipes.git
-      sparse_checkout: [ '**/Recipe', '**/Description' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/gobolinux/Recipes.git
+        sparse_checkout: [ '**/Recipe', '**/Description' ]
+      parser:
+        class: GoboLinuxGitParser
   repolinks:
     - desc: GoboLinux home
       url: http://gobolinux.org/

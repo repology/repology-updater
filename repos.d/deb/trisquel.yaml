@@ -11,10 +11,12 @@
   minpackages: 20000
   sources:
     - name: [ toutatis/main, toutatis-updates/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home
@@ -30,10 +32,12 @@
   minpackages: 50
   sources:
     - name: [ toutatis-backports/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home
@@ -49,10 +53,12 @@
   minpackages: 23000
   sources:
     - name: [ belenos/main, belenos-updates/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home
@@ -68,10 +74,12 @@
   minpackages: 50
   sources:
     - name: [ belenos-backports/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home
@@ -87,10 +95,12 @@
   minpackages: 26000
   sources:
     - name: [ flidas/main, flidas-updates/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home
@@ -106,10 +116,12 @@
   minpackages: 20
   sources:
     - name: [ flidas-backports/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home
@@ -125,10 +137,12 @@
   minpackages: 26000
   sources:
     - name: [ etiona/main, etiona-updates/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home
@@ -144,10 +158,12 @@
   minpackages: 20
   sources:
     - name: [ etiona-backports/main ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Trisquel home

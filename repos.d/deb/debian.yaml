@@ -11,10 +11,12 @@
   minpackages: 20000
   sources:
     - name: [ oldstable/main, oldstable/contrib, oldstable/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages
@@ -46,10 +48,12 @@
   minpackages: 25000
   sources:
     - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages
@@ -81,10 +85,12 @@
   minpackages: 0
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.debian.org/debian/dists/stable-backports/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/stable-backports/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages
@@ -116,10 +122,12 @@
   minpackages: 27000
   sources:
     - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages
@@ -151,10 +159,12 @@
   minpackages: 30000
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.debian.org/debian/dists/unstable/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/unstable/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages
@@ -187,10 +197,12 @@
   minpackages: 300
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages

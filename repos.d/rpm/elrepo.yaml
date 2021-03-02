@@ -10,9 +10,11 @@
   minpackages: 80
   sources:
     - name: elrepo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirrors.coreix.net/elrepo/elrepo/el7/SRPMS/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirrors.coreix.net/elrepo/elrepo/el7/SRPMS/'
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: ELRepo.org
       url: http://elrepo.org
@@ -31,9 +33,11 @@
   minpackages: 0
   sources:
     - name: elrepo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirrors.coreix.net/elrepo/extras/el7/SRPMS/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirrors.coreix.net/elrepo/extras/el7/SRPMS/'
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: ELRepo.org
       url: http://elrepo.org
@@ -51,9 +55,11 @@
   minpackages: 0
   sources:
     - name: elrepo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirrors.coreix.net/elrepo/testing/el7/SRPMS/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirrors.coreix.net/elrepo/testing/el7/SRPMS/'
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: ELRepo.org
       url: http://elrepo.org
@@ -71,9 +77,11 @@
   minpackages: 0
   sources:
     - name: elrepo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirrors.coreix.net/elrepo/elrepo/el8/SRPMS/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirrors.coreix.net/elrepo/elrepo/el8/SRPMS/'
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: ELRepo.org
       url: http://elrepo.org
@@ -91,9 +99,11 @@
   minpackages: 0
   sources:
     - name: elrepo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirrors.coreix.net/elrepo/extras/el8/SRPMS/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirrors.coreix.net/elrepo/extras/el8/SRPMS/'
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: ELRepo.org
       url: http://elrepo.org
@@ -111,9 +121,11 @@
   minpackages: 0
   sources:
     - name: elrepo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://mirrors.coreix.net/elrepo/testing/el8/SRPMS/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirrors.coreix.net/elrepo/testing/el8/SRPMS/'
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: ELRepo.org
       url: http://elrepo.org

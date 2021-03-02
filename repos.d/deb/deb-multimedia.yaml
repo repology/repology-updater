@@ -10,10 +10,12 @@
   minpackages: 300
   sources:
     - name: [ main, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://www.deb-multimedia.org/dists/unstable/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://www.deb-multimedia.org/dists/unstable/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Deb Multimedia home

@@ -10,9 +10,11 @@
   minpackages: 200
   sources:
     - name: europa.kdb
-      fetcher: FileFetcher
-      parser: KwortKdbParser
-      url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.2/europa.kdb'
+      fetcher:
+        class: FileFetcher
+        url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.2/europa.kdb'
+      parser:
+        class: KwortKdbParser
   repolinks:
     - desc: Kwort Linux home
       url: http://kwort.org/
@@ -25,9 +27,11 @@
   minpackages: 200
   sources:
     - name: europa.kdb
-      fetcher: FileFetcher
-      parser: KwortKdbParser
-      url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.3/europa.kdb'
+      fetcher:
+        class: FileFetcher
+        url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.3/europa.kdb'
+      parser:
+        class: KwortKdbParser
   repolinks:
     - desc: Kwort Linux home
       url: http://kwort.org/
@@ -40,9 +44,11 @@
   minpackages: 200
   sources:
     - name: europa.kdb
-      fetcher: FileFetcher
-      parser: KwortKdbParser
-      url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.4/europa.kdb'
+      fetcher:
+        class: FileFetcher
+        url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.4/europa.kdb'
+      parser:
+        class: KwortKdbParser
   repolinks:
     - desc: Kwort Linux home
       url: http://kwort.org/

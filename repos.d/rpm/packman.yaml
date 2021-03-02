@@ -12,9 +12,11 @@
   minpackages: 0
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/fedora/26/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/fedora/26/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -32,9 +34,11 @@
   minpackages: 0
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/fedora/27/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/fedora/27/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -52,9 +56,11 @@
   minpackages: 0
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/fedora/28/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/fedora/28/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -72,9 +78,11 @@
   minpackages: 0
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/fedora/29/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/fedora/29/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -92,9 +100,11 @@
   minpackages: 0
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/fedora/30/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/fedora/30/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -112,9 +122,11 @@
   minpackages: 0
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/factory/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/factory/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -133,9 +145,11 @@
   minpackages: 900
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_42.3/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_42.3/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -153,9 +167,11 @@
   minpackages: 800
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.0/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.0/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -173,9 +189,11 @@
   minpackages: 500
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.1/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.1/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -193,9 +211,11 @@
   minpackages: 500
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.2/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.2/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -213,9 +233,11 @@
   minpackages: 450
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -233,9 +255,11 @@
   minpackages: 200
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_12/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_12/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
@@ -253,9 +277,11 @@
   minpackages: 250
   sources:
     - name: all
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_15/
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_15/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/

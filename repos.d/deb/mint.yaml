@@ -15,10 +15,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/qiana/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/qiana/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -36,10 +38,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rebecca/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rebecca/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -57,10 +61,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rafaela/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rafaela/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -78,10 +84,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rosa/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rosa/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -99,10 +107,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sarah/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sarah/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -120,10 +130,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/serena/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/serena/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -141,10 +153,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sonya/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sonya/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -162,10 +176,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sylvia/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sylvia/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -183,10 +199,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tara/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tara/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -204,10 +222,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tessa/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tessa/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -225,10 +245,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tina/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tina/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -246,10 +268,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tricia/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tricia/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -267,10 +291,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/ulyana/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/ulyana/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -288,10 +314,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/ulyssa/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/ulyssa/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home
@@ -309,10 +337,12 @@
   default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, romeo, upstream ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/debbie/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/debbie/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Linux Mint home

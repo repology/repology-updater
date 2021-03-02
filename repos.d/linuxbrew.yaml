@@ -11,9 +11,11 @@
   minpackages: 4500
   sources:
     - name: formula-linux.json
-      fetcher: FileFetcher
-      parser: HomebrewJsonParser
-      url: https://formulae.brew.sh/api/formula-linux.json
+      fetcher:
+        class: FileFetcher
+        url: https://formulae.brew.sh/api/formula-linux.json
+      parser:
+        class: HomebrewJsonParser
   repolinks:
     - desc: Homebrew home
       url: https://brew.sh/

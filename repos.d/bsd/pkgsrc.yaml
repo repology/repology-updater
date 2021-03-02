@@ -11,11 +11,13 @@
   default_maintainer: fallback-mnt-pkgsrc@repology
   sources:
     - name: INDEX
-      fetcher: FileFetcher
-      parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q2/pkgsrc/INDEX
-      allow_zero_size: false
-      nocache: true
+      fetcher:
+        class: FileFetcher
+        url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q2/pkgsrc/INDEX
+        allow_zero_size: false
+        nocache: true
+      parser:
+        class: PkgsrcIndexParser
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -45,11 +47,13 @@
   default_maintainer: fallback-mnt-pkgsrc@repology
   sources:
     - name: INDEX
-      fetcher: FileFetcher
-      parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
-      allow_zero_size: false
-      nocache: true
+      fetcher:
+        class: FileFetcher
+        url: https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
+        allow_zero_size: false
+        nocache: true
+      parser:
+        class: PkgsrcIndexParser
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/

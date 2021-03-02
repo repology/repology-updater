@@ -83,8 +83,8 @@ class RepositoryProcessor:
         logger.log('fetching source {} started'.format(source['name']))
 
         fetcher: Fetcher = self.fetcher_factory.spawn_with_known_args(
-            source['fetcher'],
-            source
+            source['fetcher']['class'],
+            source['fetcher']
         )
 
         have_changes = fetcher.fetch(
@@ -131,7 +131,8 @@ class RepositoryProcessor:
 
         return postprocess_parsed_packages(
             self.parser_factory.spawn_with_known_args(
-                source['parser'], source
+                source['parser']['class'],
+                source['parser']
             ).iter_parse(
                 self._get_state_source_path(repository, source),
                 PackageFactory(logger),

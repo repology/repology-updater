@@ -9,9 +9,11 @@
   minpackages: 0
   sources:
     - name: pkgs
-      fetcher: SVNFetcher
-      parser: NSTPkgInfoXMLParser
-      url: 'https://svn.code.sf.net/p/nst/code/repo/28/yum/pkgs'
+      fetcher:
+        class: SVNFetcher
+        url: 'https://svn.code.sf.net/p/nst/code/repo/28/yum/pkgs'
+      parser:
+        class: NSTPkgInfoXMLParser
   repolinks:
     - desc: Network Security Toolkit home
       url: http://www.networksecuritytoolkit.org/nst/index.html

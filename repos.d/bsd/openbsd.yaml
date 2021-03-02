@@ -11,13 +11,15 @@
   sources:
     - name: sqlports
       disabled: false
-      fetcher: FileFetcher
-      parser: OpenBSDsqlportsParser
-      # use '/share/sqlports' for official sqlports-*.tgz and null for immediate sqlite file
-      path_to_database: null
-      # unofficial - kindly provided by Landry Breuil, see https://github.com/repology/repology-updater/issues/149
-      url: 'https://ftp.fr.openbsd.org/pub/sqlports'
-      allow_zero_size: false
+      fetcher:
+        class: FileFetcher
+        # unofficial - kindly provided by Landry Breuil, see https://github.com/repology/repology-updater/issues/149
+        url: 'https://ftp.fr.openbsd.org/pub/sqlports'
+        allow_zero_size: false
+      parser:
+        class: OpenBSDsqlportsParser
+        # use '/share/sqlports' for official sqlports-*.tgz and null for immediate sqlite file
+        path_to_database: null
   repolinks:
     - desc: 'OpenBSD FAQ: Packages and Ports'
       url: https://www.openbsd.org/faq/faq15.html

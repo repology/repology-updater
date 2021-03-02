@@ -35,76 +35,92 @@
         - science-kit
         - security-kit
         - text-kit
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 1.4-release
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 1.4-release
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
     - name: [ gnome-kit ]
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 3.32-prime
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 3.32-prime
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
     - name: [ perl-kit ]
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 5.28-release
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 5.28-release
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
     - name: [ python-kit ]
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 3.7-release
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 3.7-release
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
     - name: [ ruby-kit ]
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 2.6-prime
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 2.6-prime
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
     - name: [ rust-kit ]
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 1.37-prime
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 1.37-prime
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
     - name: [ xfce-kit ]
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 4.13-release
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 4.13-release
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
     - name: [ xorg-kit ]
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://github.com/funtoo/{source}.git'
-      branch: 1.20-release
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/funtoo/{source}.git'
+        branch: 1.20-release
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
       subrepo: '{source}'
   repolinks:
     - desc: Funtoo Linux home

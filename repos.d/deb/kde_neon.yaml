@@ -8,10 +8,12 @@
   minpackages: 400  # by unique projects
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/user/dists/bionic/main/source/Sources.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://archive.neon.kde.org/user/dists/bionic/main/source/Sources.gz
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: main
   repolinks:
     - desc: KDE neon home
@@ -29,10 +31,12 @@
   minpackages: 400  # by unique projects
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/user/lts/dists/bionic/main/source/Sources.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://archive.neon.kde.org/user/lts/dists/bionic/main/source/Sources.gz
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: main
   repolinks:
     - desc: KDE neon home
@@ -50,10 +54,12 @@
   minpackages: 400
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/dev/stable/dists/bionic/main/source/Sources.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://archive.neon.kde.org/dev/stable/dists/bionic/main/source/Sources.gz
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: main
   repolinks:
     - desc: KDE neon home
@@ -71,10 +77,12 @@
   minpackages: 400
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/dev/unstable/dists/bionic/main/source/Sources.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://archive.neon.kde.org/dev/unstable/dists/bionic/main/source/Sources.gz
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: main
   repolinks:
     - desc: KDE neon home
@@ -92,10 +100,12 @@
   minpackages: 400
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/unstable/dists/bionic/main/source/Sources.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://archive.neon.kde.org/unstable/dists/bionic/main/source/Sources.gz
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: main
   repolinks:
     - desc: KDE neon home
@@ -113,10 +123,12 @@
   minpackages: 400
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/testing/dists/bionic/main/source/Sources.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: http://archive.neon.kde.org/testing/dists/bionic/main/source/Sources.gz
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: main
   repolinks:
     - desc: KDE neon home

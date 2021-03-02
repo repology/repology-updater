@@ -9,10 +9,12 @@
   minpackages: 1300
   sources:
     - name: feed
-      fetcher: FileFetcher
-      parser: FreshcodeParser
-      url: http://freshcode.club/feed/xfer.json?num=15000 # max allowed value,
-      # see http://fossil.include-once.org/freshcode/finfo?name=page_feed.php
+      fetcher:
+        class: FileFetcher
+        url: http://freshcode.club/feed/xfer.json?num=15000 # max allowed value,
+        # see http://fossil.include-once.org/freshcode/finfo?name=page_feed.php
+      parser:
+        class: FreshcodeParser
   shadow: true
   repolinks:
     - desc: freshcode.club

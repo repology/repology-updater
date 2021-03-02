@@ -13,13 +13,15 @@
   default_maintainer: fallback-mnt-liguros@repology
   sources:
     - name: liguros-repo
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://gitlab.com/liguros/{source}.git'
-      branch: stable
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://gitlab.com/liguros/{source}.git'
+        branch: stable
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
   repolinks:
     - desc: LiGurOS
       url: https://liguros.gitlab.io/
@@ -45,13 +47,15 @@
   default_maintainer: fallback-mnt-liguros@repology
   sources:
     - name: liguros-repo
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: true
-      require_xml_metadata: false
-      url: 'https://gitlab.com/liguros/{source}.git'
-      branch: develop
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://gitlab.com/liguros/{source}.git'
+        branch: develop
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
   repolinks:
     - desc: LiGurOS
       url: https://liguros.gitlab.io/

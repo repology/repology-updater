@@ -8,9 +8,11 @@
   minpackages: 1
   sources:
     - name: [noarch, linux-32, linux-64, osx-64, win-32, win-64]
-      fetcher: FileFetcher
-      parser: CondaRepodataJsonParser
-      url: 'https://conda.anaconda.org/conda-forge/{source}/repodata.json'
+      fetcher:
+        class: FileFetcher
+        url: 'https://conda.anaconda.org/conda-forge/{source}/repodata.json'
+      parser:
+        class: CondaRepodataJsonParser
       subrepo: '{source}'
   repolinks:
     - desc: conda-forge home
@@ -24,9 +26,11 @@
   minpackages: 1
   sources:
     - name: [noarch, linux-32, linux-64, osx-32, osx-64, win-32, win-64]
-      fetcher: FileFetcher
-      parser: CondaRepodataJsonParser
-      url: 'https://conda.anaconda.org/bioconda/{source}/repodata.json'
+      fetcher:
+        class: FileFetcher
+        url: 'https://conda.anaconda.org/bioconda/{source}/repodata.json'
+      parser:
+        class: CondaRepodataJsonParser
       subrepo: '{source}'
   repolinks:
     - desc: Bioconda home

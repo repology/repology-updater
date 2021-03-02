@@ -8,9 +8,11 @@
   minpackages: 7000
   sources:
     - name: LIST
-      fetcher: FTPListFetcher
-      parser: RPMFTPListParser
-      url: ftp://www.oss4aix.org/everything/SRPMS
+      fetcher:
+        class: FTPListFetcher
+        url: ftp://www.oss4aix.org/everything/SRPMS
+      parser:
+        class: RPMFTPListParser
   repolinks:
     - desc: AIX Open Source Packages
       url: http://www.perzl.org/aix/index.php?n=Main.HomePage

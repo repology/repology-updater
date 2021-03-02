@@ -10,10 +10,12 @@
   minpackages: 100
   sources:
     - name: [ dev, main, nosystemd ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/jessie/dists/jessie/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/jessie/dists/jessie/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: antiX Linux home
@@ -28,10 +30,12 @@
   minpackages: 200
   sources:
     - name: [ dev, main, nonfree, nosystemd ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/stretch/dists/stretch/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/stretch/dists/stretch/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: antiX Linux home
@@ -46,10 +50,12 @@
   minpackages: 300
   sources:
     - name: [ dev, main, nonfree, nosystemd ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/buster/dists/buster/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/buster/dists/buster/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: antiX Linux home

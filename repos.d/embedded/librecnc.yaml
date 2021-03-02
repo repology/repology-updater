@@ -8,10 +8,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/packages/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/packages/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_core_ar71xx_nand_packages
@@ -21,10 +23,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/nand/packages/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/nand/packages/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_core_packages_mips_24kc_base
@@ -34,10 +38,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/packages/mips_24kc/base/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/packages/mips_24kc/base/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_core_packages_mips_24kc_packages
@@ -47,10 +53,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/packages/mips_24kc/packages/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/packages/mips_24kc/packages/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_legacy_ar71xx_generic_packages
@@ -60,10 +68,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/packages/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/packages/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_main_ar71xx_generic_packages
@@ -73,10 +83,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/packages/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/packages/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_main_ar71xx_nand_packages
@@ -86,10 +98,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/nand/packages/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/nand/packages/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_main_packages_mips_24kc_base
@@ -99,10 +113,12 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/packages/mips_24kc/base/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/packages/mips_24kc/base/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled
 
 - name: librecnc_main_packages_mips_24kc_packages
@@ -112,8 +128,10 @@
   minpackages: 1  # XXX
   sources:
     - name: Packages
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/packages/mips_24kc/packages/Packages.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/packages/mips_24kc/packages/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, librecnc ] # disabled

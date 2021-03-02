@@ -11,10 +11,12 @@
   default_maintainer: orphaned@cygwin
   sources:
     - name: packages.json
-      fetcher: FileFetcher
-      parser: CygwinParser
-      url: https://cygwin.com/packages/packages.json.xz
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: https://cygwin.com/packages/packages.json.xz
+        compression: xz
+      parser:
+        class: CygwinParser
   repolinks:
     - desc: Cygwin homepage
       url: https://cygwin.com/

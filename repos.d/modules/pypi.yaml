@@ -8,10 +8,12 @@
   minpackages: 12000
   sources:
     - name: pypicache.json
-      fetcher: FileFetcher
-      parser: PyPiCacheJsonParser
-      url: https://pypicache.repology.org/pypicache.json.zst
-      compression: zstd
+      fetcher:
+        class: FileFetcher
+        url: https://pypicache.repology.org/pypicache.json.zst
+        compression: zstd
+      parser:
+        class: PyPiCacheJsonParser
   shadow: true
   incomplete: true
   repolinks:

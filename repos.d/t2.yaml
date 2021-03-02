@@ -9,9 +9,11 @@
   minpackages: 3000
   sources:
     - name: packages
-      fetcher: SVNFetcher
-      parser: T2DescParser
-      url: 'http://svn.exactcode.de/t2/trunk/package/'
+      fetcher:
+        class: SVNFetcher
+        url: 'http://svn.exactcode.de/t2/trunk/package/'
+      parser:
+        class: T2DescParser
   repolinks:
     - desc: T2 SDE home
       url: http://t2sde.org/

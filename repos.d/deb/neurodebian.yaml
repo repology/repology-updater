@@ -9,10 +9,12 @@
   minpackages: 5
   sources:
     - name: [ data/main, data/contrib, data/non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -34,10 +36,12 @@
   minpackages: 200
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/jessie/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/jessie/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -55,10 +59,12 @@
   minpackages: 200
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/stretch/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/stretch/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -75,10 +81,12 @@
   minpackages: 50
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/buster/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/buster/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -95,10 +103,12 @@
   minpackages: 200
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/sid/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/sid/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -115,10 +125,12 @@
   minpackages: 100
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/trusty/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/trusty/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -135,10 +147,12 @@
   minpackages: 100
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/xenial/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/xenial/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -155,10 +169,12 @@
   minpackages: 50
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/bionic/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/bionic/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home
@@ -175,10 +191,12 @@
   minpackages: 30
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://neurodebian.ovgu.de/debian/dists/disco/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://neurodebian.ovgu.de/debian/dists/disco/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: NeuroDebian home

@@ -12,10 +12,12 @@
   minpackages: 0
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ppa.launchpad.net/elementary-os/stable/ubuntu/dists/xenial/main/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ppa.launchpad.net/elementary-os/stable/ubuntu/dists/xenial/main/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, elementary ]
 
 - name: elementary_daily
@@ -25,10 +27,12 @@
   minpackages: 0
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ppa.launchpad.net/elementary-os/daily/ubuntu/dists/xenial/main/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ppa.launchpad.net/elementary-os/daily/ubuntu/dists/xenial/main/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, elementary ]
 
 - name: elementary_patches
@@ -38,8 +42,10 @@
   minpackages: 0
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ppa.launchpad.net/elementary-os/os-patches/ubuntu/dists/xenial/main/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ppa.launchpad.net/elementary-os/os-patches/ubuntu/dists/xenial/main/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
   tags: [ all, elementary ]

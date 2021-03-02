@@ -10,10 +10,12 @@
   minpackages: 0
   sources:
     - name: fink-distributions
-      fetcher: GitFetcher
-      parser: FinkGitParser
-      url: 'https://github.com/fink/fink-distributions.git'
-      sparse_checkout: [ '10.9-libcxx/stable/main/finkinfo/**/*.info' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/fink/fink-distributions.git'
+        sparse_checkout: [ '10.9-libcxx/stable/main/finkinfo/**/*.info' ]
+      parser:
+        class: FinkGitParser
   repolinks:
     - desc: Fink home
       url: http://www.finkproject.org/
@@ -35,9 +37,11 @@
   minpackages: 0
   sources:
     - name: browse.php.html
-      fetcher: FileFetcher
-      parser: FinkPdbParser
-      url: 'http://pdb.finkproject.org/pdb/browse.php?nochildren=on'
+      fetcher:
+        class: FileFetcher
+        url: 'http://pdb.finkproject.org/pdb/browse.php?nochildren=on'
+      parser:
+        class: FinkPdbParser
   repolinks:
     - desc: Fink home
       url: http://www.finkproject.org/

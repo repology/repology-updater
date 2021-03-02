@@ -9,9 +9,11 @@
   minpackages: 10
   sources:
     - name: index.xml
-      fetcher: FileFetcher
-      parser: FDroidParser
-      url: https://f-droid.org/repo/index.xml
+      fetcher:
+        class: FileFetcher
+        url: https://f-droid.org/repo/index.xml
+      parser:
+        class: FDroidParser
   shadow: true
   repolinks:
     - desc: F-Droid

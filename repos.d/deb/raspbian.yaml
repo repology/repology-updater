@@ -10,10 +10,12 @@
   minpackages: 22000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.raspbian.org/raspbian/dists/oldstable/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.raspbian.org/raspbian/dists/oldstable/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Raspbian home
@@ -29,10 +31,12 @@
   minpackages: 28000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.raspbian.org/raspbian/dists/stable/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.raspbian.org/raspbian/dists/stable/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Raspbian home
@@ -48,10 +52,12 @@
   minpackages: 31000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://archive.raspbian.org/raspbian/dists/testing/{source}/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.raspbian.org/raspbian/dists/testing/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Raspbian home

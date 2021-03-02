@@ -11,9 +11,11 @@
   minpackages: 0
   sources:
     - name: frugalware-current
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'http://ftp.frugalware.org/pub/frugalware/frugalware-current/frugalware-x86_64/frugalware-current.fdb'
+      fetcher:
+        class: TarFetcher
+        url: 'http://ftp.frugalware.org/pub/frugalware/frugalware-current/frugalware-x86_64/frugalware-current.fdb'
+      parser:
+        class: ArchDBParser
   repolinks:
     - desc: Frugalware home
       url: http://frugalware.org/

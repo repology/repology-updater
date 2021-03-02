@@ -9,11 +9,13 @@
   minpackages: 2000
   sources:
     - name: x86_64
-      fetcher: RsyncFetcher
-      parser: TczInfoParser
-      url: 'rsync://distro.ibiblio.org/tinycorelinux/10.x/x86_64/tcz/'
-      rsync_include: '*.info'
-      rsync_exclude: '*'
+      fetcher:
+        class: RsyncFetcher
+        url: 'rsync://distro.ibiblio.org/tinycorelinux/10.x/x86_64/tcz/'
+        rsync_include: '*.info'
+        rsync_exclude: '*'
+      parser:
+        class: TczInfoParser
     # XXX: add x86, armv6, armv7 repos
   repolinks:
     - desc: Tincy Core Linux home

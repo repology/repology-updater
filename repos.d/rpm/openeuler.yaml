@@ -10,9 +10,11 @@
   minpackages: 1500
   sources:
     - name: source
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://repo.openeuler.org/openEuler-20.03-LTS/source/
+      fetcher:
+        class: RepodataFetcher
+        url: https://repo.openeuler.org/openEuler-20.03-LTS/source/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: openEuler home

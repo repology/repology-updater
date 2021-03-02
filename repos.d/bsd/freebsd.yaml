@@ -11,11 +11,13 @@
   minpackages: 30000
   sources:
     - name: INDEX-11
-      fetcher: FileFetcher
-      parser: FreeBSDIndexParser
-      url: http://www.FreeBSD.org/ports/INDEX-11.bz2
-      allow_zero_size: false
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: http://www.FreeBSD.org/ports/INDEX-11.bz2
+        allow_zero_size: false
+        compression: bz2
+      parser:
+        class: FreeBSDIndexParser
   repolinks:
     - desc: FreeBSD home
       url: https://www.freebsd.org/
@@ -53,11 +55,13 @@
   minpackages: 29000
   sources:
     - name: INDEX
-      fetcher: FileFetcher
-      parser: DPortsIndexParser
-      url: https://sting.dragonflybsd.org/dports/INDEX.bz2
-      allow_zero_size: false
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: https://sting.dragonflybsd.org/dports/INDEX.bz2
+        allow_zero_size: false
+        compression: bz2
+      parser:
+        class: DPortsIndexParser
   repolinks:
     - desc: DragonFly BSD home
       url: https://www.dragonflybsd.org/

@@ -8,9 +8,11 @@
   minpackages: 12000
   sources:
     - name: CRAN
-      fetcher: FileFetcher
-      parser: CRANCheckSummaryParser
-      url: https://cran.r-project.org/web/checks/check_summary_by_package.html
+      fetcher:
+        class: FileFetcher
+        url: https://cran.r-project.org/web/checks/check_summary_by_package.html
+      parser:
+        class: CRANCheckSummaryParser
   shadow: true
   repolinks:
     - desc: R project home

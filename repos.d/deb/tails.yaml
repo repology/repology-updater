@@ -11,10 +11,12 @@
   minpackages: 10
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://deb.tails.boum.org/dists/stable/main/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.tails.boum.org/dists/stable/main/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: Tails home
       url: https://tails.boum.org/
@@ -30,10 +32,12 @@
   minpackages: 10
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://deb.tails.boum.org/dists/devel/main/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.tails.boum.org/dists/devel/main/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: Tails home
       url: https://tails.boum.org/

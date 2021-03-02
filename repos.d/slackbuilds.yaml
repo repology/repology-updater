@@ -9,10 +9,12 @@
   minpackages: 6500
   sources:
     - name: slackbuilds
-      fetcher: GitFetcher
-      parser: SlackBuildsParser
-      url: git://git.slackbuilds.org/slackbuilds/
-      sparse_checkout: [ '**/*.info' ]
+      fetcher:
+        class: GitFetcher
+        url: git://git.slackbuilds.org/slackbuilds/
+        sparse_checkout: [ '**/*.info' ]
+      parser:
+        class: SlackBuildsParser
   repolinks:
     - desc: SlackBuilds.org
       url: https://slackbuilds.org/

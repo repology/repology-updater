@@ -12,10 +12,12 @@
   minpackages: 10
   sources:
     - name: [ 'bunsen-hydrogen/main' ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: BunsenLabs Linux home
       url: 'https://www.bunsenlabs.org/'
@@ -37,10 +39,12 @@
   minpackages: 10
   sources:
     - name: [ 'helium/main' ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: BunsenLabs Linux home
       url: 'https://www.bunsenlabs.org/'
@@ -62,10 +66,12 @@
   minpackages: 1
   sources:
     - name: [ 'jessie-backports/main' ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: BunsenLabs Linux home
       url: 'https://www.bunsenlabs.org/'
@@ -87,10 +93,12 @@
   minpackages: 1
   sources:
     - name: [ 'stretch-backports/main' ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: BunsenLabs Linux home
       url: 'https://www.bunsenlabs.org/'

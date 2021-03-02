@@ -10,9 +10,11 @@
   minpackages: 5500
   sources:
     - name: [ devel, devel-games, devel-makedist, devel-autodist, devel-misc, devel-future ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://cdn.openmamba.org/pub/openmamba/{source}/SRPMS.base/
+      fetcher:
+        class: RepodataFetcher
+        url: http://cdn.openmamba.org/pub/openmamba/{source}/SRPMS.base/
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: openmamba home

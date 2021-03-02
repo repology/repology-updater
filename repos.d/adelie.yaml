@@ -12,9 +12,11 @@
   sources:
     # XXX: add all arches?
     - name: [ system, user ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'https://distfiles.adelielinux.org/adelie/current/{source}/ppc64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'https://distfiles.adelielinux.org/adelie/current/{source}/ppc64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Adélie Linux home

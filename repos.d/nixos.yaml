@@ -11,9 +11,11 @@
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages.json
-      fetcher: FileFetcher
-      parser: NixJsonParser
-      url: https://channels.nixos.org/nixos-20.09/packages.json.br
+      fetcher:
+        class: FileFetcher
+        url: https://channels.nixos.org/nixos-20.09/packages.json.br
+      parser:
+        class: NixJsonParser
   repolinks:
     - desc: NixOS home
       url: https://nixos.org
@@ -38,9 +40,11 @@
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages-unstable.json
-      fetcher: FileFetcher
-      parser: NixJsonParser
-      url: https://channels.nixos.org/nixos-unstable/packages.json.br
+      fetcher:
+        class: FileFetcher
+        url: https://channels.nixos.org/nixos-unstable/packages.json.br
+      parser:
+        class: NixJsonParser
   repolinks:
     - desc: NixOS home
       url: https://nixos.org

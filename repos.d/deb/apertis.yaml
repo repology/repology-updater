@@ -11,10 +11,12 @@
   minpackages: 3500
   sources:
     - name: [ v2020/development, v2020/target, v2020/sdk, v2020/hmi, v2020-updates/development, v2020-updates/target, v2020-updates/sdk, v2020-updates/hmi ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Apertis home
@@ -31,10 +33,12 @@
   minpackages: 3500
   sources:
     - name: [ v2021dev3/development, v2021dev3/target, v2021dev3/sdk, v2021dev3/hmi ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Apertis home

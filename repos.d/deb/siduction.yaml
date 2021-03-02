@@ -11,16 +11,20 @@
   minpackages: 80
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://packages.siduction.org/extra/dists/unstable/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://packages.siduction.org/extra/dists/unstable/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'extra {source}'
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://packages.siduction.org/fixes/dists/unstable/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://packages.siduction.org/fixes/dists/unstable/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'fixes {source}'
   repolinks:
     - desc: Siduction home
@@ -37,16 +41,20 @@
   minpackages: 10
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://packages.siduction.org/extra/dists/experimental/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://packages.siduction.org/extra/dists/experimental/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'extra {source}'
     - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://packages.siduction.org/fixes/dists/experimental/{source}/source/Sources.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://packages.siduction.org/fixes/dists/experimental/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
       subrepo: 'fixes {source}'
   repolinks:
     - desc: Siduction home

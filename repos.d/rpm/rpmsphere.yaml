@@ -9,9 +9,11 @@
   minpackages: 2500
   sources:
     - name: source
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://raw.githubusercontent.com/rpmsphere/source/master/
+      fetcher:
+        class: RepodataFetcher
+        url: https://raw.githubusercontent.com/rpmsphere/source/master/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: RPM Sphere home
       url: https://rpmsphere.github.io/

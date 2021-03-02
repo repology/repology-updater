@@ -12,10 +12,12 @@
   minpackages: 150
   sources:
     - name: repo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      #url: https://downloads.sourceforge.net/project/unitedrpms/30/srpm/
-      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/30/srpm/
+      fetcher:
+        class: RepodataFetcher
+        #url: https://downloads.sourceforge.net/project/unitedrpms/30/srpm/
+        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/30/srpm/
+      parser:
+        class: RepodataParser
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -33,10 +35,12 @@
   minpackages: 100
   sources:
     - name: repo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      #url: https://downloads.sourceforge.net/project/unitedrpms/31/srpm/
-      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/31/srpm/
+      fetcher:
+        class: RepodataFetcher
+        #url: https://downloads.sourceforge.net/project/unitedrpms/31/srpm/
+        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/31/srpm/
+      parser:
+        class: RepodataParser
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -54,10 +58,12 @@
   minpackages: 50
   sources:
     - name: repo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      #url: https://downloads.sourceforge.net/project/unitedrpms/32/srpm/
-      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/32/srpm/
+      fetcher:
+        class: RepodataFetcher
+        #url: https://downloads.sourceforge.net/project/unitedrpms/32/srpm/
+        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/32/srpm/
+      parser:
+        class: RepodataParser
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -75,10 +81,12 @@
   minpackages: 50
   sources:
     - name: repo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      #url: https://downloads.sourceforge.net/project/unitedrpms/33/srpm/
-      url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/33/srpm/
+      fetcher:
+        class: RepodataFetcher
+        #url: https://downloads.sourceforge.net/project/unitedrpms/33/srpm/
+        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/33/srpm/
+      parser:
+        class: RepodataParser
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home

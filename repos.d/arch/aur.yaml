@@ -13,15 +13,17 @@
   default_maintainer: fallback-mnt-aur@repology
   sources:
     - name: aur
-      fetcher: AURFetcher
-      fetch_delay: 0.5
-      fetch_timeout: 10
-      # https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
-      # says the limit is 4443, but it doesn't seem to be enforced in practice,
-      # so up to the maximum allowed in practice
-      max_api_url_length: 6500
-      parser: AURParser
-      url: https://aur.archlinux.org/
+      fetcher:
+        class: AURFetcher
+        fetch_delay: 0.5
+        fetch_timeout: 10
+        # https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
+        # says the limit is 4443, but it doesn't seem to be enforced in practice,
+        # so up to the maximum allowed in practice
+        max_api_url_length: 6500
+        url: https://aur.archlinux.org/
+      parser:
+        class: AURParser
   repolinks:
     - desc: AUR Home
       url: https://aur.archlinux.org/
@@ -43,9 +45,11 @@
   minpackages: 0
   sources:
     - name: chaotic-aur
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: https://de-1-mirror.chaotic.cx/chaotic-aur/x86_64/chaotic-aur.db.tar.zst
+      fetcher:
+        class: TarFetcher
+        url: https://de-1-mirror.chaotic.cx/chaotic-aur/x86_64/chaotic-aur.db.tar.zst
+      parser:
+        class: ArchDBParser
   repolinks:
     - desc: Chaotic-AUR Home
       url: https://lonewolf.pedrohlc.com/chaotic-aur/

@@ -9,9 +9,11 @@
   minpackages: 200
   sources:
     - name: packages.php
-      fetcher: FileFetcher
-      parser: DistrowatchPackagesParser
-      url: https://distrowatch.com/packages.php
+      fetcher:
+        class: FileFetcher
+        url: https://distrowatch.com/packages.php
+      parser:
+        class: DistrowatchPackagesParser
   repolinks:
     - desc: DistroWatch.com
       url: https://distrowatch.com/

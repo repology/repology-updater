@@ -10,9 +10,11 @@
   minpackages: 180
   sources:
     - name: archive-contents
-      fetcher: FileFetcher
-      url: https://elpa.gnu.org/packages/archive-contents
-      parser: ArchiveContentsParser
+      fetcher:
+        class: FileFetcher
+        url: https://elpa.gnu.org/packages/archive-contents
+      parser:
+        class: ArchiveContentsParser
   shadow: true
   repolinks:
     - desc: GNU Emacs Lisp Package Archive
@@ -31,9 +33,11 @@
   minpackages: 3800
   sources:
     - name: archive-contents
-      fetcher: FileFetcher
-      url: https://melpa.org/packages/archive-contents
-      parser: ArchiveContentsParser
+      fetcher:
+        class: FileFetcher
+        url: https://melpa.org/packages/archive-contents
+      parser:
+        class: ArchiveContentsParser
   shadow: true
   repolinks:
     - desc: Milkypostman’s Emacs Lisp Package Archive

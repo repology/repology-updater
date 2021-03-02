@@ -9,9 +9,11 @@
   minpackages: 150
   sources:
     - name: rapps-db
-      fetcher: GitFetcher
-      parser: RappsParser
-      url: https://github.com/reactos/rapps-db.git
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/reactos/rapps-db.git
+      parser:
+        class: RappsParser
   shadow: true
   repolinks:
     - desc: GitHub repository

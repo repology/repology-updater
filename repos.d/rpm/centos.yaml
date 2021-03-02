@@ -11,9 +11,11 @@
   minpackages: 2000
   sources:
     - name: [ os, updates ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://vault.centos.org/centos/6/{source}/Source/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://vault.centos.org/centos/6/{source}/Source/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -33,9 +35,11 @@
   minpackages: 2500
   sources:
     - name: [ os, updates, extras ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://vault.centos.org/centos/7/{source}/Source/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://vault.centos.org/centos/7/{source}/Source/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -55,9 +59,11 @@
   minpackages: 2000
   sources:
     - name: [ AppStream, BaseOS, PowerTools, extras ]
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: 'http://vault.centos.org/centos/8/{source}/Source/'
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://vault.centos.org/centos/8/{source}/Source/'
+      parser:
+        class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home

@@ -11,14 +11,18 @@
   sources:
     # NOTE: no database for source packages
     - name: x86_64
-      fetcher: TarFetcher
-      parser: MSYS2DescParser
-      url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.gz
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.gz
+      parser:
+        class: MSYS2DescParser
       subrepo: x86_64
     - name: i686
-      fetcher: TarFetcher
-      parser: MSYS2DescParser
-      url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.gz
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.gz
+      parser:
+        class: MSYS2DescParser
       subrepo: i686
   repolinks:
     - desc: MSYS2 homepage
@@ -42,14 +46,18 @@
   sources:
     # NOTE: no database for source packages
     - name: x86_64
-      fetcher: TarFetcher
-      parser: MSYS2DescParser
-      url: http://repo.msys2.org/msys/x86_64/msys.db.tar.gz
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/msys/x86_64/msys.db.tar.gz
+      parser:
+        class: MSYS2DescParser
       subrepo: x86_64
     - name: i686
-      fetcher: TarFetcher
-      parser: MSYS2DescParser
-      url: http://repo.msys2.org/msys/i686/msys.db.tar.gz
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/msys/i686/msys.db.tar.gz
+      parser:
+        class: MSYS2DescParser
       subrepo: i686
   repolinks:
     - desc: MSYS2 homepage

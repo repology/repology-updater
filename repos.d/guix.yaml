@@ -9,9 +9,11 @@
   minpackages: 9500
   sources:
     - name: packages.json
-      fetcher: FileFetcher
-      parser: GuixJsonParser
-      url: https://guix.gnu.org/packages.json
+      fetcher:
+        class: FileFetcher
+        url: https://guix.gnu.org/packages.json
+      parser:
+        class: GuixJsonParser
   repolinks:
     - desc: GNU Guix home
       url: https://guix.gnu.org/

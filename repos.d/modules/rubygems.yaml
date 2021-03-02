@@ -10,10 +10,12 @@
   minpackages: 130000
   sources:
     - name: latest_specs.4.8
-      fetcher: FileFetcher
-      parser: RubyGemParser
-      url: https://api.rubygems.org/latest_specs.4.8.gz
-      compression: gz
+      fetcher:
+        class: FileFetcher
+        url: https://api.rubygems.org/latest_specs.4.8.gz
+        compression: gz
+      parser:
+        class: RubyGemParser
   shadow: true
   repolinks:
     - desc: RubyGems.org

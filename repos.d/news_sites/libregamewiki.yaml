@@ -9,9 +9,11 @@
   minpackages: 200
   sources:
     - name: newreleases
-      fetcher: FileFetcher
-      parser: LibreGameWikiParser
-      url: https://libregamewiki.org/New_games_and_releases
+      fetcher:
+        class: FileFetcher
+        url: https://libregamewiki.org/New_games_and_releases
+      parser:
+        class: LibreGameWikiParser
   repolinks:
     - desc: Libregamewiki
       url: https://libregamewiki.org/

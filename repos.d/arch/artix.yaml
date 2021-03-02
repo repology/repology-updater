@@ -11,9 +11,11 @@
   minpackages: 4000
   sources:
     - name: [ system, world, galaxy ]
-      fetcher: TarFetcher
-      parser: ArchDBParser
-      url: 'https://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.xz'
+      fetcher:
+        class: TarFetcher
+        url: 'https://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.xz'
+      parser:
+        class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Artix Linux home

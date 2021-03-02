@@ -13,9 +13,11 @@
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'http://dl-3.alpinelinux.org/alpine/v3.8/{source}/x86_64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/v3.8/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Alpine Linux home
@@ -37,9 +39,11 @@
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'http://dl-3.alpinelinux.org/alpine/v3.9/{source}/x86_64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/v3.9/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Alpine Linux home
@@ -60,9 +64,11 @@
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'http://dl-3.alpinelinux.org/alpine/v3.10/{source}/x86_64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/v3.10/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Alpine Linux home
@@ -83,9 +89,11 @@
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'http://dl-3.alpinelinux.org/alpine/v3.11/{source}/x86_64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/v3.11/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Alpine Linux home
@@ -106,9 +114,11 @@
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'http://dl-3.alpinelinux.org/alpine/v3.12/{source}/x86_64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/v3.12/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Alpine Linux home
@@ -129,9 +139,11 @@
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'http://dl-3.alpinelinux.org/alpine/v3.13/{source}/x86_64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/v3.13/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Alpine Linux home
@@ -152,9 +164,11 @@
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main, testing ]
-      fetcher: TarFetcher
-      parser: ApkIndexParser
-      url: 'http://dl-3.alpinelinux.org/alpine/edge/{source}/x86_64/APKINDEX.tar.gz'
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/edge/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
       subrepo: '{source}'
   repolinks:
     - desc: Alpine Linux home

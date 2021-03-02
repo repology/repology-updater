@@ -9,10 +9,12 @@
   minpackages: 1400
   sources:
     - name: [ core, main ]
-      fetcher: GitFetcher
-      parser: PisiParser
-      url: 'https://github.com/pisilinux/{source}.git'
-      sparse_checkout: [ '**/pspec.xml' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/pisilinux/{source}.git'
+        sparse_checkout: [ '**/pspec.xml' ]
+      parser:
+        class: PisiParser
       subrepo: '{source}'
   repolinks:
     - desc: Pisi Linux home
@@ -33,10 +35,12 @@
   minpackages: 200
   sources:
     - name: contrib
-      fetcher: GitFetcher
-      parser: PisiParser
-      url: 'https://github.com/pisilinux/contrib.git'
-      sparse_checkout: [ '**/pspec.xml' ]
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/pisilinux/contrib.git'
+        sparse_checkout: [ '**/pspec.xml' ]
+      parser:
+        class: PisiParser
   repolinks:
     - desc: Pisi Linux home
       url: https://pisilinux.org/

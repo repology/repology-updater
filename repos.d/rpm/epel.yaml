@@ -11,9 +11,11 @@
   minpackages: 5000
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/epel/6/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://archives.fedoraproject.org/pub/archive/epel/6/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
@@ -32,9 +34,11 @@
   minpackages: 6000
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://dl.fedoraproject.org/pub/epel/7/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://dl.fedoraproject.org/pub/epel/7/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
@@ -53,9 +57,11 @@
   minpackages: 150
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
+      fetcher:
+        class: RepodataFetcher
+        url: https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL

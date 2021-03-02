@@ -8,10 +8,12 @@
   minpackages: 1500
   sources:
     - name: [ hppa_32, ia64_32, ia64_64 ]
-      fetcher: FileFetcher
-      parser: HPPADepothelperListParser
-      url: 'http://hpux.connect.org.uk/ftp/depothelper/packages-{source}-11.31.bz2'
-      compression: bz2
+      fetcher:
+        class: FileFetcher
+        url: 'http://hpux.connect.org.uk/ftp/depothelper/packages-{source}-11.31.bz2'
+        compression: bz2
+      parser:
+        class: HPPADepothelperListParser
       subrepo: '{source}'
   repolinks:
     - desc: HP-UX Porting and Archive Centre

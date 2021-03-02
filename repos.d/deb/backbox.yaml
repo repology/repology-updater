@@ -12,10 +12,12 @@
   minpackages: 10
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ppa.launchpad.net/backbox/six/ubuntu/dists/bionic/main/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ppa.launchpad.net/backbox/six/ubuntu/dists/bionic/main/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: BackBox Linux home
       url: https://linux.backbox.org/
@@ -30,10 +32,12 @@
   minpackages: 10
   sources:
     - name: main
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ppa.launchpad.net/backbox/seven/ubuntu/dists/focal/main/source/Sources.xz'
-      compression: xz
+      fetcher:
+        class: FileFetcher
+        url: 'http://ppa.launchpad.net/backbox/seven/ubuntu/dists/focal/main/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
   repolinks:
     - desc: BackBox Linux home
       url: https://linux.backbox.org/

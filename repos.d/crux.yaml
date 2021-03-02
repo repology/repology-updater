@@ -13,9 +13,11 @@
   update_period: 6h
   sources:
     - name: CRUX-ports-JSON
-      fetcher: FileFetcher
-      parser: CRUXPortsJsonParser
-      url: https://crux.nu/files/repology-3.4.json
+      fetcher:
+        class: FileFetcher
+        url: https://crux.nu/files/repology-3.4.json
+      parser:
+        class: CRUXPortsJsonParser
   repolinks:
     - desc: CRUX home
       url: https://crux.nu/
@@ -38,9 +40,11 @@
   update_period: 6h
   sources:
     - name: CRUX-ports-JSON
-      fetcher: FileFetcher
-      parser: CRUXPortsJsonParser
-      url: https://crux.nu/files/repology-3.5.json
+      fetcher:
+        class: FileFetcher
+        url: https://crux.nu/files/repology-3.5.json
+      parser:
+        class: CRUXPortsJsonParser
   repolinks:
     - desc: CRUX home
       url: https://crux.nu/
@@ -63,9 +67,11 @@
   update_period: 6h
   sources:
     - name: CRUX-ports-JSON
-      fetcher: FileFetcher
-      parser: CRUXPortsJsonParser
-      url: https://crux.nu/files/repology-3.6.json
+      fetcher:
+        class: FileFetcher
+        url: https://crux.nu/files/repology-3.6.json
+      parser:
+        class: CRUXPortsJsonParser
   repolinks:
     - desc: CRUX home
       url: https://crux.nu/

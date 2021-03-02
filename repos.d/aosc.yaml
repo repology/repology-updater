@@ -10,9 +10,11 @@
   default_maintainer: fallback-mnt-aosc@repology  # 4 cases of `"committer" : "test <test>"`
   sources:
     - name: staging
-      fetcher: FileFetcher
-      parser: AoscPkgsParser
-      url: https://packages.aosc.io/list.json
+      fetcher:
+        class: FileFetcher
+        url: https://packages.aosc.io/list.json
+      parser:
+        class: AoscPkgsParser
   repolinks:
     - desc: AOSC OS home
       url: https://aosc.io/

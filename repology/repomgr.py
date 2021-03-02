@@ -15,14 +15,31 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import copy
 import os
-from typing import Any, Collection, Dict, List, Optional, cast
+from typing import Any, Collection, Dict, Iterable, List, Optional, Union, cast
 
 import yaml
 
 
 RepositoryNameList = Optional[Collection[str]]
 RepositoryMetadata = Dict[str, Any]
+
+
+def _subst_source_recursively(container: Union[Dict[str, Any], List[Any]], name: str) -> None:
+    key_iter: Iterable[Any]
+    if isinstance(container, list):
+        key_iter = range(len(container))
+    elif isinstance(container, dict):
+        key_iter = container.keys()
+    else:
+        return
+
+    for key in key_iter:
+        if isinstance(container[key], str):
+            container[key] = container[key].replace('{source}', name)
+        elif isinstance(container[key], list) or isinstance(container[key], dict):
+            _subst_source_recursively(container[key], name)
 
 
 class RepositoryManager:
@@ -47,24 +64,22 @@ class RepositoryManager:
         for repo in self._repositories:
             extratags = set()
 
-            newsources = []
+            processed_sources = []
             for source in repo['sources']:
                 if source.get('disabled', False):
                     continue
 
                 names = source['name'] if isinstance(source['name'], list) else [source['name']]
                 for name in names:
-                    newsource = source.copy()
-                    for key in newsource.keys():
-                        if isinstance(newsource[key], str):
-                            newsource[key] = newsource[key].replace('{source}', name)
-                    newsource['name'] = name
-                    newsources.append(newsource)
+                    processed_source = copy.deepcopy(source)
+                    processed_source['name'] = name
+                    _subst_source_recursively(processed_source, name)
+                    processed_sources.append(processed_source)
 
-                extratags.add(source['fetcher'])
-                extratags.add(source['parser'])
+                extratags.add(source['fetcher']['class'])
+                extratags.add(source['parser']['class'])
 
-            repo['sources'] = newsources
+            repo['sources'] = processed_sources
 
             if 'sortname' not in repo:
                 repo['sortname'] = repo['name']

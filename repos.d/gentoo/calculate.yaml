@@ -11,12 +11,14 @@
   default_maintainer: fallback-mnt-calculate@repology
   sources:
     - name: calculate
-      fetcher: GitFetcher
-      parser: GentooGitParser
-      require_md5cache_metadata: false
-      require_xml_metadata: false
-      url: https://github.com/calculatelinux/calculate.git
-      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/calculatelinux/calculate.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: false
+        require_xml_metadata: false
   repolinks:
     - desc: Calculate Linux home
       url: http://www.calculate-linux.org/

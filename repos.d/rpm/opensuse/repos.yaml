@@ -11,9 +11,11 @@
   minpackages: 300
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/Education/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/Education/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/Education/{srcname}'
@@ -31,9 +33,11 @@
   minpackages: 100
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/Emulators/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/Emulators/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/Emulators/{srcname}'
@@ -51,9 +55,11 @@
   minpackages: 600
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   repolinks:
     - desc: openSUSE:Games wiki page
       url: https://en.opensuse.org/openSUSE:Games
@@ -74,9 +80,11 @@
   minpackages: 150
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/graphics/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/graphics/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/graphics/{srcname}'
@@ -94,9 +102,11 @@
   minpackages: 200
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/multimedia:/apps/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/multimedia:/apps/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/multimedia:apps/{srcname}'
@@ -114,9 +124,11 @@
   minpackages: 200
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/multimedia:/libs/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/multimedia:/libs/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/multimedia:libs/{srcname}'
@@ -134,9 +146,11 @@
   minpackages: 200
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/network/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/network/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/network/{srcname}'
@@ -154,9 +168,11 @@
   minpackages: 600
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/science/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/science/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/science/{srcname}'
@@ -174,9 +190,11 @@
   minpackages: 150
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/security/{srcname}'
@@ -194,9 +212,11 @@
   minpackages: 120
   sources:
     - name: data
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: http://download.opensuse.org/repositories/hardware:/sdr/openSUSE_Tumbleweed/
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/repositories/hardware:/sdr/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/hardware:/sdr/{srcname}'
