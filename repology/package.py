@@ -192,6 +192,37 @@ class LinkType:
         }[val]
 
     @staticmethod
+    def from_string(val: str) -> int:
+        return {
+            'UPSTREAM_HOMEPAGE': LinkType.UPSTREAM_HOMEPAGE,
+            'UPSTREAM_DOWNLOAD': LinkType.UPSTREAM_DOWNLOAD,
+            'UPSTREAM_REPOSITORY': LinkType.UPSTREAM_REPOSITORY,
+            'UPSTREAM_ISSUE_TRACKER': LinkType.UPSTREAM_ISSUE_TRACKER,
+            'PROJECT_HOMEPAGE': LinkType.PROJECT_HOMEPAGE,
+            'PACKAGE_HOMEPAGE': LinkType.PACKAGE_HOMEPAGE,
+            'PACKAGE_DOWNLOAD': LinkType.PACKAGE_DOWNLOAD,
+            'PACKAGE_REPOSITORY': LinkType.PACKAGE_REPOSITORY,
+            'PACKAGE_ISSUE_TRACKER': LinkType.PACKAGE_ISSUE_TRACKER,
+            'PACKAGE_RECIPE': LinkType.PACKAGE_RECIPE,
+            'PACKAGE_RECIPE_RAW': LinkType.PACKAGE_RECIPE_RAW,
+            'PACKAGE_PATCH': LinkType.PACKAGE_PATCH,
+            'PACKAGE_PATCH_RAW': LinkType.PACKAGE_PATCH_RAW,
+            'PACKAGE_BUILD_LOG': LinkType.PACKAGE_BUILD_LOG,
+            'PACKAGE_BUILD_LOG_RAW': LinkType.PACKAGE_BUILD_LOG_RAW,
+            'PACKAGE_NEW_VERSION_CHECKER': LinkType.PACKAGE_NEW_VERSION_CHECKER,
+            'UPSTREAM_DOCUMENTATION': LinkType.UPSTREAM_DOCUMENTATION,
+            'UPSTREAM_CHANGELOG': LinkType.UPSTREAM_CHANGELOG,
+            'PROJECT_DOWNLOAD': LinkType.PROJECT_DOWNLOAD,
+            'UPSTREAM_DONATION': LinkType.UPSTREAM_DONATION,
+            'UPSTREAM_DISCUSSION': LinkType.UPSTREAM_DISCUSSION,
+            'UPSTREAM_COVERAGE': LinkType.UPSTREAM_COVERAGE,
+            'UPSTREAM_CI': LinkType.UPSTREAM_CI,
+            'UPSTREAM_WIKI': LinkType.UPSTREAM_WIKI,
+            'PACKAGE_REPOSITORY_DIR': LinkType.PACKAGE_REPOSITORY_DIR,
+            'OTHER': LinkType.OTHER,
+        }[val]
+
+    @staticmethod
     def is_relevant_for_rule_matching(val: int) -> bool:
         return val in [
             LinkType.PROJECT_DOWNLOAD,
