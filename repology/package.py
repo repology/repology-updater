@@ -157,6 +157,7 @@ class LinkType:
     UPSTREAM_COVERAGE: ClassVar[int] = 21
     UPSTREAM_CI: ClassVar[int] = 22
     UPSTREAM_WIKI: ClassVar[int] = 23
+    PACKAGE_REPOSITORY_DIR: ClassVar[int] = 24
     OTHER: ClassVar[int] = 99
 
     @staticmethod
@@ -186,6 +187,7 @@ class LinkType:
             LinkType.UPSTREAM_COVERAGE: 'UPSTREAM_COVERAGE',
             LinkType.UPSTREAM_CI: 'UPSTREAM_CI',
             LinkType.UPSTREAM_WIKI: 'UPSTREAM_WIKI',
+            LinkType.PACKAGE_REPOSITORY_DIR: 'PACKAGE_REPOSITORY_DIR',
             LinkType.OTHER: 'OTHER',
         }[val]
 
