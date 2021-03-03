@@ -21,10 +21,13 @@
 --------------------------------------------------------------------------------
 WITH expected AS (
 	SELECT
-        (json_array_elements(links)->>1)::integer AS id,
-        count(*) AS refcount
-    FROM packages
-    GROUP BY id
+		id,
+		count(*) AS refcount
+	FROM (
+		SELECT (json_array_elements(links)->>1)::integer AS id
+		FROM packages
+	) AS tmp
+	GROUP BY id
 )
 {% if do_fix %}
 -- note: these changes are not shown to SELECT below due to how CTE work
