@@ -344,6 +344,8 @@ class TestParsers(unittest.TestCase):
                     (LinkType.UPSTREAM_DOWNLOAD, 'http://download.virtualbox.org/virtualbox/5.0.30/UserManual.pdf'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'http://download.virtualbox.org/virtualbox/5.0.30/VBoxGuestAdditions_5.0.30.iso'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'http://download.virtualbox.org/virtualbox/5.0.30/VirtualBox-5.0.30.tar.bz2'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://slackbuilds.org/repository/14.2/system/virtualbox/'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://slackbuilds.org/slackbuilds/14.2/system/virtualbox/virtualbox.SlackBuild'),
                 ],
             }
         )
@@ -365,6 +367,8 @@ class TestParsers(unittest.TestCase):
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://www.baudline.com/'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'http://www.baudline.com/baudline_1.08_linux_i686.tar.gz'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'http://www.baudline.com/baudline_1.08_linux_x86_64.tar.gz'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://slackbuilds.org/repository/14.2/ham/baudline/'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://slackbuilds.org/slackbuilds/14.2/ham/baudline/baudline.SlackBuild'),
                 ],
             }
         )
@@ -385,6 +389,8 @@ class TestParsers(unittest.TestCase):
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'https://www.teamviewer.com/'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'https://download.teamviewer.com/download/teamviewer_i386.deb'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://slackbuilds.org/repository/14.2/network/teamviewer/'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://slackbuilds.org/slackbuilds/14.2/network/teamviewer/teamviewer.SlackBuild'),
                 ],
             }
         )
@@ -405,6 +411,8 @@ class TestParsers(unittest.TestCase):
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://www.oracle.com/technetwork/database/database-technologies/express-edition/overview/index.html'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://slackbuilds.org/repository/14.2/system/oracle-xe/'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://slackbuilds.org/slackbuilds/14.2/system/oracle-xe/oracle-xe.SlackBuild'),
                 ],
             }
         )
@@ -425,6 +433,8 @@ class TestParsers(unittest.TestCase):
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://ccreweb.org/software/kforth/kforth.html'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'ftp://ccreweb.org/software/kforth/linux/kforth-x86-linux-1.5.2.tar.gz'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://slackbuilds.org/repository/14.2/development/kforth/'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://slackbuilds.org/slackbuilds/14.2/development/kforth/kforth.SlackBuild'),
                 ],
             }
         )
