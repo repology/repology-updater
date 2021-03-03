@@ -129,6 +129,7 @@ class OpenWrtPackagesParser(DebianSourcesParser):
         if 'SourceName' in pkgdata:  # not present in openwrt < 19_07
             pkg.add_name(pkgdata['SourceName'], NameType.OPENWRT_SOURCENAME)
         pkg.set_arch(pkgdata['Architecture'])
+        pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
 
         if pkgpath[2:4] == ['lang', 'python']:
             # All python modules are in lang/python, but not all of lang/python are python modules
