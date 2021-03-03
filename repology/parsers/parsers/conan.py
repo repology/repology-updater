@@ -26,10 +26,8 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
-def _extract_version_urls(sources: Dict[str, Any]) -> Iterable[Tuple[str, Union[str, List[str]]]]:
-    assert(isinstance(sources, dict))
-
-    for key, value in sources.items():
+def _extract_version_urls(conandata: Dict[str, Any]) -> Iterable[Tuple[str, Union[str, List[str]]]]:
+    for key, value in conandata['sources'].items():
         if isinstance(value, dict) and 'url' in value:
             # {version: {"url": "...", "sha256": "..."}}
             yield key, value['url']
@@ -43,6 +41,19 @@ def _extract_version_urls(sources: Dict[str, Any]) -> Iterable[Tuple[str, Union[
             raise RuntimeError('unexpected conandata.yml format')
 
 
+def _extract_patches(conandata: Dict[str, Any]) -> Dict[str, List[str]]:
+    if 'patches' not in conandata:
+        return {}
+
+    return {
+        version:
+            [patch['patch_file'] for patch in patches]
+            if isinstance(patches, list)
+            else [patches['patch_file']]
+        for version, patches in conandata['patches'].items()
+    }
+
+
 class ConanGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for conandata_abs_path in walk_tree(path, name='conandata.yml'):
@@ -54,10 +65,17 @@ class ConanGitParser(Parser):
                 with open(conandata_abs_path) as fd:
                     conandata = yaml.safe_load(fd)
 
-                for version, urls in _extract_version_urls(conandata['sources']):
+                patches = _extract_patches(conandata)
+
+                for version, urls in _extract_version_urls(conandata):
                     verpkg = pkg.clone(append_ident=version)
 
                     verpkg.set_version(version)
                     verpkg.add_downloads(urls)
+
+                    if version in patches:
+                        verpkg.set_extra_field('patch', patches[version])
+
+                    verpkg.set_extra_field('folder', conandata_rel_path.split('/')[2])
 
                     yield verpkg

@@ -21,6 +21,11 @@
     - desc: Conan-Center Index repository on GitHub
       url: https://github.com/conan-io/conan-center-index
   packagelinks:
-    - desc: Recipe directory
+    - type: PACKAGE_REPOSITORY_DIR
+      desc: Recipe directory
       url: 'https://github.com/conan-io/conan-center-index/tree/master/recipes/{srcname}'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/conan-io/conan-center-index/blob/master/recipes/{srcname}/{folder}/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/conan-io/conan-center-index/master/recipes/{srcname}/{folder}/{?patch}'
   tags: [ all, production ]
