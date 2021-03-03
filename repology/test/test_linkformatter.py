@@ -83,6 +83,8 @@ class TestLinkFormatter(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             list(format_package_links(package, 'https://example.com/{unknown}'))
 
+        self.assertEqual(list(format_package_links(package, 'https://example.com/{?unknown}')), [])
+
         with self.assertRaises(RuntimeError):
             list(format_package_links(package, 'https://example.com/{name|unknownfilter}'))
 

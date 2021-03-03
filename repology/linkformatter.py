@@ -46,15 +46,20 @@ def _safe_int(arg: str) -> int:
 class FieldGatheringMapping:
     _package: Package
     _fields: Dict[str, Any]
+    _skip: bool
 
     def __init__(self, package: Package) -> None:
         self._package = package
         self._fields = {}
+        self._skip = False
 
     def __getitem__(self, key: str) -> str:
         field, *filters = key.split('|', 1)
 
-        if field in self._fields:
+        is_optional = field.startswith('?')
+        field = field.removeprefix('?')
+
+        if key in self._fields or self._skip:
             return ''
 
         value: Any = None
@@ -84,7 +89,9 @@ class FieldGatheringMapping:
         elif self._package.extrafields is not None and field in self._package.extrafields:
             value = self._package.extrafields[field]
 
-        if not value:
+        if not value and is_optional:
+            self._skip = True
+        elif not value:
             raise RuntimeError(f'missing key "{field}"')
         elif isinstance(value, list):
             if filters:
@@ -107,6 +114,9 @@ class FieldGatheringMapping:
         return ''
 
     def generate_mappings(self) -> Iterator[Dict[str, Any]]:
+        if self._skip:
+            return
+
         keys = list(self._fields.keys())
 
         for values in product(*self._fields.values()):
