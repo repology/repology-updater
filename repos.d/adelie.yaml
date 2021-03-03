@@ -22,6 +22,10 @@
     - desc: Adélie Linux home
       url: https://adelielinux.org/
   packagelinks:
-    - desc: APKBUILD
-      url: 'https://code.foxkit.us/adelie/packages/blob/master/{subrepo}/{srcname}/APKBUILD'
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://code.foxkit.us/adelie/packages/-/tree/master/{subrepo}/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://code.foxkit.us/adelie/packages/-/blob/master/{subrepo}/{srcname}/APKBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://code.foxkit.us/adelie/packages/-/raw/master/{subrepo}/{srcname}/APKBUILD'
   tags: [ all, production, adelie ]

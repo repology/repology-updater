@@ -25,8 +25,17 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
-    - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={binname}
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.8
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.8-stable'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.8-stable'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.8-stable'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-3-8-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
 
 - name: alpine_3_9
@@ -51,8 +60,17 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
-    - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={binname}
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.9
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.9-stable'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.9-stable'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.9-stable'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-3-9-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
 
 - name: alpine_3_10
@@ -76,8 +94,17 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
-    - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={binname}
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.10
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.10-stable'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.10-stable'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.10-stable'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-3-10-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
 
 - name: alpine_3_11
@@ -101,8 +128,17 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
-    - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={binname}
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.11
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.11-stable'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.11-stable'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.11-stable'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-3-11-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
 
 - name: alpine_3_12
@@ -126,8 +162,17 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
-    - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={binname}
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.12
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.12-stable'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.12-stable'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.12-stable'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-3-12-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
 
 - name: alpine_3_13
@@ -151,8 +196,17 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
-    - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={binname}
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.13
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.13-stable'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.13-stable'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.13-stable'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-3-13-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
 
 - name: alpine_edge
@@ -176,6 +230,15 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
-    - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={binname}
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
+      url: 'https://pkgs.alpinelinux.org/packages?name={binname}'
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-edge-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
