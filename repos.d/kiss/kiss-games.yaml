@@ -17,11 +17,15 @@
       parser:
         class: KissGitParser
         maintainer_from_git: true
-        blob_prefix: 'https://github.com/sdsddsd1/kiss-games/blob/master/'
   repolinks:
     - desc: Repository on GitHub
       url: https://github.com/sdsddsd1/kiss-games
   packagelinks:
-    - desc: Package directory on GitHub
+    - type: PACKAGE_REPOSITORY_DIR
+      desc: Package directory on GitHub
       url: 'https://github.com/sdsddsd1/kiss-games/tree/master/{path}'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/sdsddsd1/kiss-games/tree/master/{path}/patches/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/sdsddsd1/kiss-games/master/{path}/patches/{?patch}'
   tags: [ all, production, kiss ]
