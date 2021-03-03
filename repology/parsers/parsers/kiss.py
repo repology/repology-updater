@@ -73,12 +73,6 @@ class KissGitParser(Parser):
 
                 patchesdir_abs = os.path.join(rootdir, 'patches')
                 if os.path.exists(patchesdir_abs):
-                    patches = os.listdir(patchesdir_abs)
-
-                    # check if patches are referenced from the build script
-                    with open(os.path.join(rootdir, 'build')) as fd:
-                        build_script = fd.read()
-
-                    pkg.set_extra_field('patch', [patch for patch in patches if patch in build_script])
+                    pkg.set_extra_field('patch', os.listdir(patchesdir_abs))
 
                 yield pkg

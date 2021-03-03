@@ -13,7 +13,7 @@
         class: GitFetcher
         url: 'https://github.com/CarbsLinux/repository.git'
         depth: null
-        sparse_checkout: [ '**/version', '**/sources', '**/patches', '**/build' ]
+        sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
       parser:
         class: KissGitParser
         maintainer_from_git: true
