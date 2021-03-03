@@ -17,7 +17,7 @@
     - desc: release-monitoring.org
       url: https://release-monitoring.org/
   packagelinks:
-    - desc: release-monitoring.org entry
+    - type: PACKAGE_HOMEPAGE
       url: 'https://release-monitoring.org/project/{name}/'
   shadow: true
   tags: []

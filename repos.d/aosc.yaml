@@ -21,8 +21,13 @@
     - desc: AOSC packages
       url: https://packages.aosc.io/
   packagelinks:
-    - desc: Package details
+    - type: PACKAGE_HOMEPAGE
+      desc: Package details
       url: 'https://packages.aosc.io/packages/{binname}'
-    - desc: Package sources on GitHub
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/AOSC-Dev/{tree}/tree/{branch}/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/AOSC-Dev/{tree}/blob/{branch}/{srcname}/autobuild/build'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/AOSC-Dev/{tree}/{branch}/{srcname}/autobuild/build'
   tags: [ all, production ]
