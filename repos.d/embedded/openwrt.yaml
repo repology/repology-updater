@@ -23,13 +23,6 @@
       parser:
         class: OpenWrtPackagesParser
       subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
-          url: 'https://github.com/openwrt/openwrt/tree/openwrt-17.01/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/openwrt/blob/openwrt-17.01/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/openwrt/openwrt-17.01/{path}/Makefile'
     - name: luci
       fetcher:
         class: FileFetcher
@@ -37,13 +30,6 @@
       parser:
         class: OpenWrtPackagesParser
       subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
-          url: 'https://github.com/openwrt/luci/tree/openwrt-17.01/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/luci/blob/openwrt-17.01/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/luci/openwrt-17.01/{path}/Makefile'
     - name: packages
       fetcher:
         class: FileFetcher
@@ -51,13 +37,6 @@
       parser:
         class: OpenWrtPackagesParser
       subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
-          url: 'https://github.com/openwrt/packages/tree/openwrt-17.01/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/packages/blob/openwrt-17.01/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/packages/openwrt-17.01/{path}/Makefile'
     - name: routing
       fetcher:
         class: FileFetcher
@@ -65,13 +44,6 @@
       parser:
         class: OpenWrtPackagesParser
       subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
-          url: 'https://github.com/openwrt-routing/packages/tree/openwrt-17.01/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt-routing/packages/blob/openwrt-17.01/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt-routing/packages/openwrt-17.01/{path}/Makefile'
     - name: telephony
       fetcher:
         class: FileFetcher
@@ -79,13 +51,6 @@
       parser:
         class: OpenWrtPackagesParser
       subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
-          url: 'https://github.com/openwrt/telephony/tree/openwrt-17.01/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/telephony/blob/openwrt-17.01/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/telephony/openwrt-17.01/{path}/Makefile'
   repolinks:
     - desc: OpenWrt home
       url: https://openwrt.org/
