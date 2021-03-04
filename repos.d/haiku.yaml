@@ -12,13 +12,21 @@
       fetcher:
         class: GitFetcher
         url: https://github.com/haikuports/haikuports.git
-        sparse_checkout: [ '**/*.recipe' ]
+        sparse_checkout: [ '**/*.recipe', '**/patches' ]
       parser:
         class: HaikuPortsFilenamesParser
   repolinks:
     - desc: HaikuPorts repository
       url: https://github.com/haikuports/haikuports
   packagelinks:
-    - desc: Port directory in git repo
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/haikuports/haikuports/tree/master/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/haikuports/haikuports/blob/master/{srcname}/{srcname|basename}-{rawversion}.recipe'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/haikuports/haikuports/master/{srcname}/{srcname|basename}-{rawversion}.recipe'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/haikuports/haikuports/blob/master/{srcname}/patches/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/haikuports/haikuports/master/{srcname}/patches/{?patch}'
   tags: [ all, production, haiku ]

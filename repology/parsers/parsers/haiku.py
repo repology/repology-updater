@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019,2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -37,6 +37,11 @@ class HaikuPortsFilenamesParser(Parser):
                 if not os.path.isdir(package_path):
                     continue
 
+                patches = None
+                patches_path = os.path.join(package_path, 'patches')
+                if os.path.exists(patches_path):
+                    patches = sorted(os.listdir(patches_path))
+
                 for recipe in os.listdir(package_path):
                     if not recipe.endswith('.recipe'):
                         continue
@@ -59,11 +64,17 @@ class HaikuPortsFilenamesParser(Parser):
 
                     pkg.set_version(version)
 
-                    # XXX: we rely on the fact that no substitutions happen in these
-                    # variables. That's true as of 2018-05-14.
-                    with open(os.path.join(category_path, package, recipe), 'r', encoding='utf-8') as recipefile:
-                        match = re.search('^HOMEPAGE="([^"]+)"', recipefile.read(), re.MULTILINE)
-                        if match:
+                    with open(os.path.join(category_path, package, recipe), 'r', encoding='utf-8') as fd:
+                        recipefile = fd.read()
+
+                        # XXX: we rely on the fact that no substitutions happen in these
+                        # variables. That's true as of 2018-05-14.
+                        if (match := re.search('^HOMEPAGE="([^"]+)"', recipefile, re.MULTILINE)):
                             pkg.add_homepages(match.group(1).split())
+
+                        # XXX: this is not really precise, as we list all patches if there's
+                        # suspiction that a recipe uses any of them
+                        if patches and re.search('^PATCHES=', recipefile, re.MULTILINE):
+                            pkg.set_extra_field('patch', patches)
 
                     yield pkg
