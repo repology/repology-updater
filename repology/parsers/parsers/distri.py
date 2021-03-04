@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -43,5 +43,8 @@ class DistriGitParser(Parser):
                 pkg.set_version(build.version, lambda ver: ver.rsplit('-', 1)[0])
                 pkg.add_downloads(build.source)
                 pkg.set_extra_field('path', pkgpath)
+
+                if patches := list(build.cherry_pick):
+                    pkg.set_extra_field('patch', patches)
 
                 yield pkg
