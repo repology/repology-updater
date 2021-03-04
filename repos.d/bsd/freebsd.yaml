@@ -75,5 +75,5 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/DragonFlyBSD/DPorts/master/{srcname}/Makefile'
     - type: PACKAGE_BUILD_LOG
-      url: 'http://sting.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
+      url: 'https://sting.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
   tags: [ all, production ]
