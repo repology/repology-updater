@@ -26,15 +26,15 @@
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
-    - desc: Package details on packages.debian.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/oldstable/source/{srcname}'
-    - desc: Package on Debian Sources
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
-    - desc: Related bugs in Debian bug tracker
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
-    - desc: Package auto-building status
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=oldstable'
-    - desc: Popularity contest statistics
+    - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
@@ -63,15 +63,15 @@
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
-    - desc: Package details on packages.debian.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/stable/source/{srcname}'
-    - desc: Package on Debian Sources
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
-    - desc: Related bugs in Debian bug tracker
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
-    - desc: Package auto-building status
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable'
-    - desc: Popularity contest statistics
+    - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
@@ -100,15 +100,15 @@
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
-    - desc: Package details on packages.debian.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/stable-backports/source/{srcname}'
-    - desc: Package on Debian Sources
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
-    - desc: Related bugs in Debian bug tracker
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
-    - desc: Package auto-building status
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable-backports'
-    - desc: Popularity contest statistics
+    - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
@@ -137,15 +137,15 @@
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
-    - desc: Package details on packages.debian.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/testing/source/{srcname}'
-    - desc: Package on Debian Sources
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
-    - desc: Related bugs in Debian bug tracker
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
-    - desc: Package auto-building status
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=testing'
-    - desc: Popularity contest statistics
+    - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
@@ -174,15 +174,15 @@
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
-    - desc: Package details on packages.debian.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/unstable/source/{srcname}'
-    - desc: Package on Debian Sources
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
-    - desc: Related bugs in Debian bug tracker
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
-    - desc: Package auto-building status
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=unstable'
-    - desc: Popularity contest statistics
+    - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian, have_testdata ]
 
@@ -212,14 +212,14 @@
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
-    - desc: Package details on packages.debian.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/experimental/source/{srcname}'
-    - desc: Package on Debian Sources
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
-    - desc: Related bugs in Debian bug tracker
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
-    - desc: Package auto-building status
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=exprimental'
-    - desc: Popularity contest statistics
+    - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]

@@ -21,6 +21,6 @@
     - desc: Maemo home
       url: http://maemo.org/
   packagelinks:
-    - desc: Maemo package entry
+    - type: PACKAGE_HOMEPAGE
       url: "http://maemo.org/downloads/product/Maemo5/{srcname}/"
   tags: [ all, production, maemo ]

@@ -24,7 +24,7 @@
     - desc: BunsenLabs Repository Index
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
-    - desc: 'Package details'
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]
 
@@ -51,7 +51,7 @@
     - desc: BunsenLabs Repository Index
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
-    - desc: 'Package details'
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]
 
@@ -78,7 +78,7 @@
     - desc: BunsenLabs Repository Index
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
-    - desc: 'Package details'
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]
 
@@ -105,6 +105,6 @@
     - desc: BunsenLabs Repository Index
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
-    - desc: 'Package details'
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]

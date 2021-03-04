@@ -26,11 +26,11 @@
     - desc: Ubuntu packages in precise
       url: https://packages.ubuntu.com/precise/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -59,11 +59,11 @@
     - desc: Ubuntu packages in precise
       url: https://packages.ubuntu.com/precise/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -92,13 +92,13 @@
     - desc: Ubuntu packages in trusty
       url: https://packages.ubuntu.com/trusty/
   packagelinks:
-    - desc: Package details on packages.ubuntu.com
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.ubuntu.com/source/trusty/{srcname}'
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -127,11 +127,11 @@
     - desc: Ubuntu packages in trusty
       url: https://packages.ubuntu.com/trusty/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -160,13 +160,13 @@
     - desc: Ubuntu packages in xenial
       url: https://packages.ubuntu.com/xenial/
   packagelinks:
-    - desc: Package details on packages.ubuntu.com
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.ubuntu.com/source/xenial/{srcname}'
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -195,11 +195,11 @@
     - desc: Ubuntu packages in xenial
       url: https://packages.ubuntu.com/xenial/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -228,13 +228,13 @@
     - desc: Ubuntu packages in bionic
       url: https://packages.ubuntu.com/bionic/
   packagelinks:
-    - desc: Package details on packages.ubuntu.com
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.ubuntu.com/source/bionic/{srcname}'
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -263,11 +263,11 @@
     - desc: Ubuntu packages in bionic
       url: https://packages.ubuntu.com/bionic/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -295,13 +295,13 @@
     - desc: Ubuntu packages in focal
       url: https://packages.ubuntu.com/focal/
   packagelinks:
-    - desc: Package details on packages.ubuntu.com
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.ubuntu.com/source/focal/{srcname}'
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -329,11 +329,11 @@
     - desc: Ubuntu packages in focal
       url: https://packages.ubuntu.com/focal/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, ubuntu ]  # empty
 
@@ -361,11 +361,11 @@
     - desc: Ubuntu packages in focal
       url: https://packages.ubuntu.com/focal/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -393,13 +393,13 @@
     - desc: Ubuntu packages in groovy
       url: https://packages.ubuntu.com/groovy/
   packagelinks:
-    - desc: Package details on packages.ubuntu.com
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.ubuntu.com/source/groovy/{srcname}'
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
@@ -427,11 +427,11 @@
     - desc: Ubuntu packages in groovy
       url: https://packages.ubuntu.com/groovy/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, ubuntu ]  # empty
 
@@ -459,10 +459,10 @@
     - desc: Ubuntu packages in groovy
       url: https://packages.ubuntu.com/groovy/
   packagelinks:
-    - desc: Package on Launchpad.net
+    - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Related bugs on Launchpad.net
+    - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - desc: Package builds on launchpad
+    - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]

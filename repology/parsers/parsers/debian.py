@@ -16,9 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Dict, Iterable
+from typing import Dict, Iterable, Iterator, Optional
 
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -99,6 +99,17 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
             raise RuntimeError('unable to parse line: {}'.format(line))
 
 
+def _extract_vcs_link(pkgdata: Dict[str, str]) -> Optional[str]:
+    if 'Vcs-Browser' in pkgdata:
+        return pkgdata['Vcs-Browser']
+
+    for key, value in pkgdata.items():
+        if key.startswith('Vcs-'):
+            return value
+
+    return None
+
+
 class DebianSourcesParser(Parser):
     def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
         if 'Binary' not in pkgdata or 'Source' in pkgdata:
@@ -116,6 +127,8 @@ class DebianSourcesParser(Parser):
                 pkg.add_homepages(pkgdata.get('Homepage'))
 
                 self._extra_handling(pkg, pkgdata)
+
+                pkg.add_links(LinkType.PACKAGE_REPOSITORY, _extract_vcs_link(pkgdata))
 
                 yield pkg
 

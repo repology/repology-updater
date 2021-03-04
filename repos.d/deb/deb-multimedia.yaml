@@ -20,7 +20,4 @@
   repolinks:
     - desc: Deb Multimedia home
       url: http://www.deb-multimedia.org/
-  packagelinks:
-    - desc: Package details on deb-multimedia.org (amd64)
-      url: 'http://www.deb-multimedia.org/dists/unstable/{subrepo}/binary-amd64/package/{srcname|stripdmo}'
   tags: [ all, production, deb_multimedia ]
