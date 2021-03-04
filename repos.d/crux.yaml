@@ -24,9 +24,9 @@
     - desc: CRUX port browser
       url: https://crux.nu/portdb/
   packagelinks:
-    - desc: Port Directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}/'
-    - desc: Pkgfile
+    - type: PACKAGE_RECIPE_RAW
       url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}/Pkgfile'
   tags: [ all, production, crux ]
 
@@ -51,9 +51,9 @@
     - desc: CRUX port browser
       url: https://crux.nu/portdb/
   packagelinks:
-    - desc: Port Directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{name}/'
-    - desc: Pkgfile
+    - type: PACKAGE_RECIPE_RAW
       url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{name}/Pkgfile'
   tags: [ all, production, crux ]
 
@@ -78,8 +78,8 @@
     - desc: CRUX port browser
       url: https://crux.nu/portdb/
   packagelinks:
-    - desc: Port Directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://crux.nu/ports/crux-3.6/{subrepo}/{name}/'
-    - desc: Pkgfile
+    - type: PACKAGE_RECIPE_RAW
       url: 'https://crux.nu/ports/crux-3.6/{subrepo}/{name}/Pkgfile'
   tags: [ all, production, crux ]

@@ -27,7 +27,7 @@
     - type: PACKAGE_RECIPE
       url: 'https://github.com/Sabayon/sabayon-distro/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/Sabayon/sabayon-distro/tree/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+      url: 'https://raw.githubusercontent.com/Sabayon/sabayon-distro/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production ]
 
 - name: sabayon_for_gentoo
