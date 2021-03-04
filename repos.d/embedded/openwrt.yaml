@@ -91,7 +91,6 @@
       url: https://openwrt.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: OpenWrt package page
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, production, openwrt ]
 
@@ -179,7 +178,6 @@
       url: https://openwrt.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: OpenWrt package page
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, production, openwrt ]
 
@@ -267,7 +265,6 @@
       url: https://openwrt.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: OpenWrt package page
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, production, openwrt ]
 
@@ -355,7 +352,6 @@
       url: https://openwrt.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: OpenWrt package page
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, openwrt ]  # disable until official release
 
@@ -443,6 +439,5 @@
       url: https://openwrt.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: OpenWrt package page
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, openwrt ]  # disabled: like LEDE, it's too blinky

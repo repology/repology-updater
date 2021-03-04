@@ -28,7 +28,6 @@
       url: https://github.com/void-linux/void-packages
   packagelinks:
     - type: PACKAGE_REPOSITORY_DIR
-      desc: Port directory in git repo
       url: 'https://github.com/void-linux/void-packages/tree/master/srcpkgs/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/void-linux/void-packages/blob/master/srcpkgs/{srcname}/template'

@@ -26,7 +26,6 @@
       url: https://github.com/kiss-community/repo-main
   packagelinks:
     - type: PACKAGE_REPOSITORY_DIR
-      desc: Package directory on GitHub
       url: 'https://github.com/kiss-community/repo-main/tree/master/{path}'
     - type: PACKAGE_PATCH
       url: 'https://github.com/kiss-community/repo-main/tree/master/{path}/patches/{?patch}'
@@ -60,7 +59,6 @@
       url: https://github.com/kiss-community/repo-community
   packagelinks:
     - type: PACKAGE_REPOSITORY_DIR
-      desc: Package directory on GitHub
       url: 'https://github.com/kiss-community/repo-community/tree/main/{path}'
     - type: PACKAGE_PATCH
       url: 'https://github.com/kiss-community/repo-community/tree/main/{path}/patches/{?patch}'

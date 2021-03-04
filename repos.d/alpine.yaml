@@ -26,7 +26,6 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.8
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.8-stable'
@@ -61,7 +60,6 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.9
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.9-stable'
@@ -95,7 +93,6 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.10
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.10-stable'
@@ -129,7 +126,6 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.11
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.11-stable'
@@ -163,7 +159,6 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.12
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.12-stable'
@@ -197,7 +192,6 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.13
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.13-stable'
@@ -231,7 +225,6 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: 'https://pkgs.alpinelinux.org/packages?name={binname}'
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}'

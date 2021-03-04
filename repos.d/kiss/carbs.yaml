@@ -22,7 +22,6 @@
       url: https://carbslinux.org/
   packagelinks:
     - type: PACKAGE_REPOSITORY_DIR
-      desc: Package directory on GitHub
       url: 'https://github.com/CarbsLinux/repository/tree/master/{path}'
     - type: PACKAGE_PATCH
       url: 'https://github.com/CarbsLinux/repository/tree/master/{path}/patches/{?patch}'

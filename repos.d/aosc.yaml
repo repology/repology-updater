@@ -22,7 +22,6 @@
       url: https://packages.aosc.io/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      desc: Package details
       url: 'https://packages.aosc.io/packages/{binname}'
     - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/AOSC-Dev/{tree}/tree/{branch}/{srcname}'
