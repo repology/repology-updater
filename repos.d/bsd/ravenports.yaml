@@ -22,10 +22,12 @@
     - desc: Ravenports GitHub repository
       url: https://github.com/jrmarino/Ravenports
   packagelinks:
-    - desc: Ravenports Catalog entry
+    - type: PACKAGE_HOMEPAGE
       url: 'http://ravenports.ironwolf.systems/catalog/bucket_{bucket}/{name}/{variant}/'
-    - desc: Port directory in Ravensource
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/jrmarino/ravensource/tree/master/bucket_{bucket}/{name}'
-    - desc: Port buildsheet
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/jrmarino/Ravenports/blob/master/bucket_{bucket}/{name}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/jrmarino/Ravenports/master/bucket_{bucket}/{name}'
   tags: [ all, production ]

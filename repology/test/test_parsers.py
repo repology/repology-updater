@@ -136,6 +136,10 @@ class TestParsers(unittest.TestCase):
                 'maintainers': ['naddy@freebsd.org'],
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://www.vorbis.com/'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://www.freshports.org/audio/vorbis-tools'),
+                    (LinkType.PACKAGE_REPOSITORY_DIR, 'https://svnweb.freebsd.org/ports/head/audio/vorbis-tools/'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://svnweb.freebsd.org/ports/head/audio/vorbis-tools/Makefile?view=co'),
+                    (LinkType.PACKAGE_ISSUE_TRACKER, 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch=audio/vorbis-tools'),
                 ],
             }
         )

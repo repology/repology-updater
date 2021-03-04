@@ -28,11 +28,9 @@
     - desc: OpenBSD ports CVS repository
       url: http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/
   packagelinks:
-    - desc: OpenPorts.se page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://openports.se/{srcname}'
-    - desc: Port CVS directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{srcname}'
-    - desc: Port directory on GitHub mirror
-      url: 'https://github.com/openbsd/ports/tree/master/{srcname}'
-    # XXX: no Makefile link as sometimes Makefiles just refer to subports
+    # XXX: no Makefile link as in many cases Makefiles just refer to subports
   tags: [ all, production ]

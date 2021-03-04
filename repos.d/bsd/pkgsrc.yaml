@@ -26,15 +26,11 @@
     - desc: pkgsrc CVS repository
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
-    - desc: pkgsrc.se page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://pkgsrc.se/{srcname}'
-    - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}'
-    - desc: Port CVS directory (quarterly branch)
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-2018Q2'
-    - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain'
-    - desc: Port Makefile (quarterly branch)
+    - type: PACKAGE_RECIPE_RAW
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q2'
   tags: [ all, pkgsrc ]  # disabled due to constantly broken INDEX
 
@@ -62,10 +58,10 @@
     - desc: pkgsrc CVS repository
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
-    - desc: pkgsrc.se page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://pkgsrc.se/{srcname}'
-    - desc: Port CVS directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}'
-    - desc: Port Makefile
+    - type: PACKAGE_RECIPE_RAW
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain'
   tags: [ all, production, pkgsrc ]

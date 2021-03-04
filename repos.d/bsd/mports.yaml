@@ -22,8 +22,10 @@
     - desc: Magus, the MidnightBSD package cluster
       url: 'http://www.midnightbsd.org/magus/'
   packagelinks:
-    - desc: Port directory on GitHub
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/MidnightBSD/mports/tree/master/{srcname}/'
-    - desc: Port Makefile
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/MidnightBSD/mports/blob/master/{srcname}/Makefile'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/MidnightBSD/mports/master/{srcname}/Makefile'
   tags: [ all, production ]

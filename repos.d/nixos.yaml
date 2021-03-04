@@ -24,10 +24,8 @@
     - desc: GitHub repository
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
-    - desc: Package source (release branch)  # XXX: branch name needs manual maintenance
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/NixOS/nixpkgs/blob/release-20.09/{posfile}#L{posline}'
-    - desc: Package source (master branch, imprecise link)
-      url: 'https://github.com/NixOS/nixpkgs/blob/master/{posfile}#L{posline}'
   tags: [ all, production, nix ]
 
 - name: nix_unstable
@@ -53,6 +51,6 @@
     - desc: GitHub repository
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
-    - desc: Package source
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/NixOS/nixpkgs/blob/master/{posfile}#L{posline}'
   tags: [ all, production, nix ]
