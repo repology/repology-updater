@@ -218,7 +218,7 @@
     - desc: Wikidata home
       url: "https://wikidata.org/"
   packagelinks:
-    - desc: Wikidata item
+    - type: PACKAGE_HOMEPAGE
       url: "https://www.wikidata.org/wiki/{name}"
   tags: [ all, production ]
 
