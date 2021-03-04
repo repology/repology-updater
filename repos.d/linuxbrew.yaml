@@ -26,8 +26,10 @@
     - desc: Linuxbrew formulae repository on GitHub
       url: https://github.com/Homebrew/linuxbrew-core
   packagelinks:
-    - desc: Formula page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://formulae.brew.sh/formula-linux/{srcname}'
-    - desc: Formula code on GitHub
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/Homebrew/linuxbrew-core/blob/master/Formula/{srcname}.rb'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/Homebrew/linuxbrew-core/master/Formula/{srcname}.rb'
   tags: [ all, production, brew ]

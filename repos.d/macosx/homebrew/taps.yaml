@@ -22,6 +22,8 @@
     - desc: Homebrew home
       url: https://brew.sh/
   packagelinks:
-    - desc: Brew formula code on GitHub
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/brewsci/homebrew-bio/blob/master/Formula/{srcname}.rb'
-  tags: [ all, production ]
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/brewsci/homebrew-bio/master/Formula/{srcname}.rb'
+  tags: [ all, production, brew ]
