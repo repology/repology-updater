@@ -11,7 +11,7 @@
       fetcher:
         class: GitFetcher
         url: https://github.com/gobolinux/Recipes.git
-        sparse_checkout: [ '**/Recipe', '**/Description' ]
+        sparse_checkout: [ '**/Recipe', '**/Description', '**/*.patch' ]
       parser:
         class: GoboLinuxGitParser
   repolinks:
@@ -20,6 +20,14 @@
     - desc: GoboLinux recipes repository
       url: https://github.com/gobolinux/Recipes
   packagelinks:
-    - desc: Git
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/gobolinux/Recipes/tree/master/{name}/{origversion}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/gobolinux/Recipes/blob/master/{name}/{origversion}/Recipe'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/gobolinux/Recipes/master/{name}/{origversion}/Recipe'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/gobolinux/Recipes/blob/master/{name}/{origversion}/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/gobolinux/Recipes/master/{name}/{origversion}/{?patch}'
   tags: [ all, production, have_testdata ]

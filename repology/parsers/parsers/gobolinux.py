@@ -96,4 +96,13 @@ class GoboLinuxGitParser(Parser):
                     pkg.add_licenses(data.get('License'))
                     pkg.add_homepages(data.get('Homepage', '').strip('"'))
 
+            patches = [
+                filename
+                for filename in sorted(os.listdir(os.path.join(package_path, maxversion)))
+                if filename.endswith('.patch') or filename.endswith('.patch.in')
+            ]
+
+            if patches:
+                pkg.set_extra_field('patch', patches)
+
             yield pkg
