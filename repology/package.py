@@ -158,6 +158,8 @@ class LinkType:
     UPSTREAM_CI: ClassVar[int] = 22
     UPSTREAM_WIKI: ClassVar[int] = 23
     PACKAGE_REPOSITORY_DIR: ClassVar[int] = 24
+    PACKAGE_STATISTICS: ClassVar[int] = 25
+    PACKAGE_BUILD_STATUS: ClassVar[int] = 26
     OTHER: ClassVar[int] = 99
 
     @staticmethod
@@ -188,6 +190,8 @@ class LinkType:
             LinkType.UPSTREAM_CI: 'UPSTREAM_CI',
             LinkType.UPSTREAM_WIKI: 'UPSTREAM_WIKI',
             LinkType.PACKAGE_REPOSITORY_DIR: 'PACKAGE_REPOSITORY_DIR',
+            LinkType.PACKAGE_STATISTICS: 'PACKAGE_STATISTICS',
+            LinkType.PACKAGE_BUILD_STATUS: 'PACKAGE_BUILD_STATUS',
             LinkType.OTHER: 'OTHER',
         }[val]
 
@@ -219,6 +223,8 @@ class LinkType:
             'UPSTREAM_CI': LinkType.UPSTREAM_CI,
             'UPSTREAM_WIKI': LinkType.UPSTREAM_WIKI,
             'PACKAGE_REPOSITORY_DIR': LinkType.PACKAGE_REPOSITORY_DIR,
+            'PACKAGE_STATISTICS': LinkType.PACKAGE_STATISTICS,
+            'PACKAGE_BUILD_STATUS': LinkType.PACKAGE_BUILD_STATUS,
             'OTHER': LinkType.OTHER,
         }[val]
 
