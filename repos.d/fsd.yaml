@@ -19,6 +19,6 @@
     - desc: Free Software Directory
       url: https://directory.fsf.org/wiki/Main_Page
   packagelinks:
-    - desc: Free Software Directory page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://directory.fsf.org/wiki/{page}'
   tags: [ all ]  # not enabled due to poor quality and incompatible data (see #530)

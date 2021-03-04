@@ -18,6 +18,6 @@
     - desc: Libregamewiki
       url: https://libregamewiki.org/
   packagelinks:
-    - desc: Libregamewiki entry
+    - type: PACKAGE_HOMEPAGE
       url: 'https://libregamewiki.org/{name}'
   tags: [ all, production ]

@@ -19,6 +19,6 @@
     - desc: GitHub repository
       url: https://github.com/reactos/rapps-db
   packagelinks:
-    - desc: Source file
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/reactos/rapps-db/blob/master/{name}.txt'
   tags: [ all, production ]

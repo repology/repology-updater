@@ -22,10 +22,12 @@
     - desc: Pisi Linux GitHub organization
       url: https://github.com/pisilinux
   packagelinks:
-    - desc: Git directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/pisilinux/{subrepo}/tree/master/{srcname}'
-    - desc: pspec.xml
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/pisilinux/{subrepo}/blob/master/{srcname}/pspec.xml'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/pisilinux/{subrepo}/master/{srcname}/pspec.xml'
   tags: [ all, production, pisi ]
 
 - name: pisi_contrib
@@ -47,8 +49,10 @@
     - desc: Pisi Linux GitHub organization
       url: https://github.com/pisilinux
   packagelinks:
-    - desc: Git directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/pisilinux/contrib/tree/master/{srcname}'
-    - desc: pspec.xml
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/pisilinux/contrib/blob/master/{srcname}/pspec.xml'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/pisilinux/contrib/master/{srcname}/pspec.xml'
   tags: [ all, production, pisi ]
