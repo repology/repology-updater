@@ -19,6 +19,6 @@
     - desc: F-Droid
       url: https://f-droid.org/
   packagelinks:
-    - desc: F-Droid.org page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://f-droid.org/packages/{name}/'
   tags: [ all, production ]

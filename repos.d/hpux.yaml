@@ -19,6 +19,6 @@
     - desc: HP-UX Porting and Archive Centre
       url: http://hpux.connect.org.uk/
   packagelinks:
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://hpux.connect.org.uk/hppd{path}/{name}-{origversion}/'
   tags: [ all, production, hpux ]
