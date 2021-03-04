@@ -117,7 +117,7 @@ class T2DescParser(Parser):
 
                 patches = [
                     filename
-                    for filename in os.listdir(os.path.dirname(desc_path))
+                    for filename in sorted(os.listdir(os.path.dirname(desc_path)))
                     if filename.endswith('.patch')
                 ]
 

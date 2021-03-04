@@ -73,6 +73,6 @@ class KissGitParser(Parser):
 
                 patchesdir_abs = os.path.join(rootdir, 'patches')
                 if os.path.exists(patchesdir_abs):
-                    pkg.set_extra_field('patch', os.listdir(patchesdir_abs))
+                    pkg.set_extra_field('patch', sorted(os.listdir(patchesdir_abs)))
 
                 yield pkg
