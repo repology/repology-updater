@@ -22,7 +22,7 @@
     - desc: Sabayon Linux home
       url: https://www.sabayon.org/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/Sabayon/sabayon-distro/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
@@ -51,7 +51,7 @@
     - desc: Sabayon Linux home
       url: https://www.sabayon.org/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/Sabayon/for-gentoo/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/Sabayon/for-gentoo/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'

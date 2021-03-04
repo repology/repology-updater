@@ -20,7 +20,7 @@
     - desc: GoboLinux recipes repository
       url: https://github.com/gobolinux/Recipes
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/gobolinux/Recipes/tree/master/{name}/{origversion}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/gobolinux/Recipes/blob/master/{name}/{origversion}/Recipe'

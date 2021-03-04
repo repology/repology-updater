@@ -22,7 +22,7 @@
     - desc: Magus, the MidnightBSD package cluster
       url: 'http://www.midnightbsd.org/magus/'
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/MidnightBSD/mports/tree/master/{srcname}/'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/MidnightBSD/mports/blob/master/{srcname}/Makefile'

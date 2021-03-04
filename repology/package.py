@@ -140,7 +140,7 @@ class LinkType:
     PROJECT_HOMEPAGE: ClassVar[int] = 4
     PACKAGE_HOMEPAGE: ClassVar[int] = 5
     PACKAGE_DOWNLOAD: ClassVar[int] = 6
-    PACKAGE_REPOSITORY: ClassVar[int] = 7
+    PACKAGE_SOURCES: ClassVar[int] = 7
     PACKAGE_ISSUE_TRACKER: ClassVar[int] = 8
     PACKAGE_RECIPE: ClassVar[int] = 9
     PACKAGE_RECIPE_RAW: ClassVar[int] = 10
@@ -157,7 +157,6 @@ class LinkType:
     UPSTREAM_COVERAGE: ClassVar[int] = 21
     UPSTREAM_CI: ClassVar[int] = 22
     UPSTREAM_WIKI: ClassVar[int] = 23
-    PACKAGE_REPOSITORY_DIR: ClassVar[int] = 24
     PACKAGE_STATISTICS: ClassVar[int] = 25
     PACKAGE_BUILD_STATUS: ClassVar[int] = 26
     OTHER: ClassVar[int] = 99
@@ -172,7 +171,7 @@ class LinkType:
             LinkType.PROJECT_HOMEPAGE: 'PROJECT_HOMEPAGE',
             LinkType.PACKAGE_HOMEPAGE: 'PACKAGE_HOMEPAGE',
             LinkType.PACKAGE_DOWNLOAD: 'PACKAGE_DOWNLOAD',
-            LinkType.PACKAGE_REPOSITORY: 'PACKAGE_REPOSITORY',
+            LinkType.PACKAGE_SOURCES: 'PACKAGE_SOURCES',
             LinkType.PACKAGE_ISSUE_TRACKER: 'PACKAGE_ISSUE_TRACKER',
             LinkType.PACKAGE_RECIPE: 'PACKAGE_RECIPE',
             LinkType.PACKAGE_RECIPE_RAW: 'PACKAGE_RECIPE_RAW',
@@ -189,7 +188,6 @@ class LinkType:
             LinkType.UPSTREAM_COVERAGE: 'UPSTREAM_COVERAGE',
             LinkType.UPSTREAM_CI: 'UPSTREAM_CI',
             LinkType.UPSTREAM_WIKI: 'UPSTREAM_WIKI',
-            LinkType.PACKAGE_REPOSITORY_DIR: 'PACKAGE_REPOSITORY_DIR',
             LinkType.PACKAGE_STATISTICS: 'PACKAGE_STATISTICS',
             LinkType.PACKAGE_BUILD_STATUS: 'PACKAGE_BUILD_STATUS',
             LinkType.OTHER: 'OTHER',
@@ -205,7 +203,7 @@ class LinkType:
             'PROJECT_HOMEPAGE': LinkType.PROJECT_HOMEPAGE,
             'PACKAGE_HOMEPAGE': LinkType.PACKAGE_HOMEPAGE,
             'PACKAGE_DOWNLOAD': LinkType.PACKAGE_DOWNLOAD,
-            'PACKAGE_REPOSITORY': LinkType.PACKAGE_REPOSITORY,
+            'PACKAGE_SOURCES': LinkType.PACKAGE_SOURCES,
             'PACKAGE_ISSUE_TRACKER': LinkType.PACKAGE_ISSUE_TRACKER,
             'PACKAGE_RECIPE': LinkType.PACKAGE_RECIPE,
             'PACKAGE_RECIPE_RAW': LinkType.PACKAGE_RECIPE_RAW,
@@ -222,7 +220,6 @@ class LinkType:
             'UPSTREAM_COVERAGE': LinkType.UPSTREAM_COVERAGE,
             'UPSTREAM_CI': LinkType.UPSTREAM_CI,
             'UPSTREAM_WIKI': LinkType.UPSTREAM_WIKI,
-            'PACKAGE_REPOSITORY_DIR': LinkType.PACKAGE_REPOSITORY_DIR,
             'PACKAGE_STATISTICS': LinkType.PACKAGE_STATISTICS,
             'PACKAGE_BUILD_STATUS': LinkType.PACKAGE_BUILD_STATUS,
             'OTHER': LinkType.OTHER,

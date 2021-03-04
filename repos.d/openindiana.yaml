@@ -26,7 +26,7 @@
       url: https://github.com/OpenIndiana/oi-userland
    # XXX: fmri is not the same as path in github repo, so most times these don't work
 #  packagelinks:
-#    - type: PACKAGE_REPOSITORY_DIR
+#    - type: PACKAGE_SOURCES
 #      url: 'https://github.com/OpenIndiana/oi-userland/tree/oi/hipster/components/{fmri}'
 #    - type: PACKAGE_RECIPE
 #      url: 'https://github.com/OpenIndiana/oi-userland/blob/oi/hipster/components/{fmri}/Makefile'

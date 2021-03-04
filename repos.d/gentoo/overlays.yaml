@@ -28,7 +28,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://gpo.zugaina.org/Overlays/guru/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://gitweb.gentoo.org/repo/proj/guru.git/tree/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://gitweb.gentoo.org/repo/proj/guru.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
@@ -62,7 +62,7 @@
     - desc: GitHub page
       url: https://github.com/pentoo/pentoo-overlay
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/pentoo/pentoo-overlay/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
@@ -98,7 +98,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://gpo.zugaina.org/Overlays/science/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://gitweb.gentoo.org/proj/sci.git/tree/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://gitweb.gentoo.org/proj/sci.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'

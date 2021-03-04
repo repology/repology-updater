@@ -19,7 +19,7 @@
     - desc: HaikuPorts repository
       url: https://github.com/haikuports/haikuports
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/haikuports/haikuports/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/haikuports/haikuports/blob/master/{srcname}/{srcname|basename}-{rawversion}.recipe'

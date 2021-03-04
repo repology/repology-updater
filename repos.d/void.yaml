@@ -27,7 +27,7 @@
     - desc: Void Linux package repository
       url: https://github.com/void-linux/void-packages
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/void-linux/void-packages/tree/master/srcpkgs/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/void-linux/void-packages/blob/master/srcpkgs/{srcname}/template'

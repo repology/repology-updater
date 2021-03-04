@@ -19,7 +19,7 @@
     - desc: Solus home
       url: https://getsol.us/home/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://dev.getsol.us/source/{srcname}/'
     - type: PACKAGE_RECIPE
       url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml'

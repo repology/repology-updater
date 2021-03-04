@@ -28,7 +28,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/oldstable/source/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
@@ -65,7 +65,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/stable/source/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
@@ -102,7 +102,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/stable-backports/source/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
@@ -139,7 +139,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/testing/source/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
@@ -176,7 +176,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/unstable/source/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
@@ -214,7 +214,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.debian.org/experimental/source/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'

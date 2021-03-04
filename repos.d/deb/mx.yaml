@@ -26,7 +26,7 @@
     - desc: Community Packages for MX-15
       url: http://mxrepo.com/MX15packages.html
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
@@ -55,7 +55,7 @@
     - desc: Community Packages for MX-15
       url: http://mxrepo.com/MX15packages.html
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
@@ -84,7 +84,7 @@
     - desc: Community Packages for MX-16
       url: http://mxrepo.com/MX16packages.html
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
@@ -111,7 +111,7 @@
     - desc: MX and MEPIS Community Repository
       url: http://mxrepo.com/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
@@ -138,7 +138,7 @@
     - desc: MX and MEPIS Community Repository
       url: http://mxrepo.com/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
@@ -165,7 +165,7 @@
     - desc: MX and MEPIS Community Repository
       url: http://mxrepo.com/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
@@ -192,6 +192,6 @@
     - desc: MX and MEPIS Community Repository
       url: http://mxrepo.com/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]

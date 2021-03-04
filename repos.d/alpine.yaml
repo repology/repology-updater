@@ -27,7 +27,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.8
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.8-stable'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.8-stable'
@@ -61,7 +61,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.9
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.9-stable'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.9-stable'
@@ -94,7 +94,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.10
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.10-stable'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.10-stable'
@@ -127,7 +127,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.11
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.11-stable'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.11-stable'
@@ -160,7 +160,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.12
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.12-stable'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.12-stable'
@@ -193,7 +193,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.13
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.13-stable'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.13-stable'
@@ -226,7 +226,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkgs.alpinelinux.org/packages?name={binname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD'

@@ -20,7 +20,7 @@
     - desc: Ataraxia Linux source repository
       url: https://github.com/ataraxialinux/ataraxia
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/ataraxialinux/ataraxia/tree/master/packages/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/ataraxialinux/ataraxia/blob/master/packages/{srcname}/KagamiBuild'

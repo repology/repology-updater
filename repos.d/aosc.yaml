@@ -23,7 +23,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.aosc.io/packages/{binname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/AOSC-Dev/{tree}/tree/{branch}/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/AOSC-Dev/{tree}/blob/{branch}/{srcname}/autobuild/build'

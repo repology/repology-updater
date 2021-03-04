@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Dict, Iterable, Iterator, Optional
+from typing import Dict, Iterable, Optional
 
 from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -128,7 +128,7 @@ class DebianSourcesParser(Parser):
 
                 self._extra_handling(pkg, pkgdata)
 
-                pkg.add_links(LinkType.PACKAGE_REPOSITORY, _extract_vcs_link(pkgdata))
+                pkg.add_links(LinkType.PACKAGE_SOURCES, _extract_vcs_link(pkgdata))
 
                 yield pkg
 

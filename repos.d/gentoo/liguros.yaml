@@ -30,7 +30,7 @@
     - desc: Official LiGurOS ebuild repository
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/{branch}'
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/stable/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://gitlab.com/liguros/liguros-repo/-/blob/stable/{srcname}/{srcname|basename}-{rawversion}.ebuild'
@@ -66,7 +66,7 @@
     - desc: Official LiGurOS ebuild repository
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/{branch}'
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/develop/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://gitlab.com/liguros/liguros-repo/-/blob/develop/{srcname}/{srcname|basename}-{rawversion}.ebuild'

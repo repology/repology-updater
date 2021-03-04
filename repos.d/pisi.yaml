@@ -22,7 +22,7 @@
     - desc: Pisi Linux GitHub organization
       url: https://github.com/pisilinux
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/pisilinux/{subrepo}/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/pisilinux/{subrepo}/blob/master/{srcname}/pspec.xml'
@@ -49,7 +49,7 @@
     - desc: Pisi Linux GitHub organization
       url: https://github.com/pisilinux
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/pisilinux/contrib/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/pisilinux/contrib/blob/master/{srcname}/pspec.xml'

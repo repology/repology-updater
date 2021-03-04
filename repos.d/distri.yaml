@@ -21,7 +21,7 @@
     - desc: distri repository on GitHub
       url: https://github.com/distr1/distri
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/distr1/distri/tree/master/{path}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/distr1/distri/blob/master/{path}/build.textproto'

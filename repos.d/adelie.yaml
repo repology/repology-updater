@@ -22,7 +22,7 @@
     - desc: Adélie Linux home
       url: https://adelielinux.org/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://code.foxkit.us/adelie/packages/-/tree/master/{subrepo}/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://code.foxkit.us/adelie/packages/-/blob/master/{subrepo}/{srcname}/APKBUILD'

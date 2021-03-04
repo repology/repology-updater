@@ -28,7 +28,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://pkgsrc.se/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-2018Q2'
     - type: PACKAGE_RECIPE_RAW
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q2'
@@ -60,7 +60,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://pkgsrc.se/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}'
     - type: PACKAGE_RECIPE_RAW
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain'

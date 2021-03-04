@@ -20,7 +20,7 @@
     - desc: Packages repository
       url: https://github.com/termux/termux-packages
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/termux/termux-packages/tree/master/packages/{name}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/termux/termux-packages/blob/master/packages/{name}/build.sh'

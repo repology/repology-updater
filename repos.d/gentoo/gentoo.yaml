@@ -32,7 +32,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.gentoo.org/packages/{srcname}'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'

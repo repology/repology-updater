@@ -24,7 +24,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://ravenports.ironwolf.systems/catalog/bucket_{bucket}/{name}/{variant}/'
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/jrmarino/ravensource/tree/master/bucket_{bucket}/{name}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/jrmarino/Ravenports/blob/master/bucket_{bucket}/{name}'

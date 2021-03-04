@@ -21,7 +21,7 @@
     - desc: Carbs Linux home
       url: https://carbslinux.org/
   packagelinks:
-    - type: PACKAGE_REPOSITORY_DIR
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/CarbsLinux/repository/tree/master/{path}'
     - type: PACKAGE_PATCH
       url: 'https://github.com/CarbsLinux/repository/tree/master/{path}/patches/{?patch}'

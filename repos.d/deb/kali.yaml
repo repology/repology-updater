@@ -24,6 +24,6 @@
     - desc: Kali Linux home
       url: https://www.kali.org/
   packagelinks:
-    - type: PACKAGE_REPOSITORY
+    - type: PACKAGE_SOURCES
       url: 'https://gitlab.com/kalilinux/packages/{srcname}'
   tags: [ all, production, kali ]

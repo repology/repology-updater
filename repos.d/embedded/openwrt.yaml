@@ -76,7 +76,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/openwrt/tree/openwrt-18.06/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/openwrt/blob/openwrt-18.06/{path}/Makefile'
@@ -90,7 +90,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/luci/tree/openwrt-18.06/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/luci/blob/openwrt-18.06/{path}/Makefile'
@@ -104,7 +104,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/packages/tree/openwrt-18.06/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/packages/blob/openwrt-18.06/{path}/Makefile'
@@ -118,7 +118,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt-routing/packages/tree/openwrt-18.06/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt-routing/packages/blob/openwrt-18.06/{path}/Makefile'
@@ -132,7 +132,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/telephony/tree/openwrt-18.06/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/telephony/blob/openwrt-18.06/{path}/Makefile'
@@ -163,7 +163,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/openwrt/tree/openwrt-19.07/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/openwrt/blob/openwrt-19.07/{path}/Makefile'
@@ -177,7 +177,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/luci/tree/openwrt-19.07/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/luci/blob/openwrt-19.07/{path}/Makefile'
@@ -191,7 +191,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/packages/tree/openwrt-19.07/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/packages/blob/openwrt-19.07/{path}/Makefile'
@@ -205,7 +205,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt-routing/packages/tree/openwrt-19.07/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt-routing/packages/blob/openwrt-19.07/{path}/Makefile'
@@ -219,7 +219,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/telephony/tree/openwrt-19.07/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/telephony/blob/openwrt-19.07/{path}/Makefile'
@@ -250,7 +250,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/openwrt/tree/openwrt-21.02/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/openwrt/blob/openwrt-21.02/{path}/Makefile'
@@ -264,7 +264,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/luci/tree/openwrt-21.02/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/luci/blob/openwrt-21.02/{path}/Makefile'
@@ -278,7 +278,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/packages/tree/openwrt-21.02/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/packages/blob/openwrt-21.02/{path}/Makefile'
@@ -292,7 +292,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt-routing/packages/tree/openwrt-21.02/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt-routing/packages/blob/openwrt-21.02/{path}/Makefile'
@@ -306,7 +306,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/telephony/tree/openwrt-21.02/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/telephony/blob/openwrt-21.02/{path}/Makefile'
@@ -337,7 +337,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/openwrt/tree/master/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/openwrt/blob/master/{path}/Makefile'
@@ -351,7 +351,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/luci/tree/master/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/luci/blob/master/{path}/Makefile'
@@ -365,7 +365,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/packages/tree/master/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/packages/blob/master/{path}/Makefile'
@@ -379,7 +379,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt-routing/packages/tree/master/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt-routing/packages/blob/master/{path}/Makefile'
@@ -393,7 +393,7 @@
         class: OpenWrtPackagesParser
       subrepo: '{source}'
       packagelinks:
-        - type: PACKAGE_REPOSITORY_DIR
+        - type: PACKAGE_SOURCES
           url: 'https://github.com/openwrt/telephony/tree/master/{path}'
         - type: PACKAGE_RECIPE
           url: 'https://github.com/openwrt/telephony/blob/master/{path}/Makefile'
