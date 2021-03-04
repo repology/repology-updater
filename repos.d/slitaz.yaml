@@ -21,10 +21,12 @@
     - desc: SliTaz packages
       url: http://pkg.slitaz.org/
   packagelinks:
-    - desc: Package information
-      url: 'http://pkg.slitaz.org/?info={binname}'
-    - desc: Package receipt
-      url: 'http://pkg.slitaz.org/?receipt={binname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://pkg.slitaz.org/?info={binname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://pkg.slitaz.org/?receipt={binname}'
+    - type: PACKAGE_BUILD_LOG
+      url: 'https://cook.slitaz.org/cooker.cgi?pkg={binname}'
   tags: [ all, production, slitaz ]
 
 - name: slitaz_next
@@ -48,10 +50,12 @@
     - desc: SliTaz packages
       url: http://pkg.slitaz.org/
   packagelinks:
-    - desc: Package information
-      url: 'http://cook.slitaz.org/next/{binname}'
-    - desc: Package receipt
-      url: 'http://cook.slitaz.org/next/{srcname}/receipt'
-    - desc: Build log
-      url: 'http://cook.slitaz.org/next/{srcname}/log/'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://cook.slitaz.org/next/{binname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://cook.slitaz.org/next/{srcname}/receipt'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://cook.slitaz.org/next/{srcname}/browse/receipt'
+    - type: PACKAGE_BUILD_LOG
+      url: 'https://cook.slitaz.org/next/{srcname}/log/'
   tags: [ all, production, slitaz ]

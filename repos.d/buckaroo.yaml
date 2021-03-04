@@ -20,6 +20,8 @@
     - desc: Buckaroo recipes repository
       url: https://github.com/LoopPerfect/buckaroo-recipes
   packagelinks:
-    - desc: Buckaroo recipe
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/LoopPerfect/buckaroo-recipes/blob/master/{recipe}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/LoopPerfect/buckaroo-recipes/master/{recipe}'
   tags: [ all, production ]

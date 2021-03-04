@@ -22,8 +22,8 @@
     - desc: git repository
       url: https://git.savannah.gnu.org/cgit/guix.git/
   packagelinks:
-    - desc: Package page on Guix site
+    - type: PACKAGE_HOMEPAGE
       url: 'https://guix.gnu.org/packages/{srcname}-{rawversion}/'
-    - desc: Package source in Git
+    - type: PACKAGE_RECIPE
       url: 'https://git.savannah.gnu.org/cgit/guix.git/tree/{loc_path}#n{loc_line|dec}'
   tags: [ all, production ]

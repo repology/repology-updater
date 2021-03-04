@@ -19,8 +19,10 @@
     - desc: Solus home
       url: https://getsol.us/home/
   packagelinks:
-    - desc: Git repository
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://dev.getsol.us/source/{srcname}/'
-    - desc: package.yml
+    - type: PACKAGE_RECIPE
       url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml?view=raw'
   tags: [ all, production ]
