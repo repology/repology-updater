@@ -30,10 +30,12 @@
     - desc: Official LiGurOS ebuild repository
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/{branch}'
   packagelinks:
-    - desc: Git directory of package
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/stable/{srcname}'
-    - desc: View ebuild
+    - type: PACKAGE_RECIPE
       url: 'https://gitlab.com/liguros/liguros-repo/-/blob/stable/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitlab.com/liguros/liguros-repo/-/raw/stable/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, liguros ]
 
 - name: liguros_develop
@@ -64,8 +66,10 @@
     - desc: Official LiGurOS ebuild repository
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/{branch}'
   packagelinks:
-    - desc: Git directory of package
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://gitlab.com/liguros/liguros-repo/-/tree/develop/{srcname}'
-    - desc: View ebuild
+    - type: PACKAGE_RECIPE
       url: 'https://gitlab.com/liguros/liguros-repo/-/blob/develop/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitlab.com/liguros/liguros-repo/-/raw/develop/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, liguros ]

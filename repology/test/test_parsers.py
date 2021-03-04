@@ -160,6 +160,10 @@ class TestParsers(unittest.TestCase):
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://chromium-bsu.sourceforge.net/'),
                     (LinkType.UPSTREAM_HOMEPAGE, 'https://sourceforge.net/projects/chromium-bsu/'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'mirror://sourceforge/chromium-bsu/chromium-bsu-0.9.15.1.tar.gz'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://packages.gentoo.org/packages/games-action/chromium-bsu'),
+                    (LinkType.PACKAGE_REPOSITORY_DIR, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/games-action/chromium-bsu'),
+                    (LinkType.PACKAGE_RECIPE, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/games-action/chromium-bsu/chromium-bsu-0.9.15.1.ebuild'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://gitweb.gentoo.org/repo/gentoo.git/plain/games-action/chromium-bsu/chromium-bsu-0.9.15.1.ebuild'),
                 ],
             }
         )
@@ -184,6 +188,10 @@ class TestParsers(unittest.TestCase):
                     (LinkType.UPSTREAM_HOMEPAGE, 'https://pypi.org/project/asciinema/'),
                     (LinkType.UPSTREAM_HOMEPAGE, 'https://pypi.python.org/pypi/asciinema'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'https://github.com/asciinema/asciinema/archive/v1.3.0.tar.gz'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://packages.gentoo.org/packages/app-misc/asciinema'),
+                    (LinkType.PACKAGE_REPOSITORY_DIR, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/asciinema'),
+                    (LinkType.PACKAGE_RECIPE, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/asciinema/asciinema-1.3.0.ebuild'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://gitweb.gentoo.org/repo/gentoo.git/plain/app-misc/asciinema/asciinema-1.3.0.ebuild'),
                 ],
             }
         )
@@ -205,6 +213,10 @@ class TestParsers(unittest.TestCase):
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://unbeatenpath.net/software/away/'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'http://unbeatenpath.net/software/away/away-0.9.5.tar.bz2'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://packages.gentoo.org/packages/app-misc/away'),
+                    (LinkType.PACKAGE_REPOSITORY_DIR, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/away'),
+                    (LinkType.PACKAGE_RECIPE, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/away/away-0.9.5-r1.ebuild'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://gitweb.gentoo.org/repo/gentoo.git/plain/app-misc/away/away-0.9.5-r1.ebuild'),
                 ],
             }
         )
@@ -226,6 +238,10 @@ class TestParsers(unittest.TestCase):
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://aspell.net/'),
                     (LinkType.UPSTREAM_DOWNLOAD, 'mirror://gnu-alpha/aspell/aspell-0.60.7-rc1.tar.gz'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://packages.gentoo.org/packages/app-test/aspell'),
+                    (LinkType.PACKAGE_REPOSITORY_DIR, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/app-test/aspell'),
+                    (LinkType.PACKAGE_RECIPE, 'https://gitweb.gentoo.org/repo/gentoo.git/tree/app-test/aspell/aspell-0.60.7_rc1.ebuild'),
+                    (LinkType.PACKAGE_RECIPE_RAW, 'https://gitweb.gentoo.org/repo/gentoo.git/plain/app-test/aspell/aspell-0.60.7_rc1.ebuild'),
                 ],
             }
         )

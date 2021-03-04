@@ -45,6 +45,13 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/1.4-release/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/1.4-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/1.4-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - name: [ gnome-kit ]
       fetcher:
         class: GitFetcher
@@ -56,6 +63,13 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/3.32-prime/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/3.32-prime/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/3.32-prime/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - name: [ perl-kit ]
       fetcher:
         class: GitFetcher
@@ -67,6 +81,13 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/5.28-release/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/5.28-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/5.28-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - name: [ python-kit ]
       fetcher:
         class: GitFetcher
@@ -78,6 +99,13 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/3.7-release/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/3.7-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/3.7-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - name: [ ruby-kit ]
       fetcher:
         class: GitFetcher
@@ -89,6 +117,13 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/2.6-prime/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/2.6-prime/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/2.6-prime/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - name: [ rust-kit ]
       fetcher:
         class: GitFetcher
@@ -100,6 +135,13 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/1.37-prime/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/1.37-prime/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/1.37-prime/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - name: [ xfce-kit ]
       fetcher:
         class: GitFetcher
@@ -111,6 +153,13 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/4.13-release/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/4.13-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/4.13-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - name: [ xorg-kit ]
       fetcher:
         class: GitFetcher
@@ -122,14 +171,16 @@
         require_md5cache_metadata: true
         require_xml_metadata: false
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://github.com/funtoo/{subrepo}/tree/1.20-release/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/funtoo/{subrepo}/blob/1.20-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/1.20-release/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   repolinks:
     - desc: Funtoo Linux home
       url: https://www.funtoo.org/
     - desc: GitHub organization
       url: https://github.com/funtoo/
-  #packagelinks:
-  #  - desc: Git directory
-  #    url: 'https://github.com/funtoo/{subrepo}/tree/master/{srcname}'
-  #  - desc: View ebuild
-  #    url: 'https://github.com/funtoo/{subrepo}/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, funtoo ]

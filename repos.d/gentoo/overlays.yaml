@@ -26,10 +26,14 @@
     - desc: Github sync repository mirror
       url: https://github.com/gentoo-mirror/guru
   packagelinks:
-    - desc: Package details
+    - type: PACKAGE_HOMEPAGE
       url: 'https://gpo.zugaina.org/Overlays/guru/{srcname}'
-    - desc: View ebuild
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://gitweb.gentoo.org/repo/proj/guru.git/tree/{srcname}'
+    - type: PACKAGE_RECIPE
       url: 'https://gitweb.gentoo.org/repo/proj/guru.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitweb.gentoo.org/repo/proj/guru.git/plain/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################
@@ -58,10 +62,12 @@
     - desc: GitHub page
       url: https://github.com/pentoo/pentoo-overlay
   packagelinks:
-    - desc: Port git directory
+    - type: PACKAGE_REPOSITORY_DIR
       url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{srcname}'
-    - desc: View ebuild
-      url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/pentoo/pentoo-overlay/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/pentoo/pentoo-overlay/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################
@@ -90,10 +96,14 @@
     - desc: GitHub page
       url: https://github.com/gentoo-mirror/science
   packagelinks:
-    - desc: Package details
+    - type: PACKAGE_HOMEPAGE
       url: 'https://gpo.zugaina.org/Overlays/science/{srcname}'
-    - desc: View ebuild
+    - type: PACKAGE_REPOSITORY_DIR
+      url: 'https://gitweb.gentoo.org/proj/sci.git/tree/{srcname}'
+    - type: PACKAGE_RECIPE
       url: 'https://gitweb.gentoo.org/proj/sci.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitweb.gentoo.org/proj/sci.git/plain/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################
