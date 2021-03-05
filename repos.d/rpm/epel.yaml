@@ -20,8 +20,8 @@
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'  # XXX: inexact
   tags: [ all, production, epel ]
 
 - name: epel_7
@@ -43,8 +43,8 @@
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'  # XXX: inexact
   tags: [ all, production, epel ]
 
 - name: epel_8
@@ -66,6 +66,6 @@
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'  # XXX: inexact
   tags: [ all, production, epel ]

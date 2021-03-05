@@ -19,6 +19,10 @@
     - desc: PLD Linux home
       url: https://pld-linux.org/
   packagelinks:
-    - desc: Package git repository
-      url: https://git.pld-linux.org/?p=packages/{srcname}.git;a=summary
+    - type: PACKAGE_SOURCES
+      url: 'https://git.pld-linux.org/?p=packages/{srcname}.git;a=tree'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.pld-linux.org/?p=packages/{srcname}.git;a=blob;f={srcname}.spec;hb=HEAD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.pld-linux.org/?p=packages/{srcname}.git;a=blob_plain;f={srcname}.spec;hb=HEAD'
   tags: [ all, production ]
