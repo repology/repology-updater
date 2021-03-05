@@ -460,6 +460,8 @@ CREATE TABLE links (
 	url text NOT NULL,
 	refcount smallint NOT NULL DEFAULT 0,
 
+	priority boolean NOT NULL DEFAULT False,
+
 	first_extracted timestamp with time zone NOT NULL DEFAULT now(),
 	orphaned_since timestamp with time zone,
 

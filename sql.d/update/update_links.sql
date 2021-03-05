@@ -15,31 +15,49 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-WITH old AS (
+WITH old_links AS (
 	SELECT
-		(json_array_elements(links)->>1)::integer AS link_id,
-		count(*) AS refcount
+		(json_array_elements(links)->>0)::integer AS link_type,
+		(json_array_elements(links)->>1)::integer AS link_id
 	FROM old_packages
+), new_links AS (
+	SELECT
+		(json_array_elements(links)->>0)::integer AS link_type,
+		(json_array_elements(links)->>1)::integer AS link_id
+	FROM incoming_packages
+), old AS (
+	SELECT
+		link_id,
+		bool_or(link_type IN (0, 1, 2, 3, 16, 17, 19, 20, 21, 22, 23)) AS priority,
+		count(*) AS refcount
+	FROM old_links
 	GROUP BY link_id
 ), new AS (
 	SELECT
-		(json_array_elements(links)->>1)::integer AS link_id,
+		link_id,
+		bool_or(link_type IN (0, 1, 2, 3, 16, 17, 19, 20, 21, 22, 23)) AS priority,
 		count(*) AS refcount
-	FROM incoming_packages
+	FROM new_links
 	GROUP BY link_id
 ), delta AS (
 	SELECT
 		link_id,
-		coalesce(new.refcount, 0) - coalesce(old.refcount, 0) AS delta_refcount
+		coalesce(new.refcount, 0) - coalesce(old.refcount, 0) AS delta_refcount,
+		new.priority
 	FROM old FULL OUTER JOIN new USING(link_id)
-	WHERE coalesce(new.refcount, 0) != coalesce(old.refcount, 0)
+	WHERE
+		coalesce(new.refcount, 0) != coalesce(old.refcount, 0)
+		OR new.priority > old.priority
 )
 UPDATE links
 SET
 	refcount = refcount + delta_refcount,
+	priority = greatest(links.priority, delta.priority),
 	orphaned_since = CASE WHEN refcount + delta_refcount = 0 THEN now() ELSE NULL END
 FROM delta
-WHERE links.id = delta.link_id;
+WHERE
+	links.id = delta.link_id
+	AND (delta_refcount != 0 OR delta.priority > links.priority);
 
 {% if analyze %}
 ANALYZE links;
