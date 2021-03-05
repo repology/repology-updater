@@ -46,9 +46,6 @@
   repolinks:
     - desc: Chakra home
       url: https://www.chakralinux.org/
-  packagelinks:
-    - type: PACKAGE_RECIPE
-      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={binname}'
   tags: [ all, production, chakra ]
 
 - name: chakra_testing
@@ -69,7 +66,4 @@
   repolinks:
     - desc: Chakra home
       url: https://www.chakralinux.org/
-  packagelinks:
-    - type: PACKAGE_RECIPE
-      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={binname}'
   tags: [ all, production, chakra ]
