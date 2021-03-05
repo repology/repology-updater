@@ -43,7 +43,6 @@ class RubyGemParser(Parser):
 
                     pkg.add_name(gemname, NameType.RUBYGEMS_NAME)
                     pkg.set_version(gemversion)
-                    pkg.add_homepages('https://rubygems.org/gems/' + gemname)
 
                     yield pkg
 
