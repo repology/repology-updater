@@ -21,8 +21,12 @@
     - desc: CentOS home
       url: https://www.centos.org/
   packagelinks:
-    - desc: Package sources in CentOS git
-      url: 'https://git.centos.org/rpms/{srcname}/tree/c6'
+    - type: PACKAGE_SOURCES
+      url: 'https://git.centos.org/rpms/{srcname}/tree/c6{centossuffix}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.centos.org/rpms/{srcname}/blob/c6{centossuffix}/f/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.centos.org/rpms/{srcname}/raw/c6{centossuffix}/f/SPECS/{srcname}.spec'
   tags: [ all, production, centos, rpm ]
 
 - name: centos_7
@@ -45,8 +49,12 @@
     - desc: CentOS home
       url: https://www.centos.org/
   packagelinks:
-    - desc: Package sources in CentOS git
-      url: 'https://git.centos.org/rpms/{srcname}/tree/c7'
+    - type: PACKAGE_SOURCES
+      url: 'https://git.centos.org/rpms/{srcname}/tree/c7{centossuffix}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.centos.org/rpms/{srcname}/blob/c7{centossuffix}/f/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.centos.org/rpms/{srcname}/raw/c7{centossuffix}/f/SPECS/{srcname}.spec'
   tags: [ all, production, centos, rpm ]
 
 - name: centos_8
@@ -69,6 +77,10 @@
     - desc: CentOS home
       url: https://www.centos.org/
   packagelinks:
-    - desc: Package sources in CentOS git
-      url: 'https://git.centos.org/rpms/{srcname}/tree/c8'
+    - type: PACKAGE_SOURCES
+      url: 'https://git.centos.org/rpms/{srcname}/tree/c8{centossuffix}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.centos.org/rpms/{srcname}/blob/c8{centossuffix}/f/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.centos.org/rpms/{srcname}/raw/c8{centossuffix}/f/SPECS/{srcname}.spec'
   tags: [ all, production, centos, rpm ]

@@ -86,13 +86,21 @@ class FieldGatheringMapping:
                 value = 'community'
             else:
                 value = 'packages'
+        elif field == 'centossuffix':
+            value = '-extras' if self._package.subrepo == 'extras' else ''
+            is_optional = True
         elif self._package.extrafields is not None and field in self._package.extrafields:
             value = self._package.extrafields[field]
 
-        if not value and is_optional:
-            self._skip = True
-        elif not value:
-            raise RuntimeError(f'missing key "{field}"')
+        if value is None or value == []:
+            if is_optional:
+                self._skip = True
+            else:
+                raise RuntimeError(f'missing key "{field}"')
+        elif value == '':
+            if not is_optional:
+                raise RuntimeError(f'empty key "{field}"')
+            self._fields[key] = [value]
         elif isinstance(value, list):
             if filters:
                 raise RuntimeError(f'cannot apply filter to list of values in "{field}"')
