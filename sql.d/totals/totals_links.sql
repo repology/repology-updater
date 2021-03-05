@@ -19,14 +19,17 @@
 -- @param do_fix=False
 -- @returns array of dicts
 --------------------------------------------------------------------------------
-WITH expected AS (
+WITH package_links AS (
+	SELECT
+        (json_array_elements(links)->>0)::integer AS link_type,
+        (json_array_elements(links)->>1)::integer AS id
+    FROM packages
+), expected AS (
 	SELECT
 		id,
+		bool_or(link_type IN (0, 1, 2, 3, 16, 17, 19, 20, 21, 22, 23)) AS priority,
 		count(*) AS refcount
-	FROM (
-		SELECT (json_array_elements(links)->>1)::integer AS id
-		FROM packages
-	) AS tmp
+	FROM package_links
 	GROUP BY id
 )
 {% if do_fix %}
@@ -34,7 +37,8 @@ WITH expected AS (
 , fix AS (
 	UPDATE links
 	SET
-		refcount = expected.refcount
+		refcount = expected.refcount,
+		priority = expected.priority
 	FROM expected
 	WHERE links.id = expected.id
 )
@@ -47,4 +51,5 @@ FROM
 	expected FULL OUTER JOIN links actual USING(id)
 WHERE
 	actual.refcount != coalesce(expected.refcount, 0)
+	OR actual.priority != expected.priority
 ;
