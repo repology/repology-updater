@@ -6,6 +6,12 @@
 # Also see https://fedoraproject.org/wiki/List_of_Fedora_remixes for remixes
 ###########################################################################
 
+# XXX: consider adding the following packagelinks
+#  info on binary package, probably needs binname(s); links to build logs and other noce stuff
+#  url: 'https://koji.fedoraproject.org/koji/search?terms={srcname}-{rawversion}&type=build&match=glob'
+#  503 ATM, recheck:
+#  url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+
 # Note that these are archived
 - name: fedora_26
   type: repository
@@ -39,10 +45,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f26'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f26/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f26/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_27
@@ -76,10 +84,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f27'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f27/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f27/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_28
@@ -113,10 +123,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f28'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f28/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f28/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_29
@@ -150,10 +162,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f29'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f29/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f29/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_30
@@ -187,10 +201,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f30'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f30/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f30/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_31
@@ -224,10 +240,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f31'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f31/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f31/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 # Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
@@ -264,10 +282,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f32'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f32/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f32/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_33
@@ -301,10 +321,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f33'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f33/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f33/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 # Next development release
@@ -339,10 +361,12 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f34'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f34/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f34/f/{srcname}.spec'
   #tags: [ all, production, fedora, rpm ]  # XXX: enable me
   tags: []
 
@@ -369,8 +393,10 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{srcname}'
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/rawhide'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/rawhide/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/rawhide/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
