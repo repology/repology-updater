@@ -22,15 +22,18 @@
     - desc: Arch Linux Packages
       url: https://www.archlinux.org/packages/
   packagelinks:
-    - desc: Package details on www.archlinux.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.archlinux.org/packages/?q={binname}'
+    # XXX: exact link should replace the above one, but we need arch for this
+    #- type: Package information (x86_64)
+    #  url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
     # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
-    - desc: Git repository
+    - type: PACKAGE_SOURCES
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{srcname}'
-    - desc: PKGBUILD
+    - type: PACKAGE_RECIPE
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname}'
-    - desc: Package information (x86_64)
-      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/plain/trunk/PKGBUILD?h=packages/{srcname}'
   tags: [ all, production, have_testdata ]
 
 - name: arch_testing
@@ -54,13 +57,16 @@
     - desc: Arch Linux Packages
       url: https://www.archlinux.org/packages/
   packagelinks:
-    - desc: Package details on www.archlinux.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.archlinux.org/packages/?q={binname}'
+    # XXX: exact link should replace the above one, but we need arch for this
+    #- type: Package information (x86_64)
+    #  url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
     # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
-    - desc: Git repository
+    - type: PACKAGE_SOURCES
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{srcname}'
-    - desc: PKGBUILD
+    - type: PACKAGE_RECIPE
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname}'
-    - desc: Package information (x86_64)
-      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/plain/trunk/PKGBUILD?h=packages/{srcname}'
   tags: [ all, production ]

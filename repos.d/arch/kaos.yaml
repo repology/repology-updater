@@ -25,10 +25,12 @@
     - desc: GitHub organisation
       url: https://github.com/KaOSx
   packagelinks:
-    - desc: KaOS Package Viewer
+    - type: PACKAGE_HOMEPAGE
       url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
-    - desc: PKGBUILD
+    - type: PACKAGE_RECIPE
       url: "https://github.com/KaOSx/{subrepo}/blob/master/{binname}/PKGBUILD"
+    - type: PACKAGE_RECIPE_RAW
+      url: "https://raw.githubusercontent.com/KaOSx/{subrepo}/master/{binname}/PKGBUILD"
   tags: [ all, production ]
 
 - name: kaos_build
@@ -54,7 +56,7 @@
     - desc: GitHub organisation
       url: https://github.com/KaOSx
   packagelinks:
-    - desc: KaOS Package Viewer
+    - type: PACKAGE_HOMEPAGE
       url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
   tags: [ all, production ]
 
@@ -81,6 +83,6 @@
     - desc: GitHub organisation
       url: https://github.com/KaOSx
   packagelinks:
-    - desc: KaOS Package Viewer
+    - type: PACKAGE_HOMEPAGE
       url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
   tags: [ all, production ]

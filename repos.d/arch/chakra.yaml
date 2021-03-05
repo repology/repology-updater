@@ -20,10 +20,12 @@
     - desc: Chakra home
       url: https://www.chakralinux.org/
   packagelinks:
-    - desc: Git repository
+    - type: PACKAGE_SOURCES
       url: 'https://code.chakralinux.org/chakra/packages/{subrepo}/tree/master/{srcname}'
-    - desc: PKGBUILD in CCR
-      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://code.chakralinux.org/chakra/packages/{subrepo}/-/blob/master/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://code.chakralinux.org/chakra/packages/{subrepo}/-/raw/master/{srcname}/PKGBUILD'
   tags: [ all, production, chakra ]
 
 - name: chakra_staging
@@ -45,8 +47,8 @@
     - desc: Chakra home
       url: https://www.chakralinux.org/
   packagelinks:
-    - desc: PKGBUILD in CCR
-      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={binname}'
   tags: [ all, production, chakra ]
 
 - name: chakra_testing
@@ -68,6 +70,6 @@
     - desc: Chakra home
       url: https://www.chakralinux.org/
   packagelinks:
-    - desc: PKGBUILD in CCR
-      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={binname}'
   tags: [ all, production, chakra ]
