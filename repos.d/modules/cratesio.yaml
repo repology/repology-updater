@@ -22,6 +22,6 @@
     - desc: crates.io
       url: https://crates.io/
   packagelinks:
-    - desc: Crate page
+    - type: PROJECT_HOMEPAGE
       url: 'https://crates.io/crates/{name}'
   tags: [ all, production ]
