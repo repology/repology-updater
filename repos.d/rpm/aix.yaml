@@ -17,6 +17,6 @@
     - desc: AIX Open Source Packages
       url: http://www.perzl.org/aix/index.php?n=Main.HomePage
   packagelinks:
-    - desc: Spec file
+    - type: PACKAGE_RECIPE_RAW
       url: 'ftp://www.oss4aix.org/SPECS/{nevr}.spec'
   tags: [ all, production ]

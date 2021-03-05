@@ -22,6 +22,6 @@
     - desc: openmamba Packages Search
       url: https://openmamba.org/en/packages/
   packagelinks:
-    - desc: Package page
-      url: https://openmamba.org/en/packages/?tag={subrepo}&pkg={srcname}.source
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://openmamba.org/en/packages/?tag={subrepo}&pkg={srcname}.source'
   tags: [ all, production, rpm ]
