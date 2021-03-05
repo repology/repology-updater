@@ -24,7 +24,7 @@
     - desc: Parabola Packages
       url: https://www.parabola.nu/packages/
   packagelinks:
-    - desc: Package search on parabola.nu
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.parabola.nu/packages/?q={binname}'
   tags: [ all, production ]
 
@@ -51,6 +51,6 @@
     - desc: Parabola Packages
       url: https://www.parabola.nu/packages/
   packagelinks:
-    - desc: Package search on parabola.nu
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.parabola.nu/packages/?q={binname}'
   tags: [ all, production ]

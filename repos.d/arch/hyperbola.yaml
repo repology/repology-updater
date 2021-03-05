@@ -23,6 +23,6 @@
     - desc: Hyperbola Packages
       url: https://www.hyperbola.info/packages/
   packagelinks:
-    - desc: Package search on hyperbola.info.nu
+    - type: PACKAGE_HOMEPAGE
       url: 'https://hyperbola.info/packages/?q={binname}'
   tags: [ all, production ]

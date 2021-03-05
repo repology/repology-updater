@@ -22,6 +22,6 @@
     - desc: frugalware-current git repository
       url: https://github.com/frugalware/frugalware-current
   packagelinks:
-    - desc: Frugalware package search
+    - type: PACKAGE_HOMEPAGE
       url: 'http://frugalware.org/packages?srch={binname}&op=pkg&ver=current'
   tags: [ all, frugalware ]  # disabled: absence of %BASE% information, resulting in too many splits
