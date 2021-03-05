@@ -21,6 +21,6 @@
     - desc: RubyGems.org
       url: https://rubygems.org/
   packagelinks:
-    - desc: RubyGems page
+    - type: PROJECT_HOMEPAGE
       url: 'https://www.rubygems.org/gems/{name}/'
   tags: [ all, production ]
