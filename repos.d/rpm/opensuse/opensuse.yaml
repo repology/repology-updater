@@ -47,10 +47,12 @@
       url: https://software.opensuse.org/
   packagelinks:
     # NOTE: openSUSE:Leap:42.3:Update automatically inherits openSUSE:Leap:42.3
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.3:Update/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:42.3:Update/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_0
@@ -98,10 +100,12 @@
       url: https://software.opensuse.org/
   packagelinks:
     # NOTE: openSUSE:Leap:15.0:Update automatically inherits openSUSE:Leap:15.0
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.0:Update/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.0:Update/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_1
@@ -148,10 +152,12 @@
       url: https://software.opensuse.org/
   packagelinks:
     # NOTE: openSUSE:Leap:15.1:Update automatically inherits openSUSE:Leap:15.1
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.1:Update/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.1:Update/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_2
@@ -198,10 +204,12 @@
       url: https://software.opensuse.org/
   packagelinks:
     # NOTE: openSUSE:Leap:15.2:Update automatically inherits openSUSE:Leap:15.2
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.2:Update/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.2:Update/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_3
@@ -248,10 +256,12 @@
       url: https://software.opensuse.org/
   packagelinks:
     # NOTE: openSUSE:Leap:15.3:Update automatically inherits openSUSE:Leap:15.3
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.3:Update/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.3:Update/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_tumbleweed
@@ -284,8 +294,10 @@
     - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/openSUSE:Factory/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/openSUSE:Factory/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]

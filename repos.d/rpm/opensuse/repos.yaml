@@ -17,10 +17,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/Education/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/Education/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_emulators_tumbleweed
@@ -39,10 +41,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/Emulators/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/Emulators/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_games_tumbleweed
@@ -64,10 +68,12 @@
     - desc: openSUSE:Games wiki page
       url: https://en.opensuse.org/openSUSE:Games
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/games/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/games/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_graphics_tumbleweed
@@ -86,10 +92,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/graphics/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/graphics/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_multimedia_apps_tumbleweed
@@ -108,10 +116,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/multimedia:apps/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/multimedia:apps/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_multimedia_libs_tumbleweed
@@ -130,10 +140,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/multimedia:libs/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/multimedia:libs/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_network_tumbleweed
@@ -152,10 +164,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/network/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/network/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_science_tumbleweed
@@ -174,10 +188,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/science/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/science/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_security_tumbleweed
@@ -196,10 +212,12 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/security/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/security/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_hardware_sdr_tumbleweed
@@ -218,8 +236,10 @@
       parser:
         class: RepodataParser
   packagelinks:
-    - desc: Package in openSUSE Build Service
+    - type: PACKAGE_HOMEPAGE
       url: 'https://build.opensuse.org/package/show/hardware:/sdr/{srcname}'
-    - desc: Package details on software.opensuse.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/hardware:/sdr/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
