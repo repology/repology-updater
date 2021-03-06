@@ -78,8 +78,9 @@ class VcpkgGitParser(Parser):
 
         for pkgdir in os.listdir(os.path.join(path, 'ports')):
             with factory.begin(pkgdir) as pkg:
-                controlpath = os.path.join(path, 'ports', pkgdir, 'CONTROL')
-                manifestpath = os.path.join(path, 'ports', pkgdir, 'vcpkg.json')
+                package_path_abs = os.path.join(path, 'ports', pkgdir)
+                controlpath = os.path.join(package_path_abs, 'CONTROL')
+                manifestpath = os.path.join(package_path_abs, 'vcpkg.json')
 
                 # read either of old-style control (CONTROL) or new-style manifest (vcpkg.json) file
                 if os.path.exists(manifestpath):
@@ -123,10 +124,14 @@ class VcpkgGitParser(Parser):
                     pkg.add_maintainers(extract_maintainers(maintainer))
 
                 # pretty much a hack to shut a bunch of fake versions up
-                portfilepath = os.path.join(path, 'ports', pkgdir, 'portfile.cmake')
+                portfilepath = os.path.join(package_path_abs, 'portfile.cmake')
                 if _grep_file(portfilepath, 'libimobiledevice-win32'):
                     pkg.log('marking as untrusted, https://github.com/libimobiledevice-win32 accused of version faking', severity=Logger.WARNING)
                     pkg.set_flags(PackageFlags.UNTRUSTED)
+
+                patches = sorted(filename for filename in os.listdir(package_path_abs) if filename.endswith('.patch'))
+                if patches:
+                    pkg.set_extra_field('patch', patches)
 
                 yield pkg
 

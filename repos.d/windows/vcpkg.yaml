@@ -12,13 +12,21 @@
       fetcher:
         class: GitFetcher
         url: https://github.com/Microsoft/vcpkg.git
-        sparse_checkout: [ 'ports/*/CONTROL', 'ports/*/vcpkg.json', 'ports/*/portfile.cmake' ]
+        sparse_checkout: [ 'ports/*/CONTROL', 'ports/*/vcpkg.json', 'ports/*/portfile.cmake', 'ports/*/*.patch' ]
       parser:
         class: VcpkgGitParser
   repolinks:
     - desc: Vcpkg GitHub repository
       url: https://github.com/Microsoft/vcpkg
   packagelinks:
-    - desc: Port directory
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/Microsoft/vcpkg/tree/master/ports/{name}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/Microsoft/vcpkg/blob/master/ports/{name}/portfile.cmake'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/Microsoft/vcpkg/master/ports/{name}/portfile.cmake'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/Microsoft/vcpkg/blob/master/ports/{name}/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/Microsoft/vcpkg/master/ports/{name}/{?patch}'
   tags: [ all, production ]
