@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable, Iterator, List, Optional
+from typing import Iterable, Iterator, List, Optional, Tuple
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import Fetcher
@@ -129,19 +129,24 @@ class RepositoryProcessor:
                 package.flavors = sorted(set(map(strip_flavor, package.flavors)))
 
                 # add packagelinks
+                packagelinks: List[Tuple[int, str]] = []
                 for pkglink in source.get('packagelinks', []) + repository.get('packagelinks', []):
                     if 'type' in pkglink:  # XXX: will become mandatory
                         link_type = LinkType.from_string(pkglink['type'])
                         try:
-                            if package.links is None:
-                                package.links = []
-                            package.links.extend(
+                            packagelinks.extend(
                                 (link_type, url)
                                 for url in format_package_links(package, pkglink['url'])
                             )
                         except Exception as e:
                             packagemaker.log(f'cannot spawn package link from template "{pkglink["url"]}": {str(e)}', Logger.ERROR)
                             raise
+
+                if package.links is None:
+                    package.links = packagelinks
+                else:
+                    seen = set(package.links)
+                    package.links.extend(link for link in packagelinks if link not in seen)
 
                 yield package
 
