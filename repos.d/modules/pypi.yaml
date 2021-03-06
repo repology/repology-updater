@@ -20,6 +20,6 @@
     - desc: PyPI - the Python Package Index
       url: https://pypi.python.org/pypi
   packagelinks:
-    - desc: PyPI page
-      url: 'https://pypi.python.org/pypi/{name}/'
+    - type: PROJECT_HOMEPAGE
+      url: 'https://pypi.org/project/{name}/'
   tags: [all, production]
