@@ -21,7 +21,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 7 packages
 
@@ -43,7 +43,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 7 packages
 
@@ -65,7 +65,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 6 packages
 
@@ -87,7 +87,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 6 packages
 
@@ -109,7 +109,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 6 packages
 
@@ -131,7 +131,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 3 packages
 
@@ -154,7 +154,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
@@ -176,7 +176,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
@@ -198,7 +198,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
@@ -220,7 +220,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
@@ -242,7 +242,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
@@ -264,7 +264,7 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
@@ -286,6 +286,6 @@
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
-    - desc: PackMan package page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]

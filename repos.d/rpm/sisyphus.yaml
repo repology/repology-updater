@@ -23,10 +23,12 @@
     - desc: Sisyphus on ALT Linux Wiki
       url: https://en.altlinux.org/Sisyphus
   packagelinks:
-    - desc: Package details
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.altlinux.org/en/sisyphus/srpms/{srcname}'
-    - desc: Spec file
+    - type: PACKAGE_RECIPE
       url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{srcname}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{srcname}/raw'
   tags: [ all, production, sisyphus ]
 
 - name: alt_p9
@@ -51,10 +53,12 @@
     - desc: p9 on ALT Linux Wiki
       url: http://en.altlinux.org/p9
   packagelinks:
-    - desc: Package details
+    - type: PACKAGE_HOMEPAGE
       url: 'https://packages.altlinux.org/en/p9/srpms/{srcname}'
-    - desc: Spec file
+    - type: PACKAGE_RECIPE
       url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}/raw'
   tags: [ all, production, sisyphus ]
 
 # automatically imported packages; duplicate already existing packages and versions,

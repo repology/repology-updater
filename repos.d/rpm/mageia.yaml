@@ -24,7 +24,7 @@
     - desc: Mageia App Db
       url: https://madb.mageia.org/
   packagelinks:
-    - desc: Package details on madb.mageia.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{srcname}'
   tags: [ all, production, mageia, rpm ]
 
@@ -51,7 +51,7 @@
     - desc: Mageia App Db
       url: https://madb.mageia.org/
   packagelinks:
-    - desc: Package details on madb.mageia.org
+    - type: PACKAGE_HOMEPAGE
       url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{srcname}'
   tags: [ all, production, mageia, rpm ]
 
@@ -77,9 +77,10 @@
       url: https://www.mageia.org/en/
     - desc: Mageia App Db
       url: https://madb.mageia.org/
-  packagelinks:
-    - desc: Package details on madb.mageia.org
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/8/name/{srcname}'
+  # No suck distribution on mageia app db (yet)
+  #packagelinks:
+  #  - type: PACKAGE_HOMEPAGE
+  #    url: 'https://madb.mageia.org/package/show/source/1/application/0/release/8/name/{srcname}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
@@ -106,7 +107,7 @@
     - desc: Mageia App Db
       url: https://madb.mageia.org/
   packagelinks:
-    - desc: Package details on madb.mageia.org
+    - type: PACKAGE_HOMEPAGE
       # XXX: directories in this url work as CGI params:
       # source=1 (show source packages)
       # application=0 (show all packages, not only applications)

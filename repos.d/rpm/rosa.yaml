@@ -26,8 +26,12 @@
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   packagelinks:
-    - desc: Package on abf.io
+    - type: PACKAGE_SOURCES
       url: 'https://abf.io/import/{srcname}/tree/rosa2014.1'
+    - type: PACKAGE_RECIPE
+      url: 'https://abf.io/import/{srcname}/blob/rosa2014.1/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://abf.io/import/{srcname}/raw/rosa2014.1/{srcname}.spec'
   tags: [ all, production, rosa ]
 
 - name: rosa_2016_1
@@ -51,8 +55,12 @@
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   packagelinks:
-    - desc: Package on abf.io
+    - type: PACKAGE_SOURCES
       url: 'https://abf.io/import/{srcname}/tree/rosa2016.1'
+    - type: PACKAGE_RECIPE
+      url: 'https://abf.io/import/{srcname}/blob/rosa2016.1/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://abf.io/import/{srcname}/raw/rosa2016.1/{srcname}.spec'
   tags: [ all, production, rosa ]
 
 # Note: since Rosa 2019.1, use of urpmi metadate (info.xml) is discouraged
@@ -77,8 +85,12 @@
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   packagelinks:
-    - desc: Package on abf.io
+    - type: PACKAGE_SOURCES
       url: 'https://abf.io/import/{srcname}/tree/rosa2019.1'
+    - type: PACKAGE_RECIPE
+      url: 'https://abf.io/import/{srcname}/blob/rosa2019.1/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://abf.io/import/{srcname}/raw/rosa2019.1/{srcname}.spec'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_6_9
@@ -102,8 +114,12 @@
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   packagelinks:
-    - desc: Package on abf.io
+    - type: PACKAGE_SOURCES
       url: 'https://abf.io/server/{srcname}/tree/rosa-server69'
+    - type: PACKAGE_RECIPE
+      url: 'https://abf.io/server/{srcname}/blob/rosa-server69/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://abf.io/server/{srcname}/raw/rosa-server69/{srcname}.spec'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_7_3
@@ -127,8 +143,12 @@
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   packagelinks:
-    - desc: Package on abf.io
+    - type: PACKAGE_SOURCES
       url: 'https://abf.io/server7/{srcname}/tree/rosa-server73'
+    - type: PACKAGE_RECIPE
+      url: 'https://abf.io/server7/{srcname}/blob/rosa-server73/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://abf.io/server7/{srcname}/raw/rosa-server73/{srcname}.spec'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_7_5
@@ -152,6 +172,10 @@
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   packagelinks:
-    - desc: Package on abf.io
+    - type: PACKAGE_SOURCES
       url: 'https://abf.io/server7/{srcname}/tree/rosa-server75'
+    - type: PACKAGE_RECIPE
+      url: 'https://abf.io/server7/{srcname}/blob/rosa-server75/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://abf.io/server7/{srcname}/raw/rosa-server75/{srcname}.spec'
   tags: [ all, production, rosa ]
