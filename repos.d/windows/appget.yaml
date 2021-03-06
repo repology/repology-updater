@@ -20,10 +20,12 @@
     - desc: appget.packages repository
       url: https://github.com/appget/appget.packages/
   packagelinks:
-    - desc: Manifest directory
-      url: 'https://github.com/appget/appget.packages/tree/master/manifests/{srcname}'
-    - desc: Manifest file
-      url: 'https://github.com/appget/appget.packages/blob/master/manifests/{srcname}/{yamlname}.yaml'
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://appget.net/packages/i/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/appget/appget.packages/tree/master/manifests/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/appget/appget.packages/blob/master/manifests/{srcname}/{yamlname}.yaml'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/appget/appget.packages/master/manifests/{srcname}/{yamlname}.yaml'
   tags: [ all, production ]

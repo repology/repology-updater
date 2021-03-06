@@ -22,7 +22,7 @@
     - desc: Chocolatey new package requests
       url: https://github.com/chocolatey/chocolatey-package-requests
   packagelinks:
-    - desc: Chocolatey package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://chocolatey.org/packages/{name}'
   tags: [ all, production ]
 

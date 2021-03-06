@@ -20,8 +20,10 @@
     - desc: winget-pkgs repository
       url: https://github.com/microsoft/winget-pkgs
   packagelinks:
-    - desc: Port directory
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/microsoft/winget-pkgs/tree/master/manifests/{srcname}'
-    - desc: Manifest file
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/microsoft/winget-pkgs/blob/master/manifests/{srcname}/{version}.yaml'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/{srcname}/{version}.yaml'
   tags: [ all, production ]
