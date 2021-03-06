@@ -20,6 +20,8 @@
     - desc: CRAN home
       url: https://cran.r-project.org/
   packagelinks:
-    - desc: CRAN page
+    - type: PROJECT_HOMEPAGE
       url: 'https://cran.r-project.org/web/packages/{name}/index.html'
+    - type: PROJECT_DOWNLOAD
+      url: 'https://cran.r-project.org/src/contrib/{name}_{rawversion}.tar.gz'
   tags: [ all, production ]

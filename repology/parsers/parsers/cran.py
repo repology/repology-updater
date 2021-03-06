@@ -33,6 +33,5 @@ class CRANCheckSummaryParser(Parser):
 
                     pkg.add_name(match[1], NameType.CRAN_NAME)
                     pkg.set_version(match[2])
-                    pkg.add_homepages('https://cran.r-project.org/web/packages/{}/index.html'.format(match[1]))
 
                     yield pkg
