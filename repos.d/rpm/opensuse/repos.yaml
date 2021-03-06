@@ -237,9 +237,9 @@
         class: RepodataParser
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/hardware:/sdr/{srcname}'
+      url: 'https://build.opensuse.org/package/show/hardware:sdr/{srcname}'
     - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/hardware:/sdr/{srcname}/{srcname}.spec?expand=1'
+      url: 'https://build.opensuse.org/package/view_file/hardware:sdr/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]

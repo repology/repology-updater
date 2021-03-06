@@ -22,8 +22,12 @@
     - desc: OpenMandriva home
       url: https://openmandriva.org/
   packagelinks:
-    - desc: Package repository
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.0'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.0/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.0/{srcname}.spec'
   tags: [ all, production, openmandriva, rpm ]
 
 - name: openmandriva_4_1
@@ -46,9 +50,41 @@
     - desc: OpenMandriva home
       url: https://openmandriva.org/
   packagelinks:
-    - desc: Package repository
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.1'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.1/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.1/{srcname}.spec'
   tags: [ all, production, openmandriva, rpm ]
+
+- name: openmandriva_4_2
+  type: repository
+  desc: OpenMandriva 4.2
+  statsgroup: OpenMandriva
+  family: openmandriva
+  ruleset: [openmandriva, rpm]
+  color: '045e9d'
+  minpackages: 10000
+  sources:
+    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://abf-downloads.openmandriva.org/4.2/repository/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: OpenMandriva home
+      url: https://openmandriva.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.2'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.2/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.2/{srcname}.spec'
+  tags: [ all, openmandriva, rpm ] # no repos yet
 
 - name: openmandriva_rolling
   type: repository
@@ -70,8 +106,12 @@
     - desc: OpenMandriva home
       url: https://openmandriva.org/
   packagelinks:
-    - desc: Package repository
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/rolling'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/rolling/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/rolling/{srcname}.spec'
   tags: [ all, production, openmandriva, rpm ]
 
 - name: openmandriva_cooker
@@ -97,6 +137,10 @@
     - desc: OpenMandriva home
       url: https://www.openmandriva.org/
   packagelinks:
-    - desc: Package repository
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/master'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/master/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/master/{srcname}.spec'
   tags: [ all, production, openmandriva, rpm ]
