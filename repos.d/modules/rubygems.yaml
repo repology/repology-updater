@@ -22,5 +22,5 @@
       url: https://rubygems.org/
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'https://www.rubygems.org/gems/{name}/'
+      url: 'https://rubygems.org/gems/{name}'
   tags: [ all, production ]
