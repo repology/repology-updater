@@ -30,10 +30,12 @@
     - desc: MSYS2 mingw repository
       url: http://repo.msys2.org/mingw/
   packagelinks:
-    - desc: Package source
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
-    - desc: PKGBUILD
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
   tags: [ all, production, msys2 ]
 
 - name: msys2_msys2
@@ -65,8 +67,10 @@
     - desc: MSYS2 msys repository
       url: http://repo.msys2.org/msys/
   packagelinks:
-    - desc: Package source
+    - type: PACKAGE_SOURCES
       url: 'https://github.com/msys2/MSYS2-packages/tree/master/{srcname}'
-    - desc: PKGBUILD
+    - type: PACKAGE_RECIPE
       url: 'https://github.com/msys2/MSYS2-packages/blob/master/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/msys2/MSYS2-packages/master/{srcname}/PKGBUILD'
   tags: [ all, production, msys2 ]

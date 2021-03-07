@@ -64,6 +64,6 @@
     - desc: MetaCPAN
       url: https://metacpan.org/
   packagelinks:
-    - desc: MetaCPAN release page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://metacpan.org/release/{name}'
   tags: [ all, production ]

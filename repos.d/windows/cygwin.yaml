@@ -23,16 +23,16 @@
     - desc: Cygwin package search
       url: https://cygwin.com/packages/
   packagelinks:
-    - desc: Package details
+    - type: PACKAGE_HOMEPAGE
       url: 'https://cygwin.com/packages/summary/{binname}.html'
     # XXX: there's no knowing whether a package is noarch or arch-dependent, so
     # not using the following entries as many of them would be broken;
     # However, if we support link checking for generated links (#722), this
     # would work.
-    #- desc: Package files (noarch)
+    #- type: PACKAGE_SOURCES
     #  url: 'http://mirrors.dotsrc.org/cygwin/noarch/release/{name}'
-    #- desc: Package files (x86)
+    #- type: PACKAGE_SOURCES
     #  url: 'http://mirrors.dotsrc.org/cygwin/x86/release/{name}'
-    #- desc: Package files (x86_64)
+    #- type: PACKAGE_SOURCES
     #  url: 'http://mirrors.dotsrc.org/cygwin/x86_64/release/{name}'
   tags: [ all, production, cygwin ]

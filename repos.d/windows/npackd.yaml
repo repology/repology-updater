@@ -22,7 +22,7 @@
     - desc: Npackd home
       url: https://www.npackd.org/
   packagelinks:
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, production, npackd ]
 
@@ -45,7 +45,7 @@
     - desc: Npackd home
       url: https://www.npackd.org/
   packagelinks:
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, production, npackd ]
 
@@ -68,7 +68,7 @@
     - desc: Npackd home
       url: https://www.npackd.org/
   packagelinks:
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, npackd ]  # disabled (experimental), see #863
 
@@ -91,6 +91,6 @@
     - desc: Npackd home
       url: https://www.npackd.org/
   packagelinks:
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, production, npackd ]
