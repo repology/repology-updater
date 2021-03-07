@@ -20,6 +20,6 @@
     - desc: freshcode.club
       url: http://freshcode.club/
   packagelinks:
-    - desc: freshcode.club page
+    - type: PACKAGE_HOMEPAGE
       url: 'http://freshcode.club/projects/{name}'
   tags: [ all, production ]

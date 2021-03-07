@@ -20,7 +20,7 @@
     - desc: GNU Emacs Lisp Package Archive
       url: https://elpa.gnu.org/
   packagelinks:
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://elpa.gnu.org/packages/{name}.html'
   tags: [ all, production, elpa ]
 
@@ -43,6 +43,6 @@
     - desc: Milkypostman’s Emacs Lisp Package Archive
       url: https://melpa.org/
   packagelinks:
-    - desc: Package page
+    - type: PACKAGE_HOMEPAGE
       url: 'https://melpa.org/#/{name}'
   tags: [ all, production, elpa ]
