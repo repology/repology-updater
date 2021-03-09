@@ -22,7 +22,7 @@
     - desc: Hackage
       url: https://hackage.haskell.org/
   packagelinks:
-    - desc: Hackage page
+    - type: PROJECT_HOMEPAGE
       url: 'http://hackage.haskell.org/package/{name}'
   tags: [ all, production ]
 
@@ -46,7 +46,7 @@
     - desc: Stackage Nightly
       url: https://www.stackage.org/nightly
   packagelinks:
-    - desc: Stackage page
+    - type: PROJECT_HOMEPAGE
       url: 'https://www.stackage.org/nightly/package/{name}-{origversion}'
   tags: [ all, production, stackage ]
 
@@ -70,6 +70,6 @@
     - desc: LTS Haskell
       url: https://www.stackage.org/lts
   packagelinks:
-    - desc: Stackage page
+    - type: PROJECT_HOMEPAGE
       url: 'https://www.stackage.org/lts/package/{name}-{origversion}'
   tags: [ all, production, stackage ]

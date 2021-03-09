@@ -198,11 +198,8 @@ class HackageParserBase(Parser):
                 pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, cabaldata.get('homepage'))
                 pkg.add_categories(cabaldata.get('category'))
 
-                # XXX: mover to packagelinks
-                pkg.add_homepages(LinkType.PROJECT_HOMEPAGE, 'http://hackage.haskell.org/package/' + cabaldata['name'])
-
                 if (bug_reports := cabaldata.get('bug-reports')) and bug_reports.startswith('http'):
-                    pkg.add_homepages(LinkType.UPSTREAM_ISSUE_TRACKER, bug_reports)
+                    pkg.add_links(LinkType.UPSTREAM_ISSUE_TRACKER, bug_reports)
 
                 # XXX: may also parse repository url from source-repository section, but nested
                 # parsing need to be implemented first
