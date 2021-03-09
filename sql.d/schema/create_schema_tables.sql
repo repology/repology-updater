@@ -46,8 +46,6 @@ CREATE TABLE packages (
 	comment text,
 	licenses text[],
 
-	extrafields jsonb,
-
 	cpe_vendor text NULL,
 	cpe_product text NULL,
 	cpe_edition text NULL,
@@ -65,10 +63,7 @@ CREATE TABLE packages (
 	versionclass smallint,
 
 	flags integer NOT NULL,
-	shadow bool NOT NULL,
-
-	flavors text[],
-	branch text NULL
+	shadow bool NOT NULL
 );
 
 CREATE INDEX ON packages(effname);

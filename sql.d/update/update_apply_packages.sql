@@ -49,8 +49,6 @@ INSERT INTO packages (
 	comment,
 	licenses,
 
-	extrafields,
-
 	cpe_vendor,
 	cpe_product,
 	cpe_edition,
@@ -91,8 +89,6 @@ INSERT INTO packages (
 	category,
 	comment,
 	licenses,
-
-	extrafields,
 
 	cpe_vendor,
 	cpe_product,

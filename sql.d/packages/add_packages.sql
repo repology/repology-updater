@@ -42,8 +42,6 @@ INSERT INTO incoming_packages_raw (
 	comment,
 	licenses,
 
-	extrafields,
-
 	cpe_vendor,
 	cpe_product,
 	cpe_edition,
@@ -86,8 +84,6 @@ INSERT INTO incoming_packages_raw (
 	%(category)s,
 	%(comment)s,
 	%(licenses)s,
-
-	%(extrafields)s,
 
 	%(cpe_vendor)s,
 	%(cpe_product)s,

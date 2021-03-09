@@ -50,8 +50,6 @@ CREATE TEMPORARY TABLE incoming_packages_raw (
     comment text,
     licenses text[],
 
-    extrafields jsonb,
-
 	cpe_vendor text NULL,
 	cpe_product text NULL,
 	cpe_edition text NULL,
@@ -96,8 +94,6 @@ CREATE TEMPORARY TABLE incoming_packages (
     category text,
     comment text,
     licenses text[],
-
-    extrafields jsonb,
 
 	cpe_vendor text NULL,
 	cpe_product text NULL,

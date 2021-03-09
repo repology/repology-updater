@@ -38,8 +38,6 @@ INSERT INTO incoming_packages (
 	comment,
 	licenses,
 
-	extrafields,
-
 	cpe_vendor,
 	cpe_product,
 	cpe_edition,
@@ -81,8 +79,6 @@ SELECT
 	category,
 	comment,
 	licenses,
-
-	extrafields,
 
 	cpe_vendor,
 	cpe_product,
