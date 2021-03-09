@@ -138,6 +138,7 @@ class NixJsonParser(Parser):
                     letters = ''.join(c for c in packagedata['version'].lower() if c.isalpha())
                     if letters not in ['alpha', 'beta', 'rc', 'a', 'b', 'pre', 'post', 'rev', 'q', 'u', 'build', 'unstable']:
                         pkg.log('"{}": suspicious version "{}", worth rechecking'.format(packagedata['name'], packagedata['version']), severity=Logger.WARNING)
+                        pkg.set_flags(PackageFlags.UNTRUSTED)
 
                 pname = packagedata['pname']
                 version = packagedata['version']
