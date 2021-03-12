@@ -24,5 +24,5 @@
       url: https://www.hyperbola.info/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://hyperbola.info/packages/?q={binname}'
+      url: 'https://www.hyperbola.info/packages/?q={binname}'
   tags: [ all, production ]

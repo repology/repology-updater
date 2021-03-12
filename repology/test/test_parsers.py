@@ -270,7 +270,7 @@ class TestParsers(unittest.TestCase):
                 'maintainers': None,
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://www.zlib.net/'),
-                    (LinkType.PACKAGE_HOMEPAGE, 'https://www.archlinux.org/packages/?q=zlib'),
+                    (LinkType.PACKAGE_HOMEPAGE, 'https://archlinux.org/packages/?q=zlib'),
                     (LinkType.PACKAGE_SOURCES, 'https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/zlib'),
                     (LinkType.PACKAGE_RECIPE, 'https://git.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/zlib'),
                     (LinkType.PACKAGE_RECIPE_RAW, 'https://git.archlinux.org/svntogit/packages.git/plain/trunk/PKGBUILD?h=packages/zlib'),

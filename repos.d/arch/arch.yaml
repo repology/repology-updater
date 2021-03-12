@@ -23,7 +23,7 @@
       url: https://www.archlinux.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.archlinux.org/packages/?q={binname}'
+      url: 'https://archlinux.org/packages/?q={binname}'
     # XXX: exact link should replace the above one, but we need arch for this
     #- type: Package information (x86_64)
     #  url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
@@ -58,7 +58,7 @@
       url: https://www.archlinux.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.archlinux.org/packages/?q={binname}'
+      url: 'https://archlinux.org/packages/?q={binname}'
     # XXX: exact link should replace the above one, but we need arch for this
     #- type: Package information (x86_64)
     #  url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'

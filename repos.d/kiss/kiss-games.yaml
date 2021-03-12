@@ -24,7 +24,7 @@
     - type: PACKAGE_SOURCES
       url: 'https://github.com/sdsddsd1/kiss-games/tree/master/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/sdsddsd1/kiss-games/tree/master/{path}/patches/{?patch}'
+      url: 'https://github.com/sdsddsd1/kiss-games/blob/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/sdsddsd1/kiss-games/master/{path}/patches/{?patch}'
   tags: [ all, production, kiss ]

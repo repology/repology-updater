@@ -24,7 +24,7 @@
     - type: PACKAGE_SOURCES
       url: 'https://github.com/CarbsLinux/repository/tree/master/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/CarbsLinux/repository/tree/master/{path}/patches/{?patch}'
+      url: 'https://github.com/CarbsLinux/repository/blob/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/CarbsLinux/repository/master/{path}/patches/{?patch}'
   tags: [ all, production ]

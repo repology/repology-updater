@@ -28,7 +28,7 @@
     - type: PACKAGE_SOURCES
       url: 'https://github.com/kiss-community/repo-main/tree/master/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/kiss-community/repo-main/tree/master/{path}/patches/{?patch}'
+      url: 'https://github.com/kiss-community/repo-main/blob/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/kiss-community/repo-main/master/{path}/patches/{?patch}'
   tags: [ all, production, kiss ]
@@ -61,7 +61,7 @@
     - type: PACKAGE_SOURCES
       url: 'https://github.com/kiss-community/repo-community/tree/main/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/kiss-community/repo-community/tree/main/{path}/patches/{?patch}'
+      url: 'https://github.com/kiss-community/repo-community/blob/main/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/kiss-community/repo-community/main/{path}/patches/{?patch}'
   tags: [ all, production, kiss ]
