@@ -56,7 +56,9 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.1/{srcname}.spec'
-  tags: [ all, production, openmandriva, rpm ]
+  # 2021-03-15 04:03:45 ERROR: HTTPError: 404 Client Error: Not Found for url: http://abf-downloads.openmandriva.org/4.1/repository/SRPMS/main/release/repodata/repomd.xml
+
+  tags: [ all, openmandriva, rpm ]
 
 - name: openmandriva_4_2
   type: repository
@@ -112,7 +114,9 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/rolling/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/rolling/{srcname}.spec'
-  tags: [ all, production, openmandriva, rpm ]
+  # 2021-03-15 04:03:57 ERROR: HTTPError: 403 Client Error: Forbidden for url: http://abf-downloads.openmandriva.org/rolling/repository/SRPMS/unsupported/release/repodata/repomd.xml
+
+  tags: [ all, openmandriva, rpm ]
 
 - name: openmandriva_cooker
   sortname: openmandriva_zcooker
