@@ -19,9 +19,9 @@
         maintainer_from_git: true
   repolinks:
     - desc: KISS Linux home
-      url: https://k1ss.org/
+      url: https://k1sslinux.org/
     - desc: KISS Linux - Package System
-      url: https://k1ss.org/package-system/
+      url: https://k1sslinux.org/package-system/
     - desc: Main Repositories on GitHub
       url: https://github.com/kiss-community/repo-main
   packagelinks:
@@ -52,9 +52,9 @@
         maintainer_from_git: true
   repolinks:
     - desc: KISS Linux home
-      url: https://k1ss.org/
+      url: https://k1sslinux.org/
     - desc: KISS Linux - Package System
-      url: https://k1ss.org/package-system/
+      url: https://k1sslinux.org/package-system/
     - desc: Community Repository on GitHub
       url: https://github.com/kiss-community/repo-community
   packagelinks:
