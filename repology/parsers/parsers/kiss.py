@@ -22,6 +22,7 @@ from typing import Iterable
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.patches import add_patch_files
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
@@ -71,8 +72,6 @@ class KissGitParser(Parser):
 
                     pkg.add_maintainers(extract_maintainers(lastauthor))
 
-                patchesdir_abs = os.path.join(rootdir, 'patches')
-                if os.path.exists(patchesdir_abs):
-                    pkg.set_extra_field('patch', sorted(os.listdir(patchesdir_abs)))
+                add_patch_files(pkg, os.path.join(rootdir, 'patches'))
 
                 yield pkg

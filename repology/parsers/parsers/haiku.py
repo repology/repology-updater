@@ -22,6 +22,7 @@ from typing import Iterable
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.patches import add_patch_files
 from repology.transformer import PackageTransformer
 
 
@@ -36,11 +37,6 @@ class HaikuPortsFilenamesParser(Parser):
                 package_path = os.path.join(category_path, package)
                 if not os.path.isdir(package_path):
                     continue
-
-                patches = None
-                patches_path = os.path.join(package_path, 'patches')
-                if os.path.exists(patches_path):
-                    patches = sorted(os.listdir(patches_path))
 
                 for recipe in os.listdir(package_path):
                     if not recipe.endswith('.recipe'):
@@ -74,7 +70,7 @@ class HaikuPortsFilenamesParser(Parser):
 
                         # XXX: this is not really precise, as we list all patches if there's
                         # suspiction that a recipe uses any of them
-                        if patches and re.search('^PATCHES=', recipefile, re.MULTILINE):
-                            pkg.set_extra_field('patch', patches)
+                        if re.search('^PATCHES=', recipefile, re.MULTILINE):
+                            add_patch_files(pkg, os.path.join(package_path, 'patches'))
 
                     yield pkg

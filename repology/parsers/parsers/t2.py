@@ -25,6 +25,7 @@ from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.patches import add_patch_files
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
@@ -115,13 +116,6 @@ class T2DescParser(Parser):
 
                     pkg.add_downloads(url)
 
-                patches = [
-                    filename
-                    for filename in sorted(os.listdir(os.path.dirname(desc_path)))
-                    if filename.endswith('.patch')
-                ]
-
-                if patches:
-                    pkg.set_extra_field('patch', patches)
+                add_patch_files(pkg, os.path.dirname(desc_path), '*.patch')
 
                 yield pkg

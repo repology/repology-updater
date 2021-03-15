@@ -25,6 +25,7 @@ from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.patches import add_patch_files
 from repology.transformer import PackageTransformer
 
 
@@ -129,9 +130,7 @@ class VcpkgGitParser(Parser):
                     pkg.log('marking as untrusted, https://github.com/libimobiledevice-win32 accused of version faking', severity=Logger.WARNING)
                     pkg.set_flags(PackageFlags.UNTRUSTED)
 
-                patches = sorted(filename for filename in os.listdir(package_path_abs) if filename.endswith('.patch'))
-                if patches:
-                    pkg.set_extra_field('patch', patches)
+                add_patch_files(pkg, package_path_abs, '*.patch')
 
                 yield pkg
 

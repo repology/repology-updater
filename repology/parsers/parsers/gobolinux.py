@@ -24,6 +24,7 @@ from libversion import version_compare
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.patches import add_patch_files
 from repology.transformer import PackageTransformer
 
 
@@ -96,13 +97,6 @@ class GoboLinuxGitParser(Parser):
                     pkg.add_licenses(data.get('License'))
                     pkg.add_homepages(data.get('Homepage', '').strip('"'))
 
-            patches = [
-                filename
-                for filename in sorted(os.listdir(os.path.join(package_path, maxversion)))
-                if filename.endswith('.patch') or filename.endswith('.patch.in')
-            ]
-
-            if patches:
-                pkg.set_extra_field('patch', patches)
+            add_patch_files(pkg, os.path.join(package_path, maxversion), '*.patch*')
 
             yield pkg
