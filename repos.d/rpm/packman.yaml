@@ -274,7 +274,7 @@
   family: opensuse  # XXX: own family?
   ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
-  minpackages: 250
+  minpackages: 50
   sources:
     - name: all
       fetcher:
