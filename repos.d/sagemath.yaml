@@ -28,4 +28,8 @@
       url: 'https://github.com/sagemath/sage/blob/develop/build/pkgs/{srcname}/spkg-install.in'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/sagemath/sage/develop/build/pkgs/{srcname}/spkg-install.in'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/sagemath/sage/blob/develop/build/pkgs/{srcname}/patches/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/sagemath/sage/develop/build/pkgs/{srcname}/patches/{?patch}'
   tags: [ all, production ]

@@ -20,6 +20,7 @@ from typing import Iterable, Optional
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.patches import add_patch_files
 from repology.parsers.versions import VersionStripper
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
@@ -64,5 +65,7 @@ class SageMathParser(Parser):
                             pkg.rawversion
                         )
                     )
+
+                add_patch_files(pkg, os.path.join(pkgpath, 'patches'), '*.patch')
 
                 yield pkg
