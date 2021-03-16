@@ -26,7 +26,8 @@ __all__ = ['add_patch_files']
 
 
 def add_patch_files(pkg: PackageMaker, path: str, pattern: Optional[str] = None) -> None:
-    if not os.path.isdir(path):
+    # skip symlinked directory - in most cases we can't construct links out of these
+    if not os.path.isdir(path) or os.path.islink(path):
         return
 
     filenames = os.listdir(path)
