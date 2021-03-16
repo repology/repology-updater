@@ -19,13 +19,16 @@
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/epel6'
-    - type: PACKAGE_RECIPE
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel6/f/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel6/f/{srcname}.spec'
+  # 99.9% links broken, no such branch epel6
+  #packagelinks:
+  #  # this pattern falls back to default branch, but it's still useless
+  #  - type: PACKAGE_SOURCES
+  #    url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/epel6'
+  #  # these patterns are completely broken
+  #  - type: PACKAGE_RECIPE
+  #    url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel6/f/{srcname}.spec'
+  #  - type: PACKAGE_RECIPE_RAW
+  #    url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel6/f/{srcname}.spec'
   tags: [ all, production, epel ]
 
 - name: epel_7
