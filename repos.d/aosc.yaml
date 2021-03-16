@@ -25,8 +25,9 @@
       url: 'https://packages.aosc.io/packages/{binname}'
     - type: PACKAGE_SOURCES
       url: 'https://github.com/AOSC-Dev/{tree}/tree/{branch}/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://github.com/AOSC-Dev/{tree}/blob/{branch}/{srcname}/autobuild/build'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/AOSC-Dev/{tree}/{branch}/{srcname}/autobuild/build'
+    # These are broken for 73% of packages - recipe may reside in different directory than 'autobuild'
+    #- type: PACKAGE_RECIPE
+    #  url: 'https://github.com/AOSC-Dev/{tree}/blob/{branch}/{srcname}/autobuild/build'
+    #- type: PACKAGE_RECIPE_RAW
+    #  url: 'https://raw.githubusercontent.com/AOSC-Dev/{tree}/{branch}/{srcname}/autobuild/build'
   tags: [ all, production ]
