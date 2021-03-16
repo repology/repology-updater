@@ -18,7 +18,7 @@
 import re
 from typing import Dict, Iterable, Optional
 
-from repology.package import LinkType, PackageFlags
+from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -128,7 +128,8 @@ class DebianSourcesParser(Parser):
 
                 self._extra_handling(pkg, pkgdata)
 
-                pkg.add_links(LinkType.PACKAGE_SOURCES, _extract_vcs_link(pkgdata))
+                # XXX: too much garbage
+                #pkg.add_links(LinkType.PACKAGE_SOURCES, _extract_vcs_link(pkgdata))
 
                 yield pkg
 

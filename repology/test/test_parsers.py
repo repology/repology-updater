@@ -322,7 +322,7 @@ class TestParsers(unittest.TestCase):
                 'links': [
                     (LinkType.UPSTREAM_HOMEPAGE, 'http://liba52.sourceforge.net/'),
                     (LinkType.PACKAGE_HOMEPAGE, 'https://packages.debian.org/unstable/source/a52dec'),
-                    (LinkType.PACKAGE_SOURCES, 'https://anonscm.debian.org/cgit/pkg-multimedia/a52dec.git;a=summary'),
+                    #(LinkType.PACKAGE_SOURCES, 'https://anonscm.debian.org/cgit/pkg-multimedia/a52dec.git;a=summary'),
                     (LinkType.PACKAGE_ISSUE_TRACKER, 'https://bugs.debian.org/a52dec'),
                     (LinkType.PACKAGE_SOURCES, 'https://sources.debian.org/src/a52dec/0.7.4-18'),
                     (LinkType.PACKAGE_STATISTICS, 'https://qa.debian.org/popcon-graph.php?packages=a52dec'),
