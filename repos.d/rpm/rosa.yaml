@@ -113,13 +113,14 @@
   repolinks:
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://abf.io/server/{srcname}/tree/rosa-server69'
-    - type: PACKAGE_RECIPE
-      url: 'https://abf.io/server/{srcname}/blob/rosa-server69/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://abf.io/server/{srcname}/raw/rosa-server69/{srcname}.spec'
+  # 75% of these broken, no such branch
+  #packagelinks:
+  #  - type: PACKAGE_SOURCES
+  #    url: 'https://abf.io/server/{srcname}/tree/rosa-server69'
+  #  - type: PACKAGE_RECIPE
+  #    url: 'https://abf.io/server/{srcname}/blob/rosa-server69/{srcname}.spec'
+  #  - type: PACKAGE_RECIPE_RAW
+  #    url: 'https://abf.io/server/{srcname}/raw/rosa-server69/{srcname}.spec'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_7_3
