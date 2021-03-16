@@ -282,12 +282,14 @@
         url: http://download.opensuse.org/tumbleweed/repo/src-oss/
       parser:
         class: RepodataParser
+      subrepo: src-oss
     - name: src-non-oss
       fetcher:
         class: RepodataFetcher
         url: http://download.opensuse.org/tumbleweed/repo/src-non-oss/
       parser:
         class: RepodataParser
+      subrepo: src-non-oss
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
