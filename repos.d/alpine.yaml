@@ -3,6 +3,15 @@
 #
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux:Releases
 ###########################################################################
+
+# XXX: packagelinks problems:
+#
+# Most PACKAGE_BUILD_LOG_RAW links are broken, likely because logs are not
+# stored on servers for a long time. It would be OK for us as soon as we start
+# retrieving content for these - new logs will be fetched and stored
+# and we no longer care if original files are deleted
+#
+
 - name: alpine_3_8
   sortname: alpine_3_08
   type: repository

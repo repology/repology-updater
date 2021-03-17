@@ -1,6 +1,33 @@
 ###########################################################################
 # openSUSE additional repositories
 ###########################################################################
+
+# XXX: packagelinks problems:
+#
+# - We don't have information on than a package is produced by multibuild.
+#   For intance, for mumps-mvapich2 package we generate spec link
+#
+#     https://build.opensuse.org/package/view_file/science/mumps-mvapich2/mumps-mvapich2.spec
+#
+#   but the correct url would be
+#
+#     https://build.opensuse.org/package/view_file/science/mumps/mumps.spec
+#
+# - There's some discrepancy with package name case 
+#   We generate
+#
+#     https://build.opensuse.org/package/view_file/science/CCfits/CCfits.spec
+#
+#   but the correct would be
+#
+#     https://build.opensuse.org/package/view_file/science/ccfits/CCfits.spec
+#
+#   However we can't just fix this by lowercasing the directory, as e.g.
+#
+#     https://build.opensuse.org/package/view_file/science/Rivet/Rivet.spec
+#
+#   is a correct link.
+
 - name: opensuse_education_tumbleweed
   sortname: opensusez_education
   type: repository
