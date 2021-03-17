@@ -20,13 +20,14 @@
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://git.centos.org/rpms/{srcname}/tree/c6{centossuffix}'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.centos.org/rpms/{srcname}/blob/c6{centossuffix}/f/SPECS/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.centos.org/rpms/{srcname}/raw/c6{centossuffix}/f/SPECS/{srcname}.spec'
+  # 99.7% packages have no content
+  #packagelinks:
+  #  - type: PACKAGE_SOURCES
+  #    url: 'https://git.centos.org/rpms/{srcname}/tree/c6{centossuffix}'
+  #  - type: PACKAGE_RECIPE
+  #    url: 'https://git.centos.org/rpms/{srcname}/blob/c6{centossuffix}/f/SPECS/{srcname}.spec'
+  #  - type: PACKAGE_RECIPE_RAW
+  #    url: 'https://git.centos.org/rpms/{srcname}/raw/c6{centossuffix}/f/SPECS/{srcname}.spec'
   tags: [ all, production, centos, rpm ]
 
 - name: centos_7
