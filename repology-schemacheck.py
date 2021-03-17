@@ -259,6 +259,9 @@ schemas = {
                         # kiss
                         'maintainer_from_git': bool,
                         'blob_prefix': str,
+
+                        # debian
+                        'allowed_vcs_urls': str,
                     },
                     'packagelinks': packagelinks,
                 }

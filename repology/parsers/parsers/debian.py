@@ -18,7 +18,7 @@
 import re
 from typing import Dict, Iterable, Optional
 
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -111,6 +111,11 @@ def _extract_vcs_link(pkgdata: Dict[str, str]) -> Optional[str]:
 
 
 class DebianSourcesParser(Parser):
+    _allowed_vcs_urls_re: Optional[re.Pattern[str]]
+
+    def __init__(self, allowed_vcs_urls: Optional[str] = None) -> None:
+        self._allowed_vcs_urls_re = None if allowed_vcs_urls is None else re.compile(allowed_vcs_urls, re.IGNORECASE)
+
     def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
         if 'Binary' not in pkgdata or 'Source' in pkgdata:
             raise RuntimeError('Sanity check failed, expected Package descriptions with Binary, but without Source field')
@@ -128,8 +133,9 @@ class DebianSourcesParser(Parser):
 
                 self._extra_handling(pkg, pkgdata)
 
-                # XXX: too much garbage
-                #pkg.add_links(LinkType.PACKAGE_SOURCES, _extract_vcs_link(pkgdata))
+                if (url := _extract_vcs_link(pkgdata)) is not None:
+                    if self._allowed_vcs_urls_re is not None and self._allowed_vcs_urls_re.match(url):
+                        pkg.add_links(LinkType.PACKAGE_SOURCES, url)
 
                 yield pkg
 

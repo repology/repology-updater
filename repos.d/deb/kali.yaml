@@ -19,11 +19,10 @@
         compression: gz
       parser:
         class: DebianSourcesParser
+        # we only need sources for kalilinux unique packages, others are from debian
+        #allowed_vcs_urls: "https://gitlab.com/kalilinux/packages/"
       subrepo: '{source}'
   repolinks:
     - desc: Kali Linux home
       url: https://www.kali.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitlab.com/kalilinux/packages/{srcname}'
   tags: [ all, production, kali ]
