@@ -28,9 +28,9 @@
     - type: PACKAGE_HOMEPAGE
       url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
     - type: PACKAGE_RECIPE
-      url: "https://github.com/KaOSx/{subrepo}/blob/master/{binname}/PKGBUILD"
+      url: "https://github.com/KaOSx/{subrepo}/blob/master/{srcname}/PKGBUILD"
     - type: PACKAGE_RECIPE_RAW
-      url: "https://raw.githubusercontent.com/KaOSx/{subrepo}/master/{binname}/PKGBUILD"
+      url: "https://raw.githubusercontent.com/KaOSx/{subrepo}/master/{srcname}/PKGBUILD"
   tags: [ all, production ]
 
 - name: kaos_build
