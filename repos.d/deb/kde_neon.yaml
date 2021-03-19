@@ -10,7 +10,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/user/dists/bionic/main/source/Sources.gz
+        url: http://archive.neon.kde.org/user/dists/focal/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -33,7 +33,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/user/lts/dists/bionic/main/source/Sources.gz
+        url: http://archive.neon.kde.org/user/lts/dists/focal/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -56,7 +56,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/dev/stable/dists/bionic/main/source/Sources.gz
+        url: http://archive.neon.kde.org/dev/stable/dists/focal/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -79,7 +79,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/dev/unstable/dists/bionic/main/source/Sources.gz
+        url: http://archive.neon.kde.org/dev/unstable/dists/focal/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -102,7 +102,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/unstable/dists/bionic/main/source/Sources.gz
+        url: http://archive.neon.kde.org/unstable/dists/focal/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -125,7 +125,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/testing/dists/bionic/main/source/Sources.gz
+        url: http://archive.neon.kde.org/testing/dists/focal/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
