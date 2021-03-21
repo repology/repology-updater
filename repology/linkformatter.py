@@ -33,6 +33,7 @@ _filters: Dict[str, Callable[[str], str]] = {
     'dirname': lambda x: x.rsplit('/', 1)[0],
     'dec': lambda x: str(_safe_int(x) - 1),
     'inc': lambda x: str(_safe_int(x) + 1),
+    'quote': lambda x: urllib.parse.quote(x)
 }
 
 
@@ -110,8 +111,6 @@ class FieldGatheringMapping:
                 if filtername not in _filters:
                     raise RuntimeError(f'unknown filter "filtername" in "{field}"')
                 value = _filters[filtername](value)
-
-            value = urllib.parse.quote(value)
 
             self._fields[key] = [value]
         else:

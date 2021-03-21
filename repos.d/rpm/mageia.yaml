@@ -25,7 +25,7 @@
       url: https://madb.mageia.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{srcname}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{srcname|quote}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_7
@@ -52,7 +52,7 @@
       url: https://madb.mageia.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{srcname}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{srcname|quote}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_8
@@ -80,7 +80,7 @@
   # No suck distribution on mageia app db (yet)
   #packagelinks:
   #  - type: PACKAGE_HOMEPAGE
-  #    url: 'https://madb.mageia.org/package/show/source/1/application/0/release/8/name/{srcname}'
+  #    url: 'https://madb.mageia.org/package/show/source/1/application/0/release/8/name/{srcname|quote}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
@@ -113,5 +113,5 @@
       # application=0 (show all packages, not only applications)
       # release=cauldron (select release)
       # name=XXX (package name)
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/cauldron/name/{srcname}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/cauldron/name/{srcname|quote}'
   tags: [ all, production, mageia, rpm ]

@@ -31,9 +31,9 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://aur.archlinux.org/packages/{binname}'
     - type: PACKAGE_RECIPE
-      url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={srcname}'
+      url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={srcname|quote}'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h={srcname}'
+      url: 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
   tags: [ all, production ]
 
 - name: chaotic-aur
