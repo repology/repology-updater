@@ -20,7 +20,7 @@
     - desc: KDE neon home
       url: https://neon.kde.org/
     - desc: KDE neon git repositories
-      url: https://packaging.neon.kde.org/
+      url: https://invent.kde.org/neon
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
   tags: [ all, production, kde_neon ]
