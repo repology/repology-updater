@@ -29,6 +29,7 @@ _DEBIAN_VERSION_BAD_SUFFIX_RE = re.compile('[.~+-]?(dfsg|ubuntu|mx).*', re.IGNOR
 _DEBIAN_VERSION_GOOD_SUFFIX_RE = re.compile('((?:a|b|r|alpha|beta|rc|rcgit|pre|patch|git|svn|cvs|hg|bzr|darcs|dev)[.-]?[0-9]+(?:\\.[0-9]+)*|(?:alpha|beta|rc))', re.IGNORECASE)
 _DEBIAN_VERSION_SUFFIX_SEP_RE = re.compile('[~+-]')
 _DEBIAN_KEYVAL_RE = re.compile('([A-Za-z0-9_-]+):(.*?)')
+_DEBIAN_REALLY_RE = re.compile(r'[^a-z](is|really)[^a-z]', re.IGNORECASE)
 
 
 def _normalize_version(version: str) -> str:
@@ -130,6 +131,10 @@ class DebianSourcesParser(Parser):
                 pkg.add_maintainers(extract_maintainers(pkgdata.get('Uploaders', '')))
                 pkg.add_categories(pkgdata.get('Section'))
                 pkg.add_homepages(pkgdata.get('Homepage'))
+
+                # XXX: move into dedicated debian version handling code along with _normalize_version
+                if _DEBIAN_REALLY_RE.search(pkgdata['Version']):
+                    pkg.set_flags(PackageFlags.INCORRECT)
 
                 self._extra_handling(pkg, pkgdata)
 
