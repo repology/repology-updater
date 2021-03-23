@@ -93,6 +93,7 @@ families = [
     'pisi',
     'pkgsrc',
     'pld',
+    'postmarketos',
     'pypi',
     'ravenports',
     'reactos',

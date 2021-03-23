@@ -1,0 +1,86 @@
+###########################################################################
+# PostmarketOS
+###########################################################################
+- name: postmarketos_20.05
+  type: repository
+  desc: postmarketOS 20.05
+  statsgroup: postmarketOS
+  family: postmarketos
+  minpackages: 300
+  default_maintainer: fallback-mnt-postmarketos@repology
+  sources:
+    - name: aarch64
+      fetcher:
+        class: TarFetcher
+        url: http://mirror.postmarketos.org/postmarketos/v20.05/aarch64/APKINDEX.tar.gz
+      parser:
+        class: ApkIndexParser
+      subrepo: '{source}'
+      packagelinks:
+        # XXX: want package recipe, but no way to know path under https://gitlab.com/postmarketOS/pmaports/
+        - type: PACKAGE_HOMEPAGE
+          url: http://pkgs.postmarketos.org/package/v20.05/postmarketos/aarch64/device-pine64-pinetab-phosh
+  repolinks:
+    - desc: postmarketOS home
+      url: https://postmarketos.org/
+    - desc: postmarketOS packages
+      url: http://pkgs.postmarketos.org/packages
+    - desc: Recipe repository
+      url: https://gitlab.com/postmarketOS/pmaports/
+  tags: [ all, production, postmarketos ]
+
+- name: postmarketos_21.03
+  type: repository
+  desc: postmarketOS 21.03
+  statsgroup: postmarketOS
+  family: postmarketos
+  minpackages: 500
+  default_maintainer: fallback-mnt-postmarketos@repology
+  sources:
+    - name: aarch64
+      fetcher:
+        class: TarFetcher
+        url: http://mirror.postmarketos.org/postmarketos/v21.03/aarch64/APKINDEX.tar.gz
+      parser:
+        class: ApkIndexParser
+      subrepo: '{source}'
+      packagelinks:
+        # XXX: want package recipe, but no way to know path under https://gitlab.com/postmarketOS/pmaports/
+        - type: PACKAGE_HOMEPAGE
+          url: http://pkgs.postmarketos.org/package/v21.03/postmarketos/aarch64/device-pine64-pinetab-phosh
+  repolinks:
+    - desc: postmarketOS home
+      url: https://postmarketos.org/
+    - desc: postmarketOS packages
+      url: http://pkgs.postmarketos.org/packages
+    - desc: Recipe repository
+      url: https://gitlab.com/postmarketOS/pmaports/
+  tags: [ all, production, postmarketos ]
+
+- name: postmarketos_master
+  type: repository
+  desc: postmarketOS master
+  statsgroup: postmarketOS
+  family: postmarketos
+  minpackages: 700
+  default_maintainer: fallback-mnt-postmarketos@repology
+  sources:
+    - name: aarch64
+      fetcher:
+        class: TarFetcher
+        url: http://mirror.postmarketos.org/postmarketos/master/aarch64/APKINDEX.tar.gz
+      parser:
+        class: ApkIndexParser
+      subrepo: '{source}'
+      packagelinks:
+        # XXX: want package recipe, but no way to know path under https://gitlab.com/postmarketOS/pmaports/
+        - type: PACKAGE_HOMEPAGE
+          url: http://pkgs.postmarketos.org/package/master/postmarketos/aarch64/device-pine64-pinetab-phosh
+  repolinks:
+    - desc: postmarketOS home
+      url: https://postmarketos.org/
+    - desc: postmarketOS packages
+      url: http://pkgs.postmarketos.org/packages
+    - desc: Recipe repository
+      url: https://gitlab.com/postmarketOS/pmaports/
+  tags: [ all, production, postmarketos ]
