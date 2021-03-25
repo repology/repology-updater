@@ -16,10 +16,6 @@
       parser:
         class: ApkIndexParser
       subrepo: '{source}'
-      packagelinks:
-        # XXX: want package recipe, but no way to know path under https://gitlab.com/postmarketOS/pmaports/
-        - type: PACKAGE_HOMEPAGE
-          url: http://pkgs.postmarketos.org/package/v20.05/postmarketos/aarch64/device-pine64-pinetab-phosh
   repolinks:
     - desc: postmarketOS home
       url: https://postmarketos.org/
