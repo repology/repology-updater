@@ -39,6 +39,8 @@ class RavenportsJsonParser(Parser):
                 pkg.set_extra_field('bucket', packagedata['bucket'])
                 pkg.set_extra_field('variant', packagedata['variants'][0]['label'])
 
+                # TODO: process all variants instead of the first one
+
                 if 'cpe' in packagedata:
                     pkg.add_cpe(**{
                         key: packagedata['cpe'].get(key)
