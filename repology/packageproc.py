@@ -198,12 +198,12 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
         first_package_in_branch: Dict[Tuple[Optional[str], str], Package] = {}  # by branch, flavor
 
         for package in repo_packages:  # these are still sorted by version
-            do_switch_to_devel = (
+            do_switch_to_main_section = (
                 current_section is devel_section and
                 (current_section.is_empty() or current_section.preceeds(package)) and
                 not main_section.is_empty()
             )
-            if do_switch_to_devel:
+            if do_switch_to_main_section:
                 # switch from devel to main section
                 current_section = main_section
                 first_package_in_section = {}
