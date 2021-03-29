@@ -195,7 +195,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
     for repo, repo_packages in packages_by_repo.items():
         current_section = devel_section
         first_package_in_section: Dict[str, Package] = {}  # by flavor
-        first_package_in_branch: Dict[Tuple[str, str], Package] = {}  # by branch, flavor
+        first_package_in_branch: Dict[Tuple[Optional[str], str], Package] = {}  # by branch, flavor
 
         for package in repo_packages:  # these are still sorted by version
             do_switch_to_devel = (
@@ -231,7 +231,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
                     package.versionclass = PackageStatus.IGNORED
             else:
                 flavor = '_'.join(package.flavors)  # already sorted and unicalized in RepoProcessor
-                branch_key = None if package.branch is None else (package.branch, flavor)
+                branch_key = (package.branch, flavor)
 
                 if current_comparison == 0:
                     package.versionclass = PackageStatus.UNIQUE if project_is_unique else current_section.newest_status
@@ -242,8 +242,10 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
                     )
 
                     first_but_not_best_in_branch = (
-                        branch_key is not None and
-                        (branch_key not in first_package_in_branch or first_package_in_branch[branch_key].version_compare(package) == 0) and
+                        (
+                            branch_key not in first_package_in_branch or
+                            first_package_in_branch[branch_key].version_compare(package) == 0
+                        ) and
                         package.branch in best_package_in_branch and
                         best_package_in_branch[package.branch].version_compare(package) > 0
                     )
