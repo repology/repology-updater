@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import xml.etree.ElementTree
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, Optional, Set, Tuple
@@ -180,7 +181,7 @@ class GentooGitParser(Parser):
                 pkg.add_maintainers(xml_metadata.maintainers)
 
                 if xml_metadata.cpe is not None:
-                    cpe = xml_metadata.cpe.split(':')
+                    cpe = re.split(r"(?<!\\):", xml_metadata.cpe)
                     pkg.add_cpe(cpe[2], cpe[3])
 
                 for ebuild in _iter_ebuilds(path, category, package):
