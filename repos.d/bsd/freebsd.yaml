@@ -25,17 +25,17 @@
       url: https://www.freebsd.org/ports/
     - desc: FreshPorts - The Place For Ports
       url: https://www.freshports.org/
-    - desc: FreeBSD ports SVN repository
-      url: https://svnweb.freebsd.org/ports/head/
+    - desc: FreeBSD ports Git repository
+      url: https://cgit.freebsd.org/ports/tree/
     - desc: Package builds status
       url: https://pkg-status.freebsd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.freshports.org/{srcname}'
     - type: PACKAGE_SOURCES
-      url: 'https://svnweb.freebsd.org/ports/head/{srcname}/'
+      url: 'https://cgit.freebsd.org/ports/tree/{srcname}/'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://svnweb.freebsd.org/ports/head/{srcname}/Makefile?view=co'
+      url: 'https://cgit.freebsd.org/ports/plain/{srcname}/Makefile'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={srcname}'
   tags: [ all, production, have_testdata ]
