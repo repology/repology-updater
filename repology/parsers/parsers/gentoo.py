@@ -181,7 +181,7 @@ class GentooGitParser(Parser):
                 pkg.add_maintainers(xml_metadata.maintainers)
 
                 if xml_metadata.cpe is not None:
-                    cpe = re.split(r"(?<!\\):", xml_metadata.cpe)
+                    cpe = re.split(r'(?<!\\):', xml_metadata.cpe)
                     pkg.add_cpe(cpe[2], cpe[3])
 
                 for ebuild in _iter_ebuilds(path, category, package):
