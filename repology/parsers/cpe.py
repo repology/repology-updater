@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-def cpe_parse(cpe_str: str) -> []:
+def cpe_parse(cpe_str: str) -> list[...]:
     escaped = False
     current = ''
     res = []
