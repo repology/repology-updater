@@ -184,10 +184,10 @@ class GentooGitParser(Parser):
                     cpe = cpe_parse(xml_metadata.cpe)
 
                     # distinguish between cpe format 2.2 or 2.3
-                    if cpe['1'] == '2.3':
-                        pkg.add_cpe(cpe['3'], cpe['4'])
+                    if cpe[1] == '2.3':
+                        pkg.add_cpe(cpe[3], cpe[4])
                     else:
-                        pkg.add_cpe(cpe['2'], cpe['3'])
+                        pkg.add_cpe(cpe[2], cpe[3])
 
                 for ebuild in _iter_ebuilds(path, category, package):
                     subpkg = pkg.clone(append_ident='/' + ebuild)
