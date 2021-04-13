@@ -18,7 +18,7 @@
 from typing import List
 
 
-def cpe_parse(cpe_str: str) -> List[int]:
+def cpe_parse(cpe_str: str) -> List[str]:
     escaped = False
     current = ''
     res = []
