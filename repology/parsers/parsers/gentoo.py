@@ -17,14 +17,14 @@
 
 import os
 import xml.etree.ElementTree
+
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, Optional, Set, Tuple
-
+from repology.parsers.cpe import cpe_parse
 from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.parsers.cpe import cpe_parse
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
@@ -182,12 +182,7 @@ class GentooGitParser(Parser):
 
                 if xml_metadata.cpe is not None:
                     cpe = cpe_parse(xml_metadata.cpe)
-
-                    # distinguish between cpe format 2.2 or 2.3
-                    if cpe[1] == '2.3':
-                        pkg.add_cpe(cpe[3], cpe[4])
-                    else:
-                        pkg.add_cpe(cpe[2], cpe[3])
+                    pkg.add_cpe(cpe.part, cpe.vendor)
 
                 for ebuild in _iter_ebuilds(path, category, package):
                     subpkg = pkg.clone(append_ident='/' + ebuild)

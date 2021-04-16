@@ -21,23 +21,24 @@
 
 import unittest
 
-from repology.parsers.cpe import cpe_parse
+from repology.parsers.cpe import cpe_parse, CPE
 
 
 class TestCpe(unittest.TestCase):
     def test_cpe_parse(self) -> None:
-        self.assertEqual(cpe_parse('foo:bar'), ['foo', 'bar'])
-        self.assertEqual(cpe_parse('foobar'), ['foobar'])
-        self.assertEqual(cpe_parse('cpe:2.3:a:andreas_mueller:cdrdao'), ['cpe', '2.3', 'a', 'andreas_mueller', 'cdrdao'])
-        self.assertEqual(cpe_parse('cpe:/a:archive\\:\\:tar_project:archive\\:\\:tar'), ['cpe', '/a', 'archive\\:\\:tar_project', 'archive\\:\\:tar'])
-        self.assertEqual(cpe_parse('foo\\:bar'), ['foo\\:bar'])
-        self.assertEqual(cpe_parse('foo\\\\:bar'), ['foo\\\\', 'bar'])
+        self.assertIsInstance(cpe_parse('foo:bar'), CPE)
+        self.assertEqual(cpe_parse('foo:bar'), CPE(part='*', vendor='*', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
+        self.assertEqual(cpe_parse('foobar'), CPE(part='*', vendor='*', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
+        self.assertEqual(cpe_parse('cpe:2.3:a:andreas_mueller:cdrdao'), CPE(part='andreas_mueller', vendor='cdrdao', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
+        self.assertEqual(cpe_parse('cpe:/a:archive\\:\\:tar_project:archive\\:\\:tar'), CPE(part='archive\\:\\:tar_project', vendor='archive\\:\\:tar', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
+        self.assertEqual(cpe_parse('1:2:foo\\:bar'), CPE(part='foo\\:bar', vendor='*', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
+        self.assertEqual(cpe_parse('1:2:foo\\\\:bar'), CPE(part='foo\\\\', vendor='bar', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
 
     @unittest.expectedFailure
     def test_cpe_parse_failure(self) -> None:
-        self.assertEqual(cpe_parse('a:b'), ['ab'])
-        self.assertEqual(cpe_parse('foo\\:bar'), ['foo:bar'])
-        self.assertEqual(cpe_parse('foo\\\\:bar'), ['foo', 'bar'])
+        self.assertEqual(cpe_parse('a:b'), CPE(part='a', vendor='b', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
+        self.assertEqual(cpe_parse('1:2:foo\\:bar'), CPE(part='foo', vendor='bar', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
+        self.assertEqual(cpe_parse('1:2:foo\\\\:bar'), CPE(part='foo', vendor='bar', product='*', version='*', update='*', edition='*', lang='*', sw_edition='*', target_sw='*', target_hw='*', other='*'))
 
 
 if __name__ == '__main__':

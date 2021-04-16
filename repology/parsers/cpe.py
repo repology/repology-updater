@@ -15,10 +15,24 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List
+from dataclasses import dataclass
 
 
-def cpe_parse(cpe_str: str) -> List[str]:
+@dataclass(unsafe_hash=True)
+class CPE:
+    part:       str = '*'
+    vendor:     str = '*'
+    product:    str = '*'
+    version:    str = '*'
+    update:     str = '*'
+    edition:    str = '*'
+    lang:       str = '*'
+    sw_edition: str = '*'
+    target_sw:  str = '*'
+    target_hw:  str = '*'
+    other:      str = '*'
+
+def cpe_parse(cpe_str: str) -> CPE:
     escaped = False
     current = ''
     res = []
@@ -36,4 +50,10 @@ def cpe_parse(cpe_str: str) -> List[str]:
             current += char
 
     res.append(current)
-    return res
+
+    if len(res) < 3:
+        return CPE()            # input seems to be faulty, return default CPE
+    elif res[1] == '2.3':
+        return CPE(*res[3:])    # input seems to be CPE format 2.3
+    else:
+        return CPE(*res[2:])    # input seems to be CPE format 2.2
