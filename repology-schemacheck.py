@@ -110,6 +110,7 @@ families = [
     'slitaz',
     'snap',
     'solus',
+    'sourcemage',
     't2',
     'termux',
     'vcpkg',

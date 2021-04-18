@@ -1,0 +1,22 @@
+###########################################################################
+# Source Mage GNU/Linux
+###########################################################################
+- name: sourcemage
+  type: repository
+  desc: Source Mage GNU/Linux
+  family: sourcemage
+  ruleset: sourcemage
+  minpackages: 3000
+  sources:
+    - name: smgl-pkglist.xz
+      fetcher:
+        class: FileFetcher
+        url: http://dl.iodev.co.uk/sourcemage/pkglist.xz
+      parser:
+        class: SourcemagePkglistParser
+  repolinks:
+    - desc: Source Mage GNU/Linux home
+      url: https://sourcemage.org/
+    - desc: SCM Repositories
+      url: http://scmweb.sourcemage.org/
+  tags: [ all ]
