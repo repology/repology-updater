@@ -283,6 +283,11 @@
       parser:
         class: RepodataParser
       subrepo: src-oss
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://build.opensuse.org/package/show/openSUSE:Factory/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://build.opensuse.org/package/view_file/openSUSE:Factory/{srcname}/{srcname}.spec?expand=1'
     - name: src-non-oss
       fetcher:
         class: RepodataFetcher
@@ -290,6 +295,11 @@
       parser:
         class: RepodataParser
       subrepo: src-non-oss
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://build.opensuse.org/package/show/openSUSE:Factory:NonFree/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://build.opensuse.org/package/view_file/openSUSE:Factory:NonFree/{srcname}/{srcname}.spec?expand=1'
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -297,9 +307,5 @@
       url: https://software.opensuse.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/openSUSE:Factory/{srcname}'
-    - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/openSUSE:Factory/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
