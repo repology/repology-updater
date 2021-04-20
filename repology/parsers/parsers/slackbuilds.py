@@ -84,7 +84,9 @@ class SlackBuildsParser(Parser):
 
                 variables = _parse_infofile(info_path)
 
-                assert(variables['PRGNAM'] == pkgname)
+                if variables['PRGNAM'] != pkgname:
+                    pkg.log(f'PRGNAM "{variables["PRGNAM"]}" != pkgname "{pkgname}"', severity=Logger.ERROR)
+                    continue
 
                 pkg.add_name(variables['PRGNAM'], NameType.SLACKBUILDS_NAME)
                 pkg.add_name(category + '/' + pkgname, NameType.SLACKBUILDS_FULL_NAME)
