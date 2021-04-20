@@ -15,6 +15,9 @@ jobs:
       - name: Install dependencies
         # depends for jsonslicer, postgresql-liversion, rpm4 respectively
         run: |
+          curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+          sudo apt-get update
           sudo apt-get install libyajl-dev
           sudo apt-get install postgresql-server-dev-$POSTGRESQL
           sudo apt-get install libnss3-dev libnspr4-dev libmagic-dev libpopt-dev libarchive-dev libdb5.3-dev libgcrypt-dev
