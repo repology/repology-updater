@@ -511,6 +511,7 @@ CREATE TABLE IF NOT EXISTS reports (
 	need_verignore boolean NOT NULL,
 	need_split boolean NOT NULL,
 	need_merge boolean NOT NULL,
+	need_vuln boolean NOT NULL,
 	comment text,
 	reply text,
 	accepted boolean
