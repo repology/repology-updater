@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2020-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -24,45 +24,36 @@ import yaml
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
 @dataclass
 class _PackageLocation:
-    vendor: str
-    vendorpath: str
-
-    product: str
-    productpath: str
-
-    filename: str
-    yamlpath: str
+    yamlpath_abs: str
+    yamlpath_rel: str
+    relevant_path: str
 
 
 def _iter_packages(path: str) -> Iterable[_PackageLocation]:
-    for vendor in os.listdir(os.path.join(path, 'manifests')):
-        vendorpath = os.path.join(path, 'manifests', vendor)
-        for product in os.listdir(vendorpath):
-            productpath = os.path.join(vendorpath, product)
-            for filename in os.listdir(productpath):
-                yamlpath = os.path.join(productpath, filename)
-                if filename.lower().endswith('.yaml'):
-                    yield _PackageLocation(
-                        vendor,
-                        vendorpath,
-                        product,
-                        productpath,
-                        filename,
-                        yamlpath
-                    )
+    for yamlpath_abs in walk_tree(os.path.join(path, 'manifests'), suffix='.yaml'):
+        yamlpath_rel = os.path.relpath(yamlpath_abs, path)
+
+        yield _PackageLocation(
+            yamlpath_abs=yamlpath_abs,
+            yamlpath_rel=yamlpath_rel,
+            # skip manifests/ at left
+            # skip version directory and yaml filename at right
+            relevant_path='/'.join(yamlpath_rel.split('/')[1:-2]),
+        )
 
 
 class WingetGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgloc in _iter_packages(path):
-            with factory.begin(os.path.relpath(pkgloc.yamlpath, path)) as pkg:
+            with factory.begin(pkgloc.yamlpath_rel) as pkg:
                 try:
-                    with open(pkgloc.yamlpath, 'r') as fd:
+                    with open(pkgloc.yamlpath_abs, 'r') as fd:
                         pkgdata = yaml.safe_load(fd)
                 except UnicodeDecodeError:
                     pkg.log('Cannot read file, probably UTF-16 garbage', Logger.ERROR)
@@ -71,23 +62,31 @@ class WingetGitParser(Parser):
                     pkg.log(f'YAML error at line {e.problem_mark.line}: {e.problem}', Logger.ERROR)
                     continue
 
-                pkg.add_name(pkgdata['Id'], NameType.WINGET_ID)
-                pkg.add_name(pkgdata['Id'].split('.', 1)[-1], NameType.WINGET_ID_NAME)
-                pkg.add_name(pkgdata['Name'], NameType.WINGET_NAME)
-                pkg.add_name(os.path.join(pkgloc.vendor, pkgloc.product), NameType.WINGET_PATH)
+                if 'PackageName' not in pkgdata:
+                    pkg.log('No PackageName defined', Logger.ERROR)
+                    continue
 
-                if isinstance(pkgdata['Version'], float):
-                    pkg.log(f'Version {pkgdata["Version"]} is a floating point, should be quoted', Logger.ERROR)
+                pkg.add_name(pkgdata['PackageIdentifier'], NameType.WINGET_ID)
+                pkg.add_name(pkgdata['PackageIdentifier'].split('.', 1)[-1], NameType.WINGET_ID_NAME)
+                pkg.add_name(pkgdata['PackageName'], NameType.WINGET_NAME)
+                pkg.add_name(pkgloc.relevant_path, NameType.WINGET_PATH)
+                # Moniker field is optional and mosty useless
 
-                pkg.set_version(str(pkgdata['Version']))
-                pkg.add_homepages(pkgdata.get('Homepage'))
+                version = pkgdata['PackageVersion']
+                if isinstance(version, float):
+                    pkg.log(f'PackageVersion "{version}" is a floating point, should be quoted in YAML', Logger.WARNING)
+
+                pkg.set_version(str(version))
+                pkg.add_homepages(pkgdata.get('PackageUrl'))
 
                 # pkg.set_summary(pkgdata.get('Description'))  # may be long
                 # pkg.add_licenses(pkgdata['License'])  # long garbage
 
-                if pkgdata.get('Tags'):
-                    pkg.add_categories(pkgdata['Tags'].split(','))
+                pkg.add_categories(map(str, pkgdata.get('Tags', [])))
 
-                pkg.add_downloads(installer['Url'] for installer in pkgdata['Installers'])
+                if 'Installers' in pkgdata:
+                    pkg.add_downloads(installer['InstallerUrl'] for installer in pkgdata['Installers'])
+
+                pkg.set_extra_field('yamlpath', pkgloc.yamlpath_rel)
 
                 yield pkg
