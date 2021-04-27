@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2020-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,7 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Any, Dict, Iterable, List, Tuple, Union
+from dataclasses import dataclass
+from typing import Any, Dict, Iterable, Iterator, List
 
 import yaml
 
@@ -26,19 +27,40 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
-def _extract_version_urls(conandata: Dict[str, Any]) -> Iterable[Tuple[str, Union[str, List[str]]]]:
-    for key, value in conandata['sources'].items():
-        if isinstance(value, dict) and 'url' in value:
-            # {version: {"url": "...", "sha256": "..."}}
-            yield key, value['url']
-        elif isinstance(value, list):
-            # {version: [{"url": "...", "sha256": "..."}]} - tweetnacl
-            yield key, [item['url'] for item in value]
-        elif isinstance(value, dict):
-            # nested dict (for instance, by arch) - strawberryperl
-            yield from _extract_version_urls(value)
-        else:
-            raise RuntimeError('unexpected conandata.yml format')
+@dataclass
+class _UrlInfo:
+    tags: List[str]
+    url: str
+
+
+@dataclass
+class _VersionInfo:
+    version: str
+    url_infos: List[_UrlInfo]
+
+
+def _extract_url_infos_from_arbitrary_structure(data: Any, tags: List[str]) -> Iterator[_UrlInfo]:
+    # processes arbitrary nested structure of dicts and lists which
+    # is possible in conandata.yaml files
+
+    if isinstance(data, list):
+        for item in data:
+            yield from _extract_url_infos_from_arbitrary_structure(item, tags)
+    elif isinstance(data, dict):
+        for key, item in data.items():
+            yield from _extract_url_infos_from_arbitrary_structure(item, tags + [key])
+    elif isinstance(data, str):
+        # note that 'url' may appear more than once, see android-ndk/all/conandata.yml
+        if 'url' in tags and 'sha256' not in tags:
+            yield _UrlInfo(tags, data)
+
+
+def _extract_version_infos(conandata: Dict[str, Any]) -> Iterator[_VersionInfo]:
+    for version, data in conandata['sources'].items():
+        yield _VersionInfo(
+            version,
+            list(_extract_url_infos_from_arbitrary_structure(data, []))
+        )
 
 
 def _extract_patches(conandata: Dict[str, Any]) -> Dict[str, List[str]]:
@@ -67,14 +89,19 @@ class ConanGitParser(Parser):
 
                 patches = _extract_patches(conandata)
 
-                for version, urls in _extract_version_urls(conandata):
-                    verpkg = pkg.clone(append_ident=version)
+                for version_info in _extract_version_infos(conandata):
+                    verpkg = pkg.clone(append_ident=':' + version_info.version)
 
-                    verpkg.set_version(version)
-                    verpkg.add_downloads(urls)
+                    verpkg.set_version(version_info.version)
 
-                    if version in patches:
-                        verpkg.set_extra_field('patch', patches[version])
+                    # XXX: we may create more subpackages here based on url_info.tags
+                    # which may contain various OSes, architectures, compilers and probably
+                    # other specifics (see cspice/all/conandata.yml for example)
+                    for url_info in version_info.url_infos:
+                        verpkg.add_downloads(url_info.url)
+
+                    if version_info.version in patches:
+                        verpkg.set_extra_field('patch', patches[version_info.version])
 
                     verpkg.set_extra_field('folder', conandata_rel_path.split('/')[2])
 
