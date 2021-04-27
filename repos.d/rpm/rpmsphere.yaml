@@ -6,7 +6,7 @@
   desc: RPM Sphere
   family: fedora
   ruleset: [fedora, rpm, rpmsphere]
-  minpackages: 2500
+  minpackages: 2300
   sources:
     - name: source
       fetcher:
