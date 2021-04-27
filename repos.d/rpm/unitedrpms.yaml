@@ -3,59 +3,13 @@
 #
 # See https://sourceforge.net/projects/unitedrpms/files/
 ###########################################################################
-- name: unitedrpms_30
-  type: repository
-  desc: UnitedRPMs Fedora 30
-  family: fedora
-  ruleset: [fedora, rpm, unitedrpms]
-  color: '261d22'
-  minpackages: 150
-  sources:
-    - name: repo
-      fetcher:
-        class: RepodataFetcher
-        #url: https://downloads.sourceforge.net/project/unitedrpms/30/srpm/
-        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/30/srpm/
-      parser:
-        class: RepodataParser
-      subrepo: release
-  repolinks:
-    - desc: UnitedRPMs home
-      url: https://unitedrpms.github.io/
-    - desc: GitHub organization
-      url: https://github.com/UnitedRPMs
-  tags: [ all, production, unitedrpms, rpm ]
-
-- name: unitedrpms_31
-  type: repository
-  desc: UnitedRPMs Fedora 31
-  family: fedora
-  ruleset: [fedora, rpm, unitedrpms]
-  color: '261d22'
-  minpackages: 100
-  sources:
-    - name: repo
-      fetcher:
-        class: RepodataFetcher
-        #url: https://downloads.sourceforge.net/project/unitedrpms/31/srpm/
-        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/31/srpm/
-      parser:
-        class: RepodataParser
-      subrepo: release
-  repolinks:
-    - desc: UnitedRPMs home
-      url: https://unitedrpms.github.io/
-    - desc: GitHub organization
-      url: https://github.com/UnitedRPMs
-  tags: [ all, production, unitedrpms, rpm ]
-
 - name: unitedrpms_32
   type: repository
   desc: UnitedRPMs Fedora 32
   family: fedora
   ruleset: [fedora, rpm, unitedrpms]
   color: '261d22'
-  minpackages: 50
+  minpackages: 150
   sources:
     - name: repo
       fetcher:
@@ -78,13 +32,59 @@
   family: fedora
   ruleset: [fedora, rpm, unitedrpms]
   color: '261d22'
-  minpackages: 50
+  minpackages: 100
   sources:
     - name: repo
       fetcher:
         class: RepodataFetcher
         #url: https://downloads.sourceforge.net/project/unitedrpms/33/srpm/
         url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/33/srpm/
+      parser:
+        class: RepodataParser
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
+
+- name: unitedrpms_34
+  type: repository
+  desc: UnitedRPMs Fedora 34
+  family: fedora
+  ruleset: [fedora, rpm, unitedrpms]
+  color: '261d22'
+  minpackages: 50
+  sources:
+    - name: repo
+      fetcher:
+        class: RepodataFetcher
+        #url: https://downloads.sourceforge.net/project/unitedrpms/34/srpm/
+        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/34/srpm/
+      parser:
+        class: RepodataParser
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
+
+- name: unitedrpms_35
+  type: repository
+  desc: UnitedRPMs Fedora 35
+  family: fedora
+  ruleset: [fedora, rpm, unitedrpms]
+  color: '261d22'
+  minpackages: 50
+  sources:
+    - name: repo
+      fetcher:
+        class: RepodataFetcher
+        #url: https://downloads.sourceforge.net/project/unitedrpms/35/srpm/
+        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/35/srpm/
       parser:
         class: RepodataParser
       subrepo: release
