@@ -329,7 +329,6 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f33/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
-# Next development release
 - name: fedora_34
   type: repository
   desc: Fedora 34
@@ -367,8 +366,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f34/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f34/f/{srcname}.spec'
-  #tags: [ all, production, fedora, rpm ]  # XXX: enable me
-  tags: []
+  tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
   type: repository
