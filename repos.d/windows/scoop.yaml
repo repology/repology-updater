@@ -18,6 +18,11 @@
       parser:
         class: ScoopGitParser
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/ScoopInstaller/Main/blob/master/{path}'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/ScoopInstaller/Main/master/{path}'
     - name: extras
       fetcher:
         class: GitFetcher
@@ -26,6 +31,11 @@
       parser:
         class: ScoopGitParser
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/lukesampson/scoop-extras/blob/master/{path}'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/lukesampson/scoop-extras/master/{path}'
     - name: versions
       fetcher:
         class: GitFetcher
@@ -34,6 +44,11 @@
       parser:
         class: ScoopGitParser
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/ScoopInstaller/Versions/blob/master/{path}'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/ScoopInstaller/Versions/master/{path}'
     - name: games
       fetcher:
         class: GitFetcher
@@ -42,6 +57,11 @@
       parser:
         class: ScoopGitParser
       subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_RECIPE
+          url: 'https://github.com/Calinou/scoop-games/blob/master/{path}'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://raw.githubusercontent.com/Calinou/scoop-games/master/{path}'
   repolinks:
     - desc: Scoop home
       url: http://scoop.sh/
@@ -53,14 +73,4 @@
       url: https://github.com/ScoopInstaller/Versions
     - desc: Games repository on GitHub
       url: https://github.com/Calinou/scoop-games
-  # need support for per-source packagelinks
-  #packagelinks:
-  #  - desc: Package json
-  #    url: 'https://github.com/ScoopInstaller/Main/blob/master/{path}'
-  #  - desc: Package json
-  #    url: 'https://github.com/lukesampson/scoop-extras/blob/master/{path}'
-  #  - desc: Package json
-  #    url: 'https://github.com/ScoopInstaller/Versions/blob/master/{path}'
-  #  - desc: Package json
-  #    url: 'https://github.com/Calinou/scoop-games/blob/master/{path}'
   tags: [ all, production ]
