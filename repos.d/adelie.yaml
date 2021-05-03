@@ -23,9 +23,9 @@
       url: https://adelielinux.org/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://code.foxkit.us/adelie/packages/-/tree/master/{subrepo}/{srcname}'
+      url: 'https://git.adelielinux.org/adelie/packages/-/tree/master/{subrepo}/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://code.foxkit.us/adelie/packages/-/blob/master/{subrepo}/{srcname}/APKBUILD'
+      url: 'https://git.adelielinux.org/adelie/packages/-/blob/master/{subrepo}/{srcname}/APKBUILD'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://code.foxkit.us/adelie/packages/-/raw/master/{subrepo}/{srcname}/APKBUILD'
+      url: 'https://git.adelielinux.org/adelie/packages/-/raw/master/{subrepo}/{srcname}/APKBUILD'
   tags: [ all, production, adelie ]
