@@ -88,6 +88,9 @@ class UpdateProcess:
 
         for change in iter_changed_projects(iter_project_hashes(self._database), projects, stats):
             if isinstance(change, UpdatedProject):
+                if len(change.packages) >= 20000:
+                    raise RuntimeError('sanity check failed, more than 20k packages for a single project')
+
                 fill_packageset_versions(change.packages)
                 self._database.add_packages(map(adapt_package, change.packages))
                 self._database.update_project_hash(change.effname, change.hash_)
