@@ -67,6 +67,10 @@ def _iter_sqlports(path: str) -> Iterable[Dict[str, Any]]:
     db = sqlite3.connect(path)
     cur = db.cursor()
     #cur.execute('SELECT {} FROM Ports LEFT JOIN Paths USING(fullpkgpath)'.format(','.join(columns)))
+    # Note that this is somewhat memory-hungry compared to other parsers
+    # sqlite takes about 200MB mem, for this query, even with `limit 1`,
+    # and this may be reproduced even with `sqlite3` utility. No idea if
+    # that can be improved.
     cur.execute('SELECT {} FROM Ports'.format(','.join(columns)))
 
     while True:
