@@ -146,6 +146,8 @@ rulesets = families + [
     'maemo',
     'manjaro',
     'melpa',
+    'melpa_stable',
+    'melpa_unstable',
     'mint',
     'msys2_mingw',
     'msys2_msys2',

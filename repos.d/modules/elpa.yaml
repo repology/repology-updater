@@ -28,9 +28,9 @@
   type: modules
   desc: MELPA
   family: elpa
-  ruleset: [elpa, melpa]
+  ruleset: [elpa, melpa, melpa_unstable]
   color: "922793"
-  minpackages: 3800
+  minpackages: 4500
   sources:
     - name: archive-contents
       fetcher:
@@ -45,4 +45,27 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://melpa.org/#/{name}'
+  tags: [ all, production, elpa ]
+
+- name: melpa_stable
+  type: modules
+  desc: MELPA Stable
+  family: elpa
+  ruleset: [elpa, melpa, melpa_stable]
+  color: "922793"
+  minpackages: 2300
+  sources:
+    - name: archive-contents
+      fetcher:
+        class: FileFetcher
+        url: https://stable.melpa.org/packages/archive-contents
+      parser:
+        class: ArchiveContentsParser
+  shadow: true
+  repolinks:
+    - desc: Milkypostman’s Emacs Lisp Package Archive (Stable)
+      url: https://stable.melpa.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://stable.melpa.org/#/{name}'
   tags: [ all, production, elpa ]
