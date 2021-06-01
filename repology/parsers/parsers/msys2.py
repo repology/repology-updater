@@ -43,7 +43,7 @@ def _parse_descfile(path: str) -> Dict[str, List[str]]:
 
 class MSYS2DescParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        normalize_version = VersionStripper().strip_right('-')
+        normalize_version = VersionStripper().strip_right('-').strip_left('~')
 
         for packagedir in os.listdir(path):
             with factory.begin(packagedir) as pkg:
