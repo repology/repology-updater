@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -19,6 +19,7 @@ import os
 import subprocess
 from typing import Iterable
 
+from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -43,7 +44,12 @@ class KissGitParser(Parser):
                     version, revision = f.read().strip().split()
                     pkg.set_version(version)
 
-                with open(os.path.join(rootdir, 'sources')) as f:
+                sources_path = os.path.join(rootdir, 'sources')
+                if not os.path.exists(sources_path):
+                    pkg.log('skipping sourceless package', Logger.ERROR)
+                    continue
+
+                with open(sources_path) as f:
                     for line in f:
                         line = line.strip()
                         if not line or line.startswith('#'):
