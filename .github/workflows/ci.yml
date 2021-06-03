@@ -4,23 +4,23 @@ jobs:
   build:
     env:
       REPOLOGY_CONFIG: repology-test.conf.default
-      POSTGRESQL: 13
+      POSTGRESQL: 14
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: "3.10.0-beta.2"
       - name: Install dependencies
         # depends for jsonslicer, postgresql-liversion, rpm4 respectively
         run: |
           curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main 14" > /etc/apt/sources.list.d/pgdg.list'
           sudo apt-get update
           sudo apt-get install libyajl-dev
-          sudo apt-get install postgresql-server-dev-$POSTGRESQL
-          sudo apt-get install libnss3-dev libnspr4-dev libmagic-dev libpopt-dev libarchive-dev libdb5.3-dev libgcrypt-dev
+          sudo apt-get install postgresql-$POSTGRESQL postgresql-server-dev-$POSTGRESQL
+          sudo apt-get install libnss3-dev libnspr4-dev libmagic-dev libpopt-dev libarchive-dev libdb5.3-dev libgcrypt-dev libxslt1-dev
       - name: Install libversion
         run: |
           mkdir _libversion
@@ -56,6 +56,7 @@ jobs:
       - name: Prepare database
         run: |
           sudo sed -i -e 's|peer|trust|' /etc/postgresql/$POSTGRESQL/main/pg_hba.conf
+          sudo sed -i -e 's|5433|5432|' /etc/postgresql/$POSTGRESQL/main/postgresql.conf
           sudo pg_ctlcluster $POSTGRESQL main restart
           sudo -u postgres psql -c "CREATE DATABASE repology_test;"
           sudo -u postgres psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"
