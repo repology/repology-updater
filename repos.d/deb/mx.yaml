@@ -151,7 +151,7 @@
   color: "6693d6"
   minpackages: 100
   sources:
-    - name: [ main, non-free ]
+    - name: [ main, non-free, ahs ]
       fetcher:
         class: FileFetcher
         url: 'http://mxrepo.com/mx/repo/dists/buster/{source}/source/Sources.gz'
