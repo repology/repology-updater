@@ -212,6 +212,39 @@
       url: 'https://build.alpinelinux.org/buildlogs/build-3-13-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   tags: [ all, production, alpine ]
 
+- name: alpine_3_14
+  type: repository
+  desc: Alpine Linux 3.14
+  statsgroup: Alpine
+  family: alpine
+  minpackages: 12000
+  default_maintainer: fallback-mnt-alpine@repology
+  sources:
+    - name: [ community, main ]
+      fetcher:
+        class: TarFetcher
+        url: 'http://dl-3.alpinelinux.org/alpine/v3.14/{source}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
+      url: https://pkgs.alpinelinux.org/packages
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.14
+    - type: PACKAGE_SOURCES
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.14-stable'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.14-stable'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.14-stable'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://build.alpinelinux.org/buildlogs/build-3-14-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
+  tags: [ all, production, alpine ]
+
 - name: alpine_edge
   type: repository
   desc: Alpine Linux Edge
