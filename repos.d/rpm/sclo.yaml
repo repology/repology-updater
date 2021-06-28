@@ -1,0 +1,20 @@
+###########################################################################
+# Software Collections
+###########################################################################
+- name: sclo
+  type: repository
+  desc: Software Collections
+  family: sclo
+  ruleset: [centos, rpm, sclo]
+  minpackages: 300
+  sources:
+    - name: sclo
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://vault.centos.org/centos/7/sclo/Source/sclo/'
+      parser:
+        class: RepodataParser
+  repolinks:
+    - desc: Software Collections home
+      url: https://www.softwarecollections.org/
+  tags: [ all, production, centos, rpm ]

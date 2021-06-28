@@ -102,6 +102,7 @@ families = [
     'rudix',
     'sagemath',
     'salix',
+    'sclo',
     'scoop',
     'sisyphus',
     'slackbuilds',
