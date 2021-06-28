@@ -15,7 +15,7 @@
       fetcher:
         class: RepodataFetcher
         #url: https://downloads.sourceforge.net/project/unitedrpms/32/srpm/
-        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/32/srpm/
+        url: https://gigenet.dl.sourceforge.net/project/unitedrpms/32/srpm/
       parser:
         class: RepodataParser
       subrepo: release
@@ -38,7 +38,7 @@
       fetcher:
         class: RepodataFetcher
         #url: https://downloads.sourceforge.net/project/unitedrpms/33/srpm/
-        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/33/srpm/
+        url: https://gigenet.dl.sourceforge.net/project/unitedrpms/33/srpm/
       parser:
         class: RepodataParser
       subrepo: release
@@ -61,7 +61,7 @@
       fetcher:
         class: RepodataFetcher
         #url: https://downloads.sourceforge.net/project/unitedrpms/34/srpm/
-        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/34/srpm/
+        url: https://gigenet.dl.sourceforge.net/project/unitedrpms/34/srpm/
       parser:
         class: RepodataParser
       subrepo: release
@@ -84,7 +84,7 @@
       fetcher:
         class: RepodataFetcher
         #url: https://downloads.sourceforge.net/project/unitedrpms/35/srpm/
-        url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/35/srpm/
+        url: https://gigenet.dl.sourceforge.net/project/unitedrpms/32/srpm/
       parser:
         class: RepodataParser
       subrepo: release
