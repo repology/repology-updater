@@ -58,3 +58,36 @@
     - desc: Chaotic-AUR Home
       url: https://lonewolf.pedrohlc.com/chaotic-aur/
   tags: [ all, production ]
+
+- name: mpr
+  type: repository
+  desc: MPR
+  family: mpr
+  ruleset: mpr
+  update_period: 3h
+  minpackages: 100
+  default_maintainer: fallback-mnt-mpr@repology
+  sources:
+    - name: mpr
+      fetcher:
+        class: AURFetcher
+        fetch_delay: 0.5
+        fetch_timeout: 10
+        # https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
+        # says the limit is 4443, but it doesn't seem to be enforced in practice,
+        # so up to the maximum allowed in practice
+        max_api_url_length: 6500
+        url: https://mpr.hunterwittenborn.com/
+      parser:
+        class: AURParser
+  repolinks:
+    - desc: DUR Home
+      url: https://mpr.hunterwittenborn.com/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://mpr.hunterwittenborn.com/packages/{binname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/tree/PKGBUILD?h={srcname|quote}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
+  tags: [ all, production ]
