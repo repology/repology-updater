@@ -711,6 +711,14 @@ class Rule:
 
             self._actions.append(setver_action)
 
+        if 'setsubrepo' in ruledata:
+            setsubrepo: Final = ruledata['setsubrepo']
+
+            def setsubrepo_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.subrepo = match_context.sub_name_dollars(setsubrepo, package.effname)
+
+            self._actions.append(setsubrepo_action)
+
         if 'replaceinname' in ruledata:
             replace_items: Final = list(ruledata['replaceinname'].items())
 
