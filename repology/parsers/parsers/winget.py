@@ -59,7 +59,10 @@ class WingetGitParser(Parser):
                     pkg.log('Cannot read file, probably UTF-16 garbage', Logger.ERROR)
                     continue
                 except yaml.MarkedYAMLError as e:
-                    pkg.log(f'YAML error at line {e.problem_mark.line}: {e.problem}', Logger.ERROR)
+                    if e.problem_mark:
+                        pkg.log(f'YAML error at line {e.problem_mark.line}: {e.problem}', Logger.ERROR)
+                    else:
+                        pkg.log(f'YAML error: {e.problem}', Logger.ERROR)
                     continue
 
                 if 'PackageName' not in pkgdata:
