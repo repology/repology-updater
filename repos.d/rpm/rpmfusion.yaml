@@ -17,6 +17,7 @@
         url: https://download1.rpmfusion.org/free/fedora/releases/31/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/release
     - name: free-updates
       fetcher:
@@ -24,6 +25,7 @@
         url: https://download1.rpmfusion.org/free/fedora/updates/31/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/updates
     - name: free-updates-testing
       fetcher:
@@ -31,6 +33,7 @@
         url: https://download1.rpmfusion.org/free/fedora/updates/testing/31/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/updates-testing
     - name: nonfree-release
       fetcher:
@@ -38,6 +41,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/releases/31/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/release
     - name: nonfree-updates
       fetcher:
@@ -45,6 +49,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/updates/31/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher:
@@ -52,6 +57,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/31/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
@@ -71,6 +77,7 @@
         url: https://download1.rpmfusion.org/free/fedora/releases/32/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/release
     - name: free-updates
       fetcher:
@@ -78,6 +85,7 @@
         url: https://download1.rpmfusion.org/free/fedora/updates/32/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/updates
     - name: free-updates-testing
       fetcher:
@@ -85,6 +93,7 @@
         url: https://download1.rpmfusion.org/free/fedora/updates/testing/32/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/updates-testing
     - name: nonfree-release
       fetcher:
@@ -92,6 +101,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/releases/32/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/release
     - name: nonfree-updates
       fetcher:
@@ -99,6 +109,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/updates/32/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher:
@@ -106,6 +117,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/32/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
@@ -125,6 +137,7 @@
         url: https://download1.rpmfusion.org/free/fedora/releases/33/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/release
     - name: free-updates
       fetcher:
@@ -132,6 +145,7 @@
         url: https://download1.rpmfusion.org/free/fedora/updates/33/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/updates
     - name: free-updates-testing
       fetcher:
@@ -139,6 +153,7 @@
         url: https://download1.rpmfusion.org/free/fedora/updates/testing/33/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/updates-testing
     - name: nonfree-release
       fetcher:
@@ -146,6 +161,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/releases/33/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/release
     - name: nonfree-updates
       fetcher:
@@ -153,6 +169,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/updates/33/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher:
@@ -160,6 +177,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/33/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
@@ -179,6 +197,7 @@
         url: https://download1.rpmfusion.org/free/fedora/development/rawhide/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: free/release
     - name: nonfree-development
       fetcher:
@@ -186,6 +205,7 @@
         url: https://download1.rpmfusion.org/nonfree/fedora/development/rawhide/Everything/source/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: nonfree/release
   repolinks:
     - desc: RPM Fusion home
@@ -208,6 +228,7 @@
         url: https://download1.rpmfusion.org/free/el/updates/6/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: free/updates
     - name: free-updates-testing
       fetcher:
@@ -215,6 +236,7 @@
         url: https://download1.rpmfusion.org/free/el/updates/testing/6/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: free/updates-testing
     - name: nonfree-updates
       fetcher:
@@ -222,6 +244,7 @@
         url: https://download1.rpmfusion.org/nonfree/el/updates/6/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher:
@@ -229,6 +252,7 @@
         url: https://download1.rpmfusion.org/nonfree/el/updates/testing/6/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
@@ -248,6 +272,7 @@
         url: https://download1.rpmfusion.org/free/el/updates/7/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: free/updates
     - name: free-updates-testing
       fetcher:
@@ -255,6 +280,7 @@
         url: https://download1.rpmfusion.org/free/el/updates/testing/7/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: free/updates-testing
     - name: nonfree-updates
       fetcher:
@@ -262,6 +288,7 @@
         url: https://download1.rpmfusion.org/nonfree/el/updates/7/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher:
@@ -269,6 +296,7 @@
         url: https://download1.rpmfusion.org/nonfree/el/updates/testing/7/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
@@ -288,6 +316,7 @@
         url: https://download1.rpmfusion.org/free/el/updates/8/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: free/updates
     - name: free-updates-testing
       fetcher:
@@ -295,6 +324,7 @@
         url: https://download1.rpmfusion.org/free/el/updates/testing/8/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: free/updates-testing
     - name: nonfree-updates
       fetcher:
@@ -302,6 +332,7 @@
         url: https://download1.rpmfusion.org/nonfree/el/updates/8/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher:
@@ -309,6 +340,7 @@
         url: https://download1.rpmfusion.org/nonfree/el/updates/testing/8/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home

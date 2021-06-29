@@ -71,6 +71,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.0/repo/oss/
       parser:
         class: RepodataParser
+        vertags: lp
       subrepo: main/oss
     - name: non-oss
       fetcher:
@@ -78,6 +79,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
       parser:
         class: RepodataParser
+        vertags: lp
       subrepo: main/non-oss
     - name: updates-oss
       fetcher:
@@ -85,6 +87,7 @@
         url: http://download.opensuse.org/update/leap/15.0/oss/
       parser:
         class: RepodataParser
+        vertags: lp
       subrepo: updates/oss
     - name: updates-non-oss
       fetcher:
@@ -92,6 +95,7 @@
         url: http://download.opensuse.org/update/leap/15.0/non-oss/
       parser:
         class: RepodataParser
+        vertags: lp
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home
@@ -123,6 +127,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.1/repo/oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: main/oss
     - name: non-oss
       fetcher:
@@ -130,6 +135,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.1/repo/non-oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: main/non-oss
     - name: updates-oss
       fetcher:
@@ -137,6 +143,7 @@
         url: http://download.opensuse.org/update/leap/15.1/oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: updates/oss
     - name: updates-non-oss
       fetcher:
@@ -144,6 +151,7 @@
         url: http://download.opensuse.org/update/leap/15.1/non-oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home
@@ -175,6 +183,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.2/repo/oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: main/oss
     - name: non-oss
       fetcher:
@@ -182,6 +191,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.2/repo/non-oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: main/non-oss
     - name: updates-oss
       fetcher:
@@ -189,6 +199,7 @@
         url: http://download.opensuse.org/update/leap/15.2/oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: updates/oss
     - name: updates-non-oss
       fetcher:
@@ -196,6 +207,7 @@
         url: http://download.opensuse.org/update/leap/15.2/non-oss/
       parser:
         class: RepodataParser
+        vertags: pm
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home

@@ -246,6 +246,7 @@ schemas = {
                         'src': bool,
                         'binary': bool,
                         'arch_from_filename': bool,
+                        'vertags': Any(str, [str]),
 
                         # srclist
                         'encoding': Any('utf-8', 'cp1251'),

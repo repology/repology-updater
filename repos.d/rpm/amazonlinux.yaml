@@ -15,6 +15,7 @@
         url: 'http://repo.us-west-2.amazonaws.com/latest/{source}/SRPMS/mirror.list'
       parser:
         class: RepodataSqliteParser
+        vertags: amzn
       subrepo: '{source}'
   repolinks:
     - desc: Amazon Linux AMI
@@ -35,6 +36,7 @@
         url: http://amazonlinux.us-west-2.amazonaws.com/2/core/2.0/SRPMS/mirror.list
       parser:
         class: RepodataSqliteParser
+        vertags: amzn
   repolinks:
     - desc: Amazon Linux 2
       url: https://aws.amazon.com/amazon-linux-2/

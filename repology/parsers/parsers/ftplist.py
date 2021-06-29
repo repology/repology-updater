@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,15 +15,21 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable
+from typing import Any, Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.nevra import nevra_construct, nevra_parse
+from repology.parsers.versions import parse_rpm_version, parse_rpm_vertags
 from repology.transformer import PackageTransformer
 
 
 class RPMFTPListParser(Parser):
+    _vertags: list[str]
+
+    def __init__(self, vertags: Any = None) -> None:
+        self._vertags = parse_rpm_vertags(vertags)
+
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         with open(path) as listfile:
             for line in listfile:
@@ -35,8 +41,12 @@ class RPMFTPListParser(Parser):
                     assert(arch == 'src')
 
                     pkg.add_name(name, NameType.SRCRPM_NAME)
-                    pkg.set_version(version)
+
+                    fixed_version, flags = parse_rpm_version(self._vertags, version, release)
+                    pkg.set_version(fixed_version)
                     pkg.set_rawversion(nevra_construct(None, epoch, version, release))
+                    pkg.set_flags(flags)
+
                     pkg.set_arch(arch)
 
                     pkg.set_extra_field('nevr', filename.rsplit('.', 2)[0])

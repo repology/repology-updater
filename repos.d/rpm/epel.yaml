@@ -16,6 +16,7 @@
         url: https://archives.fedoraproject.org/pub/archive/epel/6/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
@@ -46,6 +47,7 @@
         url: https://dl.fedoraproject.org/pub/epel/7/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
@@ -73,6 +75,7 @@
         url: https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL

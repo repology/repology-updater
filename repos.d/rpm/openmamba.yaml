@@ -15,6 +15,7 @@
         url: http://cdn.openmamba.org/pub/openmamba/{source}/SRPMS.base/
       parser:
         class: RepodataParser
+        vertags: mamba
       subrepo: '{source}'
   repolinks:
     - desc: openmamba home

@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019,2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,9 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Callable, List
+import re
+from typing import Any, Callable, List, Tuple
 
-__all__ = ['VersionStripper']
+from repology.package import PackageFlags
+
+
+__all__ = ['VersionStripper', 'parse_rpm_version']
 
 
 class VersionStripper:
@@ -46,3 +50,41 @@ class VersionStripper:
         for strip in self._strips:
             version = strip(version)
         return version
+
+
+_RPM_PRERELEASE_RE = re.compile('(.*)((?:alpha|beta|rc|dev|pre|post)[0-9]+)(.*)', re.IGNORECASE)
+_RPM_SNAPSHOT = re.compile('[a-z]|20[0-9]{6}', re.IGNORECASE)
+
+
+def parse_rpm_vertags(vertags: Any) -> List[str]:
+    if isinstance(vertags, list):
+        return vertags
+    elif isinstance(vertags, str):
+        return [vertags]
+    elif vertags is None:
+        return []
+    else:
+        raise RuntimeError('bad vertags format: {vertags}')
+
+
+def parse_rpm_version(vertags: List[str], version: str, release: str) -> Tuple[str, int]:
+    fixed_version = version
+    check_release = release
+
+    for tag in vertags:
+        check_release = check_release.replace(tag, '', 1)
+
+    if match := _RPM_PRERELEASE_RE.fullmatch(check_release):
+        fixed_version += '-' + match[2]
+
+        if match[1] and match[3]:
+            check_release = f'{match[1]}.{match[3]}'
+        else:
+            check_release = f'{match[1]}{match[3]}'
+
+    elif check_release == '0' or check_release.startswith('0.'):
+        return fixed_version, PackageFlags.IGNORE
+    elif match := _RPM_SNAPSHOT.search(check_release):
+        return fixed_version, PackageFlags.IGNORE
+
+    return fixed_version, 0

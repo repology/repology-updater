@@ -17,6 +17,7 @@
         url: 'https://mirrors.kernel.org/mageia/distrib/7/SRPMS/{source}/'
       parser:
         class: RepodataParser
+        vertags: mga
       subrepo: '{source}'
   repolinks:
     - desc: Mageia home
@@ -44,6 +45,7 @@
         url: 'https://mirrors.kernel.org/mageia/distrib/8/SRPMS/{source}/'
       parser:
         class: RepodataParser
+        vertags: mga
       subrepo: '{source}'
   repolinks:
     - desc: Mageia home
@@ -73,6 +75,7 @@
         url: 'https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/{source}/'
       parser:
         class: RepodataParser
+        vertags: mga
       subrepo: '{source}'
   repolinks:
     - desc: Mageia home

@@ -18,6 +18,7 @@
         url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/32/srpm/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -41,6 +42,7 @@
         url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/33/srpm/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -64,6 +66,7 @@
         url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/34/srpm/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -87,6 +90,7 @@
         url: https://phoenixnap.dl.sourceforge.net/project/unitedrpms/35/srpm/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home

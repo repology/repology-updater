@@ -17,6 +17,7 @@
         compression: xz
       parser:
         class: SrcListParser
+        vertags: alt
   repolinks:
     - desc: Sisyphus packages
       url: https://packages.altlinux.org/en/sisyphus/packages
@@ -47,6 +48,7 @@
         compression: xz
       parser:
         class: SrcListParser
+        vertags: alt
   repolinks:
     - desc: ALT p9 packages
       url: https://packages.altlinux.org/en/p9/packages

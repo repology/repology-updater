@@ -16,6 +16,7 @@
         url: 'http://vault.centos.org/centos/6/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -45,6 +46,7 @@
         url: 'http://vault.centos.org/centos/7/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -73,6 +75,7 @@
         url: 'http://vault.centos.org/centos/8/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -100,6 +103,7 @@
         url: 'https://repo.almalinux.org/almalinux/8/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: AlmaLinux home
@@ -120,6 +124,7 @@
         url: 'https://download.rockylinux.org/pub/rocky/8/{source}/source/tree/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: Rocky Linux home

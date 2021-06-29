@@ -109,6 +109,7 @@
         url: 'http://mirror.rosalab.ru/rosa/server/6.9/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
+        vertags: res
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -139,6 +140,7 @@
         url: 'http://mirror.rosalab.ru/rosa/server/7.3/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
+        vertags: res
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -168,6 +170,7 @@
         url: 'http://mirror.rosalab.ru/rosa/server/7.5/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
+        vertags: res
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home

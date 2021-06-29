@@ -15,6 +15,7 @@
         url: https://repo.openeuler.org/openEuler-20.03-LTS/source/
       parser:
         class: RepodataParser
+        vertags: oe
       subrepo: '{source}'
   repolinks:
     - desc: openEuler home
