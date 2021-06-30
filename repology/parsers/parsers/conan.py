@@ -16,8 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from collections import defaultdict
 from dataclasses import dataclass
-from typing import Any, Dict, Iterable, Iterator, List
+from typing import Any, Callable, Dict, Iterable, Iterator, List
 
 import yaml
 
@@ -27,10 +28,36 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
+def _traverse_arbitrary_structure(data: Any, handler: Callable[[List[str], str], None], tags: List[str] = []) -> None:
+    # processes arbitrary nested structure of dicts and lists which
+    # is possible in conandata.yaml files
+
+    if isinstance(data, list):
+        for item in data:
+            _traverse_arbitrary_structure(item, handler, tags)
+    elif isinstance(data, dict):
+        for key, item in data.items():
+            _traverse_arbitrary_structure(item, handler, tags + [key])
+    elif isinstance(data, str):
+        handler(tags, data)
+
+
 @dataclass
 class _UrlInfo:
     tags: List[str]
     url: str
+
+
+def _extract_url_infos(data: Any) -> List[_UrlInfo]:
+    result: List[_UrlInfo] = []
+
+    def handler(tags: List[str], data: str) -> None:
+        if 'url' in tags and 'sha256' not in tags:
+            result.append(_UrlInfo(tags, data))
+
+    _traverse_arbitrary_structure(data, handler)
+
+    return result
 
 
 @dataclass
@@ -39,41 +66,23 @@ class _VersionInfo:
     url_infos: List[_UrlInfo]
 
 
-def _extract_url_infos_from_arbitrary_structure(data: Any, tags: List[str]) -> Iterator[_UrlInfo]:
-    # processes arbitrary nested structure of dicts and lists which
-    # is possible in conandata.yaml files
-
-    if isinstance(data, list):
-        for item in data:
-            yield from _extract_url_infos_from_arbitrary_structure(item, tags)
-    elif isinstance(data, dict):
-        for key, item in data.items():
-            yield from _extract_url_infos_from_arbitrary_structure(item, tags + [key])
-    elif isinstance(data, str):
-        # note that 'url' may appear more than once, see android-ndk/all/conandata.yml
-        if 'url' in tags and 'sha256' not in tags:
-            yield _UrlInfo(tags, data)
-
-
 def _extract_version_infos(conandata: Dict[str, Any]) -> Iterator[_VersionInfo]:
     for version, data in conandata['sources'].items():
-        yield _VersionInfo(
-            version,
-            list(_extract_url_infos_from_arbitrary_structure(data, []))
-        )
+        yield _VersionInfo(version, _extract_url_infos(data))
 
 
 def _extract_patches(conandata: Dict[str, Any]) -> Dict[str, List[str]]:
-    if 'patches' not in conandata:
-        return {}
+    result = defaultdict(list)
 
-    return {
-        version:
-            [patch['patch_file'] for patch in patches]
-            if isinstance(patches, list)
-            else [patches['patch_file']]
-        for version, patches in conandata['patches'].items()
-    }
+    if 'patches' in conandata:
+        for version, data in conandata['patches'].items():
+            def handler(tags: List[str], data: str) -> None:
+                if not tags or tags[-1] == 'patch_file':
+                    result[version].append(data)
+
+            _traverse_arbitrary_structure(data, handler)
+
+    return result
 
 
 class ConanGitParser(Parser):
