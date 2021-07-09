@@ -159,6 +159,7 @@ rulesets = families + [
     'pardus',
     'parrot',
     'pureos',
+    'raspbian',
     'rebornos',
     'rpm',
     'rpmsphere',

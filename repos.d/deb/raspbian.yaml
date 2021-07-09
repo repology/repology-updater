@@ -6,6 +6,7 @@
   desc: Raspbian Oldstable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, raspbian]
   color: 'd6264f'
   minpackages: 22000
   sources:
@@ -27,6 +28,7 @@
   desc: Raspbian Stable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, raspbian]
   color: 'd6264f'
   minpackages: 28000
   sources:
@@ -48,6 +50,7 @@
   desc: Raspbian Testing
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, raspbian]
   color: 'd6264f'
   minpackages: 31000
   sources:
