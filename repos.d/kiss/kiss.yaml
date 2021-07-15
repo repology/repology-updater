@@ -6,7 +6,7 @@
   desc: KISS Linux Main
   family: kiss
   ruleset: kiss
-  minpackages: 130
+  minpackages: 110
   sources:
     - name: repo
       fetcher:
