@@ -57,6 +57,9 @@ class KissGitParser(Parser):
 
                         url, *rest = line.split()
 
+                        if 'VERSION' in url:
+                            raise RuntimeError(f'substitution detected in url: "{url}", refusing to continue')
+
                         if '://' in url:
                             pkg.add_downloads(url)
 
