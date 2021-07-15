@@ -113,6 +113,7 @@ families = [
     'solus',
     't2',
     'termux',
+    'ubi',
     'vcpkg',
     'void',
     'wikidata',
