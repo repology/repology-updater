@@ -107,6 +107,42 @@
   tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################
+# dm9pZCAq
+###########################################################################
+- name: gentoo_ovl_dm9pZCAq
+  type: repository
+  desc: Gentoo overlay dm9pZCAq
+  family: gentoo
+  color: '428ccb'
+  minpackages: 50
+  default_maintainer: v@0x0c.xyz
+  sources:
+    - name: dm9pZCAq-overlay
+      fetcher:
+        class: GitFetcher
+        url: https://notabug.org/dm9pZCAq/dm9pZCAq-overlay
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: false
+  repolinks:
+    - desc: Git repository
+      url: https://notabug.org/dm9pZCAq/dm9pZCAq-overlay
+    - desc: Github sync repository mirror
+      url: https://github.com/gentoo-mirror/dm9pZCAq
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://gpo.zugaina.org/Overlays/dm9pZCAq/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://notabug.org/dm9pZCAq/dm9pZCAq-overlay/src/master/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://notabug.org/dm9pZCAq/dm9pZCAq-overlay/src/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://notabug.org/dm9pZCAq/dm9pZCAq-overlay/raw/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+  tags: [ all, production, gentoo-overlays ]
+
+###########################################################################
 # Disabled overlays (not really useful)
 ###########################################################################
 - name: gentoo_ovl_games
