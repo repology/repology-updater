@@ -57,7 +57,11 @@ class KissGitParser(Parser):
 
                         url, *rest = line.split()
 
-                        if 'VERSION' in url:
+                        # KISS introduced substitution variables (see #1166) which
+                        # we won't support, detect these and refuse to parse.
+                        # Check for numerics additionally, as there may be verbatim
+                        # VERSION in the url which affects carbs.
+                        if 'VERSION' in url and not any(filter(str.isnumeric, url)):  # type: ignore
                             raise RuntimeError(f'substitution detected in url: "{url}", refusing to continue')
 
                         if '://' in url:
