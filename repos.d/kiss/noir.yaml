@@ -18,7 +18,6 @@
         class: KissGitParser
         maintainer_from_git: true
   repolinks:
-    repolinks:
     - desc: NOIR Linux home
       url: https://noirlinux.github.io/
     - desc: Main Repositories on GitHub
