@@ -1,0 +1,39 @@
+FROM postgres:13.3
+
+# docker build -t repology-db .
+
+# NOTE: this is for development only! These are the development credentials
+# defined in the README.md and default configuration file. You should
+# absolutely not use this in a production setting.
+
+RUN apt-get update && apt-get install -y git \
+      build-essential \
+      postgresql-server-dev-13 \
+      wget \
+      pkg-config \
+      cmake
+
+WORKDIR /opt
+RUN wget https://github.com/repology/libversion/archive/refs/tags/3.0.1.tar.gz && \
+    tar -xzvf 3.0.1.tar.gz && \
+    cd libversion-3.0.1 && \
+    mkdir build && \
+    cmake . && \
+    cd build && \
+    cmake --build ../ && \
+    cd ../ && \
+    make install && \
+    ldconfig
+
+WORKDIR /opt
+RUN git clone https://github.com/repology/postgresql-libversion && \
+    cd postgresql-libversion && \
+    make && \
+    make install && \
+    ldconfig
+
+WORKDIR /docker-entrypoint-initdb.d
+RUN echo 'psql --username ${POSTGRES_USER} --dbname ${POSTGRES_DB} -c "CREATE EXTENSION pg_trgm"' > extension1.sh && \
+    echo 'psql --username ${POSTGRES_USER} --dbname ${POSTGRES_DB} -c "CREATE EXTENSION libversion"' > extension2.sh && \
+    chmod +x extension*.sh
+    

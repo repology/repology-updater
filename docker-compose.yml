@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  db:
+    # Important! Do not use this in production without changing credentials
+    env_file:
+      - postgres.env
+
+    restart: always
+    build:
+      context: docker/
+      dockerfile: Dockerfile.db
+
+
+  repology:
+    entrypoint: ["tail", "-f", "/dev/null"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # For development so changes to local files can be propograted with restart
+    volumes:
+      - ./:/code
+    links:
+      - db

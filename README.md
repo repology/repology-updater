@@ -81,7 +81,11 @@ on localhost.
 
 ### Creating the database
 
-For the following steps you'll need to set up the database. Ensure
+For the following steps you'll need to set up the database. 
+
+#### Local Database
+
+You can optionally deploy your own database, and first ensure
 PostgreSQL server is up and running, and execute the following
 commands to create the database for repology:
 
@@ -96,11 +100,61 @@ psql --username postgres --dbname repology -c "CREATE EXTENSION libversion"
 in the case you want to change the credentials, don't forget to add
 actual ones to `repology.conf`.
 
+#### Docker
+
+In the case that you want to create the database with Docker, a docker setup
+is provided to do so.
+
+ - [Dockerfile](Dockerfile): builds a base image with dependencies to run repology
+ - [docker/Dockerfile.db](docker/Dockerfile.db) creates the database with the above credentials
+ - [docker-compose.yml](docker-compose.yml): provides orchestration between the two.
+ 
+For this approach, both [Docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) are required to be installed.
+To build the containers:
+
+```bash
+$ docker-compose build
+```
+
+And bring them up:
+
+```bash
+$ docker-compose up -d
+```
+
+Check the status of containers:
+
+```shell
+$ docker-compose ps
+           Name                          Command              State    Ports  
+------------------------------------------------------------------------------
+repology-updater_db_1         docker-entrypoint.sh postgres   Up      5432/tcp
+repology-updater_repology_1   tail -f /dev/null               Up              
+```
+
+You will then want to shell into the repology container to interact with the
+database, discussed in the next step.
+
+```bash
+$ docker exec -it repology-updater_repology_1 bash
+```
+
+#### Initialize database
+
 Next you can create database schema (tables, indexes etc.) and at the
 same time test that the database is accessible with the following command:
 
 ```shell
+# If you are outside the container and the database is on localhost
 ./repology-update.py --initdb
+
+# Inside the container with the database at host "db"
+./repology-update.py --initdb --dsn "host=db dbname=repology user=repology password=repology"
+```
+```
+Aug 11 03:48:47 (re)initializing database schema
+Aug 11 03:48:47   committing changes
+Aug 11 03:48:47 total time taken: 0.22 seconds
 ```
 
 ### Fetching/updating repository data
@@ -110,7 +164,11 @@ update cycle consists of multiple steps, but in most cases you'll need
 to just run all of them:
 
 ```shell
+# localhost database
 ./repology-update.py --fetch --fetch --parse --database --postupdate
+
+# docker database
+./repology-update.py --fetch --fetch --parse --database --postupdate --dsn "host=db dbname=repology user=repology password=repology"
 ```
 
   - `--fetch` tells the utility to fetch raw repository data
