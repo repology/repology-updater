@@ -1,0 +1,33 @@
+###########################################################################
+# Spack
+###########################################################################
+- name: spack
+  type: repository
+  desc: Spack
+  family: spack
+  color: "0f3a80"
+  minpackages: 5000
+  default_maintainer: fallback-mnt-spack@repology
+  sources:
+    - name: repology.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/spack/packages/main/data/repology.json
+        allow_zero_size: false
+      parser:
+        class: SpackJsonParser
+  repolinks:
+    - desc: Spack Catalog
+      url: https://spack.github.io/packages/
+    - desc: Spack GitHub repository
+      url: https://github.com/spack/spack
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://spack.github.io/packages/package.html?name={name}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/package.py'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/package.py'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{name}/package.py'
+  tags: [ all, production, spack ]

@@ -157,6 +157,8 @@ class NameType:
 
     STACKAGE_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
+    SPACK_NAME: ClassVar[int] = GENERIC_GEN_NAME
+
     DISTROWATCH_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
     FRESHCODE_NAME: ClassVar[int] = GENERIC_GEN_NAME

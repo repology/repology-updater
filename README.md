@@ -1,6 +1,6 @@
 # Repology
 
-![CI](https://github.com/repology/repology-updater/workflows/CI/badge.svg)
+[![CI](https://github.com/repology/repology-updater/workflows/CI/badge.svg)](https://github.com/repology/repology-updater/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/repology/repology-updater/branch/master/graph/badge.svg)](https://codecov.io/gh/repology/repology-updater)
 
 Repology is a service which monitors *a lot* of package repositories
