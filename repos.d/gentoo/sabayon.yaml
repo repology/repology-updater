@@ -6,7 +6,7 @@
   desc: Sabayon
   statsgroup: Gentoo
   family: gentoo
-  minpackages: 400
+  minpackages: 300
   default_maintainer: fallback-mnt-sabayon@repology
   sources:
     - name: sabayon
