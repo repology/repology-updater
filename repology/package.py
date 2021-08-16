@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
-from typing import Any, ClassVar, Dict, List, Optional, Tuple, cast
+from typing import Any, ClassVar, Dict, List, Optional, Tuple
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -467,17 +467,14 @@ class Package:
         )
 
     def get_classless_hash(self) -> int:
-        return cast(
-            int,
-            xxhash.xxh64_intdigest(
-                # least-overhead stable binary encoding of meaningful Package fields (I could come with)
-                pickle.dumps(
-                    [
-                        (slot, value)
-                        for slot in Package._hashable_slots
-                        if (value := getattr(self, slot, None)) is not None
-                    ]
-                )
+        return xxhash.xxh64_intdigest(
+            # least-overhead stable binary encoding of meaningful Package fields (I could come with)
+            pickle.dumps(
+                [
+                    (slot, value)
+                    for slot in Package._hashable_slots
+                    if (value := getattr(self, slot, None)) is not None
+                ]
             )
         ) & 0x7fffffffffffffff  # to fit into PostgreSQL integer
 
