@@ -33,6 +33,7 @@
   tags: [ all, production, sisyphus ]
 
 - name: alt_p9
+  sortname: alt_p09
   type: repository
   desc: ALT Linux p9
   statsgroup: ALT Sisyphus
