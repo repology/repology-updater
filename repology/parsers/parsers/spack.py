@@ -1,4 +1,4 @@
-# Copyright (C) 2021 Vanessa Sochat
+# Copyright (C) 2021 Vanessa Sochat, Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,35 +15,55 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable
+from typing import Any, Dict, Iterable, List, Optional
 
+from libversion import version_compare
+
+from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.parsers.json import iter_json_list
-from repology.transformer import PackageTransformer
+from repology.parsers.json import iter_json_dict
 from repology.parsers.versions import VersionStripper
-import json
+from repology.transformer import PackageTransformer
+
 
 class SpackJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_left(':')
 
-        for pkgdata in iter_json_list(path, ('packages', None)):
-            with factory.begin() as pkg:
-
-                pkg.add_name(pkgdata['name'], NameType.SPACK)
-                pkg.set_version(pkgdata['version'], normalize_version)
-                pkg.set_rawversion(pkgdata['version'])
-
-                # We don't currently have good keywords, could in the future!
-                # pkg.add_categories(packagedata['keywords'])
+        for key, pkgdata in iter_json_dict(path, ('packages', None)):
+            with factory.begin(key) as pkg:
+                pkg.add_name(pkgdata['name'], NameType.SPACK_NAME)
                 pkg.add_homepages(pkgdata['homepages'])
-                pkg.add_downloads(pkgdata['downloads'])
-                pkg.set_summary(pkgdata['summary'])
-                # Ensure that maintainer usernames are in context of spack
-                pkg.add_maintainers(["%s @spack" %x for x in pkgdata['maintainers']])
-                # Not currently used/needed, but available
-                # pkg.set_extra_field('dependencies', packagedata['dependencies'])
-                yield pkg
+                pkg.add_maintainers(f'{m}@spack' for m in pkgdata['maintainers'])
 
+                # - no usable keywords/categories (yet)
+                # - summaries are multiline, so ignored
+                # - dependencies info is available, not used yet
+                # - patches info is available, not used yet
 
+                # spack may contain a lot of versions for a single project,
+                # we don't handle that very well, so pick greatest release
+                # version and all rolling versions
+                picked_verdatas: List[Dict[str, Any]] = []
+                latest_release_verdata: Optional[Dict[str, Any]] = None
+
+                for pkgverdata in pkgdata['version']:
+                    if 'branch' in pkgverdata:
+                        picked_verdatas.append(pkgverdata)
+                    elif latest_release_verdata is None or version_compare(pkgverdata['version'], latest_release_verdata['version']) > 0:
+                        latest_release_verdata = pkgverdata
+
+                if latest_release_verdata:
+                    picked_verdatas.append(latest_release_verdata)
+
+                for pkgverdata in picked_verdatas:
+                    verpkg = pkg.clone()
+
+                    if 'branch' in pkgverdata:
+                        verpkg.set_flags(PackageFlags.ROLLING)
+
+                    verpkg.set_version(pkgverdata['version'], normalize_version)
+                    verpkg.add_downloads(pkgverdata['downloads'])
+
+                    yield verpkg

@@ -5,6 +5,7 @@
   type: repository
   desc: Spack
   family: spack
+  ruleset: spack
   color: "0f3a80"
   minpackages: 5000
   default_maintainer: fallback-mnt-spack@repology
@@ -25,9 +26,9 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://spack.github.io/packages/package.html?name={name}'
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/package.py'
+      url: 'https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/{name}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/package.py'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{name}/package.py'
-  tags: [ all, production, spack ]
+  tags: [ all, production ]
