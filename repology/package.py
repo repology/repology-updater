@@ -128,6 +128,7 @@ class PackageFlags:
                 PackageFlags.ALTVER: 'ALTVER',
                 PackageFlags.VULNERABLE: 'VULNERABLE',
                 PackageFlags.ALTSCHEME: 'ALTSCHEME',
+                PackageFlags.NOLEGACY: 'NOLEGACY',
             }.items() if val & var
         )
 
