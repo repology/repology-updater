@@ -63,6 +63,37 @@
       url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}/raw'
   tags: [ all, production, sisyphus ]
 
+- name: alt_p10
+  type: repository
+  desc: ALT Linux p10
+  statsgroup: ALT Sisyphus
+  family: sisyphus
+  ruleset: [sisyphus, rpm]
+  color: 'baccdd'
+  minpackages: 18000
+  sources:
+    - name: [ noarch, x86_64 ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/p10/branch/{source}/base/srclist.classic.xz'
+        compression: xz
+      parser:
+        class: SrcListParser
+        vertags: alt
+  repolinks:
+    - desc: ALT p10 packages
+      url: https://packages.altlinux.org/en/p10/packages
+    - desc: p10 on ALT Linux Wiki
+      url: https://en.altlinux.org/PlatformTen
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.altlinux.org/en/p10/srpms/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://packages.altlinux.org/en/p10/specfiles/{srcname}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://packages.altlinux.org/en/p10/specfiles/{srcname}/raw'
+  tags: [ all, production, sisyphus ]
+
 # automatically imported packages; duplicate already existing packages and versions,
 # and has it's own comparison and garbage problems, so not enabled in production
 - name: altsisyphus_autoimports
