@@ -85,6 +85,7 @@ class PackageFlags:
     VULNERABLE: ClassVar[int] = 1 << 16
     ALTSCHEME: ClassVar[int] = 1 << 17
     NOLEGACY: ClassVar[int] = 1 << 18
+    FORCE_OUTDATED: ClassVar[int] = 1 << 19
 
     ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
@@ -129,6 +130,7 @@ class PackageFlags:
                 PackageFlags.VULNERABLE: 'VULNERABLE',
                 PackageFlags.ALTSCHEME: 'ALTSCHEME',
                 PackageFlags.NOLEGACY: 'NOLEGACY',
+                PackageFlags.FORCE_OUTDATED: 'FORCE_OUTDATED',
             }.items() if val & var
         )
 

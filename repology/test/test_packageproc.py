@@ -429,6 +429,21 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='4', version='10').expect(versionclass=Ps.NEWEST),
         )
 
+    def test_force_outdated(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='0', version='2', flags=Pf.FORCE_OUTDATED).expect(versionclass=Ps.OUTDATED),
+            PackageSample(repo='1', version='1').expect(versionclass=Ps.OUTDATED),
+        )
+
+        self._check_fill_versions(
+            PackageSample(repo='0', version='2', flags=Pf.DEVEL | Pf.FORCE_OUTDATED).expect(versionclass=Ps.OUTDATED),
+            PackageSample(repo='1', version='1').expect(versionclass=Ps.NEWEST),
+        )
+
+        self._check_fill_versions(
+            PackageSample(repo='0', version='1', flags=Pf.FORCE_OUTDATED).expect(versionclass=Ps.OUTDATED),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

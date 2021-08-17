@@ -517,6 +517,14 @@ class Rule:
 
             self._actions.append(outdated_action)
 
+        if 'force_outdated' in ruledata:
+            force_outdated_flag: Final = ruledata['force_outdated']
+
+            def force_outdated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.FORCE_OUTDATED, force_outdated_flag)
+
+            self._actions.append(force_outdated_action)
+
         if 'legacy' in ruledata:
             legacy_flag: Final = ruledata['legacy']
 

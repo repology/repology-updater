@@ -266,6 +266,9 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
                 if branch_key is not None and branch_key not in first_package_in_branch:
                     first_package_in_branch[branch_key] = package
 
+            if package.has_flag(PackageFlags.FORCE_OUTDATED) and package.versionclass in (PackageStatus.UNIQUE, PackageStatus.NEWEST, PackageStatus.DEVEL):
+                package.versionclass = PackageStatus.OUTDATED
+
 
 def fill_packageset_versions(packages: Sequence[Package]) -> None:
     # global flags #1
