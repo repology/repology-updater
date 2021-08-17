@@ -509,7 +509,7 @@ class Rule:
 
             self._actions.append(any_is_patch_action)
 
-        if 'outdated' in ruledata:
+        if 'outdated' in ruledata:  # XXX: renamed to 'sink'
             outdated_flag: Final = ruledata['outdated']
 
             def outdated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
@@ -517,7 +517,15 @@ class Rule:
 
             self._actions.append(outdated_action)
 
-        if 'force_outdated' in ruledata:
+        if 'sink' in ruledata:  # XXX: alias to former 'outdated'
+            sink_flag: Final = ruledata['sink']
+
+            def sink_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.OUTDATED, sink_flag)
+
+            self._actions.append(sink_action)
+
+        if 'force_outdated' in ruledata:  # XXX: to be renamed to 'outdated'
             force_outdated_flag: Final = ruledata['force_outdated']
 
             def force_outdated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
