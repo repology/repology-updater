@@ -36,11 +36,11 @@ class SpackJsonParser(Parser):
                 pkg.add_name(pkgdata['name'], NameType.SPACK_NAME)
                 pkg.add_homepages(pkgdata['homepages'])
                 pkg.add_maintainers(f'{m}@spack' for m in pkgdata['maintainers'])
+                pkg.set_extra_field('patch', pkgdata['patches'])
 
                 # - no usable keywords/categories (yet)
                 # - summaries are multiline, so ignored
                 # - dependencies info is available, not used yet
-                # - patches info is available, not used yet
 
                 # spack may contain a lot of versions for a single project,
                 # we don't handle that very well, so pick greatest release

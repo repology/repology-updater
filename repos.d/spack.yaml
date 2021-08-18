@@ -31,4 +31,8 @@
       url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/package.py'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{name}/package.py'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{name}/{?patch}'
   tags: [ all, production ]
