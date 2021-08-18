@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -509,15 +509,7 @@ class Rule:
 
             self._actions.append(any_is_patch_action)
 
-        if 'outdated' in ruledata:  # XXX: renamed to 'sink'
-            outdated_flag: Final = ruledata['outdated']
-
-            def outdated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.set_flag(PackageFlags.OUTDATED, outdated_flag)
-
-            self._actions.append(outdated_action)
-
-        if 'sink' in ruledata:  # XXX: alias to former 'outdated'
+        if 'sink' in ruledata:
             sink_flag: Final = ruledata['sink']
 
             def sink_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
@@ -525,7 +517,15 @@ class Rule:
 
             self._actions.append(sink_action)
 
-        if 'force_outdated' in ruledata:  # XXX: to be renamed to 'outdated'
+        if 'outdated' in ruledata:
+            outdated_flag: Final = ruledata['outdated']
+
+            def outdated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.FORCE_OUTDATED, outdated_flag)
+
+            self._actions.append(outdated_action)
+
+        if 'force_outdated' in ruledata:  # XXX: to be removed in favor of outdated
             force_outdated_flag: Final = ruledata['force_outdated']
 
             def force_outdated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
