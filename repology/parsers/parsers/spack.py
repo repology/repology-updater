@@ -36,7 +36,7 @@ class SpackJsonParser(Parser):
                 pkg.add_name(pkgdata['name'], NameType.SPACK_NAME)
                 pkg.add_homepages(pkgdata['homepages'])
                 pkg.add_maintainers(f'{m}@spack' for m in pkgdata['maintainers'])
-                pkg.set_extra_field('patch', pkgdata['patches'])
+                pkg.set_extra_field('patch', [patch.split()[0] for patch in pkgdata['patches'] if '://' not in patch])
 
                 # - no usable keywords/categories (yet)
                 # - summaries are multiline, so ignored
