@@ -98,18 +98,18 @@ class TestParsers(unittest.TestCase):
             0
         )
         self.assert_version_compare(
-            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
+            spawn_package(version='1.0', flags=PackageFlags.SINK),
             spawn_package(version='1.0'),
             -1
         )
         self.assert_version_compare(
             spawn_package(version='1.0'),
-            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
+            spawn_package(version='1.0', flags=PackageFlags.SINK),
             1
         )
         self.assert_version_compare(
-            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
-            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
+            spawn_package(version='1.0', flags=PackageFlags.SINK),
+            spawn_package(version='1.0', flags=PackageFlags.SINK),
             0
         )
 
