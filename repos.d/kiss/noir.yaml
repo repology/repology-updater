@@ -1,0 +1,32 @@
+###########################################################################
+# NOIR Linux
+###########################################################################
+- name: noir
+  type: repository
+  desc: NOIR Linux Main
+  family: noir
+  ruleset: noir
+  minpackages: 110
+  sources:
+    - name: main
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/noirlinux/main.git'
+        depth: null
+        sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
+      parser:
+        class: KissGitParser
+        maintainer_from_git: true
+  repolinks:
+    - desc: NOIR Linux home
+      url: https://noirlinux.github.io/
+    - desc: Main Repositories on GitHub
+      url: https://github.com/noirlinux/main
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/noirlinux/main/tree/master/{path}'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/noirlinux/main/blob/master/{path}/patches/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/noirlinux/main/master/{path}/patches/{?patch}'
+  tags: [ all, production, kiss ]

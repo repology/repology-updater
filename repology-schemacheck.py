@@ -80,6 +80,7 @@ families = [
     'mer',
     'msys2',
     'nix',
+    'noir',
     'npackd',
     'openbsd',
     'openindiana',
