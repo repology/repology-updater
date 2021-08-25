@@ -29,4 +29,4 @@
       url: 'https://github.com/noirlinux/main/blob/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/noirlinux/main/master/{path}/patches/{?patch}'
-  tags: [ all, production, kiss ]
+  tags: [ all, production ]
