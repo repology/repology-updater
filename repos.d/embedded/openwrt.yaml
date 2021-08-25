@@ -239,7 +239,7 @@
   statsgroup: OpenWrt
   family: openwrt
   color: '5d6993'
-  minpackages: 6000
+  minpackages: 8000
   default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: base
@@ -318,7 +318,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, openwrt ]  # disable until official release
+  tags: [ all, production, openwrt ]
 
 - name: openwrt_snapshot_x86_64
   type: repository
