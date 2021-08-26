@@ -445,7 +445,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=sid'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian, have_testdata ]
+  tags: [ all, production, debian ]
 
 - name: debian_experimental
   sortname: debian_zzz

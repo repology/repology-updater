@@ -298,39 +298,6 @@ class TestParsers(unittest.TestCase):
             }
         )
 
-    def test_debian(self) -> None:
-        self.check_package(
-            {
-                'repo': 'debian_unstable',
-                'subrepo': 'main',
-                'category': 'devel',
-                'family': 'debuntu',
-                'srcname': 'a52dec',
-                'binnames': ['liba52-0.7.4', 'liba52-0.7.4-dev'],
-                'trackname': 'a52dec',
-                'visiblename': 'a52dec',
-                'projectname_seed': 'a52dec',
-                'version': '0.7.4',
-                'origversion': '0.7.4',
-                'rawversion': '0.7.4-18',
-                'maintainers': [
-                    'pkg-multimedia-maintainers@lists.alioth.debian.org',
-                    'dmitrij.ledkov@ubuntu.com',
-                    'sam+deb@zoy.org',
-                    'siretart@tauware.de',
-                ],
-                'links': [
-                    (LinkType.UPSTREAM_HOMEPAGE, 'http://liba52.sourceforge.net/'),
-                    (LinkType.PACKAGE_HOMEPAGE, 'https://packages.debian.org/unstable/source/a52dec'),
-                    #(LinkType.PACKAGE_SOURCES, 'https://anonscm.debian.org/cgit/pkg-multimedia/a52dec.git;a=summary'),
-                    (LinkType.PACKAGE_ISSUE_TRACKER, 'https://bugs.debian.org/a52dec'),
-                    (LinkType.PACKAGE_SOURCES, 'https://sources.debian.org/src/a52dec/0.7.4-18/'),
-                    (LinkType.PACKAGE_STATISTICS, 'https://qa.debian.org/popcon-graph.php?packages=a52dec'),
-                    (LinkType.PACKAGE_BUILD_STATUS, 'https://buildd.debian.org/status/package.php?p=a52dec&suite=unstable'),
-                ],
-            }
-        )
-
     def test_gobolinux(self) -> None:
         self.check_package(
             {
