@@ -12,7 +12,7 @@
     - name: PortIndex
       fetcher:
         class: RsyncFetcher
-        url: rsync://rsync.macports.org/macports/trunk/dports/PortIndex_darwin_16_i386/PortIndex.json
+        url: rsync://rsync.macports.org/macports/trunk/dports/PortIndex_darwin_20_i386/PortIndex.json
       parser:
         class: MacPortsJsonParser
   repolinks:
