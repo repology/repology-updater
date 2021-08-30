@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2020-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,7 +17,8 @@
 
 from typing import Iterable
 
-from repology.package import LinkType
+from repology.logger import Logger
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -63,19 +64,10 @@ class PyPiCacheJsonParser(Parser):
                 info = pkgdata['info']
 
                 pkg.add_name(info['name'], NameType.PYPI_NAME)
-                pkg.set_version(info['version'])
 
                 pkg.add_links(LinkType.PROJECT_HOMEPAGE, info['project_url'])
                 if (url := info.get('home_page')) and url != 'UNKNOWN':
                     pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, url)
-
-                if info['project_urls']:
-                    for key, url in info['project_urls'].items():
-                        if (link_type := _url_types.get(key.lower())) and url != 'UNKNOWN':
-                            pkg.add_links(link_type, url)
-
-                for item in pkgdata['releases'][info['version']]:
-                    pkg.add_links(LinkType.PROJECT_DOWNLOAD, item['url'])
 
                 if info['author_email']:
                     pkg.add_maintainers(map(str.strip, info['author_email'].split(',')))
@@ -83,4 +75,31 @@ class PyPiCacheJsonParser(Parser):
                 if info['summary']:
                     pkg.set_summary(info['summary'])
 
-                yield pkg
+                if info['project_urls']:
+                    for key, url in info['project_urls'].items():
+                        if (link_type := _url_types.get(key.lower())) and url != 'UNKNOWN':
+                            pkg.add_links(link_type, url)
+
+                for version, releasedatas in pkgdata['releases'].items():
+                    verpkg = pkg.clone()
+
+                    # XXX: this condition is for transition period while pypicache is migrated
+                    if version != info['version']:
+                        verpkg.log(f'Skipping non-latest version {version}', Logger.WARNING)
+                        continue
+
+                    verpkg.set_version(version)
+
+                    good_items = 0
+                    yanked_items = 0
+                    for releasedata in releasedatas:
+                        if releasedata['yanked']:
+                            yanked_items += 1
+                        else:
+                            good_items += 1
+                            verpkg.add_links(LinkType.PROJECT_DOWNLOAD, releasedata['url'])
+
+                    if yanked_items > 0 and good_items == 0:
+                        verpkg.set_flags(PackageFlags.RECALLED)
+
+                    yield verpkg
