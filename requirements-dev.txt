@@ -10,4 +10,5 @@ types-protobuf
 types-psycopg2
 types-requests
 types-xxhash
+typing-extensions!=3.10.0.1
 voluptuous
