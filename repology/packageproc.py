@@ -154,6 +154,9 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
             if package.branch is not None:
                 branches.add(package.branch)
 
+        if all_flags & PackageFlags.RECALLED:
+            version_totally_ignored = True
+
         is_devel = (
             all_flags & PackageFlags.DEVEL or (
                 all_flags & PackageFlags.WEAK_DEVEL and not has_non_devel
@@ -220,15 +223,18 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
                 # - noscheme beats everything else - if there's no versioning scheme,
                 #   it's meaningless to talk about any kind of version correctness
                 # - incorrect beats untrusted as more specific
-                # - everything else is generic ignored
+                # - ignored is most generic
+                # - without any ignored status, treat as outdated
                 if package.has_flag(PackageFlags.NOSCHEME):
                     package.versionclass = PackageStatus.NOSCHEME
                 elif package.has_flag(PackageFlags.INCORRECT):
                     package.versionclass = PackageStatus.INCORRECT
                 elif package.has_flag(PackageFlags.UNTRUSTED):
                     package.versionclass = PackageStatus.UNTRUSTED
-                else:
+                elif package.has_flag(PackageFlags.IGNORE):
                     package.versionclass = PackageStatus.IGNORED
+                else:
+                    package.versionclass = PackageStatus.OUTDATED
             else:
                 flavor = '_'.join(package.flavors)  # already sorted and unicalized in RepoProcessor
                 branch_key = (package.branch, flavor)

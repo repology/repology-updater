@@ -444,6 +444,28 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='0', version='1', flags=Pf.OUTDATED).expect(versionclass=Ps.OUTDATED),
         )
 
+    def test_recalled(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='0', version='2', flags=Pf.RECALLED).expect(versionclass=Ps.OUTDATED),
+            PackageSample(repo='0', version='1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='2').expect(versionclass=Ps.OUTDATED),
+            PackageSample(repo='1', version='1').expect(versionclass=Ps.NEWEST),
+        )
+
+        self._check_fill_versions(
+            PackageSample(repo='0', version='3').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='0', version='2', flags=Pf.RECALLED).expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='0', version='1').expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='1', version='3').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='2').expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='1', version='1').expect(versionclass=Ps.LEGACY),
+        )
+
+        self._check_fill_versions(
+            PackageSample(repo='0', version='1', flags=Pf.RECALLED).expect(versionclass=Ps.OUTDATED),
+            PackageSample(repo='1', version='1').expect(versionclass=Ps.OUTDATED),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
