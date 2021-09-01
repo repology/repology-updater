@@ -17,7 +17,6 @@
 
 from typing import Iterable
 
-from repology.logger import Logger
 from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -82,11 +81,6 @@ class PyPiCacheJsonParser(Parser):
 
                 for version, releasedatas in pkgdata['releases'].items():
                     verpkg = pkg.clone()
-
-                    # XXX: this condition is for transition period while pypicache is migrated
-                    if version != info['version']:
-                        verpkg.log(f'Skipping non-latest version {version}', Logger.WARNING)
-                        continue
 
                     verpkg.set_version(version)
 
