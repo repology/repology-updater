@@ -81,7 +81,7 @@
       parser:
         class: AURParser
   repolinks:
-    - desc: DUR Home
+    - desc: MPR Home
       url: https://mpr.hunterwittenborn.com/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
