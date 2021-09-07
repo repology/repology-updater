@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 from typing import Iterable
 
 from repology.package import LinkType, PackageFlags
@@ -56,6 +57,15 @@ _url_types = {
 }
 
 
+# https://www.python.org/dev/peps/pep-0440/#pre-releases
+# https://www.python.org/dev/peps/pep-0440/#pre-release-spelling
+_PEP440_PRERELEASE_RE = re.compile('(a|b|rc|dev|alpha|beta|c|pre|preview)')
+
+
+def _pep440_is_prerelease(version: str) -> bool:
+    return _PEP440_PRERELEASE_RE.search(version.lower()) is not None
+
+
 class PyPiCacheJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
@@ -83,6 +93,9 @@ class PyPiCacheJsonParser(Parser):
                     verpkg = pkg.clone()
 
                     verpkg.set_version(version)
+
+                    if _pep440_is_prerelease(version):
+                        verpkg.set_flags(PackageFlags.DEVEL)
 
                     good_items = 0
                     yanked_items = 0
