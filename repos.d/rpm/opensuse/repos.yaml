@@ -270,3 +270,27 @@
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/hardware:sdr/{srcname}/{srcname}.spec?expand=1'
   tags: [ all, production, opensuse, rpm ]
+
+- name: opensuse_server_irc_tumbleweed
+  sortname: opensusez_server_irc
+  type: repository
+  desc: openSUSE Server:IRC Tumbleweed
+  family: opensuse
+  ruleset: [opensuse,rpm]
+  color: '6da741'
+  minpackages: 25
+  sources:
+    - name: data
+      fetcher:
+        class: RepodataFetcher
+        url: https://download.opensuse.org/repositories/server:irc/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://build.opensuse.org/package/show/server:irc/{srcname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/server:irc/{srcname}/{srcname}.spec?expand=1'
+  tags: [ all, production, opensuse, rpm ]
