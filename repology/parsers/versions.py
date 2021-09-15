@@ -52,7 +52,8 @@ class VersionStripper:
         return version
 
 
-_RPM_PRERELEASE_RE = re.compile('(.*)((?:alpha|beta|rc|dev|pre|post)[0-9]+)(.*)', re.IGNORECASE)
+_RPM_PRERELEASE_RE = re.compile('(.*)((?:alpha|beta|rc|dev|pre)[0-9]+)(.*)', re.IGNORECASE)
+_RPM_POSTRELEASE_RE = re.compile('(.*)((?:post)[0-9]+)(.*)', re.IGNORECASE)
 _RPM_SNAPSHOT = re.compile('[a-z]|20[0-9]{6}', re.IGNORECASE)
 
 
@@ -68,23 +69,30 @@ def parse_rpm_vertags(vertags: Any) -> List[str]:
 
 
 def parse_rpm_version(vertags: List[str], version: str, release: str) -> Tuple[str, int]:
-    fixed_version = version
-    check_release = release
+    flags = 0
+    cleaned_up_release = ''
 
-    for tag in vertags:
-        check_release = check_release.replace(tag, '', 1)
-
-    if match := _RPM_PRERELEASE_RE.fullmatch(check_release):
-        fixed_version += '-' + match[2]
-
-        if match[1] and match[3]:
-            check_release = f'{match[1]}.{match[3]}'
+    for part in re.split('|'.join(vertags), release) if vertags else [release]:
+        if (match := _RPM_PRERELEASE_RE.fullmatch(part)) is not None:
+            flags = PackageFlags.DEVEL
         else:
-            check_release = f'{match[1]}{match[3]}'
+            match = _RPM_POSTRELEASE_RE.fullmatch(part)
 
-    elif check_release == '0' or check_release.startswith('0.'):
-        return fixed_version, PackageFlags.IGNORE
-    elif match := _RPM_SNAPSHOT.search(check_release):
-        return fixed_version, PackageFlags.IGNORE
+        # legal prerelease or postrelease match
+        if match is not None:
+            version += '-' + match[2]
 
-    return fixed_version, 0
+            if match[1] and match[3]:
+                part = f'{match[1]}.{match[3]}'
+            else:
+                part = f'{match[1]}{match[3]}'
+
+        cleaned_up_release += part
+
+    if (cleaned_up_release == '0' or cleaned_up_release.startswith('0.')) and not flags & PackageFlags.DEVEL:
+        flags |= PackageFlags.IGNORE
+
+    if match := _RPM_SNAPSHOT.search(cleaned_up_release):
+        flags |= PackageFlags.IGNORE
+
+    return version, flags
