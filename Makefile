@@ -1,12 +1,13 @@
 FLAKE8?=	flake8
 MYPY?=		mypy
+PYTEST?=	pytest
 
 REPOLOGY_TEST_DUMP_PATH?=	.
 
 lint:: check test flake8 mypy
 
 test::
-	python3 -m unittest discover
+	${PYTEST} ${PYTEST_ARGS} -v -rs
 
 test-make-dump::
 	psql -U repology_test -At -c "select tablename from pg_tables where schemaname = 'public'" | \

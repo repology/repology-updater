@@ -4,6 +4,7 @@ flake8-import-order
 flake8-quotes
 lxml-stubs
 mypy
+pytest
 types-Jinja2
 types-PyYAML
 types-protobuf
