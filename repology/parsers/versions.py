@@ -52,7 +52,8 @@ class VersionStripper:
         return version
 
 
-_RPM_PRERELEASE_RE = re.compile('(.*)((?:alpha|beta|rc|dev|pre)[0-9]+)(.*)', re.IGNORECASE)
+# allows alpha1, alpha20210101, alpha.1, but not alpha.20210101 (which is parsed as alpha instead)
+_RPM_PRERELEASE_RE = re.compile('(.*)((?:alpha|beta|rc|dev|pre)(?:[0-9]+|\\.[0-9]{1,2}(?![0-9]))?)(.*)', re.IGNORECASE)
 _RPM_POSTRELEASE_RE = re.compile('(.*)((?:post)[0-9]+)(.*)', re.IGNORECASE)
 _RPM_SNAPSHOT = re.compile('[a-z]|20[0-9]{6}', re.IGNORECASE)
 
