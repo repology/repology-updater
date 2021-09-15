@@ -77,6 +77,6 @@ jobs:
       - name: Run unit tests
         run: make test
         env:
-          PYTEST_ARGS: --cov-report=xml --cov=repology --omit="repology/fetchers/*"
+          PYTEST_ARGS: --cov-report=xml --cov=repology
       - name: Push coverage info
         run: codecov
