@@ -5,6 +5,7 @@ flake8-quotes
 lxml-stubs
 mypy
 pytest
+pytest-cov
 types-Jinja2
 types-PyYAML
 types-protobuf
