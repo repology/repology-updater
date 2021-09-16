@@ -30,29 +30,35 @@ def test_release_starts_with_zero() -> None:
     assert parse_rpm_version([], '1.2.3', '0') == ('1.2.3', Pf.IGNORE)
 
 
-def test_release_contains_date() -> None:
+def test_release_suggests_snapshot() -> None:
     # Release suggests snapshot, even if it doesn't start with zero
     assert parse_rpm_version([], '1.2.3', '1.20200101') == ('1.2.3', Pf.IGNORE)
+    assert parse_rpm_version([], '1.2.3', '1.garbage') == ('1.2.3', Pf.IGNORE)
 
 
-def test_release_contains_good_prerelease() -> None:
-    assert parse_rpm_version([], '1.2.3', '1.alpha1') == ('1.2.3-alpha1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '1.beta1') == ('1.2.3-beta1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '1.pre1') == ('1.2.3-pre1', Pf.DEVEL)
+prerelease_params = (
+    'suffix,expected_suffix',
+    [
+        ('alpha1', '-alpha1'),
+        ('beta1', '-beta1'),
+        ('rc1', '-rc1'),
+        ('pre1', '-pre1'),
+        ('.alpha1', '-alpha1'),
+        ('.beta1', '-beta1'),
+        ('.rc1', '-rc1'),
+        ('.pre1', '-pre1'),
+    ],
+)
 
-    assert parse_rpm_version([], '1.2.3', '1alpha1') == ('1.2.3-alpha1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '1beta1') == ('1.2.3-beta1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '1pre1') == ('1.2.3-pre1', Pf.DEVEL)
+
+@pytest.mark.parametrize(*prerelease_params)
+def test_release_contains_good_prerelease(suffix, expected_suffix) -> None:
+    assert parse_rpm_version([], '1.2.3', f'1{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
 
 
-def test_release_contains_good_prerelease_and_starts_with_zero() -> None:
-    assert parse_rpm_version([], '1.2.3', '0.alpha1') == ('1.2.3-alpha1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '0.beta1') == ('1.2.3-beta1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '0.pre1') == ('1.2.3-pre1', Pf.DEVEL)
-
-    assert parse_rpm_version([], '1.2.3', '0alpha1') == ('1.2.3-alpha1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '0beta1') == ('1.2.3-beta1', Pf.DEVEL)
-    assert parse_rpm_version([], '1.2.3', '0pre1') == ('1.2.3-pre1', Pf.DEVEL)
+@pytest.mark.parametrize(*prerelease_params)
+def test_release_contains_good_prerelease_and_starts_with_zero(suffix, expected_suffix) -> None:
+    assert parse_rpm_version([], '1.2.3', f'0{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
 
 
 @pytest.mark.xfail(reason='not implemented yet, prone to false positives')
@@ -66,15 +72,15 @@ def test_release_contains_good_prerelease_dot_separated() -> None:
     assert parse_rpm_version([], '1.2.3', '1pre.1') == ('1.2.3-pre.1', 0)
 
 
-def test_release_contains_letters() -> None:
-    # Release contains letters, likely garbage
-    assert parse_rpm_version([], '1.2.3', '1.garbage') == ('1.2.3', Pf.IGNORE)
-
-
 def test_release_tag() -> None:
-    # Tags are removed
+    # Release tags, if specified for the repo, are not condidered as
+    # a sing of a snapshot and do not produce IGNORE flag
     assert parse_rpm_version(['el'], '1.2.3', '1.el6') == ('1.2.3', 0)
     assert parse_rpm_version(['el'], '1.2.3', '1.6el') == ('1.2.3', 0)
+
+
+def test_release_multi() -> None:
+    assert parse_rpm_version(['mga'], '1.2.3', '1.mga1.mga2') == ('1.2.3', 0)
 
 
 def test_release_tag_glued() -> None:
@@ -82,34 +88,23 @@ def test_release_tag_glued() -> None:
     assert parse_rpm_version(['el'], '1.2.3', '1beta3el6') == ('1.2.3-beta3', Pf.DEVEL)
 
 
-@pytest.mark.xfail(reason='not implemented')
-def test_misc_asciidoctor() -> None:
-    assert parse_rpm_version(['fc'], '1.5.0', '0.2.alpha.13.fc26') == ('1.5.0-alpha.13', 0)
+@pytest.mark.parametrize(
+    'tags,version,release,expected_version,expected_flags',
+    [
+        pytest.param(['fc'], '1.5.0', '0.2.alpha.13.fc26', '1.5.0-alpha.13', 0, id='asciidoctor', marks=pytest.mark.xfail(reason='not implemented')),
+        pytest.param(['mga'], '1.5', '0.beta.2.mga8', '1.5-beta.2', 0, id='roundcube', marks=pytest.mark.xfail(reason='not implemented')),
+        pytest.param(['fc'], '0.2.2', '0.36.beta2.fc29', '0.2.2-beta2', Pf.DEVEL, id='aeskulap'),
 
+        # arguable: we parse out devel suffix from Release, but set IGNORE flag
+        # because Release also contains signs of snapshot; instead, we could ignore
+        # the latter and consider that the version with prerelease suffix is precise
+        # enough to not be a pre-snapshot
+        pytest.param(['mga'], '2.1.0', '0.rc9.20190320.7.mga7', '2.1.0-rc9', Pf.IGNORE | Pf.DEVEL, id='kumir'),
+        pytest.param(['el'], '1.1.0', '0.4.rc1.git.ff7641193a.el6', '1.1.0-rc1', Pf.IGNORE | Pf.DEVEL, id='novacom-client'),
 
-@pytest.mark.xfail(reason='not implemented')
-def test_misc_roundcube() -> None:
-    assert parse_rpm_version(['mga'], '1.5', '0.beta.2.mga8') == ('1.5-beta.2', 0)
-
-
-def test_misc_aeskulap() -> None:
-    assert parse_rpm_version(['fc'], '0.2.2', '0.36.beta2.fc29') == ('0.2.2-beta2', Pf.DEVEL)
-
-
-def test_misc_kumir() -> None:
-    # arguable: we parse out devel suffix, but ignore it because of the date
-    # in this specific case we could drop ignore, since because of prerelease
-    # suffix the version is precise enough
-    assert parse_rpm_version(['mga'], '2.1.0', '0.rc9.20190320.7.mga7') == ('2.1.0-rc9', Pf.IGNORE | Pf.DEVEL)
-
-
-def test_misc_airstrike() -> None:
-    # arguable: we parse out pre6, but we don't expect it to be pre6a
-    # so we also ignore it
-    assert parse_rpm_version(['mga'], '1.0', '1.0-0.pre6a.8.mga8') == ('1.0-pre6', Pf.IGNORE | Pf.DEVEL)
-
-
-def test_novacom_client() -> None:
-    # arguable: similar to kumir; although we won't normally trust git.XXX garbage,
-    # rc1 suggests it's a post-snapshot
-    assert parse_rpm_version(['el'], '1.1.0', '0.4.rc1.git.ff7641193a.el6') == ('1.1.0-rc1', Pf.IGNORE | Pf.DEVEL)
+        # arguable: we parse out pre6, but we don't expect it to be pre6a so we also ignore it
+        pytest.param(['mga'], '1.0', '1.0-0.pre6a.8.mga8', '1.0-pre6', Pf.IGNORE | Pf.DEVEL, id='airstrike'),
+    ]
+)
+def test_real_world(tags, version, release, expected_version, expected_flags):
+    assert parse_rpm_version(tags, version, release) == (expected_version, expected_flags)
