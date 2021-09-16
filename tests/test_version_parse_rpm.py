@@ -104,6 +104,14 @@ def test_release_tag_glued() -> None:
 
         # arguable: we parse out pre6, but we don't expect it to be pre6a so we also ignore it
         pytest.param(['mga'], '1.0', '1.0-0.pre6a.8.mga8', '1.0-pre6', Pf.IGNORE | Pf.DEVEL, id='airstrike'),
+
+        # we may parse prealpha as well, but we'll have to ignore it for correct sorting
+        pytest.param([], '0.9', '0.5prealpha', '0.9-prealpha', Pf.DEVEL, id='pocketsphinx', marks=pytest.mark.xfail),
+
+        # this case cannot be processed correctly, as there's no telling that '2' does not belong to 'beta'
+        pytest.param([], '0.5.2', '0.beta.2', '0.5.2-beta', Pf.DEVEL, id='php-pear-Console_ProgressBar', marks=pytest.mark.xfail),
+
+        pytest.param(['el'], '4.999.9', '0.5.beta.20091007git.el6', '4.999.9-beta', Pf.DEVEL | Pf.IGNORE, id='xz', marks=pytest.mark.xfail),
     ]
 )
 def test_real_world(tags, version, release, expected_version, expected_flags):
