@@ -36,7 +36,7 @@ def test_release_suggests_snapshot() -> None:
     assert parse_rpm_version([], '1.2.3', '1.garbage') == ('1.2.3', Pf.IGNORE)
 
 
-prerelease_params = (
+@pytest.mark.parametrize(
     'suffix,expected_suffix',
     [
         ('alpha1', '-alpha1'),
@@ -47,29 +47,33 @@ prerelease_params = (
         ('.beta1', '-beta1'),
         ('.rc1', '-rc1'),
         ('.pre1', '-pre1'),
+        ('alpha.1', '-alpha.1'),
+        ('beta.1', '-beta.1'),
+        ('rc.1', '-rc.1'),
+        ('pre.1', '-pre.1'),
+        ('.alpha.1', '-alpha.1'),
+        ('.beta.1', '-beta.1'),
+        ('.rc.1', '-rc.1'),
+        ('.pre.1', '-pre.1'),
     ],
 )
-
-
-@pytest.mark.parametrize(*prerelease_params)
 def test_release_contains_good_prerelease(suffix, expected_suffix) -> None:
+    assert parse_rpm_version([], '1.2.3', f'0{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', f'1{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
 
 
-@pytest.mark.parametrize(*prerelease_params)
-def test_release_contains_good_prerelease_and_starts_with_zero(suffix, expected_suffix) -> None:
-    assert parse_rpm_version([], '1.2.3', f'0{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
+def test_release_prerelease_without_number() -> None:
+    assert parse_rpm_version([], '1.2.3', '0alpha') == ('1.2.3-alpha', Pf.DEVEL)
+    assert parse_rpm_version([], '1.2.3', '0.alpha') == ('1.2.3-alpha', Pf.DEVEL)
+    assert parse_rpm_version([], '1.2.3', '1alpha') == ('1.2.3-alpha', Pf.DEVEL)
+    assert parse_rpm_version([], '1.2.3', '1.alpha') == ('1.2.3-alpha', Pf.DEVEL)
 
 
-@pytest.mark.xfail(reason='not implemented yet, prone to false positives')
-def test_release_contains_good_prerelease_dot_separated() -> None:
-    assert parse_rpm_version([], '1.2.3', '1.alpha.1') == ('1.2.3-alpha.1', 0)
-    assert parse_rpm_version([], '1.2.3', '1.beta.1') == ('1.2.3-beta.1', 0)
-    assert parse_rpm_version([], '1.2.3', '1.pre.1') == ('1.2.3-pre.1', 0)
-
-    assert parse_rpm_version([], '1.2.3', '1alpha.1') == ('1.2.3-alpha.1', 0)
-    assert parse_rpm_version([], '1.2.3', '1beta.1') == ('1.2.3-beta.1', 0)
-    assert parse_rpm_version([], '1.2.3', '1pre.1') == ('1.2.3-pre.1', 0)
+def test_release_prerelease_dot_longnumber() -> None:
+    assert parse_rpm_version([], '1.2.3', '0.alpha20210101') == ('1.2.3-alpha20210101', Pf.DEVEL)
+    assert parse_rpm_version([], '1.2.3', '0.alpha.20210101') == ('1.2.3-alpha', Pf.DEVEL | Pf.IGNORE)
+    assert parse_rpm_version([], '1.2.3', '1.alpha20210101') == ('1.2.3-alpha20210101', Pf.DEVEL)
+    assert parse_rpm_version([], '1.2.3', '1.alpha.20210101') == ('1.2.3-alpha', Pf.DEVEL | Pf.IGNORE)
 
 
 def test_release_tag() -> None:
@@ -91,8 +95,8 @@ def test_release_tag_glued() -> None:
 @pytest.mark.parametrize(
     'tags,version,release,expected_version,expected_flags',
     [
-        pytest.param(['fc'], '1.5.0', '0.2.alpha.13.fc26', '1.5.0-alpha.13', 0, id='asciidoctor', marks=pytest.mark.xfail(reason='not implemented')),
-        pytest.param(['mga'], '1.5', '0.beta.2.mga8', '1.5-beta.2', 0, id='roundcube', marks=pytest.mark.xfail(reason='not implemented')),
+        pytest.param(['fc'], '1.5.0', '0.2.alpha.13.fc26', '1.5.0-alpha.13', Pf.DEVEL, id='asciidoctor'),
+        pytest.param(['mga'], '1.5', '0.beta.2.mga8', '1.5-beta.2', Pf.DEVEL, id='roundcube'),
         pytest.param(['fc'], '0.2.2', '0.36.beta2.fc29', '0.2.2-beta2', Pf.DEVEL, id='aeskulap'),
 
         # arguable: we parse out devel suffix from Release, but set IGNORE flag
@@ -111,7 +115,7 @@ def test_release_tag_glued() -> None:
         # this case cannot be processed correctly, as there's no telling that '2' does not belong to 'beta'
         pytest.param([], '0.5.2', '0.beta.2', '0.5.2-beta', Pf.DEVEL, id='php-pear-Console_ProgressBar', marks=pytest.mark.xfail),
 
-        pytest.param(['el'], '4.999.9', '0.5.beta.20091007git.el6', '4.999.9-beta', Pf.DEVEL | Pf.IGNORE, id='xz', marks=pytest.mark.xfail),
+        pytest.param(['el'], '4.999.9', '0.5.beta.20091007git.el6', '4.999.9-beta', Pf.DEVEL | Pf.IGNORE, id='xz')
     ]
 )
 def test_real_world(tags, version, release, expected_version, expected_flags):
