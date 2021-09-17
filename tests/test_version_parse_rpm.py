@@ -118,15 +118,11 @@ def test_release_tag_glued() -> None:
         pytest.param(['el'], '4.999.9', '0.5.beta.20091007git.el6', '4.999.9-beta', Pf.DEVEL | Pf.IGNORE, id='xz'),
 
         pytest.param([], '1.2.0', '5.rcgit.15.2', '1.2.0-rcgit.15', Pf.DEVEL | Pf.IGNORE, id='remmina', marks=pytest.mark.xfail),
+
+        # prefer standard suffixes like alpha|beta|rc over pre|dev
+        pytest.param(['fc'], '2.0.0', 'pre.0.3.alpha16.patched1.1.fc35', '2.0.0-alpha16', Pf.DEVEL | Pf.IGNORE, id='icedtea-web'),
+        pytest.param(['mga'], '1.0.0', '0.rc92.7.dev.gitff819c7.mga8', '1.0.0-rc92', Pf.DEVEL | Pf.IGNORE, id='opencontainers-runc'),
     ]
 )
 def test_real_world(tags, version, release, expected_version, expected_flags):
     assert parse_rpm_version(tags, version, release) == (expected_version, expected_flags)
-
-
-# not sure how to parse this correctly, but at least it should
-# contain rc as the first or the most descriptive prerelease suffix
-def test_real_world_opencontainers_runc():
-    version, flags = parse_rpm_version([], '1.0.0', '0.rc92.7.dev.gitff819c7.mga8')
-    assert 'rc92' in version
-    assert flags & Pf.IGNORE

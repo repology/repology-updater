@@ -53,7 +53,8 @@ class VersionStripper:
 
 
 # allows alpha1, alpha20210101, alpha.1, but not alpha.20210101 (which is parsed as alpha instead)
-_RPM_PRERELEASE_RE = re.compile('(.*?)((?:alpha|beta|rc|dev|pre)(?:[0-9]+|\\.[0-9]{1,2}(?![0-9]))?)(.*)', re.IGNORECASE)
+_RPM_PRERELEASE_RE = re.compile('(.*?)((?:alpha|beta|rc)(?:[0-9]+|\\.[0-9]{1,2}(?![0-9]))?)(.*)', re.IGNORECASE)
+_RPM_PRERELEASE_FALLBACK_RE = re.compile('(.*?)((?:dev|pre)(?:[0-9]+|\\.[0-9]{1,2}(?![0-9]))?)(.*)', re.IGNORECASE)
 _RPM_POSTRELEASE_RE = re.compile('(.*?)((?:post)[0-9]+)(.*)', re.IGNORECASE)
 _RPM_SNAPSHOT = re.compile('[a-z]|20[0-9]{6}', re.IGNORECASE)
 
@@ -75,6 +76,8 @@ def parse_rpm_version(vertags: List[str], version: str, release: str) -> Tuple[s
 
     for part in re.split('|'.join(vertags), release) if vertags else [release]:
         if (match := _RPM_PRERELEASE_RE.fullmatch(part)) is not None:
+            flags = PackageFlags.DEVEL
+        elif (match := _RPM_PRERELEASE_FALLBACK_RE.fullmatch(part)) is not None:
             flags = PackageFlags.DEVEL
         else:
             match = _RPM_POSTRELEASE_RE.fullmatch(part)
