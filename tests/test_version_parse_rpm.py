@@ -115,7 +115,9 @@ def test_release_tag_glued() -> None:
         # this case cannot be processed correctly, as there's no telling that '2' does not belong to 'beta'
         pytest.param([], '0.5.2', '0.beta.2', '0.5.2-beta', Pf.DEVEL, id='php-pear-Console_ProgressBar', marks=pytest.mark.xfail),
 
-        pytest.param(['el'], '4.999.9', '0.5.beta.20091007git.el6', '4.999.9-beta', Pf.DEVEL | Pf.IGNORE, id='xz')
+        pytest.param(['el'], '4.999.9', '0.5.beta.20091007git.el6', '4.999.9-beta', Pf.DEVEL | Pf.IGNORE, id='xz'),
+
+        pytest.param([], '1.2.0', '5.rcgit.15.2', '1.2.0-rcgit.15', Pf.DEVEL | Pf.IGNORE, id='remmina', marks=pytest.mark.xfail),
     ]
 )
 def test_real_world(tags, version, release, expected_version, expected_flags):
