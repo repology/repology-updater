@@ -120,3 +120,11 @@ def test_release_tag_glued() -> None:
 )
 def test_real_world(tags, version, release, expected_version, expected_flags):
     assert parse_rpm_version(tags, version, release) == (expected_version, expected_flags)
+
+
+# not sure how to parse this correctly, but at least it should
+# contain rc as the first or the most descriptive prerelease suffix
+def test_real_world_opencontainers_runc():
+    version, flags = parse_rpm_version([], '1.0.0', '0.rc92.7.dev.gitff819c7.mga8')
+    assert 'rc92' in version
+    assert flags & Pf.IGNORE
