@@ -6,6 +6,7 @@
   desc: nixpkgs stable 21.05
   statsgroup: nix
   family: nix
+  ruleset: [nix,nix_old_node_naming]  # don't set nix_old_node_naming for next release
   color: '7eb2dd'
   minpackages: 60000
   default_maintainer: fallback-mnt-nix@repology
@@ -33,6 +34,7 @@
   desc: nixpkgs unstable
   statsgroup: nix
   family: nix
+  ruleset: [nix]
   color: '7eb2dd'
   minpackages: 70000
   default_maintainer: fallback-mnt-nix@repology
