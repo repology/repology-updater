@@ -1,9 +1,9 @@
 ###########################################################################
 # NixOS packages
 ###########################################################################
-- name: nix_stable
+- name: nix_stable  # XXX: name the next one as e.g. nix_stable_21_05
   type: repository
-  desc: nixpkgs stable
+  desc: nixpkgs stable 21.05
   statsgroup: nix
   family: nix
   color: '7eb2dd'
