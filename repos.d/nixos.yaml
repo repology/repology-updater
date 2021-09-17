@@ -7,7 +7,7 @@
   statsgroup: nix
   family: nix
   color: '7eb2dd'
-  minpackages: 12000
+  minpackages: 60000
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages.json
@@ -34,7 +34,7 @@
   statsgroup: nix
   family: nix
   color: '7eb2dd'
-  minpackages: 13000
+  minpackages: 70000
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages-unstable.json
