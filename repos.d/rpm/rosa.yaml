@@ -74,7 +74,7 @@
   minpackages: 11000
   sources:
     # note */updates and */testing repositories are empty ATOW
-    - name: [ main/release, non-free/release, restricted/release, contrib/release ]
+    - name: [ main/release, non-free/release, contrib/release ]
       fetcher:
         class: RepodataFetcher
         url: 'http://abf-downloads.rosalinux.ru/rosa2019.1/repository/SRPMS/{source}/'
