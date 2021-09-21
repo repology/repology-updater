@@ -434,3 +434,101 @@
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
+
+- name: ubuntu_21_10
+  type: repository
+  desc: Ubuntu 21.10
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 32000
+  sources:
+    - name: [ impish/main, impish/multiverse, impish/restricted, impish/universe, impish-updates/main, impish-updates/multiverse, impish-updates/restricted, impish-updates/universe ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in impish
+      url: https://packages.ubuntu.com/impish/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.ubuntu.com/source/impish/{srcname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_21_10_backports
+  type: repository
+  desc: Ubuntu 21.10 Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ impish-backports/main, impish-backports/multiverse, impish-backports/restricted, impish-backports/universe ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in impish
+      url: https://packages.ubuntu.com/impish/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_21_10_proposed
+  type: repository
+  desc: Ubuntu 21.10 Proposed
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ impish-proposed/main, impish-proposed/multiverse, impish-proposed/restricted, impish-proposed/universe ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in impish
+      url: https://packages.ubuntu.com/impish/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  tags: [ all, production, ubuntu ]
