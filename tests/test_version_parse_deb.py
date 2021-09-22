@@ -117,6 +117,14 @@ def test_suffixes(version, expected_flags) -> None:
     pytest.param('1.0.0+git20170913.6.c70cbf6-4', '1.0.0+git20170913.6.c70cbf6', Pf.IGNORE | Pf.ANY_IS_PATCH),
     pytest.param('5.0.4+post1-1', '5.0.4+post1', 0, id='yubioath-desktop'),
     pytest.param('1.2.post4+dfsg-2', '1.2.post4', 0, id='pgzero'),
+    pytest.param('1:1.2-0~rc4-2', '1.2-0~rc4', Pf.DEVEL | Pf.IGNORE, id='aircrack-ng'),
+    pytest.param('0.9.0rc2-1-10', '0.9.0rc2-1', Pf.IGNORE, id='alsamixergui'),
+    pytest.param('2.1.0+dfsg~b36-1', '2.1.0~b36', Pf.DEVEL, id='anki'),
+    pytest.param('0.1.1~r57551-2', '0.1.1~r57551', Pf.INCORRECT, id='apertium-id-ms'),
+    pytest.param('2.3.99~b1-1', '2.3.99~b1', Pf.DEVEL, id='apmod:auth-tkt'),
+    pytest.param('6.4~pre-1', '6.4~pre', Pf.DEVEL, id='brltty'),
+    pytest.param('0.9.6~unreleased-1', '0.9.6~unreleased', Pf.INCORRECT, id='fritzing-parts'),
+    pytest.param('10.2+2.0.1-dmo1', '10.2+2.0.1', Pf.IGNORE, id='libcdio-paranoia'),
 ])
 def test_real_world(version, expected_version, expected_flags):
     fixed_version, flags = parse_debian_version(version)
@@ -127,6 +135,10 @@ def test_real_world(version, expected_version, expected_flags):
 @pytest.mark.parametrize('version,expected_version,expected_flags', [
     pytest.param('0.F-2-1', '0.F-2', 0, id='cataclysm-dda'),
     pytest.param('1.4.6+really1.4.2-2', '1.4.6+really1.4.2', Pf.INCORRECT, id='nim'),
+    pytest.param('12-248-3', '12-248', 0, id='aephea'),
+    pytest.param('0.99+1.0pre6a-10', '0.99+1.0pre6a', Pf.IGNORE, id='airstrike'),
+    pytest.param('2021-08-25+ds-1', '2021-08-25', 0, id='gmap'),
+    pytest.param('21.08.1+p20.04+tstable+git20210921.0023-0', '21.08.1+p20.04+tstable+git20210921.0023', Pf.IGNORE, id='kdeconnect'),
 ])
 def test_real_world_weak(version, expected_version, expected_flags):
     fixed_version, flags = parse_debian_version(version)
