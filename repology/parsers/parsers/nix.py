@@ -207,3 +207,79 @@ class NixJsonParser(Parser):
                     continue
 
                 yield pkg
+
+
+class NurJsonParser(Parser):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        for key, packagedata in iter_json_dict(path, (None, None), encoding='utf-8'):
+            with factory.begin(key) as pkg:
+                if not packagedata['version']:
+                    continue  # no version - silently ignore
+
+                if re.match('[0-9].*[a-z].*-[0-9]', packagedata['version'].lower()):
+                    letters = ''.join(c for c in packagedata['version'].lower() if c.isalpha())
+                    if letters not in ['alpha', 'beta', 'rc', 'a', 'b', 'pre', 'post', 'rev', 'q', 'u', 'build', 'unstable']:
+                        pkg.log('"{}": suspicious version "{}", worth rechecking'.format(packagedata['name'], packagedata['version']), severity=Logger.WARNING)
+                        pkg.set_flags(PackageFlags.UNTRUSTED)
+
+                pname = packagedata['pname']
+                version = packagedata['version']
+
+                if not pname:
+                    # This is temporary solution (see #854) which overrides pname and version with ones
+                    # (ambigiously) parsed from name. That's what nix currently does (instead of exposing
+                    # explicitly set pname and version), and we do the same instead of using pname/version
+                    # provided by them to avoid unexpected change in data when/if they change their logic
+                    # As soon as they do and changed data is verified, this block may be removed
+                    match = re.match('(.+?)-([0-9].*)$', packagedata['name'])
+                    if match is None:
+                        pkg.log('cannot parse name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                        continue
+                    pname = match.group(1)
+                    version = match.group(2)
+
+                pkg.add_name(key, NameType.NIX_ATTRIBUTE_PATH)
+                pkg.add_name(pname, NameType.NIX_PNAME)
+                pkg.set_version(version)
+
+                meta = packagedata['meta']
+
+                keyparts = key.split('.')
+                pkg.set_extra_field('subrepo', keyparts[2])
+                if len(keyparts) > 4:
+                    pkg.add_categories(keyparts[3])
+
+                # XXX: move to rules
+                if pname.endswith('-git'):
+                    pkg.add_name(pname[:-4], NameType.NIX_PNAME)
+                    pkg.set_flags(PackageFlags.IGNORE)
+
+                # XXX: move to rules
+                if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
+                    pkg.set_flags(PackageFlags.IGNORE)
+
+                # XXX: move to rules
+                if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
+                    pkg.set_flags(PackageFlags.IGNORE)
+
+                pkg.add_homepages(meta.get('homepage'))
+
+                if 'description' in meta:
+                    pkg.set_summary(meta['description'].replace('\n', ' '))
+
+                if 'maintainers' in meta:
+                    if not isinstance(meta['maintainers'], list):
+                        pkg.log('maintainers "{}" is not a list'.format(meta['maintainers']), severity=Logger.ERROR)
+                    else:
+                        pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
+
+                if 'license' in meta:
+                    pkg.add_licenses(extract_nix_licenses(meta['license']))
+
+                if 'position' in meta:
+                    pkg.set_extra_field('position', meta['position'])
+                else:
+                    pkg.log('dropping, no position recorded in meta', severity=Logger.ERROR)
+                    continue
+
+                yield pkg
