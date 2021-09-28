@@ -10,10 +10,31 @@
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ community, core, extra ]
+    - name: [ community, core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'http://mirror.yandex.ru/mirrors/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.yandex.ru/mirrors/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Manjaro Linux home
+      url: https://manjaro.org/
+  tags: [ all, production, manjaro ]
+  
+- name: manjaro_staging
+  type: repository
+  desc: Manjaro Staging
+  statsgroup: Arch+derivs
+  family: arch
+  ruleset: [arch, manjaro]
+  color: '34be5b'
+  minpackages: 10000
+  sources:
+    - name: [ community, core, extra, multilib ]
+      fetcher:
+        class: TarFetcher
+        url: 'https://mirror.yandex.ru/mirrors/manjaro/stable-staging/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
@@ -27,15 +48,14 @@
   desc: Manjaro Testing
   statsgroup: Arch+derivs
   family: arch
-  family: arch
   ruleset: [arch, manjaro]
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ community, core, extra ]
+    - name: [ community, core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'http://mirror.yandex.ru/mirrors/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.yandex.ru/mirrors/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
@@ -49,15 +69,14 @@
   desc: Manjaro Unstable
   statsgroup: Arch+derivs
   family: arch
-  family: arch
   ruleset: [arch, manjaro]
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ community, core, extra ]
+    - name: [ community, core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'http://mirror.yandex.ru/mirrors/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.yandex.ru/mirrors/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
@@ -65,26 +84,3 @@
     - desc: Manjaro Linux home
       url: https://manjaro.org/
   tags: [ all, production, manjaro ]
-
-# This is more outdated than stable, likely legacy
-- name: manjaro_xperimental
-  type: repository
-  desc: Manjaro Xperimental
-  statsgroup: Arch+derivs
-  family: arch
-  family: arch
-  ruleset: [arch, manjaro]
-  color: '34be5b'
-  minpackages: 1  # XXX: unknown
-  sources:
-    - name: [ community, core, extra ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://mirror.yandex.ru/mirrors/manjaro/xperimental/{source}/x86_64/{source}.db.tar.gz'
-      parser:
-        class: ArchDBParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Manjaro Linux home
-      url: https://manjaro.org/
-  tags: []
