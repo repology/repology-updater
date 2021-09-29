@@ -17,7 +17,7 @@
 
 import os
 import urllib
-from typing import Iterable, Iterator, Optional, Tuple
+from typing import Iterable, Iterator, Optional
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import PersistentData, ScratchDirFetcher
@@ -25,7 +25,7 @@ from repology.fetchers.http import PoliteHTTP
 from repology.logger import Logger
 
 
-def _split_names_into_urls(prefix: str, package_names: Iterable[str], maxlen: int) -> Iterator[Tuple[str, int]]:
+def _split_names_into_urls(prefix: str, package_names: Iterable[str], maxlen: int) -> Iterator[tuple[str, int]]:
     url_parts = [prefix]
     url_length = len(prefix)
 

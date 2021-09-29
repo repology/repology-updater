@@ -18,7 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
-from typing import Any, Dict
+from typing import Any
 
 from repology.config import config
 from repology.package import LinkType
@@ -35,8 +35,8 @@ class TestParsers(unittest.TestCase):
         self.maxDiff = None
         self.packages = list(repoproc.iter_parse(reponames=['have_testdata']))
 
-    def check_package(self, reference: Dict[str, Any]) -> None:
-        reference_with_default: Dict[str, Any] = {
+    def check_package(self, reference: dict[str, Any]) -> None:
+        reference_with_default: dict[str, Any] = {
             # repo must be filled
             # family must be filled
             'subrepo': None,
@@ -86,7 +86,7 @@ class TestParsers(unittest.TestCase):
             'versionclass',
         ]
 
-        def normalize_fields(what: Dict[str, Any]) -> Dict[str, Any]:
+        def normalize_fields(what: dict[str, Any]) -> dict[str, Any]:
             output = {}
             for key, value in what.items():
                 if key in ignored_fields:

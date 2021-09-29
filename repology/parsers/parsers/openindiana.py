@@ -17,7 +17,7 @@
 
 import re
 from collections import defaultdict
-from typing import Any, Dict, Iterable, List, Tuple
+from typing import Any, Iterable
 
 from jsonslicer import JsonSlicer
 
@@ -26,7 +26,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iter_packages(path: str) -> Iterable[Tuple[str, Dict[str, Any]]]:
+def _iter_packages(path: str) -> Iterable[tuple[str, dict[str, Any]]]:
     with open(path, 'rb') as jsonfile:
         for summary_key, fmri, _, pkgdata in JsonSlicer(jsonfile, (None, None, None), path_mode='full'):
             if summary_key.startswith('_'):  # e.g. _SIGNATURE
@@ -38,8 +38,8 @@ def _iter_packages(path: str) -> Iterable[Tuple[str, Dict[str, Any]]]:
             yield fmri, pkgdata
 
 
-def _parse_actions(actions: List[str]) -> Dict[str, List[str]]:
-    variables: Dict[str, List[str]] = defaultdict(list)
+def _parse_actions(actions: list[str]) -> dict[str, list[str]]:
+    variables: dict[str, list[str]] = defaultdict(list)
 
     for action in actions:
         match = re.fullmatch('set(?: last-fmri=[^ ]+)? name=([^ ]+)(?: refresh_fmri=[^ ]+)?( value=.*)', action)

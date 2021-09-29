@@ -17,7 +17,7 @@
 
 import re
 from collections import Counter
-from typing import Any, Dict, Iterable
+from typing import Any, Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -53,7 +53,7 @@ class RepodataParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
-        skipped_archs: Dict[str, int] = Counter()
+        skipped_archs: dict[str, int] = Counter()
 
         if self._arch_from_filename:
             factory.log('mitigation for incorrect <arch></arch> enabled', severity=Logger.WARNING)
@@ -134,7 +134,7 @@ class RepodataSqliteParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
-        skipped_archs: Dict[str, int] = Counter()
+        skipped_archs: dict[str, int] = Counter()
 
         wanted_columns = ['name', 'version', 'arch', 'epoch', 'release',
                           'summary', 'url', 'rpm_group', 'rpm_license',

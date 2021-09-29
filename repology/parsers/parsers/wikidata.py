@@ -17,7 +17,7 @@
 
 import json
 from functools import cmp_to_key
-from typing import Dict, Iterable
+from typing import Iterable
 
 from libversion import version_compare
 
@@ -28,7 +28,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
+def _iter_packages(path: str) -> Iterable[dict[str, str]]:
     with open(path, 'r', encoding='utf-8') as jsonfile:
         for item in json.load(jsonfile)['results']['bindings']:
             yield {

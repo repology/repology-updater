@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import AbstractSet, Any, Callable, Dict, Iterable, List, Match, MutableSet, Optional, Pattern, Set, TYPE_CHECKING
+from typing import Any, Callable, Iterable, Match, Optional, Pattern, TYPE_CHECKING
 
 from libversion import LOWER_BOUND, UPPER_BOUND, version_compare
 
@@ -33,10 +33,10 @@ DOLLARN = re.compile('\\$([0-9])', re.ASCII)
 class PackageContext:
     __slots__ = ['_flags', '_rulesets', 'warnings', 'matched_rules']
 
-    _flags: MutableSet[str]
-    _rulesets: MutableSet[str]
-    warnings: List[str]
-    matched_rules: List[int]
+    _flags: set[str]
+    _rulesets: set[str]
+    warnings: list[str]
+    matched_rules: list[int]
 
     def __init__(self) -> None:
         self._flags = set()
@@ -50,10 +50,10 @@ class PackageContext:
     def has_flag(self, name: str) -> bool:
         return name in self._flags
 
-    def has_flags(self, names: AbstractSet[str]) -> bool:
+    def has_flags(self, names: set[str]) -> bool:
         return not self._flags.isdisjoint(names)
 
-    def has_rulesets(self, rulesets: AbstractSet[str]) -> bool:
+    def has_rulesets(self, rulesets: set[str]) -> bool:
         return not self._rulesets.isdisjoint(rulesets)
 
     def set_rulesets(self, rulesets: Iterable[str]) -> None:
@@ -101,16 +101,16 @@ class MatchContext:
 class Rule:
     __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'checks', 'matches', 'number', 'pretty']
 
-    _matchers: List[Callable[[Package, PackageContext, MatchContext], bool]]
-    _actions: List[Callable[[Package, PackageContext, MatchContext], None]]
-    names: Optional[List[str]]
+    _matchers: list[Callable[[Package, PackageContext, MatchContext], bool]]
+    _actions: list[Callable[[Package, PackageContext, MatchContext], None]]
+    names: Optional[list[str]]
     namepat: Optional[str]
     checks: int
     matches: int
     number: int
     pretty: str
 
-    def __init__(self, number: int, ruledata: Dict[str, Any]) -> None:
+    def __init__(self, number: int, ruledata: dict[str, Any]) -> None:
         self.names = None
         self.namepat = None
         self.number = number
@@ -122,7 +122,7 @@ class Rule:
         self._matchers = []
         self._actions = []
 
-        def as_list(val: Any) -> List[str]:
+        def as_list(val: Any) -> list[str]:
             if isinstance(val, list):
                 return val
             elif isinstance(val, set):
@@ -130,13 +130,13 @@ class Rule:
             else:
                 return [val]
 
-        def as_lowercase_list(val: Any) -> List[str]:
+        def as_lowercase_list(val: Any) -> list[str]:
             return [v.lower() for v in as_list(val)]
 
-        def as_set(val: Any) -> Set[str]:
+        def as_set(val: Any) -> set[str]:
             return set(as_list(val))
 
-        def as_lowercase_set(val: Any) -> Set[str]:
+        def as_lowercase_set(val: Any) -> set[str]:
             return set(as_lowercase_list(val))
 
         # These conditional blocks use local variables which are then captured by
@@ -648,7 +648,7 @@ class Rule:
             self._actions.append(last_action)
 
         if 'addflavor' in ruledata:
-            tmp_flavors: Optional[List[str]]
+            tmp_flavors: Optional[list[str]]
 
             if isinstance(ruledata['addflavor'], str):
                 tmp_flavors = [ruledata['addflavor']]
@@ -659,10 +659,10 @@ class Rule:
             else:
                 tmp_flavors = None
 
-            want_flavors: Final[Optional[List[str]]] = tmp_flavors
+            want_flavors: Final[Optional[list[str]]] = tmp_flavors
 
             def addflavor_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                flavors: List[str] = want_flavors if want_flavors else [package.effname]
+                flavors: list[str] = want_flavors if want_flavors else [package.effname]
 
                 flavors = [match_context.sub_name_dollars(flavor, package.effname) for flavor in flavors]
 

@@ -17,7 +17,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import Counter
-from typing import Dict, Iterable
+from typing import Iterable
 
 import rubymarshal.reader
 
@@ -28,7 +28,7 @@ from repology.transformer import PackageTransformer
 
 class RubyGemParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        skipped_gemplats: Dict[str, int] = Counter()
+        skipped_gemplats: dict[str, int] = Counter()
 
         with open(path, 'rb') as fd:
             for gemname, gemversion, gemplat in rubymarshal.reader.load(fd):

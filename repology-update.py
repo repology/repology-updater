@@ -21,7 +21,7 @@ import argparse
 import sys
 from datetime import timedelta
 from timeit import default_timer as timer
-from typing import Any, Callable, Iterable, List, TypeVar
+from typing import Any, Callable, Iterable, TypeVar
 
 from repology.config import config
 from repology.database import Database
@@ -82,11 +82,11 @@ class Environment:
         return PackageTransformer(self.get_repo_manager(), self.options.rules_dir)
 
     @cached_method
-    def get_enabled_repo_names(self) -> List[str]:
+    def get_enabled_repo_names(self) -> list[str]:
         return self.get_repo_manager().get_names(reponames=self.options.enabled_repositories)
 
     @cached_method
-    def get_processable_repo_names(self) -> List[str]:
+    def get_processable_repo_names(self) -> list[str]:
         enabled = set(self.get_enabled_repo_names())
         return [reponame for reponame in self.get_repo_manager().get_names(reponames=self.options.reponames) if reponame in enabled]
 

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Iterable, List
+from typing import Iterable
 
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -25,7 +25,7 @@ from repology.parsers.xml import XmlElement, iter_xml_elements_at_level, safe_fi
 from repology.transformer import PackageTransformer
 
 
-def _get_attrs(elt: XmlElement, path: str, attrname: str) -> List[str]:
+def _get_attrs(elt: XmlElement, path: str, attrname: str) -> list[str]:
     res = []
 
     for e in elt.findall(path):

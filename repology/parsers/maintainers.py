@@ -16,10 +16,10 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, List
+from typing import Any
 
 
-def extract_maintainers(input_: Any) -> List[str]:
+def extract_maintainers(input_: Any) -> list[str]:
     if not input_:
         return []
 

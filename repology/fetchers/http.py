@@ -23,7 +23,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
-from typing import Any, AnyStr, Callable, Dict, IO, Optional, Union, cast
+from typing import Any, AnyStr, Callable, IO, Optional, Union, cast
 
 import brotli
 
@@ -58,7 +58,7 @@ def do_http(url: str,
             data: Union[str, bytes, None] = None,
             json: Any = None,
             post: Union[str, bytes, None] = None,  # XXX: compatibility shim
-            headers: Optional[Dict[str, str]] = None,
+            headers: Optional[dict[str, str]] = None,
             stream: bool = False) -> requests.Response:
     headers = headers.copy() if headers else {}
     headers['User-Agent'] = USER_AGENT

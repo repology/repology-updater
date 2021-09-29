@@ -15,14 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable, Tuple
+from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iterate_packages(path: str) -> Iterable[Tuple[str, str]]:
+def _iterate_packages(path: str) -> Iterable[tuple[str, str]]:
     with open(path, encoding='utf-8', errors='ignore') as packagesfile:
         current_name = None
 

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Any, Dict, Iterable, List
+from typing import Any, Iterable
 
 from pyparsing import OneOrMore, QuotedString, Regex, Suppress, Word, ZeroOrMore, alphas, printables
 
@@ -31,10 +31,10 @@ class _PackageData:
     name: str
     version: str
     summary: str
-    keyvals: Dict[str, Any]
+    keyvals: dict[str, Any]
 
 
-def _parse_data(data: str) -> List[_PackageData]:
+def _parse_data(data: str) -> list[_PackageData]:
     lpar, rpar, lbrk, rbrk, dot = map(Suppress, '()[].')
     nil = Suppress('nil')
 
@@ -79,7 +79,7 @@ class ArchiveContentsParser(Parser):
                 pkg.set_summary(pkgdata.summary)
 
                 if 'maintainer' in pkgdata.keyvals:
-                    maintainers: List[str] = sum(map(extract_maintainers, pkgdata.keyvals['maintainer']), [])
+                    maintainers: list[str] = sum(map(extract_maintainers, pkgdata.keyvals['maintainer']), [])
                     pkg.add_maintainers(maintainers)
 
                 pkg.add_homepages(pkgdata.keyvals.get('url'))

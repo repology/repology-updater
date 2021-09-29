@@ -19,7 +19,7 @@ import importlib
 import importlib.util
 import inspect
 import os
-from typing import Any, Dict, Iterable, Optional, Type
+from typing import Any, Iterable, Optional, Type
 
 
 __all__ = [
@@ -48,7 +48,7 @@ class ClassFactory:
                     yield '.'.join([module] + relpath[:-3].split(os.sep))
 
     def __init__(self, modulename: str, suffix: Optional[str] = None, superclass: Optional[Type[Any]] = None) -> None:
-        self.classes: Dict[str, Any] = {}
+        self.classes: dict[str, Any] = {}
 
         for submodulename in ClassFactory._enumerate_all_submodules(modulename):
             submodule = importlib.import_module(submodulename)
@@ -67,7 +67,7 @@ class ClassFactory:
     def spawn(self, name: str, *args: Any, **kwargs: Any) -> Any:
         return self.classes[name](*args, **kwargs)
 
-    def spawn_with_known_args(self, name: str, kwargs: Dict[str, Any]) -> Any:
+    def spawn_with_known_args(self, name: str, kwargs: dict[str, Any]) -> Any:
         class_ = self.classes[name]
 
         filtered_kwargs = {

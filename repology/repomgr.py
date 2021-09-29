@@ -17,16 +17,16 @@
 
 import copy
 import os
-from typing import Any, Collection, Dict, Iterable, List, Optional, Union, cast
+from typing import Any, Collection, Iterable, Optional, Union, cast
 
 import yaml
 
 
 RepositoryNameList = Optional[Collection[str]]
-RepositoryMetadata = Dict[str, Any]
+RepositoryMetadata = dict[str, Any]
 
 
-def _subst_source_recursively(container: Union[Dict[str, Any], List[Any]], name: str) -> None:
+def _subst_source_recursively(container: Union[dict[str, Any], list[Any]], name: str) -> None:
     key_iter: Iterable[Any]
     if isinstance(container, list):
         key_iter = range(len(container))
@@ -43,8 +43,8 @@ def _subst_source_recursively(container: Union[Dict[str, Any], List[Any]], name:
 
 
 class RepositoryManager:
-    _repositories: List[RepositoryMetadata]
-    _repo_by_name: Dict[str, RepositoryMetadata]
+    _repositories: list[RepositoryMetadata]
+    _repo_by_name: dict[str, RepositoryMetadata]
 
     def __init__(self, reposdir: Optional[str] = None, repostext: Optional[str] = None) -> None:
         self._repositories = []
@@ -118,7 +118,7 @@ class RepositoryManager:
     def get_repository(self, reponame: str) -> RepositoryMetadata:
         return self._repo_by_name[reponame]
 
-    def get_repositories(self, reponames: RepositoryNameList = None) -> List[RepositoryMetadata]:
+    def get_repositories(self, reponames: RepositoryNameList = None) -> list[RepositoryMetadata]:
         if reponames is None:
             return []
 
@@ -137,10 +137,10 @@ class RepositoryManager:
 
         return filtered_repositories
 
-    def get_names(self, reponames: RepositoryNameList = None) -> List[str]:
+    def get_names(self, reponames: RepositoryNameList = None) -> list[str]:
         return [repo['name'] for repo in sorted(self.get_repositories(reponames), key=lambda repo: cast(str, repo['sortname']))]
 
-    def get_metadata(self, reponames: RepositoryNameList = None) -> Dict[str, RepositoryMetadata]:
+    def get_metadata(self, reponames: RepositoryNameList = None) -> dict[str, RepositoryMetadata]:
         return {
             repository['name']: {
                 'shadow': repository.get('shadow', False),
@@ -157,7 +157,7 @@ class RepositoryManager:
             } for repository in self.get_repositories(reponames)
         }
 
-    def get_metadatas(self, reponames: RepositoryNameList = None) -> List[RepositoryMetadata]:
+    def get_metadatas(self, reponames: RepositoryNameList = None) -> list[RepositoryMetadata]:
         return [
             {
                 'name': repository['name'],

@@ -18,7 +18,7 @@
 import json
 import os
 import re
-from typing import Any, Dict, Iterable, cast
+from typing import Any, Iterable, cast
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -38,7 +38,7 @@ def _normalize_version(version: str) -> str:
     return version
 
 
-def _read_control_file(path: str) -> Dict[str, Any]:
+def _read_control_file(path: str) -> dict[str, Any]:
     control_to_manifest_key_map = {
         'Source': 'name',
         'Version': 'version-string',
@@ -46,7 +46,7 @@ def _read_control_file(path: str) -> Dict[str, Any]:
         'Homepage': 'homepage',
     }
 
-    res: Dict[str, Any] = {}
+    res: dict[str, Any] = {}
 
     with open(path, 'r', encoding='utf-8', errors='ignore') as controlfile:
         for line in controlfile:
@@ -58,9 +58,9 @@ def _read_control_file(path: str) -> Dict[str, Any]:
     return res
 
 
-def _read_manifest_file(path: str) -> Dict[str, Any]:
+def _read_manifest_file(path: str) -> dict[str, Any]:
     with open(path) as manifestfile:
-        return cast(Dict[str, Any], json.load(manifestfile))
+        return cast(dict[str, Any], json.load(manifestfile))
 
 
 def _grep_file(path: str, sample: str) -> bool:

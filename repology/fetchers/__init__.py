@@ -18,13 +18,13 @@
 import os
 import pickle
 from abc import ABC, abstractmethod
-from typing import Any, Dict
+from typing import Any
 
 from repology.atomic_fs import AtomicDir, AtomicFile
 from repology.logger import Logger, NoopLogger
 
 
-PersistentData = Dict[str, str]
+PersistentData = dict[str, str]
 
 
 class Fetcher(ABC):
@@ -63,7 +63,7 @@ class ScratchDirFetcher(Fetcher):
             logger.log('no update requested, skipping')
             return False
 
-        persdata: Dict[str, Any] = {}
+        persdata: dict[str, Any] = {}
 
         perspath = statepath + '.persdata'
 
@@ -103,7 +103,7 @@ class ScratchFileFetcher(Fetcher):
 
         args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8'}
 
-        persdata: Dict[str, Any] = {}
+        persdata: dict[str, Any] = {}
 
         perspath = statepath + '.persdata'
 

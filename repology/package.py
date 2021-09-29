@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
-from typing import Any, ClassVar, Dict, List, Optional, Tuple
+from typing import Any, ClassVar, Optional
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -292,7 +292,7 @@ class Package:
         'branch',
     ]
 
-    _hashable_slots: ClassVar[List[str]] = [slot for slot in __slots__ if slot != 'versionclass']
+    _hashable_slots: ClassVar[list[str]] = [slot for slot in __slots__ if slot != 'versionclass']
 
     repo: str
     family: str
@@ -301,7 +301,7 @@ class Package:
     name: Optional[str]
     srcname: Optional[str]
     binname: Optional[str]
-    binnames: Optional[List[str]]
+    binnames: Optional[list[str]]
     trackname: Optional[str]
     visiblename: str
     projectname_seed: str
@@ -311,12 +311,12 @@ class Package:
 
     arch: Optional[str]
 
-    maintainers: Optional[List[str]]
+    maintainers: Optional[list[str]]
     category: Optional[str]
     comment: Optional[str]
-    licenses: Optional[List[str]]
+    licenses: Optional[list[str]]
 
-    extrafields: Optional[Dict[str, Any]]
+    extrafields: Optional[dict[str, Any]]
 
     cpe_vendor: Optional[str]
     cpe_product: Optional[str]
@@ -327,7 +327,7 @@ class Package:
     cpe_target_hw: Optional[str]
     cpe_other: Optional[str]
 
-    links: Optional[List[Tuple[int, str]]]
+    links: Optional[list[tuple[int, str]]]
 
     effname: str
 
@@ -336,7 +336,7 @@ class Package:
 
     flags: int
     shadow: bool
-    flavors: List[str]
+    flavors: list[str]
     branch: Optional[str]
 
     def __init__(self, *,
@@ -358,17 +358,17 @@ class Package:
                  name: Optional[str] = None,
                  srcname: Optional[str] = None,
                  binname: Optional[str] = None,
-                 binnames: Optional[List[str]] = None,
+                 binnames: Optional[list[str]] = None,
                  trackname: Optional[str] = None,
 
                  arch: Optional[str] = None,
 
-                 maintainers: Optional[List[str]] = None,
+                 maintainers: Optional[list[str]] = None,
                  category: Optional[str] = None,
                  comment: Optional[str] = None,
-                 licenses: Optional[List[str]] = None,
+                 licenses: Optional[list[str]] = None,
 
-                 extrafields: Optional[Dict[str, Any]] = None,
+                 extrafields: Optional[dict[str, Any]] = None,
 
                  cpe_vendor: Optional[str] = None,
                  cpe_product: Optional[str] = None,
@@ -379,11 +379,11 @@ class Package:
                  cpe_target_hw: Optional[str] = None,
                  cpe_other: Optional[str] = None,
 
-                 links: Optional[List[Tuple[int, str]]] = None,
+                 links: Optional[list[tuple[int, str]]] = None,
 
                  flags: int = 0,
                  shadow: bool = False,
-                 flavors: Optional[List[str]] = None,
+                 flavors: Optional[list[str]] = None,
                  branch: Optional[str] = None):
         # parsed, immutable
         self.repo = repo

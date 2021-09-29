@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import ClassVar, Dict, Optional, Tuple
+from typing import ClassVar, Optional
 
 
 __all__ = ['NameType', 'NameMapper']
@@ -499,8 +499,8 @@ _MAPPINGS = [
 
 
 class NameMapper:
-    _names: Dict[int, str]
-    _mappings: ClassVar[Dict[Tuple[int, ...], _NameMapping]] = {
+    _names: dict[int, str]
+    _mappings: ClassVar[dict[tuple[int, ...], _NameMapping]] = {
         tuple(sorted(set(filter(None, mapping.__dict__.values())))): mapping
         for mapping in _MAPPINGS
     }

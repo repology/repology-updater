@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Iterable, Optional
 
 from libversion import version_compare
 
@@ -45,8 +45,8 @@ class SpackJsonParser(Parser):
                 # spack may contain a lot of versions for a single project,
                 # we don't handle that very well, so pick greatest release
                 # version and all rolling versions
-                picked_verdatas: List[Dict[str, Any]] = []
-                latest_release_verdata: Optional[Dict[str, Any]] = None
+                picked_verdatas: list[dict[str, Any]] = []
+                latest_release_verdata: Optional[dict[str, Any]] = None
 
                 for pkgverdata in pkgdata['version']:
                     if 'branch' in pkgverdata:
