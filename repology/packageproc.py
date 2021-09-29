@@ -45,7 +45,7 @@ def packageset_deduplicate(packages: Sequence[Package]) -> List[Package]:
     return outpkgs
 
 
-def packageset_is_unique(packages: Sequence[Package]) -> bool:
+def is_packageset_unique(packages: Sequence[Package]) -> bool:
     if len(packages) <= 1:
         return True
 
@@ -277,7 +277,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
 
 def fill_packageset_versions(packages: Sequence[Package]) -> None:
     # global flags #1
-    project_is_unique = packageset_is_unique(packages)
+    project_is_unique = is_packageset_unique(packages)
 
     # preprocessing: rolling versions
     packages_to_process = []
