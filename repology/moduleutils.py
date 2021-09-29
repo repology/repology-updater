@@ -53,16 +53,16 @@ class ClassFactory:
         for submodulename in ClassFactory._enumerate_all_submodules(modulename):
             submodule = importlib.import_module(submodulename)
             for name, member in inspect.getmembers(submodule):
-                suitable = True
+                if suffix is not None and not name.endswith(suffix):
+                    continue
 
-                if suffix is not None:
-                    suitable &= name.endswith(suffix)
+                try:  # workaround for https://bugs.python.org/issue45326
+                    if superclass is not None and (not inspect.isclass(member) or not issubclass(member, superclass)):
+                        continue
+                except TypeError:
+                    continue
 
-                if superclass is not None:
-                    suitable &= inspect.isclass(member) and issubclass(member, superclass)
-
-                if suitable:
-                    self.classes[name] = member
+                self.classes[name] = member
 
     def spawn(self, name: str, *args: Any, **kwargs: Any) -> Any:
         return self.classes[name](*args, **kwargs)
