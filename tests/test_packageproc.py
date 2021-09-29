@@ -22,6 +22,8 @@
 import unittest
 from typing import List
 
+import pytest
+
 from repology.package import Package
 from repology.package import PackageFlags as Pf
 from repology.package import PackageStatus as Ps
@@ -473,6 +475,14 @@ class TestPackageProc(unittest.TestCase):
         self._check_fill_versions(
             PackageSample(repo='0', version='1', flags=Pf.RECALLED).expect(versionclass=Ps.OUTDATED),
             PackageSample(repo='1', version='1').expect(versionclass=Ps.OUTDATED),
+        )
+
+    @pytest.mark.xfail(reason='to be fixed by altver handling rewrite')
+    def test_kdeconnect(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='winget', version='21.08.1.726', flags=Pf.ALTVER).expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='kde_neon', version='21.08.1+p20.04+tunstable+git20210927.0021', flags=Pf.IGNORE | Pf.INCORRECT | Pf.ANY_IS_PATCH).expect(versionclass=Ps.INCORRECT),
+            PackageSample(repo='alpine', version='21.08.1', flags=0).expect(versionclass=Ps.NEWEST),
         )
 
 
