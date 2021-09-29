@@ -201,9 +201,9 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
 
         for package in repo_packages:  # these are still sorted by version
             do_switch_to_main_section = (
-                current_section is devel_section and
-                (current_section.is_empty() or current_section.preceeds(package)) and
-                not main_section.is_empty()
+                current_section is devel_section
+                and (current_section.is_empty() or current_section.preceeds(package))
+                and not main_section.is_empty()
             )
             if do_switch_to_main_section:
                 # switch from devel to main section
@@ -242,24 +242,24 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
                     package.versionclass = PackageStatus.UNIQUE if project_is_unique else current_section.newest_status
                 else:
                     non_first_in_section = (
-                        flavor in first_package_in_section and
-                        first_package_in_section[flavor].version_compare(package) != 0
+                        flavor in first_package_in_section
+                        and first_package_in_section[flavor].version_compare(package) != 0
                     )
 
                     first_but_not_best_in_branch = (
                         (
-                            branch_key not in first_package_in_branch or
-                            first_package_in_branch[branch_key].version_compare(package) == 0
-                        ) and
-                        package.branch in best_package_in_branch and
-                        best_package_in_branch[package.branch].version_compare(package) > 0
+                            branch_key not in first_package_in_branch
+                            or first_package_in_branch[branch_key].version_compare(package) == 0
+                        )
+                        and package.branch in best_package_in_branch
+                        and best_package_in_branch[package.branch].version_compare(package) > 0
                     )
 
                     legacy_allowed = (
                         (
-                            non_first_in_section and not
-                            first_but_not_best_in_branch and not
-                            package.has_flag(PackageFlags.NOLEGACY)
+                            non_first_in_section
+                            and not first_but_not_best_in_branch
+                            and not package.has_flag(PackageFlags.NOLEGACY)
                         ) or package.has_flag(PackageFlags.LEGACY)
                     )
 

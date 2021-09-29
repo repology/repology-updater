@@ -43,11 +43,11 @@ class PackageStatus:
     @staticmethod
     def is_ignored(val: int) -> bool:
         """Return whether a specified val is equivalent to ignored."""
-        return (val == PackageStatus.IGNORED or
-                val == PackageStatus.INCORRECT or
-                val == PackageStatus.UNTRUSTED or
-                val == PackageStatus.NOSCHEME or
-                val == PackageStatus.ROLLING)
+        return (val == PackageStatus.IGNORED
+                or val == PackageStatus.INCORRECT
+                or val == PackageStatus.UNTRUSTED
+                or val == PackageStatus.NOSCHEME
+                or val == PackageStatus.ROLLING)
 
     @staticmethod
     def as_string(val: int) -> str:
@@ -465,10 +465,10 @@ class Package:
         return version_compare(
             self.version,
             other.version,
-            ((self.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
-            ((self.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH),
-            ((other.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
-            ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
+            ((self.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH)
+            | ((self.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH),
+            ((other.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH)
+            | ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
         )
 
     def get_classless_hash(self) -> int:
