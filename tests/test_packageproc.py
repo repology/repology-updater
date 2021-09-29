@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -21,8 +21,6 @@
 
 import unittest
 from typing import List
-
-import pytest
 
 from repology.package import Package
 from repology.package import PackageFlags as Pf
@@ -230,8 +228,9 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_branch_bounds3(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='1', version='2.0beta1', flags=Pf.DEVEL).expect(versionclass=Ps.DEVEL),
-            # in absense of main branch, trailing ingnored versions should be assigned to devel
-            PackageSample(repo='2', version='0.9999', flags=Pf.IGNORE).expect(versionclass=Ps.OUTDATED),
+            # In the past, the following package was assigned to devel section in absence of stable
+            # section. I don't see a point in that - it looks more like ignored status should be honored
+            PackageSample(repo='2', version='0.9999', flags=Pf.IGNORE).expect(versionclass=Ps.IGNORED),
         )
 
     def test_versionclass_ignoredignored(self) -> None:
@@ -477,7 +476,6 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='1', version='1').expect(versionclass=Ps.OUTDATED),
         )
 
-    @pytest.mark.xfail(reason='to be fixed by altver handling rewrite')
     def test_kdeconnect(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='winget', version='21.08.1.726', flags=Pf.ALTVER).expect(versionclass=Ps.NEWEST),

@@ -16,9 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import cmp_to_key
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple, cast
+from typing import Callable, Dict, Iterable, Iterator, List, Optional, Sequence, Tuple, cast
 
 from repology.package import Package, PackageFlags, PackageStatus
 
@@ -91,62 +91,26 @@ def aggregate_by_same_version(packages: Iterable[Package]) -> Iterable[List[Pack
 
 
 @dataclass
-class _Section:
-    newest_status: int
-    first: Optional[Package] = None
-    altfirst: Optional[Package] = None
-    last: Optional[Package] = None
-
-    def include(self, package: Package, alt: bool = False) -> None:
-        if self.first is None and not alt:
-            self.first = package
-        if self.altfirst is None:
-            self.altfirst = package
-
-        self.last = package
-
-    def is_empty(self) -> bool:
-        return self.altfirst is None
-
-    def preceeds(self, package: Package) -> int:
-        assert(self.last)
-        return self.last.version_compare(package) > 0
-
-    def compared_to_best(self, package: Package, alt: bool = False) -> int:
-        if alt:
-            assert(self.altfirst)
-            return package.version_compare(self.altfirst)
-        else:
-            assert(self.first)
-            return package.version_compare(self.first)
+class VersionGroup:
+    all_flags: int = 0
+    is_devel: bool = False
+    totally_ignored: bool = False
+    packages: list[Package] = field(default_factory=list)
+    branches: set[Optional[str]] = field(default_factory=set)
 
 
-def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bool, suppress_ignore: bool) -> None:
-    #
-    # Pass 1: calculate section boundaries
-    #
-    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
-
-    devel_section = _Section(newest_status=PackageStatus.DEVEL)
-    main_section = _Section(newest_status=PackageStatus.NEWEST)
-
-    current_section = devel_section
-
-    best_package_in_branch: Dict[Optional[str], Package] = {}
-
+def group_packages(packages: Sequence[Package], suppress_ignore: bool = True) -> Iterator[VersionGroup]:
     for verpackages in aggregate_by_same_version(packages):
         all_flags = 0
         has_non_devel = False
-        version_totally_ignored = not suppress_ignore
+        totally_ignored = not suppress_ignore
         branches = set()
 
         for package in verpackages:
-            packages_by_repo[package.repo].append(package)
-
             all_flags |= package.flags
 
             if not package.has_flag(PackageFlags.ANY_IGNORED):
-                version_totally_ignored = False
+                totally_ignored = False
 
             if not package.has_flag(PackageFlags.DEVEL | PackageFlags.WEAK_DEVEL):
                 has_non_devel = True
@@ -154,67 +118,163 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
             branches.add(package.branch)
 
         if all_flags & PackageFlags.RECALLED:
-            version_totally_ignored = True
+            totally_ignored = True
 
-        is_devel = (
-            all_flags & PackageFlags.DEVEL or (
-                all_flags & PackageFlags.WEAK_DEVEL and not has_non_devel
-            )
-        ) and not all_flags & PackageFlags.STABLE
+        is_devel = cast(
+            bool,
+            (
+                all_flags & PackageFlags.DEVEL or (
+                    all_flags & PackageFlags.WEAK_DEVEL and not has_non_devel
+                )
+            ) and not all_flags & PackageFlags.STABLE
+        )
 
-        #
-        # The important logic of section bounds handling follows
-        #
+        yield VersionGroup(
+            all_flags=all_flags,
+            is_devel=is_devel,
+            totally_ignored=totally_ignored,
+            packages=verpackages,
+            branches=branches,
+        )
 
-        # 1. Choose suitable section naively
-        #    The following code may use different section as it enforces section order, e.g.
-        #    devel may not follow main
-        target_section = devel_section if is_devel else main_section
 
-        # 2. Debase ignored versions
-        #    These may only be added to the bottom of their designated section, otherwise
-        #    they do not affect section bounds
-        if version_totally_ignored:
-            if current_section is target_section and not current_section.is_empty():
-                current_section.include(verpackages[0], cast(bool, all_flags & PackageFlags.ALTVER))
-            continue
+@dataclass
+class Section:
+    GuardFn = Callable[[VersionGroup], bool]
 
-        # 3. Switch to the next section when needed
-        if target_section is not current_section and target_section is main_section:
-            current_section = target_section
+    name: str
+    newest_status: int
+    guard: Optional[GuardFn] = None
+    next_section: Optional['Section'] = None
 
-        # 4. Assign the version to the current section (effectively update section bounds)
-        current_section.include(verpackages[0], cast(bool, all_flags & PackageFlags.ALTVER))
+    first_package: Optional[Package] = None
+    first_package_alt: Optional[Package] = None
+    last_package: Optional[Package] = None
 
-        # 5. Update legacy branches
-        for branch in branches:
-            if branch not in best_package_in_branch and not is_devel:
-                best_package_in_branch[branch] = verpackages[0]
+    def add_package(self, package: Package, alt: bool = False) -> None:
+        if self.first_package_alt is None:
+            self.first_package_alt = package
+        if self.first_package is None and not alt:
+            self.first_package = package
 
-    #
-    # Pass 2: fill version classes
-    #
+        self.last_package = package
+
+    def preceeds_package(self, package: Package) -> bool:
+        return self.last_package.version_compare(package) > 0 if self.last_package else False
+
+    def follows_package(self, package: Package, alt: bool = False) -> bool:
+        first_package = self.first_package_alt if alt else self.first_package
+        return first_package.version_compare(package) < 0 if first_package else False
+
+    def contains_package(self, package: Package, alt: bool = False) -> bool:
+        first_package = self.first_package_alt if alt else self.first_package
+        return (
+            first_package is not None
+            and first_package.version_compare(package) >= 0
+            and self.last_package.version_compare(package) <= 0  # type: ignore  # (last_package is always set if any of first_package* is)
+        )
+
+    def is_empty(self) -> bool:
+        return self.last_package is None
+
+    def compared_to_best(self, package: Package, alt: bool = False) -> int:
+        if alt:
+            return package.version_compare(self.first_package_alt) if self.first_package_alt else 1
+        else:
+            return package.version_compare(self.first_package) if self.first_package else 1
+
+    def is_suitable_for_group(self, group: VersionGroup) -> bool:
+        return not self.guard or self.guard(group)
+
+    def get_next_section(self) -> 'Section':
+        assert(self.next_section)
+        return self.next_section
+
+    def __repr__(self) -> str:
+        if self.first_package is not None and self.first_package is self.first_package_alt:
+            assert(self.last_package)
+            return f'Section("{self.name}", versions=[{self.first_package.version}, {self.last_package.version}])'
+        elif self.first_package is not None:
+            assert(self.last_package)
+            assert(self.first_package_alt)
+            return f'Section("{self.name}", versions=[{self.first_package.version} ({self.first_package_alt.version}), {self.last_package.version}])'
+        elif self.first_package_alt is not None:
+            assert(self.last_package)
+            return f'Section("{self.name}", versions=[({self.first_package_alt.version}), {self.last_package.version}])'
+        else:
+            return f'Section("{self.name}", empty)'
+
+
+def generate_sections() -> List[Section]:
+    sections = [
+        Section(
+            'devel',
+            PackageStatus.DEVEL,
+            lambda section: section.is_devel
+        ),
+        Section(
+            'stable',
+            PackageStatus.NEWEST,
+        ),
+    ]
+
+    for section, next_section in zip(sections, sections[1:]):
+        section.next_section = next_section
+
+    # last section must not have a guard as there's no more
+    # sections to fall through to
+    assert sections[-1].guard is None
+
+    return sections
+
+
+def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bool, suppress_ignore: bool) -> None:
+    # preparation
+    groups = list(group_packages(packages, suppress_ignore=suppress_ignore))
+
+    sections = generate_sections()
+
+    best_package_in_branch: Dict[Optional[str], Package] = {}
+    packages_by_repo: Dict[str, list[tuple[Package, Section]]] = defaultdict(list)
+
+    # Pass 1: calculate section boundaries based on not ignored versions
+    current_section = sections[0]
+    for group in (group for group in groups if not group.totally_ignored):
+        for branch in group.branches:
+            if branch not in best_package_in_branch and not group.is_devel:
+                best_package_in_branch[branch] = group.packages[0]
+
+        while not current_section.is_suitable_for_group(group):
+            current_section = current_section.get_next_section()
+
+        current_section.add_package(group.packages[0], cast(bool, group.all_flags & PackageFlags.ALTVER))
+
+    # Pass 2: assign sections for all groups
+    current_section = sections[0]
+    for group in groups:
+        while not (
+            current_section.contains_package(group.packages[0], cast(bool, group.all_flags & PackageFlags.ALTVER))
+            or current_section.is_suitable_for_group(group)
+            or current_section.follows_package(group.packages[0], cast(bool, group.all_flags & PackageFlags.ALTVER))
+        ):
+            current_section = current_section.get_next_section()
+
+        for package in group.packages:
+            packages_by_repo[package.repo].append((package, current_section))
+
+    # Pass 3: fill version classes
     for repo, repo_packages in packages_by_repo.items():
-        current_section = devel_section
         first_package_in_section: Dict[str, Package] = {}  # by flavor
         first_package_in_branch: Dict[Tuple[Optional[str], str], Package] = {}  # by branch, flavor
 
-        for package in repo_packages:  # these are still sorted by version
-            do_switch_to_main_section = (
-                current_section is devel_section
-                and (current_section.is_empty() or current_section.preceeds(package))
-                and not main_section.is_empty()
-            )
-            if do_switch_to_main_section:
-                # switch from devel to main section
-                current_section = main_section
+        prev_section = None
+        for package, section in repo_packages:  # these are still sorted by version
+            if section is not prev_section:
+                # handle section change
                 first_package_in_section = {}
+                prev_section = section
 
-            # chose version class based on comparison to section best version
-            if current_section.is_empty():
-                current_comparison = 1
-            else:
-                current_comparison = current_section.compared_to_best(package, cast(bool, package.flags & PackageFlags.ALTVER))
+            current_comparison = section.compared_to_best(package, cast(bool, package.flags & PackageFlags.ALTVER))
 
             if current_comparison > 0:
                 # Note that the order here determines class priority when multiple
@@ -239,7 +299,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
                 branch_key = (package.branch, flavor)
 
                 if current_comparison == 0:
-                    package.versionclass = PackageStatus.UNIQUE if project_is_unique else current_section.newest_status
+                    package.versionclass = PackageStatus.UNIQUE if project_is_unique else section.newest_status
                 else:
                     non_first_in_section = (
                         flavor in first_package_in_section
