@@ -132,7 +132,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
 
     current_section = devel_section
 
-    best_package_in_branch: Dict[str, Package] = {}
+    best_package_in_branch: Dict[Optional[str], Package] = {}
 
     for verpackages in aggregate_by_same_version(packages):
         all_flags = 0
@@ -151,8 +151,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
             if not package.has_flag(PackageFlags.DEVEL | PackageFlags.WEAK_DEVEL):
                 has_non_devel = True
 
-            if package.branch is not None:
-                branches.add(package.branch)
+            branches.add(package.branch)
 
         if all_flags & PackageFlags.RECALLED:
             version_totally_ignored = True
