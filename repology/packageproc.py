@@ -56,7 +56,7 @@ def is_packageset_unique(packages: Sequence[Package]) -> bool:
     return True
 
 
-def packageset_may_be_unignored(packages: Sequence[Package]) -> bool:
+def should_suppress_ignore(packages: Sequence[Package]) -> bool:
     if len(packages) <= 1:
         return True
 
@@ -121,7 +121,7 @@ class _Section:
             return package.version_compare(self.first)
 
 
-def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bool, project_should_unignore: bool) -> None:
+def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bool, suppress_ignore: bool) -> None:
     #
     # Pass 1: calculate section boundaries
     #
@@ -137,7 +137,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
     for verpackages in aggregate_by_same_version(packages):
         all_flags = 0
         has_non_devel = False
-        version_totally_ignored = not project_should_unignore
+        version_totally_ignored = not suppress_ignore
         branches = set()
 
         for package in verpackages:
@@ -277,7 +277,7 @@ def _fill_packageset_versions(packages: Sequence[Package], project_is_unique: bo
 
 def fill_packageset_versions(packages: Sequence[Package]) -> None:
     # global flags #1
-    project_is_unique = is_packageset_unique(packages)
+    is_unique = is_packageset_unique(packages)
 
     # preprocessing: rolling versions
     packages_to_process = []
@@ -306,18 +306,18 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
     # The proper solution would be to allow rules decide whether they may be unignored. This,
     # however, brings in more complex flag handling, as in `soft` and `hard` ignores, so I'd
     # like to postpone it for now
-    project_should_unignore = packageset_may_be_unignored(packages)
+    suppress_ignore = should_suppress_ignore(packages)
 
     # Process altscheme and normal packages independently
     _fill_packageset_versions(
         [package for package in packages if package.flags & PackageFlags.ALTSCHEME],
-        project_is_unique,
-        project_should_unignore
+        is_unique,
+        suppress_ignore
     )
     _fill_packageset_versions(
         [package for package in packages if not package.flags & PackageFlags.ALTSCHEME],
-        project_is_unique,
-        project_should_unignore
+        is_unique,
+        suppress_ignore
     )
 
 
