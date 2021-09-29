@@ -20,35 +20,20 @@
 # mypy: no-disallow-untyped-calls
 
 import unittest
-from typing import List
 
-from repology.package import Package
+from repology.classifier import classify_packages
 from repology.package import PackageFlags as Pf
 from repology.package import PackageStatus as Ps
-from repology.packageproc import fill_packageset_versions, is_packageset_unique
 
-from .package import PackageSample, spawn_package
+from .package import PackageSample
 
 
 class TestPackageProc(unittest.TestCase):
     def _check_fill_versions(self, *samples: PackageSample) -> None:
-        fill_packageset_versions([sample.package for sample in samples])
+        classify_packages([sample.package for sample in samples])
 
         for sample in samples:
             sample.check(self)
-
-    def test_is_packageset_unique(self) -> None:
-        packages: List[Package] = []
-        self.assertEqual(is_packageset_unique(packages), True)
-
-        packages = [spawn_package(family='foo')]
-        self.assertEqual(is_packageset_unique(packages), True)
-
-        packages = [spawn_package(family='foo'), spawn_package(family='foo')]
-        self.assertEqual(is_packageset_unique(packages), True)
-
-        packages = [spawn_package(family='foo'), spawn_package(family='bar')]
-        self.assertEqual(is_packageset_unique(packages), False)
 
     def test_versionclasses_big(self) -> None:
         self._check_fill_versions(

@@ -20,11 +20,11 @@ from typing import Any, Dict, Iterable, List
 
 import psycopg2
 
+from repology.classifier import classify_packages
 from repology.database import Database
 from repology.fieldstats import FieldStatistics
 from repology.logger import Logger
 from repology.package import Package
-from repology.packageproc import fill_packageset_versions
 from repology.update.changes import ProjectsChangeStatistics, RemovedProject, UpdatedProject, iter_changed_projects
 from repology.update.hashes import iter_project_hashes
 
@@ -91,7 +91,7 @@ class UpdateProcess:
                 if len(change.packages) >= 20000:
                     raise RuntimeError('sanity check failed, more than 20k packages for a single project')
 
-                fill_packageset_versions(change.packages)
+                classify_packages(change.packages)
                 self._database.add_packages(map(adapt_package, change.packages))
                 self._database.update_project_hash(change.effname, change.hash_)
 
