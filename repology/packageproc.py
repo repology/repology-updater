@@ -309,16 +309,13 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
     suppress_ignore = should_suppress_ignore(packages)
 
     # Process altscheme and normal packages independently
-    _fill_packageset_versions(
-        [package for package in packages if package.flags & PackageFlags.ALTSCHEME],
-        is_unique,
-        suppress_ignore
-    )
-    _fill_packageset_versions(
-        [package for package in packages if not package.flags & PackageFlags.ALTSCHEME],
-        is_unique,
-        suppress_ignore
-    )
+    altscheme_packages = [package for package in packages if package.flags & PackageFlags.ALTSCHEME]
+    if altscheme_packages:
+        _fill_packageset_versions(altscheme_packages, is_unique, suppress_ignore)
+
+    normal_packages = [package for package in packages if not package.flags & PackageFlags.ALTSCHEME]
+    if normal_packages:
+        _fill_packageset_versions(normal_packages, is_unique, suppress_ignore)
 
 
 def packageset_sort_by_version(packages: Sequence[Package]) -> List[Package]:
