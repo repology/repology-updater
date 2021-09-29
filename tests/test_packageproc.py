@@ -203,7 +203,7 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='3', family='1', version='1.0').expect(versionclass=Ps.LEGACY),
         )
 
-    def test_versionclass_branch_bounds(self) -> None:
+    def test_versionclass_branch_bounds1(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='1', version='2.2beta1', flags=Pf.DEVEL).expect(versionclass=Ps.DEVEL),
             PackageSample(repo='1', version='2.2alpha1.9999', flags=Pf.IGNORE | Pf.DEVEL).expect(versionclass=Ps.LEGACY),
