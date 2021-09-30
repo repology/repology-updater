@@ -18,7 +18,7 @@
 import datetime
 import resource
 import traceback
-from typing import Any, List, Optional, Tuple
+from typing import Any, Optional
 
 from repology.database import Database
 from repology.logger import Logger, format_log_entry
@@ -72,7 +72,7 @@ class RealtimeDatabaseLogger(Logger):
 
 
 class PostponedDatabaseLogger(Logger):
-    _lines: List[Tuple[datetime.datetime, str, int]]
+    _lines: list[tuple[datetime.datetime, str, int]]
     _maxlines: int
 
     def __init__(self, maxlines: int = 2500) -> None:

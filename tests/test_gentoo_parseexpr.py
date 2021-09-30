@@ -15,12 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List
-
 from repology.parsers.parsers.gentoo import _parse_conditional_expr
 
 
-def parse_conditional_expr(string: str) -> List[str]:
+def parse_conditional_expr(string: str) -> list[str]:
     return list(_parse_conditional_expr(string))
 
 

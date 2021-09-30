@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Callable, Optional, Tuple
+from typing import Callable, Optional
 
 
 _supported_schemas = [
@@ -40,7 +40,7 @@ _supported_schemas = [
 ]
 
 
-NormalizerResult = Tuple[Optional[str], Optional[str]]
+NormalizerResult = tuple[Optional[str], Optional[str]]
 NormalizerFunction = Callable[[str], NormalizerResult]
 
 
@@ -64,11 +64,11 @@ def url(value: str) -> NormalizerResult:
     return '{}://{}{}'.format(schema, hostname, path), None
 
 
-def strip(value: str) -> Tuple[str, None]:
+def strip(value: str) -> tuple[str, None]:
     return value.strip(), None
 
 
-def tolower(value: str) -> Tuple[str, None]:
+def tolower(value: str) -> tuple[str, None]:
     return value.lower(), None
 
 

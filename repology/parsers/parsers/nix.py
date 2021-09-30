@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Dict, Iterable, List, Union
+from typing import Any, Iterable, Union
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -27,7 +27,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def extract_nix_maintainers(items: Iterable[Union[str, Dict[str, str]]]) -> Iterable[str]:
+def extract_nix_maintainers(items: Iterable[Union[str, dict[str, str]]]) -> Iterable[str]:
     for item in items:
         # old format, currently used in stable; parse email out of 'name <email>' string
         # items without closing '>' are quite common, just skip them
@@ -43,7 +43,7 @@ def extract_nix_maintainers(items: Iterable[Union[str, Dict[str, str]]]) -> Iter
             #    yield item['github'].lower() + '@github'
 
 
-def extract_nix_licenses(whatever: Any) -> List[str]:
+def extract_nix_licenses(whatever: Any) -> list[str]:
     if isinstance(whatever, str):
         return [whatever]
     elif isinstance(whatever, list):

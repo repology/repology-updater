@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Dict, Iterable, Optional, Tuple
+from typing import Iterable, Optional
 
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -25,7 +25,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
+def _iter_packages(path: str) -> Iterable[tuple[str, str]]:
     for category in os.listdir(path):
         if category.startswith('.'):
             continue
@@ -42,8 +42,8 @@ def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
             yield category, package
 
 
-def _parse_infofile(path: str) -> Dict[str, str]:
-    variables: Dict[str, str] = {}
+def _parse_infofile(path: str) -> dict[str, str]:
+    variables: dict[str, str] = {}
 
     with open(path, encoding='utf-8', errors='ignore') as infofile:
         key: Optional[str] = None

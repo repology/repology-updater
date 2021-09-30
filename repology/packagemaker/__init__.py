@@ -18,7 +18,7 @@
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple, Type, TypeVar
+from typing import Any, Callable, Iterable, Optional, Type, TypeVar
 
 from repology.logger import Logger, NoopLogger
 from repology.package import LinkType, Package, PackageStatus
@@ -75,17 +75,17 @@ class PackageTemplate:
     origversion: Optional[str]
     rawversion: Optional[str]
 
-    binnames: List[str]
+    binnames: list[str]
 
     arch: Optional[str]
     summary: Optional[str]
-    maintainers: List[str]
-    categories: List[str]
-    licenses: List[str]
+    maintainers: list[str]
+    categories: list[str]
+    licenses: list[str]
 
     flags: int
 
-    extrafields: Dict[str, Any]
+    extrafields: dict[str, Any]
 
     cpe_vendor: Optional[str]
     cpe_product: Optional[str]
@@ -96,9 +96,9 @@ class PackageTemplate:
     cpe_target_hw: Optional[str]
     cpe_other: Optional[str]
 
-    flavors: List[str]
+    flavors: list[str]
 
-    links: List[Tuple[int, str]]
+    links: list[tuple[int, str]]
 
     def __init__(self) -> None:
         self.subrepo = None
@@ -170,7 +170,7 @@ class PackageMakerBase(Logger):
 
         return value
 
-    def _normalize_args(self, args: Iterable[Any], fieldname: str, want_type: Any, normalizers: Iterable[NormalizerFunction]) -> Optional[List[Any]]:
+    def _normalize_args(self, args: Iterable[Any], fieldname: str, want_type: Any, normalizers: Iterable[NormalizerFunction]) -> Optional[list[Any]]:
         output = []
         for arg in PackageMakerBase._flatten_args(args):
             if not isinstance(arg, want_type):
@@ -215,11 +215,11 @@ def _simple_setter(fieldname: str, want_type: Type[Any], *normalizers: Normalize
 T = TypeVar('T')
 
 
-def _as_opt_list(items: Iterable[T]) -> Optional[List[T]]:
+def _as_opt_list(items: Iterable[T]) -> Optional[list[T]]:
     return list(items) or None
 
 
-def _as_unique_list(items: Iterable[T]) -> List[T]:
+def _as_unique_list(items: Iterable[T]) -> list[T]:
     seen = set()
     res = []
     for item in items:
@@ -229,7 +229,7 @@ def _as_unique_list(items: Iterable[T]) -> List[T]:
     return res
 
 
-def _as_opt_unique_list(items: Iterable[T]) -> Optional[List[T]]:
+def _as_opt_unique_list(items: Iterable[T]) -> Optional[list[T]]:
     return _as_unique_list(items) or None
 
 
@@ -344,7 +344,7 @@ class PackageMaker(PackageMakerBase):
         self._package.cpe_other = other
 
     def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
-        maintainers: Optional[List[str]] = None
+        maintainers: Optional[list[str]] = None
 
         if self._package.maintainers:
             maintainers = _as_opt_unique_list(self._package.maintainers)

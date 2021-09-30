@@ -18,7 +18,7 @@
 import os
 import xml.etree.ElementTree
 from dataclasses import dataclass, field
-from typing import Dict, Iterable, List, Optional, Set, Tuple
+from typing import Iterable, Optional
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -56,7 +56,7 @@ def _parse_conditional_expr(string: str) -> Iterable[str]:
         # XXX: parse ( || foo bar ) construct used with licenses
 
 
-def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
+def _iter_packages(path: str) -> Iterable[tuple[str, str]]:
     for category in os.listdir(path):
         category_path = os.path.join(path, category)
         if not os.path.isdir(category_path) or category.startswith('.') or category in ['acct-group', 'acct-user', 'metadata', 'virtual']:
@@ -99,9 +99,9 @@ _link_templates_by_upstream_type = {
 
 @dataclass
 class _ParsedXmlMetadata:
-    maintainers: List[str] = field(default_factory=list)
-    upstreams: List[str] = field(default_factory=list)
-    unsupported_upstream_types: Set[str] = field(default_factory=set)
+    maintainers: list[str] = field(default_factory=list)
+    upstreams: list[str] = field(default_factory=list)
+    unsupported_upstream_types: set[str] = field(default_factory=set)
     cpe: Optional[str] = None
 
     def handle_upstream(self, type_: str, value: str) -> None:
@@ -136,8 +136,8 @@ def _parse_xml_metadata(path: str) -> _ParsedXmlMetadata:
     return output
 
 
-def _parse_md5cache_metadata(path: str) -> Dict[str, str]:
-    result: Dict[str, str] = {}
+def _parse_md5cache_metadata(path: str) -> dict[str, str]:
+    result: dict[str, str] = {}
 
     with open(path, 'r', encoding='utf-8') as metadata_file:
         for line in metadata_file:

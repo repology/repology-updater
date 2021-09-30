@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Dict, Iterable, Optional
+from typing import Iterable, Optional
 
 import lxml
 
@@ -29,13 +29,13 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
-def _parse_info_file(filename: str) -> Dict[str, str]:
+def _parse_info_file(filename: str) -> dict[str, str]:
     with open(filename, 'r') as infofile:
         return _parse_info(infofile.read())
 
 
-def _parse_info(text: str) -> Dict[str, str]:
-    result: Dict[str, str] = {}
+def _parse_info(text: str) -> dict[str, str]:
+    result: dict[str, str] = {}
     current_multiline_key: Optional[str] = None
     multiline_depth = 0
 

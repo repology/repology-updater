@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Dict, Iterable
+from typing import Iterable
 
 from libversion import version_compare
 
@@ -28,7 +28,7 @@ from repology.transformer import PackageTransformer
 
 class FreshcodeParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        result: Dict[str, PackageMaker] = {}
+        result: dict[str, PackageMaker] = {}
 
         # note that we actually parse database prepared by
         # fetcher, not the file we've downloaded

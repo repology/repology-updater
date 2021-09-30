@@ -17,7 +17,7 @@
 
 import os
 import shutil
-from typing import Any, Dict, IO, Tuple
+from typing import Any, IO
 
 
 __all__ = ['AtomicDir', 'AtomicFile']
@@ -75,8 +75,8 @@ class AtomicDir(_AtomicFSObject):
 
 
 class AtomicFile(_AtomicFSObject):
-    _args: Tuple[Any, ...]
-    _kwargs: Dict[str, Any]
+    _args: tuple[Any, ...]
+    _kwargs: dict[str, Any]
     _file: IO[Any]
 
     def __init__(self, path: str, *args: Any, **kwargs: Any) -> None:

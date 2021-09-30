@@ -18,7 +18,7 @@
 import heapq
 import os
 import pickle
-from typing import Iterable, Iterator, List
+from typing import Iterable, Iterator
 
 from repology.package import Package
 
@@ -27,7 +27,7 @@ class ChunkedSerializer:
     path: str
     next_chunk_number: int
     chunk_size: int
-    packages: List[Package]
+    packages: list[Package]
     total_packages: int
 
     def __init__(self, path: str, chunk_size: int) -> None:
@@ -81,8 +81,8 @@ def _stream_deserialize(path: str) -> Iterator[Package]:
         raise RuntimeError(f'Failed to deserialize packages from {path}') from e
 
 
-def heap_deserialize(paths: Iterable[str]) -> Iterator[List[Package]]:
-    packages: List[Package] = []
+def heap_deserialize(paths: Iterable[str]) -> Iterator[list[Package]]:
+    packages: list[Package] = []
 
     for package in heapq.merge(*(_stream_deserialize(path) for path in paths), key=lambda p: p.effname):
         if packages and packages[0].effname != package.effname:

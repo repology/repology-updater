@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable, Tuple
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -23,7 +23,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iter_index(path: str) -> Iterable[Tuple[str, str, int, str, str, str]]:
+def _iter_index(path: str) -> Iterable[tuple[str, str, int, str, str, str]]:
     with open(path, encoding='latin-1') as listfile:
         for line in listfile:
             if line.startswith(';'):

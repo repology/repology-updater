@@ -17,7 +17,7 @@
 
 import os
 from collections import defaultdict
-from typing import Dict, Iterable, List
+from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -26,8 +26,8 @@ from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
 
-def _parse_descfile(path: str) -> Dict[str, List[str]]:
-    data: Dict[str, List[str]] = defaultdict(list)
+def _parse_descfile(path: str) -> dict[str, list[str]]:
+    data: dict[str, list[str]] = defaultdict(list)
 
     with open(path, 'r', encoding='utf-8') as descfile:
         key = ''

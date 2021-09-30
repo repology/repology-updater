@@ -19,7 +19,7 @@ import hashlib
 import os
 import sys
 from copy import deepcopy
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Iterable, Optional
 
 import yaml
 
@@ -36,9 +36,9 @@ SPLIT_MULTI_NAME_RULES = True
 
 
 class RulesetStatistics:
-    RuleStatistics = Tuple[str, int, int]
+    RuleStatistics = tuple[str, int, int]
 
-    blocks: List[List[RuleStatistics]] = []
+    blocks: list[list[RuleStatistics]] = []
 
     def __init__(self) -> None:
         self.blocks = []
@@ -55,10 +55,10 @@ class RulesetStatistics:
 
 class PackageTransformer:
     _repomgr: RepositoryManager
-    _rules: List[Rule]
+    _rules: list[Rule]
     _hash: str
-    _ruleblocks: List[RuleBlock]
-    _optruleblocks: List[RuleBlock]
+    _ruleblocks: list[RuleBlock]
+    _optruleblocks: list[RuleBlock]
     _packages_processed: int
 
     def __init__(self, repomgr: RepositoryManager, rulesdir: Optional[str] = None, rulestext: Optional[str] = None):
@@ -72,7 +72,7 @@ class PackageTransformer:
             for ruledata in yaml.safe_load(rulestext):
                 self._add_rule(ruledata)
         elif isinstance(rulesdir, str):
-            rulefiles: List[str] = []
+            rulefiles: list[str] = []
 
             for root, dirs, files in os.walk(rulesdir):
                 rulefiles += [os.path.join(root, f) for f in files if f.endswith('.yaml')]
@@ -94,7 +94,7 @@ class PackageTransformer:
 
         self._ruleblocks = []
 
-        current_name_rules: List[Rule] = []
+        current_name_rules: list[Rule] = []
 
         def flush_current_name_rules() -> None:
             nonlocal current_name_rules
@@ -116,7 +116,7 @@ class PackageTransformer:
         self._optruleblocks = self._ruleblocks
         self._packages_processed = 0
 
-    def _add_rule(self, ruledata: Dict[str, Any]) -> None:
+    def _add_rule(self, ruledata: dict[str, Any]) -> None:
         if SPLIT_MULTI_NAME_RULES and 'name' in ruledata and isinstance(ruledata['name'], list):
             for name in ruledata['name']:
                 modified_ruledata = deepcopy(ruledata)
@@ -128,7 +128,7 @@ class PackageTransformer:
     def _recalc_opt_ruleblocks(self) -> None:
         self._optruleblocks = []
 
-        current_lowfreq_blocks: List[RuleBlock] = []
+        current_lowfreq_blocks: list[RuleBlock] = []
 
         def flush_current_lowfreq_blocks() -> None:
             nonlocal current_lowfreq_blocks

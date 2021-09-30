@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import ClassVar, Optional, Tuple, Type, Union
+from typing import ClassVar, Optional, Type, Union
 
 __all__ = ['nevra_construct', 'nevra_parse', 'EpochMode']
 
@@ -30,7 +30,7 @@ class EpochMode:
 # https://github.com/python/mypy/issues/4236
 #EpochType = TypeVar('EpochType', str, int)
 
-def nevra_parse(nevra: str, epoch_mode: int = EpochMode.PRESERVE, epoch_type: Type[Union[str, int]] = str) -> Tuple[str, Union[int, str, None], str, str, str]:
+def nevra_parse(nevra: str, epoch_mode: int = EpochMode.PRESERVE, epoch_type: Type[Union[str, int]] = str) -> tuple[str, Union[int, str, None], str, str, str]:
     epoch: Union[int, str, None] = None
 
     rest = nevra

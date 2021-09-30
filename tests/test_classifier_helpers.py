@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,16 +15,23 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Iterable, Union
+# mypy: no-disallow-untyped-calls
 
-from jsonslicer import JsonSlicer
+from repology.classifier import _is_packageset_unique
+from repology.package import Package
 
-
-def iter_json_list(path: str, json_path: tuple[Union[str, None], ...], **kwargs: Any) -> Iterable[dict[str, Any]]:
-    with open(path, 'rb') as jsonfile:
-        yield from JsonSlicer(jsonfile, json_path, **kwargs)
+from .package import spawn_package
 
 
-def iter_json_dict(path: str, json_path: tuple[Union[str, None], ...], **kwargs: Any) -> Iterable[tuple[str, dict[str, Any]]]:
-    with open(path, 'rb') as jsonfile:
-        yield from JsonSlicer(jsonfile, json_path, path_mode='map_keys', **kwargs)
+def test_is_packageset_unique():
+    packages: list[Package] = []
+    assert _is_packageset_unique(packages)
+
+    packages = [spawn_package(family='foo')]
+    assert _is_packageset_unique(packages)
+
+    packages = [spawn_package(family='foo'), spawn_package(family='foo')]
+    assert _is_packageset_unique(packages)
+
+    packages = [spawn_package(family='foo'), spawn_package(family='bar')]
+    assert not _is_packageset_unique(packages)

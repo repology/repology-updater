@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Dict, Iterable, Iterator
+from typing import Iterable, Iterator
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -33,7 +33,7 @@ def _normalize_version(version: str) -> str:
     return version
 
 
-def _iter_apkindex(path: str) -> Iterator[Dict[str, str]]:
+def _iter_apkindex(path: str) -> Iterator[dict[str, str]]:
     with open(path, 'r', encoding='utf-8') as apkindex:
         state = {}
         for line in apkindex:

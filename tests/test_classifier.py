@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,35 +20,20 @@
 # mypy: no-disallow-untyped-calls
 
 import unittest
-from typing import List
 
-from repology.package import Package
+from repology.classifier import classify_packages
 from repology.package import PackageFlags as Pf
 from repology.package import PackageStatus as Ps
-from repology.packageproc import fill_packageset_versions, packageset_is_unique
 
-from .package import PackageSample, spawn_package
+from .package import PackageSample
 
 
 class TestPackageProc(unittest.TestCase):
     def _check_fill_versions(self, *samples: PackageSample) -> None:
-        fill_packageset_versions([sample.package for sample in samples])
+        classify_packages([sample.package for sample in samples])
 
         for sample in samples:
             sample.check(self)
-
-    def test_packageset_is_unique(self) -> None:
-        packages: List[Package] = []
-        self.assertEqual(packageset_is_unique(packages), True)
-
-        packages = [spawn_package(family='foo')]
-        self.assertEqual(packageset_is_unique(packages), True)
-
-        packages = [spawn_package(family='foo'), spawn_package(family='foo')]
-        self.assertEqual(packageset_is_unique(packages), True)
-
-        packages = [spawn_package(family='foo'), spawn_package(family='bar')]
-        self.assertEqual(packageset_is_unique(packages), False)
 
     def test_versionclasses_big(self) -> None:
         self._check_fill_versions(
@@ -201,7 +186,7 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='3', family='1', version='1.0').expect(versionclass=Ps.LEGACY),
         )
 
-    def test_versionclass_branch_bounds(self) -> None:
+    def test_versionclass_branch_bounds1(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='1', version='2.2beta1', flags=Pf.DEVEL).expect(versionclass=Ps.DEVEL),
             PackageSample(repo='1', version='2.2alpha1.9999', flags=Pf.IGNORE | Pf.DEVEL).expect(versionclass=Ps.LEGACY),
@@ -228,8 +213,9 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_branch_bounds3(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='1', version='2.0beta1', flags=Pf.DEVEL).expect(versionclass=Ps.DEVEL),
-            # in absense of main branch, trailing ingnored versions should be assigned to devel
-            PackageSample(repo='2', version='0.9999', flags=Pf.IGNORE).expect(versionclass=Ps.OUTDATED),
+            # In the past, the following package was assigned to devel section in absence of stable
+            # section. I don't see a point in that - it looks more like ignored status should be honored
+            PackageSample(repo='2', version='0.9999', flags=Pf.IGNORE).expect(versionclass=Ps.IGNORED),
         )
 
     def test_versionclass_ignoredignored(self) -> None:
@@ -473,6 +459,13 @@ class TestPackageProc(unittest.TestCase):
         self._check_fill_versions(
             PackageSample(repo='0', version='1', flags=Pf.RECALLED).expect(versionclass=Ps.OUTDATED),
             PackageSample(repo='1', version='1').expect(versionclass=Ps.OUTDATED),
+        )
+
+    def test_kdeconnect(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='winget', version='21.08.1.726', flags=Pf.ALTVER).expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='kde_neon', version='21.08.1+p20.04+tunstable+git20210927.0021', flags=Pf.IGNORE | Pf.INCORRECT | Pf.ANY_IS_PATCH).expect(versionclass=Ps.INCORRECT),
+            PackageSample(repo='alpine', version='21.08.1', flags=0).expect(versionclass=Ps.NEWEST),
         )
 
 

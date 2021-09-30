@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-#
 # Copyright (C) 2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
@@ -19,75 +17,64 @@
 
 # mypy: no-disallow-untyped-calls
 
-import unittest
+import pytest
 
 from repology.linkformatter import format_package_links
 
 from .package import spawn_package
 
 
-class TestLinkFormatter(unittest.TestCase):
-    def test_basic(self) -> None:
-        self.assertEqual(
-            list(
-                format_package_links(
-                    spawn_package(
-                        name='foo',
-                        version='1.1',
-                    ),
-                    'https://example.com/{name}/{version}'
-                )
+def test_basic() -> None:
+    assert list(
+        format_package_links(
+            spawn_package(
+                name='foo',
+                version='1.1',
             ),
-            [
-                'https://example.com/foo/1.1'
-            ]
+            'https://example.com/{name}/{version}'
         )
+    ) == [
+        'https://example.com/foo/1.1'
+    ]
 
-    def test_filter(self) -> None:
-        self.assertEqual(
-            list(
-                format_package_links(
-                    spawn_package(
-                        name='FOO',
-                        version='1.1',
-                    ),
-                    'https://example.com/{name|lowercase}'
-                )
+
+def test_filter() -> None:
+    assert list(
+        format_package_links(
+            spawn_package(
+                name='FOO',
+                version='1.1',
             ),
-            [
-                'https://example.com/foo'
-            ]
+            'https://example.com/{name|lowercase}'
         )
-
-    def test_list(self) -> None:
-        package = spawn_package()
-        package.extrafields = {'patch': ['foo', 'bar', 'baz'], 'suffix': ['a', 'b']}
-
-        self.assertEqual(
-            list(
-                format_package_links(package, 'https://example.com/{patch}{suffix}')
-            ),
-            [
-                'https://example.com/fooa',
-                'https://example.com/foob',
-                'https://example.com/bara',
-                'https://example.com/barb',
-                'https://example.com/baza',
-                'https://example.com/bazb',
-            ]
-        )
-
-    def test_raises(self) -> None:
-        package = spawn_package()
-
-        with self.assertRaises(RuntimeError):
-            list(format_package_links(package, 'https://example.com/{unknown}'))
-
-        self.assertEqual(list(format_package_links(package, 'https://example.com/{?unknown}')), [])
-
-        with self.assertRaises(RuntimeError):
-            list(format_package_links(package, 'https://example.com/{name|unknownfilter}'))
+    ) == [
+        'https://example.com/foo'
+    ]
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_list() -> None:
+    package = spawn_package()
+    package.extrafields = {'patch': ['foo', 'bar', 'baz'], 'suffix': ['a', 'b']}
+
+    assert list(
+        format_package_links(package, 'https://example.com/{patch}{suffix}')
+    ) == [
+        'https://example.com/fooa',
+        'https://example.com/foob',
+        'https://example.com/bara',
+        'https://example.com/barb',
+        'https://example.com/baza',
+        'https://example.com/bazb',
+    ]
+
+
+def test_raises() -> None:
+    package = spawn_package()
+
+    with pytest.raises(RuntimeError):
+        list(format_package_links(package, 'https://example.com/{unknown}'))
+
+    assert list(format_package_links(package, 'https://example.com/{?unknown}')) == []
+
+    with pytest.raises(RuntimeError):
+        list(format_package_links(package, 'https://example.com/{name|unknownfilter}'))

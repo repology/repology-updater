@@ -20,7 +20,7 @@
 # mypy: no-disallow-untyped-calls
 
 import unittest
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Optional
 
 from repology.package import Package
 from repology.packagemaker import NameType, PackageFactory
@@ -35,10 +35,10 @@ def spawn_package(
     family: Optional[str] = None,
     comment: Optional[str] = None,
     category: Optional[str] = None,
-    maintainers: Optional[List[str]] = None,
-    flavors: Optional[List[str]] = None,
+    maintainers: Optional[list[str]] = None,
+    flavors: Optional[list[str]] = None,
     branch: Optional[str] = None,
-    links: Optional[List[Tuple[int, str]]] = None,
+    links: Optional[list[tuple[int, str]]] = None,
 ) -> Package:
     m = PackageFactory().begin()
 
@@ -67,7 +67,7 @@ def spawn_package(
 
 class PackageSample:
     package: Package
-    expectations: Dict[str, Any]
+    expectations: dict[str, Any]
 
     def __init__(self, **pkgargs: Any) -> None:
         self.package = spawn_package(**pkgargs)

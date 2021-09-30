@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Callable, List, Tuple
+from typing import Any, Callable
 
 from libversion import version_compare
 
@@ -27,7 +27,7 @@ __all__ = ['VersionStripper', 'parse_rpm_version', 'parse_debian_version']
 
 
 class VersionStripper:
-    _strips: List[Callable[[str], str]]
+    _strips: list[Callable[[str], str]]
 
     def __init__(self) -> None:
         self._strips = []
@@ -61,7 +61,7 @@ _RPM_POSTRELEASE_RE = re.compile('(.*?)((?:post)[0-9]+)(.*)', re.IGNORECASE)
 _RPM_SNAPSHOT = re.compile('[a-z]|20[0-9]{6}', re.IGNORECASE)
 
 
-def parse_rpm_vertags(vertags: Any) -> List[str]:
+def parse_rpm_vertags(vertags: Any) -> list[str]:
     if isinstance(vertags, list):
         return vertags
     elif isinstance(vertags, str):
@@ -72,7 +72,7 @@ def parse_rpm_vertags(vertags: Any) -> List[str]:
         raise RuntimeError('bad vertags format: {vertags}')
 
 
-def parse_rpm_version(vertags: List[str], version: str, release: str) -> Tuple[str, int]:
+def parse_rpm_version(vertags: list[str], version: str, release: str) -> tuple[str, int]:
     flags = 0
     cleaned_up_release = ''
 
@@ -115,7 +115,7 @@ _DEBIAN_ALPHA_RE = re.compile('[a-zA-Z]')
 _DEBIAN_POST_ALPHA_RE = re.compile('[+][a-zA-Z]')
 
 
-def parse_debian_version(version: str) -> Tuple[str, int]:
+def parse_debian_version(version: str) -> tuple[str, int]:
     # Epoch and revision
     version = version.split(':', 1)[-1]
     version = version.rsplit('-', 1)[0]

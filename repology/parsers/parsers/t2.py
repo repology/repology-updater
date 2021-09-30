@@ -18,7 +18,7 @@
 import os
 import re
 from collections import defaultdict
-from typing import Dict, Iterable, List
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -30,8 +30,8 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
-def _parse_descfile(path: str, logger: Logger) -> Dict[str, List[str]]:
-    data: Dict[str, List[str]] = defaultdict(list)
+def _parse_descfile(path: str, logger: Logger) -> dict[str, list[str]]:
+    data: dict[str, list[str]] = defaultdict(list)
 
     # http://t2sde.org/handbook/html/t2.package.desc.html
     tag_map = {

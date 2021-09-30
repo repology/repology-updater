@@ -16,15 +16,15 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
-from typing import Any, Dict, Iterable, List
+from typing import Any, Iterable
 
 import psycopg2
 
+from repology.classifier import classify_packages
 from repology.database import Database
 from repology.fieldstats import FieldStatistics
 from repology.logger import Logger
 from repology.package import Package
-from repology.packageproc import fill_packageset_versions
 from repology.update.changes import ProjectsChangeStatistics, RemovedProject, UpdatedProject, iter_changed_projects
 from repology.update.hashes import iter_project_hashes
 
@@ -33,7 +33,7 @@ class ChangedProjectsAccumulator:
     _BATCH_SIZE = 1000
 
     _database: Database
-    _effnames: List[str]
+    _effnames: list[str]
 
     def __init__(self, database: Database) -> None:
         self._database = database
@@ -51,7 +51,7 @@ class ChangedProjectsAccumulator:
             self._effnames = []
 
 
-def adapt_package(package: Package) -> Dict[str, Any]:
+def adapt_package(package: Package) -> dict[str, Any]:
     res = package.__dict__
     if (links := res.get('links')) is not None:
         res['links'] = psycopg2.extras.Json(links)
@@ -76,10 +76,10 @@ class UpdateProcess:
         self._logger.log('forcing update for projects affected by changed CPEs')
         self._database.update_force_project_updates_by_cpe()
 
-    def _push_packages(self, projects: Iterable[List[Package]]) -> None:
+    def _push_packages(self, projects: Iterable[list[Package]]) -> None:
         self._logger.log('updating projects')
 
-        field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(FieldStatistics)
+        field_stats_per_repo: dict[str, FieldStatistics] = defaultdict(FieldStatistics)
         stats = ProjectsChangeStatistics()
 
         prev_total = 0
@@ -91,7 +91,7 @@ class UpdateProcess:
                 if len(change.packages) >= 20000:
                     raise RuntimeError('sanity check failed, more than 20k packages for a single project')
 
-                fill_packageset_versions(change.packages)
+                classify_packages(change.packages)
                 self._database.add_packages(map(adapt_package, change.packages))
                 self._database.update_project_hash(change.effname, change.hash_)
 
@@ -240,7 +240,7 @@ class UpdateProcess:
         def __init__(self, update: 'UpdateProcess') -> None:
             self._update = update
 
-        def push_packages(self, projects: Iterable[List[Package]]) -> None:
+        def push_packages(self, projects: Iterable[list[Package]]) -> None:
             self._update._push_packages(projects)
 
         def set_history_cutoff_timestamp(self, timestamp: int) -> None:

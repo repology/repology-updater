@@ -22,7 +22,7 @@
 import functools
 import os
 import re
-from typing import Any, Callable, ClassVar, Dict, List
+from typing import Any, Callable, ClassVar
 
 import jinja2
 
@@ -62,8 +62,8 @@ class QueryMetadata:
     name: str
     query: str
     template: jinja2.Template
-    args: List[Any]
-    argdefaults: Dict[str, Any]
+    args: list[Any]
+    argdefaults: dict[str, Any]
     rettype: int
     argsmode: int
 
@@ -169,7 +169,7 @@ class QueryMetadata:
 
 
 class QueryManager:
-    _queries: Dict[str, Callable[..., Any]]
+    _queries: dict[str, Callable[..., Any]]
 
     def __init__(self, queriesdir: str) -> None:
         self._queries = {}

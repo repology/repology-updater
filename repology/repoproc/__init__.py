@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable, Iterator, List, Optional, Tuple
+from typing import Iterable, Iterator, Optional
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import Fetcher
@@ -68,7 +68,7 @@ class RepositoryProcessor:
     def _get_parsed_path(self, repository: RepositoryMetadata) -> str:
         return os.path.join(self.parseddir, repository['name'] + '.parsed')
 
-    def _get_parsed_chunk_paths(self, repository: RepositoryMetadata) -> List[str]:
+    def _get_parsed_chunk_paths(self, repository: RepositoryMetadata) -> list[str]:
         dirpath = self._get_parsed_path(repository)
         return [
             os.path.join(dirpath, filename)
@@ -129,7 +129,7 @@ class RepositoryProcessor:
                 package.flavors = sorted(set(map(strip_flavor, package.flavors)))
 
                 # add packagelinks
-                packagelinks: List[Tuple[int, str]] = []
+                packagelinks: list[tuple[int, str]] = []
                 for pkglink in source.get('packagelinks', []) + repository.get('packagelinks', []):
                     if 'type' in pkglink:  # XXX: will become mandatory
                         link_type = LinkType.from_string(pkglink['type'])
@@ -217,8 +217,8 @@ class RepositoryProcessor:
         for repository in self.repomgr.get_repositories(reponames):
             yield from self._iter_parse_all_sources(repository, transformer, logger)
 
-    def iter_parsed(self, reponames: Optional[RepositoryNameList] = None, logger: Logger = NoopLogger()) -> Iterator[List[Package]]:
-        sources: List[str] = []
+    def iter_parsed(self, reponames: Optional[RepositoryNameList] = None, logger: Logger = NoopLogger()) -> Iterator[list[Package]]:
+        sources: list[str] = []
         for repository in self.repomgr.get_repositories(reponames):
             repo_sources = self._get_parsed_chunk_paths(repository)
 

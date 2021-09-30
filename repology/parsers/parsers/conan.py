@@ -18,7 +18,7 @@
 import os
 from collections import defaultdict
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, Iterable, Iterator, List
+from typing import Any, Callable, Iterable, Iterator
 
 import yaml
 
@@ -28,7 +28,7 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
-def _traverse_arbitrary_structure(data: Any, handler: Callable[[List[str], str], None], tags: List[str] = []) -> None:
+def _traverse_arbitrary_structure(data: Any, handler: Callable[[list[str], str], None], tags: list[str] = []) -> None:
     # processes arbitrary nested structure of dicts and lists which
     # is possible in conandata.yaml files
 
@@ -44,14 +44,14 @@ def _traverse_arbitrary_structure(data: Any, handler: Callable[[List[str], str],
 
 @dataclass
 class _UrlInfo:
-    tags: List[str]
+    tags: list[str]
     url: str
 
 
-def _extract_url_infos(data: Any) -> List[_UrlInfo]:
-    result: List[_UrlInfo] = []
+def _extract_url_infos(data: Any) -> list[_UrlInfo]:
+    result: list[_UrlInfo] = []
 
-    def handler(tags: List[str], data: str) -> None:
+    def handler(tags: list[str], data: str) -> None:
         if 'url' in tags and 'sha256' not in tags:
             result.append(_UrlInfo(tags, data))
 
@@ -63,20 +63,20 @@ def _extract_url_infos(data: Any) -> List[_UrlInfo]:
 @dataclass
 class _VersionInfo:
     version: str
-    url_infos: List[_UrlInfo]
+    url_infos: list[_UrlInfo]
 
 
-def _extract_version_infos(conandata: Dict[str, Any]) -> Iterator[_VersionInfo]:
+def _extract_version_infos(conandata: dict[str, Any]) -> Iterator[_VersionInfo]:
     for version, data in conandata['sources'].items():
         yield _VersionInfo(version, _extract_url_infos(data))
 
 
-def _extract_patches(conandata: Dict[str, Any]) -> Dict[str, List[str]]:
+def _extract_patches(conandata: dict[str, Any]) -> dict[str, list[str]]:
     result = defaultdict(list)
 
     if 'patches' in conandata:
         for version, data in conandata['patches'].items():
-            def handler(tags: List[str], data: str) -> None:
+            def handler(tags: list[str], data: str) -> None:
                 if not tags or tags[-1] == 'patch_file':
                     result[version].append(data)
 

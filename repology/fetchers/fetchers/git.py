@@ -17,7 +17,7 @@
 
 import os
 import shutil
-from typing import List, Optional
+from typing import Optional
 
 from repology.fetchers import PersistentDirFetcher
 from repology.logger import Logger
@@ -27,11 +27,11 @@ from repology.subprocess import Runner
 class GitFetcher(PersistentDirFetcher):
     _url: str
     _branch: str
-    _sparse_checkout: Optional[List[str]]
+    _sparse_checkout: Optional[list[str]]
     _timeout_arg: str
     _depth_arg: Optional[str]
 
-    def __init__(self, url: str, branch: str = 'master', sparse_checkout: Optional[List[str]] = None, fetch_timeout: int = 600, depth: Optional[int] = 1) -> None:
+    def __init__(self, url: str, branch: str = 'master', sparse_checkout: Optional[list[str]] = None, fetch_timeout: int = 600, depth: Optional[int] = 1) -> None:
         self._url = url
         self._branch = branch
         self._sparse_checkout = sparse_checkout

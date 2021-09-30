@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Dict, Iterable, Optional
+from typing import Iterable, Optional
 
 from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -29,9 +29,9 @@ from repology.transformer import PackageTransformer
 _DEBIAN_KEYVAL_RE = re.compile('([A-Za-z0-9_-]+):(.*?)')
 
 
-def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
+def _iter_packages(path: str) -> Iterable[dict[str, str]]:
     with open(path, encoding='utf-8', errors='ignore') as f:
-        current_data: Dict[str, str] = {}
+        current_data: dict[str, str] = {}
         last_key = None
 
         for line in f:
@@ -68,7 +68,7 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
             raise RuntimeError('unable to parse line: {}'.format(line))
 
 
-def _extract_vcs_link(pkgdata: Dict[str, str]) -> Optional[str]:
+def _extract_vcs_link(pkgdata: dict[str, str]) -> Optional[str]:
     if 'Vcs-Browser' in pkgdata:
         return pkgdata['Vcs-Browser']
 
@@ -85,7 +85,7 @@ class DebianSourcesParser(Parser):
     def __init__(self, allowed_vcs_urls: Optional[str] = None) -> None:
         self._allowed_vcs_urls_re = None if allowed_vcs_urls is None else re.compile(allowed_vcs_urls, re.IGNORECASE)
 
-    def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:
         if 'Binary' not in pkgdata or 'Source' in pkgdata:
             raise RuntimeError('Sanity check failed, expected Package descriptions with Binary, but without Source field')
         pkg.add_name(pkgdata['Package'], NameType.DEBIAN_SOURCE_PACKAGE)
@@ -115,7 +115,7 @@ class DebianSourcesParser(Parser):
 
 
 class OpenWrtPackagesParser(DebianSourcesParser):
-    def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:
         pkgpath = pkgdata['Source'].split('/')
         pkg.add_name(pkgdata['Package'], NameType.OPENWRT_PACKAGE)
         pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)
