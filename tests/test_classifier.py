@@ -215,6 +215,9 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='1', version='2.0beta1', flags=Pf.DEVEL).expect(versionclass=Ps.DEVEL),
             # In the past, the following package was assigned to devel section in absence of stable
             # section. I don't see a point in that - it looks more like ignored status should be honored
+            # Real world cases to check out:
+            # - goldendict
+            # - libadwaita
             PackageSample(repo='2', version='0.9999', flags=Pf.IGNORE).expect(versionclass=Ps.IGNORED),
         )
 
