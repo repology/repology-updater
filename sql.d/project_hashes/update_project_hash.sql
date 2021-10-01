@@ -23,11 +23,14 @@
 --------------------------------------------------------------------------------
 INSERT INTO project_hashes(
 	effname,
-	hash
+	hash,
+	last_updated
 ) VALUES (
 	%(effname)s,
-	%(hash)s
+	%(hash)s,
+	now()
 )
 ON CONFLICT (effname)
 DO UPDATE SET
-	hash = EXCLUDED.hash;
+	hash = EXCLUDED.hash,
+	last_updated = now();
