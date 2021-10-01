@@ -86,6 +86,9 @@ class UpdateProcess:
 
         changed_projects = ChangedProjectsAccumulator(self._database)
 
+        # XXX: note that we update packages only when they change in repositories
+        # that is, if classification algorithm is changed and this causes package
+        # statuses change, it won't be picked up by this process
         for change in iter_changed_projects(iter_project_hashes(self._database), projects, stats):
             if isinstance(change, UpdatedProject):
                 if len(change.packages) >= 20000:
