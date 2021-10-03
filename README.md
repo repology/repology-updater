@@ -19,7 +19,7 @@ which updates the repository information. See also the
   - Python module [psycopg2](http://initd.org/psycopg/)
   - Python module [pyyaml](http://pyyaml.org/)
   - Python module [xxhash](https://github.com/ifduyue/python-xxhash)
-  - [PostgreSQL](https://www.postgresql.org/) 13.0+
+  - [PostgreSQL](https://www.postgresql.org/) 14.0+
   - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
 Needed for fetching/parsing repository data:
