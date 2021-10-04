@@ -96,18 +96,32 @@ psql --username postgres --dbname repology -c "CREATE EXTENSION libversion"
 in the case you want to change the credentials, don't forget to add
 actual ones to `repology.conf`.
 
-Next you can create database schema (tables, indexes etc.) and at the
-same time test that the database is accessible with the following command:
+### Populating the database
+
+#### Option 1: use dump
+
+The most simple way to populate the database would be to just fill
+it with the data from main Repology instance, dumps of which are
+generated daily:
+
+```shell
+curl -s https://dumps.repology.org/repology-database-dump-latest.sql.zst | unzstd | psql -U repology
+```
+
+#### Option 2: complete update
+
+Another option would be to go through complete update process which
+includes fetching and parsing all repository data from scratch and
+pushing it to the database.
+
+First, init the database schema (note that it would drop the existing
+data in Repology database, if there is any):
 
 ```shell
 ./repology-update.py --initdb
 ```
 
-### Fetching/updating repository data
-
-The database is now ready to be filled with data. Typical Repology
-update cycle consists of multiple steps, but in most cases you'll need
-to just run all of them:
+Next, run the update process:
 
 ```shell
 ./repology-update.py --fetch --fetch --parse --database --postupdate
@@ -122,7 +136,7 @@ to just run all of them:
   - `--database` pushes processed package data into the database.
   - `--postupdate` runs additional database processing such as
     calculating summaries and updating feeds. It's separate from
-    `--database` because it can be ran in background, parallelly
+    `--database` because it can be ran in background, parallel
     to the following fetch/update cycle.
 
 ## Documentation
