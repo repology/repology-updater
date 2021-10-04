@@ -21,7 +21,7 @@ test-make-dump::
 		> ${REPOLOGY_TEST_DUMP_PATH}/repology_test.sql
 
 flake8:
-	${FLAKE8} --application-import-names=repology *.py repology tests
+	${FLAKE8} *.py repology tests
 
 mypy:
 	${MYPY} repology-update.py repology-dump.py repology
