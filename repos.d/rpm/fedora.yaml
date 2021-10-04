@@ -7,10 +7,10 @@
 ###########################################################################
 
 # XXX: consider adding the following packagelinks
-#  info on binary package, probably needs binname(s); links to build logs and other noce stuff
+#  info on binary package, probably needs binname(s); links to build logs and other nice stuff
 #  url: 'https://koji.fedoraproject.org/koji/search?terms={srcname}-{rawversion}&type=build&match=glob'
-#  503 ATM, recheck:
-#  url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+#
+#  url: 'https://packages.fedoraproject.org/pkgs/{srcname}'
 
 # Note that these are archived
 - name: fedora_26
@@ -43,7 +43,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -84,7 +84,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -125,7 +125,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -166,7 +166,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -207,7 +207,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -248,7 +248,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -292,7 +292,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -311,7 +311,7 @@
   family: fedora
   ruleset: [fedora, rpm]
   color: '294172'
-  minpackages: 18000
+  minpackages: 22000
   sources:
     - name: release
       fetcher:
@@ -333,7 +333,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -352,7 +352,7 @@
   family: fedora
   ruleset: [fedora, rpm]
   color: '294172'
-  minpackages: 18000
+  minpackages: 22000
   sources:
     - name: release
       fetcher:
@@ -374,7 +374,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -384,6 +384,47 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f34/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f34/f/{srcname}.spec'
+  tags: [ all, production, fedora, rpm ]
+
+- name: fedora_35
+  type: repository
+  desc: Fedora 35
+  statsgroup: Fedora
+  family: fedora
+  ruleset: [fedora, rpm]
+  color: '294172'
+  minpackages: 22000
+  sources:
+    - name: development
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/development/35/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+    - name: updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/updates/35/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://packages.fedoraproject.org/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f35'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f35/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f35/f/{srcname}.spec'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
@@ -406,7 +447,7 @@
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
