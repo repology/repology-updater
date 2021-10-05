@@ -25,7 +25,6 @@ from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 def _as_maybe_str(v: Any) -> Optional[str]:
@@ -119,7 +118,7 @@ def _parse_devel_packages(packages: Iterable[dict[str, Any]], latest_versions: d
 
 
 class MetacpanAPIParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         latest_versions: dict[str, str] = {}
 
         yield from _parse_latest_packages(_iter_packages(path), latest_versions, factory)

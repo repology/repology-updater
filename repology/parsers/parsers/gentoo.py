@@ -26,7 +26,6 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
-from repology.transformer import PackageTransformer
 
 
 def _parse_conditional_expr(string: str) -> Iterable[str]:
@@ -157,7 +156,7 @@ class GentooGitParser(Parser):
         self._require_xml_metadata = require_xml_metadata
         self._require_md5cache_metadata = require_md5cache_metadata
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('-')
 
         for category, package in _iter_packages(path):

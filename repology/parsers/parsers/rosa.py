@@ -24,7 +24,6 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.parsers.versions import parse_rpm_version, parse_rpm_vertags
-from repology.transformer import PackageTransformer
 
 
 class RosaInfoXmlParser(Parser):
@@ -33,7 +32,7 @@ class RosaInfoXmlParser(Parser):
     def __init__(self, vertags: Any = None) -> None:
         self._vertags = parse_rpm_vertags(vertags)
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         root = xml.etree.ElementTree.parse(path)
 
         for info in root.findall('./info'):

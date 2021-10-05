@@ -28,7 +28,6 @@ from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 _WHITESPACE_PREFIX_RE = re.compile('([ ]*)[^ ]')
@@ -183,7 +182,7 @@ class HackageParserBase(Parser):
     def _iterate(self, path: str) -> Iterable[dict[str, str]]:
         pass
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for cabaldata in self._iterate(path):
             with factory.begin() as pkg:
                 pkg.add_name(cabaldata['name'], NameType.HACKAGE_NAME)

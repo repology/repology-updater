@@ -22,11 +22,10 @@ from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import safe_findtext
-from repology.transformer import PackageTransformer
 
 
 class FDroidParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         root = xml.etree.ElementTree.parse(path)
 
         for application in root.findall('application'):

@@ -26,7 +26,6 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.patches import add_patch_files
-from repology.transformer import PackageTransformer
 
 
 def _normalize_version(version: str) -> str:
@@ -74,7 +73,7 @@ def _grep_file(path: str, sample: str) -> bool:
 
 
 class VcpkgGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         has_control_files = False
 
         for pkgdir in os.listdir(os.path.join(path, 'ports')):

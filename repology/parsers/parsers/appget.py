@@ -24,7 +24,6 @@ import yaml
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 @dataclass
@@ -52,7 +51,7 @@ def _iter_packages(path: str) -> Iterable[_PackageLocation]:
 
 
 class AppgetGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgloc in _iter_packages(path):
             with factory.begin(os.path.relpath(pkgloc.yamlpath, path)) as pkg:
                 try:

@@ -23,7 +23,6 @@ from typing import Any, Iterable, Optional
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 def _normalize_version(version: str) -> str:
@@ -128,7 +127,7 @@ class OpenBSDsqlportsParser(Parser):
     def __init__(self, path_to_database: Optional[str] = None) -> None:
         self._path_to_database = path_to_database or ''
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for row in _iter_sqlports(os.path.join(path + self._path_to_database)):
             with factory.begin(row['fullpkgpath']) as pkg:
                 # there are a lot of potential name sources in sqlports, namely:

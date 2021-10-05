@@ -25,7 +25,6 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.patches import add_patch_files
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
 class KissGitParser(Parser):
@@ -34,7 +33,7 @@ class KissGitParser(Parser):
     def __init__(self, maintainer_from_git: bool = False):
         self._maintainer_from_git = maintainer_from_git
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for versionpath in walk_tree(path, name='version'):
             rootdir = os.path.dirname(versionpath)
             with factory.begin(os.path.relpath(rootdir, path)) as pkg:

@@ -20,11 +20,10 @@ from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 class CondaRepodataJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for pkgfilename, pkgdata in json.load(jsonfile)['packages'].items():
                 pkg = factory.begin(pkgfilename)

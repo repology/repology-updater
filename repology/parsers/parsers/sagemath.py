@@ -23,7 +23,6 @@ from repology.parsers import Parser
 from repology.parsers.patches import add_patch_files
 from repology.parsers.versions import VersionStripper
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
 def _parse_upstream_url(pkgpath: str) -> Optional[str]:
@@ -41,7 +40,7 @@ def _parse_upstream_url(pkgpath: str) -> Optional[str]:
 
 
 class SageMathParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('.p')
 
         for versionfile in walk_tree(path, name='package-version.txt'):

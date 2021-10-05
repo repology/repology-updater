@@ -25,7 +25,6 @@ import yaml
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
 def _traverse_arbitrary_structure(data: Any, handler: Callable[[list[str], str], None], tags: list[str] = []) -> None:
@@ -86,7 +85,7 @@ def _extract_patches(conandata: dict[str, Any]) -> dict[str, list[str]]:
 
 
 class ConanGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for conandata_abs_path in walk_tree(path, name='conandata.yml'):
             conandata_rel_path = os.path.relpath(conandata_abs_path, path)
 

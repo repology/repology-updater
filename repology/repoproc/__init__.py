@@ -156,8 +156,7 @@ class RepositoryProcessor:
                 source['parser']
             ).iter_parse(
                 self._get_state_source_path(repository, source),
-                PackageFactory(logger),
-                transformer
+                PackageFactory(logger)
             )
         )
 

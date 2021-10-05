@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019,2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -19,10 +19,9 @@ from abc import ABC, abstractmethod
 from typing import Iterable
 
 from repology.packagemaker import PackageFactory, PackageMaker
-from repology.transformer import PackageTransformer
 
 
 class Parser(ABC):
     @abstractmethod
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         pass

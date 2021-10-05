@@ -23,11 +23,10 @@ from typing import Iterable
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
 class NSTPkgInfoXMLParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for filename in walk_tree(path, suffix='pkginfo.xml'):
             root = xml.etree.ElementTree.parse(filename)
             # XXX: fails on unknown entity NST_RELEASE_SUFFIX
