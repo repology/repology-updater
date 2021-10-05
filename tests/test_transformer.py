@@ -24,6 +24,7 @@ import unittest
 from repology.package import LinkType as Lt, PackageFlags as Pf
 from repology.repomgr import RepositoryManager
 from repology.transformer import PackageTransformer
+from repology.transformer.ruleset import Ruleset
 
 from .package import PackageSample
 
@@ -40,7 +41,8 @@ repomgr = RepositoryManager(repostext="""
 
 class TestPackageTransformer(unittest.TestCase):
     def _check_transformer(self, rulestext: str, *samples: PackageSample) -> None:
-        transformer = PackageTransformer(repomgr, rulestext=rulestext)
+        ruleset = Ruleset(rulestext=rulestext)
+        transformer = PackageTransformer(repomgr, ruleset)
 
         for sample in samples:
             transformer.process(sample.package)

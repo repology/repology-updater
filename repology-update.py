@@ -31,6 +31,7 @@ from repology.querymgr import QueryManager
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
+from repology.transformer.ruleset import Ruleset
 from repology.update import UpdateProcess
 
 
@@ -78,8 +79,8 @@ class Environment:
         return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, self.options.parseddir, safety_checks=self.options.enable_safety_checks)
 
     @cached_method
-    def get_package_transformer(self) -> PackageTransformer:
-        return PackageTransformer(self.get_repo_manager(), self.options.rules_dir)
+    def get_ruleset(self) -> Ruleset:
+        return Ruleset(self.options.rules_dir)
 
     @cached_method
     def get_enabled_repo_names(self) -> list[str]:
@@ -142,9 +143,9 @@ def process_repositories(env: Environment) -> None:
             database.commit()
 
         if env.get_options().parse:
-            transformer = env.get_package_transformer()
+            ruleset = env.get_ruleset()
 
-            ruleset_hash_changed = transformer.get_ruleset_hash() != database.get_repository_ruleset_hash(reponame)
+            ruleset_hash_changed = ruleset.get_hash() != database.get_repository_ruleset_hash(reponame)
 
             if ruleset_hash_changed:
                 env.get_main_logger().log('parsing {}'.format(reponame))
@@ -159,6 +160,8 @@ def process_repositories(env: Environment) -> None:
             database.commit()
 
             try:
+                transformer = PackageTransformer(env.get_repo_manager(), ruleset)
+
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as runlogger:
                     env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
 
@@ -170,7 +173,7 @@ def process_repositories(env: Environment) -> None:
                 if env.get_options().fatal:
                     raise
 
-            database.update_repository_ruleset_hash(reponame, transformer.get_ruleset_hash())
+            database.update_repository_ruleset_hash(reponame, ruleset.get_hash())
             database.mark_repository_parsed(reponame)
             database.commit()
 
@@ -280,16 +283,6 @@ def database_update_post(env: Environment) -> None:
     database.commit()
 
 
-def dump_rules(env: Environment) -> None:
-    statistics = env.get_package_transformer().get_statistics()
-
-    for block in statistics.blocks:
-        print('{')
-        for rule, checks, matches in block:
-            print('    {:7} {:7}  {}'.format(checks, matches, (rule[:80] + '...') if len(rule) > 80 else rule))
-        print('}')
-
-
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
@@ -317,7 +310,6 @@ def parse_arguments() -> argparse.Namespace:
 
     grp = parser.add_argument_group('Informational queries')
     grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
-    grp.add_argument('-r', '--dump-rules', action='store_true', help='dump rule statistics')
 
     grp = parser.add_argument_group('Flags')
     grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
@@ -363,9 +355,6 @@ def main() -> int:
 
     if options.postupdate:
         database_update_post(env)
-
-    if options.dump_rules:
-        dump_rules(env)
 
     if options.check_totals or options.fix_totals:
         handle_totals(env, options.fix_totals)
