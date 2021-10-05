@@ -26,7 +26,8 @@ import yaml
 from repology.package import Package, PackageFlags
 from repology.repomgr import RepositoryManager
 from repology.transformer.blocks import CoveringRuleBlock, NameMapRuleBlock, RuleBlock, SingleRuleBlock
-from repology.transformer.rule import PackageContext, Rule
+from repology.transformer.contexts import PackageContext
+from repology.transformer.rule import Rule
 
 
 RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
