@@ -22,7 +22,7 @@
       url: https://manjaro.org/
   tags: [ all, production, manjaro ]
   
-- name: manjaro_stable-staging
+- name: manjaro_stable_staging
   type: repository
   desc: Manjaro Stable-Staging
   statsgroup: Arch+derivs
