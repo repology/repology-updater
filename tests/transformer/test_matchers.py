@@ -115,56 +115,132 @@ def test_verlonger() -> None:
 def test_vergt() -> None:
     check_transformer(
         '[ { vergt: "1.0", setname: bar } ]',
-        PackageSample(name='p1', version='0.9').expect(effname='p1'),
-        PackageSample(name='p2', version='1.0').expect(effname='p2'),
-        PackageSample(name='p3', version='1.1').expect(effname='bar'),
+        PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='p2'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='p3'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='bar'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='bar'),
     )
 
 
 def test_verge() -> None:
     check_transformer(
         '[ { verge: "1.0", setname: bar } ]',
-        PackageSample(name='p1', version='0.9').expect(effname='p1'),
-        PackageSample(name='p2', version='1.0').expect(effname='bar'),
-        PackageSample(name='p3', version='1.1').expect(effname='bar'),
+        PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='p2'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='bar'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='bar'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='bar'),
     )
 
 
 def test_verlt() -> None:
     check_transformer(
         '[ { verlt: "1.0", setname: bar } ]',
-        PackageSample(name='p1', version='0.9').expect(effname='bar'),
-        PackageSample(name='p2', version='1.0').expect(effname='p2'),
-        PackageSample(name='p3', version='1.1').expect(effname='p3'),
+        PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='bar'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='p3'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='p4'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='p5'),
     )
 
 
 def test_verle() -> None:
     check_transformer(
         '[ { verle: "1.0", setname: bar } ]',
-        PackageSample(name='p1', version='0.9').expect(effname='bar'),
-        PackageSample(name='p2', version='1.0').expect(effname='bar'),
-        PackageSample(name='p3', version='1.1').expect(effname='p3'),
+        PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='bar'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='bar'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='p4'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='p5'),
     )
 
 
 def test_vereq() -> None:
     check_transformer(
         '[ { vereq: "1.0", setname: bar } ]',
-        PackageSample(name='p1', version='0.9').expect(effname='p1'),
-        PackageSample(name='p2', version='1.0').expect(effname='bar'),
-        PackageSample(name='p3', version='01.00.00').expect(effname='bar'),
-        PackageSample(name='p4', version='1.1').expect(effname='p4'),
+        PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='p2'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='bar'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='p4'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='p5'),
     )
 
 
 def test_verne() -> None:
     check_transformer(
         '[ { verne: "1.0", setname: bar } ]',
-        PackageSample(name='p1', version='0.9').expect(effname='bar'),
-        PackageSample(name='p2', version='1.0').expect(effname='p2'),
-        PackageSample(name='p3', version='01.00.00').expect(effname='p3'),
-        PackageSample(name='p4', version='1.1').expect(effname='bar'),
+        PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='bar'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='p3'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='bar'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='bar'),
+    )
+
+
+def test_relgt() -> None:
+    check_transformer(
+        '[ { relgt: "1.0", setname: bar } ]',
+        PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='p2'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='p3'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='p4'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='bar'),
+    )
+
+
+def test_relge() -> None:
+    check_transformer(
+        '[ { relge: "1.0", setname: bar } ]',
+        PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='bar'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='bar'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='bar'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='bar'),
+    )
+
+
+def test_rellt() -> None:
+    check_transformer(
+        '[ { rellt: "1.0", setname: bar } ]',
+        PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='p2'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='p3'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='p4'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='p5'),
+    )
+
+
+def test_relle() -> None:
+    check_transformer(
+        '[ { relle: "1.0", setname: bar } ]',
+        PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='bar'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='bar'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='bar'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='p5'),
+    )
+
+
+def test_releq() -> None:
+    check_transformer(
+        '[ { releq: "1.0", setname: bar } ]',
+        PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='bar'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='bar'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='bar'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='p5'),
+    )
+
+
+def test_relne() -> None:
+    check_transformer(
+        '[ { relne: "1.0", setname: bar } ]',
+        PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
+        PackageSample(name='p2', version='1.0.alpha1').expect(effname='p2'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='p3'),
+        PackageSample(name='p4', version='1.0.1').expect(effname='p4'),
+        PackageSample(name='p5', version='1.1.0').expect(effname='bar'),
     )
 
 
