@@ -13,7 +13,7 @@ which updates the repository information. See also the
 
 ## Dependencies
 
-  - [Python](https://www.python.org/) 3.9+
+  - [Python](https://www.python.org/) 3.10+
   - Python module [Jinja2](http://jinja.pocoo.org/)
   - Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
   - Python module [psycopg2](http://initd.org/psycopg/)

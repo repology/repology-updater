@@ -11,7 +11,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10.0-rc.2"
+          python-version: "3.10.0"
       - name: Install dependencies
         # depends for jsonslicer, postgresql-liversion, rpm4 respectively
         run: |
