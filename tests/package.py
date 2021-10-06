@@ -22,6 +22,8 @@
 import unittest
 from typing import Any
 
+import pytest
+
 from repology.package import Package
 from repology.packagemaker import NameType, PackageFactory
 
@@ -80,3 +82,12 @@ class PackageSample:
     def check(self, test: unittest.TestCase) -> None:
         for k, v in self.expectations.items():
             test.assertEqual(getattr(self.package, k), v, msg='{} of {}'.format(k, self.package))
+
+    def check_pytest(self) -> None:
+        __tracebackhide__ = True
+
+        for key, expected in self.expectations.items():
+            actual = getattr(self.package, key)
+
+            if actual != expected:
+                pytest.fail(f'field "{key}" value "{actual}" != expected "{expected}" for {self.package}')
