@@ -18,7 +18,7 @@
 import os
 import re
 import sqlite3
-from typing import Any, Iterable, Optional
+from typing import Any, Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -124,7 +124,7 @@ def _strip_flavors_from_stem(stem: str, flavors: Iterable[str]) -> str:
 class OpenBSDsqlportsParser(Parser):
     _path_to_database: str
 
-    def __init__(self, path_to_database: Optional[str] = None) -> None:
+    def __init__(self, path_to_database: str | None = None) -> None:
         self._path_to_database = path_to_database or ''
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:

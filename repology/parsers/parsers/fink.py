@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable, Optional
+from typing import Iterable
 
 import lxml
 
@@ -35,7 +35,7 @@ def _parse_info_file(filename: str) -> dict[str, str]:
 
 def _parse_info(text: str) -> dict[str, str]:
     result: dict[str, str] = {}
-    current_multiline_key: Optional[str] = None
+    current_multiline_key: str | None = None
     multiline_depth = 0
 
     for line in text.split('\n'):

@@ -18,7 +18,7 @@
 import datetime
 import resource
 import traceback
-from typing import Any, Optional
+from typing import Any
 
 from repology.database import Database
 from repology.logger import Logger, format_log_entry
@@ -134,7 +134,7 @@ class RunHandler(Logger):
     def set_no_changes(self) -> None:
         self._no_changes = True
 
-    def finish(self, status: str = 'successful', traceback_text: Optional[str] = None) -> None:
+    def finish(self, status: str = 'successful', traceback_text: str | None = None) -> None:
         end_rusage = resource.getrusage(resource.RUSAGE_SELF)
 
         self._db.finish_run(

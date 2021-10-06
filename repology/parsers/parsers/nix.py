@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Iterable, Union
+from typing import Any, Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -26,7 +26,7 @@ from repology.parsers.json import iter_json_dict
 from repology.parsers.maintainers import extract_maintainers
 
 
-def extract_nix_maintainers(items: Iterable[Union[str, dict[str, str]]]) -> Iterable[str]:
+def extract_nix_maintainers(items: Iterable[str | dict[str, str]]) -> Iterable[str]:
     for item in items:
         # old format, currently used in stable; parse email out of 'name <email>' string
         # items without closing '>' are quite common, just skip them

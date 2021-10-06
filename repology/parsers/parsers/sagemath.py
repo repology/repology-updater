@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable, Optional
+from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -25,7 +25,7 @@ from repology.parsers.versions import VersionStripper
 from repology.parsers.walk import walk_tree
 
 
-def _parse_upstream_url(pkgpath: str) -> Optional[str]:
+def _parse_upstream_url(pkgpath: str) -> str | None:
     checksums_path = os.path.join(pkgpath, 'checksums.ini')
     if not os.path.exists(checksums_path):
         return None

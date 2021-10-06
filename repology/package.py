@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
-from typing import Any, ClassVar, Optional
+from typing import Any, ClassVar
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -296,38 +296,38 @@ class Package:
 
     repo: str
     family: str
-    subrepo: Optional[str]
+    subrepo: str | None
 
-    name: Optional[str]
-    srcname: Optional[str]
-    binname: Optional[str]
-    binnames: Optional[list[str]]
-    trackname: Optional[str]
+    name: str | None
+    srcname: str | None
+    binname: str | None
+    binnames: list[str] | None
+    trackname: str | None
     visiblename: str
     projectname_seed: str
 
     origversion: str
     rawversion: str
 
-    arch: Optional[str]
+    arch: str | None
 
-    maintainers: Optional[list[str]]
-    category: Optional[str]
-    comment: Optional[str]
-    licenses: Optional[list[str]]
+    maintainers: list[str] | None
+    category: str | None
+    comment: str | None
+    licenses: list[str] | None
 
-    extrafields: Optional[dict[str, Any]]
+    extrafields: dict[str, Any] | None
 
-    cpe_vendor: Optional[str]
-    cpe_product: Optional[str]
-    cpe_edition: Optional[str]
-    cpe_lang: Optional[str]
-    cpe_sw_edition: Optional[str]
-    cpe_target_sw: Optional[str]
-    cpe_target_hw: Optional[str]
-    cpe_other: Optional[str]
+    cpe_vendor: str | None
+    cpe_product: str | None
+    cpe_edition: str | None
+    cpe_lang: str | None
+    cpe_sw_edition: str | None
+    cpe_target_sw: str | None
+    cpe_target_hw: str | None
+    cpe_other: str | None
 
-    links: Optional[list[tuple[int, str]]]
+    links: list[tuple[int, str]] | None
 
     effname: str
 
@@ -337,7 +337,7 @@ class Package:
     flags: int
     shadow: bool
     flavors: list[str]
-    branch: Optional[str]
+    branch: str | None
 
     def __init__(self, *,
                  repo: str,
@@ -353,38 +353,38 @@ class Package:
 
                  versionclass: int,
 
-                 subrepo: Optional[str] = None,
+                 subrepo: str | None = None,
 
-                 name: Optional[str] = None,
-                 srcname: Optional[str] = None,
-                 binname: Optional[str] = None,
-                 binnames: Optional[list[str]] = None,
-                 trackname: Optional[str] = None,
+                 name: str | None = None,
+                 srcname: str | None = None,
+                 binname: str | None = None,
+                 binnames: list[str] | None = None,
+                 trackname: str | None = None,
 
-                 arch: Optional[str] = None,
+                 arch: str | None = None,
 
-                 maintainers: Optional[list[str]] = None,
-                 category: Optional[str] = None,
-                 comment: Optional[str] = None,
-                 licenses: Optional[list[str]] = None,
+                 maintainers: list[str] | None = None,
+                 category: str | None = None,
+                 comment: str | None = None,
+                 licenses: list[str] | None = None,
 
-                 extrafields: Optional[dict[str, Any]] = None,
+                 extrafields: dict[str, Any] | None = None,
 
-                 cpe_vendor: Optional[str] = None,
-                 cpe_product: Optional[str] = None,
-                 cpe_edition: Optional[str] = None,
-                 cpe_lang: Optional[str] = None,
-                 cpe_sw_edition: Optional[str] = None,
-                 cpe_target_sw: Optional[str] = None,
-                 cpe_target_hw: Optional[str] = None,
-                 cpe_other: Optional[str] = None,
+                 cpe_vendor: str | None = None,
+                 cpe_product: str | None = None,
+                 cpe_edition: str | None = None,
+                 cpe_lang: str | None = None,
+                 cpe_sw_edition: str | None = None,
+                 cpe_target_sw: str | None = None,
+                 cpe_target_hw: str | None = None,
+                 cpe_other: str | None = None,
 
-                 links: Optional[list[tuple[int, str]]] = None,
+                 links: list[tuple[int, str]] | None = None,
 
                  flags: int = 0,
                  shadow: bool = False,
-                 flavors: Optional[list[str]] = None,
-                 branch: Optional[str] = None):
+                 flavors: list[str] | None = None,
+                 branch: str | None = None):
         # parsed, immutable
         self.repo = repo
         self.family = family

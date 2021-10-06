@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Iterable, Optional
+from typing import Iterable
 
 from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -67,7 +67,7 @@ def _iter_packages(path: str) -> Iterable[dict[str, str]]:
             raise RuntimeError('unable to parse line: {}'.format(line))
 
 
-def _extract_vcs_link(pkgdata: dict[str, str]) -> Optional[str]:
+def _extract_vcs_link(pkgdata: dict[str, str]) -> str | None:
     if 'Vcs-Browser' in pkgdata:
         return pkgdata['Vcs-Browser']
 
@@ -79,9 +79,9 @@ def _extract_vcs_link(pkgdata: dict[str, str]) -> Optional[str]:
 
 
 class DebianSourcesParser(Parser):
-    _allowed_vcs_urls_re: Optional[re.Pattern[str]]
+    _allowed_vcs_urls_re: re.Pattern[str] | None
 
-    def __init__(self, allowed_vcs_urls: Optional[str] = None) -> None:
+    def __init__(self, allowed_vcs_urls: str | None = None) -> None:
         self._allowed_vcs_urls_re = None if allowed_vcs_urls is None else re.compile(allowed_vcs_urls, re.IGNORECASE)
 
     def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:

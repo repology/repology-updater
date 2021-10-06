@@ -18,7 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
-from typing import Any, Iterator, Optional
+from typing import Any, Iterator
 
 from repology.logger import AccumulatingLogger, Logger, NoopLogger
 from repology.package import LinkType, Package
@@ -27,8 +27,8 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 
 class TestPackage:
     _factory: PackageFactory
-    _package_maker: Optional[PackageMaker]
-    _package: Optional[Package]
+    _package_maker: PackageMaker | None
+    _package: Package | None
 
     def __init__(self, logger: Logger = NoopLogger()) -> None:
         self._factory = PackageFactory(logger)

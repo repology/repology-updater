@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Any, Iterable, Optional
+from typing import Any, Iterable
 
 from libversion import version_compare
 
@@ -27,7 +27,7 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 
 
-def _as_maybe_str(v: Any) -> Optional[str]:
+def _as_maybe_str(v: Any) -> str | None:
     if v is None:
         return None
     if isinstance(v, list):

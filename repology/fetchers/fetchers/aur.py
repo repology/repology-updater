@@ -17,7 +17,7 @@
 
 import os
 import urllib
-from typing import Iterable, Iterator, Optional
+from typing import Iterable, Iterator
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import PersistentData, ScratchDirFetcher
@@ -45,7 +45,7 @@ def _split_names_into_urls(prefix: str, package_names: Iterable[str], maxlen: in
 
 
 class AURFetcher(ScratchDirFetcher):
-    def __init__(self, url: str, fetch_timeout: int = 5, fetch_delay: Optional[int] = None, max_api_url_length: int = 4443) -> None:
+    def __init__(self, url: str, fetch_timeout: int = 5, fetch_delay: int | None = None, max_api_url_length: int = 4443) -> None:
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
         self.max_api_url_length = max_api_url_length  # see https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import ClassVar, Optional
+from typing import ClassVar
 
 
 __all__ = ['NameType', 'NameMapper']
@@ -226,20 +226,20 @@ class _NameMapping:
     visiblename: int
     projectname_seed: int
 
-    name: Optional[int] = None
-    srcname: Optional[int] = None
-    binname: Optional[int] = None
-    trackname: Optional[int] = None
+    name: int | None = None
+    srcname: int | None = None
+    binname: int | None = None
+    trackname: int | None = None
 
 
 @dataclass
 class MappedNames:
-    name: Optional[str] = None
-    srcname: Optional[str] = None
-    binname: Optional[str] = None
-    visiblename: Optional[str] = None
-    projectname_seed: Optional[str] = None
-    trackname: Optional[str] = None
+    name: str | None = None
+    srcname: str | None = None
+    binname: str | None = None
+    visiblename: str | None = None
+    projectname_seed: str | None = None
+    trackname: str | None = None
 
 
 _MAPPINGS = [
@@ -528,7 +528,7 @@ class NameMapper:
 
         return mapped
 
-    def describe(self) -> Optional[str]:
+    def describe(self) -> str | None:
         if not self._names:
             return None
         return '|'.join(v for _, v in sorted(self._names.items()))

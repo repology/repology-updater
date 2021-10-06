@@ -19,7 +19,7 @@ import importlib
 import importlib.util
 import inspect
 import os
-from typing import Any, Iterable, Optional, Type
+from typing import Any, Iterable, Type
 
 
 __all__ = [
@@ -47,7 +47,7 @@ class ClassFactory:
 
                     yield '.'.join([module] + relpath[:-3].split(os.sep))
 
-    def __init__(self, modulename: str, suffix: Optional[str] = None, superclass: Optional[Type[Any]] = None) -> None:
+    def __init__(self, modulename: str, suffix: str | None = None, superclass: Type[Any] | None = None) -> None:
         self.classes: dict[str, Any] = {}
 
         for submodulename in ClassFactory._enumerate_all_submodules(modulename):

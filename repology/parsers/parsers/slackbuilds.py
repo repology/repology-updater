@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable, Optional
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -45,7 +45,7 @@ def _parse_infofile(path: str) -> dict[str, str]:
     variables: dict[str, str] = {}
 
     with open(path, encoding='utf-8', errors='ignore') as infofile:
-        key: Optional[str] = None
+        key: str | None = None
         total_value = []
 
         for line in infofile:

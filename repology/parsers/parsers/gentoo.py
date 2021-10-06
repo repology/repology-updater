@@ -18,7 +18,7 @@
 import os
 import xml.etree.ElementTree
 from dataclasses import dataclass, field
-from typing import Iterable, Optional
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -101,7 +101,7 @@ class _ParsedXmlMetadata:
     maintainers: list[str] = field(default_factory=list)
     upstreams: list[str] = field(default_factory=list)
     unsupported_upstream_types: set[str] = field(default_factory=set)
-    cpe: Optional[str] = None
+    cpe: str | None = None
 
     def handle_upstream(self, type_: str, value: str) -> None:
         if type_ == 'cpe':

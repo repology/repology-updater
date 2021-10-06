@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Callable, Optional, cast
+from typing import Any, Callable, cast
 
 from repology.package import Package, PackageFlags
 from repology.transformer.contexts import MatchContext, PackageContext
@@ -290,7 +290,7 @@ def last(ruledata: Any) -> Action:
 
 @_action_generator
 def addflavor(ruledata: Any) -> Action:
-    tmp_flavors: Optional[list[str]]
+    tmp_flavors: list[str] | None
 
     if isinstance(ruledata['addflavor'], str):
         tmp_flavors = [ruledata['addflavor']]
@@ -301,7 +301,7 @@ def addflavor(ruledata: Any) -> Action:
     else:
         tmp_flavors = None
 
-    want_flavors: Optional[list[str]] = tmp_flavors
+    want_flavors: list[str] | None = tmp_flavors
 
     def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
         flavors: list[str] = want_flavors if want_flavors else [package.effname]

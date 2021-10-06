@@ -28,12 +28,12 @@ class Section:
 
     name: str
     newest_status: int
-    guard: Optional[GuardFn] = None
+    guard: GuardFn | None = None
     next_section: Optional['Section'] = None
 
-    first_package: Optional[Package] = None
-    first_package_alt: Optional[Package] = None
-    last_package: Optional[Package] = None
+    first_package: Package | None = None
+    first_package_alt: Package | None = None
+    last_package: Package | None = None
 
     def add_package(self, package: Package, alt: bool = False) -> None:
         if self.first_package_alt is None:

@@ -20,7 +20,7 @@ import re
 import tarfile
 from abc import abstractmethod
 from io import StringIO
-from typing import Any, IO, Iterable, Optional
+from typing import Any, IO, Iterable
 
 from libversion import version_compare
 
@@ -36,8 +36,8 @@ _KEYVAL_RE = re.compile('([a-zA-Z-]+)[ \t]*:[ \t]*(.*?)')
 
 def _parse_cabal_file(cabalfile: IO[str]) -> dict[str, str]:
     cabaldata: dict[str, str] = {}
-    offset: Optional[int] = None
-    key: Optional[str] = None
+    offset: int | None = None
+    key: str | None = None
 
     for line in cabalfile:
         line = line.rstrip()
@@ -81,8 +81,8 @@ def _iter_cabal_hier(path: str) -> Iterable[dict[str, str]]:
     for moduledir in os.listdir(path):
         modulepath = os.path.join(path, moduledir)
 
-        cabalpath: Optional[str] = None
-        maxversion: Optional[str] = None
+        cabalpath: str | None = None
+        maxversion: str | None = None
 
         for versiondir in os.listdir(modulepath):
             if versiondir == 'preferred-versions':
@@ -106,9 +106,9 @@ def _extract_tarinfo(tar: tarfile.TarFile, tarinfo: tarfile.TarInfo) -> str:
 def _iter_hackage_tarfile(path: str) -> Iterable[dict[str, str]]:
     preferred_versions: dict[str, str] = {}
 
-    current_name: Optional[str] = None
-    maxversion: Optional[str] = None
-    maxversion_data: Optional[str] = None
+    current_name: str | None = None
+    maxversion: str | None = None
+    maxversion_data: str | None = None
 
     with tarfile.open(path, 'r|*') as tar:
         for tarinfo in tar:

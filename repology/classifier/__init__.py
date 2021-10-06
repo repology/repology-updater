@@ -17,7 +17,7 @@
 
 from collections import defaultdict
 from functools import cmp_to_key
-from typing import Iterable, Iterator, Optional, Sequence, cast
+from typing import Iterable, Iterator, Sequence, cast
 
 from repology.classifier.group import group_packages
 from repology.classifier.section import Section, generate_sections
@@ -33,7 +33,7 @@ def _classify_packages_inner(packages: Iterable[Package], project_is_unique: boo
 
     sections = generate_sections()
 
-    best_package_in_branch: dict[Optional[str], Package] = {}
+    best_package_in_branch: dict[str | None, Package] = {}
     packages_by_repo: dict[str, list[tuple[Package, Section]]] = defaultdict(list)
 
     # Pass 1: calculate section boundaries based on not ignored versions
@@ -64,7 +64,7 @@ def _classify_packages_inner(packages: Iterable[Package], project_is_unique: boo
     # Pass 3: fill version classes
     for repo, repo_packages in packages_by_repo.items():
         first_package_in_section: dict[str, Package] = {}  # by flavor
-        first_package_in_branch: dict[tuple[Optional[str], str], Package] = {}  # by branch, flavor
+        first_package_in_branch: dict[tuple[str | None, str], Package] = {}  # by branch, flavor
 
         prev_section = None
         for package, section in repo_packages:  # these are still sorted by version

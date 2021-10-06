@@ -18,7 +18,7 @@
 import hashlib
 import os
 from copy import deepcopy
-from typing import Any, Optional
+from typing import Any
 
 import yaml
 
@@ -32,7 +32,7 @@ class Ruleset:
     _rules: list[Rule]
     _hash: str
 
-    def __init__(self, rulesdir: Optional[str] = None, rulestext: Optional[str] = None) -> None:
+    def __init__(self, rulesdir: str | None = None, rulestext: str | None = None) -> None:
         self._rules = []
 
         hasher = hashlib.sha256()

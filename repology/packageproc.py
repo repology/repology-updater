@@ -16,13 +16,13 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
-from typing import Iterable, Optional
+from typing import Iterable
 
 from repology.package import Package
 
 
 def packageset_deduplicate(packages: Iterable[Package]) -> list[Package]:
-    aggregated: dict[tuple[str, Optional[str], Optional[str], str], list[Package]] = defaultdict(list)
+    aggregated: dict[tuple[str, str | None, str | None, str], list[Package]] = defaultdict(list)
 
     # aggregate by subset of fields to make O(n²) merge below faster
     for package in packages:

@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable, Match, Optional
+from typing import Iterable, Match
 
 from repology.transformer.util import DOLLAR0, DOLLARN
 
@@ -59,8 +59,8 @@ class PackageContext:
 class MatchContext:
     __slots__ = ['name_match', 'ver_match', 'last']
 
-    name_match: Optional[Match[str]]
-    ver_match: Optional[Match[str]]
+    name_match: Match[str] | None
+    ver_match: Match[str] | None
     last: bool
 
     def __init__(self) -> None:

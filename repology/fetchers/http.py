@@ -23,7 +23,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
-from typing import Any, AnyStr, Callable, IO, Optional, Union, cast
+from typing import Any, AnyStr, Callable, IO, cast
 
 import brotli
 
@@ -38,7 +38,7 @@ STREAM_CHUNK_SIZE = 10240
 
 
 class PoliteHTTP:
-    def __init__(self, timeout: int = 5, delay: Optional[int] = None):
+    def __init__(self, timeout: int = 5, delay: int | None = None):
         self.do_http = functools.partial(do_http, timeout=timeout)
         self.delay = delay
         self.had_requests = False
@@ -52,13 +52,13 @@ class PoliteHTTP:
 
 
 def do_http(url: str,
-            method: Optional[str] = None,
+            method: str | None = None,
             check_status: bool = True,
-            timeout: Optional[int] = 5,
-            data: Union[str, bytes, None] = None,
+            timeout: int | None = 5,
+            data: str | bytes | None = None,
             json: Any = None,
-            post: Union[str, bytes, None] = None,  # XXX: compatibility shim
-            headers: Optional[dict[str, str]] = None,
+            post: str | bytes | None = None,  # XXX: compatibility shim
+            headers: dict[str, str] | None = None,
             stream: bool = False) -> requests.Response:
     headers = headers.copy() if headers else {}
     headers['User-Agent'] = USER_AGENT
@@ -89,7 +89,7 @@ class NotModifiedException(requests.RequestException):
     pass
 
 
-def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] = None, **kwargs: Any) -> requests.Response:
+def save_http_stream(url: str, outfile: IO[AnyStr], compression: str | None = None, **kwargs: Any) -> requests.Response:
     # TODO: we should really decompress stream on the fly or
     # (better) store it as is and decompress when reading.
 
@@ -119,13 +119,7 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] =
                 def read(self, size: int) -> bytes:
                     return cast(bytes, brotli.process(temp.read(size)))
 
-            decompressor: Union[
-                gzip.GzipFile,
-                lzma.LZMAFile,
-                bz2.BZ2File,
-                '_BrotliDecompress',
-                zstandard.ZstdDecompressionReader
-            ]
+            decompressor: gzip.GzipFile | lzma.LZMAFile | bz2.BZ2File | '_BrotliDecompress' | zstandard.ZstdDecompressionReader
 
             if compression == 'gz':
                 decompressor = stack.enter_context(gzip.open(temp))

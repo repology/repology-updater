@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable, Iterator, Optional
+from typing import Iterable, Iterator
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import Fetcher
@@ -98,7 +98,7 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def _iter_parse_source(self, repository: RepositoryMetadata, source: RepositoryMetadata, transformer: Optional[PackageTransformer], logger: Logger) -> Iterator[Package]:
+    def _iter_parse_source(self, repository: RepositoryMetadata, source: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
         def postprocess_parsed_packages(packages_iter: Iterable[PackageMaker]) -> Iterator[Package]:
             for packagemaker in packages_iter:
                 try:
@@ -160,7 +160,7 @@ class RepositoryProcessor:
             )
         )
 
-    def _iter_parse_all_sources(self, repository: RepositoryMetadata, transformer: Optional[PackageTransformer], logger: Logger) -> Iterator[Package]:
+    def _iter_parse_all_sources(self, repository: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
         for source in repository['sources']:
             logger.log('parsing source {} started'.format(source['name']))
             yield from self._iter_parse_source(repository, source, transformer, logger.get_indented())
@@ -183,7 +183,7 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def _parse(self, repository: RepositoryMetadata, transformer: Optional[PackageTransformer], logger: Logger) -> None:
+    def _parse(self, repository: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> None:
         logger.log('parsing started')
 
         if not os.path.isdir(self.parseddir):
@@ -208,15 +208,15 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def parse(self, reponames: RepositoryNameList, transformer: Optional[PackageTransformer] = None, logger: Logger = NoopLogger()) -> None:
+    def parse(self, reponames: RepositoryNameList, transformer: PackageTransformer | None = None, logger: Logger = NoopLogger()) -> None:
         for repository in self.repomgr.get_repositories(reponames):
             self._parse(repository, transformer, logger)
 
-    def iter_parse(self, reponames: RepositoryNameList, transformer: Optional[PackageTransformer] = None, logger: Logger = NoopLogger()) -> Iterator[Package]:
+    def iter_parse(self, reponames: RepositoryNameList, transformer: PackageTransformer | None = None, logger: Logger = NoopLogger()) -> Iterator[Package]:
         for repository in self.repomgr.get_repositories(reponames):
             yield from self._iter_parse_all_sources(repository, transformer, logger)
 
-    def iter_parsed(self, reponames: Optional[RepositoryNameList] = None, logger: Logger = NoopLogger()) -> Iterator[list[Package]]:
+    def iter_parsed(self, reponames: RepositoryNameList | None = None, logger: Logger = NoopLogger()) -> Iterator[list[Package]]:
         sources: list[str] = []
         for repository in self.repomgr.get_repositories(reponames):
             repo_sources = self._get_parsed_chunk_paths(repository)

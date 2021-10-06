@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Callable, Optional
+from typing import Any, Callable
 
 from repology.package import Package
 from repology.transformer.actions import get_action_generators
@@ -29,8 +29,8 @@ class Rule:
 
     _matchers: list[Callable[[Package, PackageContext, MatchContext], bool]]
     _actions: list[Callable[[Package, PackageContext, MatchContext], None]]
-    names: Optional[list[str]]
-    namepat: Optional[str]
+    names: list[str] | None
+    namepat: str | None
     checks: int
     matches: int
     number: int
@@ -75,7 +75,7 @@ class Rule:
             if keyword in ruledata:
                 self._actions.append(generate_action(ruledata))
 
-    def match(self, package: Package, package_context: PackageContext) -> Optional[MatchContext]:
+    def match(self, package: Package, package_context: PackageContext) -> MatchContext | None:
         match_context = MatchContext()
 
         self.checks += 1

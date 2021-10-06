@@ -16,12 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import subprocess
-from typing import Optional
 
 from repology.logger import Logger
 
 
-def run_subprocess(command: list[str], logger: Logger, cwd: Optional[str] = None) -> None:
+def run_subprocess(command: list[str], logger: Logger, cwd: str | None = None) -> None:
     message = 'running "{}"'.format(' '.join(command))
     if cwd is not None:
         message += ' in "{}"'.format(cwd)
@@ -44,7 +43,7 @@ def run_subprocess(command: list[str], logger: Logger, cwd: Optional[str] = None
             raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
 
 
-def get_subprocess_output(command: list[str], logger: Logger, cwd: Optional[str] = None) -> str:
+def get_subprocess_output(command: list[str], logger: Logger, cwd: str | None = None) -> str:
     message = 'running "{}"'.format(' '.join(command))
     if cwd is not None:
         message += ' in "{}"'.format(cwd)
@@ -73,14 +72,14 @@ def get_subprocess_output(command: list[str], logger: Logger, cwd: Optional[str]
 
 class Runner:
     _logger: Logger
-    _cwd: Optional[str]
+    _cwd: str | None
 
-    def __init__(self, logger: Logger, cwd: Optional[str] = None) -> None:
+    def __init__(self, logger: Logger, cwd: str | None = None) -> None:
         self._logger = logger
         self._cwd = cwd
 
-    def run(self, *args: Optional[str]) -> None:
+    def run(self, *args: str | None) -> None:
         run_subprocess([arg for arg in args if arg is not None], logger=self._logger, cwd=self._cwd)
 
-    def get(self, *args: Optional[str]) -> str:
+    def get(self, *args: str | None) -> str:
         return get_subprocess_output([arg for arg in args if arg is not None], logger=self._logger, cwd=self._cwd)

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass, field
-from typing import Iterable, Iterator, Optional, cast
+from typing import Iterable, Iterator, cast
 
 from repology.package import Package, PackageFlags
 
@@ -51,7 +51,7 @@ class VersionGroup:
     is_devel: bool = False
     totally_ignored: bool = False
     packages: list[Package] = field(default_factory=list)
-    branches: set[Optional[str]] = field(default_factory=set)
+    branches: set[str | None] = field(default_factory=set)
 
 
 def group_packages(packages: Iterable[Package], suppress_ignore: bool = True) -> Iterator[VersionGroup]:

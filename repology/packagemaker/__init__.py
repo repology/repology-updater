@@ -18,7 +18,7 @@
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Iterable, Optional, Type, TypeVar
+from typing import Any, Callable, Iterable, Type, TypeVar
 
 from repology.logger import Logger, NoopLogger
 from repology.package import LinkType, Package, PackageStatus
@@ -69,16 +69,16 @@ class PackageTemplate:
         'links',
     ]
 
-    subrepo: Optional[str]
+    subrepo: str | None
 
-    version: Optional[str]
-    origversion: Optional[str]
-    rawversion: Optional[str]
+    version: str | None
+    origversion: str | None
+    rawversion: str | None
 
     binnames: list[str]
 
-    arch: Optional[str]
-    summary: Optional[str]
+    arch: str | None
+    summary: str | None
     maintainers: list[str]
     categories: list[str]
     licenses: list[str]
@@ -87,14 +87,14 @@ class PackageTemplate:
 
     extrafields: dict[str, Any]
 
-    cpe_vendor: Optional[str]
-    cpe_product: Optional[str]
-    cpe_edition: Optional[str]
-    cpe_lang: Optional[str]
-    cpe_sw_edition: Optional[str]
-    cpe_target_sw: Optional[str]
-    cpe_target_hw: Optional[str]
-    cpe_other: Optional[str]
+    cpe_vendor: str | None
+    cpe_product: str | None
+    cpe_edition: str | None
+    cpe_lang: str | None
+    cpe_sw_edition: str | None
+    cpe_target_sw: str | None
+    cpe_target_hw: str | None
+    cpe_other: str | None
 
     flavors: list[str]
 
@@ -156,7 +156,7 @@ class PackageMakerBase(Logger):
             else:  # iterate
                 yield from PackageMakerBase._flatten_args(arg)
 
-    def _apply_normalizers(self, value: Optional[str], fieldname: str, normalizers: Iterable[NormalizerFunction]) -> Optional[str]:
+    def _apply_normalizers(self, value: str | None, fieldname: str, normalizers: Iterable[NormalizerFunction]) -> str | None:
         origvalue = value
 
         for normalizer in normalizers:
@@ -170,7 +170,7 @@ class PackageMakerBase(Logger):
 
         return value
 
-    def _normalize_args(self, args: Iterable[Any], fieldname: str, want_type: Any, normalizers: Iterable[NormalizerFunction]) -> Optional[list[Any]]:
+    def _normalize_args(self, args: Iterable[Any], fieldname: str, want_type: Any, normalizers: Iterable[NormalizerFunction]) -> list[Any] | None:
         output = []
         for arg in PackageMakerBase._flatten_args(args):
             if not isinstance(arg, want_type):
@@ -215,7 +215,7 @@ def _simple_setter(fieldname: str, want_type: Type[Any], *normalizers: Normalize
 T = TypeVar('T')
 
 
-def _as_opt_list(items: Iterable[T]) -> Optional[list[T]]:
+def _as_opt_list(items: Iterable[T]) -> list[T] | None:
     return list(items) or None
 
 
@@ -229,22 +229,22 @@ def _as_unique_list(items: Iterable[T]) -> list[T]:
     return res
 
 
-def _as_opt_unique_list(items: Iterable[T]) -> Optional[list[T]]:
+def _as_opt_unique_list(items: Iterable[T]) -> list[T] | None:
     return _as_unique_list(items) or None
 
 
-def _as_opt_first_from_list(items: Iterable[T]) -> Optional[T]:
+def _as_opt_first_from_list(items: Iterable[T]) -> T | None:
     return next(iter(items), None)
 
 
 class PackageMaker(PackageMakerBase):
     _package: PackageTemplate
     _name_mapper: NameMapper
-    _ident: Optional[str]
+    _ident: str | None
     _itemno: int
     _skipfailed: bool
 
-    def __init__(self, logger: Logger, ident: Optional[str], itemno: int, skipfailed: bool = False) -> None:
+    def __init__(self, logger: Logger, ident: str | None, itemno: int, skipfailed: bool = False) -> None:
         super(PackageMaker, self).__init__(logger)
         self._package = PackageTemplate()
         self._name_mapper = NameMapper()
@@ -264,7 +264,7 @@ class PackageMaker(PackageMakerBase):
         self._package.binnames.extend(args)
 
     @_simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
-    def set_version(self, version: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
+    def set_version(self, version: str, version_normalizer: Callable[[str], str] | None = None) -> None:
         self._package.rawversion = version
         self._package.origversion = version if version_normalizer is None else version_normalizer(version)
         self._package.version = self._package.origversion
@@ -333,7 +333,7 @@ class PackageMaker(PackageMakerBase):
     def set_extra_field(self, key: str, value: Any) -> None:
         self._package.extrafields[key] = value
 
-    def add_cpe(self, vendor: Optional[str] = None, product: Optional[str] = None, edition: Optional[str] = None, lang: Optional[str] = None, sw_edition: Optional[str] = None, target_sw: Optional[str] = None, target_hw: Optional[str] = None, other: Optional[str] = None) -> None:
+    def add_cpe(self, vendor: str | None = None, product: str | None = None, edition: str | None = None, lang: str | None = None, sw_edition: str | None = None, target_sw: str | None = None, target_hw: str | None = None, other: str | None = None) -> None:
         self._package.cpe_vendor = vendor
         self._package.cpe_product = product
         self._package.cpe_edition = edition
@@ -343,8 +343,8 @@ class PackageMaker(PackageMakerBase):
         self._package.cpe_target_hw = target_hw
         self._package.cpe_other = other
 
-    def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
-        maintainers: Optional[list[str]] = None
+    def spawn(self, repo: str, family: str, subrepo: str | None = None, shadow: bool = False, default_maintainer: str | None = None) -> Package:
+        maintainers: list[str] | None = None
 
         if self._package.maintainers:
             maintainers = _as_opt_unique_list(self._package.maintainers)
@@ -415,7 +415,7 @@ class PackageMaker(PackageMakerBase):
             versionclass=PackageStatus.UNPROCESSED,
         )
 
-    def clone(self, ident: Optional[str] = None, append_ident: Optional[str] = None) -> 'PackageMaker':
+    def clone(self, ident: str | None = None, append_ident: str | None = None) -> 'PackageMaker':
         offspring_ident = self._ident
         if ident is not None:
             offspring_ident = ident
@@ -434,7 +434,7 @@ class PackageMaker(PackageMakerBase):
     def __enter__(self) -> 'PackageMaker':
         return self
 
-    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> Optional[bool]:
+    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> bool | None:
         if exc_type:
             self.log('parsing failed ({}): {}: {}'.format(
                 'skipped' if self._skipfailed else 'fatal',
@@ -459,6 +459,6 @@ class PackageFactory(Logger):
     def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
         self._logger._log(message, severity, indent, prefix)
 
-    def begin(self, ident: Optional[str] = None, skipfailed: bool = False) -> PackageMaker:
+    def begin(self, ident: str | None = None, skipfailed: bool = False) -> PackageMaker:
         self._itemno += 1
         return PackageMaker(self._logger, ident, self._itemno, skipfailed)

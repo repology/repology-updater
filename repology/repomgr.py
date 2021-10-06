@@ -17,16 +17,16 @@
 
 import copy
 import os
-from typing import Any, Collection, Iterable, Optional, Union, cast
+from typing import Any, Collection, Iterable, Optional, cast
 
 import yaml
 
 
-RepositoryNameList = Optional[Collection[str]]
+RepositoryNameList = Optional[Collection[str]]  # XXX: can't use |-union yet, see https://github.com/python/mypy/issues/11280
 RepositoryMetadata = dict[str, Any]
 
 
-def _subst_source_recursively(container: Union[dict[str, Any], list[Any]], name: str) -> None:
+def _subst_source_recursively(container: dict[str, Any] | list[Any], name: str) -> None:
     key_iter: Iterable[Any]
     if isinstance(container, list):
         key_iter = range(len(container))
@@ -46,7 +46,7 @@ class RepositoryManager:
     _repositories: list[RepositoryMetadata]
     _repo_by_name: dict[str, RepositoryMetadata]
 
-    def __init__(self, reposdir: Optional[str] = None, repostext: Optional[str] = None) -> None:
+    def __init__(self, reposdir: str | None = None, repostext: str | None = None) -> None:
         self._repositories = []
         self._repo_by_name = {}
 
