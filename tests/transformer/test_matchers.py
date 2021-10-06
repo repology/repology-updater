@@ -112,6 +112,18 @@ def test_verlonger() -> None:
     )
 
 
+def test_vercomps() -> None:
+    check_transformer(
+        '[ { vercomps: 2, setname: bar } ]',
+        PackageSample(name='p1', version='1').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0').expect(effname='bar'),
+        PackageSample(name='p3', version='1.0.0').expect(effname='p3'),
+        PackageSample(name='p4', version='1').expect(effname='p4'),
+        PackageSample(name='p5', version='1-0').expect(effname='bar'),
+        PackageSample(name='p6', version='1-0-0').expect(effname='p6'),
+    )
+
+
 def test_vergt() -> None:
     check_transformer(
         '[ { vergt: "1.0", setname: bar } ]',
