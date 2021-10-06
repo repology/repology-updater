@@ -20,11 +20,10 @@ from typing import Iterable
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.sqlite import iter_sqlite
-from repology.transformer import PackageTransformer
 
 
 class KwortKdbParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in iter_sqlite(path, 'MIRRORPKG', ['NAME', 'VERSION', 'ARCH']):
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['NAME'], NameType.KWORT_NAME)

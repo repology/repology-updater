@@ -23,7 +23,6 @@ from pyparsing import OneOrMore, QuotedString, Regex, Suppress, Word, ZeroOrMore
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 @dataclass
@@ -68,7 +67,7 @@ def _parse_data(data: str) -> list[_PackageData]:
 
 
 class ArchiveContentsParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path, encoding='utf-8', errors='ignore') as contents:
             data = contents.read()
 

@@ -21,7 +21,6 @@ from pyparsing import Empty, Forward, QuotedString, Regex, Suppress, ZeroOrMore
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 def _parse_data(data: str) -> dict[str, Any]:
@@ -46,7 +45,7 @@ def _parse_data(data: str) -> dict[str, Any]:
 
 
 class LuaRocksParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path, encoding='utf-8', errors='ignore') as contents:
             data = contents.read()
 

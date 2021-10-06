@@ -23,7 +23,6 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import parse_debian_version
-from repology.transformer import PackageTransformer
 
 
 _DEBIAN_KEYVAL_RE = re.compile('([A-Za-z0-9_-]+):(.*?)')
@@ -91,7 +90,7 @@ class DebianSourcesParser(Parser):
         pkg.add_name(pkgdata['Package'], NameType.DEBIAN_SOURCE_PACKAGE)
         pkg.add_binnames(pkgdata['Binary'].split(', '))
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in _iter_packages(path):
             with factory.begin(pkgdata['Package']) as pkg:
                 fixed_version, flags = parse_debian_version(pkgdata['Version'])

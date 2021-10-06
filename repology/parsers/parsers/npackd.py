@@ -21,7 +21,6 @@ from typing import Iterable
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import iter_xml_elements_at_level, safe_findalltexts, safe_findtext, safe_getattr
-from repology.transformer import PackageTransformer
 
 
 _BLACKLISTED_CATEGORIES = set([
@@ -49,7 +48,7 @@ class PackageData:
 
 
 class NpackdXmlParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         licenses: dict[str, str] = {}
         packages: dict[str, PackageData] = {}
 

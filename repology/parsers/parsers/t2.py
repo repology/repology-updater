@@ -27,7 +27,6 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.patches import add_patch_files
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
 def _parse_descfile(path: str, logger: Logger) -> dict[str, list[str]]:
@@ -81,7 +80,7 @@ def _parse_descfile(path: str, logger: Logger) -> dict[str, list[str]]:
 
 
 class T2DescParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for desc_path in walk_tree(path, suffix='.desc'):
             rel_desc_path = os.path.relpath(desc_path, path)
             with factory.begin(rel_desc_path) as pkg:

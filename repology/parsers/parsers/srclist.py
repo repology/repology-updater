@@ -25,7 +25,6 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
 from repology.parsers.versions import parse_rpm_version, parse_rpm_vertags
-from repology.transformer import PackageTransformer
 
 
 class SrcListParser(Parser):
@@ -36,7 +35,7 @@ class SrcListParser(Parser):
         self._encoding = encoding
         self._vertags = parse_rpm_vertags(vertags)
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for header in rpm.readHeaderListFromFile(path):
             with factory.begin() as pkg:
                 assert(header.isSource())  # binary packages not supported yet

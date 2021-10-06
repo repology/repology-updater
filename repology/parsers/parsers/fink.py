@@ -26,7 +26,6 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
 def _parse_info_file(filename: str) -> dict[str, str]:
@@ -69,7 +68,7 @@ def _parse_info(text: str) -> dict[str, str]:
 
 
 class FinkGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for filename in walk_tree(path, suffix='.info'):
             rel_filename = os.path.relpath(filename, path)
 
@@ -116,7 +115,7 @@ class FinkGitParser(Parser):
 
 
 class FinkPdbParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('-')
 
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="pdb"]')[0].xpath('./tr[@class="package"]'):

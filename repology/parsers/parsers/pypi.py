@@ -22,7 +22,6 @@ from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
-from repology.transformer import PackageTransformer
 
 
 # see `jq '.[].info.project_urls' < pypicache.json` for all of them
@@ -67,7 +66,7 @@ def _pep440_is_prerelease(version: str) -> bool:
 
 
 class PyPiCacheJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
                 info = pkgdata['info']

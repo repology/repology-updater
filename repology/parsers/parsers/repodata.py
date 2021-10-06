@@ -28,7 +28,6 @@ from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.parsers.sqlite import iter_sqlite
 from repology.parsers.versions import VersionStripper, parse_rpm_version, parse_rpm_vertags
 from repology.parsers.xml import iter_xml_elements_at_level, safe_findtext, safe_getattr
-from repology.transformer import PackageTransformer
 
 
 class RepodataParser(Parser):
@@ -50,7 +49,7 @@ class RepodataParser(Parser):
         self._arch_from_filename = arch_from_filename
         self._vertags = parse_rpm_vertags(vertags)
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
         skipped_archs: dict[str, int] = Counter()
@@ -131,7 +130,7 @@ class RepodataSqliteParser(Parser):
         self._src = src
         self._binary = binary
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
         skipped_archs: dict[str, int] = Counter()

@@ -125,6 +125,7 @@ def test_suffixes(version, expected_flags) -> None:
     pytest.param('6.4~pre-1', '6.4~pre', Pf.DEVEL, id='brltty'),
     pytest.param('0.9.6~unreleased-1', '0.9.6~unreleased', Pf.INCORRECT, id='fritzing-parts'),
     pytest.param('10.2+2.0.1-dmo1', '10.2+2.0.1', Pf.IGNORE, id='libcdio-paranoia'),
+    pytest.param('1.5.0~rc2+git20210630+ds-2', '1.5.0~rc2+git20210630', Pf.DEVEL | Pf.IGNORE, id='goldendict'),
 ])
 def test_real_world(version, expected_version, expected_flags):
     fixed_version, flags = parse_debian_version(version)

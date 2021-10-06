@@ -22,7 +22,6 @@ from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 def _iter_packages(path: str) -> Iterable[tuple[str, str]]:
@@ -72,7 +71,7 @@ def _parse_infofile(path: str) -> dict[str, str]:
 
 
 class SlackBuildsParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for category, pkgname in _iter_packages(path):
             with factory.begin(category + '/' + pkgname) as pkg:
                 info_path = os.path.join(path, category, pkgname, pkgname + '.info')

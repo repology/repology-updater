@@ -22,7 +22,6 @@ from typing import Iterable, Iterator
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 def _normalize_version(version: str) -> str:
@@ -46,7 +45,7 @@ def _iter_apkindex(path: str) -> Iterator[dict[str, str]]:
 
 
 class ApkIndexParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in _iter_apkindex(os.path.join(path, 'APKINDEX')):
             with factory.begin(pkgdata['P']) as pkg:
                 pkg.add_name(pkgdata['P'], NameType.APK_BIG_P)

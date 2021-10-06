@@ -107,7 +107,7 @@ def parse_rpm_version(vertags: list[str], version: str, release: str) -> tuple[s
 _DEBIAN_SPLIT_RE = re.compile('(?=[+~-]+)')
 _DEBIAN_GARBAGE = 'dfsg|nmu|repack|ds|debian|mx|pristine|stable|ubuntu'
 _DEBIAN_GARBAGE_PART_RE = re.compile('[+~-]+(?:' + _DEBIAN_GARBAGE + ')[.0-9]*', re.IGNORECASE)
-_DEBIAN_EMBEDDED_GARBAGE_RE = re.compile('(?:' + _DEBIAN_GARBAGE + '|is|real)')
+_DEBIAN_EMBEDDED_GARBAGE_RE = re.compile('(?:' + _DEBIAN_GARBAGE + '|is|real|revert)')
 _DEBIAN_GOOD_PRERELEASE_LONG_PART_RE = re.compile('[+~-]+(?:alpha|beta|rc|dev|pre[a-z]*)[.0-9]*', re.IGNORECASE)
 _DEBIAN_GOOD_PRERELEASE_SHORT_PART_RE = re.compile('~[ab][0-9]{0,2}', re.IGNORECASE)
 _DEBIAN_GOOD_POSTRELEASE_PART_RE = re.compile('[+-]+(post[a-z]*)[.0-9]*', re.IGNORECASE)

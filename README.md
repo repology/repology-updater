@@ -19,7 +19,7 @@ which updates the repository information. See also the
   - Python module [psycopg2](http://initd.org/psycopg/)
   - Python module [pyyaml](http://pyyaml.org/)
   - Python module [xxhash](https://github.com/ifduyue/python-xxhash)
-  - [PostgreSQL](https://www.postgresql.org/) 13.0+
+  - [PostgreSQL](https://www.postgresql.org/) 14.0+
   - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
 Needed for fetching/parsing repository data:
@@ -94,36 +94,58 @@ psql --username postgres --dbname repology -c "CREATE EXTENSION libversion"
 ```
 
 in the case you want to change the credentials, don't forget to add
-actual ones to `repology.conf`.
+the actual ones to `repology.conf`.
 
-Next you can create database schema (tables, indexes etc.) and at the
-same time test that the database is accessible with the following command:
+### Populating the database
+
+Note that you need more than 11GiB of disk space for Repology
+PostgreSQL database and additioannly more than 11GiB space for raw
+and parsed repository data if you decide to run a complete update
+process.
+
+#### Option 1: use dump
+
+The fastest and most simple way to fill the database would be to
+use a database [dump](https://dumps.repology.org/) of main Repology
+instance:
+
+```shell
+curl -s https://dumps.repology.org/repology-database-dump-latest.sql.zst | unzstd | psql -U repology
+```
+
+#### Option 2: complete update
+
+Another option would be to go through complete update process which
+includes fetching and parsing all repository data from scratch and
+pushing it to the database.
+
+First, init the database schema:
 
 ```shell
 ./repology-update.py --initdb
 ```
 
-### Fetching/updating repository data
+Note that this command drops all existing data in Repology database,
+if any. You only need to run this command once.
 
-The database is now ready to be filled with data. Typical Repology
-update cycle consists of multiple steps, but in most cases you'll need
-to just run all of them:
+Next, run the update process:
 
 ```shell
 ./repology-update.py --fetch --fetch --parse --database --postupdate
 ```
 
+Expect it to take several hours the first time, subsequent updates
+will be faster. You can use the same commant to updated. Brief
+explanation of options used here:
+
   - `--fetch` tells the utility to fetch raw repository data
     (download files, scrape websites, clone git repos) into state
-    directory. Note that it won't refetch (update) data unless
-    it's specified twice.
+    directory. Note that it needs to be specified twice to allow
+	updating.
   - `--parse` enables parsing downloaded data into internal format
     which is also saved into state directory.
   - `--database` pushes processed package data into the database.
-  - `--postupdate` runs additional database processing such as
-    calculating summaries and updating feeds. It's separate from
-    `--database` because it can be ran in background, parallelly
-    to the following fetch/update cycle.
+  - `--postupdate` runs optional cleanup tasks.
 
 ## Documentation
 

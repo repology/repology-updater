@@ -25,7 +25,6 @@ from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.patches import add_patch_files
-from repology.transformer import PackageTransformer
 
 
 def _expand_mirrors(url: str) -> str:
@@ -39,7 +38,7 @@ def _expand_mirrors(url: str) -> str:
 
 
 class GoboLinuxGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for recipe_name in os.listdir(path):
             if recipe_name.startswith('.'):
                 continue

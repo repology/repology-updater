@@ -23,7 +23,6 @@ from jsonslicer import JsonSlicer
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 def _iter_packages(path: str) -> Iterable[tuple[str, dict[str, Any]]]:
@@ -55,7 +54,7 @@ def _parse_actions(actions: list[str]) -> dict[str, list[str]]:
 
 
 class OpenIndianaSummaryJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for fmri, pkgdata in _iter_packages(path):
             with factory.begin(f'{fmri} {pkgdata["version"]}') as pkg:
                 variables = _parse_actions(pkgdata['actions'])

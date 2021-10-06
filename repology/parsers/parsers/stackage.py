@@ -21,11 +21,10 @@ import lxml.html
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 class StackageHTMLParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for row in lxml.html.parse(path).getroot().xpath('.//div[@class="packages"]/table/tbody/tr'):
             pkg = factory.begin()
 

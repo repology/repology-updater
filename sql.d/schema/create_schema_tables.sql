@@ -580,7 +580,8 @@ DROP TABLE IF EXISTS project_hashes CASCADE;
 
 CREATE TABLE project_hashes (
 	effname text NOT NULL PRIMARY KEY,
-	hash bigint NOT NULL
+	hash bigint NOT NULL,
+	last_updated timestamp with time zone
 );
 
 --------------------------------------------------------------------------------
