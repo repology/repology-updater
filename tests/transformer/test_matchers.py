@@ -77,6 +77,15 @@ def test_ver() -> None:
     )
 
 
+def test_ver_multi() -> None:
+    check_transformer(
+        '[ { ver: ["1.0", "2.0"], setname: bar } ]',
+        PackageSample(name='p1', version='1.0').expect(effname='bar'),
+        PackageSample(name='p2', version='2.0').expect(effname='bar'),
+        PackageSample(name='p3', version='3.0').expect(effname='p3'),
+    )
+
+
 def test_notver() -> None:
     check_transformer(
         '[ { notver: "1.0", setname: bar }, { notver: ["1.0", "3.0"], setname: baz } ]',
