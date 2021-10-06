@@ -57,7 +57,7 @@ def test_release_suggests_snapshot() -> None:
         ('.pre.1', '-pre.1'),
     ],
 )
-def test_release_contains_good_prerelease(suffix, expected_suffix) -> None:
+def test_release_contains_good_prerelease(suffix: str, expected_suffix: str) -> None:
     assert parse_rpm_version([], '1.2.3', f'0{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', f'1{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
 
@@ -124,5 +124,5 @@ def test_release_tag_glued() -> None:
         pytest.param(['mga'], '1.0.0', '0.rc92.7.dev.gitff819c7.mga8', '1.0.0-rc92', Pf.DEVEL | Pf.IGNORE, id='opencontainers-runc'),
     ]
 )
-def test_real_world(tags, version, release, expected_version, expected_flags):
+def test_real_world(tags: list[str], version: str, release: str, expected_version: str, expected_flags: int) -> None:
     assert parse_rpm_version(tags, version, release) == (expected_version, expected_flags)

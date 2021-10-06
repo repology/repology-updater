@@ -15,15 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-# mypy: no-disallow-untyped-calls
-
 from repology.classifier import _is_packageset_unique
 from repology.package import Package
 
 from .package import spawn_package
 
 
-def test_is_packageset_unique():
+def test_is_packageset_unique() -> None:
     packages: list[Package] = []
     assert _is_packageset_unique(packages)
 

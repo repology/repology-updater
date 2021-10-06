@@ -48,7 +48,7 @@ def test_epoch() -> None:
     '+dfsg1.3',
     '+ds3',
 ])
-def test_garbage_suffixes(suffix) -> None:
+def test_garbage_suffixes(suffix: str) -> None:
     assert parse_debian_version(f'1.1.2{suffix}-2') == ('1.1.2', 0)
 
 
@@ -109,7 +109,7 @@ def test_inseparable_garbage() -> None:
     ('2is1', Pf.INCORRECT),
     ('2.is.really.1', Pf.INCORRECT),
 ])
-def test_suffixes(version, expected_flags) -> None:
+def test_suffixes(version: str, expected_flags: int) -> None:
     assert parse_debian_version(f'{version}-1') == (version, expected_flags)
 
 
@@ -127,7 +127,7 @@ def test_suffixes(version, expected_flags) -> None:
     pytest.param('10.2+2.0.1-dmo1', '10.2+2.0.1', Pf.IGNORE, id='libcdio-paranoia'),
     pytest.param('1.5.0~rc2+git20210630+ds-2', '1.5.0~rc2+git20210630', Pf.DEVEL | Pf.IGNORE, id='goldendict'),
 ])
-def test_real_world(version, expected_version, expected_flags):
+def test_real_world(version: str, expected_version: str, expected_flags: int) -> None:
     fixed_version, flags = parse_debian_version(version)
     assert fixed_version == expected_version
     assert flags == expected_flags
@@ -141,7 +141,8 @@ def test_real_world(version, expected_version, expected_flags):
     pytest.param('2021-08-25+ds-1', '2021-08-25', 0, id='gmap'),
     pytest.param('21.08.1+p20.04+tstable+git20210921.0023-0', '21.08.1+p20.04+tstable+git20210921.0023', Pf.IGNORE, id='kdeconnect'),
 ])
-def test_real_world_weak(version, expected_version, expected_flags):
+def test_real_world_weak(version: str, expected_version: str, expected_flags: int) -> None:
+    # checks for existence of specified flags, ignores other flags
     fixed_version, flags = parse_debian_version(version)
     assert fixed_version == expected_version
     assert flags & expected_flags == expected_flags

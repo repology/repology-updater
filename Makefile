@@ -24,7 +24,7 @@ flake8:
 	${FLAKE8} *.py repology tests
 
 mypy:
-	${MYPY} repology-update.py repology-dump.py repology
+	${MYPY} repology-update.py repology-dump.py repology tests
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")

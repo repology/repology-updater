@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-# mypy: no-disallow-untyped-calls
-
 from repology.package import LinkType, Package, PackageFlags
 
 from .package import spawn_package
