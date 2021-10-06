@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.package import LinkType as Lt
+from repology.package import LinkType as Lt, PackageFlags as Pf
 
 from . import check_transformer
 from ..package import PackageSample
@@ -347,4 +347,12 @@ def test_hasbranch() -> None:
         '[ { hasbranch: true, setname: "hasbranch" }, { hasbranch: false, setname: "nobranch" } ]',
         PackageSample().expect(effname='nobranch'),
         PackageSample(branch='foo').expect(effname='hasbranch'),
+    )
+
+
+def test_is_p_is_patch() -> None:
+    check_transformer(
+        '[ { is_p_is_patch: true, setname: bar } ]',
+        PackageSample(name='p1').expect(effname='p1'),
+        PackageSample(name='p2', flags=Pf.P_IS_PATCH).expect(effname='bar'),
     )
