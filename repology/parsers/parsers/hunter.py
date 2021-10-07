@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import Any, Callable, Iterable, Iterator
@@ -30,22 +31,25 @@ from repology.parsers.walk import walk_tree
 @dataclass
 class _VersionInfo:
     version: str
-    url_info: str
+    url: str
 
 def _extract_version_infos(huntercmake: str) -> Iterator[_VersionInfo]:
     regex = r"hunter_add_version\((.*?)\)"
-    matches = re.finditer(regex, test_str, re.DOTALL)
+    matches = re.finditer(regex, huntercmake, re.DOTALL)
 
-    for matchNum, match in enumerate(matches, start=0):
-        
-        print ("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum = matchNum, start = match.start(), end = match.end(), match = match.group()))
-        
+    for matchNum, match in enumerate(matches, start=0):        
         for groupNum in range(0, len(match.groups())):
             groupNum = groupNum + 1
             
-            print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = match.group(groupNum)))
+            group = match.group(groupNum)
+            print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = group))
+            
+            args = group.replace(' ', '').split('\n')
+            version_index = args.index('VERSION')
+            url_index = args.index('URL')
+            print(f'version={args[version_index+1]}, url={args[url_index+1]}')
 
-    yield _VersionInfo("todo", "soon")
+            yield _VersionInfo(args[version_index+1].replace('"', ''), args[url_index+1].replace('"', ''))
 
 
 class HunterGitParser(Parser):
@@ -57,17 +61,12 @@ class HunterGitParser(Parser):
                 pkg.add_name(huntercmake_rel_path.split('/')[1], NameType.HUNTER_RECIPE_NAME)
 
                 with open(huntercmake_abs_path) as fd:
-                    huntercmake = yaml.safe_load(fd)
+                    huntercmake = fd.read()
 
                 for version_info in _extract_version_infos(huntercmake):
                     verpkg = pkg.clone(append_ident=':' + version_info.version)
 
                     verpkg.set_version(version_info.version)
-
-                    # XXX: we may create more subpackages here based on url_info.tags
-                    # which may contain various OSes, architectures, compilers and probably
-                    # other specifics (see cspice/all/conandata.yml for example)
-                    for url_info in version_info.url_infos:
-                        verpkg.add_downloads(url_info.url)
+                    verpkg.add_downloads(version_info.url)
 
                     yield verpkg
