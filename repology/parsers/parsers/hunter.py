@@ -27,46 +27,25 @@ from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 
 
-def _traverse_arbitrary_structure(data: Any, handler: Callable[[list[str], str], None], tags: list[str] = []) -> None:
-    # processes arbitrary nested structure of dicts and lists which
-    # is possible in conandata.yaml files
-
-    if isinstance(data, list):
-        for item in data:
-            _traverse_arbitrary_structure(item, handler, tags)
-    elif isinstance(data, dict):
-        for key, item in data.items():
-            _traverse_arbitrary_structure(item, handler, tags + [key])
-    elif isinstance(data, str):
-        handler(tags, data)
-
-
-@dataclass
-class _UrlInfo:
-    tags: list[str]
-    url: str
-
-
-def _extract_url_infos(data: Any) -> list[_UrlInfo]:
-    result: list[_UrlInfo] = []
-
-    def handler(tags: list[str], data: str) -> None:
-        if 'url' in tags and 'sha256' not in tags:
-            result.append(_UrlInfo(tags, data))
-
-    _traverse_arbitrary_structure(data, handler)
-
-    return result
-
-
 @dataclass
 class _VersionInfo:
     version: str
-    url_infos: list[_UrlInfo]
-
+    url_info: str
 
 def _extract_version_infos(huntercmake: str) -> Iterator[_VersionInfo]:
-    yield _VersionInfo("todo", _extract_url_infos(data))
+    regex = r"hunter_add_version\((.*?)\)"
+    matches = re.finditer(regex, test_str, re.DOTALL)
+
+    for matchNum, match in enumerate(matches, start=0):
+        
+        print ("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum = matchNum, start = match.start(), end = match.end(), match = match.group()))
+        
+        for groupNum in range(0, len(match.groups())):
+            groupNum = groupNum + 1
+            
+            print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = match.group(groupNum)))
+
+    yield _VersionInfo("todo", "soon")
 
 
 class HunterGitParser(Parser):
