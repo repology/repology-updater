@@ -131,7 +131,7 @@ if any. You only need to run this command once.
 Next, run the update process:
 
 ```shell
-./repology-update.py --fetch --fetch --parse --database --postupdate
+./repology-update.py --fetch --parse --database --postupdate
 ```
 
 Expect it to take several hours the first time, subsequent updates
