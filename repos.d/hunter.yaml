@@ -18,7 +18,7 @@
   repolinks:
     - desc: Hunter
       url: https://hunter.readthedocs.io/en/latest/
-    - desc: Hunter Index repository on GitHub
+    - desc: Hunter repository on GitHub
       url: https://github.com/cpp-pm/hunter
   packagelinks:
     - type: PACKAGE_SOURCES
