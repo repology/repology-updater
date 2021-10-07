@@ -45,9 +45,7 @@ def _extract_version_infos(huntercmake: str) -> Iterator[_VersionInfo]:
             print ("Group {groupNum} found at {start}-{end}: {group}".format(groupNum = groupNum, start = match.start(groupNum), end = match.end(groupNum), group = group))
             
             args = group.replace(' ', '\n').split('\n')
-            def check_empty(str):
-                return len(str) > 0
-            args = filter(check_empty, args)
+            args = list(filter(lambda str: (len(str) > 0), args))
             
             version_index = args.index('VERSION')
             url_index = args.index('URL')
