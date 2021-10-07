@@ -58,7 +58,7 @@ class HunterGitParser(Parser):
             huntercmake_rel_path = os.path.relpath(huntercmake_abs_path, path)
 
             with factory.begin(huntercmake_rel_path) as pkg:
-                pkg.add_name(huntercmake_rel_path.split('/')[1], NameType.HUNTER_PROJECT_NAME)
+                pkg.add_name(huntercmake_rel_path.split('/')[2], NameType.HUNTER_PROJECT_NAME)
 
                 with open(huntercmake_abs_path) as fd:
                     huntercmake = fd.read()
