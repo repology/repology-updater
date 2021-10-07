@@ -117,7 +117,7 @@ class NameType:
 
     CONAN_RECIPE_NAME: ClassVar[int] = 260
 
-    HUNTER_RECIPE_NAME: ClassVar[int] = 260
+    HUNTER_PROJECT_NAME: ClassVar[int] = 260
 
     WINGET_ID: ClassVar[int] = IGNORED
     WINGET_ID_NAME: ClassVar[int] = 271
@@ -469,10 +469,10 @@ _MAPPINGS = [
     ),
     # Hunter
     _NameMapping(
-        srcname=NameType.HUNTER_RECIPE_NAME,
-        trackname=NameType.HUNTER_RECIPE_NAME,
-        visiblename=NameType.HUNTER_RECIPE_NAME,
-        projectname_seed=NameType.HUNTER_RECIPE_NAME,
+        srcname=NameType.HUNTER_PROJECT_NAME,
+        trackname=NameType.HUNTER_PROJECT_NAME,
+        visiblename=NameType.HUNTER_PROJECT_NAME,
+        projectname_seed=NameType.HUNTER_PROJECT_NAME,
     ),
     # Winget
     _NameMapping(
