@@ -115,6 +115,12 @@ class RepositoryManager:
 
             self._repo_by_name[repo['name']] = repo
 
+        def repo_sort_key(repo: RepositoryMetadata) -> str:
+            assert isinstance(repo['sortname'], str)
+            return repo['sortname']
+
+        self._repositories = sorted(self._repositories, key=repo_sort_key)
+
     def get_repository(self, reponame: str) -> RepositoryMetadata:
         return self._repo_by_name[reponame]
 
