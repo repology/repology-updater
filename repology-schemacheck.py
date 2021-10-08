@@ -179,8 +179,7 @@ rulesets = families + [
 
 packagelinks = [
     {
-        'desc': str,  # XXX: remove with complete switch to generalized links
-        'type': str,  # XXX: make mandatory with complete switch to generalized links
+        Required('type'): str,
         Required('url'): Url(),
     }
 ]
