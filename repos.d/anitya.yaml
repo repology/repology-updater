@@ -20,4 +20,4 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://release-monitoring.org/project/{name}/'
   shadow: true
-  tags: []
+  groups: []

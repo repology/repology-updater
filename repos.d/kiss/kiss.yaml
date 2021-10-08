@@ -31,7 +31,7 @@
       url: 'https://github.com/kisslinux/repo/blob/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/kisslinux/repo/master/{path}/patches/{?patch}'
-  tags: []  # unparsable, see #1166
+  groups: []  # unparsable, see #1166
 
 - name: kiss_community
   type: repository
@@ -64,4 +64,4 @@
       url: 'https://github.com/kisslinux/community/blob/main/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/kisslinux/community/main/{path}/patches/{?patch}'
-  tags: [ all, kiss ]
+  groups: [ all, kiss ]

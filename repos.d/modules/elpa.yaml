@@ -22,7 +22,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://elpa.gnu.org/packages/{name}.html'
-  tags: [ all, production, elpa ]
+  groups: [ all, production, elpa ]
 
 - name: melpa
   type: modules
@@ -45,7 +45,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://melpa.org/#/{name}'
-  tags: [ all, production, elpa ]
+  groups: [ all, production, elpa ]
 
 - name: melpa_stable
   type: modules
@@ -68,4 +68,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://stable.melpa.org/#/{name}'
-  tags: [ all, production, elpa ]
+  groups: [ all, production, elpa ]

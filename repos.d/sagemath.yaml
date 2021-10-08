@@ -33,7 +33,7 @@
       url: 'https://github.com/sagemath/sage/blob/master/build/pkgs/{srcname}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/sagemath/sage/master/build/pkgs/{srcname}/patches/{?patch}'
-  tags: [ all, production, sagemath ]
+  groups: [ all, production, sagemath ]
 
 - name: sagemath_develop
   type: repository
@@ -66,4 +66,4 @@
       url: 'https://github.com/sagemath/sage/blob/develop/build/pkgs/{srcname}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/sagemath/sage/develop/build/pkgs/{srcname}/patches/{?patch}'
-  tags: [ all, production, sagemath ]
+  groups: [ all, production, sagemath ]

@@ -23,7 +23,7 @@
   #packagelinks:
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
-  tags: [ all, production, elrepo ]
+  groups: [ all, production, elrepo ]
 
 - name: elrepo_el7_extras
   type: repository
@@ -46,7 +46,7 @@
   #packagelinks:
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
-  tags: [ elrepo ]  # no useful packages
+  groups: [ elrepo ]  # no useful packages
 
 - name: elrepo_el7_testing
   type: repository
@@ -69,7 +69,7 @@
   #packagelinks:
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
-  tags: [ all, production, elrepo ]
+  groups: [ all, production, elrepo ]
 
 - name: elrepo_el8
   type: repository
@@ -92,7 +92,7 @@
   #packagelinks:
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
-  tags: [ elrepo ]  # no useful packages
+  groups: [ elrepo ]  # no useful packages
 
 - name: elrepo_el8_extras
   type: repository
@@ -115,7 +115,7 @@
   #packagelinks:
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
-  tags: [ elrepo ]  # no useful packages
+  groups: [ elrepo ]  # no useful packages
 
 - name: elrepo_el8_testing
   type: repository
@@ -138,4 +138,4 @@
   #packagelinks:
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
-  tags: [ elrepo ]  # no useful packages
+  groups: [ elrepo ]  # no useful packages

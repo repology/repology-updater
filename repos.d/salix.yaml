@@ -20,4 +20,4 @@
       url: https://www.salixos.org/
     - desc: Salix package search
       url: https://packages.salixos.org/
-  tags: [ all, production, salix ]
+  groups: [ all, production, salix ]

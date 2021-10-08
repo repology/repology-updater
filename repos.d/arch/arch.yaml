@@ -34,7 +34,7 @@
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname|quote}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/plain/trunk/PKGBUILD?h=packages/{srcname|quote}'
-  tags: [ all, production, have_testdata ]
+  groups: [ all, production, have_testdata ]
 
 - name: arch_testing
   type: repository
@@ -69,4 +69,4 @@
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname|quote}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/plain/trunk/PKGBUILD?h=packages/{srcname|quote}'
-  tags: [ all, production ]
+  groups: [ all, production ]

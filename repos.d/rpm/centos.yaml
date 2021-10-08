@@ -29,7 +29,7 @@
   #    url: 'https://git.centos.org/rpms/{srcname}/blob/c6{centossuffix}/f/SPECS/{srcname}.spec'
   #  - type: PACKAGE_RECIPE_RAW
   #    url: 'https://git.centos.org/rpms/{srcname}/raw/c6{centossuffix}/f/SPECS/{srcname}.spec'
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
 
 - name: centos_7
   type: repository
@@ -58,7 +58,7 @@
       url: 'https://git.centos.org/rpms/{srcname}/blob/c7{centossuffix}/f/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.centos.org/rpms/{srcname}/raw/c7{centossuffix}/f/SPECS/{srcname}.spec'
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
 
 - name: centos_8
   type: repository
@@ -87,7 +87,7 @@
       url: 'https://git.centos.org/rpms/{srcname}/blob/c8{centossuffix}/f/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.centos.org/rpms/{srcname}/raw/c8{centossuffix}/f/SPECS/{srcname}.spec'
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
 
 - name: almalinux_8
   type: repository
@@ -108,7 +108,7 @@
   repolinks:
     - desc: AlmaLinux home
       url: https://almalinux.org/
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
 
 - name: rocky_8
   type: repository
@@ -129,4 +129,4 @@
   repolinks:
     - desc: Rocky Linux home
       url: https://rockylinux.org/
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]

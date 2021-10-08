@@ -25,4 +25,4 @@
   repolinks:
     - desc: Kali Linux home
       url: https://www.kali.org/
-  tags: [ all, production, kali ]
+  groups: [ all, production, kali ]

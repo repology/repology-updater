@@ -18,7 +18,7 @@
   repolinks:
     - desc: CPAN
       url: http://cpan.org/
-  tags: [ all, production, have_testdata ]
+  groups: [ all, production, have_testdata ]
 
 - name: metacpan
   sortname: cpan_  # XXX: for easier comparison with CPAN; remove along with cpan entry
@@ -66,4 +66,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://metacpan.org/release/{name}'
-  tags: [ all, production ]
+  groups: [ all, production ]

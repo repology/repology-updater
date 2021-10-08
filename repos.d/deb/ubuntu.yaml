@@ -34,7 +34,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_14_04_backports
   type: repository
@@ -67,7 +67,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_16_04
   type: repository
@@ -102,7 +102,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_16_04_backports
   type: repository
@@ -135,7 +135,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_18_04
   type: repository
@@ -170,7 +170,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_18_04_backports
   type: repository
@@ -203,7 +203,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_20_04
   type: repository
@@ -237,7 +237,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_20_04_backports
   type: repository
@@ -269,7 +269,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_20_10
   type: repository
@@ -303,7 +303,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_20_10_backports
   type: repository
@@ -335,7 +335,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_21_04
   type: repository
@@ -369,7 +369,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_21_04_backports
   type: repository
@@ -401,7 +401,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, ubuntu ]  # empty
+  groups: [ all, ubuntu ]  # empty
 
 - name: ubuntu_21_04_proposed
   type: repository
@@ -433,7 +433,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_21_10
   type: repository
@@ -467,7 +467,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_21_10_backports
   type: repository
@@ -499,7 +499,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
 
 - name: ubuntu_21_10_proposed
   type: repository
@@ -531,4 +531,4 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]

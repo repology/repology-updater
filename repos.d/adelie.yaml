@@ -28,4 +28,4 @@
       url: 'https://git.adelielinux.org/adelie/packages/-/blob/master/{subrepo}/{srcname}/APKBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.adelielinux.org/adelie/packages/-/raw/master/{subrepo}/{srcname}/APKBUILD'
-  tags: [ all, production, adelie ]
+  groups: [ all, production, adelie ]

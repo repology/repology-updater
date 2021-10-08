@@ -24,4 +24,4 @@
       url: 'https://cran.r-project.org/web/packages/{name}/index.html'
     - type: PROJECT_DOWNLOAD
       url: 'https://cran.r-project.org/src/contrib/{name}_{rawversion}.tar.gz'
-  tags: [ all, production ]
+  groups: [ all, production ]

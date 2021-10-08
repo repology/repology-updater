@@ -22,7 +22,7 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_2_0
   type: repository
@@ -43,7 +43,7 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_3_0
   type: repository
@@ -64,7 +64,7 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_4_0
   type: repository
@@ -85,7 +85,7 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_unstable
   type: repository
@@ -106,4 +106,4 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]

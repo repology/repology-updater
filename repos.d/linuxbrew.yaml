@@ -32,4 +32,4 @@
       url: 'https://github.com/Homebrew/linuxbrew-core/blob/master/Formula/{srcname}.rb'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/Homebrew/linuxbrew-core/master/Formula/{srcname}.rb'
-  tags: [ all, production, brew ]
+  groups: [ all, production, brew ]

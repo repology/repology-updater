@@ -32,4 +32,4 @@
       url: 'https://raw.githubusercontent.com/jrmarino/Ravenports/master/bucket_{bucket}/{name}'
     - type: PACKAGE_BUILD_LOG_RAW  # dragonflybsd specific logs
       url: 'https://loki.dragonflybsd.org/raven/logs/{name}___{variant}.log'
-  tags: [ all, production ]
+  groups: [ all, production ]

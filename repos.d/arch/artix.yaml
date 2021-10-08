@@ -20,4 +20,4 @@
   repolinks:
     - desc: Artix Linux home
       url: https://artixlinux.org/
-  tags: [ all, production ]
+  groups: [ all, production ]

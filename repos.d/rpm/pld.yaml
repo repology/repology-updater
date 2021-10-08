@@ -25,4 +25,4 @@
       url: 'https://git.pld-linux.org/?p=packages/{srcname|quote}.git;a=blob;f={srcname|quote}.spec;hb=HEAD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.pld-linux.org/?p=packages/{srcname|quote}.git;a=blob_plain;f={srcname|quote}.spec;hb=HEAD'
-  tags: [ all, production ]
+  groups: [ all, production ]

@@ -20,7 +20,7 @@
   repolinks:
     - desc: Manjaro Linux home
       url: https://manjaro.org/
-  tags: [ all, production, manjaro ]
+  groups: [ all, production, manjaro ]
   
 - name: manjaro_staging
   type: repository
@@ -41,7 +41,7 @@
   repolinks:
     - desc: Manjaro Linux home
       url: https://manjaro.org/
-  tags: [ all, production, manjaro ]
+  groups: [ all, production, manjaro ]
 
 - name: manjaro_testing
   type: repository
@@ -62,7 +62,7 @@
   repolinks:
     - desc: Manjaro Linux home
       url: https://manjaro.org/
-  tags: [ all, production, manjaro ]
+  groups: [ all, production, manjaro ]
 
 - name: manjaro_unstable
   type: repository
@@ -83,4 +83,4 @@
   repolinks:
     - desc: Manjaro Linux home
       url: https://manjaro.org/
-  tags: [ all, production, manjaro ]
+  groups: [ all, production, manjaro ]

@@ -22,4 +22,4 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://pypi.org/project/{name}/'
-  tags: [all, production]
+  groups: [all, production]

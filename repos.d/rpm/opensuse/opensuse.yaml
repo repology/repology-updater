@@ -53,7 +53,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:42.3:Update/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_0
   type: repository
@@ -110,7 +110,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.0:Update/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_1
   type: repository
@@ -166,7 +166,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.1:Update/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_2
   type: repository
@@ -222,7 +222,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.2:Update/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_3
   type: repository
@@ -274,7 +274,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.3:Update/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_tumbleweed
   type: repository
@@ -320,4 +320,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]

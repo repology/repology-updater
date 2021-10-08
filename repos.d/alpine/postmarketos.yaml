@@ -23,7 +23,7 @@
       url: http://pkgs.postmarketos.org/packages
     - desc: Recipe repository
       url: https://gitlab.com/postmarketOS/pmaports/
-  tags: [ all, production, postmarketos ]
+  groups: [ all, production, postmarketos ]
 
 - name: postmarketos_21.03
   type: repository
@@ -51,7 +51,7 @@
       url: http://pkgs.postmarketos.org/packages
     - desc: Recipe repository
       url: https://gitlab.com/postmarketOS/pmaports/
-  tags: [ all, production, postmarketos ]
+  groups: [ all, production, postmarketos ]
 
 - name: postmarketos_master
   type: repository
@@ -79,4 +79,4 @@
       url: http://pkgs.postmarketos.org/packages
     - desc: Recipe repository
       url: https://gitlab.com/postmarketOS/pmaports/
-  tags: [ all, production, postmarketos ]
+  groups: [ all, production, postmarketos ]

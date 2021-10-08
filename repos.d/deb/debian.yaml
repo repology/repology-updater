@@ -39,7 +39,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_testing
   type: repository
@@ -76,7 +76,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=testing'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 # Versioned debian releases
 - name: debian_8
@@ -111,7 +111,7 @@
       url: 'https://bugs.debian.org/{srcname}'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_9
   sortname: debian_09
@@ -147,7 +147,7 @@
       url: 'https://bugs.debian.org/{srcname}'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_9_backports
   sortname: debian_09_backports
@@ -185,7 +185,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stretch-backports'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_10
   type: repository
@@ -222,7 +222,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=buster'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_10_backports
   type: repository
@@ -259,7 +259,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=buster-backports'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_11
   type: repository
@@ -296,7 +296,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bullseye'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_11_backports
   type: repository
@@ -333,7 +333,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bullseye-backports'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_12
   type: repository
@@ -370,7 +370,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bookworm'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_12_backports
   type: repository
@@ -407,7 +407,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bookworm-backports'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, debian ] # not there yet
+  groups: [ all, debian ] # not there yet
 
 # Rolling
 - name: debian_unstable
@@ -445,7 +445,7 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=sid'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
 - name: debian_experimental
   sortname: debian_zzz
@@ -483,4 +483,4 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=exprimental'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]

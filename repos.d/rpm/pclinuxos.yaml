@@ -23,4 +23,4 @@
   repolinks:
     - desc: PCLinuxOS home
       url: http://www.pclinuxos.com/
-  tags: [ all, production ]
+  groups: [ all, production ]

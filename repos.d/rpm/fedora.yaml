@@ -53,7 +53,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f26/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f26/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_27
   type: repository
@@ -94,7 +94,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f27/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f27/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_28
   type: repository
@@ -135,7 +135,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f28/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f28/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_29
   type: repository
@@ -176,7 +176,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f29/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f29/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_30
   type: repository
@@ -217,7 +217,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f30/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f30/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_31
   type: repository
@@ -258,7 +258,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f31/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f31/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 # Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
 # here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
@@ -302,7 +302,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f32/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f32/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_33
   type: repository
@@ -343,7 +343,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f33/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f33/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_34
   type: repository
@@ -384,7 +384,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f34/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f34/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_35
   type: repository
@@ -425,7 +425,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f35/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f35/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
   type: repository
@@ -457,4 +457,4 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/rawhide/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/rawhide/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]

@@ -23,4 +23,4 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://rubygems.org/gems/{name}'
-  tags: [ all, production ]
+  groups: [ all, production ]

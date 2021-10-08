@@ -20,7 +20,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  tags: [ all, production, antix ]
+  groups: [ all, production, antix ]
 
 - name: antix_17
   type: repository
@@ -40,7 +40,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  tags: [ all, production, antix ]
+  groups: [ all, production, antix ]
 
 - name: antix_19
   type: repository
@@ -60,7 +60,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  tags: [ all, production, antix ]
+  groups: [ all, production, antix ]
 
 # Probable future releases would be called
 # 21 = bullseye

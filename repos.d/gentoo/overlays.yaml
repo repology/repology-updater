@@ -34,7 +34,7 @@
       url: 'https://gitweb.gentoo.org/repo/proj/guru.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitweb.gentoo.org/repo/proj/guru.git/plain/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production, gentoo-overlays ]
+  groups: [ all, production, gentoo-overlays ]
 
 ###########################################################################
 # Pentoo
@@ -68,7 +68,7 @@
       url: 'https://github.com/pentoo/pentoo-overlay/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/pentoo/pentoo-overlay/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production, gentoo-overlays ]
+  groups: [ all, production, gentoo-overlays ]
 
 ###########################################################################
 # Science
@@ -104,7 +104,7 @@
       url: 'https://gitweb.gentoo.org/proj/sci.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitweb.gentoo.org/proj/sci.git/plain/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production, gentoo-overlays ]
+  groups: [ all, production, gentoo-overlays ]
 
 ###########################################################################
 # Disabled overlays (not really useful)
@@ -125,7 +125,7 @@
     - desc: Git repository
       url: https://github.com/hasufell/games-overlay
   # XXX: add packagelinks if this is ever enabled
-  tags: [ all ]
+  groups: [ all ]
 
 - name: gentoo_ovl_gamerlay
   type: repository
@@ -143,4 +143,4 @@
     - desc: Git repository
       url: https://cgit.gentoo.org/proj/gamerlay.git/
   # XXX: add packagelinks if this is ever enabled
-  tags: [ all ]
+  groups: [ all ]

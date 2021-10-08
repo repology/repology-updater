@@ -17,4 +17,4 @@
   repolinks:
     - desc: RPM Sphere home
       url: https://rpmsphere.github.io/
-  tags: [ all, production ]
+  groups: [ all, production ]

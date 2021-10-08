@@ -22,4 +22,4 @@
     # XXX: ask author to provide raw versions in json dump, so we can link to cygports directly
     - type: PACKAGE_SOURCES
       url: 'https://github.com/fd00/yacp/tree/master/{srcname}'
-  tags: [ all, production ]
+  groups: [ all, production ]

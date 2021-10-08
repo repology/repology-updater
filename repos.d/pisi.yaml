@@ -28,7 +28,7 @@
       url: 'https://github.com/pisilinux/{subrepo}/blob/master/{srcname}/pspec.xml'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/pisilinux/{subrepo}/master/{srcname}/pspec.xml'
-  tags: [ all, production, pisi ]
+  groups: [ all, production, pisi ]
 
 - name: pisi_contrib
   type: repository
@@ -55,4 +55,4 @@
       url: 'https://github.com/pisilinux/contrib/blob/master/{srcname}/pspec.xml'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/pisilinux/contrib/master/{srcname}/pspec.xml'
-  tags: [ all, production, pisi ]
+  groups: [ all, production, pisi ]

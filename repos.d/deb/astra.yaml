@@ -21,7 +21,7 @@
   repolinks:
     - desc: Astra Linux home (in Russian)
       url: http://astralinux.com/
-  tags: [ all, production, astra ]
+  groups: [ all, production, astra ]
 
 - name: astra_current
   type: repository
@@ -42,4 +42,4 @@
   repolinks:
     - desc: Astra Linux home (in Russian)
       url: http://astralinux.com/
-  tags: [ all, production, astra ]
+  groups: [ all, production, astra ]

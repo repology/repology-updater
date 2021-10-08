@@ -27,7 +27,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{srcname|quote}'
-  tags: [ all, production, mageia, rpm ]
+  groups: [ all, production, mageia, rpm ]
 
 - name: mageia_8
   type: repository
@@ -56,7 +56,7 @@
   #packagelinks:
   #  - type: PACKAGE_HOMEPAGE
   #    url: 'https://madb.mageia.org/package/show/source/1/application/0/release/8/name/{srcname|quote}'
-  tags: [ all, production, mageia, rpm ]
+  groups: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
   type: repository
@@ -90,4 +90,4 @@
       # release=cauldron (select release)
       # name=XXX (package name)
       url: 'https://madb.mageia.org/package/show/source/1/application/0/release/cauldron/name/{srcname|quote}'
-  tags: [ all, production, mageia, rpm ]
+  groups: [ all, production, mageia, rpm ]

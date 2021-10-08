@@ -29,4 +29,4 @@
       url: 'https://github.com/macports/macports-ports/blob/master/{srcname}/Portfile'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/macports/macports-ports/master/{srcname}/Portfile'
-  tags: [ all, production ]
+  groups: [ all, production ]

@@ -24,4 +24,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://os4depot.net/index.php?function=showfile&file={category}/{filename}'
-  tags: [ all, production ]
+  groups: [ all, production ]

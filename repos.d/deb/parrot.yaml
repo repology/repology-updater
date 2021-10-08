@@ -34,4 +34,4 @@
   repolinks:
     - desc: Parrot Project home
       url: https://parrotsec.org/
-  tags: [ all, production ]
+  groups: [ all, production ]

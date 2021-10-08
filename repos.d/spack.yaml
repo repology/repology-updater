@@ -35,4 +35,4 @@
       url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{name}/{?patch}'
-  tags: [ all, production ]
+  groups: [ all, production ]

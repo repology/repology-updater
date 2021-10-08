@@ -21,7 +21,7 @@
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
-  tags: [ all, production, raspbian ]
+  groups: [ all, production, raspbian ]
 
 - name: raspbian_stable
   type: repository
@@ -43,7 +43,7 @@
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
-  tags: [ all, production, raspbian ]
+  groups: [ all, production, raspbian ]
 
 - name: raspbian_testing
   type: repository
@@ -65,4 +65,4 @@
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
-  tags: [ all, production, raspbian ]
+  groups: [ all, production, raspbian ]

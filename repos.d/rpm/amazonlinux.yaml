@@ -20,7 +20,7 @@
   repolinks:
     - desc: Amazon Linux AMI
       url: https://aws.amazon.com/amazon-linux-ami/
-  tags: [ all, production, rpm, amazon ]
+  groups: [ all, production, rpm, amazon ]
 
 - name: amazon_2
   type: repository
@@ -40,4 +40,4 @@
   repolinks:
     - desc: Amazon Linux 2
       url: https://aws.amazon.com/amazon-linux-2/
-  tags: [ all, production, rpm, amazon ]
+  groups: [ all, production, rpm, amazon ]

@@ -20,7 +20,7 @@
   repolinks:
     - desc: PureOS home
       url: https://pureos.net/
-  tags: [ all, production, pureos ]
+  groups: [ all, production, pureos ]
 
 - name: pureos_landing
   type: repository
@@ -41,4 +41,4 @@
   repolinks:
     - desc: PureOS home
       url: https://pureos.net/
-  tags: [ all, production, pureos ]
+  groups: [ all, production, pureos ]

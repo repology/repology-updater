@@ -27,7 +27,7 @@
   packagelinks:
     - type: PACKAGE_RECIPE
       url: 'https://github.com/NixOS/nixpkgs/blob/release-21.05/{posfile}#L{posline}'
-  tags: [ all, production, nix ]
+  groups: [ all, production, nix ]
 
 - name: nix_unstable
   type: repository
@@ -55,4 +55,4 @@
   packagelinks:
     - type: PACKAGE_RECIPE
       url: 'https://github.com/NixOS/nixpkgs/blob/master/{posfile}#L{posline}'
-  tags: [ all, production, have_testdata, nix ]
+  groups: [ all, production, have_testdata, nix ]

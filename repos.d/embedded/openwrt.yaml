@@ -57,7 +57,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, production, openwrt ]
+  groups: [ all, production, openwrt ]
 
 - name: openwrt_18_06_x86_64
   type: repository
@@ -144,7 +144,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, production, openwrt ]
+  groups: [ all, production, openwrt ]
 
 - name: openwrt_19_07_x86_64
   type: repository
@@ -231,7 +231,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, production, openwrt ]
+  groups: [ all, production, openwrt ]
 
 - name: openwrt_21_02_x86_64
   type: repository
@@ -318,7 +318,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, production, openwrt ]
+  groups: [ all, production, openwrt ]
 
 - name: openwrt_snapshot_x86_64
   type: repository
@@ -405,4 +405,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, openwrt ]  # disabled: like LEDE, it's too blinky
+  groups: [ all, openwrt ]  # disabled: like LEDE, it's too blinky

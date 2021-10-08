@@ -29,4 +29,4 @@
       url: 'https://github.com/haikuports/haikuports/blob/master/{srcname}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/haikuports/haikuports/master/{srcname}/patches/{?patch}'
-  tags: [ all, production, haiku ]
+  groups: [ all, production, haiku ]

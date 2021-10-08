@@ -25,4 +25,4 @@
   repolinks:
     - desc: Deepin home
       url: https://www.deepin.org/
-  tags: [ all, production, deepin ]
+  groups: [ all, production, deepin ]

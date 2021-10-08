@@ -18,6 +18,6 @@
     - desc: OpenPKG Project
       url: http://www.openpkg.org/
   # packagelinks: http://www.openpkg.org/product/packages/ -> HTTP 500
-  tags: [ all, production, openpkg ]
+  groups: [ all, production, openpkg ]
 
 # XXX: there are also release and testing repositories, but they are empty

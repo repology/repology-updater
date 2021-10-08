@@ -29,7 +29,7 @@
   repolinks:
     - desc: Siduction home
       url: https://siduction.org/
-  tags: [ all, production, siduction ]
+  groups: [ all, production, siduction ]
 
 - name: siduction_experimental
   sortname: siduction_1
@@ -59,4 +59,4 @@
   repolinks:
     - desc: Siduction home
       url: https://siduction.org/
-  tags: [ all, production, siduction ]
+  groups: [ all, production, siduction ]

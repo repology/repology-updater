@@ -25,4 +25,4 @@
       url: https://github.com/just-install
     - desc: just-install application registry
       url: https://github.com/just-install/registry/blob/master/just-install-v4.json
-  tags: [ all, production, just-install ]
+  groups: [ all, production, just-install ]

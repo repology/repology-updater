@@ -44,7 +44,7 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.8-stable'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-3-8-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]
 
 - name: alpine_3_9
   sortname: alpine_3_09
@@ -78,7 +78,7 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.9-stable'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-3-9-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]
 
 - name: alpine_3_10
   type: repository
@@ -111,7 +111,7 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.10-stable'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-3-10-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]
 
 - name: alpine_3_11
   type: repository
@@ -144,7 +144,7 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.11-stable'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-3-11-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]
 
 - name: alpine_3_12
   type: repository
@@ -177,7 +177,7 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.12-stable'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-3-12-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]
 
 - name: alpine_3_13
   type: repository
@@ -210,7 +210,7 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.13-stable'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-3-13-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]
 
 - name: alpine_3_14
   type: repository
@@ -243,7 +243,7 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.14-stable'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-3-14-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]
 
 - name: alpine_edge
   type: repository
@@ -276,4 +276,4 @@
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-edge-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  tags: [ all, production, alpine ]
+  groups: [ all, production, alpine ]

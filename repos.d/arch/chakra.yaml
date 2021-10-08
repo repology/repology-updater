@@ -26,7 +26,7 @@
       url: 'https://code.chakralinux.org/chakra/packages/{subrepo}/-/blob/master/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://code.chakralinux.org/chakra/packages/{subrepo}/-/raw/master/{srcname}/PKGBUILD'
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 - name: chakra_staging
   type: repository
@@ -46,7 +46,7 @@
   repolinks:
     - desc: Chakra home
       url: https://www.chakralinux.org/
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 - name: chakra_testing
   type: repository
@@ -66,4 +66,4 @@
   repolinks:
     - desc: Chakra home
       url: https://www.chakralinux.org/
-  tags: [ all, production ]
+  groups: [ all, production ]

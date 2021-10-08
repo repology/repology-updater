@@ -50,7 +50,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/Education/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_emulators_tumbleweed
   sortname: opensusez_emulators
@@ -74,7 +74,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/Emulators/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_games_tumbleweed
   sortname: opensusez_games
@@ -101,7 +101,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/games/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_graphics_tumbleweed
   sortname: opensusez_graphics
@@ -125,7 +125,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/graphics/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_multimedia_apps_tumbleweed
   sortname: opensusez_multimedia:apps
@@ -149,7 +149,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/multimedia:apps/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_multimedia_libs_tumbleweed
   sortname: opensusez_multimedia:libs
@@ -173,7 +173,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/multimedia:libs/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_network_tumbleweed
   sortname: opensusez_network
@@ -197,7 +197,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/network/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_science_tumbleweed
   sortname: opensusez_science
@@ -221,7 +221,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/science/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_security_tumbleweed
   sortname: opensusez_security
@@ -245,7 +245,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/security/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_hardware_sdr_tumbleweed
   sortname: opensusez_hardware_sdr
@@ -269,7 +269,7 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/hardware:sdr/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]
 
 - name: opensuse_server_irc_tumbleweed
   sortname: opensusez_server_irc
@@ -293,4 +293,4 @@
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/server:irc/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+  groups: [ all, production, opensuse, rpm ]

@@ -33,4 +33,4 @@
       url: 'https://github.com/void-linux/void-packages/blob/master/srcpkgs/{srcname}/template'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/{srcname}/template'
-  tags: [ all, production, void ]
+  groups: [ all, production, void ]

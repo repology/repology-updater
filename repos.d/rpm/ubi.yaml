@@ -21,4 +21,4 @@
         class: RepodataParser
         vertags: el
       subrepo: '{source}'
-  tags: [ all, production, ubi, rpm ]
+  groups: [ all, production, ubi, rpm ]

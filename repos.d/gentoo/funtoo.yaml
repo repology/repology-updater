@@ -183,4 +183,4 @@
       url: https://www.funtoo.org/
     - desc: GitHub organization
       url: https://github.com/funtoo/
-  tags: [ all, production, funtoo ]
+  groups: [ all, production, funtoo ]

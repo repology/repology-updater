@@ -23,7 +23,7 @@
       url: https://invent.kde.org/neon
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  tags: [ all, production, kde_neon ]
+  groups: [ all, production, kde_neon ]
 
 - name: kde_neon_user_lts
   type: repository
@@ -47,7 +47,7 @@
       url: https://packaging.neon.kde.org/
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  tags: [ all, production, kde_neon ]
+  groups: [ all, production, kde_neon ]
 
 - name: kde_neon_dev_stable
   type: repository
@@ -71,7 +71,7 @@
       url: https://packaging.neon.kde.org/
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  tags: [ all, production, kde_neon ]
+  groups: [ all, production, kde_neon ]
 
 - name: kde_neon_dev_unstable
   type: repository
@@ -95,7 +95,7 @@
       url: https://packaging.neon.kde.org/
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  tags: [ all, production, kde_neon ]
+  groups: [ all, production, kde_neon ]
 
 - name: kde_neon_unstable
   type: repository
@@ -119,7 +119,7 @@
       url: https://packaging.neon.kde.org/
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  tags: [ all, kde_neon ] # same as dev unstable
+  groups: [ all, kde_neon ] # same as dev unstable
 
 - name: kde_neon_testing
   type: repository
@@ -143,4 +143,4 @@
       url: https://packaging.neon.kde.org/
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  tags: [ all, kde_neon ] # same as dev stable
+  groups: [ all, kde_neon ] # same as dev stable

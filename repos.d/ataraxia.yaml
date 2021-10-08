@@ -26,4 +26,4 @@
       url: 'https://gitlab.com/ataraxialinux/ataraxia/-/blob/master/packages/{srcname}/KagamiBuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitlab.com/ataraxialinux/ataraxia/-/raw/master/packages/{srcname}/KagamiBuild'
-  tags: [ all, production ]
+  groups: [ all, production ]

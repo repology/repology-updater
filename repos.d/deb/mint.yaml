@@ -25,7 +25,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_17_1
   type: repository
@@ -48,7 +48,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_17_2
   type: repository
@@ -71,7 +71,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_17_3
   type: repository
@@ -94,7 +94,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_18
   type: repository
@@ -117,7 +117,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_18_1
   type: repository
@@ -140,7 +140,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_18_2
   type: repository
@@ -163,7 +163,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_18_3
   type: repository
@@ -186,7 +186,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_19
   type: repository
@@ -209,7 +209,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_19_1
   type: repository
@@ -232,7 +232,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_19_2
   type: repository
@@ -255,7 +255,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_19_3
   type: repository
@@ -278,7 +278,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_20_0
   type: repository
@@ -301,7 +301,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_20_1
   type: repository
@@ -324,7 +324,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: linux_mint_20_2
   type: repository
@@ -347,7 +347,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]
 
 - name: lmde_4
   type: repository
@@ -370,4 +370,4 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  tags: [ all, production, mint ]
+  groups: [ all, production, mint ]

@@ -17,4 +17,4 @@
   repolinks:
     - desc: Network Security Toolkit home
       url: http://www.networksecuritytoolkit.org/nst/index.html
-  tags: [ nst ]  # disabled, no way to parse it
+  groups: [ nst ]  # disabled, no way to parse it

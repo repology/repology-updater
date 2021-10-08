@@ -27,4 +27,4 @@
       url: 'https://gitee.com/src-openeuler/{srcname}/blob/openEuler-20.03-LTS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitee.com/src-openeuler/{srcname}/raw/openEuler-20.03-LTS/{srcname}.spec'
-  tags: [ all, production, openeuler, rpm ]
+  groups: [ all, production, openeuler, rpm ]

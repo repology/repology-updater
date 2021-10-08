@@ -25,4 +25,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.hyperbola.info/packages/?q={binname}'
-  tags: [ all, production ]
+  groups: [ all, production ]

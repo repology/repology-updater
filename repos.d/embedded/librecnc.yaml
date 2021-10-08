@@ -14,7 +14,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_core_ar71xx_nand_packages
   type: repository
@@ -29,7 +29,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_core_packages_mips_24kc_base
   type: repository
@@ -44,7 +44,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_core_packages_mips_24kc_packages
   type: repository
@@ -59,7 +59,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_legacy_ar71xx_generic_packages
   type: repository
@@ -74,7 +74,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_main_ar71xx_generic_packages
   type: repository
@@ -89,7 +89,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_main_ar71xx_nand_packages
   type: repository
@@ -104,7 +104,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_main_packages_mips_24kc_base
   type: repository
@@ -119,7 +119,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled
 
 - name: librecnc_main_packages_mips_24kc_packages
   type: repository
@@ -134,4 +134,4 @@
         compression: gz
       parser:
         class: DebianSourcesParser
-  tags: [ all, librecnc ] # disabled
+  groups: [ all, librecnc ] # disabled

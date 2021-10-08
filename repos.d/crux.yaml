@@ -28,7 +28,7 @@
       url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}/'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{name}/Pkgfile'
-  tags: [ all, production, crux ]
+  groups: [ all, production, crux ]
 
 - name: crux_35
   type: repository
@@ -55,7 +55,7 @@
       url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{name}/'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{name}/Pkgfile'
-  tags: [ all, production, crux ]
+  groups: [ all, production, crux ]
 
 - name: crux_36
   type: repository
@@ -82,4 +82,4 @@
       url: 'https://crux.nu/ports/crux-3.6/{subrepo}/{name}/'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://crux.nu/ports/crux-3.6/{subrepo}/{name}/Pkgfile'
-  tags: [ all, production, crux ]
+  groups: [ all, production, crux ]

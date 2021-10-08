@@ -24,7 +24,7 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'http://hackage.haskell.org/package/{name}'
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 - name: stackage_nighly
   type: modules
@@ -48,7 +48,7 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://www.stackage.org/nightly/package/{name}-{origversion}'
-  tags: [ all, production, stackage ]
+  groups: [ all, production, stackage ]
 
 - name: stackage_lts
   type: modules
@@ -72,4 +72,4 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://www.stackage.org/lts/package/{name}-{origversion}'
-  tags: [ all, production, stackage ]
+  groups: [ all, production, stackage ]

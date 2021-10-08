@@ -292,7 +292,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument('-U', '--rules-dir', default=config['RULES_DIR'], help='path to directory with rules')
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
-    parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) which are enabled and shown in repology')
+    parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|group', nargs='*', help='own or group name(s) of repositories which are enabled and shown in repology')
 
     grp = parser.add_argument_group('Initialization actions (destructive!)')
     grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
@@ -319,7 +319,7 @@ def parse_arguments() -> argparse.Namespace:
 
     grp.add_argument('--fatal', action='store_true', help='treat single repository processing failure as fatal')
 
-    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) to process')
+    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|group', nargs='*', help='own or group name(s) of repositories to process')
 
     return parser.parse_args()
 

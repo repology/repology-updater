@@ -35,4 +35,4 @@
     #  url: 'http://mirrors.dotsrc.org/cygwin/x86/release/{name}'
     #- type: PACKAGE_SOURCES
     #  url: 'http://mirrors.dotsrc.org/cygwin/x86_64/release/{name}'
-  tags: [ all, production, cygwin ]
+  groups: [ all, production, cygwin ]

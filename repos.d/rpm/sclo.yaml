@@ -18,4 +18,4 @@
   repolinks:
     - desc: Software Collections home
       url: https://www.softwarecollections.org/
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]

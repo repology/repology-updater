@@ -24,7 +24,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://chocolatey.org/packages/{name}'
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 # it's similar, but contains too many packages, with the same verioning problems
 - name: nuget
@@ -41,4 +41,4 @@
       parser:
         class: ChocolateyParser
   shadow: true
-  tags: [ all ]
+  groups: [ all ]

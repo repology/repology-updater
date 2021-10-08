@@ -62,7 +62,7 @@ class RepositoryManager:
 
         # process source loops
         for repo in self._repositories:
-            extratags = set()
+            extra_groups = set()
 
             processed_sources = []
             for source in repo['sources']:
@@ -76,8 +76,8 @@ class RepositoryManager:
                     _subst_source_recursively(processed_source, name)
                     processed_sources.append(processed_source)
 
-                extratags.add(source['fetcher']['class'])
-                extratags.add(source['parser']['class'])
+                extra_groups.add(source['fetcher']['class'])
+                extra_groups.add(source['parser']['class'])
 
             repo['sources'] = processed_sources
 
@@ -111,7 +111,7 @@ class RepositoryManager:
 
             repo['ruleset'] = set(repo['ruleset'])
 
-            repo.setdefault('tags', []).extend(extratags)
+            repo.setdefault('groups', []).extend(extra_groups)
 
             self._repo_by_name[repo['name']] = repo
 
@@ -135,7 +135,7 @@ class RepositoryManager:
                 if reponame == repository['name']:
                     match = True
                     break
-                if reponame in repository['tags']:
+                if reponame in repository['groups']:
                     match = True
                     break
             if match:

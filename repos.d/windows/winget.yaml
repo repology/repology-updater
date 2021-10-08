@@ -26,4 +26,4 @@
       url: 'https://github.com/microsoft/winget-pkgs/blob/master/{yamlpath}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/microsoft/winget-pkgs/master/{yamlpath}'
-  tags: [ all, production ]
+  groups: [ all, production ]

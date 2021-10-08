@@ -25,4 +25,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openmamba.org/en/packages/?tag={subrepo}&pkg={srcname}.source'
-  tags: [ all, production, rpm ]
+  groups: [ all, production, rpm ]

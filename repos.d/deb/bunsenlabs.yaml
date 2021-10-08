@@ -26,7 +26,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
-  tags: [ all, production, bunsenlabs ]
+  groups: [ all, production, bunsenlabs ]
 
 - name: bunsenlabs_helium
   sortname: bunsenlabs_9
@@ -53,7 +53,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
-  tags: [ all, production, bunsenlabs ]
+  groups: [ all, production, bunsenlabs ]
 
 - name: bunsenlabs_jessie_backports
   sortname: bunsenlabs_8_backports
@@ -80,7 +80,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
-  tags: [ all, production, bunsenlabs ]
+  groups: [ all, production, bunsenlabs ]
 
 - name: bunsenlabs_stretch_backports
   sortname: bunsenlabs_9_backports
@@ -107,4 +107,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
-  tags: [ all, production, bunsenlabs ]
+  groups: [ all, production, bunsenlabs ]

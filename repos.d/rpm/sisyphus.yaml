@@ -30,7 +30,7 @@
       url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{srcname}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{srcname}/raw'
-  tags: [ all, production, sisyphus ]
+  groups: [ all, production, sisyphus ]
 
 - name: alt_p9
   sortname: alt_p09
@@ -62,7 +62,7 @@
       url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}/raw'
-  tags: [ all, production, sisyphus ]
+  groups: [ all, production, sisyphus ]
 
 - name: alt_p10
   type: repository
@@ -93,7 +93,7 @@
       url: 'https://packages.altlinux.org/en/p10/specfiles/{srcname}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://packages.altlinux.org/en/p10/specfiles/{srcname}/raw'
-  tags: [ all, production, sisyphus ]
+  groups: [ all, production, sisyphus ]
 
 # automatically imported packages; duplicate already existing packages and versions,
 # and has it's own comparison and garbage problems, so not enabled in production
@@ -117,4 +117,4 @@
       url: http://www.sisyphus.ru/en/
     - desc: Documentation on Autoimports (russian)
       url: https://www.altlinux.org/Autoimports
-  tags: [ all ]
+  groups: [ all ]

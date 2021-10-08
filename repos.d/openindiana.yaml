@@ -35,4 +35,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://github.com/OpenIndiana/oi-userland/search?q={srcname}+filename%3AMakefile&type=Code'
-  tags: [ all, production ]
+  groups: [ all, production ]

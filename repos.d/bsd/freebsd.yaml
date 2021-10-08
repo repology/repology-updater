@@ -38,7 +38,7 @@
       url: 'https://cgit.freebsd.org/ports/plain/{srcname}/Makefile'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={srcname}'
-  tags: [ all, production, have_testdata ]
+  groups: [ all, production, have_testdata ]
 
 ###########################################################################
 # DragonFlyBSD DPorts (derivative from FreeBSD ports)
@@ -79,4 +79,4 @@
     # There's no flavor in INDEX, so this can't be fixed atow
     - type: PACKAGE_BUILD_LOG
       url: 'https://sting.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
-  tags: [ all, production ]
+  groups: [ all, production ]

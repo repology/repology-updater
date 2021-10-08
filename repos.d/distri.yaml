@@ -31,4 +31,4 @@
       url: 'https://github.com/distr1/distri/blob/master/{path}/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/distr1/distri/master/{path}/{?patch}'
-  tags: [ all, production ]
+  groups: [ all, production ]

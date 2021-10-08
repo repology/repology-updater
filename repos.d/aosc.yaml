@@ -30,4 +30,4 @@
     #  url: 'https://github.com/AOSC-Dev/{tree}/blob/{branch}/{srcname}/autobuild/build'
     #- type: PACKAGE_RECIPE_RAW
     #  url: 'https://raw.githubusercontent.com/AOSC-Dev/{tree}/{branch}/{srcname}/autobuild/build'
-  tags: [ all, production ]
+  groups: [ all, production ]

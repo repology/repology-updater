@@ -285,7 +285,7 @@ schemas = {
                 }
             ],
             'packagelinks': packagelinks,
-            'tags': [
+            'groups': [
                 str
             ]
         }

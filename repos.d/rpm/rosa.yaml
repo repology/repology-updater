@@ -32,7 +32,7 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2014.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2014.1/{srcname}.spec'
-  tags: [ all, production, rosa ]
+  groups: [ all, production, rosa ]
 
 - name: rosa_2016_1
   type: repository
@@ -61,7 +61,7 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2016.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2016.1/{srcname}.spec'
-  tags: [ all, production, rosa ]
+  groups: [ all, production, rosa ]
 
 # Note: since Rosa 2019.1, use of urpmi metadate (info.xml) is discouraged
 - name: rosa_2019_1
@@ -91,7 +91,7 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2019.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2019.1/{srcname}.spec'
-  tags: [ all, production, rosa ]
+  groups: [ all, production, rosa ]
 
 - name: rosa_server_6_9
   type: repository
@@ -122,7 +122,7 @@
   #    url: 'https://abf.io/server/{srcname}/blob/rosa-server69/{srcname}.spec'
   #  - type: PACKAGE_RECIPE_RAW
   #    url: 'https://abf.io/server/{srcname}/raw/rosa-server69/{srcname}.spec'
-  tags: [ all, production, rosa ]
+  groups: [ all, production, rosa ]
 
 - name: rosa_server_7_3
   type: repository
@@ -152,7 +152,7 @@
       url: 'https://abf.io/server7/{srcname}/blob/rosa-server73/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/server7/{srcname}/raw/rosa-server73/{srcname}.spec'
-  tags: [ all, production, rosa ]
+  groups: [ all, production, rosa ]
 
 - name: rosa_server_7_5
   type: repository
@@ -182,4 +182,4 @@
       url: 'https://abf.io/server7/{srcname}/blob/rosa-server75/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/server7/{srcname}/raw/rosa-server75/{srcname}.spec'
-  tags: [ all, production, rosa ]
+  groups: [ all, production, rosa ]

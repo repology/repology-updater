@@ -25,7 +25,7 @@
   #packagelinks:
   #  - desc: Package details
   #    url: 'http://neuro.debian.net/pkgs/{srcname}.html'
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_debian_8
   sortname: neurodebian_debian_08
@@ -48,7 +48,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_debian_9
   sortname: neurodebian_debian_09
@@ -71,7 +71,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_debian_10
   type: repository
@@ -93,7 +93,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_debian_11
   type: repository
@@ -115,7 +115,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_debian_unstable
   type: repository
@@ -137,7 +137,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_ubuntu_14_04
   type: repository
@@ -159,7 +159,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_ubuntu_16_04
   type: repository
@@ -181,7 +181,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_ubuntu_18_04
   type: repository
@@ -203,7 +203,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_ubuntu_19_04
   type: repository
@@ -225,7 +225,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_ubuntu_20_04
   type: repository
@@ -247,7 +247,7 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]
 
 - name: neurodebian_ubuntu_21_04
   type: repository
@@ -269,4 +269,4 @@
       url: http://neuro.debian.net/index.html
     - desc: NeuroDebian packages
       url: http://neuro.debian.net/pkgs.html
-  tags: [ all, production, neurodebian ]
+  groups: [ all, production, neurodebian ]

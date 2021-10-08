@@ -47,7 +47,7 @@
   repolinks:
     - desc: Pardus home
       url: https://www.pardus.org.tr/
-  tags: [ all, production, pardus ]
+  groups: [ all, production, pardus ]
 
 - name: pardus_19
   type: repository
@@ -95,7 +95,7 @@
   repolinks:
     - desc: Pardus home
       url: https://www.pardus.org.tr/
-  tags: [ all, production, pardus ]
+  groups: [ all, production, pardus ]
 
 - name: pardus_21
   type: repository
@@ -143,4 +143,4 @@
   repolinks:
     - desc: Pardus home
       url: https://www.pardus.org.tr/
-  tags: [ all, production, pardus ]
+  groups: [ all, production, pardus ]

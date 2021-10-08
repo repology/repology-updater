@@ -19,4 +19,4 @@
   repolinks:
     - desc: RebornOS home
       url: https://rebornos.org/
-  tags: [ all, production ]
+  groups: [ all, production ]

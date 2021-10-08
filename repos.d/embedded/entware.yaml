@@ -19,4 +19,4 @@
   repolinks:
     - desc: Entware repository on GitHub
       url: https://github.com/Entware
-  tags: [ all, production ]
+  groups: [ all, production ]

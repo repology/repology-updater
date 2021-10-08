@@ -220,7 +220,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: "https://www.wikidata.org/wiki/{name}"
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 # Some additional useful requests
 #

@@ -24,7 +24,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
-  tags: [ all, production, npackd ]
+  groups: [ all, production, npackd ]
 
 - name: npackd_stable
   type: repository
@@ -47,7 +47,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
-  tags: [ all, production, npackd ]
+  groups: [ all, production, npackd ]
 
 - name: npackd_libs
   type: repository
@@ -70,7 +70,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
-  tags: [ all, npackd ]  # disabled (experimental), see #863
+  groups: [ all, npackd ]  # disabled (experimental), see #863
 
 - name: npackd_stable64
   type: repository
@@ -93,4 +93,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
-  tags: [ all, production, npackd ]
+  groups: [ all, production, npackd ]

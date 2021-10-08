@@ -21,4 +21,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://hpux.connect.org.uk/hppd{path}/{name}-{origversion}/'
-  tags: [ all, production, hpux ]
+  groups: [ all, production, hpux ]

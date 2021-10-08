@@ -27,7 +27,7 @@
       url: 'https://pkg.slitaz.org/?receipt={binname}'
     - type: PACKAGE_BUILD_LOG
       url: 'https://cook.slitaz.org/cooker.cgi?pkg={binname}'
-  tags: [ all, production, slitaz ]
+  groups: [ all, production, slitaz ]
 
 - name: slitaz_next
   type: repository
@@ -58,4 +58,4 @@
       url: 'https://cook.slitaz.org/next/{srcname}/browse/receipt'
     - type: PACKAGE_BUILD_LOG
       url: 'https://cook.slitaz.org/next/{srcname}/log/'
-  tags: [ all, production, slitaz ]
+  groups: [ all, production, slitaz ]

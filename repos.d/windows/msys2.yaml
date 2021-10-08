@@ -36,7 +36,7 @@
       url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
-  tags: [ all, production, msys2 ]
+  groups: [ all, production, msys2 ]
 
 - name: msys2_msys2
   type: repository
@@ -73,4 +73,4 @@
       url: 'https://github.com/msys2/MSYS2-packages/blob/master/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/msys2/MSYS2-packages/master/{srcname}/PKGBUILD'
-  tags: [ all, production, msys2 ]
+  groups: [ all, production, msys2 ]
