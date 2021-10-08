@@ -1,0 +1,867 @@
+{
+ "repo": "gobolinux",
+ "family": "gobolinux",
+ "subrepo": null,
+ "name": "AutoFS",
+ "srcname": null,
+ "binname": null,
+ "binnames": null,
+ "trackname": "AutoFS",
+ "visiblename": "AutoFS",
+ "projectname_seed": "AutoFS",
+ "origversion": "5.0.5",
+ "rawversion": "5.0.5",
+ "arch": null,
+ "maintainers": null,
+ "category": null,
+ "comment": "Automounting daemon",
+ "licenses": [
+  "GNU General Public License (GPL)"
+ ],
+ "extrafields": {
+  "patch": [
+   "10-dont_install_initfile.patch",
+   "30-default_master_map_location.patch"
+  ]
+ },
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   1,
+   "http://www.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.0.5.tar.bz2"
+  ],
+  [
+   0,
+   "ftp://ftp.kernel.org/pub/linux/daemons/autofs/"
+  ],
+  [
+   7,
+   "https://github.com/gobolinux/Recipes/tree/master/AutoFS/5.0.5"
+  ],
+  [
+   9,
+   "https://github.com/gobolinux/Recipes/blob/master/AutoFS/5.0.5/Recipe"
+  ],
+  [
+   10,
+   "https://raw.githubusercontent.com/gobolinux/Recipes/master/AutoFS/5.0.5/Recipe"
+  ],
+  [
+   11,
+   "https://github.com/gobolinux/Recipes/blob/master/AutoFS/5.0.5/10-dont_install_initfile.patch"
+  ],
+  [
+   11,
+   "https://github.com/gobolinux/Recipes/blob/master/AutoFS/5.0.5/30-default_master_map_location.patch"
+  ],
+  [
+   12,
+   "https://raw.githubusercontent.com/gobolinux/Recipes/master/AutoFS/5.0.5/10-dont_install_initfile.patch"
+  ],
+  [
+   12,
+   "https://raw.githubusercontent.com/gobolinux/Recipes/master/AutoFS/5.0.5/30-default_master_map_location.patch"
+  ]
+ ],
+ "effname": "AutoFS",
+ "version": "5.0.5",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "slackbuilds",
+ "family": "slackbuilds",
+ "subrepo": null,
+ "name": null,
+ "srcname": "ham/baudline",
+ "binname": null,
+ "binnames": null,
+ "trackname": "ham/baudline",
+ "visiblename": "ham/baudline",
+ "projectname_seed": "baudline",
+ "origversion": "1.08",
+ "rawversion": "1.08",
+ "arch": null,
+ "maintainers": [
+  "joshuakwood@gmail.com"
+ ],
+ "category": "ham",
+ "comment": null,
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://www.baudline.com/"
+  ],
+  [
+   1,
+   "http://www.baudline.com/baudline_1.08_linux_i686.tar.gz"
+  ],
+  [
+   1,
+   "http://www.baudline.com/baudline_1.08_linux_x86_64.tar.gz"
+  ],
+  [
+   5,
+   "https://slackbuilds.org/repository/14.2/ham/baudline/"
+  ],
+  [
+   10,
+   "https://slackbuilds.org/slackbuilds/14.2/ham/baudline/baudline.SlackBuild"
+  ]
+ ],
+ "effname": "baudline",
+ "version": "1.08",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "slackbuilds",
+ "family": "slackbuilds",
+ "subrepo": null,
+ "name": null,
+ "srcname": "system/oracle-xe",
+ "binname": null,
+ "binnames": null,
+ "trackname": "system/oracle-xe",
+ "visiblename": "system/oracle-xe",
+ "projectname_seed": "oracle-xe",
+ "origversion": "11.2.0",
+ "rawversion": "11.2.0",
+ "arch": null,
+ "maintainers": [
+  "slack.dhabyx@gmail.com"
+ ],
+ "category": "system",
+ "comment": null,
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://www.oracle.com/technetwork/database/database-technologies/express-edition/overview/index.html"
+  ],
+  [
+   1,
+   "http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip"
+  ],
+  [
+   5,
+   "https://slackbuilds.org/repository/14.2/system/oracle-xe/"
+  ],
+  [
+   10,
+   "https://slackbuilds.org/slackbuilds/14.2/system/oracle-xe/oracle-xe.SlackBuild"
+  ]
+ ],
+ "effname": "oracle-xe",
+ "version": "11.2.0",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "slackbuilds",
+ "family": "slackbuilds",
+ "subrepo": null,
+ "name": null,
+ "srcname": "system/virtualbox",
+ "binname": null,
+ "binnames": null,
+ "trackname": "system/virtualbox",
+ "visiblename": "system/virtualbox",
+ "projectname_seed": "virtualbox",
+ "origversion": "5.0.30",
+ "rawversion": "5.0.30",
+ "arch": null,
+ "maintainers": [
+  "pprkut@liwjatan.at"
+ ],
+ "category": "system",
+ "comment": null,
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://www.virtualbox.org/"
+  ],
+  [
+   1,
+   "http://download.virtualbox.org/virtualbox/5.0.30/VirtualBox-5.0.30.tar.bz2"
+  ],
+  [
+   1,
+   "http://download.virtualbox.org/virtualbox/5.0.30/VBoxGuestAdditions_5.0.30.iso"
+  ],
+  [
+   1,
+   "http://download.virtualbox.org/virtualbox/5.0.30/UserManual.pdf"
+  ],
+  [
+   1,
+   "http://download.virtualbox.org/virtualbox/5.0.30/SDKRef.pdf"
+  ],
+  [
+   5,
+   "https://slackbuilds.org/repository/14.2/system/virtualbox/"
+  ],
+  [
+   10,
+   "https://slackbuilds.org/slackbuilds/14.2/system/virtualbox/virtualbox.SlackBuild"
+  ]
+ ],
+ "effname": "virtualbox",
+ "version": "5.0.30",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "slackbuilds",
+ "family": "slackbuilds",
+ "subrepo": null,
+ "name": null,
+ "srcname": "development/kforth",
+ "binname": null,
+ "binnames": null,
+ "trackname": "development/kforth",
+ "visiblename": "development/kforth",
+ "projectname_seed": "kforth",
+ "origversion": "1.5.2p1",
+ "rawversion": "1.5.2p1",
+ "arch": null,
+ "maintainers": [
+  "gschoen@iinet.net.au"
+ ],
+ "category": "development",
+ "comment": null,
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://ccreweb.org/software/kforth/kforth.html"
+  ],
+  [
+   1,
+   "ftp://ccreweb.org/software/kforth/linux/kforth-x86-linux-1.5.2.tar.gz"
+  ],
+  [
+   5,
+   "https://slackbuilds.org/repository/14.2/development/kforth/"
+  ],
+  [
+   10,
+   "https://slackbuilds.org/slackbuilds/14.2/development/kforth/kforth.SlackBuild"
+  ]
+ ],
+ "effname": "kforth",
+ "version": "1.5.2p1",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "slackbuilds",
+ "family": "slackbuilds",
+ "subrepo": null,
+ "name": null,
+ "srcname": "network/teamviewer",
+ "binname": null,
+ "binnames": null,
+ "trackname": "network/teamviewer",
+ "visiblename": "network/teamviewer",
+ "projectname_seed": "teamviewer",
+ "origversion": "12.0.76279",
+ "rawversion": "12.0.76279",
+ "arch": null,
+ "maintainers": [
+  "willysr@slackbuilds.org"
+ ],
+ "category": "network",
+ "comment": null,
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "https://www.teamviewer.com/"
+  ],
+  [
+   1,
+   "https://download.teamviewer.com/download/teamviewer_i386.deb"
+  ],
+  [
+   5,
+   "https://slackbuilds.org/repository/14.2/network/teamviewer/"
+  ],
+  [
+   10,
+   "https://slackbuilds.org/slackbuilds/14.2/network/teamviewer/teamviewer.SlackBuild"
+  ]
+ ],
+ "effname": "teamviewer",
+ "version": "12.0.76279",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "gentoo",
+ "family": "gentoo",
+ "subrepo": null,
+ "name": null,
+ "srcname": "app-test/aspell",
+ "binname": null,
+ "binnames": null,
+ "trackname": "app-test/aspell",
+ "visiblename": "app-test/aspell",
+ "projectname_seed": "aspell",
+ "origversion": "0.60.7_rc1",
+ "rawversion": "0.60.7_rc1",
+ "arch": null,
+ "maintainers": [
+  "maintainer-needed@gentoo.org"
+ ],
+ "category": "app-test",
+ "comment": "A spell checker replacement for ispell",
+ "licenses": [
+  "LGPL-2"
+ ],
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   1,
+   "mirror://gnu-alpha/aspell/aspell-0.60.7-rc1.tar.gz"
+  ],
+  [
+   0,
+   "http://aspell.net/"
+  ],
+  [
+   5,
+   "https://packages.gentoo.org/packages/app-test/aspell"
+  ],
+  [
+   7,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/app-test/aspell"
+  ],
+  [
+   9,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/app-test/aspell/aspell-0.60.7_rc1.ebuild"
+  ],
+  [
+   10,
+   "https://gitweb.gentoo.org/repo/gentoo.git/plain/app-test/aspell/aspell-0.60.7_rc1.ebuild"
+  ]
+ ],
+ "effname": "aspell",
+ "version": "0.60.7_rc1",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "gentoo",
+ "family": "gentoo",
+ "subrepo": null,
+ "name": null,
+ "srcname": "games-action/chromium-bsu",
+ "binname": null,
+ "binnames": null,
+ "trackname": "games-action/chromium-bsu",
+ "visiblename": "games-action/chromium-bsu",
+ "projectname_seed": "chromium-bsu",
+ "origversion": "0.9.15.1",
+ "rawversion": "0.9.15.1",
+ "arch": null,
+ "maintainers": [
+  "games@gentoo.org"
+ ],
+ "category": "games-action",
+ "comment": "Chromium B.S.U. - an arcade game",
+ "licenses": [
+  "Clarified-Artistic"
+ ],
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   1,
+   "mirror://sourceforge/chromium-bsu/chromium-bsu-0.9.15.1.tar.gz"
+  ],
+  [
+   0,
+   "http://chromium-bsu.sourceforge.net/"
+  ],
+  [
+   0,
+   "https://sourceforge.net/projects/chromium-bsu/"
+  ],
+  [
+   5,
+   "https://packages.gentoo.org/packages/games-action/chromium-bsu"
+  ],
+  [
+   7,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/games-action/chromium-bsu"
+  ],
+  [
+   9,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/games-action/chromium-bsu/chromium-bsu-0.9.15.1.ebuild"
+  ],
+  [
+   10,
+   "https://gitweb.gentoo.org/repo/gentoo.git/plain/games-action/chromium-bsu/chromium-bsu-0.9.15.1.ebuild"
+  ]
+ ],
+ "effname": "chromium-bsu",
+ "version": "0.9.15.1",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "gentoo",
+ "family": "gentoo",
+ "subrepo": null,
+ "name": null,
+ "srcname": "app-misc/asciinema",
+ "binname": null,
+ "binnames": null,
+ "trackname": "app-misc/asciinema",
+ "visiblename": "app-misc/asciinema",
+ "projectname_seed": "asciinema",
+ "origversion": "1.3.0",
+ "rawversion": "1.3.0",
+ "arch": null,
+ "maintainers": [
+  "kensington@gentoo.org"
+ ],
+ "category": "app-misc",
+ "comment": "Command line recorder for asciinema.org service",
+ "licenses": [
+  "GPL-3+"
+ ],
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   1,
+   "https://github.com/asciinema/asciinema/archive/v1.3.0.tar.gz"
+  ],
+  [
+   0,
+   "https://asciinema.org/"
+  ],
+  [
+   0,
+   "https://pypi.python.org/pypi/asciinema"
+  ],
+  [
+   0,
+   "https://github.com/asciinema/asciinema"
+  ],
+  [
+   0,
+   "https://pypi.org/project/asciinema/"
+  ],
+  [
+   5,
+   "https://packages.gentoo.org/packages/app-misc/asciinema"
+  ],
+  [
+   7,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/asciinema"
+  ],
+  [
+   9,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/asciinema/asciinema-1.3.0.ebuild"
+  ],
+  [
+   10,
+   "https://gitweb.gentoo.org/repo/gentoo.git/plain/app-misc/asciinema/asciinema-1.3.0.ebuild"
+  ]
+ ],
+ "effname": "asciinema",
+ "version": "1.3.0",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "gentoo",
+ "family": "gentoo",
+ "subrepo": null,
+ "name": null,
+ "srcname": "app-misc/away",
+ "binname": null,
+ "binnames": null,
+ "trackname": "app-misc/away",
+ "visiblename": "app-misc/away",
+ "projectname_seed": "away",
+ "origversion": "0.9.5",
+ "rawversion": "0.9.5-r1",
+ "arch": null,
+ "maintainers": [
+  "maintainer-needed@gentoo.org"
+ ],
+ "category": "app-misc",
+ "comment": "Terminal locking program with few additional features",
+ "licenses": [
+  "GPL-2"
+ ],
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   1,
+   "http://unbeatenpath.net/software/away/away-0.9.5.tar.bz2"
+  ],
+  [
+   0,
+   "http://unbeatenpath.net/software/away/"
+  ],
+  [
+   5,
+   "https://packages.gentoo.org/packages/app-misc/away"
+  ],
+  [
+   7,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/away"
+  ],
+  [
+   9,
+   "https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/away/away-0.9.5-r1.ebuild"
+  ],
+  [
+   10,
+   "https://gitweb.gentoo.org/repo/gentoo.git/plain/app-misc/away/away-0.9.5-r1.ebuild"
+  ]
+ ],
+ "effname": "away",
+ "version": "0.9.5",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "freebsd",
+ "family": "freebsd",
+ "subrepo": null,
+ "name": null,
+ "srcname": "sysutils/kiconvtool",
+ "binname": "kiconvtool",
+ "binnames": null,
+ "trackname": "sysutils/kiconvtool",
+ "visiblename": "sysutils/kiconvtool",
+ "projectname_seed": "kiconvtool",
+ "origversion": "0.97",
+ "rawversion": "0.97_1",
+ "arch": null,
+ "maintainers": [
+  "amdmi3@freebsd.org"
+ ],
+ "category": "sysutils",
+ "comment": "Tool to preload kernel iconv charset tables",
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://wiki.freebsd.org/DmitryMarakasov/kiconvtool"
+  ],
+  [
+   5,
+   "https://www.freshports.org/sysutils/kiconvtool"
+  ],
+  [
+   7,
+   "https://cgit.freebsd.org/ports/tree/sysutils/kiconvtool/"
+  ],
+  [
+   10,
+   "https://cgit.freebsd.org/ports/plain/sysutils/kiconvtool/Makefile"
+  ],
+  [
+   8,
+   "https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch=sysutils/kiconvtool"
+  ]
+ ],
+ "effname": "kiconvtool",
+ "version": "0.97",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "freebsd",
+ "family": "freebsd",
+ "subrepo": null,
+ "name": null,
+ "srcname": "audio/vorbis-tools",
+ "binname": "vorbis-tools",
+ "binnames": null,
+ "trackname": "audio/vorbis-tools",
+ "visiblename": "audio/vorbis-tools",
+ "projectname_seed": "vorbis-tools",
+ "origversion": "1.4.0",
+ "rawversion": "1.4.0_10,3",
+ "arch": null,
+ "maintainers": [
+  "naddy@freebsd.org"
+ ],
+ "category": "audio",
+ "comment": "Play, encode, and manage Ogg Vorbis files",
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://www.vorbis.com/"
+  ],
+  [
+   5,
+   "https://www.freshports.org/audio/vorbis-tools"
+  ],
+  [
+   7,
+   "https://cgit.freebsd.org/ports/tree/audio/vorbis-tools/"
+  ],
+  [
+   10,
+   "https://cgit.freebsd.org/ports/plain/audio/vorbis-tools/Makefile"
+  ],
+  [
+   8,
+   "https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch=audio/vorbis-tools"
+  ]
+ ],
+ "effname": "vorbis-tools",
+ "version": "1.4.0",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "arch",
+ "family": "arch",
+ "subrepo": "core",
+ "name": null,
+ "srcname": "zlib",
+ "binname": "zlib",
+ "binnames": null,
+ "trackname": "zlib",
+ "visiblename": "zlib",
+ "projectname_seed": "zlib",
+ "origversion": "1.2.8",
+ "rawversion": "1:1.2.8-7",
+ "arch": null,
+ "maintainers": null,
+ "category": null,
+ "comment": "Compression library implementing the deflate compression method found in gzip and PKZIP",
+ "licenses": [
+  "custom"
+ ],
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://www.zlib.net/"
+  ],
+  [
+   5,
+   "https://archlinux.org/packages/?q=zlib"
+  ],
+  [
+   7,
+   "https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/zlib"
+  ],
+  [
+   9,
+   "https://git.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/zlib"
+  ],
+  [
+   10,
+   "https://git.archlinux.org/svntogit/packages.git/plain/trunk/PKGBUILD?h=packages/zlib"
+  ]
+ ],
+ "effname": "zlib",
+ "version": "1.2.8",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
+ "repo": "cpan",
+ "family": "cpan",
+ "subrepo": null,
+ "name": "Acme-Brainfuck",
+ "srcname": null,
+ "binname": null,
+ "binnames": null,
+ "trackname": "Acme-Brainfuck",
+ "visiblename": "Acme-Brainfuck",
+ "projectname_seed": "Acme-Brainfuck",
+ "origversion": "1.1.1",
+ "rawversion": "1.1.1",
+ "arch": null,
+ "maintainers": [
+  "jaldhar@cpan"
+ ],
+ "category": null,
+ "comment": null,
+ "licenses": null,
+ "extrafields": null,
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "http://search.cpan.org/dist/Acme-Brainfuck/"
+  ]
+ ],
+ "effname": "Acme-Brainfuck",
+ "version": "1.1.1",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": true,
+ "flavors": [],
+ "branch": null
+}

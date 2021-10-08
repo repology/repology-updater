@@ -6,6 +6,7 @@ lxml-stubs
 mypy
 pytest
 pytest-cov
+pytest-regtest
 types-Jinja2
 types-PyYAML
 types-protobuf
