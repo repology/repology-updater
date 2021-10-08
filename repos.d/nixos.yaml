@@ -55,4 +55,4 @@
   packagelinks:
     - type: PACKAGE_RECIPE
       url: 'https://github.com/NixOS/nixpkgs/blob/master/{posfile}#L{posline}'
-  tags: [ all, production, nix ]
+  tags: [ all, production, have_testdata, nix ]

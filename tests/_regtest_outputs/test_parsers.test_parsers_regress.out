@@ -370,6 +370,62 @@
  "branch": null
 }
 {
+ "repo": "nix_unstable",
+ "family": "nix",
+ "subrepo": null,
+ "name": "0ad",
+ "srcname": null,
+ "binname": null,
+ "binnames": null,
+ "trackname": "zeroadPackages.zeroad-unwrapped",
+ "visiblename": "0ad",
+ "projectname_seed": "0ad",
+ "origversion": "0.0.25b",
+ "rawversion": "0.0.25b",
+ "arch": null,
+ "maintainers": [
+  "nixpkgs@cvpetegem.be"
+ ],
+ "category": "zeroadPackages",
+ "comment": "A free, open-source game of ancient warfare",
+ "licenses": [
+  "GPL-2.0",
+  "LGPL-2.1",
+  "MIT",
+  "CC-BY-SA-3.0",
+  "Zlib"
+ ],
+ "extrafields": {
+  "posfile": "pkgs/games/0ad/game.nix",
+  "posline": "98"
+ },
+ "cpe_vendor": null,
+ "cpe_product": null,
+ "cpe_edition": null,
+ "cpe_lang": null,
+ "cpe_sw_edition": null,
+ "cpe_target_sw": null,
+ "cpe_target_hw": null,
+ "cpe_other": null,
+ "links": [
+  [
+   0,
+   "https://play0ad.com/"
+  ],
+  [
+   9,
+   "https://github.com/NixOS/nixpkgs/blob/master/pkgs/games/0ad/game.nix#L98"
+  ]
+ ],
+ "effname": "0ad",
+ "version": "0.0.25b",
+ "versionclass": 0,
+ "flags": 0,
+ "shadow": false,
+ "flavors": [],
+ "branch": null
+}
+{
  "repo": "gentoo",
  "family": "gentoo",
  "subrepo": null,
