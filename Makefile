@@ -9,6 +9,9 @@ lint:: check test flake8 mypy
 test::
 	${PYTEST} ${PYTEST_ARGS} -v -rs
 
+canonize::
+	${PYTEST} ${PYTEST_ARGS} -v -rs -k _regress --regtest-reset
+
 test-make-dump::
 	psql -U repology_test -At -c "select tablename from pg_tables where schemaname = 'public'" | \
 		sed -e 's|.*|drop table & cascade;|' | psql -U repology_test
