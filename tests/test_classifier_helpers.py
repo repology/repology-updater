@@ -21,7 +21,7 @@ from repology.package import Package
 from .package import spawn_package
 
 
-def test_is_packageset_unique() -> None:
+def test_is_packageset_unique():
     packages: list[Package] = []
     assert _is_packageset_unique(packages)
 

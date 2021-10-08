@@ -21,7 +21,7 @@ from . import check_transformer
 from ..package import PackageSample
 
 
-def test_remove_true() -> None:
+def test_remove_true():
     check_transformer(
         '[ { name: p1, remove: true } ]',
         PackageSample(name='p1', version='1.0').expect(flags=Pf.REMOVE),
@@ -29,7 +29,7 @@ def test_remove_true() -> None:
     )
 
 
-def test_remove_false() -> None:
+def test_remove_false():
     check_transformer(
         '[ { name: p1, remove: false } ]',
         PackageSample(name='p1', version='1.0', flags=Pf.REMOVE).expect(flags=0),
@@ -37,7 +37,7 @@ def test_remove_false() -> None:
     )
 
 
-def test_ignore_true() -> None:
+def test_ignore_true():
     check_transformer(
         '[ { name: p1, ignore: true } ]',
         PackageSample(name='p1', version='1.0').expect(flags=Pf.IGNORE),
@@ -45,7 +45,7 @@ def test_ignore_true() -> None:
     )
 
 
-def test_ignore_false() -> None:
+def test_ignore_false():
     check_transformer(
         '[ { name: p1, ignore: false } ]',
         PackageSample(name='p1', version='1.0', flags=Pf.IGNORE).expect(flags=0),
@@ -53,7 +53,7 @@ def test_ignore_false() -> None:
     )
 
 
-def test_devel_true() -> None:
+def test_devel_true():
     check_transformer(
         '[ { name: p1, devel: true } ]',
         PackageSample(name='p1', version='1.0').expect(flags=Pf.DEVEL),
@@ -61,7 +61,7 @@ def test_devel_true() -> None:
     )
 
 
-def test_devel_false() -> None:
+def test_devel_false():
     check_transformer(
         '[ { name: p1, devel: false } ]',
         PackageSample(name='p1', version='1.0', flags=Pf.DEVEL).expect(flags=0),
@@ -69,7 +69,7 @@ def test_devel_false() -> None:
     )
 
 
-def test_stable_true() -> None:
+def test_stable_true():
     check_transformer(
         '[ { name: p1, stable: true } ]',
         PackageSample(name='p1', version='1.0').expect(flags=Pf.STABLE),
@@ -77,7 +77,7 @@ def test_stable_true() -> None:
     )
 
 
-def test_stable_false() -> None:
+def test_stable_false():
     check_transformer(
         '[ { name: p1, stable: false } ]',
         PackageSample(name='p1', version='1.0', flags=Pf.STABLE).expect(flags=0),
@@ -85,7 +85,7 @@ def test_stable_false() -> None:
     )
 
 
-def test_altver_true() -> None:
+def test_altver_true():
     check_transformer(
         '[ { name: p1, altver: true } ]',
         PackageSample(name='p1', version='1.0').expect(flags=Pf.ALTVER),
@@ -93,7 +93,7 @@ def test_altver_true() -> None:
     )
 
 
-def test_altver_false() -> None:
+def test_altver_false():
     check_transformer(
         '[ { name: p1, altver: false } ]',
         PackageSample(name='p1', version='1.0', flags=Pf.ALTVER).expect(flags=0),
@@ -101,7 +101,7 @@ def test_altver_false() -> None:
     )
 
 
-def test_vulnerable_true() -> None:
+def test_vulnerable_true():
     check_transformer(
         '[ { name: p1, vulnerable: true } ]',
         PackageSample(name='p1', version='1.0').expect(flags=Pf.VULNERABLE),
@@ -109,7 +109,7 @@ def test_vulnerable_true() -> None:
     )
 
 
-def test_vulnerable_false() -> None:
+def test_vulnerable_false():
     check_transformer(
         '[ { name: p1, vulnerable: false } ]',
         PackageSample(name='p1', version='1.0', flags=Pf.VULNERABLE).expect(flags=0),
@@ -117,14 +117,14 @@ def test_vulnerable_false() -> None:
     )
 
 
-def test_setbranch() -> None:
+def test_setbranch():
     check_transformer(
         '[ { setbranch: "9.x" } ]',
         PackageSample().expect(branch='9.x'),
     )
 
 
-def test_setbranchcomps() -> None:
+def test_setbranchcomps():
     check_transformer(
         '[ { setbranchcomps: 1 } ]',
         PackageSample(version='1.2.3.4').expect(branch='1'),
@@ -146,21 +146,21 @@ def test_setbranchcomps() -> None:
     )
 
 
-def test_setname() -> None:
+def test_setname():
     check_transformer(
         '[ { setname: "bar" } ]',
         PackageSample(name='foo', version='1.0').expect(name='foo', effname='bar'),
     )
 
 
-def test_setname_subst() -> None:
+def test_setname_subst():
     check_transformer(
         '[ { setname: "bar_$0" } ]',
         PackageSample(name='foo', version='1.0').expect(name='foo', effname='bar_foo'),
     )
 
 
-def test_setname_reverse_subst() -> None:
+def test_setname_reverse_subst():
     check_transformer(
         '[ { setname: foo, name: [ $0-client, $0-server ] } ]',
         PackageSample(name='foo-client', version='1.0').expect(effname='foo'),
@@ -176,14 +176,14 @@ def test_setname_reverse_subst() -> None:
     )
 
 
-def test_setver() -> None:
+def test_setver():
     check_transformer(
         '[ { setver: "2.0" } ]',
         PackageSample(name='foo', version='1.0').expect(version='2.0'),
     )
 
 
-def test_setver_subst() -> None:
+def test_setver_subst():
     check_transformer(
         '[ { setver: "2.$0" } ]',
         PackageSample(name='foo', version='1.0').expect(version='2.1.0'),
@@ -194,28 +194,28 @@ def test_setver_subst() -> None:
     )
 
 
-def test_setver_setname_subst() -> None:
+def test_setver_setname_subst():
     check_transformer(
         '[ { namepat: "f(.*)", verpat: "1(.*)", setname: "$1/$0", setver: "$1/$0" } ]',
         PackageSample(name='foo', version='1.0').expect(effname='oo/foo', version='.0/1.0'),
     )
 
 
-def test_tolowername() -> None:
+def test_tolowername():
     check_transformer(
         '[ { tolowername: true } ]',
         PackageSample(name='fOoBaR', version='1.0').expect(name='fOoBaR', effname='foobar'),
     )
 
 
-def test_last() -> None:
+def test_last():
     check_transformer(
         '[ { last: true }, { setname: "bar" } ]',
         PackageSample(name='foo', version='1.0').expect(effname='foo'),
     )
 
 
-def test_addflavor() -> None:
+def test_addflavor():
     check_transformer(
         '[ { name: foo, addflavor: fff } ]',
         PackageSample(name='foo', version='1.0').expect(flavors=['fff']),

@@ -22,31 +22,31 @@ from repology.parsers.nevra import EpochMode, nevra_construct, nevra_parse
 
 
 class TestNevraConstruct:
-    def test_basic(self) -> None:
+    def test_basic(self):
         assert nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src') == 'foo-1:1.2.3-fc34.git20181111.src'
 
-    def test_epoch_mode_preserve(self) -> None:
+    def test_epoch_mode_preserve(self):
         assert nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE) == 'foo-1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', 0, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE) == 'foo-0:1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE) == 'foo-1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '0', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE) == 'foo-0:1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE) == 'foo-1:1.2.3-fc34.git20181111.src'
 
-    def test_epoch_mode_provide(self) -> None:
+    def test_epoch_mode_provide(self):
         assert nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE) == 'foo-0:1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', 0, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE) == 'foo-0:1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE) == 'foo-0:1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '0', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE) == 'foo-0:1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE) == 'foo-1:1.2.3-fc34.git20181111.src'
 
-    def test_epoch_mode_trim(self) -> None:
+    def test_epoch_mode_trim(self):
         assert nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM) == 'foo-1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', 0, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM) == 'foo-1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM) == 'foo-1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '0', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM) == 'foo-1.2.3-fc34.git20181111.src'
         assert nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM) == 'foo-1:1.2.3-fc34.git20181111.src'
 
-    def test_partial(self) -> None:
+    def test_partial(self):
         assert nevra_construct(None, '1', '1.2.3', 'fc34.git20181111', 'src') == '1:1.2.3-fc34.git20181111.src'
 
         assert nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src') == 'foo-1.2.3-fc34.git20181111.src'
@@ -60,33 +60,33 @@ class TestNevraConstruct:
 
 
 class TestNevraParse:
-    def test_basic(self) -> None:
+    def test_basic(self):
         assert nevra_parse('foo-1.2.3-1.i386') == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-bar-baz-999:1.2.3-1.src') == ('foo-bar-baz', '999', '1.2.3', '1', 'src')
 
-    def test_filename(self) -> None:
+    def test_filename(self):
         assert nevra_parse('foo-1.2.3-1.i386.rpm') == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-bar-baz-999:1.2.3-1.src.rpm') == ('foo-bar-baz', '999', '1.2.3', '1', 'src')
 
-    def test_epoch_mode_str_preserve(self) -> None:
+    def test_epoch_mode_str_preserve(self):
         assert nevra_parse('foo-1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE) == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-0:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE) == ('foo', '0', '1.2.3', '1', 'i386')
         assert nevra_parse('foo-1:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE) == ('foo', '1', '1.2.3', '1', 'i386')
         assert nevra_parse('foo-x:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE) == ('foo', 'x', '1.2.3', '1', 'i386')
 
-    def test_epoch_mode_str_provide(self) -> None:
+    def test_epoch_mode_str_provide(self):
         assert nevra_parse('foo-1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE) == ('foo', '0', '1.2.3', '1', 'i386')
         assert nevra_parse('foo-0:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE) == ('foo', '0', '1.2.3', '1', 'i386')
         assert nevra_parse('foo-1:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE) == ('foo', '1', '1.2.3', '1', 'i386')
         assert nevra_parse('foo-x:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE) == ('foo', 'x', '1.2.3', '1', 'i386')
 
-    def test_epoch_type_str_trim(self) -> None:
+    def test_epoch_type_str_trim(self):
         assert nevra_parse('foo-1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM) == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-0:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM) == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-1:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM) == ('foo', '1', '1.2.3', '1', 'i386')
         assert nevra_parse('foo-x:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM) == ('foo', 'x', '1.2.3', '1', 'i386')
 
-    def test_epoch_mode_int_preserve(self) -> None:
+    def test_epoch_mode_int_preserve(self):
         assert nevra_parse('foo-1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE) == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-0:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE) == ('foo', 0, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-1:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE) == ('foo', 1, '1.2.3', '1', 'i386')
@@ -94,7 +94,7 @@ class TestNevraParse:
         with pytest.raises(ValueError):
             nevra_parse('foo-x:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE)
 
-    def test_epoch_type_int_provide(self) -> None:
+    def test_epoch_type_int_provide(self):
         assert nevra_parse('foo-1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE) == ('foo', 0, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-0:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE) == ('foo', 0, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-1:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE) == ('foo', 1, '1.2.3', '1', 'i386')
@@ -102,7 +102,7 @@ class TestNevraParse:
         with pytest.raises(ValueError):
             nevra_parse('foo-x:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE)
 
-    def test_epoch_type_int_trim(self) -> None:
+    def test_epoch_type_int_trim(self):
         assert nevra_parse('foo-1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.TRIM) == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-0:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.TRIM) == ('foo', None, '1.2.3', '1', 'i386')
         assert nevra_parse('foo-1:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.TRIM) == ('foo', 1, '1.2.3', '1', 'i386')
@@ -112,39 +112,39 @@ class TestNevraParse:
 
 
 class TestSplitMaintainers:
-    def test_simple(self) -> None:
+    def test_simple(self):
         assert extract_maintainers('amdmi3@FreeBSD.org') == ['amdmi3@freebsd.org']
         assert extract_maintainers('amdmi3@FAKE') == ['amdmi3@fake']
 
-    def test_name(self) -> None:
+    def test_name(self):
         assert extract_maintainers('Dmitry Marakasov <amdmi3@FreeBSD.org>') == ['amdmi3@freebsd.org']
         assert extract_maintainers('"Dmitry Marakasov" <amdmi3@FreeBSD.org>') == ['amdmi3@freebsd.org']
 
-    def test_name_comma(self) -> None:
+    def test_name_comma(self):
         assert extract_maintainers('Marakasov, Dmitry <amdmi3@FreeBSD.org>') == ['amdmi3@freebsd.org']
         assert extract_maintainers('"Marakasov, Dmitry" <amdmi3@FreeBSD.org>') == ['amdmi3@freebsd.org']
 
-    def test_lists(self) -> None:
+    def test_lists(self):
         assert extract_maintainers('amdmi3@FreeBSD.org,gnome@FreeBSD.org') == ['amdmi3@freebsd.org', 'gnome@freebsd.org']
         assert extract_maintainers('amdmi3@FreeBSD.org, gnome@FreeBSD.org') == ['amdmi3@freebsd.org', 'gnome@freebsd.org']
         assert extract_maintainers('amdmi3@FreeBSD.org gnome@FreeBSD.org') == ['amdmi3@freebsd.org', 'gnome@freebsd.org']
 
-    def test_list_name(self) -> None:
+    def test_list_name(self):
         assert extract_maintainers('Dmitry Marakasov <amdmi3@FreeBSD.org>, Gnome Guys <gnome@FreeBSD.org>') == ['amdmi3@freebsd.org', 'gnome@freebsd.org']
 
-    def test_list_name_complex(self) -> None:
+    def test_list_name_complex(self):
         assert extract_maintainers('Marakasov, Dmitry <amdmi3@FreeBSD.org>, Guys, Gnome <gnome@FreeBSD.org>') == ['amdmi3@freebsd.org', 'gnome@freebsd.org']
 
-    def test_list_name_ambigous(self) -> None:
+    def test_list_name_ambigous(self):
         # apart from samples form test_lists above, this is ambiguous -
         # words may be a name, or may be an obfuscated email. These
         # should be skipped
         assert extract_maintainers('dmitry marakasov amdmi3@FreeBSD.org, foo dot bar@FreeBSD.org') == []
 
-    def test_garbage(self) -> None:
+    def test_garbage(self):
         assert extract_maintainers(',amdmi3@FreeBSD.org, ,,   ') == ['amdmi3@freebsd.org']
 
-    def test_immune_to_obfuscation(self) -> None:
+    def test_immune_to_obfuscation(self):
         assert extract_maintainers('amdmi3[at]FreeBSD[dot]org') == []
         assert extract_maintainers('amdmi3 [ at ] FreeBSD [ dot ] org') == []
         assert extract_maintainers('amdmi3 at FreeBSD dot org') == []
@@ -164,7 +164,7 @@ class TestSplitMaintainers:
         assert extract_maintainers('amdNOmi3@freeSPAMbsd.org (remove NO and SPAM)') == []
         assert extract_maintainers('amdmi3 @ google mail') == []
 
-    def test_empty(self) -> None:
+    def test_empty(self):
         assert extract_maintainers('somecrap') == []
         assert extract_maintainers('') == []
         assert extract_maintainers('http://repology.org') == []

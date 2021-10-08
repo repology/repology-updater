@@ -18,17 +18,17 @@
 from repology.parsers.versions import VersionStripper
 
 
-def test_identity() -> None:
+def test_identity():
     assert VersionStripper()('1.2.3') == '1.2.3'
 
 
-def test_basic() -> None:
+def test_basic():
     assert VersionStripper().strip_left('.')('1.2.3') == '2.3'
     assert VersionStripper().strip_left_greedy('.')('1.2.3') == '3'
     assert VersionStripper().strip_right('.')('1.2.3') == '1.2'
     assert VersionStripper().strip_right_greedy('.')('1.2.3') == '1'
 
 
-def test_order() -> None:
+def test_order():
     assert VersionStripper().strip_right('_').strip_right(',')('1_2,3_4') == '1_2'
     assert VersionStripper().strip_right(',').strip_right('_')('1_2,3_4') == '1'

@@ -21,24 +21,24 @@ from repology.package import PackageFlags as Pf
 from repology.parsers.versions import parse_debian_version
 
 
-def test_basic() -> None:
+def test_basic():
     assert parse_debian_version('1.2.3-1') == ('1.2.3', 0)
 
 
-def test_revision() -> None:
+def test_revision():
     assert parse_debian_version('1.2.3-1.2.3') == ('1.2.3', 0)
 
 
-def test_revision_is_not_greedy() -> None:
+def test_revision_is_not_greedy():
     assert parse_debian_version('1-2-3-4')[0] == '1-2-3'
 
 
 @pytest.mark.xfail(reason='cannot tell this case from snapshots like 1-20210101')
-def test_minus_parts_do_not_produce_extra_flags() -> None:
+def test_minus_parts_do_not_produce_extra_flags():
     assert parse_debian_version('1-2-3-4')[1] == 0
 
 
-def test_epoch() -> None:
+def test_epoch():
     assert parse_debian_version('1:1.2.3-1') == ('1.2.3', 0)
 
 
@@ -48,11 +48,11 @@ def test_epoch() -> None:
     '+dfsg1.3',
     '+ds3',
 ])
-def test_garbage_suffixes(suffix: str) -> None:
+def test_garbage_suffixes(suffix: str):
     assert parse_debian_version(f'1.1.2{suffix}-2') == ('1.1.2', 0)
 
 
-def test_inseparable_garbage() -> None:
+def test_inseparable_garbage():
     assert parse_debian_version('1.1.2dfsg3') == ('1.1.2dfsg3', Pf.INCORRECT)
 
 
@@ -109,7 +109,7 @@ def test_inseparable_garbage() -> None:
     ('2is1', Pf.INCORRECT),
     ('2.is.really.1', Pf.INCORRECT),
 ])
-def test_suffixes(version: str, expected_flags: int) -> None:
+def test_suffixes(version: str, expected_flags: int):
     assert parse_debian_version(f'{version}-1') == (version, expected_flags)
 
 
@@ -127,7 +127,7 @@ def test_suffixes(version: str, expected_flags: int) -> None:
     pytest.param('10.2+2.0.1-dmo1', '10.2+2.0.1', Pf.IGNORE, id='libcdio-paranoia'),
     pytest.param('1.5.0~rc2+git20210630+ds-2', '1.5.0~rc2+git20210630', Pf.DEVEL | Pf.IGNORE, id='goldendict'),
 ])
-def test_real_world(version: str, expected_version: str, expected_flags: int) -> None:
+def test_real_world(version: str, expected_version: str, expected_flags: int):
     fixed_version, flags = parse_debian_version(version)
     assert fixed_version == expected_version
     assert flags == expected_flags
@@ -141,7 +141,7 @@ def test_real_world(version: str, expected_version: str, expected_flags: int) ->
     pytest.param('2021-08-25+ds-1', '2021-08-25', 0, id='gmap'),
     pytest.param('21.08.1+p20.04+tstable+git20210921.0023-0', '21.08.1+p20.04+tstable+git20210921.0023', Pf.IGNORE, id='kdeconnect'),
 ])
-def test_real_world_weak(version: str, expected_version: str, expected_flags: int) -> None:
+def test_real_world_weak(version: str, expected_version: str, expected_flags: int):
     # checks for existence of specified flags, ignores other flags
     fixed_version, flags = parse_debian_version(version)
     assert fixed_version == expected_version

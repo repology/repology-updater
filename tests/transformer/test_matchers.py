@@ -21,7 +21,7 @@ from . import check_transformer
 from ..package import PackageSample
 
 
-def test_name() -> None:
+def test_name():
     check_transformer(
         '[ { name: p1, setname: bar }, { name: [p3], setname: baz } ]',
         PackageSample(name='p1', version='1.0').expect(effname='bar'),
@@ -30,7 +30,7 @@ def test_name() -> None:
     )
 
 
-def test_name_multi() -> None:
+def test_name_multi():
     # XXX: may not in fact cover multi-name branch of `name' matcher
     # bacause rules with multiple names are split to single-name rules
     # in Ruleset as an optimization
@@ -42,7 +42,7 @@ def test_name_multi() -> None:
     )
 
 
-def test_namepat() -> None:
+def test_namepat():
     check_transformer(
         '[ { namepat: ".*1", setname: bar } ]',
         PackageSample(name='p1', version='1.0').expect(effname='bar'),
@@ -68,7 +68,7 @@ def test_namepat() -> None:
     )
 
 
-def test_ver() -> None:
+def test_ver():
     check_transformer(
         '[ { ver: "1.0", setname: bar }, { ver: ["3.0"], setname: baz } ]',
         PackageSample(name='p1', version='1.0').expect(effname='bar'),
@@ -77,7 +77,7 @@ def test_ver() -> None:
     )
 
 
-def test_ver_multi() -> None:
+def test_ver_multi():
     check_transformer(
         '[ { ver: ["1.0", "2.0"], setname: bar } ]',
         PackageSample(name='p1', version='1.0').expect(effname='bar'),
@@ -86,7 +86,7 @@ def test_ver_multi() -> None:
     )
 
 
-def test_notver() -> None:
+def test_notver():
     check_transformer(
         '[ { notver: "1.0", setname: bar }, { notver: ["1.0", "3.0"], setname: baz } ]',
         PackageSample(name='p1', version='1.0').expect(effname='p1'),
@@ -95,7 +95,7 @@ def test_notver() -> None:
     )
 
 
-def test_verpat() -> None:
+def test_verpat():
     check_transformer(
         '[ { verpat: "1.*", setname: bar } ]',
         PackageSample(name='p1', version='1.0').expect(effname='bar'),
@@ -104,7 +104,7 @@ def test_verpat() -> None:
     )
 
 
-def test_verpat_case_ignored() -> None:
+def test_verpat_case_ignored():
     check_transformer(
         '[ { verpat: ".*beta.*", setname: bar } ]',
         PackageSample(name='p1', version='1beta1').expect(effname='bar'),
@@ -112,7 +112,7 @@ def test_verpat_case_ignored() -> None:
     )
 
 
-def test_verlonger() -> None:
+def test_verlonger():
     check_transformer(
         '[ { verlonger: 2, setname: bar } ]',
         PackageSample(name='p1', version='1.0.0').expect(effname='bar'),
@@ -121,7 +121,7 @@ def test_verlonger() -> None:
     )
 
 
-def test_vercomps() -> None:
+def test_vercomps():
     check_transformer(
         '[ { vercomps: 2, setname: bar } ]',
         PackageSample(name='p1', version='1').expect(effname='p1'),
@@ -133,7 +133,7 @@ def test_vercomps() -> None:
     )
 
 
-def test_vergt() -> None:
+def test_vergt():
     check_transformer(
         '[ { vergt: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
@@ -144,7 +144,7 @@ def test_vergt() -> None:
     )
 
 
-def test_verge() -> None:
+def test_verge():
     check_transformer(
         '[ { verge: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
@@ -155,7 +155,7 @@ def test_verge() -> None:
     )
 
 
-def test_verlt() -> None:
+def test_verlt():
     check_transformer(
         '[ { verlt: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
@@ -166,7 +166,7 @@ def test_verlt() -> None:
     )
 
 
-def test_verle() -> None:
+def test_verle():
     check_transformer(
         '[ { verle: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
@@ -177,7 +177,7 @@ def test_verle() -> None:
     )
 
 
-def test_vereq() -> None:
+def test_vereq():
     check_transformer(
         '[ { vereq: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
@@ -188,7 +188,7 @@ def test_vereq() -> None:
     )
 
 
-def test_verne() -> None:
+def test_verne():
     check_transformer(
         '[ { verne: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
@@ -199,7 +199,7 @@ def test_verne() -> None:
     )
 
 
-def test_relgt() -> None:
+def test_relgt():
     check_transformer(
         '[ { relgt: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
@@ -210,7 +210,7 @@ def test_relgt() -> None:
     )
 
 
-def test_relge() -> None:
+def test_relge():
     check_transformer(
         '[ { relge: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
@@ -221,7 +221,7 @@ def test_relge() -> None:
     )
 
 
-def test_rellt() -> None:
+def test_rellt():
     check_transformer(
         '[ { rellt: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
@@ -232,7 +232,7 @@ def test_rellt() -> None:
     )
 
 
-def test_relle() -> None:
+def test_relle():
     check_transformer(
         '[ { relle: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
@@ -243,7 +243,7 @@ def test_relle() -> None:
     )
 
 
-def test_releq() -> None:
+def test_releq():
     check_transformer(
         '[ { releq: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='p1'),
@@ -254,7 +254,7 @@ def test_releq() -> None:
     )
 
 
-def test_relne() -> None:
+def test_relne():
     check_transformer(
         '[ { relne: "1.0", setname: bar } ]',
         PackageSample(name='p1', version='0.9.0').expect(effname='bar'),
@@ -265,7 +265,7 @@ def test_relne() -> None:
     )
 
 
-def test_wwwpat() -> None:
+def test_wwwpat():
     check_transformer(
         '[ { wwwpat: "https?://foo\\\\.com/.*", setname: bar } ]',
         PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.com/xxx')]).expect(effname='bar'),
@@ -278,7 +278,7 @@ def test_wwwpat() -> None:
     )
 
 
-def test_wwwpart() -> None:
+def test_wwwpart():
     check_transformer(
         '[ { wwwpart: "foo", setname: bar } ]',
         PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://foo/xxx')]).expect(effname='bar'),
@@ -289,7 +289,7 @@ def test_wwwpart() -> None:
     )
 
 
-def test_wwwpart_case() -> None:
+def test_wwwpart_case():
     check_transformer(
         '[ { wwwpart: homepage1, setname: ok1 }, { wwwpart: HOMEPAGE2, setname: ok2 }, { wwwpart: homepage3, setname: ok3 }, { wwwpart: HOMEPAGE4, setname: ok4 } ]',
         PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://homepage1')]).expect(effname='ok1'),
@@ -303,7 +303,7 @@ def test_wwwpart_case() -> None:
     )
 
 
-def test_summpart() -> None:
+def test_summpart():
     check_transformer(
         '[ { summpart: Browser, setname: match }, { wwwpart: shouldnotmatch, setname: false } ]',
         PackageSample(name='p1', version='1.0', comment='Web browseR').expect(effname='match'),
@@ -312,7 +312,7 @@ def test_summpart() -> None:
     )
 
 
-def test_ruleset() -> None:
+def test_ruleset():
     check_transformer(
         '[ { ruleset: foo, setname: quux }, { ruleset: [ baz ], setname: bat } ]',
         PackageSample(name='p1', version='1.0', repo='foo').expect(effname='quux'),
@@ -321,7 +321,7 @@ def test_ruleset() -> None:
     )
 
 
-def test_noruleset() -> None:
+def test_noruleset():
     check_transformer(
         '[ { noruleset: baz, setname: bat } ]',
         PackageSample(name='p1', version='1.0', repo='foo').expect(effname='bat'),
@@ -330,7 +330,7 @@ def test_noruleset() -> None:
     )
 
 
-def test_category() -> None:
+def test_category():
     check_transformer(
         '[ { category: foo, setname: quux }, { category: [ baz ], setname: bat } ]',
         PackageSample(name='p1', version='1.0', category='foo').expect(effname='quux'),
@@ -339,7 +339,7 @@ def test_category() -> None:
     )
 
 
-def test_category_case() -> None:
+def test_category_case():
     check_transformer(
         '[ { category: categ1, setname: ok1 }, { category: CATEG2, setname: ok2 }, { category: categ3, setname: ok3 }, { category: CATEG4, setname: ok4 } ]',
         PackageSample(name='p1', version='1.0', category='categ1').expect(effname='ok1'),
@@ -353,7 +353,7 @@ def test_category_case() -> None:
     )
 
 
-def test_maintainer() -> None:
+def test_maintainer():
     check_transformer(
         '[ { maintainer: "Foo@bAz.com", setname: quux }, { maintainer: [ "Bar@baZ.com" ], setname: bat } ]',
         PackageSample(name='p1', version='1.0', maintainers=['foo@baz.COM', 'bbb']).expect(effname='quux'),
@@ -363,7 +363,7 @@ def test_maintainer() -> None:
     )
 
 
-def test_hasbranch() -> None:
+def test_hasbranch():
     check_transformer(
         '[ { hasbranch: true, setname: "hasbranch" }, { hasbranch: false, setname: "nobranch" } ]',
         PackageSample().expect(effname='nobranch'),
@@ -371,7 +371,7 @@ def test_hasbranch() -> None:
     )
 
 
-def test_is_p_is_patch() -> None:
+def test_is_p_is_patch():
     check_transformer(
         '[ { is_p_is_patch: true, setname: bar } ]',
         PackageSample(name='p1').expect(effname='p1'),

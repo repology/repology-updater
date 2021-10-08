@@ -24,7 +24,7 @@ def assert_version_compare(a: Package, b: Package, res: int) -> None:
     assert a.version_compare(b) == res
 
 
-def test_equality() -> None:
+def test_equality():
     assert spawn_package() == spawn_package()
     assert spawn_package(name='a') == spawn_package(name='a')
     assert spawn_package(
@@ -46,7 +46,7 @@ def test_equality() -> None:
     assert spawn_package(name='a') != spawn_package()
 
 
-def test_flag_p_is_patch() -> None:
+def test_flag_p_is_patch():
     assert_version_compare(
         spawn_package(version='1.0p1'), spawn_package(version='1.0p1'), 0
     )
@@ -67,7 +67,7 @@ def test_flag_p_is_patch() -> None:
     )
 
 
-def test_flag_sink() -> None:
+def test_flag_sink():
     assert_version_compare(
         spawn_package(version='1.0'), spawn_package(version='1.0'), 0
     )
@@ -88,7 +88,7 @@ def test_flag_sink() -> None:
     )
 
 
-def test_flag_rolling() -> None:
+def test_flag_rolling():
     assert_version_compare(
         spawn_package(version='1.0'), spawn_package(version='1.0'), 0
     )
@@ -109,7 +109,7 @@ def test_flag_rolling() -> None:
     )
 
 
-def test_hash() -> None:
+def test_hash():
     assert (
         spawn_package(
             name='foo',

@@ -21,7 +21,7 @@ from . import check_transformer
 from ..package import PackageSample
 
 
-def test_flag_chain() -> None:
+def test_flag_chain():
     check_transformer(
         '[ { name: p1, addflag: xyz }, { flag: xyz, setname: bar }, { noflag: xyz, setname: baz } ]',
         PackageSample(name='p1', version='1.0').expect(effname='bar'),
@@ -29,7 +29,7 @@ def test_flag_chain() -> None:
     )
 
 
-def test_setname_chain() -> None:
+def test_setname_chain():
     check_transformer(
         '[ { name: aaa, setname: bbb }, { name: bbb, setname: ccc }, { name: eee, setname: fff }, { name: ddd, setname: eee } ]',
         PackageSample(name='aaa', version='1.0').expect(effname='ccc'),
@@ -39,7 +39,7 @@ def test_setname_chain() -> None:
     )
 
 
-def test_multiflags() -> None:
+def test_multiflags():
     check_transformer(
         '[ { devel: true, ignore: false, noscheme: true }, { ignore: true, noscheme: false } ]',
         PackageSample(name='aaa', version='1.0').expect(flags=Pf.DEVEL | Pf.IGNORE),

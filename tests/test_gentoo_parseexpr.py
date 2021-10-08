@@ -22,28 +22,28 @@ def parse_conditional_expr(string: str) -> list[str]:
     return list(_parse_conditional_expr(string))
 
 
-def test_simple() -> None:
+def test_simple():
     assert parse_conditional_expr('http://foo') == ['http://foo']
 
 
-def test_multiple() -> None:
+def test_multiple():
     assert parse_conditional_expr('http://foo http://bar') == ['http://foo', 'http://bar']
 
 
-def test_rename() -> None:
+def test_rename():
     assert parse_conditional_expr('http://foo/file.tgz -> file.tar.gz') == ['http://foo/file.tgz']
 
 
-def test_condition() -> None:
+def test_condition():
     assert parse_conditional_expr('!http? ( http://foo )') == ['http://foo']
     assert parse_conditional_expr('!http? ( http://foo ) !ftp? ( http://bar )') == ['http://foo', 'http://bar']
 
 
-def test_nested_condition() -> None:
+def test_nested_condition():
     assert parse_conditional_expr('!http? ( !ftp? ( http://foo ) )') == ['http://foo']
 
 
-def test_realworld() -> None:
+def test_realworld():
     assert parse_conditional_expr(
         'mirror://sourceforge/free-doko/FreeDoko_0.7.14.src.zip backgrounds? '
         '( mirror://sourceforge/free-doko/backgrounds.zip -> freedoko-backgrounds.zip ) '

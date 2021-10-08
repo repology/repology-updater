@@ -22,7 +22,7 @@ from repology.linkformatter import format_package_links
 from .package import spawn_package
 
 
-def test_basic() -> None:
+def test_basic():
     assert list(
         format_package_links(
             spawn_package(
@@ -36,7 +36,7 @@ def test_basic() -> None:
     ]
 
 
-def test_filter() -> None:
+def test_filter():
     assert list(
         format_package_links(
             spawn_package(
@@ -50,7 +50,7 @@ def test_filter() -> None:
     ]
 
 
-def test_list() -> None:
+def test_list():
     package = spawn_package()
     package.extrafields = {'patch': ['foo', 'bar', 'baz'], 'suffix': ['a', 'b']}
 
@@ -66,7 +66,7 @@ def test_list() -> None:
     ]
 
 
-def test_raises() -> None:
+def test_raises():
     package = spawn_package()
 
     with pytest.raises(RuntimeError):

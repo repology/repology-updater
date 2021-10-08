@@ -60,7 +60,7 @@ def pkg() -> PackageMakerWrapper:
     return PackageMakerWrapper()
 
 
-def test_all_fields(pkg: PackageMakerWrapper) -> None:
+def test_all_fields(pkg):
     with pkg as maker:
         maker.add_name('foo', NameType.GENERIC_GEN_NAME)
         maker.set_version('1.0')
@@ -91,7 +91,7 @@ def test_all_fields(pkg: PackageMakerWrapper) -> None:
         ]
 
 
-def test_validate_urls(pkg: PackageMakerWrapper) -> None:
+def test_validate_urls(pkg):
     with pkg as maker:
         maker.add_downloads('http://www.valid/', 'https://www.valid/some', 'ftp://ftp.valid/', 'invalid')
 
@@ -105,7 +105,7 @@ def test_validate_urls(pkg: PackageMakerWrapper) -> None:
     assert 'invalid' in pkg.get_logger().get()[0]
 
 
-def test_normalize_urls(pkg: PackageMakerWrapper) -> None:
+def test_normalize_urls(pkg):
     with pkg as maker:
         maker.add_homepages('Http://Foo.coM')
         maker.add_downloads('Http://Foo.coM')
@@ -117,7 +117,7 @@ def test_normalize_urls(pkg: PackageMakerWrapper) -> None:
         ]
 
 
-def test_unicalization_with_order_preserved(pkg: PackageMakerWrapper) -> None:
+def test_unicalization_with_order_preserved(pkg):
     with pkg as maker:
         maker.add_maintainers('z@com', 'y@com', 'x@com', 'z@com', 'y@com', 'x@com')
         maker.add_maintainers('z@com', 'y@com', 'x@com')
@@ -125,14 +125,14 @@ def test_unicalization_with_order_preserved(pkg: PackageMakerWrapper) -> None:
     assert pkg.maintainers == ['z@com', 'y@com', 'x@com']
 
 
-def test_strip(pkg: PackageMakerWrapper) -> None:
+def test_strip(pkg):
     with pkg as maker:
         maker.set_summary('       some package foo      ')
 
     assert pkg.comment == 'some package foo'
 
 
-def test_redefine(pkg: PackageMakerWrapper) -> None:
+def test_redefine(pkg):
     with pkg as maker:
         maker.add_name('foo', NameType.GENERIC_GEN_NAME)
         maker.add_name('bar', NameType.GENERIC_GEN_NAME)
@@ -146,7 +146,7 @@ def test_redefine(pkg: PackageMakerWrapper) -> None:
     assert pkg.comment == 'Bar'
 
 
-def test_type_normalization1(pkg: PackageMakerWrapper) -> None:
+def test_type_normalization1(pkg):
     with pkg as maker:
         maker.add_name(0, NameType.GENERIC_GEN_NAME)
         maker.set_version(0)
@@ -157,7 +157,7 @@ def test_type_normalization1(pkg: PackageMakerWrapper) -> None:
     assert pkg.comment == '0'
 
 
-def test_type_normalization2(pkg: PackageMakerWrapper) -> None:
+def test_type_normalization2(pkg):
     with pkg as maker:
         with pytest.raises(RuntimeError):
             maker.add_name([123], NameType.GENERIC_GEN_NAME)
@@ -167,7 +167,7 @@ def test_type_normalization2(pkg: PackageMakerWrapper) -> None:
             maker.set_summary([123])
 
 
-def test_nulls(pkg: PackageMakerWrapper) -> None:
+def test_nulls(pkg):
     with pkg as maker:
         maker.add_name('foo', NameType.GENERIC_GEN_NAME)
         maker.add_name('', NameType.GENERIC_GEN_NAME)
@@ -184,7 +184,7 @@ def test_nulls(pkg: PackageMakerWrapper) -> None:
     assert pkg.comment == 'Foo'
 
 
-def test_iter(pkg: PackageMakerWrapper) -> None:
+def test_iter(pkg):
     def iter_maintainers() -> Iterator[Any]:
         yield 'a@com'
         yield ['b@com', None, '', 'c@com']
@@ -198,7 +198,7 @@ def test_iter(pkg: PackageMakerWrapper) -> None:
     assert pkg.maintainers == ['a@com', 'b@com', 'c@com', 'd@com']
 
 
-def test_clone() -> None:
+def test_clone():
     factory = PackageFactory(NoopLogger())
 
     pkg1 = factory.begin('pkg1')
@@ -215,7 +215,7 @@ def test_clone() -> None:
     assert pkg3.maintainers == ['foo', 'baz']
 
 
-def test_ident() -> None:
+def test_ident():
     logger = AccumulatingLogger()
 
     factory = PackageFactory(logger)

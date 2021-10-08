@@ -21,16 +21,16 @@ from repology.package import PackageFlags as Pf
 from repology.parsers.versions import parse_rpm_version
 
 
-def test_basic() -> None:
+def test_basic():
     assert parse_rpm_version([], '1.2.3', '1') == ('1.2.3', 0)
 
 
-def test_release_starts_with_zero() -> None:
+def test_release_starts_with_zero():
     # Release starts with zero - potentially prerelease or a snapshot
     assert parse_rpm_version([], '1.2.3', '0') == ('1.2.3', Pf.IGNORE)
 
 
-def test_release_suggests_snapshot() -> None:
+def test_release_suggests_snapshot():
     # Release suggests snapshot, even if it doesn't start with zero
     assert parse_rpm_version([], '1.2.3', '1.20200101') == ('1.2.3', Pf.IGNORE)
     assert parse_rpm_version([], '1.2.3', '1.garbage') == ('1.2.3', Pf.IGNORE)
@@ -57,37 +57,37 @@ def test_release_suggests_snapshot() -> None:
         ('.pre.1', '-pre.1'),
     ],
 )
-def test_release_contains_good_prerelease(suffix: str, expected_suffix: str) -> None:
+def test_release_contains_good_prerelease(suffix: str, expected_suffix: str):
     assert parse_rpm_version([], '1.2.3', f'0{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', f'1{suffix}') == (f'1.2.3{expected_suffix}', Pf.DEVEL)
 
 
-def test_release_prerelease_without_number() -> None:
+def test_release_prerelease_without_number():
     assert parse_rpm_version([], '1.2.3', '0alpha') == ('1.2.3-alpha', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', '0.alpha') == ('1.2.3-alpha', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', '1alpha') == ('1.2.3-alpha', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', '1.alpha') == ('1.2.3-alpha', Pf.DEVEL)
 
 
-def test_release_prerelease_dot_longnumber() -> None:
+def test_release_prerelease_dot_longnumber():
     assert parse_rpm_version([], '1.2.3', '0.alpha20210101') == ('1.2.3-alpha20210101', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', '0.alpha.20210101') == ('1.2.3-alpha', Pf.DEVEL | Pf.IGNORE)
     assert parse_rpm_version([], '1.2.3', '1.alpha20210101') == ('1.2.3-alpha20210101', Pf.DEVEL)
     assert parse_rpm_version([], '1.2.3', '1.alpha.20210101') == ('1.2.3-alpha', Pf.DEVEL | Pf.IGNORE)
 
 
-def test_release_tag() -> None:
+def test_release_tag():
     # Release tags, if specified for the repo, are not condidered as
     # a sing of a snapshot and do not produce IGNORE flag
     assert parse_rpm_version(['el'], '1.2.3', '1.el6') == ('1.2.3', 0)
     assert parse_rpm_version(['el'], '1.2.3', '1.6el') == ('1.2.3', 0)
 
 
-def test_release_multi() -> None:
+def test_release_multi():
     assert parse_rpm_version(['mga'], '1.2.3', '1.mga1.mga2') == ('1.2.3', 0)
 
 
-def test_release_tag_glued() -> None:
+def test_release_tag_glued():
     # Removed tags should not corrupt prerelease versions
     assert parse_rpm_version(['el'], '1.2.3', '1beta3el6') == ('1.2.3-beta3', Pf.DEVEL)
 
@@ -124,5 +124,5 @@ def test_release_tag_glued() -> None:
         pytest.param(['mga'], '1.0.0', '0.rc92.7.dev.gitff819c7.mga8', '1.0.0-rc92', Pf.DEVEL | Pf.IGNORE, id='opencontainers-runc'),
     ]
 )
-def test_real_world(tags: list[str], version: str, release: str, expected_version: str, expected_flags: int) -> None:
+def test_real_world(tags: list[str], version: str, release: str, expected_version: str, expected_flags: int):
     assert parse_rpm_version(tags, version, release) == (expected_version, expected_flags)
