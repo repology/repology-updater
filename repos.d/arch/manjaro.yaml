@@ -22,9 +22,9 @@
       url: https://manjaro.org/
   tags: [ all, production, manjaro ]
   
-- name: manjaro_stable_staging
+- name: manjaro_staging
   type: repository
-  desc: Manjaro Stable-Staging
+  desc: Manjaro Staging
   statsgroup: Arch+derivs
   family: arch
   ruleset: [arch, manjaro]
