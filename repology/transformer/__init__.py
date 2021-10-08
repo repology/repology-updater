@@ -22,17 +22,26 @@ from repology.package import Package, PackageFlags
 from repology.transformer.contexts import PackageContext
 from repology.transformer.iterator import RulesetIterator
 from repology.transformer.ruleset import Ruleset
+from repology.transformer.statistics import RuleMatchStatistics
 
 
 class PackageTransformer:
     _ruleset: Ruleset
     _repository_name: str
+    _active_statistics: RuleMatchStatistics
+    _next_statistics: RuleMatchStatistics
     _iterator: RulesetIterator
 
+    # XXX: introduce a dataclass in RepoMgr to hold repository information and pass it here
+    # instead of repository_name and rulesets. We should also get path to persistent rule match
+    # statistics file from it.
     def __init__(self, ruleset: Ruleset, repository_name: str, rulesets: Iterable[str]) -> None:
         self._ruleset = ruleset
         self._repository_name = repository_name
-        self._iterator = RulesetIterator(ruleset, set(rulesets))
+        self._active_statistics = RuleMatchStatistics()  # XXX: load persistent statistics here
+        self._next_statistics = RuleMatchStatistics()
+
+        self._iterator = RulesetIterator(ruleset, set(rulesets), self._active_statistics)
 
     def process(self, package: Package) -> None:
         # XXX: duplicate code: PackageMaker does the same
@@ -43,10 +52,23 @@ class PackageTransformer:
         if package.repo != self._repository_name:
             raise RuntimeError(f'not expected package from repository "{package.repo}" with ruleset for repository "{self._repository_name}"')
 
+        if self._active_statistics is self._next_statistics:
+            if self._active_statistics.get_total_packages() in (10, 100, 1000, 10000, 100000):
+                self._iterator.update_statistics(self._active_statistics)
+        else:
+            if self._next_statistics.get_total_packages() > self._active_statistics.get_total_packages():
+                self._active_statistics = self._next_statistics
+                self._iterator.update_statistics(self._active_statistics)
+
+        self._next_statistics.count_package()
+
         for rule in self._iterator.iter_rules_for_package(package):
             match_context = rule.match(package, package_context)
             if not match_context:
                 continue
+
+            self._next_statistics.count_rule_match(rule.texthash)
+
             rule.apply(package, package_context, match_context)
             if match_context.last:
                 break
@@ -59,3 +81,6 @@ class PackageTransformer:
             print('Rule trace for {} ({}) {} in {}'.format(package.effname, package.trackname or '???', package.version, package.repo), file=sys.stderr)
             for rulenum in package_context.matched_rules:
                 print('{:5d} {}'.format(rulenum, self._ruleset.get_rules()[rulenum].pretty), file=sys.stderr)
+
+    def finalize(self) -> None:
+        pass  # XXX: save _next_statistics here

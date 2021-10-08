@@ -17,6 +17,8 @@
 
 from typing import Any, Callable
 
+import xxhash
+
 from repology.package import Package
 from repology.transformer.actions import get_action_generators
 from repology.transformer.contexts import MatchContext, PackageContext
@@ -25,7 +27,7 @@ from repology.transformer.util import DOLLAR0, yaml_as_list, yaml_as_set
 
 
 class Rule:
-    __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'rulesets', 'norulesets', 'checks', 'matches', 'number', 'pretty']
+    __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'rulesets', 'norulesets', 'number', 'pretty', 'texthash']
 
     _matchers: list[Callable[[Package, PackageContext, MatchContext], bool]]
     _actions: list[Callable[[Package, PackageContext, MatchContext], None]]
@@ -33,10 +35,9 @@ class Rule:
     namepat: str | None
     rulesets: set[str] | None
     norulesets: set[str] | None
-    checks: int
-    matches: int
     number: int
     pretty: str
+    texthash: int
 
     def __init__(self, number: int, ruledata: dict[str, Any]) -> None:
         self.names = None
@@ -44,10 +45,9 @@ class Rule:
         self.rulesets = None
         self.norulesets = None
         self.number = number
-        self.checks = 0
-        self.matches = 0
 
         self.pretty = str(ruledata)
+        self.texthash = xxhash.xxh64_intdigest(self.pretty)
 
         self._matchers = []
         self._actions = []
@@ -88,13 +88,10 @@ class Rule:
     def match(self, package: Package, package_context: PackageContext) -> MatchContext | None:
         match_context = MatchContext()
 
-        self.checks += 1
-
         for matcher in self._matchers:
             if not matcher(package, package_context, match_context):
                 return None
 
-        self.matches += 1
         package_context.add_matched_rule(self.number)
 
         return match_context

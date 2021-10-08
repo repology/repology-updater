@@ -166,6 +166,8 @@ def process_repositories(env: Environment) -> None:
                     env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
 
                 env.get_main_logger().get_indented().log('done')
+
+                transformer.finalize()
             except KeyboardInterrupt:
                 raise
             except Exception as e:
