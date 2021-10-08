@@ -299,7 +299,6 @@ schemas = {
             'verpat': str,
             'wwwpart': Any(str, [str]),
             'wwwpat': str,
-            'family': Any(Any(*families), [Any(*families)]),  # XXX: legacy; remove after rules converted to ruleset
             'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),
             'noruleset': Any(Any(*rulesets), [Any(*rulesets)]),
             'category': Any(str, [str]),
