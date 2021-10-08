@@ -28,7 +28,7 @@ def test_parsers_regress(regtest):
 
     # NOTE: run the following command to canonize this test after parser or testdata update
     #
-    #     pytest -k test_parsers_regress --regtest-reset to canonize
+    #     pytest -k test_parsers_regress --regtest-reset
     #
     with regtest:
         for package in repoproc.iter_parse(reponames=['have_testdata']):
