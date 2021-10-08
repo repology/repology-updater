@@ -31,5 +31,10 @@ def test_parsers_regress(regtest):
     #     pytest -k test_parsers_regress --regtest-reset
     #
     with regtest:
-        for package in repoproc.iter_parse(reponames=['have_testdata']):
-            print(json.dumps(package.__dict__, indent=1))
+        map(
+            print,
+            sorted(
+                json.dumps(package.__dict__, indent=1)
+                for package in repoproc.iter_parse(reponames=['have_testdata'])
+            )
+        )
