@@ -48,26 +48,6 @@ def _matcher_generator(func: MatcherGenerator) -> MatcherGenerator:
 
 # matchers
 @_matcher_generator
-def ruleset(ruledata: Any) -> Matcher:
-    rulesets = yaml_as_set(ruledata['ruleset'])
-
-    def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-        return package_context.has_rulesets(rulesets)
-
-    return matcher
-
-
-@_matcher_generator
-def noruleset(ruledata: Any) -> Matcher:
-    norulesets = yaml_as_set(ruledata['noruleset'])
-
-    def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-        return not package_context.has_rulesets(norulesets)
-
-    return matcher
-
-
-@_matcher_generator
 def category(ruledata: Any) -> Matcher:
     categories = yaml_as_lowercase_set(ruledata['category'])
 

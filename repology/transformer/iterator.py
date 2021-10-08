@@ -29,13 +29,11 @@ NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
 
 
 class RulesetIterator:
-    _ruleset: Ruleset
     _ruleblocks: list[RuleBlock]
     _optruleblocks: list[RuleBlock]
     _packages_processed: int
 
-    def __init__(self, ruleset: Ruleset) -> None:
-        self._ruleset = ruleset
+    def __init__(self, ruleset: Ruleset, rulesets: set[str]) -> None:
         self._ruleblocks = []
 
         current_name_rules: list[Rule] = []
@@ -48,7 +46,12 @@ class RulesetIterator:
                 self._ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
             current_name_rules = []
 
-        for rule in self._ruleset.get_rules():
+        for rule in ruleset.get_rules():
+            if rule.rulesets is not None and rule.rulesets.isdisjoint(rulesets):
+                continue
+            if rule.norulesets is not None and not rule.norulesets.isdisjoint(rulesets):
+                continue
+
             if rule.names:
                 current_name_rules.append(rule)
             else:

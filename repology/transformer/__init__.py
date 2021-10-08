@@ -16,9 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+from typing import Iterable
 
 from repology.package import Package, PackageFlags
-from repology.repomgr import RepositoryManager
 from repology.transformer.contexts import PackageContext
 from repology.transformer.iterator import RulesetIterator
 from repology.transformer.ruleset import Ruleset
@@ -26,20 +26,22 @@ from repology.transformer.ruleset import Ruleset
 
 class PackageTransformer:
     _ruleset: Ruleset
+    _repository_name: str
     _iterator: RulesetIterator
 
-    def __init__(self, repomgr: RepositoryManager, ruleset: Ruleset) -> None:
-        self._repomgr = repomgr
+    def __init__(self, ruleset: Ruleset, repository_name: str, rulesets: Iterable[str]) -> None:
         self._ruleset = ruleset
-        self._iterator = RulesetIterator(ruleset)
+        self._repository_name = repository_name
+        self._iterator = RulesetIterator(ruleset, set(rulesets))
 
     def process(self, package: Package) -> None:
         # XXX: duplicate code: PackageMaker does the same
         package.effname = package.projectname_seed
 
         package_context = PackageContext()
-        if package.repo:
-            package_context.set_rulesets(self._repomgr.get_repository(package.repo)['ruleset'])
+
+        if package.repo != self._repository_name:
+            raise RuntimeError(f'not expected package from repository "{package.repo}" with ruleset for repository "{self._repository_name}"')
 
         for rule in self._iterator.iter_rules_for_package(package):
             match_context = rule.match(package, package_context)

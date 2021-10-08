@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from collections import defaultdict
+
 from repology.repomgr import RepositoryManager
 from repology.transformer import PackageTransformer
 from repology.transformer.ruleset import Ruleset
@@ -36,8 +38,14 @@ def check_transformer(rulestext: str, *samples: PackageSample) -> None:
     __tracebackhide__ = True
 
     ruleset = Ruleset(rulestext=rulestext)
-    transformer = PackageTransformer(_repomgr, ruleset)
+
+    sample_by_repo = defaultdict(list)
 
     for sample in samples:
-        transformer.process(sample.package)
-        sample.check_pytest()
+        sample_by_repo[sample.package.repo].append(sample)
+
+    for repo, repo_samples in sample_by_repo.items():
+        transformer = PackageTransformer(ruleset, repo, {repo})
+        for sample in repo_samples:
+            transformer.process(sample.package)
+            sample.check_pytest()

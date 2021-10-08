@@ -21,16 +21,18 @@ from repology.package import Package
 from repology.transformer.actions import get_action_generators
 from repology.transformer.contexts import MatchContext, PackageContext
 from repology.transformer.matchers import get_matcher_generators
-from repology.transformer.util import DOLLAR0, yaml_as_list
+from repology.transformer.util import DOLLAR0, yaml_as_list, yaml_as_set
 
 
 class Rule:
-    __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'checks', 'matches', 'number', 'pretty']
+    __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'rulesets', 'norulesets', 'checks', 'matches', 'number', 'pretty']
 
     _matchers: list[Callable[[Package, PackageContext, MatchContext], bool]]
     _actions: list[Callable[[Package, PackageContext, MatchContext], None]]
     names: list[str] | None
     namepat: str | None
+    rulesets: set[str] | None
+    norulesets: set[str] | None
     checks: int
     matches: int
     number: int
@@ -39,6 +41,8 @@ class Rule:
     def __init__(self, number: int, ruledata: dict[str, Any]) -> None:
         self.names = None
         self.namepat = None
+        self.rulesets = None
+        self.norulesets = None
         self.number = number
         self.checks = 0
         self.matches = 0
@@ -64,6 +68,12 @@ class Rule:
                 self.namepat = DOLLAR0.sub(ruledata['setname'], self.namepat)
 
             ruledata['namepat'] = self.namepat
+
+        if 'ruleset' in ruledata:
+            self.rulesets = yaml_as_set(ruledata['ruleset'])
+
+        if 'noruleset' in ruledata:
+            self.norulesets = yaml_as_set(ruledata['noruleset'])
 
         # matchers
         for keyword, generate_matcher in get_matcher_generators():

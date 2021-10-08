@@ -15,22 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable, Match
+from typing import Match
 
 from repology.transformer.util import DOLLAR0, DOLLARN
 
 
 class PackageContext:
-    __slots__ = ['_flags', '_rulesets', 'warnings', 'matched_rules']
+    __slots__ = ['_flags', 'warnings', 'matched_rules']
 
     _flags: set[str]
-    _rulesets: set[str]
     warnings: list[str]
     matched_rules: list[int]
 
     def __init__(self) -> None:
         self._flags = set()
-        self._rulesets = set()
         self.warnings = []
         self.matched_rules = []
 
@@ -42,12 +40,6 @@ class PackageContext:
 
     def has_flags(self, names: set[str]) -> bool:
         return not self._flags.isdisjoint(names)
-
-    def has_rulesets(self, rulesets: set[str]) -> bool:
-        return not self._rulesets.isdisjoint(rulesets)
-
-    def set_rulesets(self, rulesets: Iterable[str]) -> None:
-        self._rulesets = set(rulesets)
 
     def add_warning(self, warning: str) -> None:
         self.warnings.append(warning)

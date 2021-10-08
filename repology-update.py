@@ -160,7 +160,7 @@ def process_repositories(env: Environment) -> None:
             database.commit()
 
             try:
-                transformer = PackageTransformer(env.get_repo_manager(), ruleset)
+                transformer = PackageTransformer(ruleset, reponame, env.get_repo_manager().get_repository(reponame)['ruleset'])
 
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as runlogger:
                     env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
