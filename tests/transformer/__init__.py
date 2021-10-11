@@ -20,24 +20,25 @@ from collections import defaultdict
 from repology.repomgr import RepositoryManager
 from repology.transformer import PackageTransformer
 from repology.transformer.ruleset import Ruleset
+from repology.yamlloader import YamlConfig
 
 from ..package import PackageSample
 
 
-_repomgr = RepositoryManager(repostext="""
+_repomgr = RepositoryManager(YamlConfig.from_text("""
 [
     { name: dummyrepo, desc: dummyrepo, family: dummyrepo, sources: [] },
     { name: foo, desc: foo, family: foo, sources: [] },
     { name: bar, desc: bar, family: bar, sources: [] },
     { name: baz, desc: baz, family: baz, sources: [] }
 ]
-""")
+"""))
 
 
 def check_transformer(rulestext: str, *samples: PackageSample) -> None:
     __tracebackhide__ = True
 
-    ruleset = Ruleset(rulestext=rulestext)
+    ruleset = Ruleset(YamlConfig.from_text(rulestext))
 
     sample_by_repo = defaultdict(list)
 

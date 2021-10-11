@@ -33,6 +33,7 @@ from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
 from repology.transformer.ruleset import Ruleset
 from repology.update import UpdateProcess
+from repology.yamlloader import ParsedConfigCache, YamlConfig
 
 
 T = TypeVar('T')
@@ -67,12 +68,16 @@ class Environment:
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, application_name='repology-update')
 
     @cached_method
+    def get_parsed_config_cache(self) -> ParsedConfigCache | None:
+        return ParsedConfigCache(self.options.config_cache) if self.options.config_cache else None
+
+    @cached_method
     def get_logging_database_connection(self) -> Database:
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, autocommit=True, application_name='repology-update-logging')
 
     @cached_method
     def get_repo_manager(self) -> RepositoryManager:
-        return RepositoryManager(self.options.repos_dir)
+        return RepositoryManager(YamlConfig.from_path(self.options.repos_dir, self.get_parsed_config_cache()))
 
     @cached_method
     def get_repo_processor(self) -> RepositoryProcessor:
@@ -80,7 +85,7 @@ class Environment:
 
     @cached_method
     def get_ruleset(self) -> Ruleset:
-        return Ruleset(self.options.rules_dir)
+        return Ruleset(YamlConfig.from_path(self.options.rules_dir, self.get_parsed_config_cache()))
 
     @cached_method
     def get_enabled_repo_names(self) -> list[str]:
@@ -295,6 +300,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|group', nargs='*', help='own or group name(s) of repositories which are enabled and shown in repology')
+    parser.add_argument('--config-cache', default=config['CONFIG_CACHE_DIR'], help='path to directory for caching parsed repository and rule data')
 
     grp = parser.add_argument_group('Initialization actions (destructive!)')
     grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')

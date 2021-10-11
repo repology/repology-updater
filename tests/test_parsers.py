@@ -20,10 +20,11 @@ import json
 from repology.config import config
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
+from repology.yamlloader import YamlConfig
 
 
 def test_parsers_regress(regtest):
-    repomgr = RepositoryManager(config['REPOS_DIR'])
+    repomgr = RepositoryManager(YamlConfig.from_path(config['REPOS_DIR']))
     repoproc = RepositoryProcessor(repomgr, 'testdata', 'testdata', safety_checks=False)
 
     # NOTE: run the following command to canonize this test after parser or testdata update

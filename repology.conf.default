@@ -51,6 +51,14 @@ REPOS_DIR = "repos.d"
 RULES_DIR = "rules.d"
 
 #
+# Path to directory for caching parsed configs
+#
+# Used by repology-update
+# Overridable via --config-cache command line arg
+#
+CONFIG_CACHE_DIR = None
+
+#
 # Path to directory containing SQL queries
 #
 # Use by repology-update and repology-app

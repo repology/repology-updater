@@ -56,7 +56,7 @@ class PackageTransformer:
             if self._active_statistics.get_total_packages() in (10, 100, 1000, 10000, 100000):
                 self._iterator.update_statistics(self._active_statistics)
         else:
-            if self._next_statistics.get_total_packages() > self._active_statistics.get_total_packages():
+            if self._next_statistics.get_total_packages() > self._active_statistics.get_total_packages() * 1.1:
                 self._active_statistics = self._next_statistics
                 self._iterator.update_statistics(self._active_statistics)
 

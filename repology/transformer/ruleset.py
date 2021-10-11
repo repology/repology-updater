@@ -15,14 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import hashlib
-import os
 from copy import deepcopy
 from typing import Any
 
-import yaml
-
 from repology.transformer.rule import Rule
+from repology.yamlloader import YamlConfig
 
 
 SPLIT_MULTI_NAME_RULES = True
@@ -32,35 +29,13 @@ class Ruleset:
     _rules: list[Rule]
     _hash: str
 
-    def __init__(self, rulesdir: str | None = None, rulestext: str | None = None) -> None:
+    def __init__(self, rules_config: YamlConfig) -> None:
         self._rules = []
 
-        hasher = hashlib.sha256()
+        for rule in rules_config.get_items():
+            self._add_rule(rule)
 
-        if isinstance(rulestext, str):
-            hasher.update(rulestext.encode('utf-8'))
-            for ruledata in yaml.safe_load(rulestext):
-                self._add_rule(ruledata)
-        elif isinstance(rulesdir, str):
-            rulefiles: list[str] = []
-
-            for root, dirs, files in os.walk(rulesdir):
-                rulefiles += [os.path.join(root, f) for f in files if f.endswith('.yaml')]
-                dirs[:] = [d for d in dirs if not d.startswith('.')]
-
-            for rulefile in sorted(rulefiles):
-                with open(rulefile) as data:
-                    ruleset_text = data.read()
-                    hasher.update(ruleset_text.encode('utf-8'))
-
-                    rules = yaml.safe_load(ruleset_text)
-                    if rules:  # may be None for empty file
-                        for rule in rules:
-                            self._add_rule(rule)
-        else:
-            raise RuntimeError('rulesdir or rulestext must be defined')
-
-        self._hash = hasher.hexdigest()
+        self._hash = rules_config.get_hash()
 
     def _add_rule(self, ruledata: dict[str, Any]) -> None:
         if SPLIT_MULTI_NAME_RULES and 'name' in ruledata and isinstance(ruledata['name'], list):

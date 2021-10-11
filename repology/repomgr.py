@@ -16,10 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import copy
-import os
 from typing import Any, Collection, Iterable, Optional, cast
 
-import yaml
+from repology.yamlloader import YamlConfig
 
 
 RepositoryNameList = Optional[Collection[str]]  # XXX: can't use |-union yet, see https://github.com/python/mypy/issues/11280
@@ -46,19 +45,9 @@ class RepositoryManager:
     _repositories: list[RepositoryMetadata]
     _repo_by_name: dict[str, RepositoryMetadata]
 
-    def __init__(self, reposdir: str | None = None, repostext: str | None = None) -> None:
-        self._repositories = []
+    def __init__(self, repositories_config: YamlConfig) -> None:
+        self._repositories = repositories_config.get_items()
         self._repo_by_name = {}
-
-        if isinstance(repostext, str):
-            self._repositories = yaml.safe_load(repostext)
-        elif isinstance(reposdir, str):
-            for root, dirs, files in os.walk(reposdir):
-                for filename in filter(lambda f: f.endswith('.yaml'), files):
-                    with open(os.path.join(root, filename)) as reposfile:
-                        self._repositories += yaml.safe_load(reposfile)
-        else:
-            raise RuntimeError('rulesdir or rulestext must be defined')
 
         # process source loops
         for repo in self._repositories:
