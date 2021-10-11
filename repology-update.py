@@ -345,6 +345,7 @@ def main() -> int:
         # and this will look loke a hang, and parse run duration will be incorrect
         env.get_main_logger().log('loading rules')
         env.get_repo_processor()
+        env.get_ruleset()
 
     if options.fetch or options.parse or options.database or options.postupdate or options.repositories:
         update_repositories(env)
