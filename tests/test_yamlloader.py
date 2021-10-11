@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import shutil
+
 from repology.yamlloader import ParsedConfigCache, YamlConfig
 
 from .fixtures import *  # noqa
@@ -61,3 +63,27 @@ def test_cache(testdata_dir, datadir):
         ]
 
         assert config.get_hash() == 'd6080e544cb4490aa1381f4cd3892c2f858f01fd6f0897e1d2829b20187b70e9'
+
+
+def test_cache_update(testdata_dir, datadir):
+    cache = ParsedConfigCache(datadir)
+
+    shutil.copytree(testdata_dir / 'yaml_configs', datadir / 'configs')
+
+    # populate cache
+    config = YamlConfig.from_path(datadir / 'configs', cache)
+
+    # modify config
+    with open(datadir / 'configs' / '1.yaml', 'a') as fd:
+        print('- { "foo": 11 }', file=fd)
+
+    config = YamlConfig.from_path(datadir / 'configs', cache)
+
+    assert config.get_items() == [
+        {'foo': 1},
+        {'foo': 11},
+        {'bar': 2},
+        {'baz': 3},
+    ]
+
+    assert config.get_hash() == '0c86170147f75217684bc52ed5f87085460a7fe4b2af901d7a9569772139594c'
