@@ -16,6 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import copy
+import datetime
+import json
 from enum import Enum
 from typing import Any, Collection, Iterable, Optional, TYPE_CHECKING, overload
 
@@ -23,6 +25,7 @@ if TYPE_CHECKING:
     from dataclasses import dataclass
 else:
     from pydantic.dataclasses import dataclass
+from pydantic.json import pydantic_encoder
 
 from repology.yamlloader import YamlConfig
 
@@ -48,7 +51,7 @@ def _subst_source_recursively(container: dict[str, Any] | list[Any], name: str) 
 
 
 @overload
-def _parse_duration(arg: str | int) -> int:
+def _parse_duration(arg: str | int) -> datetime.timedelta:
     pass
 
 
@@ -57,17 +60,19 @@ def _parse_duration(arg: None) -> None:
     pass
 
 
-def _parse_duration(arg: str | int | None) -> int | None:
-    if not isinstance(arg, str):
-        return arg
+def _parse_duration(arg: str | int | None) -> datetime.timedelta | None:
+    if arg is None:
+        return None
+    if isinstance(arg, int):
+        return datetime.timedelta(seconds=arg)
     elif arg.endswith('m'):
-        return int(arg[:-1]) * 60
+        return datetime.timedelta(minutes=int(arg[:-1]))
     elif arg.endswith('h'):
-        return int(arg[:-1]) * 60 * 60
+        return datetime.timedelta(hours=int(arg[:-1]))
     elif arg.endswith('d'):
-        return int(arg[:-1]) * 60 * 60 * 24
+        return datetime.timedelta(days=int(arg[:-1]))
     else:
-        return int(arg)
+        return datetime.timedelta(seconds=int(arg))
 
 
 def _listify(arg: Any) -> list[Any]:
@@ -93,10 +98,10 @@ class Repository:
     statsgroup: str
     family: str
     ruleset: list[str]
-    color: str
-    valid_till: Optional[str]
+    color: Optional[str]
+    valid_till: Optional[datetime.date]
     default_maintainer: Optional[str]
-    update_period: int
+    update_period: datetime.timedelta
     minpackages: int
 
     shadow: bool
@@ -146,8 +151,8 @@ class RepositoryManager:
                 statsgroup=repodata.get('statsgroup', repodata['desc']),
                 family=repodata['family'],
                 ruleset=_listify(repodata.get('ruleset', repodata['family'])),
-                color=repodata.get('color', '000000'),
-                valid_till=str(repodata.get('valid_till')),
+                color=repodata.get('color'),
+                valid_till=repodata.get('valid_till'),
                 default_maintainer=repodata.get('default_maintainer'),
                 update_period=_parse_duration(repodata.get('update_period', 600)),
                 minpackages=repodata.get('minpackages', 0),
@@ -188,26 +193,5 @@ class RepositoryManager:
     def get_names(self, reponames: RepositoryNameList = None) -> list[str]:
         return [repository.name for repository in self.get_repositories(reponames)]
 
-    def get_metadatas(self, reponames: RepositoryNameList = None) -> list[RepositoryMetadata]:
-        # TODO: remove this, just output all the keys
-        keys = [
-            'name',
-            'sortname',
-            'shadow',
-            'incomplete',
-            'repolinks',
-            'packagelinks',
-            'family',
-            'desc',
-            'singular',
-            'type',
-            'color',
-            'statsgroup',
-            'update_period',
-        ]
-
-        return [
-            {
-                key: repository.__dict__[key] for key in keys
-            } for repository in self.get_repositories(reponames)
-        ]
+    def get_repository_json(self, reponame: str) -> str:
+        return json.dumps(self.get_repository(reponame), default=pydantic_encoder)

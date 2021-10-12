@@ -18,7 +18,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-import datetime
 import sys
 from timeit import default_timer as timer
 from typing import Any, Callable, Iterable, TypeVar
@@ -110,7 +109,7 @@ def process_repositories(env: Environment) -> None:
     for reponame in env.get_processable_repo_names():
         repository = env.get_repo_manager().get_repository(reponame)
 
-        update_period = datetime.timedelta(seconds=repository.update_period)
+        update_period = repository.update_period
         since_last_fetched = database.get_repository_since_last_fetched(reponame)
 
         skip_fetch = since_last_fetched is not None and since_last_fetched < update_period
@@ -206,17 +205,17 @@ def update_repositories(env: Environment) -> None:
 
     logger.log('updating repositories metadata')
 
-    config_repos = env.get_repo_manager().get_metadatas(env.get_enabled_repo_names())
+    config_repos = env.get_repo_manager().get_repositories(env.get_enabled_repo_names())
     db_repos = database.get_repositories_statuses()
 
-    new_reponames = set(repo['name'] for repo in config_repos) - set(repo['name'] for repo in db_repos)
-    deprecated_reponames = set(repo['name'] for repo in db_repos if repo['state'] != 'legacy') - set(repo['name'] for repo in config_repos)
+    new_reponames = set(repo.name for repo in config_repos) - set(repo['name'] for repo in db_repos)
+    deprecated_reponames = set(repo['name'] for repo in db_repos if repo['state'] != 'legacy') - set(repo.name for repo in config_repos)
 
     for repo in config_repos:
-        if repo['name'] in new_reponames:
-            database.add_repository(repo)
+        if repo.name in new_reponames:
+            database.add_repository(env.get_repo_manager().get_repository_json(repo.name))
         else:
-            database.update_repository(repo)
+            database.update_repository(env.get_repo_manager().get_repository_json(repo.name))
 
     for reponame in deprecated_reponames:
         database.deprecate_repository(reponame)
