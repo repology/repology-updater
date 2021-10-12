@@ -31,7 +31,6 @@ from repology.yamlloader import YamlConfig
 
 
 RepositoryNameList = Optional[Collection[str]]  # XXX: can't use |-union yet, see https://github.com/python/mypy/issues/11280
-RepositoryMetadata = dict[str, Any]
 
 
 def _subst_source_recursively(container: dict[str, Any] | list[Any], name: str) -> None:
@@ -82,6 +81,18 @@ def _listify(arg: Any) -> list[Any]:
         return arg
 
 
+@dataclass
+class Source:
+    name: str
+
+    subrepo: Optional[str]
+
+    fetcher: dict[str, Any]
+    parser: dict[str, Any]
+
+    packagelinks: list[Any]
+
+
 class RepositoryType(str, Enum):
     REPOSITORY = 'repository'
     SITE = 'site'
@@ -112,7 +123,7 @@ class Repository:
 
     groups: list[str]
 
-    sources: list[Any]
+    sources: list[Source]
 
 
 class RepositoryManager:
@@ -127,20 +138,27 @@ class RepositoryManager:
         for repodata in repositories_config.get_items():
             extra_groups = set()
 
-            processed_sources = []
-            for source in repodata['sources']:
-                if source.get('disabled', False):
+            sources = []
+            for sourcedata in repodata['sources']:
+                if sourcedata.get('disabled', False):
                     continue
 
-                names = source['name'] if isinstance(source['name'], list) else [source['name']]
-                for name in names:
-                    processed_source = copy.deepcopy(source)
-                    processed_source['name'] = name
-                    _subst_source_recursively(processed_source, name)
-                    processed_sources.append(processed_source)
+                for name in _listify(sourcedata['name']):
+                    # if there are multiple names, clone source data for each of them
+                    processed_sourcedata = copy.deepcopy(sourcedata)
+                    _subst_source_recursively(processed_sourcedata, name)
+                    sources.append(
+                        Source(
+                            name=name,
+                            subrepo=processed_sourcedata.get('subrepo'),
+                            fetcher=processed_sourcedata['fetcher'],
+                            parser=processed_sourcedata['parser'],
+                            packagelinks=processed_sourcedata.get('packagelinks', []),
+                        )
+                    )
 
-                extra_groups.add(source['fetcher']['class'])
-                extra_groups.add(source['parser']['class'])
+                extra_groups.add(sourcedata['fetcher']['class'])
+                extra_groups.add(sourcedata['parser']['class'])
 
             repo = Repository(
                 name=repodata['name'],
@@ -165,7 +183,7 @@ class RepositoryManager:
 
                 groups=repodata.get('groups', []) + list(extra_groups),
 
-                sources=processed_sources,
+                sources=sources,
             )
 
             self._repositories.append(repo)

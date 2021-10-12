@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -27,7 +27,7 @@ from repology.package import LinkType, Package, PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
-from repology.repomgr import Repository, RepositoryManager, RepositoryMetadata, RepositoryNameList
+from repology.repomgr import Repository, RepositoryManager, RepositoryNameList, Source
 from repology.repoproc.serialization import ChunkedSerializer, heap_deserialize
 from repology.transformer import PackageTransformer
 
@@ -62,8 +62,8 @@ class RepositoryProcessor:
     def _get_state_path(self, repository: Repository) -> str:
         return os.path.join(self.statedir, repository.name + '.state')
 
-    def _get_state_source_path(self, repository: Repository, source: RepositoryMetadata) -> str:
-        return os.path.join(self._get_state_path(repository), source['name'].replace('/', '_'))
+    def _get_state_source_path(self, repository: Repository, source: Source) -> str:
+        return os.path.join(self._get_state_path(repository), source.name.replace('/', '_'))
 
     def _get_parsed_path(self, repository: Repository) -> str:
         return os.path.join(self.parseddir, repository.name + '.parsed')
@@ -76,16 +76,12 @@ class RepositoryProcessor:
         ] if os.path.isdir(dirpath) else []
 
     # source level private methods
-    def _fetch_source(self, repository: Repository, update: bool, source: RepositoryMetadata, logger: Logger) -> bool:
-        if 'fetcher' not in source:
-            logger.log('fetching source {} not supported'.format(source['name']))
-            return False
-
-        logger.log('fetching source {} started'.format(source['name']))
+    def _fetch_source(self, repository: Repository, update: bool, source: Source, logger: Logger) -> bool:
+        logger.log(f'fetching source {source.name} started')
 
         fetcher: Fetcher = self.fetcher_factory.spawn_with_known_args(
-            source['fetcher']['class'],
-            source['fetcher']
+            source.fetcher['class'],
+            source.fetcher
         )
 
         have_changes = fetcher.fetch(
@@ -94,18 +90,18 @@ class RepositoryProcessor:
             logger=logger.get_indented()
         )
 
-        logger.log('fetching source {} complete'.format(source['name']) + ('' if have_changes else ' (no changes)'))
+        logger.log(f'fetching source {source.name} complete' + ('' if have_changes else ' (no changes)'))
 
         return have_changes
 
-    def _iter_parse_source(self, repository: Repository, source: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
+    def _iter_parse_source(self, repository: Repository, source: Source, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
         def postprocess_parsed_packages(packages_iter: Iterable[PackageMaker]) -> Iterator[Package]:
             for packagemaker in packages_iter:
                 try:
                     package = packagemaker.spawn(
                         repo=repository.name,
                         family=repository.family,
-                        subrepo=source.get('subrepo'),
+                        subrepo=source.subrepo,
                         shadow=repository.shadow,
                         default_maintainer=repository.default_maintainer,
                     )
@@ -130,7 +126,7 @@ class RepositoryProcessor:
 
                 # add packagelinks
                 packagelinks: list[tuple[int, str]] = []
-                for pkglink in source.get('packagelinks', []) + repository.packagelinks:
+                for pkglink in source.packagelinks + repository.packagelinks:
                     if 'type' in pkglink:  # XXX: will become mandatory
                         link_type = LinkType.from_string(pkglink['type'])
                         try:
@@ -152,8 +148,8 @@ class RepositoryProcessor:
 
         return postprocess_parsed_packages(
             self.parser_factory.spawn_with_known_args(
-                source['parser']['class'],
-                source['parser']
+                source.parser['class'],
+                source.parser
             ).iter_parse(
                 self._get_state_source_path(repository, source),
                 PackageFactory(logger)
@@ -162,9 +158,9 @@ class RepositoryProcessor:
 
     def _iter_parse_all_sources(self, repository: Repository, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
         for source in repository.sources:
-            logger.log('parsing source {} started'.format(source['name']))
+            logger.log(f'parsing source {source.name} started')
             yield from self._iter_parse_source(repository, source, transformer, logger.get_indented())
-            logger.log('parsing source {} complete'.format(source['name']))
+            logger.log(f'parsing source {source.name} complete')
 
     # repository level private methods
     def _fetch(self, repository: Repository, update: bool, logger: Logger) -> bool:
