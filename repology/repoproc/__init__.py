@@ -27,7 +27,7 @@ from repology.package import LinkType, Package, PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
-from repology.repomgr import RepositoryManager, RepositoryMetadata, RepositoryNameList
+from repology.repomgr import Repository, RepositoryManager, RepositoryMetadata, RepositoryNameList
 from repology.repoproc.serialization import ChunkedSerializer, heap_deserialize
 from repology.transformer import PackageTransformer
 
@@ -59,16 +59,16 @@ class RepositoryProcessor:
         self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', superclass=Fetcher)
         self.parser_factory = ClassFactory('repology.parsers.parsers', superclass=Parser)
 
-    def _get_state_path(self, repository: RepositoryMetadata) -> str:
-        return os.path.join(self.statedir, repository['name'] + '.state')
+    def _get_state_path(self, repository: Repository) -> str:
+        return os.path.join(self.statedir, repository.name + '.state')
 
-    def _get_state_source_path(self, repository: RepositoryMetadata, source: RepositoryMetadata) -> str:
+    def _get_state_source_path(self, repository: Repository, source: RepositoryMetadata) -> str:
         return os.path.join(self._get_state_path(repository), source['name'].replace('/', '_'))
 
-    def _get_parsed_path(self, repository: RepositoryMetadata) -> str:
-        return os.path.join(self.parseddir, repository['name'] + '.parsed')
+    def _get_parsed_path(self, repository: Repository) -> str:
+        return os.path.join(self.parseddir, repository.name + '.parsed')
 
-    def _get_parsed_chunk_paths(self, repository: RepositoryMetadata) -> list[str]:
+    def _get_parsed_chunk_paths(self, repository: Repository) -> list[str]:
         dirpath = self._get_parsed_path(repository)
         return [
             os.path.join(dirpath, filename)
@@ -76,7 +76,7 @@ class RepositoryProcessor:
         ] if os.path.isdir(dirpath) else []
 
     # source level private methods
-    def _fetch_source(self, repository: RepositoryMetadata, update: bool, source: RepositoryMetadata, logger: Logger) -> bool:
+    def _fetch_source(self, repository: Repository, update: bool, source: RepositoryMetadata, logger: Logger) -> bool:
         if 'fetcher' not in source:
             logger.log('fetching source {} not supported'.format(source['name']))
             return False
@@ -98,16 +98,16 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def _iter_parse_source(self, repository: RepositoryMetadata, source: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
+    def _iter_parse_source(self, repository: Repository, source: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
         def postprocess_parsed_packages(packages_iter: Iterable[PackageMaker]) -> Iterator[Package]:
             for packagemaker in packages_iter:
                 try:
                     package = packagemaker.spawn(
-                        repo=repository['name'],
-                        family=repository['family'],
+                        repo=repository.name,
+                        family=repository.family,
                         subrepo=source.get('subrepo'),
-                        shadow=repository.get('shadow', False),
-                        default_maintainer=repository.get('default_maintainer'),
+                        shadow=repository.shadow,
+                        default_maintainer=repository.default_maintainer,
                     )
                 except RuntimeError as e:
                     packagemaker.log(str(e), Logger.ERROR)
@@ -130,7 +130,7 @@ class RepositoryProcessor:
 
                 # add packagelinks
                 packagelinks: list[tuple[int, str]] = []
-                for pkglink in source.get('packagelinks', []) + repository.get('packagelinks', []):
+                for pkglink in source.get('packagelinks', []) + repository.packagelinks:
                     if 'type' in pkglink:  # XXX: will become mandatory
                         link_type = LinkType.from_string(pkglink['type'])
                         try:
@@ -160,21 +160,21 @@ class RepositoryProcessor:
             )
         )
 
-    def _iter_parse_all_sources(self, repository: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
-        for source in repository['sources']:
+    def _iter_parse_all_sources(self, repository: Repository, transformer: PackageTransformer | None, logger: Logger) -> Iterator[Package]:
+        for source in repository.sources:
             logger.log('parsing source {} started'.format(source['name']))
             yield from self._iter_parse_source(repository, source, transformer, logger.get_indented())
             logger.log('parsing source {} complete'.format(source['name']))
 
     # repository level private methods
-    def _fetch(self, repository: RepositoryMetadata, update: bool, logger: Logger) -> bool:
+    def _fetch(self, repository: Repository, update: bool, logger: Logger) -> bool:
         logger.log('fetching started')
 
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
 
         have_changes = False
-        for source in repository['sources']:
+        for source in repository.sources:
             if not os.path.isdir(self._get_state_path(repository)):
                 os.mkdir(self._get_state_path(repository))
             have_changes |= self._fetch_source(repository, update, source, logger.get_indented())
@@ -183,7 +183,7 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def _parse(self, repository: RepositoryMetadata, transformer: PackageTransformer | None, logger: Logger) -> None:
+    def _parse(self, repository: Repository, transformer: PackageTransformer | None, logger: Logger) -> None:
         logger.log('parsing started')
 
         if not os.path.isdir(self.parseddir):
@@ -194,8 +194,8 @@ class RepositoryProcessor:
 
             serializer.serialize(self._iter_parse_all_sources(repository, transformer, logger))
 
-            if self.safety_checks and serializer.get_num_packages() < repository['minpackages']:
-                raise TooLittlePackages(serializer.get_num_packages(), repository['minpackages'])
+            if self.safety_checks and serializer.get_num_packages() < repository.minpackages:
+                raise TooLittlePackages(serializer.get_num_packages(), repository.minpackages)
 
         logger.log('parsing complete, {} packages'.format(serializer.get_num_packages()))
 
@@ -222,7 +222,7 @@ class RepositoryProcessor:
             repo_sources = self._get_parsed_chunk_paths(repository)
 
             if not repo_sources:
-                logger.log('parsed packages for repository {} are missing, treating repository as empty'.format(repository['desc']), severity=Logger.WARNING)
+                logger.log(f'parsed packages for repository {repository.desc} are missing, treating repository as empty', severity=Logger.WARNING)
 
             sources.extend(repo_sources)
 

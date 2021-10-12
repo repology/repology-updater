@@ -18,8 +18,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+import datetime
 import sys
-from datetime import timedelta
 from timeit import default_timer as timer
 from typing import Any, Callable, Iterable, TypeVar
 
@@ -108,7 +108,9 @@ def process_repositories(env: Environment) -> None:
     database = env.get_main_database_connection()
 
     for reponame in env.get_processable_repo_names():
-        update_period = timedelta(seconds=env.get_repo_manager().get_metadatas([reponame])[0]['update_period'])
+        repository = env.get_repo_manager().get_repository(reponame)
+
+        update_period = datetime.timedelta(seconds=repository.update_period)
         since_last_fetched = database.get_repository_since_last_fetched(reponame)
 
         skip_fetch = since_last_fetched is not None and since_last_fetched < update_period
@@ -165,7 +167,7 @@ def process_repositories(env: Environment) -> None:
             database.commit()
 
             try:
-                transformer = PackageTransformer(ruleset, reponame, env.get_repo_manager().get_repository(reponame)['ruleset'])
+                transformer = PackageTransformer(ruleset, reponame, repository.ruleset)
 
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as runlogger:
                     env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
