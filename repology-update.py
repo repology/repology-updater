@@ -88,12 +88,12 @@ class Environment:
 
     @cached_method
     def get_enabled_repo_names(self) -> list[str]:
-        return self.get_repo_manager().get_names(reponames=self.options.enabled_repositories)
+        return self.get_repo_manager().get_names(self.options.enabled_repositories)
 
     @cached_method
     def get_processable_repo_names(self) -> list[str]:
         enabled = set(self.get_enabled_repo_names())
-        return [reponame for reponame in self.get_repo_manager().get_names(reponames=self.options.reponames) if reponame in enabled]
+        return [reponame for reponame in self.get_repo_manager().get_names(self.options.reponames) if reponame in enabled]
 
     @cached_method
     def get_main_logger(self) -> Logger:

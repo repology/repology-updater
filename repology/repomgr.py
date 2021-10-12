@@ -198,25 +198,25 @@ class RepositoryManager:
 
         self._repositories = sorted(self._repositories, key=lambda repo: repo.sortname)
 
-    def get_repository(self, reponame: str) -> Repository:
-        return self._repo_by_name[reponame]
+    def get_repository(self, name: str) -> Repository:
+        return self._repo_by_name[name]
 
-    def get_repositories(self, reponames: RepositoryNameList = None) -> list[Repository]:
-        if reponames is None:
+    def get_repositories(self, names: RepositoryNameList = None) -> list[Repository]:
+        if names is None:
             return []
 
         filtered_repositories = []
 
         for repository in self._repositories:
-            for reponame in reponames:
-                if reponame == repository.name or reponame in repository.groups:
+            for name in names:
+                if name == repository.name or name in repository.groups:
                     filtered_repositories.append(repository)
                     break
 
         return filtered_repositories
 
-    def get_names(self, reponames: RepositoryNameList = None) -> list[str]:
-        return [repository.name for repository in self.get_repositories(reponames)]
+    def get_names(self, names: RepositoryNameList = None) -> list[str]:
+        return [repository.name for repository in self.get_repositories(names)]
 
-    def get_repository_json(self, reponame: str) -> str:
-        return json.dumps(self.get_repository(reponame), default=pydantic_encoder)
+    def get_repository_json(self, name: str) -> str:
+        return json.dumps(self.get_repository(name), default=pydantic_encoder)
