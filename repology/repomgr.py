@@ -27,6 +27,7 @@ else:
     from pydantic.dataclasses import dataclass
 from pydantic.json import pydantic_encoder
 
+from repology.package import LinkType
 from repology.yamlloader import YamlConfig
 
 
@@ -82,6 +83,12 @@ def _listify(arg: Any) -> list[Any]:
 
 
 @dataclass
+class PackageLink:
+    type: int  # noqa
+    url: str
+
+
+@dataclass
 class Source:
     name: str
 
@@ -90,7 +97,7 @@ class Source:
     fetcher: dict[str, Any]
     parser: dict[str, Any]
 
-    packagelinks: list[Any]
+    packagelinks: list[PackageLink]
 
 
 class RepositoryType(str, Enum):
@@ -119,7 +126,7 @@ class Repository:
     incomplete: bool
 
     repolinks: list[Any]
-    packagelinks: list[Any]
+    packagelinks: list[PackageLink]
 
     groups: list[str]
 
@@ -153,7 +160,7 @@ class RepositoryManager:
                             subrepo=processed_sourcedata.get('subrepo'),
                             fetcher=processed_sourcedata['fetcher'],
                             parser=processed_sourcedata['parser'],
-                            packagelinks=processed_sourcedata.get('packagelinks', []),
+                            packagelinks=[PackageLink(type=LinkType.from_string(linkdata['type']), url=linkdata['url']) for linkdata in processed_sourcedata.get('packagelinks', [])],
                         )
                     )
 
@@ -179,7 +186,7 @@ class RepositoryManager:
                 incomplete=repodata.get('incomplete', False),
 
                 repolinks=repodata.get('repolinks', []),
-                packagelinks=repodata.get('packagelinks', []),
+                packagelinks=[PackageLink(type=LinkType.from_string(linkdata['type']), url=linkdata['url']) for linkdata in repodata.get('packagelinks', [])],
 
                 groups=repodata.get('groups', []) + list(extra_groups),
 

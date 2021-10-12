@@ -23,7 +23,7 @@ from repology.fetchers import Fetcher
 from repology.linkformatter import format_package_links
 from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
-from repology.package import LinkType, Package, PackageFlags
+from repology.package import Package, PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
@@ -127,16 +127,15 @@ class RepositoryProcessor:
                 # add packagelinks
                 packagelinks: list[tuple[int, str]] = []
                 for pkglink in source.packagelinks + repository.packagelinks:
-                    if 'type' in pkglink:  # XXX: will become mandatory
-                        link_type = LinkType.from_string(pkglink['type'])
-                        try:
-                            packagelinks.extend(
-                                (link_type, url)
-                                for url in format_package_links(package, pkglink['url'])
-                            )
-                        except Exception as e:
-                            packagemaker.log(f'cannot spawn package link from template "{pkglink["url"]}": {str(e)}', Logger.ERROR)
-                            raise
+                    link_type = pkglink.type
+                    try:
+                        packagelinks.extend(
+                            (link_type, url)
+                            for url in format_package_links(package, pkglink.url)
+                        )
+                    except Exception as e:
+                        packagemaker.log(f'cannot spawn package link from template "{pkglink.url}": {str(e)}', Logger.ERROR)
+                        raise
 
                 if package.links is None:
                     package.links = packagelinks
