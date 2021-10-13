@@ -33,7 +33,7 @@ import zstandard
 
 from repology.config import config
 
-USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
+USER_AGENT = 'repology-fetcher/0 (+{}/docs/bots)'.format(config['REPOLOGY_HOME'])
 STREAM_CHUNK_SIZE = 10240
 
 
