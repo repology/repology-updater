@@ -51,7 +51,7 @@ def test_files(testdata_dir):
 
 
 def test_cache(testdata_dir, datadir):
-    cache = ParsedConfigCache(datadir)
+    cache = ParsedConfigCache(datadir / 'config-cache')
 
     for _ in ('populate cache', 'use cache'):
         config = YamlConfig.from_path(testdata_dir / 'yaml_configs', cache)
@@ -66,7 +66,7 @@ def test_cache(testdata_dir, datadir):
 
 
 def test_cache_update(testdata_dir, datadir):
-    cache = ParsedConfigCache(datadir)
+    cache = ParsedConfigCache(datadir / 'config-cache')
 
     shutil.copytree(testdata_dir / 'yaml_configs', datadir / 'configs')
 
