@@ -20,6 +20,8 @@ import os
 import pickle
 from typing import Any, cast
 
+import jinja2
+
 import yaml
 
 
@@ -69,7 +71,7 @@ class YamlConfig:
     @staticmethod
     def from_text(text: str) -> 'YamlConfig':
         texthash = hashlib.sha256(text.encode('utf-8')).hexdigest()
-        return YamlConfig(yaml.safe_load(text), texthash)
+        return YamlConfig(yaml.safe_load(jinja2.Template(text).render()), texthash)
 
     @staticmethod
     def from_path(path: str, cache: ParsedConfigCache | None = None) -> 'YamlConfig':
@@ -84,18 +86,21 @@ class YamlConfig:
             dirs[:] = [d for d in dirs if not d.startswith('.')]
 
         for file_path in sorted(file_paths):
-            with open(file_path, 'rb') as fd:
-                data = fd.read()
-                file_hash = hashlib.sha256(data).hexdigest()
+            try:
+                with open(file_path, 'rb') as fd:
+                    data = fd.read()
+                    file_hash = hashlib.sha256(data).hexdigest()
 
-                if cache is not None and (cached := cache.get(file_path, file_hash)) is not None:
-                    items.extend(cached)
-                elif (parsed := yaml.safe_load(data.decode('utf-8'))):
-                    if cache is not None:
-                        cache.store(file_path, file_hash, parsed)
-                    items.extend(parsed)
+                    if cache is not None and (cached := cache.get(file_path, file_hash)) is not None:
+                        items.extend(cached)
+                    elif (parsed := yaml.safe_load(jinja2.Template(data.decode('utf-8')).render())):
+                        if cache is not None:
+                            cache.store(file_path, file_hash, parsed)
+                        items.extend(parsed)
 
-                overall_hash.update(file_hash.encode('utf-8'))
+                    overall_hash.update(file_hash.encode('utf-8'))
+            except (jinja2.exceptions.TemplateSyntaxError, SystemError) as e:
+                raise RuntimeError(f'cannot load config file {file_path}') from e
 
         return YamlConfig(items, overall_hash.hexdigest())
 
