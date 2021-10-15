@@ -327,6 +327,8 @@ def parse_arguments() -> argparse.Namespace:
 
     grp = parser.add_argument_group('Informational queries')
     grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
+    grp.add_argument('--dump-repositories', action='store_true', help='dump parsed repositories config')
+    grp.add_argument('--dump-rules', action='store_true', help='dump parsed rules config')
 
     grp = parser.add_argument_group('Flags')
     grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
@@ -376,6 +378,12 @@ def main() -> int:
 
     if options.check_totals or options.fix_totals:
         handle_totals(env, options.fix_totals)
+
+    if options.dump_repositories:
+        print(env.get_repos_config().dump())
+
+    if options.dump_rules:
+        print(env.get_rules_config().dump())
 
     env.get_main_logger().log('total time taken: {:.2f} seconds'.format((timer() - start)))
 
