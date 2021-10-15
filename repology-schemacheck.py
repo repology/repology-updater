@@ -23,7 +23,7 @@ from datetime import date
 
 from voluptuous import All, Any, Contains, MultipleInvalid, Required, Schema, Url
 
-import yaml
+from repology.yamlloader import YamlConfig
 
 
 families = [
@@ -341,8 +341,7 @@ schemas = {
 
 
 def get_yaml(path: str) -> Any:
-    with open(path) as yamlfile:
-        return yaml.safe_load(yamlfile)
+    return YamlConfig.from_path(path).get_items()
 
 
 def parse_arguments() -> argparse.Namespace:
