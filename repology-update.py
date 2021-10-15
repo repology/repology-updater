@@ -75,16 +75,24 @@ class Environment:
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, autocommit=True, application_name='repology-update-logging')
 
     @cached_method
+    def get_repos_config(self) -> YamlConfig:
+        return YamlConfig.from_path(self.options.repos_dir, self.get_parsed_config_cache())
+
+    @cached_method
     def get_repo_manager(self) -> RepositoryManager:
-        return RepositoryManager(YamlConfig.from_path(self.options.repos_dir, self.get_parsed_config_cache()))
+        return RepositoryManager(self.get_repos_config())
 
     @cached_method
     def get_repo_processor(self) -> RepositoryProcessor:
         return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, self.options.parseddir, safety_checks=self.options.enable_safety_checks)
 
     @cached_method
+    def get_rules_config(self) -> YamlConfig:
+        return YamlConfig.from_path(self.options.rules_dir, self.get_parsed_config_cache())
+
+    @cached_method
     def get_ruleset(self) -> Ruleset:
-        return Ruleset(YamlConfig.from_path(self.options.rules_dir, self.get_parsed_config_cache()))
+        return Ruleset(self.get_rules_config())
 
     @cached_method
     def get_enabled_repo_names(self) -> list[str]:
