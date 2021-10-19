@@ -542,3 +542,104 @@
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   groups: [ all, production, ubuntu ]
+
+- name: ubuntu_22_04
+  type: repository
+  desc: Ubuntu 22.04
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 32000
+  valid_till: 2032-04-21
+  sources:
+    - name: [ jammy/main, jammy/multiverse, jammy/restricted, jammy/universe, jammy-updates/main, jammy-updates/multiverse, jammy-updates/restricted, jammy-updates/universe ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in jammy
+      url: https://packages.ubuntu.com/jammy/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.ubuntu.com/source/jammy/{srcname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  groups: [ all, production, ubuntu ]
+
+- name: ubuntu_22_04_backports
+  type: repository
+  desc: Ubuntu 22.04 Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 0
+  valid_till: 2032-04-21
+  sources:
+    - name: [ jammy-backports/main, jammy-backports/multiverse, jammy-backports/restricted, jammy-backports/universe ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in jammy
+      url: https://packages.ubuntu.com/jammy/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  groups: [ all, production, ubuntu ]
+
+- name: ubuntu_22_04_proposed
+  type: repository
+  desc: Ubuntu 22.04 Proposed
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: 0
+  valid_till: 2032-04-21
+  sources:
+    - name: [ jammy-proposed/main, jammy-proposed/multiverse, jammy-proposed/restricted, jammy-proposed/universe ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in jammy
+      url: https://packages.ubuntu.com/jammy/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+  groups: [ all, production, ubuntu ]
