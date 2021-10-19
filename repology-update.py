@@ -364,7 +364,7 @@ def main() -> int:
         env.get_repo_processor()
         env.get_ruleset()
 
-    if options.fetch or options.parse or options.database or options.postupdate or options.repositories:
+    if options.fetch or options.parse or options.database or options.repositories:
         update_repositories(env)
 
     if options.fetch or options.parse:
