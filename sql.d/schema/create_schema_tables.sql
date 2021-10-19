@@ -247,20 +247,12 @@ CREATE TABLE repositories (
 
 	ruleset_hash text NULL,
 
-	-- metadata from config
+	-- metadata from config and some chosen fields as separate columns
 	metadata jsonb NOT NULL,
 
 	sortname text NOT NULL,
-	"type" text NOT NULL,
 	"desc" text NOT NULL,
-	statsgroup text NOT NULL,
-	singular text NOT NULL,
-	family text NOT NULL,
-	color text,
-	shadow boolean NOT NULL,
-	incomplete boolean NOT NULL DEFAULT FALSE,
-	repolinks jsonb NOT NULL,
-	packagelinks jsonb NOT NULL
+	incomplete boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE UNIQUE INDEX ON repositories(name);
