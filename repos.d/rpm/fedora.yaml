@@ -63,6 +63,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 22000
+  valid_till: 2018-11-30
   sources:
     - name: release
       fetcher:
@@ -104,6 +105,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2019-05-28
   sources:
     - name: release
       fetcher:
@@ -145,6 +147,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2019-11-26
   sources:
     - name: release
       fetcher:
@@ -186,6 +189,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2020-05-26
   sources:
     - name: release
       fetcher:
@@ -227,6 +231,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2020-11-24
   sources:
     - name: release
       fetcher:
@@ -271,6 +276,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 22000
+  valid_till: 2021-05-25
   sources:
     - name: release
       fetcher:
@@ -312,6 +318,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 22000
+  valid_till: 2021-11-23
   sources:
     - name: release
       fetcher:
@@ -353,6 +360,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 22000
+  valid_till: 2022-05-17
   sources:
     - name: release
       fetcher:
@@ -394,6 +402,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 22000
+  valid_till: 2022-11-30
   sources:
     - name: development
       fetcher:
