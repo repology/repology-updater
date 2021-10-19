@@ -436,6 +436,48 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f35/f/{srcname}.spec'
   groups: [ all, production, fedora, rpm ]
 
+- name: fedora_36
+  type: repository
+  desc: Fedora 36
+  statsgroup: Fedora
+  family: fedora
+  ruleset: [fedora, rpm]
+  color: '294172'
+  minpackages: 22000
+  valid_till: 2023-05-24
+  sources:
+    - name: development
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/development/36/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+    - name: updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/updates/36/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://packages.fedoraproject.org/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f36'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f36/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f36/f/{srcname}.spec'
+  groups: [ all, fedora, rpm ] # not there yet
+
 - name: fedora_rawhide
   type: repository
   desc: Fedora Rawhide
