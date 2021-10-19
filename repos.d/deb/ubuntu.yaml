@@ -8,7 +8,7 @@
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2019-04-01
+  valid_till: 2024-04-25
   minpackages: 23000
   sources:
     - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
@@ -43,7 +43,7 @@
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2019-04-01
+  valid_till: 2024-04-25
   minpackages: 0
   sources:
     - name: [ trusty-backports/main, trusty-backports/multiverse, trusty-backports/restricted, trusty-backports/universe ]
@@ -76,7 +76,7 @@
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2021-04-01
+  valid_till: 2026-04-23
   minpackages: 26000
   sources:
     - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
@@ -111,7 +111,7 @@
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2021-04-01
+  valid_till: 2026-04-23
   minpackages: 0
   sources:
     - name: [ xenial-backports/main, xenial-backports/multiverse, xenial-backports/restricted, xenial-backports/universe ]
@@ -144,7 +144,7 @@
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2023-04-01
+  valid_till: 2028-04-26
   minpackages: 29000
   sources:
     - name: [ bionic/main, bionic/multiverse, bionic/restricted, bionic/universe, bionic-updates/main, bionic-updates/multiverse, bionic-updates/restricted, bionic-updates/universe ]
@@ -179,7 +179,7 @@
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2023-04-01
+  valid_till: 2028-04-26
   minpackages: 0
   sources:
     - name: [ bionic-backports/main, bionic-backports/multiverse, bionic-backports/restricted, bionic-backports/universe ]
@@ -213,6 +213,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 29000
+  valid_till: 2030-04-23
   sources:
     - name: [ focal/main, focal/multiverse, focal/restricted, focal/universe, focal-updates/main, focal-updates/multiverse, focal-updates/restricted, focal-updates/universe ]
       fetcher:
@@ -247,6 +248,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
+  valid_till: 2030-04-23
   sources:
     - name: [ focal-backports/main, focal-backports/multiverse, focal-backports/restricted, focal-backports/universe ]
       fetcher:
@@ -279,6 +281,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 29000
+  valid_till: 2021-07-22
   sources:
     - name: [ groovy/main, groovy/multiverse, groovy/restricted, groovy/universe, groovy-updates/main, groovy-updates/multiverse, groovy-updates/restricted, groovy-updates/universe ]
       fetcher:
@@ -313,6 +316,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
+  valid_till: 2021-07-22
   sources:
     - name: [ groovy-backports/main, groovy-backports/multiverse, groovy-backports/restricted, groovy-backports/universe ]
       fetcher:
@@ -345,6 +349,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 30000
+  valid_till: 2022-01-20
   sources:
     - name: [ hirsute/main, hirsute/multiverse, hirsute/restricted, hirsute/universe, hirsute-updates/main, hirsute-updates/multiverse, hirsute-updates/restricted, hirsute-updates/universe ]
       fetcher:
@@ -379,6 +384,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
+  valid_till: 2022-01-20
   sources:
     - name: [ hirsute-backports/main, hirsute-backports/multiverse, hirsute-backports/restricted, hirsute-backports/universe ]
       fetcher:
@@ -411,6 +417,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
+  valid_till: 2022-01-20
   sources:
     - name: [ hirsute-proposed/main, hirsute-proposed/multiverse, hirsute-proposed/restricted, hirsute-proposed/universe ]
       fetcher:
@@ -443,6 +450,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 32000
+  valid_till: 2022-07-14
   sources:
     - name: [ impish/main, impish/multiverse, impish/restricted, impish/universe, impish-updates/main, impish-updates/multiverse, impish-updates/restricted, impish-updates/universe ]
       fetcher:
@@ -477,6 +485,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
+  valid_till: 2022-07-14
   sources:
     - name: [ impish-backports/main, impish-backports/multiverse, impish-backports/restricted, impish-backports/universe ]
       fetcher:
@@ -509,6 +518,7 @@
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
+  valid_till: 2022-07-14
   sources:
     - name: [ impish-proposed/main, impish-proposed/multiverse, impish-proposed/restricted, impish-proposed/universe ]
       fetcher:
