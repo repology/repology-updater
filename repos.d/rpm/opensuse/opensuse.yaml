@@ -9,7 +9,7 @@
   family: opensuse
   ruleset: [opensuse,rpm]
   color: '6da741'
-  valid_till: 2019-01-31
+  valid_till: 2019-06-30
   minpackages: 10000
   sources:
     - name: oss
@@ -62,7 +62,7 @@
   family: opensuse
   ruleset: [opensuse,rpm]
   color: '6da741'
-  valid_till: 2019-11-25
+  valid_till: 2019-12-03
   minpackages: 11000
   sources:
     - name: oss
@@ -120,6 +120,7 @@
   ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 10500
+  valid_till: 2021-01-31
   sources:
     - name: oss
       fetcher:
@@ -176,6 +177,7 @@
   ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 10500
+  valid_till: 2021-12-31
   sources:
     - name: oss
       fetcher:
