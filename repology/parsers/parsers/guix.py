@@ -40,9 +40,7 @@ class GuixJsonParser(Parser):
 
                 pkg.add_cpe(product=pkgdata.get('cpe_name'))
 
-                if 'source' in pkgdata:
-                    source = pkgdata['source']
-
+                for source in pkgdata.get('source', []):
                     if source['type'] == 'url':
                         pkg.add_downloads(source['urls'])
                         if re.fullmatch('.*-[0-9]+\\.[0-9a-f]{4,}', pkgdata['version']):
