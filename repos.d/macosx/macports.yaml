@@ -18,6 +18,8 @@
   repolinks:
     - desc: MacPorts home
       url: https://www.macports.org/
+    - desc: MacPorts Packages
+      url: https://ports.macports.org/
     - desc: MacPorts GitHub repository
       url: https://github.com/macports/macports-ports
   packagelinks:
@@ -29,4 +31,10 @@
       url: 'https://github.com/macports/macports-ports/blob/master/{srcname}/Portfile'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/macports/macports-ports/master/{srcname}/Portfile'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://trac.macports.org/query?status=!closed&port=~{binname}'
+    - type: PACKAGE_STATISTICS
+      url: 'https://ports.macports.org/port/{binname}/stats/'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://ports.macports.org/port/{binname}/builds/'
   groups: [ all, production ]
