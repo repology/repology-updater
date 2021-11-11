@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019,2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -21,6 +21,7 @@ from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
 
@@ -55,3 +56,29 @@ class AURParser(Parser):
                     #    pkg.add_categories(result['Keywords'])
 
                     yield pkg
+
+
+class AURJsonParser(Parser):
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        normalize_version = VersionStripper().strip_right_greedy('-').strip_left(':').strip_right_greedy('+')
+
+        for pkgdata in iter_json_list(path, (None,)):
+            with factory.begin() as pkg:
+                pkg.add_name(pkgdata['Name'], NameType.ARCH_NAME)
+
+                pkg.set_version(pkgdata['Version'], normalize_version)
+                pkg.set_summary(pkgdata['Description'])
+                pkg.add_homepages(pkgdata['URL'])
+                pkg.add_licenses(pkgdata.get('License'))
+
+                if 'Maintainer' in pkgdata and pkgdata['Maintainer']:
+                    pkg.add_maintainers(extract_maintainers(pkgdata['Maintainer'] + '@aur'))
+
+                if 'PackageBase' in pkgdata and pkgdata['PackageBase']:
+                    pkg.add_name(pkgdata['PackageBase'], NameType.ARCH_BASENAME)
+
+                # XXX: enable when we support multiple categories
+                #if 'Keywords' in pkgdata and pkgdata['Keywords']:
+                #    pkg.add_categories(pkgdata['Keywords'])
+
+                yield pkg
