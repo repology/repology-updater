@@ -35,7 +35,6 @@
   desc: Chaotic-AUR
   family: arch
   ruleset: [ arch, aur ]
-  update_period: 3h
   minpackages: 0
   sources:
     - name: chaotic-aur-x86_64
@@ -58,7 +57,6 @@
   desc: MPR
   family: mpr
   ruleset: mpr
-  update_period: 3h
   minpackages: 100
   default_maintainer: fallback-mnt-mpr@repology
   sources:
