@@ -8,7 +8,7 @@
   ruleset: [scoop, windows]
   minpackages: 1300
   sources:
-    # See https://github.com/lukesampson/scoop/blob/master/buckets.json
+    # See https://github.com/ScoopInstaller/Scoop/blob/master/buckets.json
     # Small, not-portable and proprietary repositories are skipped
     - name: main
       fetcher:
@@ -26,16 +26,16 @@
     - name: extras
       fetcher:
         class: GitFetcher
-        url: https://github.com/lukesampson/scoop-extras
+        url: https://github.com/ScoopInstaller/Extras
         sparse_checkout: [ 'bucket/*.json' ]
       parser:
         class: ScoopGitParser
       subrepo: '{source}'
       packagelinks:
         - type: PACKAGE_RECIPE
-          url: 'https://github.com/lukesampson/scoop-extras/blob/master/{path}'
+          url: 'https://github.com/ScoopInstaller/Extras/blob/master/{path}'
         - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/lukesampson/scoop-extras/master/{path}'
+          url: 'https://raw.githubusercontent.com/ScoopInstaller/Extras/master/{path}'
     - name: versions
       fetcher:
         class: GitFetcher
@@ -68,7 +68,7 @@
     - desc: Main repository on GitHub
       url: https://github.com/ScoopInstaller/Main
     - desc: Extras repository on GitHub
-      url: https://github.com/lukesampson/scoop-extras
+      url: https://github.com/ScoopInstaller/Extras
     - desc: Versions repository on GitHub
       url: https://github.com/ScoopInstaller/Versions
     - desc: Games repository on GitHub
