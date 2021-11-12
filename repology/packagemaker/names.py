@@ -122,9 +122,6 @@ class NameType:
     WINGET_NAME: ClassVar[int] = 272
     WINGET_PATH: ClassVar[int] = 273
 
-    APPGET_ID: ClassVar[int] = 280
-    APPGET_NAME: ClassVar[int] = 281
-
     GUIX_NAME: ClassVar[int] = 290
 
     SAGEMATH_NAME: ClassVar[int] = 300
@@ -471,13 +468,6 @@ _MAPPINGS = [
         trackname=NameType.WINGET_PATH,
         visiblename=NameType.WINGET_NAME,
         projectname_seed=NameType.WINGET_ID_NAME,
-    ),
-    # Appget
-    _NameMapping(
-        srcname=NameType.APPGET_ID,
-        trackname=NameType.APPGET_ID,
-        visiblename=NameType.APPGET_NAME,
-        projectname_seed=NameType.APPGET_ID,
     ),
     # Guix
     _NameMapping(
