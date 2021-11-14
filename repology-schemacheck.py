@@ -35,6 +35,7 @@ families = [
     'appget',
     'arch',
     'ataraxia',
+    'baulk',
     'buckaroo',
     'carbs',
     'centos',

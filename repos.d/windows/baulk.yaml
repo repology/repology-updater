@@ -1,0 +1,25 @@
+###########################################################################
+# Baulk
+###########################################################################
+- name: baulk
+  type: repository
+  desc: Baulk
+  family: baulk
+  minpackages: 70
+  sources:
+    - name: baulk
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/baulk/bucket.git'
+        sparse_checkout: [ 'bucket/*.json' ]
+      parser:
+        class: BaulkGitParser
+  repolinks:
+    - desc: Baulk GitHub organization
+      url: https://github.com/baulk
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/baulk/bucket/blob/master/bucket/{name}.json'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/baulk/bucket/master/bucket/{name}.json'
+  groups: [ all, production ]

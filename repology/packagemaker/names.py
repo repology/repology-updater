@@ -187,6 +187,8 @@ class NameType:
 
     ATARAXIA_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
+    BAULK_NAME: ClassVar[int] = GENERIC_GEN_NAME
+
     MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 
