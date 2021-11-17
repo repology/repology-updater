@@ -1,0 +1,32 @@
+###########################################################################
+# Arch
+###########################################################################
+- name: joaquinito01_22_05
+  type: repository
+  desc: Joaquinito01 22.05
+  statsgroup: Arch+derivs
+  family: arch
+  color: '0088cc'
+  minpackages: 9500
+  sources:
+    - name: [ core, extra, community, multilib ]
+      fetcher:
+        class: TarFetcher
+        url: 'https://repo.joaquinito01.com/{source}/os/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
+      subrepo: '{source}'
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://archlinux.org/packages/?q={binname}'
+    # XXX: exact link should replace the above one, but we need arch for this
+    #- type: Package information (x86_64)
+    #  url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
+    # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
+    - type: PACKAGE_SOURCES
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{srcname|quote}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname|quote}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/plain/trunk/PKGBUILD?h=packages/{srcname|quote}'
+  groups: [ all, production, have_testdata ]
