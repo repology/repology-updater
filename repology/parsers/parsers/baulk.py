@@ -19,8 +19,8 @@ import json
 import os
 from typing import Iterable
 
-#from repology.logger import Logger
-#from repology.package import PackageFlags
+from repology.logger import Logger
+from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 
@@ -40,7 +40,13 @@ class BaulkGitParser(Parser):
                 pkg.add_name(filename.removesuffix('.json'), NameType.BAULK_NAME)
                 pkg.set_version(pkgdata['version'])
                 pkg.set_summary(pkgdata['description'])
-                pkg.add_homepages(pkgdata.get('homepage'))
+
+                homepage = pkgdata.get('homepage')
+                if homepage and 'baulk' in homepage:
+                    pkg.log('Not trusting package with baulk upstream', severity=Logger.ERROR)
+                    pkg.set_flags(PackageFlags.UNTRUSTED)
+
+                pkg.add_homepages(homepage)
                 pkg.add_downloads(pkgdata.get('url'), pkgdata.get('url64'))
 
                 yield pkg
