@@ -12,7 +12,7 @@
     - name: [ core, extra, community, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'http://delta.archlinux.fr/22.05/{source}/os/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
