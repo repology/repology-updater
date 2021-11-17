@@ -12,7 +12,7 @@
     - name: [ core, extra, community, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'https://repo.joaquinito01.com/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'https://repo.joaquinito01.com/22.05/{source}/os/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
