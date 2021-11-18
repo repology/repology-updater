@@ -22,27 +22,6 @@
       url: https://manjaro.org/
   groups: [ all, production, manjaro ]
   
-- name: manjaro_staging
-  type: repository
-  desc: Manjaro Staging
-  statsgroup: Arch+derivs
-  family: arch
-  ruleset: [arch, manjaro]
-  color: '34be5b'
-  minpackages: 10000
-  sources:
-    - name: [ community, core, extra, multilib ]
-      fetcher:
-        class: TarFetcher
-        url: 'https://mirror.yandex.ru/mirrors/manjaro/stable-staging/{source}/x86_64/{source}.db.tar.gz'
-      parser:
-        class: ArchDBParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Manjaro Linux home
-      url: https://manjaro.org/
-  groups: [ all, production, manjaro ]
-
 - name: manjaro_testing
   type: repository
   desc: Manjaro Testing
