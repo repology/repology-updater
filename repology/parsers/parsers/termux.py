@@ -51,6 +51,6 @@ class TermuxJsonParser(Parser):
                 # maintainer may also be in '@username' form
                 match = re.search('(?:^| )@([^ ]+)$', packagedata['maintainer'])
                 if match:
-                    pkg.add_maintainers(match.group(1).lower() + '@termux')
+                    pkg.add_maintainers(match.group(1).lower() + '@github')
 
                 yield pkg
