@@ -25,6 +25,11 @@ from repology.parsers.versions import VersionStripper
 
 
 class AURJsonParser(Parser):
+    _maintainer_host: str
+
+    def __init__(self, maintainer_host: str) -> None:
+        self._maintainer_host = maintainer_host
+
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('-').strip_left(':').strip_right_greedy('+')
 
@@ -38,7 +43,7 @@ class AURJsonParser(Parser):
                 pkg.add_licenses(pkgdata.get('License'))
 
                 if 'Maintainer' in pkgdata and pkgdata['Maintainer']:
-                    pkg.add_maintainers(extract_maintainers(pkgdata['Maintainer'] + '@aur'))
+                    pkg.add_maintainers(extract_maintainers(pkgdata['Maintainer'] + '@' + self._maintainer_host))
 
                 if 'PackageBase' in pkgdata and pkgdata['PackageBase']:
                     pkg.add_name(pkgdata['PackageBase'], NameType.ARCH_BASENAME)

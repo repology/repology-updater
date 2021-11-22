@@ -18,6 +18,7 @@
         # despite what the url says, returns plain JSON with transfer-encoding, thus no compression: is needed
       parser:
         class: AURJsonParser
+        maintainer_host: aur
   repolinks:
     - desc: AUR Home
       url: https://aur.archlinux.org/
@@ -67,6 +68,7 @@
         # despite what the url says, returns plain JSON with transfer-encoding, thus no compression: is needed
       parser:
         class: AURJsonParser
+        maintainer_host: mpr
   repolinks:
     - desc: MPR Home
       url: https://mpr.hunterwittenborn.com/

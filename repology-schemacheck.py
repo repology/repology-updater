@@ -273,6 +273,9 @@ schemas = {
 
                         # debian
                         'allowed_vcs_urls': str,
+
+                        # aur
+                        'maintainer_host': str,
                     },
                     'packagelinks': packagelinks,
                 }
