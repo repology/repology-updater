@@ -3,7 +3,7 @@
 ###########################################################################
 - name: nix_stable  # XXX: name the next one as e.g. nix_stable_21_05
   type: repository
-  desc: nixpkgs stable 21.05
+  desc: nixpkgs stable 21.11
   statsgroup: nix
   family: nix
   ruleset: [nix,nix_old_node_naming]  # don't set nix_old_node_naming for next release
@@ -14,7 +14,7 @@
     - name: packages.json
       fetcher:
         class: FileFetcher
-        url: https://channels.nixos.org/nixos-21.05/packages.json.br
+        url: https://channels.nixos.org/nixos-21.11/packages.json.br
       parser:
         class: NixJsonParser
   repolinks:
