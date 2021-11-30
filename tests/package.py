@@ -79,7 +79,7 @@ class PackageSample:
 
     def check(self, test: unittest.TestCase) -> None:
         for k, v in self.expectations.items():
-            test.assertEqual(getattr(self.package, k), v, msg='{} of {}'.format(k, self.package))
+            test.assertEqual(getattr(self.package, k), v, msg=f'{k} of {self.package}')
 
     def check_pytest(self) -> None:
         __tracebackhide__ = True

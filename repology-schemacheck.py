@@ -365,7 +365,7 @@ def main() -> int:
         try:
             Schema(schemas[options.schema])(get_yaml(path))
         except MultipleInvalid as e:
-            print('Bad schema for {}: {}'.format(path, str(e)))
+            print(f'Bad schema for {path}: {str(e)}')
             errors += 1
 
     return 1 if errors else 0

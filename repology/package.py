@@ -484,7 +484,7 @@ class Package:
         ) & 0x7fffffffffffffff  # to fit into PostgreSQL integer
 
     def __repr__(self) -> str:
-        return 'Package(repo={}, name={}, version={})'.format(self.repo, self.name, self.version)
+        return f'Package(repo={self.repo}, name={self.name}, version={self.version})'
 
     # XXX: add signature to this, see https://github.com/python/mypy/issues/6523
     @property
