@@ -26,7 +26,7 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/NixOS/nixpkgs/blob/release-21.11/{posfile}#L{posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/nixos-21.11/{posfile}#L{posline}'
   groups: [ all, production, nix ]
 - name: nix_unstable
   type: repository
