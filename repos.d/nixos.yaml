@@ -6,9 +6,9 @@
   desc: nixpkgs stable 21.11
   statsgroup: nix
   family: nix
-  ruleset: [nix]  # don't set nix_old_node_naming for next release
+  ruleset: nix
   color: '7eb2dd'
-  minpackages: 60000
+  minpackages: 70000
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages.json
@@ -28,6 +28,7 @@
     - type: PACKAGE_RECIPE
       url: 'https://github.com/NixOS/nixpkgs/blob/release-21.11/{posfile}#L{posline}'
   groups: [ all, production, nix ]
+
 - name: nix_unstable
   type: repository
   desc: nixpkgs unstable
