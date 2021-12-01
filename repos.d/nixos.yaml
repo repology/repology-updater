@@ -1,6 +1,34 @@
 ###########################################################################
 # NixOS packages
 ###########################################################################
+- name: nix_stable  # XXX: remove in 2022
+  type: repository
+  desc: nixpkgs stable 21.05
+  statsgroup: nix
+  family: nix
+  ruleset: [nix,nix_old_node_naming]
+  color: '7eb2dd'
+  minpackages: 60000
+  default_maintainer: fallback-mnt-nix@repology
+  sources:
+    - name: packages.json
+      fetcher:
+        class: FileFetcher
+        url: https://channels.nixos.org/nixos-21.05/packages.json.br
+      parser:
+        class: NixJsonParser
+  repolinks:
+    - desc: NixOS home
+      url: https://nixos.org
+    - desc: NixOS packages
+      url: https://search.nixos.org/packages
+    - desc: GitHub repository
+      url: https://github.com/NixOS/nixpkgs
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/NixOS/nixpkgs/blob/release-21.05/{posfile}#L{posline}'
+  groups: [ all, production, nix ]
+
 - name: nix_stable_21_11
   type: repository
   desc: nixpkgs stable 21.11
