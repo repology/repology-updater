@@ -9,6 +9,7 @@
   ruleset: [nix,nix_old_node_naming]
   color: '7eb2dd'
   minpackages: 60000
+  valid_till: 2021-12-31
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages.json
@@ -37,6 +38,7 @@
   ruleset: nix
   color: '7eb2dd'
   minpackages: 70000
+  valid_till: 2022-06-30
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages.json
