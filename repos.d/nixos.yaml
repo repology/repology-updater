@@ -1,7 +1,7 @@
 ###########################################################################
 # NixOS packages
 ###########################################################################
-- name: nix_stable
+- name: nix_stable_21_11
   type: repository
   desc: nixpkgs stable 21.11
   statsgroup: nix
