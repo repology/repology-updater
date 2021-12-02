@@ -12,11 +12,10 @@
       fetcher:
         class: GitFetcher
         url: 'https://github.com/CarbsLinux/repository.git'
-        depth: null
-        sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
+        sparse_checkout: [ '**/version', '**/sources', '**/patches', '**/meta' ]
       parser:
         class: KissGitParser
-        maintainer_from_git: true
+        use_meta: true
   repolinks:
     - desc: Carbs Linux home
       url: https://carbslinux.org/
