@@ -31,7 +31,7 @@
   desc: Stackage Nightly
   family: hackage
   color: "293845"
-  minpackages: 2350
+  minpackages: 2800
   sources:
     - name: nightly.html
       fetcher:
@@ -55,7 +55,7 @@
   desc: Stackage LTS Haskell
   family: hackage
   color: "293845"
-  minpackages: 2450
+  minpackages: 2700
   sources:
     - name: lts.html
       fetcher:
