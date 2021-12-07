@@ -22,24 +22,3 @@
     - desc: Astra Linux home (in Russian)
       url: http://astralinux.com/
   groups: [ all, production, astra ]
-
-- name: astra_current
-  type: repository
-  desc: Astra Orel Current
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, astra]
-  minpackages: 3500
-  sources:
-    - name: [ main, contrib, non-free ]
-      fetcher:
-        class: FileFetcher
-        url: 'https://dl.astralinux.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Astra Linux home (in Russian)
-      url: http://astralinux.com/
-  groups: [ all, production, astra ]
