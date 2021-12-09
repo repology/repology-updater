@@ -8,7 +8,7 @@
   family: sisyphus
   ruleset: [sisyphus, rpm]
   color: 'baccdd'
-  minpackages: 18000
+  minpackages: 17000
   sources:
     - name: sisyphus
       fetcher:
@@ -16,6 +16,7 @@
         url: 'https://rdb.altlinux.org/api/export/repology/sisyphus'
       parser:
         class: SisyphusJsonParser
+        vertags: alt
   repolinks:
     - desc: Sisyphus packages
       url: https://packages.altlinux.org/en/sisyphus/packages
@@ -39,6 +40,7 @@
         url: 'https://rdb.altlinux.org/api/export/repology/p9'
       parser:
         class: SisyphusJsonParser
+        vertags: alt
   repolinks:
     - desc: ALT p9 packages
       url: https://packages.altlinux.org/en/p9/packages
@@ -54,7 +56,7 @@
   family: sisyphus
   ruleset: [sisyphus, rpm]
   color: 'baccdd'
-  minpackages: 18000
+  minpackages: 17000
   sources:
     - name: p10
       fetcher:
@@ -62,6 +64,7 @@
         url: 'https://rdb.altlinux.org/api/export/repology/p10'
       parser:
         class: SisyphusJsonParser
+        vertags: alt
   repolinks:
     - desc: ALT p10 packages
       url: https://packages.altlinux.org/en/p10/packages
