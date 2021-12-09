@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import warnings
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
@@ -296,6 +297,7 @@ class PackageMaker(PackageMakerBase):
 
     @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_homepages(self, *args: Any) -> None:
+        warnings.warn('Use add_links(LinkType.UPSTREAM_HOMEPAGE, ...) instead of add_homepages(...)', DeprecationWarning, stacklevel=3)
         self.add_links(LinkType.UPSTREAM_HOMEPAGE, args)
 
     @_omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
@@ -304,6 +306,7 @@ class PackageMaker(PackageMakerBase):
 
     @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines, nzs.limit_length(_MAX_URL_LENGTH))
     def add_downloads(self, *args: Any) -> None:
+        warnings.warn('Use add_links(LinkType.UPSTREAM_DOWNLOAD, ...) instead of add_downloads(...)', DeprecationWarning, stacklevel=3)
         self.add_links(LinkType.UPSTREAM_DOWNLOAD, args)
 
     @_omnivorous_setter('flavor', str, nzs.strip, nzs.warn_whitespace, nzs.forbid_newlines)
