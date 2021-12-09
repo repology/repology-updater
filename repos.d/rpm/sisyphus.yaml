@@ -21,11 +21,6 @@
       url: https://packages.altlinux.org/en/sisyphus/packages
     - desc: Sisyphus on ALT Linux Wiki
       url: https://en.altlinux.org/Sisyphus
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.altlinux.org/en/sisyphus/srpms/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://packages.altlinux.org/en/sisyphus/srpms/{srcname}/specfiles/'
   groups: [ all, production, sisyphus ]
 
 - name: alt_p9
@@ -49,11 +44,6 @@
       url: https://packages.altlinux.org/en/p9/packages
     - desc: p9 on ALT Linux Wiki
       url: https://en.altlinux.org/Ninth_Platform
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.altlinux.org/en/p9/srpms/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://packages.altlinux.org/en/p9/srpms/{srcname}/specfiles/'
   groups: [ all, production, sisyphus ]
 
 - name: alt_p10
@@ -77,11 +67,6 @@
       url: https://packages.altlinux.org/en/p10/packages
     - desc: p10 on ALT Linux Wiki
       url: https://en.altlinux.org/PlatformTen
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.altlinux.org/en/p10/srpms/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://packages.altlinux.org/en/p10/srpms/{srcname}/specfiles/'
   groups: [ all, production, sisyphus ]
 
 # automatically imported packages; duplicate already existing packages and versions,
