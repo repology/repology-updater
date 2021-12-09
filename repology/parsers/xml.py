@@ -55,6 +55,13 @@ def safe_findtext(elt: XmlElement, match: str) -> str:
     return res
 
 
+def safe_findtext_empty(elt: XmlElement, match: str) -> str:
+    res = elt.find(match)
+    if res is None:
+        raise RuntimeError('required subelement {} of {} is missing'.format(match, elt.tag))
+    return res.text or ''
+
+
 def safe_findalltexts(elt: XmlElement, match: str) -> list[str]:
     res = []
 
