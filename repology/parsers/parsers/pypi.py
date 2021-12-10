@@ -18,6 +18,7 @@
 import re
 from typing import Iterable
 
+from repology.logger import Logger
 from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -78,7 +79,11 @@ class PyPiCacheJsonParser(Parser):
                     pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, url)
 
                 if info['author_email']:
-                    pkg.add_maintainers(map(str.strip, info['author_email'].split(',')))
+                    for maintainer in map(str.strip, info['author_email'].split(',')):
+                        if ' ' in maintainer or '"' in maintainer or '<' in maintainer or "'" in maintainer or '@' not in maintainer:
+                            pkg.log('Skipping garbage maintainer email "{maintainer}"', severity=Logger.WARNING)
+                        else:
+                            pkg.add_maintainers(maintainer)
 
                 if info['summary']:
                     pkg.set_summary(info['summary'])
