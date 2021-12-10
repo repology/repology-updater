@@ -8,28 +8,20 @@
   family: sisyphus
   ruleset: [sisyphus, rpm]
   color: 'baccdd'
-  minpackages: 18000
+  minpackages: 17000
   sources:
-    - name: [ noarch, x86_64 ]
+    - name: sisyphus
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{source}/base/srclist.classic.xz'
-        compression: xz
+        url: 'https://rdb.altlinux.org/api/export/repology/sisyphus'
       parser:
-        class: SrcListParser
+        class: SisyphusJsonParser
         vertags: alt
   repolinks:
     - desc: Sisyphus packages
       url: https://packages.altlinux.org/en/sisyphus/packages
     - desc: Sisyphus on ALT Linux Wiki
       url: https://en.altlinux.org/Sisyphus
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.altlinux.org/en/sisyphus/srpms/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{srcname}'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{srcname}/raw'
   groups: [ all, production, sisyphus ]
 
 - name: alt_p9
@@ -42,57 +34,42 @@
   color: 'baccdd'
   minpackages: 18000
   sources:
-    - name: [ noarch, x86_64 ]
+    - name: p9
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/p9/branch/{source}/base/srclist.classic.xz'
-        compression: xz
+        url: 'https://rdb.altlinux.org/api/export/repology/p9'
       parser:
-        class: SrcListParser
+        class: SisyphusJsonParser
         vertags: alt
   repolinks:
     - desc: ALT p9 packages
       url: https://packages.altlinux.org/en/p9/packages
     - desc: p9 on ALT Linux Wiki
-      url: http://en.altlinux.org/p9
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.altlinux.org/en/p9/srpms/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}/raw'
+      url: https://en.altlinux.org/Ninth_Platform
   groups: [ all, production, sisyphus ]
 
 - name: alt_p10
+  sortname: alt_p10
   type: repository
   desc: ALT Linux p10
   statsgroup: ALT Sisyphus
   family: sisyphus
   ruleset: [sisyphus, rpm]
   color: 'baccdd'
-  minpackages: 18000
+  minpackages: 17000
   sources:
-    - name: [ noarch, x86_64 ]
+    - name: p10
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/p10/branch/{source}/base/srclist.classic.xz'
-        compression: xz
+        url: 'https://rdb.altlinux.org/api/export/repology/p10'
       parser:
-        class: SrcListParser
+        class: SisyphusJsonParser
         vertags: alt
   repolinks:
     - desc: ALT p10 packages
       url: https://packages.altlinux.org/en/p10/packages
     - desc: p10 on ALT Linux Wiki
       url: https://en.altlinux.org/PlatformTen
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.altlinux.org/en/p10/srpms/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://packages.altlinux.org/en/p10/specfiles/{srcname}'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://packages.altlinux.org/en/p10/specfiles/{srcname}/raw'
   groups: [ all, production, sisyphus ]
 
 # automatically imported packages; duplicate already existing packages and versions,
