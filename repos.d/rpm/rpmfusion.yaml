@@ -37,7 +37,6 @@
         class: RepodataParser
         vertags: fc
       subrepo: {{sub1}}/updates-testing
-    {% if version >= 34 %}
     - name: {{sub1}}-tainted
       fetcher:
         class: RepodataFetcher
@@ -46,7 +45,6 @@
         class: RepodataParser
         vertags: fc
       subrepo: {{sub1}}/tainted
-    {% endif %}
     {% endfor %}
   repolinks:
     - desc: RPM Fusion home
