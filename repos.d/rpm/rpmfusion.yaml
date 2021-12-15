@@ -21,30 +21,16 @@
         class: RepodataParser
         vertags: fc
       subrepo: {{sub1}}/release
-    - name: {{sub1}}-updates
+    {% for sub2 in ['updates', 'updates-testing', 'tainted'] %}
+    - name: {{sub1}}-{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: https://download1.rpmfusion.org/{{sub1}}/fedora/updates/{{version}}/SRPMS/
+        url: https://download1.rpmfusion.org/{{sub1}}/fedora/{{sub2|replace('-','/')}}/{{version}}/SRPMS/
       parser:
         class: RepodataParser
         vertags: fc
-      subrepo: {{sub1}}/updates
-    - name: {{sub1}}-updates-testing
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/{{sub1}}/fedora/updates/testing/{{version}}/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: fc
-      subrepo: {{sub1}}/updates-testing
-    - name: {{sub1}}-tainted
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/{{sub1}}/fedora/tainted/{{version}}/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: fc
-      subrepo: {{sub1}}/tainted
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
     {% endfor %}
   repolinks:
     - desc: RPM Fusion home
@@ -65,22 +51,16 @@
   ruleset: [fedora,rpm]
   minpackages: 300
   sources:
-    - name: free-development
+    {% for sub1 in ['free', 'nonfree'] %}
+    - name: {{sub1}}-development
       fetcher:
         class: RepodataFetcher
-        url: https://download1.rpmfusion.org/free/fedora/development/rawhide/Everything/source/SRPMS/
+        url: https://download1.rpmfusion.org/{{sub1}}/fedora/development/rawhide/Everything/source/SRPMS/
       parser:
         class: RepodataParser
         vertags: fc
-      subrepo: free/release
-    - name: nonfree-development
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/nonfree/fedora/development/rawhide/Everything/source/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: fc
-      subrepo: nonfree/release
+      subrepo: {{sub1}}/release
+    {% endfor %}
   repolinks:
     - desc: RPM Fusion home
       url: https://rpmfusion.org/
@@ -89,134 +69,32 @@
 ###########################################################################
 # RPM Fusion EL
 ###########################################################################
-- name: rpmfusion_el_6
+{% macro rpmfusion_el(version, minpackages) %}
+- name: rpmfusion_el_{{version}}
   type: repository
-  desc: RPM Fusion EL 6
+  desc: RPM Fusion EL {{version}}
   family: fedora
   ruleset: [fedora,rpm]
-  minpackages: 50
+  minpackages: {{minpackages}}
   sources:
-    - name: free-updates
+    {% for sub1 in ['free', 'nonfree'] %}
+    {% for sub2 in ['updates', 'updates-testing'] %}
+    - name: {{sub1}}-{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: https://download1.rpmfusion.org/free/el/updates/6/SRPMS/
+        url: https://download1.rpmfusion.org/{{sub1}}/el/{{sub2|replace('-','/')}}/{{version}}/SRPMS/
       parser:
         class: RepodataParser
         vertags: el
-      subrepo: free/updates
-    - name: free-updates-testing
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/free/el/updates/testing/6/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: free/updates-testing
-    - name: nonfree-updates
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/nonfree/el/updates/6/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: nonfree/updates
-    - name: nonfree-updates-testing
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/nonfree/el/updates/testing/6/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: nonfree/updates-testing
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: RPM Fusion home
       url: https://rpmfusion.org/
   groups: [ all, production, rpmfusion ]
+{% endmacro %}
 
-- name: rpmfusion_el_7
-  type: repository
-  desc: RPM Fusion EL 7
-  family: fedora
-  ruleset: [fedora,rpm]
-  minpackages: 100
-  sources:
-    - name: free-updates
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/free/el/updates/7/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: free/updates
-    - name: free-updates-testing
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/free/el/updates/testing/7/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: free/updates-testing
-    - name: nonfree-updates
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/nonfree/el/updates/7/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: nonfree/updates
-    - name: nonfree-updates-testing
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/nonfree/el/updates/testing/7/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: nonfree/updates-testing
-  repolinks:
-    - desc: RPM Fusion home
-      url: https://rpmfusion.org/
-  groups: [ all, production, rpmfusion ]
-
-- name: rpmfusion_el_8
-  type: repository
-  desc: RPM Fusion EL 8
-  family: fedora
-  ruleset: [fedora,rpm]
-  minpackages: 50
-  sources:
-    - name: free-updates
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/free/el/updates/8/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: free/updates
-    - name: free-updates-testing
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/free/el/updates/testing/8/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: free/updates-testing
-    - name: nonfree-updates
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/nonfree/el/updates/8/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: nonfree/updates
-    - name: nonfree-updates-testing
-      fetcher:
-        class: RepodataFetcher
-        url: https://download1.rpmfusion.org/nonfree/el/updates/testing/8/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: nonfree/updates-testing
-  repolinks:
-    - desc: RPM Fusion home
-      url: https://rpmfusion.org/
-  groups: [ all, production, rpmfusion ]
+{{ rpmfusion_el(6, minpackages=50) }}
+{{ rpmfusion_el(7, minpackages=100) }}
+{{ rpmfusion_el(8, minpackages=50) }}
