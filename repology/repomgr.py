@@ -18,6 +18,7 @@
 import copy
 import datetime
 import json
+import warnings
 from enum import Enum
 from typing import Any, Collection, Iterable, Optional, TYPE_CHECKING, overload
 
@@ -45,6 +46,8 @@ def _subst_source_recursively(container: dict[str, Any] | list[Any], name: str) 
 
     for key in key_iter:
         if isinstance(container[key], str):
+            if '{source}' in container[key]:
+                warnings.warn('{source} substitution in repo config', DeprecationWarning)
             container[key] = container[key].replace('{source}', name)
         elif isinstance(container[key], list) or isinstance(container[key], dict):
             _subst_source_recursively(container[key], name)
