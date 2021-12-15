@@ -3,7 +3,7 @@
 #
 # See https://rpmfusion.org/#Browse_available_packages
 ###########################################################################
-# XXX: add tainted subrepos (see above)
+
 - name: rpmfusion_fedora_31
   type: repository
   desc: RPM Fusion Fedora 31
@@ -179,6 +179,158 @@
         class: RepodataParser
         vertags: fc
       subrepo: nonfree/updates-testing
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  groups: [ all, production, rpmfusion ]
+
+- name: rpmfusion_fedora_34
+  type: repository
+  desc: RPM Fusion Fedora 34
+  family: fedora
+  ruleset: [fedora,rpm]
+  minpackages: 300
+  sources:
+    - name: free-release
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/releases/34/Everything/source/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/release
+    - name: free-updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/updates/34/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/updates
+    - name: free-updates-testing
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/updates/testing/34/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/updates-testing
+    - name: free-tainted
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/tainted/34/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/tainted
+    - name: nonfree-release
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/releases/34/Everything/source/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/release
+    - name: nonfree-updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/updates/34/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/updates
+    - name: nonfree-updates-testing
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/34/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/updates-testing
+    - name: nonfree-tainted
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/tainted/34/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/tainted
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  groups: [ all, production, rpmfusion ]
+
+- name: rpmfusion_fedora_35
+  type: repository
+  desc: RPM Fusion Fedora 35
+  family: fedora
+  ruleset: [fedora,rpm]
+  minpackages: 300
+  sources:
+    - name: free-release
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/releases/35/Everything/source/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/release
+    - name: free-updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/updates/35/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/updates
+    - name: free-updates-testing
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/updates/testing/35/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/updates-testing
+    - name: free-tainted
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/free/fedora/tainted/35/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: free/tainted
+    - name: nonfree-release
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/releases/35/Everything/source/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/release
+    - name: nonfree-updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/updates/35/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/updates
+    - name: nonfree-updates-testing
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/35/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/updates-testing
+    - name: nonfree-tainted
+      fetcher:
+        class: RepodataFetcher
+        url: https://download1.rpmfusion.org/nonfree/fedora/tainted/35/SRPMS/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: nonfree/tainted
   repolinks:
     - desc: RPM Fusion home
       url: https://rpmfusion.org/
