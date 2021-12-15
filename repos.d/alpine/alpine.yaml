@@ -25,13 +25,15 @@
   minpackages: {{minpackages}}
   default_maintainer: fallback-mnt-alpine@repology
   sources:
-    - name: {{subrepos}}
+    {% for subrepo in subrepos %}
+    - name: {{subrepo}}
       fetcher:
         class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/{{vversion}}/{source}/x86_64/APKINDEX.tar.gz'
+        url: 'http://dl-3.alpinelinux.org/alpine/{{vversion}}/{{subrepo}}/x86_64/APKINDEX.tar.gz'
       parser:
         class: ApkIndexParser
-      subrepo: '{source}'
+      subrepo: {{subrepo}}
+    {% endfor %}
   repolinks:
     - desc: Alpine Linux home
       url: https://alpinelinux.org/
