@@ -62,21 +62,21 @@
     - name: {{ kit }}
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/funtoo/{source}.git'
+        url: 'https://github.com/funtoo/{{kit}}.git'
         branch: {{branch}}
         sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       parser:
         class: GentooGitParser
         require_md5cache_metadata: true
         require_xml_metadata: false
-      subrepo: '{source}'
+      subrepo: {{kit}}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
-          url: 'https://github.com/funtoo/{subrepo}/tree/{{branch}}/{srcname}'
+          url: 'https://github.com/funtoo/{{kit}}/tree/{{branch}}/{srcname}'
         - type: PACKAGE_RECIPE
-          url: 'https://github.com/funtoo/{subrepo}/blob/{{branch}}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+          url: 'https://github.com/funtoo/{{kit}}/blob/{{branch}}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
         - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/funtoo/{subrepo}/{{branch}}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+          url: 'https://raw.githubusercontent.com/funtoo/{{kit}}/{{branch}}/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     {% endfor %}
   repolinks:
     - desc: Funtoo Linux home
