@@ -12,19 +12,23 @@
 # and we no longer care if original files are deleted
 #
 
-- name: alpine_3_8
-  sortname: alpine_3_08
+{% macro alpine(version, minpackages, subrepos=['community','main']) %}
+{% set vversion = 'edge' if version == 'edge' else 'v' + version %}
+- name: alpine_{{version|replace('.', '_')}}
+  {% if version >= '3.8' and version <= '3.9' %}
+  sortname: alpine_{{version|replace('.', '_0')}}
+  {% endif %}
   type: repository
-  desc: Alpine Linux 3.8
+  desc: Alpine Linux {{version|title}}
   statsgroup: Alpine
   family: alpine
-  minpackages: 8500
+  minpackages: {{minpackages}}
   default_maintainer: fallback-mnt-alpine@repology
   sources:
-    - name: [ community, main ]
+    - name: {{subrepos}}
       fetcher:
         class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.8/{source}/x86_64/APKINDEX.tar.gz'
+        url: 'http://dl-3.alpinelinux.org/alpine/{{vversion}}/{source}/x86_64/APKINDEX.tar.gz'
       parser:
         class: ApkIndexParser
       subrepo: '{source}'
@@ -34,279 +38,29 @@
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
+    {% if version != 'edge' %}
+    {% set pkgs_branch = '&branch=v' + version %}
+    {% set git_branch = '?h=' + version + '-stable' %}
+    {% endif %}
     - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.8
+      url: 'https://pkgs.alpinelinux.org/packages?name={binname}{{pkgs_branch}}'
     - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.8-stable'
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}{{git_branch}}'
     - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.8-stable'
+      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD{{git_branch}}'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.8-stable'
+      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD{{git_branch}}'
     - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-8-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
+      url: 'https://build.alpinelinux.org/buildlogs/build-{{version|replace('.', '-')}}-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
   groups: [ all, production, alpine ]
+{% endmacro %}
 
-- name: alpine_3_9
-  sortname: alpine_3_09
-  type: repository
-  desc: Alpine Linux 3.9
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 9000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.9/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.9
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.9-stable'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.9-stable'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.9-stable'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-9-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
-
-- name: alpine_3_10
-  type: repository
-  desc: Alpine Linux 3.10
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 9000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.10/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.10
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.10-stable'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.10-stable'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.10-stable'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-10-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
-
-- name: alpine_3_11
-  type: repository
-  desc: Alpine Linux 3.11
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 10000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.11/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.11
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.11-stable'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.11-stable'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.11-stable'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-11-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
-
-- name: alpine_3_12
-  type: repository
-  desc: Alpine Linux 3.12
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 11000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.12/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.12
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.12-stable'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.12-stable'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.12-stable'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-12-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
-
-- name: alpine_3_13
-  type: repository
-  desc: Alpine Linux 3.13
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 13000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.13/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.13
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.13-stable'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.13-stable'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.13-stable'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-13-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
-
-- name: alpine_3_14
-  type: repository
-  desc: Alpine Linux 3.14
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 14000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.14/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.14
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.14-stable'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.14-stable'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.14-stable'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-14-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
-
-- name: alpine_3_15
-  type: repository
-  desc: Alpine Linux 3.15
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 15000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/v3.15/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: https://pkgs.alpinelinux.org/packages?name={binname}&branch=v3.15
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}?h=3.15-stable'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD?h=3.15-stable'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD?h=3.15-stable'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-3-15-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
-
-- name: alpine_edge
-  type: repository
-  desc: Alpine Linux Edge
-  statsgroup: Alpine
-  family: alpine
-  minpackages: 15000
-  default_maintainer: fallback-mnt-alpine@repology
-  sources:
-    - name: [ community, main, testing ]
-      fetcher:
-        class: TarFetcher
-        url: 'http://dl-3.alpinelinux.org/alpine/edge/{source}/x86_64/APKINDEX.tar.gz'
-      parser:
-        class: ApkIndexParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Alpine Linux home
-      url: https://alpinelinux.org/
-    - desc: Alpine packages
-      url: https://pkgs.alpinelinux.org/packages
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://pkgs.alpinelinux.org/packages?name={binname}'
-    - type: PACKAGE_SOURCES
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD'
-    - type: PACKAGE_BUILD_LOG_RAW
-      url: 'https://build.alpinelinux.org/buildlogs/build-edge-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
-  groups: [ all, production, alpine ]
+{{ alpine('3.8', minpackages=8500) }}
+{{ alpine('3.9', minpackages=9000) }}
+{{ alpine('3.10', minpackages=9000) }}
+{{ alpine('3.11', minpackages=10000) }}
+{{ alpine('3.12', minpackages=11000) }}
+{{ alpine('3.13', minpackages=13000) }}
+{{ alpine('3.14', minpackages=14000) }}
+{{ alpine('3.15', minpackages=15000) }}
+{{ alpine('edge', minpackages=15000, subrepos=['community', 'main', 'testing']) }}
