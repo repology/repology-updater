@@ -294,3 +294,27 @@
     - type: PACKAGE_RECIPE
       url: 'https://build.opensuse.org/package/view_file/server:irc/{srcname}/{srcname}.spec?expand=1'
   groups: [ all, production, opensuse, rpm ]
+
+- name: opensuse_shells_tumbleweed
+  sortname: opensusez_shells
+  type: repository
+  desc: openSUSE shells Tumbleweed
+  family: opensuse
+  ruleset: [opensuse,rpm]
+  color: '6da741'
+  minpackages: 25
+  sources:
+    - name: data
+      fetcher:
+        class: RepodataFetcher
+        url: https://download.opensuse.org/repositories/shells/openSUSE_Tumbleweed/
+      parser:
+        class: RepodataParser
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://build.opensuse.org/package/show/shells/{srcname}'
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://software.opensuse.org/package/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://build.opensuse.org/package/view_file/shells/{srcname}/{srcname}.spec?expand=1'
+  groups: [ all, production, opensuse, rpm ]
