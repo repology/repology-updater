@@ -87,3 +87,31 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel8/f/{srcname}.spec'
   groups: [ all, production, epel ]
+
+- name: epel_9
+  type: repository
+  desc: EPEL 9
+  statsgroup: EPEL
+  family: fedora
+  ruleset: [fedora, rpm, epel]
+  color: 'ff0000'
+  minpackages: 150
+  sources:
+    - name: data
+      fetcher:
+        class: RepodataFetcher
+        url: https://dl.fedoraproject.org/pub/epel/9/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: el
+  repolinks:
+    - desc: EPEL wiki page
+      url: https://fedoraproject.org/wiki/EPEL
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/epel9'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel9/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel9/f/{srcname}.spec'
+  groups: [ all, production, epel ]
