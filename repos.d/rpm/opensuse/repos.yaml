@@ -64,12 +64,12 @@
 {{ opensuse_extra_repo('Education', minpackages=300) }}
 {{ opensuse_extra_repo('Emulators', minpackages=100) }}
 {{ opensuse_extra_repo('games', minpackages=600, wiki='openSUSE:Games') }}
-{{ opensuse_extra_repo('graphics', minpackages=150) }}
+{{ opensuse_extra_repo('graphics', minpackages=200) }}
 {{ opensuse_extra_repo('hardware:sdr', minpackages=120) }}
 {{ opensuse_extra_repo('multimedia:apps', minpackages=200) }}
 {{ opensuse_extra_repo('multimedia:libs', minpackages=200) }}
 {{ opensuse_extra_repo('network', minpackages=200) }}
-{{ opensuse_extra_repo('science', minpackages=600) }}
+{{ opensuse_extra_repo('science', minpackages=1400) }}
 {{ opensuse_extra_repo('security', minpackages=150) }}
 {{ opensuse_extra_repo('server:irc', minpackages=25) }}
 {{ opensuse_extra_repo('shells', minpackages=25) }}
