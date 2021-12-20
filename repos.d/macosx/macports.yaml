@@ -24,7 +24,7 @@
       url: https://github.com/macports/macports-ports
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://ports.macports.org/port/{binname}/summary/'
+      url: 'https://ports.macports.org/port/{binname}/summary/' # XXX: redirs to /details/, but "Details" tab still links to /summary/
     - type: PACKAGE_SOURCES
       url: 'https://github.com/macports/macports-ports/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
