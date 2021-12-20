@@ -20,7 +20,7 @@ import datetime
 import json
 import warnings
 from enum import Enum
-from typing import Any, Collection, Iterable, Optional, TYPE_CHECKING, overload
+from typing import Any, Collection, Optional, TYPE_CHECKING, TypeVar, overload
 
 if TYPE_CHECKING:
     from dataclasses import dataclass
@@ -35,22 +35,20 @@ from repology.yamlloader import YamlConfig
 RepositoryNameList = Optional[Collection[str]]  # XXX: can't use |-union yet, see https://github.com/python/mypy/issues/11280
 
 
-def _subst_source_recursively(container: dict[str, Any] | list[Any], name: str) -> None:
-    key_iter: Iterable[Any]
-    if isinstance(container, list):
-        key_iter = range(len(container))
-    elif isinstance(container, dict):
-        key_iter = container.keys()
-    else:
-        return
+T = TypeVar('T')
 
-    for key in key_iter:
-        if isinstance(container[key], str):
-            if '{source}' in container[key]:
-                warnings.warn('{source} substitution in repo config', DeprecationWarning)
-            container[key] = container[key].replace('{source}', name)
-        elif isinstance(container[key], list) or isinstance(container[key], dict):
-            _subst_source_recursively(container[key], name)
+
+def _subst_source_recursively(data: T, name: str) -> T:
+    if isinstance(data, str):
+        if '{source}' in data:
+            warnings.warn('{source} substitution in repo config', DeprecationWarning)
+        return data.replace('{source}', name)  # type: ignore
+    elif isinstance(data, list):
+        return [_subst_source_recursively(item, name) for item in data]  # type: ignore
+    elif isinstance(data, dict):
+        return {key: _subst_source_recursively(value, name) for key, value in data.items()}  # type: ignore
+    else:
+        return data
 
 
 @overload
@@ -155,8 +153,7 @@ class RepositoryManager:
 
                 for name in _listify(sourcedata['name']):
                     # if there are multiple names, clone source data for each of them
-                    processed_sourcedata = copy.deepcopy(sourcedata)
-                    _subst_source_recursively(processed_sourcedata, name)
+                    processed_sourcedata = _subst_source_recursively(copy.deepcopy(sourcedata), name)
                     sources.append(
                         Source(
                             name=name,
