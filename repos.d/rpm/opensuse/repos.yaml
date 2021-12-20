@@ -28,8 +28,8 @@
 #
 #   is a correct link.
 
-{% macro opensuse_extra_repo(name, path_name, minpackages, wiki=None) %}
-{% set path = path_name|replace(':', ':/') %}
+{% macro opensuse_extra_repo(name, minpackages, wiki=None) %}
+{% set path = name|replace(':', ':/') %}
 {% set underscore_name = name|lower|replace(':', '_') %}
 - name: opensuse_{{underscore_name}}_tumbleweed
   sortname: opensusez_{{underscore_name}}
@@ -53,23 +53,23 @@
   {% endif %}
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/{{path_name}}/{srcname}'
+      url: 'https://build.opensuse.org/package/show/{{name}}/{srcname}'
     - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/{{path_name}}/{srcname}/{srcname}.spec?expand=1'
+      url: 'https://build.opensuse.org/package/view_file/{{name}}/{srcname}/{srcname}.spec?expand=1'
   groups: [ all, production, opensuse, opensuse_extra, rpm ]
 {% endmacro %}
 
-{{ opensuse_extra_repo('Education', 'Education', minpackages=300) }}
-{{ opensuse_extra_repo('Emulators', 'Emulators', minpackages=100) }}
-{{ opensuse_extra_repo('Games', 'games', minpackages=600, wiki='openSUSE:Games') }}
-{{ opensuse_extra_repo('Graphics', 'graphics', minpackages=150) }}
-{{ opensuse_extra_repo('Hardware:SDR', 'hardware:sdr', minpackages=120) }}
-{{ opensuse_extra_repo('Multimedia:Apps', 'multimedia:apps', minpackages=200) }}
-{{ opensuse_extra_repo('Multimedia:Libs', 'multimedia:libs', minpackages=200) }}
-{{ opensuse_extra_repo('Network', 'network', minpackages=200) }}
-{{ opensuse_extra_repo('Science', 'science', minpackages=600) }}
-{{ opensuse_extra_repo('Security', 'security', minpackages=150) }}
-{{ opensuse_extra_repo('Server:IRC', 'server:irc', minpackages=25) }}
-{{ opensuse_extra_repo('Shells', 'shells', minpackages=25) }}
+{{ opensuse_extra_repo('Education', minpackages=300) }}
+{{ opensuse_extra_repo('Emulators', minpackages=100) }}
+{{ opensuse_extra_repo('games', minpackages=600, wiki='openSUSE:Games') }}
+{{ opensuse_extra_repo('graphics', minpackages=150) }}
+{{ opensuse_extra_repo('hardware:sdr', minpackages=120) }}
+{{ opensuse_extra_repo('multimedia:apps', minpackages=200) }}
+{{ opensuse_extra_repo('multimedia:libs', minpackages=200) }}
+{{ opensuse_extra_repo('network', minpackages=200) }}
+{{ opensuse_extra_repo('science', minpackages=600) }}
+{{ opensuse_extra_repo('security', minpackages=150) }}
+{{ opensuse_extra_repo('server:irc', minpackages=25) }}
+{{ opensuse_extra_repo('shells', minpackages=25) }}
