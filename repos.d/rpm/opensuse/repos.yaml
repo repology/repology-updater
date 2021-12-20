@@ -40,7 +40,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/Education/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/Education/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -64,7 +64,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/Emulators/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/Emulators/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -88,7 +88,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   repolinks:
@@ -115,7 +115,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/graphics/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/graphics/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -139,7 +139,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/multimedia:/apps/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/multimedia:/apps/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -163,7 +163,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/multimedia:/libs/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/multimedia:/libs/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -187,7 +187,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/network/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/network/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -211,7 +211,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/science/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/science/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -235,7 +235,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
@@ -259,7 +259,7 @@
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/hardware:/sdr/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/hardware:/sdr/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   packagelinks:
