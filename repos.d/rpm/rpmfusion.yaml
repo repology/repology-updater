@@ -52,14 +52,18 @@
   minpackages: 300
   sources:
     {% for sub1 in ['free', 'nonfree'] %}
+    {% set repo_url = 'https://download1.rpmfusion.org/' + sub1 + '/fedora/development/rawhide/Everything/source/SRPMS/' %}
     - name: {{sub1}}-development
       fetcher:
         class: RepodataFetcher
-        url: https://download1.rpmfusion.org/{{sub1}}/fedora/development/rawhide/Everything/source/SRPMS/
+        url: {{repo_url}}
       parser:
         class: RepodataParser
         vertags: fc
       subrepo: {{sub1}}/release
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: {{repo_url}}/repoview/{srcname}.html
     {% endfor %}
   repolinks:
     - desc: RPM Fusion home
