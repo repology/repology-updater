@@ -49,6 +49,8 @@ def _iter_packages(path: str) -> Iterable[_PackageLocation]:
 
 class WingetGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        num_manifests_without_packagename = 0
+
         for pkgloc in _iter_packages(path):
             with factory.begin(pkgloc.yamlpath_rel) as pkg:
                 try:
@@ -65,7 +67,7 @@ class WingetGitParser(Parser):
                     continue
 
                 if 'PackageName' not in pkgdata:
-                    pkg.log('No PackageName defined', Logger.ERROR)
+                    num_manifests_without_packagename += 1
                     continue
 
                 pkg.add_name(pkgdata['PackageIdentifier'], NameType.WINGET_ID)
@@ -92,3 +94,5 @@ class WingetGitParser(Parser):
                 pkg.set_extra_field('yamlpath', pkgloc.yamlpath_rel)
 
                 yield pkg
+
+        factory.log(f'Skipped manifests without PackageName: {num_manifests_without_packagename}', Logger.WARNING)
