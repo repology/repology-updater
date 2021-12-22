@@ -59,11 +59,11 @@
         class: MetacpanAPIParser
   shadow: true
   repolinks:
-    - desc: CPAN
-      url: http://cpan.org/
     - desc: MetaCPAN
       url: https://metacpan.org/
+    - desc: CPAN
+      url: https://www.cpan.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://metacpan.org/release/{name}'
+      url: 'https://metacpan.org/dist/{name}'
   groups: [ all, production ]
