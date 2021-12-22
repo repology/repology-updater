@@ -42,7 +42,6 @@ class ChocolateyParser(Parser):
                     pkg.add_name(safe_findtext(entry, f'{atom}title'), NameType.CHOCOLATEY_TITLE)
                     pkg.set_version(safe_findtext(entry, f'{md}properties/{ds}Version'))
                     pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, safe_findtext_empty(entry, f'{md}properties/{ds}ProjectUrl'))
-                    pkg.add_links(LinkType.UPSTREAM_CHANGELOG, safe_findtext_empty(entry, f'{md}properties/{ds}ReleaseNotes'))
                     pkg.add_links(LinkType.UPSTREAM_REPOSITORY, safe_findtext_empty(entry, f'{md}properties/{ds}ProjectSourceUrl'))
                     pkg.add_links(LinkType.PACKAGE_SOURCES, safe_findtext_empty(entry, f'{md}properties/{ds}PackageSourceUrl'))
                     pkg.add_links(LinkType.UPSTREAM_DOCUMENTATION, safe_findtext_empty(entry, f'{md}properties/{ds}DocsUrl'))
