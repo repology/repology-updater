@@ -38,6 +38,16 @@ def test_text():
     assert config.get_hash() == 'da87f61f7796c806802a20b96d40406533fb91e07945c747ed84124b6277151d'
 
 
+def test_file(testdata_dir):
+    config = YamlConfig.from_path(testdata_dir / 'yaml_configs' / '1.yaml')
+
+    assert config.get_items() == [
+        {'foo': 1},
+    ]
+
+    assert config.get_hash() == '1b8a0882147fa5c71060f8a3f8cf7fa3e97f0b729ccc134526052ae0c181a925'
+
+
 def test_files(testdata_dir):
     config = YamlConfig.from_path(testdata_dir / 'yaml_configs')
 
