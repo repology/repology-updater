@@ -270,7 +270,7 @@ schemas = {
 
                         # kiss
                         'maintainer_from_git': bool,
-                        'blob_prefix': str,
+                        'use_meta': bool,
 
                         # debian
                         'allowed_vcs_urls': str,
