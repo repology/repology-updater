@@ -128,6 +128,7 @@ families = [
 rulesets = families + [
     'antergos',
     'antix',
+    'amazon',
     'apertis',
     'artix',
     'astra',
