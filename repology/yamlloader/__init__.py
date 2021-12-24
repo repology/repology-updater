@@ -81,9 +81,12 @@ class YamlConfig:
 
         overall_hash = hashlib.sha256()
 
-        for root, dirs, files in os.walk(path):
-            file_paths += [os.path.join(root, f) for f in files if f.endswith('.yaml')]
-            dirs[:] = [d for d in dirs if not d.startswith('.')]
+        if os.path.isfile(path):
+            file_paths = [path]
+        else:
+            for root, dirs, files in os.walk(path):
+                file_paths += [os.path.join(root, f) for f in files if f.endswith('.yaml')]
+                dirs[:] = [d for d in dirs if not d.startswith('.')]
 
         for file_path in sorted(file_paths):
             try:
