@@ -26,7 +26,13 @@ from repology.parsers import Parser
 
 class LibreGameWikiParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        root = xml.etree.ElementTree.parse(path)
+        with open(path) as fd:
+            data = fd.read()
+
+        # plug incorrect XML
+        data = data.replace('value="Special:Search">', 'value="Special:Search"/>')
+
+        root = xml.etree.ElementTree.fromstring(data)
 
         content = root.find('.//div[@id="mw-content-text"]')
         if content is None:
