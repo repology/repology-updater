@@ -79,4 +79,4 @@
       url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/tree/PKGBUILD?h={srcname|quote}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
-  groups: [ all, production ]
+  groups: [ all ]
