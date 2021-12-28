@@ -106,7 +106,7 @@ class VcpkgGitParser(Parser):
 
                 if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
                     pkg.set_version(version)
-                    pkg.set_flags(PackageFlags.IGNORE)
+                    pkg.set_flags(PackageFlags.UNTRUSTED)
                 else:
                     pkg.set_version(version, _normalize_version)
 
