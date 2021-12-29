@@ -89,6 +89,10 @@ class NixJsonParser(Parser):
                     pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
 
+                if packagedata['name'].startswith('_at'):
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
                 if '--' in packagedata['name']:
                     pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
