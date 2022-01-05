@@ -5,6 +5,7 @@
   type: repository
   desc: Baulk
   family: baulk
+  ruleset: [baulk, windows]
   minpackages: 70
   sources:
     - name: baulk
