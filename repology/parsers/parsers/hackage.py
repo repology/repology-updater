@@ -158,6 +158,8 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[dict[str, str]]:
             tarpath = tarinfo.name.split('/')
             if tarpath[-1].endswith('.cabal'):
                 name, version = tarpath[0:2]
+                if 'hledger' in name and version == '1.24.99':
+                    continue  # XXX: support preferred_versions properly
                 if name not in latest_versions or version_compare(version, latest_versions[name][0]) > 0:
                     latest_versions[name] = [version, 1]
                 elif version == latest_versions[name][0]:
