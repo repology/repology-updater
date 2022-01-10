@@ -4,370 +4,90 @@
 # See https://www.linuxmint.com/download_all.php
 # Also https://en.wikipedia.org/wiki/Linux_Mint_version_history#Release_history
 ###########################################################################
-- name: linux_mint_17
-  type: repository
-  desc: Linux Mint 17
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/qiana/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
 
-- name: linux_mint_17_1
+{% macro mint(major, minor, codename, minpackages, valid_till=None) %}
+{% set uversion = major|string + '_' + minor|string if minor else major|string %}
+{% set dversion = major|string + '.' + minor|string if minor else major|string %}
+- name: linux_mint_{{uversion}}
   type: repository
-  desc: Linux Mint 17.1
+  desc: Linux Mint {{dversion}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
-  minpackages: 300
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   default_maintainer: root@linuxmint.com
   sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+    {% for subrepo in ['backport', 'import', 'main', 'multiverse', 'romeo', 'universe', 'upstream'] %}
+    - name: {{subrepo}}
       fetcher:
         class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rebecca/{source}/source/Sources.gz'
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/{{codename}}/{{subrepo}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{subrepo}}
+    {% endfor %}
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
   groups: [ all, production, mint ]
+{% endmacro %}
 
-- name: linux_mint_17_2
+{% macro lmde(version, codename, minpackages, valid_till=None) %}
+- name: lmde_{{version}}
   type: repository
-  desc: Linux Mint 17.2
+  desc: LMDE {{version}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
-  minpackages: 300
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   default_maintainer: root@linuxmint.com
   sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+    {% for subrepo in ['backport', 'import', 'main', 'romeo', 'upstream'] %}
+    - name: {{subrepo}}
       fetcher:
         class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rafaela/{source}/source/Sources.gz'
+        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/{{codename}}/{{subrepo}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{subrepo}}
+    {% endfor %}
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
   groups: [ all, production, mint ]
+{% endmacro %}
 
-- name: linux_mint_17_3
-  type: repository
-  desc: Linux Mint 17.3
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 300
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rosa/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
+# https://en.wikipedia.org/wiki/Linux_Mint
 
-- name: linux_mint_18
-  type: repository
-  desc: Linux Mint 18
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sarah/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
+{{ mint(17, 0, 'qiana',   minpackages=100, valid_till='2019-04-30') }}
+{{ mint(17, 1, 'rebecca', minpackages=300, valid_till='2019-04-30') }}
+{{ mint(17, 2, 'rafaela', minpackages=300, valid_till='2019-04-30') }}
+{{ mint(17, 3, 'rosa',    minpackages=300, valid_till='2019-04-30') }}
 
-- name: linux_mint_18_1
-  type: repository
-  desc: Linux Mint 18.1
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/serena/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
+{{ mint(18, 0, 'sarah',   minpackages=100, valid_till='2021-04-30') }}
+{{ mint(18, 1, 'serena',  minpackages=100, valid_till='2021-04-30') }}
+{{ mint(18, 2, 'sonya',   minpackages=100, valid_till='2021-04-30') }}
+{{ mint(18, 3, 'sylvia',  minpackages=100, valid_till='2021-04-30') }}
 
-- name: linux_mint_18_2
-  type: repository
-  desc: Linux Mint 18.2
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sonya/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
+{{ mint(19, 0, 'tara',    minpackages=100, valid_till='2023-04-30') }}
+{{ mint(19, 1, 'tessa',   minpackages=100, valid_till='2023-04-30') }}
+{{ mint(19, 2, 'tina',    minpackages=100, valid_till='2023-04-30') }}
+{{ mint(19, 3, 'tricia',  minpackages=100, valid_till='2023-04-30') }}
 
-- name: linux_mint_18_3
-  type: repository
-  desc: Linux Mint 18.3
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sylvia/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
+{{ mint(20, 0, 'ulyana',  minpackages=100, valid_till='2025-04-30') }}
+{{ mint(20, 1, 'ulyssa',  minpackages=100, valid_till='2025-04-30') }}
+{{ mint(20, 2, 'uma',     minpackages=100, valid_till='2025-04-30') }}
+{{ mint(20, 3, 'una',     minpackages=100, valid_till='2025-04-30') }}
 
-- name: linux_mint_19
-  type: repository
-  desc: Linux Mint 19
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tara/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
-
-- name: linux_mint_19_1
-  type: repository
-  desc: Linux Mint 19.1
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tessa/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
-
-- name: linux_mint_19_2
-  type: repository
-  desc: Linux Mint 19.2
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tina/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
-
-- name: linux_mint_19_3
-  type: repository
-  desc: Linux Mint 19.3
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tricia/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
-
-- name: linux_mint_20_0
-  type: repository
-  desc: Linux Mint 20.0
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/ulyana/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
-
-- name: linux_mint_20_1
-  type: repository
-  desc: Linux Mint 20.1
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/ulyssa/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
-
-- name: linux_mint_20_2
-  type: repository
-  desc: Linux Mint 20.2
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/uma/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
-
-- name: lmde_4
-  type: repository
-  desc: LMDE 4
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu,mint]
-  color: '87cf3e'
-  minpackages: 100
-  default_maintainer: root@linuxmint.com
-  sources:
-    - name: [ backport, import, main, romeo, upstream ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.yandex.ru/linuxmint-packages/dists/debbie/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Linux Mint home
-      url: https://linuxmint.com/
-  groups: [ all, production, mint ]
+{{ lmde(4, 'debbie', minpackages=100) }}
+{#{ lmde(5, 'elsie',  minpackages=100) }#}
