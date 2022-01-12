@@ -690,6 +690,7 @@ CREATE TABLE manual_cpes (
 
 CREATE UNIQUE INDEX ON manual_cpes(effname, cpe_product, cpe_vendor, cpe_edition, cpe_lang, cpe_sw_edition, cpe_target_sw, cpe_target_hw, cpe_other);
 CREATE INDEX ON manual_cpes(cpe_product, cpe_vendor);
+CREATE INDEX ON manual_cpes(added_ts DESC);
 
 
 DROP TABLE IF EXISTS project_cpe CASCADE;
@@ -736,6 +737,7 @@ CREATE TABLE cves (
 );
 
 CREATE INDEX ON cves USING gin (cpe_pairs);
+CREATE INDEX ON cves(published DESC);
 
 -- cpe dictionary
 DROP TABLE IF EXISTS cpe_dictionary CASCADE;
