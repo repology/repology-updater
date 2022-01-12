@@ -140,6 +140,7 @@ rulesets = families + [
     'debian',
     'deepin',
     'dports',
+    'endlessos',
     'entware',
     'epel',
     'frugalware',
