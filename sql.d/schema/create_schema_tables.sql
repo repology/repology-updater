@@ -396,6 +396,17 @@ CREATE TABLE maintainer_repo_metapackages_events (
 
 CREATE INDEX ON maintainer_repo_metapackages_events(maintainer_id, repository_id, ts DESC);
 
+CREATE TABLE maintainer_repo_metapackages_events_archive (
+	maintainer_id integer NOT NULL,
+	repository_id smallint NOT NULL,
+
+	ts timestamp with time zone NOT NULL,
+
+	metapackage_id integer NOT NULL,
+	type maintainer_repo_metapackages_event_type NOT NULL,
+	data jsonb NOT NULL
+);
+
 -- repository events
 DROP TABLE IF EXISTS repository_events CASCADE;
 
@@ -412,6 +423,16 @@ CREATE TABLE repository_events (
 );
 
 CREATE INDEX ON repository_events(repository_id, ts DESC);
+
+CREATE TABLE repository_events_archive (
+	repository_id smallint NOT NULL,
+
+	ts timestamp with time zone NOT NULL,
+
+	metapackage_id integer NOT NULL,
+	type maintainer_repo_metapackages_event_type NOT NULL,
+	data jsonb NOT NULL
+);
 
 --------------------------------------------------------------------------------
 -- Statistics

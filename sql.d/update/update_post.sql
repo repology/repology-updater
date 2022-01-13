@@ -101,3 +101,27 @@ DELETE FROM repositories_history_new USING duplicate_rows
 WHERE
 	repositories_history_new.repository_id = duplicate_rows.repository_id AND
 	repositories_history_new.ts = duplicate_rows.ts;
+
+{#
+do it manually for now
+--------------------------------------------------------------------------------
+-- Archive old events (maintainer and repository)
+-- Note that project events are not processed, as project history is more
+-- important
+--------------------------------------------------------------------------------
+WITH moved AS (
+    DELETE FROM maintainer_repo_metapackages_events
+    WHERE ts < now() - interval '1' year
+    RETURNING maintainer_id, repository_id, ts, metapackage_id, type, data
+)
+INSERT INTO maintainer_repo_metapackages_events_archive(maintainer_id, repository_id, ts, metapackage_id, type, data)
+SELECT * FROM moved;
+
+WITH moved AS (
+    DELETE FROM repository_events
+    WHERE ts < now() - interval '1' year
+    RETURNING repository_id, ts, metapackage_id, type, data
+)
+INSERT INTO repository_events_archive(repository_id, ts, metapackage_id, type, data)
+SELECT * FROM moved;
+#}
