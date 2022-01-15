@@ -38,4 +38,4 @@
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/plain/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production, have_testdata ]
+  groups: [ all, production, have_testdata ]

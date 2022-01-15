@@ -21,7 +21,7 @@
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
-  tags: [ all, production, slackware ]
+  groups: [ all, production, slackware ]
 
 - name: slackware_current
   sortname: slackware32_current
@@ -43,7 +43,7 @@
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
-  tags: [ all, production, slackware ]
+  groups: [ all, production, slackware ]
 
 - name: slackware64_14_2
   type: repository
@@ -64,7 +64,7 @@
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
-  tags: [ all, production, slackware ]
+  groups: [ all, production, slackware ]
 
 - name: slackware64_current
   type: repository
@@ -85,7 +85,7 @@
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
-  tags: [ all, production, slackware ]
+  groups: [ all, production, slackware ]
 
 - name: slackwarearm_14_2
   type: repository
@@ -106,7 +106,7 @@
   repolinks:
     - desc: Slackware ARM / AARCH64
       url: http://arm.slackware.com/
-  tags: [ all, production, slackware ]
+  groups: [ all, production, slackware ]
 
 - name: slackwarearm_current
   type: repository
@@ -127,4 +127,4 @@
   repolinks:
     - desc: Slackware ARM / AARCH64
       url: http://arm.slackware.com/
-  tags: [ all, production, slackware ]
+  groups: [ all, production, slackware ]

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Iterable, List
+from typing import Iterable
 
 from repology.package import Package
 from repology.update.hashes import ProjectHash, calculate_project_classless_hash
@@ -44,7 +44,7 @@ class RemovedProject(ChangedProject):
 @dataclass
 class UpdatedProject(ChangedProject):
     hash_: int
-    packages: List[Package]
+    packages: list[Package]
 
 
 @dataclass
@@ -68,7 +68,7 @@ class ProjectsChangeStatistics:
         return f'added {self.added}, removed {self.removed}, changed {self.changed}, unchanged {self.unchanged}, total change {self.change_fraction*100.0:.2f}%'
 
 
-def iter_changed_projects(old_hashes_iter: Iterable[ProjectHash], new_packagesets_iter: Iterable[List[Package]], statistics: ProjectsChangeStatistics) -> Iterable[ChangedProject]:
+def iter_changed_projects(old_hashes_iter: Iterable[ProjectHash], new_packagesets_iter: Iterable[list[Package]], statistics: ProjectsChangeStatistics) -> Iterable[ChangedProject]:
     old_effname, old_hash = next(old_hashes_iter, (None, None))  # type: ignore
     new_packages = next(new_packagesets_iter, None)  # type: ignore
 

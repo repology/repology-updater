@@ -21,13 +21,13 @@ import xml.etree.ElementTree
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 from repology.parsers.cpe import cpe_parse
+from typing import Iterable
 from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
-from repology.transformer import PackageTransformer
 
 
 def _parse_conditional_expr(string: str) -> Iterable[str]:
@@ -57,7 +57,7 @@ def _parse_conditional_expr(string: str) -> Iterable[str]:
         # XXX: parse ( || foo bar ) construct used with licenses
 
 
-def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
+def _iter_packages(path: str) -> Iterable[tuple[str, str]]:
     for category in os.listdir(path):
         category_path = os.path.join(path, category)
         if not os.path.isdir(category_path) or category.startswith('.') or category in ['acct-group', 'acct-user', 'metadata', 'virtual']:
@@ -100,10 +100,10 @@ _link_templates_by_upstream_type = {
 
 @dataclass
 class _ParsedXmlMetadata:
-    maintainers: List[str] = field(default_factory=list)
-    upstreams: List[str] = field(default_factory=list)
-    unsupported_upstream_types: Set[str] = field(default_factory=set)
-    cpe: Optional[str] = None
+    maintainers: list[str] = field(default_factory=list)
+    upstreams: list[str] = field(default_factory=list)
+    unsupported_upstream_types: set[str] = field(default_factory=set)
+    cpe: str | None = None
 
     def handle_upstream(self, type_: str, value: str) -> None:
         if type_ == 'cpe':
@@ -137,8 +137,8 @@ def _parse_xml_metadata(path: str) -> _ParsedXmlMetadata:
     return output
 
 
-def _parse_md5cache_metadata(path: str) -> Dict[str, str]:
-    result: Dict[str, str] = {}
+def _parse_md5cache_metadata(path: str) -> dict[str, str]:
+    result: dict[str, str] = {}
 
     with open(path, 'r', encoding='utf-8') as metadata_file:
         for line in metadata_file:
@@ -158,7 +158,7 @@ class GentooGitParser(Parser):
         self._require_xml_metadata = require_xml_metadata
         self._require_md5cache_metadata = require_md5cache_metadata
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('-')
 
         for category, package in _iter_packages(path):

@@ -1,53 +1,52 @@
 ###########################################################################
 # Debian
 ###########################################################################
-- name: debian_oldstable
+
+- name: debian_8
+  sortname: debian_08
   type: repository
-  desc: Debian Oldstable
+  desc: Debian 8
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 20000
   sources:
-    - name: [ oldstable/main, oldstable/contrib, oldstable/non-free ]
+    - name: [ jessie/main, jessie/contrib, jessie/non-free, jessie-updates/main, jessie-updates/contrib, jessie-updates/non-free ]
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
-        compression: xz
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.gz'
+        compression: gz
       parser:
         class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in oldstable
-      url: https://packages.debian.org/oldstable/
+    - desc: Debian packages in jessie
+      url: https://packages.debian.org/jessie/
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.debian.org/oldstable/source/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=oldstable'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
-- name: debian_stable
+- name: debian_9
+  sortname: debian_09
   type: repository
-  desc: Debian Stable
+  desc: Debian 9
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, debian]
   color: 'c70036'
-  minpackages: 25000
+  minpackages: 24000
   sources:
-    - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
+    - name: [ stretch/main, stretch/contrib, stretch/non-free, stretch-updates/main, stretch-updates/contrib, stretch-updates/non-free ]
       fetcher:
         class: FileFetcher
         url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
@@ -58,70 +57,254 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in stable
-      url: https://packages.debian.org/stable/
+    - desc: Debian packages in stretch
+      url: https://packages.debian.org/stretch/
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.debian.org/stable/source/{srcname}'
+      url: 'https://packages.debian.org/stretch/source/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.debian.org/{srcname}'
+    - type: PACKAGE_STATISTICS
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
+  groups: [ all, production, debian ]
+
+- name: debian_9_backports
+  sortname: debian_09_backports
+  type: repository
+  desc: Debian 9 Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, debian]
+  color: 'c70036'
+  minpackages: 1500
+  sources:
+    - name: [ stretch-backports/main, stretch-backports/contrib, stretch-backports/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in stretch
+      url: https://packages.debian.org/stretch/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.debian.org/stretch/source/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
     - type: PACKAGE_BUILD_STATUS
-      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stretch-backports'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]
 
-- name: debian_stable_backports
+- name: debian_10
   type: repository
-  desc: Debian Stable Backports
+  desc: Debian 10
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, debian]
+  color: 'c70036'
+  minpackages: 28000
+  sources:
+    - name: [ buster/main, buster/contrib, buster/non-free, buster-updates/main, buster-updates/contrib, buster-updates/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in buster
+      url: https://packages.debian.org/buster/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.debian.org/buster/source/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.debian.org/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=buster'
+    - type: PACKAGE_STATISTICS
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
+  groups: [ all, production, debian ]
+
+- name: debian_10_backports
+  type: repository
+  desc: Debian 10 Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, debian]
+  color: 'c70036'
+  minpackages: 1500
+  sources:
+    - name: [ buster-backports/main, buster-backports/contrib, buster-backports/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in buster
+      url: https://packages.debian.org/buster/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.debian.org/buster-backports/source/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.debian.org/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=buster-backports'
+    - type: PACKAGE_STATISTICS
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
+  groups: [ all, production, debian ]
+
+- name: debian_11
+  type: repository
+  desc: Debian 11
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, debian]
+  color: 'c70036'
+  minpackages: 30000
+  sources:
+    - name: [ bullseye/main, bullseye/contrib, bullseye/non-free, bullseye-updates/main, bullseye-updates/contrib, bullseye-updates/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in bullseye
+      url: https://packages.debian.org/bullseye/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.debian.org/bullseye/source/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.debian.org/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bullseye'
+    - type: PACKAGE_STATISTICS
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
+  groups: [ all, production, debian ]
+
+- name: debian_11_backports
+  type: repository
+  desc: Debian 11 Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, debian]
+  color: 'c70036'
+  minpackages: 40
+  sources:
+    - name: [ bullseye-backports/main, bullseye-backports/contrib, bullseye-backports/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in bullseye
+      url: https://packages.debian.org/bullseye/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.debian.org/bullseye-backports/source/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.debian.org/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bullseye-backports'
+    - type: PACKAGE_STATISTICS
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
+  groups: [ all, production, debian ]
+
+- name: debian_12
+  type: repository
+  desc: Debian 12
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, debian]
+  color: 'c70036'
+  minpackages: 30000
+  sources:
+    - name: [ bookworm/main, bookworm/contrib, bookworm/non-free, bookworm-updates/main, bookworm-updates/contrib, bookworm-updates/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in bookworm
+      url: https://packages.debian.org/bookworm/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.debian.org/bookworm/source/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.debian.org/{srcname}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bookworm'
+    - type: PACKAGE_STATISTICS
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
+  groups: [ all, production, debian ]
+
+- name: debian_12_backports
+  type: repository
+  desc: Debian 12 Backports
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: 0
   sources:
-    - name: [ main, contrib, non-free ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.debian.org/debian/dists/stable-backports/{source}/source/Sources.xz'
-        compression: xz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Debian packages
-      url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in stable-backports
-      url: https://packages.debian.org/stable-backports/
-    - desc: Debian package auto-building status
-      url: https://buildd.debian.org/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.debian.org/stable-backports/source/{srcname}'
-    - type: PACKAGE_SOURCES
-      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.debian.org/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable-backports'
-    - type: PACKAGE_STATISTICS
-      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
-
-- name: debian_testing
-  type: repository
-  desc: Debian Testing
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, debian]
-  color: 'c70036'
-  minpackages: 27000
-  sources:
-    - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
+    - name: [ bookworm-backports/main, bookworm-backports/contrib, bookworm-backports/non-free ]
       fetcher:
         class: FileFetcher
         url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
@@ -132,23 +315,24 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in testing
-      url: https://packages.debian.org/testing/
+    - desc: Debian packages in bookworm
+      url: https://packages.debian.org/bookworm/
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.debian.org/testing/source/{srcname}'
+      url: 'https://packages.debian.org/bookworm-backports/source/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
     - type: PACKAGE_BUILD_STATUS
-      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=testing'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=bookworm-backports'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, debian ] # not there yet
 
+# Rolling
 - name: debian_unstable
   type: repository
   desc: Debian Unstable
@@ -156,12 +340,12 @@
   family: debuntu
   ruleset: [debuntu, debian]
   color: 'c70036'
-  minpackages: 30000
+  minpackages: 32000
   sources:
-    - name: [ main, contrib, non-free ]
+    - name: [ sid/main, sid/contrib, sid/non-free ]
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.debian.org/debian/dists/unstable/{source}/source/Sources.xz'
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -169,22 +353,22 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in unstable
-      url: https://packages.debian.org/unstable/
+    - desc: Debian packages in sid
+      url: https://packages.debian.org/sid/
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.debian.org/unstable/source/{srcname}'
+      url: 'https://packages.debian.org/sid/source/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
     - type: PACKAGE_BUILD_STATUS
-      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=unstable'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=sid'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian, have_testdata ]
+  groups: [ all, production, debian ]
 
 - name: debian_experimental
   sortname: debian_zzz
@@ -196,10 +380,10 @@
   color: 'c70036'
   minpackages: 300
   sources:
-    - name: [ main, contrib, non-free ]
+    - name: [ experimental/main, experimental/contrib, experimental/non-free ]
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.xz'
+        url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -222,4 +406,4 @@
       url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=exprimental'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
-  tags: [ all, production, debian ]
+  groups: [ all, production, debian ]

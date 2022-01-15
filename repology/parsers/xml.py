@@ -16,13 +16,13 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import xml.etree.cElementTree as ElementTree
-from typing import Iterable, List
+from typing import Iterable
 
 
 XmlElement = ElementTree.Element
 
 
-def iter_xml_elements_at_level(path: str, level: int, tags: List[str]) -> Iterable[XmlElement]:
+def iter_xml_elements_at_level(path: str, level: int, tags: list[str]) -> Iterable[XmlElement]:
     """Iterate all specified elements from XML at given nesting level.
 
     Processed elements are cleared so large XML files may be processed
@@ -55,7 +55,14 @@ def safe_findtext(elt: XmlElement, match: str) -> str:
     return res
 
 
-def safe_findalltexts(elt: XmlElement, match: str) -> List[str]:
+def safe_findtext_empty(elt: XmlElement, match: str) -> str:
+    res = elt.find(match)
+    if res is None:
+        raise RuntimeError('required subelement {} of {} is missing'.format(match, elt.tag))
+    return res.text or ''
+
+
+def safe_findalltexts(elt: XmlElement, match: str) -> list[str]:
     res = []
 
     for e in elt.findall(match):

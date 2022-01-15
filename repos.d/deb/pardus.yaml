@@ -47,7 +47,7 @@
   repolinks:
     - desc: Pardus home
       url: https://www.pardus.org.tr/
-  tags: [ all, production, pardus ]
+  groups: [ all, production, pardus ]
 
 - name: pardus_19
   type: repository
@@ -95,4 +95,52 @@
   repolinks:
     - desc: Pardus home
       url: https://www.pardus.org.tr/
-  tags: [ all, production, pardus ]
+  groups: [ all, production, pardus ]
+
+- name: pardus_21
+  type: repository
+  desc: Pardus 21
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, pardus]
+  color: 'ffcc00'
+  minpackages: 25000
+  sources:
+    - name: [main,contrib,non-free]
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/pardus/dists/yirmibir/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+    # following urls were taken from https://wiki.debian.org/Derivatives/Census/Pardus,
+    # otherwise it's unclear how 'guvenlik' is related to 'pardus'
+    - name: updates-main
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/yirmibir/main/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
+      subrepo: 'updates/main'
+    - name: updates-contrib
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/yirmibir/contrib/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
+      subrepo: 'updates/contrib'
+    - name: updates-non-free
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/yirmibir/non-free/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
+      subrepo: 'updates/non-free'
+  repolinks:
+    - desc: Pardus home
+      url: https://www.pardus.org.tr/
+  groups: [ all, production, pardus ]

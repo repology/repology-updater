@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2020-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,13 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 from typing import Iterable
 
-from repology.package import LinkType
+from repology.logger import Logger
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
-from repology.transformer import PackageTransformer
 
 
 # see `jq '.[].info.project_urls' < pypicache.json` for all of them
@@ -56,31 +57,60 @@ _url_types = {
 }
 
 
+# https://www.python.org/dev/peps/pep-0440/#pre-releases
+# https://www.python.org/dev/peps/pep-0440/#pre-release-spelling
+_PEP440_PRERELEASE_RE = re.compile('(a|b|rc|dev|alpha|beta|c|pre|preview)')
+
+
+def _pep440_is_prerelease(version: str) -> bool:
+    return _PEP440_PRERELEASE_RE.search(version.lower()) is not None
+
+
 class PyPiCacheJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
                 info = pkgdata['info']
 
                 pkg.add_name(info['name'], NameType.PYPI_NAME)
-                pkg.set_version(info['version'])
 
                 pkg.add_links(LinkType.PROJECT_HOMEPAGE, info['project_url'])
                 if (url := info.get('home_page')) and url != 'UNKNOWN':
                     pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, url)
+
+                if info['author_email']:
+                    for maintainer in map(str.strip, info['author_email'].split(',')):
+                        if ' ' in maintainer or '"' in maintainer or '<' in maintainer or "'" in maintainer or '@' not in maintainer:
+                            pkg.log('Skipping garbage maintainer email "{maintainer}"', severity=Logger.WARNING)
+                        else:
+                            pkg.add_maintainers(maintainer)
+
+                if info['summary']:
+                    pkg.set_summary(info['summary'])
 
                 if info['project_urls']:
                     for key, url in info['project_urls'].items():
                         if (link_type := _url_types.get(key.lower())) and url != 'UNKNOWN':
                             pkg.add_links(link_type, url)
 
-                for item in pkgdata['releases'][info['version']]:
-                    pkg.add_links(LinkType.PROJECT_DOWNLOAD, item['url'])
+                for version, releasedatas in pkgdata['releases'].items():
+                    verpkg = pkg.clone()
 
-                if info['author_email']:
-                    pkg.add_maintainers(map(str.strip, info['author_email'].split(',')))
+                    verpkg.set_version(version)
 
-                if info['summary']:
-                    pkg.set_summary(info['summary'])
+                    if _pep440_is_prerelease(version):
+                        verpkg.set_flags(PackageFlags.DEVEL)
 
-                yield pkg
+                    good_items = 0
+                    yanked_items = 0
+                    for releasedata in releasedatas:
+                        if releasedata['yanked']:
+                            yanked_items += 1
+                        else:
+                            good_items += 1
+                            verpkg.add_links(LinkType.PROJECT_DOWNLOAD, releasedata['url'])
+
+                    if yanked_items > 0 and good_items == 0:
+                        verpkg.set_flags(PackageFlags.RECALLED)
+
+                    yield verpkg

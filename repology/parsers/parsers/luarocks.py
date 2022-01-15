@@ -15,16 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Dict, Iterable
+from typing import Any, Iterable
 
 from pyparsing import Empty, Forward, QuotedString, Regex, Suppress, ZeroOrMore
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
-def _parse_data(data: str) -> Dict[str, Any]:
+def _parse_data(data: str) -> dict[str, Any]:
     lcur, rcur, lbrk, rbrk, comma, eq = map(Suppress, '{}[],=')
 
     tablekey = Regex(r'[a-z][a-z0-9_]*') | (lbrk + QuotedString(quoteChar="'") + rbrk)
@@ -46,7 +45,7 @@ def _parse_data(data: str) -> Dict[str, Any]:
 
 
 class LuaRocksParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path, encoding='utf-8', errors='ignore') as contents:
             data = contents.read()
 

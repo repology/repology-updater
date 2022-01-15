@@ -17,18 +17,17 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-# mypy: no-disallow-untyped-calls
-
 import argparse
 import sys
 from typing import Any, Iterable
 
+from repology.classifier import classify_packages
 from repology.config import config
 from repology.logger import FileLogger, Logger, StderrLogger
 from repology.package import LinkType, Package, PackageFlags, PackageStatus
-from repology.packageproc import fill_packageset_versions
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
+from repology.yamlloader import YamlConfig
 
 
 def format_package_field(key: str, value: Any) -> str:
@@ -86,7 +85,7 @@ def main() -> int:
     else:
         options.fields = options.fields.split(',')
 
-    repomgr = RepositoryManager(options.repos_dir)
+    repomgr = RepositoryManager(YamlConfig.from_path(options.repos_dir))
     repoproc = RepositoryProcessor(repomgr, options.statedir, options.parseddir)
 
     logger.log('dumping...')
@@ -96,7 +95,7 @@ def main() -> int:
         if options.to is not None and packageset[0].effname > options.to:
             break
 
-        fill_packageset_versions(packageset)
+        classify_packages(packageset)
 
         if not options.all and packageset_is_shadow_only(packageset):
             continue

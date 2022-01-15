@@ -17,4 +17,4 @@
   repolinks:
     - desc: IBM i Open Source
       url: 'https://bitbucket.org/ibmi/opensource/src/master/'
-  tags: [ all, production, rpm ]
+  groups: [ all, production, rpm ]

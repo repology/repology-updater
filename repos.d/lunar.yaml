@@ -19,4 +19,4 @@
       url: http://www.lunar-linux.org/
     - desc: GitHub ort
       url: https://github.com/lunar-linux
-  tags: [ all ]  # disabled: does not prefix perl/python modules
+  groups: [ all ]  # disabled: does not prefix perl/python modules

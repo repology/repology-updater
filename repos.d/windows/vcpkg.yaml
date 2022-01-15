@@ -29,4 +29,4 @@
       url: 'https://github.com/Microsoft/vcpkg/blob/master/ports/{name}/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/Microsoft/vcpkg/master/ports/{name}/{?patch}'
-  tags: [ all, production ]
+  groups: [ all, production ]

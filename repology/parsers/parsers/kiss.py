@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,52 +17,92 @@
 
 import os
 import subprocess
-from typing import Iterable
+from typing import Iterable, Iterator
 
+from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.patches import add_patch_files
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
+
+
+def read_version(path: str) -> str:
+    with open(path) as fd:
+        return fd.read().strip().split(None, 1)[0]
+
+
+def iter_sources(path: str) -> Iterator[str]:
+    with open(path) as fd:
+        for line in fd:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+
+            url = line.split()[0]
+
+            # KISS introduced substitution variables (see #1166) which
+            # we won't support, detect these and refuse to parse.
+            # Check for numerics additionally, as there may be verbatim
+            # VERSION in the url which affects carbs.
+            if 'VERSION' in url and not any(filter(str.isnumeric, url)):  # type: ignore
+                raise RuntimeError(f'substitution detected in url: "{url}", refusing to continue')
+
+            if '://' in url:
+                yield url
+
+
+def read_carbs_meta(path: str) -> dict[str, str]:
+    meta = {}
+    with open(path) as fd:
+        for line in fd:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+
+            key, value = map(str.strip, line.split(':', 1))
+            meta[key] = value
+
+    return meta
 
 
 class KissGitParser(Parser):
     _maintainer_from_git: bool
+    _use_meta: bool
 
-    def __init__(self, maintainer_from_git: bool = False):
+    def __init__(self, maintainer_from_git: bool = False, use_meta: bool = False):
         self._maintainer_from_git = maintainer_from_git
+        self._use_meta = use_meta
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for versionpath in walk_tree(path, name='version'):
-            rootdir = os.path.dirname(versionpath)
-            with factory.begin(os.path.relpath(rootdir, path)) as pkg:
-                pkg.add_name(os.path.basename(rootdir), NameType.KISS_NAME)
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        for version_path_abs in walk_tree(path, name='version'):
+            version_path_rel = os.path.relpath(version_path_abs, path)
 
-                with open(versionpath) as f:
-                    version, revision = f.read().strip().split()
-                    pkg.set_version(version)
+            package_path_abs = os.path.dirname(version_path_abs)
+            package_path_rel = os.path.relpath(package_path_abs, path)
+            package_path_rel_comps = os.path.split(package_path_rel)
 
-                with open(os.path.join(rootdir, 'sources')) as f:
-                    for line in f:
-                        line = line.strip()
-                        if not line or line.startswith('#'):
-                            continue
+            sources_path_abs = os.path.join(package_path_abs, 'sources')
 
-                        url, *rest = line.split()
+            meta_path_abs = os.path.join(package_path_abs, 'meta')
 
-                        if '://' in url:
-                            pkg.add_downloads(url)
+            patches_path_abs = os.path.join(package_path_abs, 'patches')
 
-                pkgpath = os.path.relpath(rootdir, path)
+            with factory.begin(package_path_rel) as pkg:
+                pkg.add_name(package_path_rel_comps[-1], NameType.KISS_NAME)
+                pkg.set_version(read_version(version_path_abs))
 
-                subrepo = os.path.split(pkgpath)[0]
+                if not os.path.exists(sources_path_abs):
+                    pkg.log('skipping sourceless package', Logger.ERROR)
+                    continue
 
-                pkg.set_extra_field('path', pkgpath)
-                pkg.set_subrepo(subrepo)
+                pkg.add_downloads(iter_sources(sources_path_abs))
+
+                pkg.set_extra_field('path', package_path_rel)
+                pkg.set_subrepo(package_path_rel_comps[0])
 
                 if self._maintainer_from_git:
-                    command = ['git', 'log', '-1', '--format=tformat:%ae', os.path.relpath(versionpath, path)]
+                    command = ['git', 'log', '-1', '--format=tformat:%ae', version_path_rel]
                     with subprocess.Popen(command,
                                           stdout=subprocess.PIPE,
                                           encoding='utf-8',
@@ -72,6 +112,12 @@ class KissGitParser(Parser):
 
                     pkg.add_maintainers(extract_maintainers(lastauthor))
 
-                add_patch_files(pkg, os.path.join(rootdir, 'patches'))
+                if self._use_meta and os.path.exists(meta_path_abs):
+                    meta = read_carbs_meta(meta_path_abs)
+                    pkg.set_summary(meta.get('description'))
+                    pkg.add_licenses(meta.get('license', '').split(','))
+                    pkg.add_maintainers(extract_maintainers(meta.get('maintainer')))
+
+                add_patch_files(pkg, patches_path_abs)
 
                 yield pkg

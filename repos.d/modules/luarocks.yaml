@@ -21,4 +21,4 @@
   #packagelinks:
   #  - desc: LuaRocks page
   #    url: 'https://luarocks.org/modules/{uploader}/{name}/{rawversion}'
-  tags: [ all, production ]
+  groups: [ all, production ]

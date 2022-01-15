@@ -20,11 +20,10 @@ from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 class CRANCheckSummaryParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path, 'r', encoding='utf-8') as htmlfile:
             for nline, line in enumerate(htmlfile, 1):
                 match = re.search('<tr> <td> <a href="[^"]+">([^<>]+)</a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', line)

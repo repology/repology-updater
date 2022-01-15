@@ -21,4 +21,4 @@
   packagelinks:
     - type: PACKAGE_RECIPE
       url: 'https://github.com/reactos/rapps-db/blob/master/{name}.txt'
-  tags: [ all, production ]
+  groups: [ all, production ]

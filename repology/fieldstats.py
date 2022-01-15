@@ -15,15 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List, Set
-
 from repology.package import Package
 
 
 class FieldStatistics:
-    _interesting_fields: Set[str]
-    _used_fields: Set[str]
-    _used_link_types: Set[int]
+    _interesting_fields: set[str]
+    _used_fields: set[str]
+    _used_link_types: set[int]
 
     def __init__(self) -> None:
         self._interesting_fields = set(Package.__slots__)
@@ -45,8 +43,8 @@ class FieldStatistics:
         if new_fields:
             self._interesting_fields -= self._used_fields
 
-    def get_used_fields(self) -> List[str]:
+    def get_used_fields(self) -> list[str]:
         return list(self._used_fields)
 
-    def get_used_link_types(self) -> List[int]:
+    def get_used_link_types(self) -> list[int]:
         return list(self._used_link_types)

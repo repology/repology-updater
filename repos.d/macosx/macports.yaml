@@ -12,21 +12,29 @@
     - name: PortIndex
       fetcher:
         class: RsyncFetcher
-        url: rsync://rsync.macports.org/macports/trunk/dports/PortIndex_darwin_16_i386/PortIndex.json
+        url: rsync://rsync.macports.org/macports/trunk/dports/PortIndex_darwin_20_i386/PortIndex.json
       parser:
         class: MacPortsJsonParser
   repolinks:
     - desc: MacPorts home
       url: https://www.macports.org/
+    - desc: MacPorts Packages
+      url: https://ports.macports.org/
     - desc: MacPorts GitHub repository
       url: https://github.com/macports/macports-ports
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://ports.macports.org/port/{binname}/summary/'
+      url: 'https://ports.macports.org/port/{binname}/summary/' # XXX: redirs to /details/, but "Details" tab still links to /summary/
     - type: PACKAGE_SOURCES
       url: 'https://github.com/macports/macports-ports/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/macports/macports-ports/blob/master/{srcname}/Portfile'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/macports/macports-ports/master/{srcname}/Portfile'
-  tags: [ all, production ]
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://trac.macports.org/query?status=!closed&port=~{binname}'
+    - type: PACKAGE_STATISTICS
+      url: 'https://ports.macports.org/port/{binname}/stats/'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://ports.macports.org/port/{binname}/builds/'
+  groups: [ all, production ]

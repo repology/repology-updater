@@ -16,54 +16,21 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Dict, Iterable, Optional
+from typing import Iterable
 
 from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
+from repology.parsers.versions import parse_debian_version
 
 
-_DEBIAN_VERSION_BAD_SUFFIX_RE = re.compile('[.~+-]?(dfsg|ubuntu|mx).*', re.IGNORECASE)
-_DEBIAN_VERSION_GOOD_SUFFIX_RE = re.compile('((?:a|b|r|alpha|beta|rc|rcgit|pre|patch|git|svn|cvs|hg|bzr|darcs|dev)[.-]?[0-9]+(?:\\.[0-9]+)*|(?:alpha|beta|rc))', re.IGNORECASE)
-_DEBIAN_VERSION_SUFFIX_SEP_RE = re.compile('[~+-]')
 _DEBIAN_KEYVAL_RE = re.compile('([A-Za-z0-9_-]+):(.*?)')
-_DEBIAN_REALLY_RE = re.compile(r'[^a-z](is|really)[^a-z]', re.IGNORECASE)
 
 
-def _normalize_version(version: str) -> str:
-    # epoch
-    pos = version.find(':')
-    if pos != -1:
-        version = version[pos + 1:]
-
-    # revision
-    pos = version.rfind('-')
-    if pos != -1:
-        version = version[0:pos]
-
-    # garbage debian/ubuntu addendums
-    version = _DEBIAN_VERSION_BAD_SUFFIX_RE.sub('', version)
-
-    # remove suffixes
-    version, *suffixes = _DEBIAN_VERSION_SUFFIX_SEP_RE.split(version)
-
-    # append useful suffixes
-    good_suffixes = []
-    for suffix in suffixes:
-        match = _DEBIAN_VERSION_GOOD_SUFFIX_RE.match(suffix)
-        if match:
-            good_suffixes.append(match.group(1))
-
-    version += '.'.join(good_suffixes)
-
-    return version
-
-
-def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
+def _iter_packages(path: str) -> Iterable[dict[str, str]]:
     with open(path, encoding='utf-8', errors='ignore') as f:
-        current_data: Dict[str, str] = {}
+        current_data: dict[str, str] = {}
         last_key = None
 
         for line in f:
@@ -100,7 +67,7 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
             raise RuntimeError('unable to parse line: {}'.format(line))
 
 
-def _extract_vcs_link(pkgdata: Dict[str, str]) -> Optional[str]:
+def _extract_vcs_link(pkgdata: dict[str, str]) -> str | None:
     if 'Vcs-Browser' in pkgdata:
         return pkgdata['Vcs-Browser']
 
@@ -112,29 +79,30 @@ def _extract_vcs_link(pkgdata: Dict[str, str]) -> Optional[str]:
 
 
 class DebianSourcesParser(Parser):
-    _allowed_vcs_urls_re: Optional[re.Pattern[str]]
+    _allowed_vcs_urls_re: re.Pattern[str] | None
 
-    def __init__(self, allowed_vcs_urls: Optional[str] = None) -> None:
+    def __init__(self, allowed_vcs_urls: str | None = None) -> None:
         self._allowed_vcs_urls_re = None if allowed_vcs_urls is None else re.compile(allowed_vcs_urls, re.IGNORECASE)
 
-    def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:
         if 'Binary' not in pkgdata or 'Source' in pkgdata:
             raise RuntimeError('Sanity check failed, expected Package descriptions with Binary, but without Source field')
         pkg.add_name(pkgdata['Package'], NameType.DEBIAN_SOURCE_PACKAGE)
         pkg.add_binnames(pkgdata['Binary'].split(', '))
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in _iter_packages(path):
             with factory.begin(pkgdata['Package']) as pkg:
-                pkg.set_version(pkgdata['Version'], _normalize_version)
+                fixed_version, flags = parse_debian_version(pkgdata['Version'])
+
+                pkg.set_version(fixed_version)
+                pkg.set_rawversion(pkgdata['Version'])
+                pkg.set_flags(flags)
+
                 pkg.add_maintainers(extract_maintainers(pkgdata.get('Maintainer', '')))
                 pkg.add_maintainers(extract_maintainers(pkgdata.get('Uploaders', '')))
                 pkg.add_categories(pkgdata.get('Section'))
                 pkg.add_homepages(pkgdata.get('Homepage'))
-
-                # XXX: move into dedicated debian version handling code along with _normalize_version
-                if _DEBIAN_REALLY_RE.search(pkgdata['Version']):
-                    pkg.set_flags(PackageFlags.INCORRECT)
 
                 self._extra_handling(pkg, pkgdata)
 
@@ -146,7 +114,7 @@ class DebianSourcesParser(Parser):
 
 
 class OpenWrtPackagesParser(DebianSourcesParser):
-    def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:
         pkgpath = pkgdata['Source'].split('/')
         pkg.add_name(pkgdata['Package'], NameType.OPENWRT_PACKAGE)
         pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)

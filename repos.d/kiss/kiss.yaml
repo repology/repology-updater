@@ -6,12 +6,12 @@
   desc: KISS Linux Main
   family: kiss
   ruleset: kiss
-  minpackages: 130
+  minpackages: 110
   sources:
     - name: repo
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/kiss-community/repo-main.git'
+        url: 'https://github.com/kisslinux/repo.git'
         depth: null
         sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
       parser:
@@ -19,19 +19,19 @@
         maintainer_from_git: true
   repolinks:
     - desc: KISS Linux home
-      url: https://k1sslinux.org/
+      url: https://kisslinux.xyz/
     - desc: KISS Linux - Package System
-      url: https://k1sslinux.org/package-system/
+      url: https://kisslinux.xyz/package-system/
     - desc: Main Repositories on GitHub
-      url: https://github.com/kiss-community/repo-main
+      url: https://github.com/kisslinux/repo
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/kiss-community/repo-main/tree/master/{path}'
+      url: 'https://github.com/kisslinux/repo/tree/master/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/kiss-community/repo-main/blob/master/{path}/patches/{?patch}'
+      url: 'https://github.com/kisslinux/repo/blob/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/kiss-community/repo-main/master/{path}/patches/{?patch}'
-  tags: [ all, production, kiss ]
+      url: 'https://raw.githubusercontent.com/kisslinux/repo/master/{path}/patches/{?patch}'
+  groups: []  # unparsable, see #1166
 
 - name: kiss_community
   type: repository
@@ -43,7 +43,7 @@
     - name: repo
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/kiss-community/repo-community.git'
+        url: 'https://github.com/kisslinux/community.git'
         branch: main
         depth: null
         sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
@@ -52,16 +52,16 @@
         maintainer_from_git: true
   repolinks:
     - desc: KISS Linux home
-      url: https://k1sslinux.org/
+      url: https://kisslinux.xyz/
     - desc: KISS Linux - Package System
-      url: https://k1sslinux.org/package-system/
+      url: https://kisslinux.xyz/package-system/
     - desc: Community Repository on GitHub
-      url: https://github.com/kiss-community/repo-community
+      url: https://github.com/kisslinux/repo-community
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/kiss-community/repo-community/tree/main/{path}'
+      url: 'https://github.com/kisslinux/community/tree/main/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/kiss-community/repo-community/blob/main/{path}/patches/{?patch}'
+      url: 'https://github.com/kisslinux/community/blob/main/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/kiss-community/repo-community/main/{path}/patches/{?patch}'
-  tags: [ all, production, kiss ]
+      url: 'https://raw.githubusercontent.com/kisslinux/community/main/{path}/patches/{?patch}'
+  groups: [ all, kiss ]

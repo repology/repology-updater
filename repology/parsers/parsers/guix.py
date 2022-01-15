@@ -23,11 +23,10 @@ from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
-from repology.transformer import PackageTransformer
 
 
 class GuixJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['name'], NameType.GUIX_NAME)
@@ -41,9 +40,7 @@ class GuixJsonParser(Parser):
 
                 pkg.add_cpe(product=pkgdata.get('cpe_name'))
 
-                if 'source' in pkgdata:
-                    source = pkgdata['source']
-
+                for source in pkgdata.get('source', []):
                     if source['type'] == 'url':
                         pkg.add_downloads(source['urls'])
                         if re.fullmatch('.*-[0-9]+\\.[0-9a-f]{4,}', pkgdata['version']):

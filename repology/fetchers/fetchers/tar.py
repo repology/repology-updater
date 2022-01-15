@@ -49,6 +49,10 @@ class TarFetcher(ScratchDirFetcher):
 
         # XXX: may be unportable, FreeBSD tar automatically handles compression type,
         # may not be the case on linuxes
+        # XXX: this extracts tarball permissions, which is not desirable and it may
+        # produce non-readable files and dirs (blackarch). GNU tar has --mode, BSD tar
+        # lacks this. We should probably require GNU tar, and handle binary name which
+        # may differ on BSD.
         run_subprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir.get_path()], logger)
         os.remove(tarpath)
 

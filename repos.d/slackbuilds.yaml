@@ -23,4 +23,4 @@
       url: 'https://slackbuilds.org/repository/14.2/{srcname}/'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://slackbuilds.org/slackbuilds/14.2/{srcname}/{srcname|basename}.SlackBuild'
-  tags: [ all, production, have_testdata ]
+  groups: [ all, production, have_testdata ]

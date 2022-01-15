@@ -28,7 +28,7 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
-  tags: [ all, production, mx ]
+  groups: [ all, production, mx ]
 
 - name: mx_15_testing
   type: repository
@@ -57,7 +57,7 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
-  tags: [ all, production, mx ]
+  groups: [ all, production, mx ]
 
 - name: mx_16
   type: repository
@@ -86,7 +86,7 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
-  tags: [ all, production, mx ]
+  groups: [ all, production, mx ]
 
 - name: mx_17
   type: repository
@@ -113,7 +113,7 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
-  tags: [ all, production, mx ]
+  groups: [ all, production, mx ]
 
 - name: mx_17_testing
   type: repository
@@ -140,7 +140,7 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
-  tags: [ all, production, mx ]
+  groups: [ all, production, mx ]
 
 - name: mx_19
   type: repository
@@ -151,7 +151,7 @@
   color: "6693d6"
   minpackages: 100
   sources:
-    - name: [ main, non-free ]
+    - name: [ main, non-free, ahs ]
       fetcher:
         class: FileFetcher
         url: 'http://mxrepo.com/mx/repo/dists/buster/{source}/source/Sources.gz'
@@ -167,7 +167,7 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
-  tags: [ all, production, mx ]
+  groups: [ all, production, mx ]
 
 - name: mx_19_testing
   type: repository
@@ -194,4 +194,58 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
-  tags: [ all, production, mx ]
+  groups: [ all, production, mx ]
+
+- name: mx_21
+  type: repository
+  desc: MX Linux MX-21
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu,mx]
+  color: "6693d6"
+  minpackages: 100
+  sources:
+    - name: [ main, non-free, ahs ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://mxrepo.com/mx/repo/dists/bullseye/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
+  groups: [ all, production, mx ]
+
+- name: mx_21_testing
+  type: repository
+  desc: MX Linux MX-21 Testing
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu,mx]
+  color: "6693d6"
+  minpackages: 20
+  sources:
+    - name: [ test ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://mxrepo.com/mx/testrepo/dists/bullseye/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
+  groups: [ all, production, mx ]

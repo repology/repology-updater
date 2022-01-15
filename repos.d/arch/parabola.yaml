@@ -26,7 +26,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.parabola.nu/packages/?q={binname}'
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 - name: parabola_testing
   type: repository
@@ -53,4 +53,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://www.parabola.nu/packages/?q={binname}'
-  tags: [ all, production ]
+  groups: [ all, production ]

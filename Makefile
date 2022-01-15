@@ -1,12 +1,16 @@
 FLAKE8?=	flake8
 MYPY?=		mypy
+PYTEST?=	pytest
 
 REPOLOGY_TEST_DUMP_PATH?=	.
 
 lint:: check test flake8 mypy
 
 test::
-	python3 -m unittest discover
+	${PYTEST} ${PYTEST_ARGS} -v -rs
+
+canonize::
+	${PYTEST} ${PYTEST_ARGS} -v -rs -k _regress --regtest-reset
 
 test-make-dump::
 	psql -U repology_test -At -c "select tablename from pg_tables where schemaname = 'public'" | \
@@ -20,10 +24,10 @@ test-make-dump::
 		> ${REPOLOGY_TEST_DUMP_PATH}/repology_test.sql
 
 flake8:
-	${FLAKE8} --application-import-names=repology *.py repology
+	${FLAKE8} *.py repology tests
 
 mypy:
-	${MYPY} repology-update.py repology-dump.py repology
+	${MYPY} repology-update.py repology-dump.py repology tests
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")

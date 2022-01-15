@@ -1,17 +1,21 @@
 ###########################################################################
 # Ubuntu
 ###########################################################################
-- name: ubuntu_12_04
+
+{% macro ubuntu(major, minor, codename, minpackages, backports=True, proposed=False, valid_till=Null) %}
+- name: ubuntu_{{major}}_{{minor}}
   type: repository
-  desc: Ubuntu 12.04
+  desc: Ubuntu {{major}}.{{minor}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2017-04-26
-  minpackages: 21000
+  {% if valid_till %}
+  valid_till: {{ valid_till }}
+  {% endif %}
+  minpackages: {{ minpackages }}
   sources:
-    - name: [ precise/main, precise/multiverse, precise/restricted, precise/universe, precise-updates/main, precise-updates/multiverse, precise-updates/restricted, precise-updates/universe ]
+    - name: [ {{codename}}/main, {{codename}}/multiverse, {{codename}}/restricted, {{codename}}/universe, {{codename}}-updates/main, {{codename}}-updates/multiverse, {{codename}}-updates/restricted, {{codename}}-updates/universe ]
       fetcher:
         class: FileFetcher
         url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
@@ -23,28 +27,32 @@
   repolinks:
     - desc: Ubuntu packages
       url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in precise
-      url: https://packages.ubuntu.com/precise/
+    - desc: Ubuntu packages in {{codename}}
+      url: https://packages.ubuntu.com/{{codename}}/
   packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.ubuntu.com/source/{{codename}}/{srcname}'
     - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_12_04_backports
+  groups: [ all, production, ubuntu ]
+{% if backports %}
+- name: ubuntu_{{major}}_{{minor}}_backports
   type: repository
-  desc: Ubuntu 12.04 Backports
+  desc: Ubuntu {{major}}.{{minor}} Backports
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2017-04-26
+  {% if valid_till %}
+  valid_till: {{ valid_till }}
+  {% endif %}
   minpackages: 0
   sources:
-    - name: [ precise-backports/main, precise-backports/multiverse, precise-backports/restricted, precise-backports/universe ]
+    - name: [ {{codename}}-backports/main, {{codename}}-backports/multiverse, {{codename}}-backports/restricted, {{codename}}-backports/universe ]
       fetcher:
         class: FileFetcher
         url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
@@ -56,8 +64,8 @@
   repolinks:
     - desc: Ubuntu packages
       url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in precise
-      url: https://packages.ubuntu.com/precise/
+    - desc: Ubuntu packages in {{codename}}
+      url: https://packages.ubuntu.com/{{codename}}/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
@@ -65,54 +73,22 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_14_04
+  groups: [ all, production, ubuntu ]
+{% endif %}
+{% if proposed %}
+- name: ubuntu_{{major}}_{{minor}}_proposed
   type: repository
-  desc: Ubuntu 14.04
+  desc: Ubuntu {{major}}.{{minor}} Proposed
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, ubuntu]
   color: 'e95420'
-  valid_till: 2019-04-01
-  minpackages: 23000
-  sources:
-    - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in trusty
-      url: https://packages.ubuntu.com/trusty/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.ubuntu.com/source/trusty/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_14_04_backports
-  type: repository
-  desc: Ubuntu 14.04 Backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  valid_till: 2019-04-01
+  {% if valid_till %}
+  valid_till: {{ valid_till }}
+  {% endif %}
   minpackages: 0
   sources:
-    - name: [ trusty-backports/main, trusty-backports/multiverse, trusty-backports/restricted, trusty-backports/universe ]
+    - name: [ {{codename}}-proposed/main, {{codename}}-proposed/multiverse, {{codename}}-proposed/restricted, {{codename}}-proposed/universe ]
       fetcher:
         class: FileFetcher
         url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
@@ -124,8 +100,8 @@
   repolinks:
     - desc: Ubuntu packages
       url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in trusty
-      url: https://packages.ubuntu.com/trusty/
+    - desc: Ubuntu packages in {{codename}}
+      url: https://packages.ubuntu.com/{{codename}}/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
@@ -133,370 +109,14 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
       url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  groups: [ all, production, ubuntu ]
+{% endif %}
+{% endmacro %}
 
-- name: ubuntu_16_04
-  type: repository
-  desc: Ubuntu 16.04
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  valid_till: 2021-04-01
-  minpackages: 26000
-  sources:
-    - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in xenial
-      url: https://packages.ubuntu.com/xenial/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.ubuntu.com/source/xenial/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_16_04_backports
-  type: repository
-  desc: Ubuntu 16.04 Backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  valid_till: 2021-04-01
-  minpackages: 0
-  sources:
-    - name: [ xenial-backports/main, xenial-backports/multiverse, xenial-backports/restricted, xenial-backports/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in xenial
-      url: https://packages.ubuntu.com/xenial/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_18_04
-  type: repository
-  desc: Ubuntu 18.04
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  valid_till: 2023-04-01
-  minpackages: 29000
-  sources:
-    - name: [ bionic/main, bionic/multiverse, bionic/restricted, bionic/universe, bionic-updates/main, bionic-updates/multiverse, bionic-updates/restricted, bionic-updates/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in bionic
-      url: https://packages.ubuntu.com/bionic/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.ubuntu.com/source/bionic/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_18_04_backports
-  type: repository
-  desc: Ubuntu 18.04 Backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  valid_till: 2023-04-01
-  minpackages: 0
-  sources:
-    - name: [ bionic-backports/main, bionic-backports/multiverse, bionic-backports/restricted, bionic-backports/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in bionic
-      url: https://packages.ubuntu.com/bionic/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_20_04
-  type: repository
-  desc: Ubuntu 20.04
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  minpackages: 29000
-  sources:
-    - name: [ focal/main, focal/multiverse, focal/restricted, focal/universe, focal-updates/main, focal-updates/multiverse, focal-updates/restricted, focal-updates/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in focal
-      url: https://packages.ubuntu.com/focal/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.ubuntu.com/source/focal/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_20_04_backports
-  type: repository
-  desc: Ubuntu 20.04 Backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  minpackages: 0
-  sources:
-    - name: [ focal-backports/main, focal-backports/multiverse, focal-backports/restricted, focal-backports/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in focal
-      url: https://packages.ubuntu.com/focal/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_20_10
-  type: repository
-  desc: Ubuntu 20.10
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  minpackages: 29000
-  sources:
-    - name: [ groovy/main, groovy/multiverse, groovy/restricted, groovy/universe, groovy-updates/main, groovy-updates/multiverse, groovy-updates/restricted, groovy-updates/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in groovy
-      url: https://packages.ubuntu.com/groovy/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.ubuntu.com/source/groovy/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_20_10_backports
-  type: repository
-  desc: Ubuntu 20.10 Backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  minpackages: 0
-  sources:
-    - name: [ groovy-backports/main, groovy-backports/multiverse, groovy-backports/restricted, groovy-backports/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in groovy
-      url: https://packages.ubuntu.com/groovy/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_21_04
-  type: repository
-  desc: Ubuntu 21.04
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  minpackages: 30000
-  sources:
-    - name: [ hirsute/main, hirsute/multiverse, hirsute/restricted, hirsute/universe, hirsute-updates/main, hirsute-updates/multiverse, hirsute-updates/restricted, hirsute-updates/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in hirsute
-      url: https://packages.ubuntu.com/hirsute/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.ubuntu.com/source/hirsute/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
-- name: ubuntu_21_04_backports
-  type: repository
-  desc: Ubuntu 21.04 Backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  minpackages: 0
-  sources:
-    - name: [ hirsute-backports/main, hirsute-backports/multiverse, hirsute-backports/restricted, hirsute-backports/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in hirsute
-      url: https://packages.ubuntu.com/hirsute/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, ubuntu ]  # empty
-
-- name: ubuntu_21_04_proposed
-  type: repository
-  desc: Ubuntu 21.04 Proposed
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, ubuntu]
-  color: 'e95420'
-  minpackages: 0
-  sources:
-    - name: [ hirsute-proposed/main, hirsute-proposed/multiverse, hirsute-proposed/restricted, hirsute-proposed/universe ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-        fetch_timeout: 5
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in hirsute
-      url: https://packages.ubuntu.com/hirsute/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
-    - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
-  tags: [ all, production, ubuntu ]
+{{ ubuntu('14', '04', 'trusty',  minpackages=23000, valid_till='2024-04-25') }}
+{{ ubuntu('16', '04', 'xenial',  minpackages=26000, valid_till='2026-04-23') }}
+{{ ubuntu('18', '04', 'bionic',  minpackages=29000, valid_till='2028-04-26') }}
+{{ ubuntu('20', '04', 'focal',   minpackages=29000, valid_till='2030-04-23') }}
+{{ ubuntu('21', '04', 'hirsute', minpackages=30000, valid_till='2022-01-20') }}
+{{ ubuntu('21', '10', 'impish',  minpackages=32000, valid_till='2022-07-14') }}
+{{ ubuntu('22', '04', 'jammy',   minpackages=32000, valid_till='2032-04-21', backports=false, proposed=true) }}

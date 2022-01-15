@@ -29,12 +29,12 @@
     #  url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
     # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - type: PACKAGE_SOURCES
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{srcname|quote}'
+      url: 'https://github.com/archlinux/svntogit-{archrepo}/tree/packages/{srcname}/trunk'
     - type: PACKAGE_RECIPE
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname|quote}'
+      url: 'https://github.com/archlinux/svntogit-{archrepo}/blob/packages/{srcname}/trunk/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/plain/trunk/PKGBUILD?h=packages/{srcname|quote}'
-  tags: [ all, production, have_testdata ]
+      url: 'https://raw.githubusercontent.com/archlinux/svntogit-{archrepo}/packages/{srcname}/trunk/PKGBUILD'
+  groups: [ all, production, have_testdata ]
 
 - name: arch_testing
   type: repository
@@ -64,9 +64,9 @@
     #  url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
     # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - type: PACKAGE_SOURCES
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{srcname|quote}'
+      url: 'https://github.com/archlinux/svntogit-{archrepo}/tree/packages/{srcname}/trunk'
     - type: PACKAGE_RECIPE
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname|quote}'
+      url: 'https://github.com/archlinux/svntogit-{archrepo}/blob/packages/{srcname}/trunk/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/plain/trunk/PKGBUILD?h=packages/{srcname|quote}'
-  tags: [ all, production ]
+      url: 'https://raw.githubusercontent.com/archlinux/svntogit-{archrepo}/packages/{srcname}/trunk/PKGBUILD'
+  groups: [ all, production ]

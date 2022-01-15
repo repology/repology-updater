@@ -24,11 +24,10 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 from repology.parsers.xml import safe_findtext
-from repology.transformer import PackageTransformer
 
 
 class PisiParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for filename in walk_tree(path, suffix='pspec.xml'):
             relpath = os.path.relpath(filename, path)
 

@@ -16,16 +16,15 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Dict, Iterable, Optional, Tuple
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
-def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
+def _iter_packages(path: str) -> Iterable[tuple[str, str]]:
     for category in os.listdir(path):
         if category.startswith('.'):
             continue
@@ -42,11 +41,11 @@ def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
             yield category, package
 
 
-def _parse_infofile(path: str) -> Dict[str, str]:
-    variables: Dict[str, str] = {}
+def _parse_infofile(path: str) -> dict[str, str]:
+    variables: dict[str, str] = {}
 
     with open(path, encoding='utf-8', errors='ignore') as infofile:
-        key: Optional[str] = None
+        key: str | None = None
         total_value = []
 
         for line in infofile:
@@ -72,7 +71,7 @@ def _parse_infofile(path: str) -> Dict[str, str]:
 
 
 class SlackBuildsParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for category, pkgname in _iter_packages(path):
             with factory.begin(category + '/' + pkgname) as pkg:
                 info_path = os.path.join(path, category, pkgname, pkgname + '.info')
@@ -84,7 +83,9 @@ class SlackBuildsParser(Parser):
 
                 variables = _parse_infofile(info_path)
 
-                assert(variables['PRGNAM'] == pkgname)
+                if variables['PRGNAM'] != pkgname:
+                    pkg.log(f'PRGNAM "{variables["PRGNAM"]}" != pkgname "{pkgname}"', severity=Logger.ERROR)
+                    continue
 
                 pkg.add_name(variables['PRGNAM'], NameType.SLACKBUILDS_NAME)
                 pkg.add_name(category + '/' + pkgname, NameType.SLACKBUILDS_FULL_NAME)

@@ -12,7 +12,7 @@
       fetcher:
         class: ChocolateyFetcher
         fetch_timeout: 60
-        url: https://chocolatey.org/api/v2/
+        url: https://community.chocolatey.org/api/v2/
       parser:
         class: ChocolateyParser
   shadow: true
@@ -23,8 +23,8 @@
       url: https://github.com/chocolatey/chocolatey-package-requests
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://chocolatey.org/packages/{name}'
-  tags: [ all, production ]
+      url: 'https://community.chocolatey.org/packages/{name}'
+  groups: [ all, production ]
 
 # it's similar, but contains too many packages, with the same verioning problems
 - name: nuget
@@ -41,4 +41,4 @@
       parser:
         class: ChocolateyParser
   shadow: true
-  tags: [ all ]
+  groups: [ all ]

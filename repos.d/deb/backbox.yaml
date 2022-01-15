@@ -21,7 +21,7 @@
   repolinks:
     - desc: BackBox Linux home
       url: https://linux.backbox.org/
-  tags: [ all, production, backbox ]
+  groups: [ all, production, backbox ]
 
 - name: backbox_7
   type: repository
@@ -41,4 +41,4 @@
   repolinks:
     - desc: BackBox Linux home
       url: https://linux.backbox.org/
-  tags: [ all, production, backbox ]
+  groups: [ all, production, backbox ]

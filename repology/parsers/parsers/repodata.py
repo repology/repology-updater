@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,7 +17,7 @@
 
 import re
 from collections import Counter
-from typing import Dict, Iterable
+from typing import Any, Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -26,9 +26,8 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.parsers.sqlite import iter_sqlite
-from repology.parsers.versions import VersionStripper
+from repology.parsers.versions import VersionStripper, parse_rpm_version, parse_rpm_vertags
 from repology.parsers.xml import iter_xml_elements_at_level, safe_findtext, safe_getattr
-from repology.transformer import PackageTransformer
 
 
 class RepodataParser(Parser):
@@ -39,18 +38,21 @@ class RepodataParser(Parser):
     # architectures in '<arch></arch>' for source packages
     _arch_from_filename: bool
 
-    def __init__(self, src: bool = True, binary: bool = False, arch_from_filename: bool = False) -> None:
+    _vertags: list[str]
+
+    def __init__(self, src: bool = True, binary: bool = False, arch_from_filename: bool = False, vertags: Any = None) -> None:
         if not src and not binary:
             raise RuntimeError('at least one of "src" and "binary" modes for RepodataParser must be enabled')
 
         self._src = src
         self._binary = binary
         self._arch_from_filename = arch_from_filename
+        self._vertags = parse_rpm_vertags(vertags)
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
-        skipped_archs: Dict[str, int] = Counter()
+        skipped_archs: dict[str, int] = Counter()
 
         if self._arch_from_filename:
             factory.log('mitigation for incorrect <arch></arch> enabled', severity=Logger.WARNING)
@@ -96,19 +98,11 @@ class RepodataParser(Parser):
                 version = version_elt.attrib['ver']
                 release = version_elt.attrib['rel']
 
-                fixed_version = version
-
-                match = re.match('0\\.[0-9]+\\.((?:alpha|beta|rc)[0-9]+)\\.', release)
-                if match:
-                    # known pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Prerelease_versions
-                    fixed_version += '-' + match.group(1)
-                elif release < '1':
-                    # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
-                    # most likely a snapshot
-                    pkg.set_flags(PackageFlags.IGNORE)
+                fixed_version, flags = parse_rpm_version(self._vertags, version, release)
 
                 pkg.set_version(fixed_version, normalize_version)
                 pkg.set_rawversion(nevra_construct(None, epoch, version, release))
+                pkg.set_flags(flags)
 
                 pkg.set_summary(entry.findtext('{http://linux.duke.edu/metadata/common}summary'))
                 pkg.add_homepages(entry.findtext('{http://linux.duke.edu/metadata/common}url'))
@@ -136,10 +130,10 @@ class RepodataSqliteParser(Parser):
         self._src = src
         self._binary = binary
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
-        skipped_archs: Dict[str, int] = Counter()
+        skipped_archs: dict[str, int] = Counter()
 
         wanted_columns = ['name', 'version', 'arch', 'epoch', 'release',
                           'summary', 'url', 'rpm_group', 'rpm_license',

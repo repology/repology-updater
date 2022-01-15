@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019,2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,44 +15,41 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
-import os
 from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
-from repology.transformer import PackageTransformer
 
 
-class AURParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+class AURJsonParser(Parser):
+    _maintainer_host: str
+
+    def __init__(self, maintainer_host: str) -> None:
+        self._maintainer_host = maintainer_host
+
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('-').strip_left(':').strip_right_greedy('+')
 
-        for filename in os.listdir(path):
-            if not filename.endswith('.json'):
-                continue
+        for pkgdata in iter_json_list(path, (None,)):
+            with factory.begin() as pkg:
+                pkg.add_name(pkgdata['Name'], NameType.ARCH_NAME)
 
-            with open(os.path.join(path, filename), 'r') as jsonfile:
-                for result in json.load(jsonfile)['results']:
-                    pkg = factory.begin()
+                pkg.set_version(pkgdata['Version'], normalize_version)
+                pkg.set_summary(pkgdata['Description'])
+                pkg.add_homepages(pkgdata['URL'])
+                pkg.add_licenses(pkgdata.get('License'))
 
-                    pkg.add_name(result['Name'], NameType.ARCH_NAME)
+                if 'Maintainer' in pkgdata and pkgdata['Maintainer']:
+                    pkg.add_maintainers(extract_maintainers(pkgdata['Maintainer'] + '@' + self._maintainer_host))
 
-                    pkg.set_version(result['Version'], normalize_version)
-                    pkg.set_summary(result['Description'])
-                    pkg.add_homepages(result['URL'])
-                    pkg.add_licenses(result.get('License'))
+                if 'PackageBase' in pkgdata and pkgdata['PackageBase']:
+                    pkg.add_name(pkgdata['PackageBase'], NameType.ARCH_BASENAME)
 
-                    if 'Maintainer' in result and result['Maintainer']:
-                        pkg.add_maintainers(extract_maintainers(result['Maintainer'] + '@aur'))
+                # XXX: enable when we support multiple categories
+                #if 'Keywords' in pkgdata and pkgdata['Keywords']:
+                #    pkg.add_categories(pkgdata['Keywords'])
 
-                    if 'PackageBase' in result and result['PackageBase']:
-                        pkg.add_name(result['PackageBase'], NameType.ARCH_BASENAME)
-
-                    # XXX: enable when we support multiple categories
-                    #if 'Keywords' in result and result['Keywords']:
-                    #    pkg.add_categories(result['Keywords'])
-
-                    yield pkg
+                yield pkg

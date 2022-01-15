@@ -21,4 +21,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://directory.fsf.org/wiki/{page}'
-  tags: [ all ]  # not enabled due to poor quality and incompatible data (see #530)
+  groups: [ all ]  # not enabled due to poor quality and incompatible data (see #530)

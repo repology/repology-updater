@@ -1,0 +1,24 @@
+###########################################################################
+# UBI
+###########################################################################
+- name: ubi_8
+  type: repository
+  desc: UBI 8
+  family: centos
+  ruleset: [centos, rpm, ubi]
+  minpackages: 0
+  sources:
+    - name: [baseos, appstream, codeready-builder]
+      fetcher:
+        class: RepodataFetcher
+        # XXX: there are arch-dependent SRPM repositories (aarch64, ppc64le, s390x, x86_64)
+        # these have mostly the same contents with the differentce of some arch-dependent
+        # packages lacking in some repos. x86_64 is the most complete, ppc64le has 1 unique
+        # package, others are subset of x86_64. In fact, we could add all archs here so the
+        # similar packages will collapse, but that would look ugly in the config
+        url: 'https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/x86_64/{source}/source/SRPMS/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  groups: [ all, production, ubi, rpm ]

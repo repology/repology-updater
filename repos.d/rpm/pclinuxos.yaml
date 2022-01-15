@@ -19,7 +19,8 @@
       parser:
         class: SrcListParser
         encoding: 'cp1251'
+        vertags: pclos
   repolinks:
     - desc: PCLinuxOS home
       url: http://www.pclinuxos.com/
-  tags: [ all, production ]
+  groups: [ all, production ]

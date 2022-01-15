@@ -20,4 +20,4 @@
   repolinks:
     - desc: Tincy Core Linux home
       url: http://www.tinycorelinux.net/
-  tags: [ ]  # disabled, too much garbage in package names and versions
+  groups: [ ]  # disabled, too much garbage in package names and versions

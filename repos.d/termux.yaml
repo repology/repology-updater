@@ -27,4 +27,4 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/termux/termux-packages/master/packages/{name}/build.sh'
     # XXX: there are patches in the package dirs, but we can't access them while using json
-  tags: [ all, production ]
+  groups: [ all, production ]

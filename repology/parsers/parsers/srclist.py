@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -24,14 +24,18 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
-from repology.transformer import PackageTransformer
+from repology.parsers.versions import parse_rpm_version, parse_rpm_vertags
 
 
 class SrcListParser(Parser):
-    def __init__(self, encoding: str = 'utf-8') -> None:
-        self._encoding = encoding
+    _encoding: str
+    _vertags: list[str]
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def __init__(self, encoding: str = 'utf-8', vertags: Any = None) -> None:
+        self._encoding = encoding
+        self._vertags = parse_rpm_vertags(vertags)
+
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for header in rpm.readHeaderListFromFile(path):
             with factory.begin() as pkg:
                 assert(header.isSource())  # binary packages not supported yet
@@ -51,12 +55,14 @@ class SrcListParser(Parser):
                 # May use is for some other purposes
 
                 pkg.add_name(pkgdata['name'], NameType.SRCRPM_NAME)
-                pkg.set_version(pkgdata['version'])  # XXX: handle release
 
                 if pkgdata['version'] is None:
                     raise RuntimeError('version not defined')
 
+                version, flags = parse_rpm_version(self._vertags, pkgdata['version'], pkgdata['release'])
+                pkg.set_version(version)
                 pkg.set_rawversion(nevra_construct(None, header['epoch'], pkgdata['version'], pkgdata['release']))
+                pkg.set_flags(flags)
 
                 if 'packager' in pkgdata:
                     pkg.add_maintainers(extract_maintainers(pkgdata['packager']))  # XXX: may have multiple maintainers

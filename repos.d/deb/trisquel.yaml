@@ -2,6 +2,7 @@
 # Trisquel
 ###########################################################################
 - name: trisquel_6_0
+  sortname: trisquel_06_0
   type: repository
   desc: Trisquel 6.0
   statsgroup: Debian+derivs
@@ -21,9 +22,10 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
 
 - name: trisquel_6_0_backports
+  sortname: trisquel_06_0_backports
   type: repository
   desc: Trisquel 6.0 backports
   statsgroup: Debian+derivs
@@ -42,9 +44,10 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
 
 - name: trisquel_7_0
+  sortname: trisquel_07_0
   type: repository
   desc: Trisquel 7.0
   statsgroup: Debian+derivs
@@ -63,9 +66,10 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
 
 - name: trisquel_7_0_backports
+  sortname: trisquel_07_0_backports
   type: repository
   desc: Trisquel 7.0 backports
   statsgroup: Debian+derivs
@@ -84,9 +88,10 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
 
 - name: trisquel_8_0
+  sortname: trisquel_08_0
   type: repository
   desc: Trisquel 8.0
   statsgroup: Debian+derivs
@@ -105,9 +110,10 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
 
 - name: trisquel_8_0_backports
+  sortname: trisquel_08_0_backports
   type: repository
   desc: Trisquel 8.0 backports
   statsgroup: Debian+derivs
@@ -126,9 +132,10 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
 
 - name: trisquel_9_0
+  sortname: trisquel_09_0
   type: repository
   desc: Trisquel 9.0
   statsgroup: Debian+derivs
@@ -147,9 +154,10 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
 
 - name: trisquel_9_0_backports
+  sortname: trisquel_09_0_backports
   type: repository
   desc: Trisquel 9.0 backports
   statsgroup: Debian+derivs
@@ -168,4 +176,46 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  tags: [ all, production, trisquel ]
+  groups: [ all, production, trisquel ]
+
+- name: trisquel_10_0
+  type: repository
+  desc: Trisquel 10.0
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '669fe7'
+  minpackages: 26000
+  sources:
+    - name: [ nabia/main, nabia-updates/main ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  groups: [ all, production, trisquel ]
+
+- name: trisquel_10_0_backports
+  type: repository
+  desc: Trisquel 10.0 backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '669fe7'
+  minpackages: 20
+  sources:
+    - name: [ nabia-backports/main ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  groups: [ all, production, trisquel ]

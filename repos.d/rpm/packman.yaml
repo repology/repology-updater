@@ -23,7 +23,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, packman]  # 7 packages
+  groups: [all, packman]  # 7 packages
 
 - name: packman_fedora_27
   type: repository
@@ -45,7 +45,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, packman]  # 7 packages
+  groups: [all, packman]  # 7 packages
 
 - name: packman_fedora_28
   type: repository
@@ -67,7 +67,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, packman]  # 6 packages
+  groups: [all, packman]  # 6 packages
 
 - name: packman_fedora_29
   type: repository
@@ -89,7 +89,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, packman]  # 6 packages
+  groups: [all, packman]  # 6 packages
 
 - name: packman_fedora_30
   type: repository
@@ -111,7 +111,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, packman]  # 6 packages
+  groups: [all, packman]  # 6 packages
 
 - name: packman_factory
   type: repository
@@ -133,7 +133,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, packman]  # 3 packages
+  groups: [all, packman]  # 3 packages
 
 - name: packman_opensuse_leap_42_3
   sortname: packman_opensuse_leap_14_0
@@ -156,7 +156,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, production, packman]
+  groups: [all, production, packman]
 
 - name: packman_opensuse_leap_15_0
   type: repository
@@ -178,7 +178,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, production, packman]
+  groups: [all, production, packman]
 
 - name: packman_opensuse_leap_15_1
   type: repository
@@ -200,7 +200,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, production, packman]
+  groups: [all, production, packman]
 
 - name: packman_opensuse_leap_15_2
   type: repository
@@ -222,7 +222,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, production, packman]
+  groups: [all, production, packman]
 
 - name: packman_opensuse_tumbleweed
   type: repository
@@ -244,7 +244,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, production, packman]
+  groups: [all, production, packman]
 
 - name: packman_sle_12
   type: repository
@@ -266,7 +266,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, production, packman]
+  groups: [all, production, packman]
 
 - name: packman_sle_15
   type: repository
@@ -288,4 +288,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://packman.links2linux.org/package/{srcname}'
-  tags: [all, production, packman]
+  groups: [all, production, packman]

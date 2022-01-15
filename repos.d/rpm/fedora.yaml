@@ -7,10 +7,10 @@
 ###########################################################################
 
 # XXX: consider adding the following packagelinks
-#  info on binary package, probably needs binname(s); links to build logs and other noce stuff
+#  info on binary package, probably needs binname(s); links to build logs and other nice stuff
 #  url: 'https://koji.fedoraproject.org/koji/search?terms={srcname}-{rawversion}&type=build&match=glob'
-#  503 ATM, recheck:
-#  url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
+#
+#  url: 'https://packages.fedoraproject.org/pkgs/{srcname}'
 
 # Note that these are archived
 - name: fedora_26
@@ -29,6 +29,7 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/26/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -36,12 +37,13 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/26/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -51,7 +53,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f26/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f26/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_27
   type: repository
@@ -61,6 +63,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 22000
+  valid_till: 2018-11-30
   sources:
     - name: release
       fetcher:
@@ -68,6 +71,7 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/27/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -75,12 +79,13 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/27/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -90,7 +95,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f27/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f27/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_28
   type: repository
@@ -100,6 +105,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2019-05-28
   sources:
     - name: release
       fetcher:
@@ -107,6 +113,7 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -114,12 +121,13 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/28/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -129,7 +137,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f28/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f28/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_29
   type: repository
@@ -139,6 +147,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2019-11-26
   sources:
     - name: release
       fetcher:
@@ -146,6 +155,7 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/29/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -153,12 +163,13 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/29/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -168,7 +179,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f29/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f29/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_30
   type: repository
@@ -178,6 +189,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2020-05-26
   sources:
     - name: release
       fetcher:
@@ -185,6 +197,7 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -192,12 +205,13 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/30/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -207,7 +221,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f30/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f30/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_31
   type: repository
@@ -217,6 +231,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 24000
+  valid_till: 2020-11-24
   sources:
     - name: release
       fetcher:
@@ -224,6 +239,7 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/31/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -231,12 +247,13 @@
         url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/31/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -246,7 +263,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f31/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f31/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 # Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
 # here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
@@ -259,6 +276,7 @@
   ruleset: [fedora, rpm]
   color: '294172'
   minpackages: 22000
+  valid_till: 2021-05-25
   sources:
     - name: release
       fetcher:
@@ -266,6 +284,7 @@
         url: https://mirror.yandex.ru/fedora/linux/releases/32/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -273,12 +292,13 @@
         url: https://mirror.yandex.ru/fedora/linux/updates/32/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -288,7 +308,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f32/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f32/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
 - name: fedora_33
   type: repository
@@ -297,7 +317,8 @@
   family: fedora
   ruleset: [fedora, rpm]
   color: '294172'
-  minpackages: 18000
+  minpackages: 22000
+  valid_till: 2021-11-23
   sources:
     - name: release
       fetcher:
@@ -305,6 +326,7 @@
         url: https://mirror.yandex.ru/fedora/linux/releases/33/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -312,12 +334,13 @@
         url: https://mirror.yandex.ru/fedora/linux/updates/33/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -327,9 +350,8 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f33/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f33/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]
 
-# Next development release
 - name: fedora_34
   type: repository
   desc: Fedora 34
@@ -337,14 +359,16 @@
   family: fedora
   ruleset: [fedora, rpm]
   color: '294172'
-  minpackages: 18000
+  minpackages: 22000
+  valid_till: 2022-05-17
   sources:
-    - name: development
+    - name: release
       fetcher:
         class: RepodataFetcher
-        url: https://mirror.yandex.ru/fedora/linux/development/34/Everything/source/tree/
+        url: https://mirror.yandex.ru/fedora/linux/releases/34/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
     - name: updates
       fetcher:
@@ -352,12 +376,13 @@
         url: https://mirror.yandex.ru/fedora/linux/updates/34/Everything/SRPMS/
       parser:
         class: RepodataParser
+        vertags: fc
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -367,8 +392,91 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f34/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f34/f/{srcname}.spec'
-  #tags: [ all, production, fedora, rpm ]  # XXX: enable me
-  tags: []
+  groups: [ all, production, fedora, rpm ]
+
+- name: fedora_35
+  type: repository
+  desc: Fedora 35
+  statsgroup: Fedora
+  family: fedora
+  ruleset: [fedora, rpm]
+  color: '294172'
+  minpackages: 22000
+  valid_till: 2022-11-30
+  sources:
+    - name: development
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/development/35/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+    - name: updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/updates/35/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://packages.fedoraproject.org/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f35'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f35/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f35/f/{srcname}.spec'
+  groups: [ all, production, fedora, rpm ]
+
+- name: fedora_36
+  type: repository
+  desc: Fedora 36
+  statsgroup: Fedora
+  family: fedora
+  ruleset: [fedora, rpm]
+  color: '294172'
+  minpackages: 22000
+  valid_till: 2023-05-24
+  sources:
+    - name: development
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/development/36/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+    - name: updates
+      fetcher:
+        class: RepodataFetcher
+        url: https://mirror.yandex.ru/fedora/linux/updates/36/Everything/source/tree/
+      parser:
+        class: RepodataParser
+        vertags: fc
+      subrepo: '{source}'
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://packages.fedoraproject.org/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/f36'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/f36/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/f36/f/{srcname}.spec'
+  groups: [ all, fedora, rpm ] # not there yet
 
 - name: fedora_rawhide
   type: repository
@@ -385,11 +493,12 @@
         url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
       parser:
         class: RepodataParser
+        vertags: fc
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
     - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
+      url: https://packages.fedoraproject.org/
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
@@ -399,4 +508,4 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/rawhide/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/rawhide/f/{srcname}.spec'
-  tags: [ all, production, fedora, rpm ]
+  groups: [ all, production, fedora, rpm ]

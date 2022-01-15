@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,162 +16,207 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import copy
-import os
-from typing import Any, Collection, Dict, Iterable, List, Optional, Union, cast
+import datetime
+import json
+import warnings
+from enum import Enum
+from typing import Any, Collection, Optional, TYPE_CHECKING, TypeVar, overload
 
-import yaml
+if TYPE_CHECKING:
+    from dataclasses import dataclass
+else:
+    from pydantic.dataclasses import dataclass
+from pydantic.json import pydantic_encoder
+
+from repology.package import LinkType
+from repology.yamlloader import YamlConfig
 
 
-RepositoryNameList = Optional[Collection[str]]
-RepositoryMetadata = Dict[str, Any]
+RepositoryNameList = Optional[Collection[str]]  # XXX: can't use |-union yet, see https://github.com/python/mypy/issues/11280
 
 
-def _subst_source_recursively(container: Union[Dict[str, Any], List[Any]], name: str) -> None:
-    key_iter: Iterable[Any]
-    if isinstance(container, list):
-        key_iter = range(len(container))
-    elif isinstance(container, dict):
-        key_iter = container.keys()
+T = TypeVar('T')
+
+
+def _subst_source_recursively(data: T, name: str) -> T:
+    if isinstance(data, str):
+        if '{source}' in data:
+            warnings.warn('{source} substitution in repo config', DeprecationWarning)
+        return data.replace('{source}', name)  # type: ignore
+    elif isinstance(data, list):
+        return [_subst_source_recursively(item, name) for item in data]  # type: ignore
+    elif isinstance(data, dict):
+        return {key: _subst_source_recursively(value, name) for key, value in data.items()}  # type: ignore
     else:
-        return
+        return data
 
-    for key in key_iter:
-        if isinstance(container[key], str):
-            container[key] = container[key].replace('{source}', name)
-        elif isinstance(container[key], list) or isinstance(container[key], dict):
-            _subst_source_recursively(container[key], name)
+
+@overload
+def _parse_duration(arg: str | int) -> datetime.timedelta:
+    pass
+
+
+@overload
+def _parse_duration(arg: None) -> None:
+    pass
+
+
+def _parse_duration(arg: str | int | None) -> datetime.timedelta | None:
+    if arg is None:
+        return None
+    if isinstance(arg, int):
+        return datetime.timedelta(seconds=arg)
+    elif arg.endswith('m'):
+        return datetime.timedelta(minutes=int(arg[:-1]))
+    elif arg.endswith('h'):
+        return datetime.timedelta(hours=int(arg[:-1]))
+    elif arg.endswith('d'):
+        return datetime.timedelta(days=int(arg[:-1]))
+    else:
+        return datetime.timedelta(seconds=int(arg))
+
+
+def _listify(arg: Any) -> list[Any]:
+    if not isinstance(arg, list):
+        return [arg]
+    else:
+        return arg
+
+
+@dataclass
+class PackageLink:
+    type: int  # noqa
+    url: str
+
+
+@dataclass
+class Source:
+    name: str
+
+    subrepo: Optional[str]
+
+    fetcher: dict[str, Any]
+    parser: dict[str, Any]
+
+    packagelinks: list[PackageLink]
+
+
+class RepositoryType(str, Enum):
+    REPOSITORY = 'repository'
+    SITE = 'site'
+    MODULES = 'modules'
+
+
+@dataclass
+class Repository:
+    name: str
+    sortname: str
+    singular: str
+    type: RepositoryType  # noqa
+    desc: str
+    statsgroup: str
+    family: str
+    ruleset: list[str]
+    color: Optional[str]
+    valid_till: Optional[datetime.date]
+    default_maintainer: Optional[str]
+    update_period: datetime.timedelta
+    minpackages: int
+
+    shadow: bool
+    incomplete: bool
+
+    repolinks: list[Any]
+    packagelinks: list[PackageLink]
+
+    groups: list[str]
+
+    sources: list[Source]
 
 
 class RepositoryManager:
-    _repositories: List[RepositoryMetadata]
-    _repo_by_name: Dict[str, RepositoryMetadata]
+    _repositories: list[Repository]
+    _repo_by_name: dict[str, Repository]
 
-    def __init__(self, reposdir: Optional[str] = None, repostext: Optional[str] = None) -> None:
+    def __init__(self, repositories_config: YamlConfig) -> None:
         self._repositories = []
         self._repo_by_name = {}
 
-        if isinstance(repostext, str):
-            self._repositories = yaml.safe_load(repostext)
-        elif isinstance(reposdir, str):
-            for root, dirs, files in os.walk(reposdir):
-                for filename in filter(lambda f: f.endswith('.yaml'), files):
-                    with open(os.path.join(root, filename)) as reposfile:
-                        self._repositories += yaml.safe_load(reposfile)
-        else:
-            raise RuntimeError('rulesdir or rulestext must be defined')
-
         # process source loops
-        for repo in self._repositories:
-            extratags = set()
+        for repodata in repositories_config.get_items():
+            extra_groups = set()
 
-            processed_sources = []
-            for source in repo['sources']:
-                if source.get('disabled', False):
+            sources = []
+            for sourcedata in repodata['sources']:
+                if sourcedata.get('disabled', False):
                     continue
 
-                names = source['name'] if isinstance(source['name'], list) else [source['name']]
-                for name in names:
-                    processed_source = copy.deepcopy(source)
-                    processed_source['name'] = name
-                    _subst_source_recursively(processed_source, name)
-                    processed_sources.append(processed_source)
+                for name in _listify(sourcedata['name']):
+                    # if there are multiple names, clone source data for each of them
+                    processed_sourcedata = _subst_source_recursively(copy.deepcopy(sourcedata), name)
+                    sources.append(
+                        Source(
+                            name=name,
+                            subrepo=processed_sourcedata.get('subrepo'),
+                            fetcher=processed_sourcedata['fetcher'],
+                            parser=processed_sourcedata['parser'],
+                            packagelinks=[PackageLink(type=LinkType.from_string(linkdata['type']), url=linkdata['url']) for linkdata in processed_sourcedata.get('packagelinks', [])],
+                        )
+                    )
 
-                extratags.add(source['fetcher']['class'])
-                extratags.add(source['parser']['class'])
+                extra_groups.add(sourcedata['fetcher']['class'])
+                extra_groups.add(sourcedata['parser']['class'])
 
-            repo['sources'] = processed_sources
+            repo = Repository(
+                name=repodata['name'],
+                sortname=repodata.get('sortname', repodata['name']),
+                singular=repodata.get('singular', repodata['desc'] + ' package'),
+                type=repodata.get('type', 'repository'),
+                desc=repodata['desc'],
+                statsgroup=repodata.get('statsgroup', repodata['desc']),
+                family=repodata['family'],
+                ruleset=_listify(repodata.get('ruleset', repodata['family'])),
+                color=repodata.get('color'),
+                valid_till=repodata.get('valid_till'),
+                default_maintainer=repodata.get('default_maintainer'),
+                update_period=_parse_duration(repodata.get('update_period', 600)),
+                minpackages=repodata.get('minpackages', 0),
 
-            if 'sortname' not in repo:
-                repo['sortname'] = repo['name']
+                shadow=repodata.get('shadow', False),
+                incomplete=repodata.get('incomplete', False),
 
-            if 'singular' not in repo:
-                repo['singular'] = repo['desc'] + ' package'
+                repolinks=repodata.get('repolinks', []),
+                packagelinks=[PackageLink(type=LinkType.from_string(linkdata['type']), url=linkdata['url']) for linkdata in repodata.get('packagelinks', [])],
 
-            # XXX: legacy, ruleset will be required
-            if 'ruleset' not in repo:
-                repo['ruleset'] = [repo['family']]
+                groups=repodata.get('groups', []) + list(extra_groups),
 
-            if not isinstance(repo['ruleset'], list):
-                repo['ruleset'] = [repo['ruleset']]
+                sources=sources,
+            )
 
-            if 'minpackages' not in repo:
-                repo['minpackages'] = 0
+            self._repositories.append(repo)
+            self._repo_by_name[repo.name] = repo
 
-            if 'update_period' not in repo:
-                repo['update_period'] = 600  # XXX: default update period - move to config?
-            elif isinstance(repo['update_period'], str):
-                if repo['update_period'].endswith('m'):
-                    repo['update_period'] = int(repo['update_period'][:-1]) * 60
-                elif repo['update_period'].endswith('h'):
-                    repo['update_period'] = int(repo['update_period'][:-1]) * 60 * 60
-                elif repo['update_period'].endswith('d'):
-                    repo['update_period'] = int(repo['update_period'][:-1]) * 60 * 60 * 24
-                else:
-                    raise RuntimeError('unexpected update_period format')
+        self._repositories = sorted(self._repositories, key=lambda repo: repo.sortname)
 
-            repo['ruleset'] = set(repo['ruleset'])
+    def get_repository(self, name: str) -> Repository:
+        return self._repo_by_name[name]
 
-            repo.setdefault('tags', []).extend(extratags)
-
-            self._repo_by_name[repo['name']] = repo
-
-    def get_repository(self, reponame: str) -> RepositoryMetadata:
-        return self._repo_by_name[reponame]
-
-    def get_repositories(self, reponames: RepositoryNameList = None) -> List[RepositoryMetadata]:
-        if reponames is None:
+    def get_repositories(self, names: RepositoryNameList = None) -> list[Repository]:
+        if names is None:
             return []
 
         filtered_repositories = []
+
         for repository in self._repositories:
-            match = False
-            for reponame in reponames:
-                if reponame == repository['name']:
-                    match = True
+            for name in names:
+                if name == repository.name or name in repository.groups:
+                    filtered_repositories.append(repository)
                     break
-                if reponame in repository['tags']:
-                    match = True
-                    break
-            if match:
-                filtered_repositories.append(repository)
 
         return filtered_repositories
 
-    def get_names(self, reponames: RepositoryNameList = None) -> List[str]:
-        return [repo['name'] for repo in sorted(self.get_repositories(reponames), key=lambda repo: cast(str, repo['sortname']))]
+    def get_names(self, names: RepositoryNameList = None) -> list[str]:
+        return [repository.name for repository in self.get_repositories(names)]
 
-    def get_metadata(self, reponames: RepositoryNameList = None) -> Dict[str, RepositoryMetadata]:
-        return {
-            repository['name']: {
-                'shadow': repository.get('shadow', False),
-                'incomplete': repository.get('incomplete', False),
-                'repolinks': repository.get('repolinks', []),
-                'packagelinks': repository.get('packagelinks', []),
-                'family': repository['family'],
-                'desc': repository['desc'],
-                'singular': repository['singular'],
-                'type': repository['type'],
-                'color': repository.get('color'),
-                'statsgroup': repository.get('statsgroup', repository['desc']),
-                'update_period': repository['update_period'],
-            } for repository in self.get_repositories(reponames)
-        }
-
-    def get_metadatas(self, reponames: RepositoryNameList = None) -> List[RepositoryMetadata]:
-        return [
-            {
-                'name': repository['name'],
-                'sortname': repository['sortname'],
-                'shadow': repository.get('shadow', False),
-                'incomplete': repository.get('incomplete', False),
-                'repolinks': repository.get('repolinks', []),
-                'packagelinks': repository.get('packagelinks', []),
-                'family': repository['family'],
-                'desc': repository['desc'],
-                'singular': repository['singular'],
-                'type': repository['type'],
-                'color': repository.get('color'),
-                'statsgroup': repository.get('statsgroup', repository['desc']),
-                'update_period': repository['update_period'],
-            } for repository in self.get_repositories(reponames)
-        ]
+    def get_repository_json(self, name: str) -> str:
+        return json.dumps(self.get_repository(name), default=pydantic_encoder)

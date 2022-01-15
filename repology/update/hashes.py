@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable, Set, Tuple
+from typing import Iterable
 
 from repology.database import Database
 from repology.package import Package
@@ -23,7 +23,7 @@ from repology.package import Package
 
 def calculate_project_classless_hash(packages: Iterable[Package]) -> int:
     total_hash = 0
-    seen_hashes: Set[int] = set()
+    seen_hashes: set[int] = set()
 
     for package in packages:
         package_hash = package.get_classless_hash()
@@ -38,7 +38,7 @@ def calculate_project_classless_hash(packages: Iterable[Package]) -> int:
     return total_hash
 
 
-ProjectHash = Tuple[str, int]
+ProjectHash = tuple[str, int]
 
 
 def iter_project_hashes(database: Database) -> Iterable[ProjectHash]:

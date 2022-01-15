@@ -6,7 +6,7 @@
   desc: RPM Sphere
   family: fedora
   ruleset: [fedora, rpm, rpmsphere]
-  minpackages: 2500
+  minpackages: 2300
   sources:
     - name: source
       fetcher:
@@ -17,4 +17,4 @@
   repolinks:
     - desc: RPM Sphere home
       url: https://rpmsphere.github.io/
-  tags: [ all, production ]
+  groups: [ all, production ]

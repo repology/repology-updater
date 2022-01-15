@@ -26,4 +26,4 @@
       url: 'http://svn.exactcode.de/t2/trunk/package/{srcname}/'
     - type: PACKAGE_PATCH_RAW
       url: 'http://svn.exactcode.de/t2/trunk/package/{srcname}/{?patch}'
-  tags: [ all, production ]
+  groups: [ all, production ]

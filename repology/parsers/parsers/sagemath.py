@@ -16,17 +16,16 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable, Optional
+from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.patches import add_patch_files
 from repology.parsers.versions import VersionStripper
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
-def _parse_upstream_url(pkgpath: str) -> Optional[str]:
+def _parse_upstream_url(pkgpath: str) -> str | None:
     checksums_path = os.path.join(pkgpath, 'checksums.ini')
     if not os.path.exists(checksums_path):
         return None
@@ -41,7 +40,7 @@ def _parse_upstream_url(pkgpath: str) -> Optional[str]:
 
 
 class SageMathParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('.p')
 
         for versionfile in walk_tree(path, name='package-version.txt'):

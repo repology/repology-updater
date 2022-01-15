@@ -19,7 +19,7 @@ import fcntl
 import sys
 import time
 from abc import ABC, abstractmethod
-from typing import Any, ClassVar, List, Tuple
+from typing import Any, ClassVar
 
 
 def format_log_entry(message: str, severity: int, indent: int, prefix: str) -> str:
@@ -99,7 +99,7 @@ class StderrLogger(Logger):
 
 
 class AccumulatingLogger(Logger):
-    _entries: List[Tuple[str, int, int, str]]
+    _entries: list[tuple[str, int, int, str]]
 
     def __init__(self) -> None:
         self._entries = []
@@ -107,7 +107,7 @@ class AccumulatingLogger(Logger):
     def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
         self._entries.append((message, severity, indent, prefix))
 
-    def get(self) -> List[str]:
+    def get(self) -> list[str]:
         return [format_log_entry(*args) for args in self._entries]
 
     def forward(self, otherlogger: Logger) -> None:

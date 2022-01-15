@@ -15,16 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Dict, Iterable, Tuple, Union
+from typing import Any, Iterable
 
 from jsonslicer import JsonSlicer
 
 
-def iter_json_list(path: str, json_path: Tuple[Union[str, None], ...], **kwargs: Any) -> Iterable[Dict[str, Any]]:
+def iter_json_list(path: str, json_path: tuple[str | None, ...], **kwargs: Any) -> Iterable[dict[str, Any]]:
     with open(path, 'rb') as jsonfile:
         yield from JsonSlicer(jsonfile, json_path, **kwargs)
 
 
-def iter_json_dict(path: str, json_path: Tuple[Union[str, None], ...], **kwargs: Any) -> Iterable[Tuple[str, Dict[str, Any]]]:
+def iter_json_dict(path: str, json_path: tuple[str | None, ...], **kwargs: Any) -> Iterable[tuple[str, dict[str, Any]]]:
     with open(path, 'rb') as jsonfile:
         yield from JsonSlicer(jsonfile, json_path, path_mode='map_keys', **kwargs)

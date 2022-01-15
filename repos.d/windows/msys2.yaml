@@ -13,14 +13,14 @@
     - name: x86_64
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.gz
+        url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.zst
       parser:
         class: MSYS2DescParser
       subrepo: x86_64
     - name: i686
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.gz
+        url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.zst
       parser:
         class: MSYS2DescParser
       subrepo: i686
@@ -36,7 +36,7 @@
       url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
-  tags: [ all, production, msys2 ]
+  groups: [ all, production, msys2 ]
 
 - name: msys2_msys2
   type: repository
@@ -50,14 +50,14 @@
     - name: x86_64
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/msys/x86_64/msys.db.tar.gz
+        url: http://repo.msys2.org/msys/x86_64/msys.db.tar.zst
       parser:
         class: MSYS2DescParser
       subrepo: x86_64
     - name: i686
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/msys/i686/msys.db.tar.gz
+        url: http://repo.msys2.org/msys/i686/msys.db.tar.zst
       parser:
         class: MSYS2DescParser
       subrepo: i686
@@ -73,4 +73,4 @@
       url: 'https://github.com/msys2/MSYS2-packages/blob/master/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/msys2/MSYS2-packages/master/{srcname}/PKGBUILD'
-  tags: [ all, production, msys2 ]
+  groups: [ all, production, msys2 ]

@@ -41,7 +41,15 @@ WITH homepages AS (
 		)::bit(64)::bigint AS urlhash,
 		count(DISTINCT family) AS num_families
 	FROM homepages
-	WHERE link_type IN(0)  -- UPSTREAM_HOMEPAGE, may also add UPSTREAM_DOWNLOAD (1) and/or UPSTREAM_REPOSITORY (2)
+	WHERE link_type IN(
+		0,   -- UPSTREAM_HOMEPAGE
+		--1, -- UPSTREAM_DOWNLOAD (may generate too many new entries)
+		2,   -- UPSTREAM_REPOSITORY
+		4,   -- PROJECT_HOMEPAGE
+		16,  -- UPSTREAM_DOCUMENTATION
+		20,  -- UPSTREAM_DISCUSSION
+		23   -- UPSTREAM_WIKI
+	)
 	GROUP BY effname, urlhash
 )
 INSERT

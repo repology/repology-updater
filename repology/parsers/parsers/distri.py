@@ -24,11 +24,10 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.pb.distri_pb2 import Build as BuildMessage
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
 class DistriGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for protofile in walk_tree(path, name='build.textproto'):
             protofile_rel = os.path.relpath(protofile, path)
             with factory.begin(protofile_rel) as pkg:

@@ -26,15 +26,7 @@ SET
 	metadata = %(metadata)s,
 
 	sortname = %(metadata)s::json->>'sortname',
-	"type" = %(metadata)s::json->>'type',
 	"desc" = %(metadata)s::json->>'desc',
-	statsgroup = %(metadata)s::json->>'statsgroup',
-	singular = %(metadata)s::json->>'singular',
-	family = %(metadata)s::json->>'family',
-	color = %(metadata)s::json->>'color',
-	shadow = (%(metadata)s::json->>'shadow')::boolean,
-	incomplete = (%(metadata)s::json->>'incomplete')::boolean,
-	repolinks = %(metadata)s::json->'repolinks',
-	packagelinks = %(metadata)s::json->'packagelinks'
+	incomplete = (%(metadata)s::json->>'incomplete')::boolean
 WHERE
 	name = %(metadata)s::json->>'name';

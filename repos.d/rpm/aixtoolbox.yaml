@@ -23,4 +23,4 @@
   repolinks:
     - desc: AIX Toolbox home
       url: https://www.ibm.com/support/pages/aix-toolbox-linux-applications-downloads-alpha
-  tags: [ all, production ]
+  groups: [ all, production ]

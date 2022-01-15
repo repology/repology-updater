@@ -16,14 +16,13 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Any, Dict, Iterable, List
+from typing import Any, Iterable
 
 from pyparsing import OneOrMore, QuotedString, Regex, Suppress, Word, ZeroOrMore, alphas, printables
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 @dataclass
@@ -31,10 +30,10 @@ class _PackageData:
     name: str
     version: str
     summary: str
-    keyvals: Dict[str, Any]
+    keyvals: dict[str, Any]
 
 
-def _parse_data(data: str) -> List[_PackageData]:
+def _parse_data(data: str) -> list[_PackageData]:
     lpar, rpar, lbrk, rbrk, dot = map(Suppress, '()[].')
     nil = Suppress('nil')
 
@@ -68,7 +67,7 @@ def _parse_data(data: str) -> List[_PackageData]:
 
 
 class ArchiveContentsParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path, encoding='utf-8', errors='ignore') as contents:
             data = contents.read()
 
@@ -79,7 +78,7 @@ class ArchiveContentsParser(Parser):
                 pkg.set_summary(pkgdata.summary)
 
                 if 'maintainer' in pkgdata.keyvals:
-                    maintainers: List[str] = sum(map(extract_maintainers, pkgdata.keyvals['maintainer']), [])
+                    maintainers: list[str] = sum(map(extract_maintainers, pkgdata.keyvals['maintainer']), [])
                     pkg.add_maintainers(maintainers)
 
                 pkg.add_homepages(pkgdata.keyvals.get('url'))

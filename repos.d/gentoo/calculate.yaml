@@ -31,4 +31,4 @@
       url: 'https://old.calculate-linux.org/packages/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://old.calculate-linux.org/packages/{srcname}/{srcname|basename}-{rawversion}.ebuild?format=raw'
-  tags: [ all, production ]
+  groups: [ all, production ]

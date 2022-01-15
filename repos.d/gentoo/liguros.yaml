@@ -36,7 +36,7 @@
       url: 'https://gitlab.com/liguros/liguros-repo/-/blob/stable/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitlab.com/liguros/liguros-repo/-/raw/stable/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production, liguros ]
+  groups: [ all, production, liguros ]
 
 - name: liguros_develop
   type: repository
@@ -72,4 +72,4 @@
       url: 'https://gitlab.com/liguros/liguros-repo/-/blob/develop/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitlab.com/liguros/liguros-repo/-/raw/develop/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production, liguros ]
+  groups: [ all, production, liguros ]

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Dict, Iterable, Optional
+from typing import Iterable
 
 import lxml
 
@@ -26,17 +26,16 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
 from repology.parsers.walk import walk_tree
-from repology.transformer import PackageTransformer
 
 
-def _parse_info_file(filename: str) -> Dict[str, str]:
+def _parse_info_file(filename: str) -> dict[str, str]:
     with open(filename, 'r') as infofile:
         return _parse_info(infofile.read())
 
 
-def _parse_info(text: str) -> Dict[str, str]:
-    result: Dict[str, str] = {}
-    current_multiline_key: Optional[str] = None
+def _parse_info(text: str) -> dict[str, str]:
+    result: dict[str, str] = {}
+    current_multiline_key: str | None = None
     multiline_depth = 0
 
     for line in text.split('\n'):
@@ -69,7 +68,7 @@ def _parse_info(text: str) -> Dict[str, str]:
 
 
 class FinkGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for filename in walk_tree(path, suffix='.info'):
             rel_filename = os.path.relpath(filename, path)
 
@@ -116,7 +115,7 @@ class FinkGitParser(Parser):
 
 
 class FinkPdbParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('-')
 
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="pdb"]')[0].xpath('./tr[@class="package"]'):

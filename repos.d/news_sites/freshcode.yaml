@@ -22,4 +22,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://freshcode.club/projects/{name}'
-  tags: [ all, production ]
+  groups: [ all, production ]

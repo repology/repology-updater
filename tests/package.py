@@ -17,10 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-# mypy: no-disallow-untyped-calls
-
 import unittest
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
+
+import pytest
 
 from repology.package import Package
 from repology.packagemaker import NameType, PackageFactory
@@ -32,13 +32,13 @@ def spawn_package(
     version: str = '0',
     repo: str = 'dummyrepo',
     flags: int = 0,
-    family: Optional[str] = None,
-    comment: Optional[str] = None,
-    category: Optional[str] = None,
-    maintainers: Optional[List[str]] = None,
-    flavors: Optional[List[str]] = None,
-    branch: Optional[str] = None,
-    links: Optional[List[Tuple[int, str]]] = None,
+    family: str | None = None,
+    comment: str | None = None,
+    category: str | None = None,
+    maintainers: list[str] | None = None,
+    flavors: list[str] | None = None,
+    branch: str | None = None,
+    links: list[tuple[int, str]] | None = None,
 ) -> Package:
     m = PackageFactory().begin()
 
@@ -67,7 +67,7 @@ def spawn_package(
 
 class PackageSample:
     package: Package
-    expectations: Dict[str, Any]
+    expectations: dict[str, Any]
 
     def __init__(self, **pkgargs: Any) -> None:
         self.package = spawn_package(**pkgargs)
@@ -79,4 +79,13 @@ class PackageSample:
 
     def check(self, test: unittest.TestCase) -> None:
         for k, v in self.expectations.items():
-            test.assertEqual(getattr(self.package, k), v, msg='{} of {}'.format(k, self.package))
+            test.assertEqual(getattr(self.package, k), v, msg=f'{k} of {self.package}')
+
+    def check_pytest(self) -> None:
+        __tracebackhide__ = True
+
+        for key, expected in self.expectations.items():
+            actual = getattr(self.package, key)
+
+            if actual != expected:
+                pytest.fail(f'field "{key}" value "{actual}" != expected "{expected}" for {self.package}')

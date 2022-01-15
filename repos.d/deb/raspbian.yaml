@@ -6,6 +6,7 @@
   desc: Raspbian Oldstable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, raspbian]
   color: 'd6264f'
   minpackages: 22000
   sources:
@@ -20,13 +21,14 @@
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
-  tags: [ all, production, raspbian ]
+  groups: [ all, production, raspbian ]
 
 - name: raspbian_stable
   type: repository
   desc: Raspbian Stable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, raspbian]
   color: 'd6264f'
   minpackages: 28000
   sources:
@@ -41,13 +43,14 @@
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
-  tags: [ all, production, raspbian ]
+  groups: [ all, production, raspbian ]
 
 - name: raspbian_testing
   type: repository
   desc: Raspbian Testing
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, raspbian]
   color: 'd6264f'
   minpackages: 31000
   sources:
@@ -62,4 +65,4 @@
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
-  tags: [ all, production, raspbian ]
+  groups: [ all, production, raspbian ]

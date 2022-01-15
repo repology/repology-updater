@@ -20,7 +20,7 @@ import re
 import tarfile
 from abc import abstractmethod
 from io import StringIO
-from typing import Any, Dict, IO, Iterable, List, Optional
+from typing import Any, IO, Iterable
 
 from libversion import version_compare
 
@@ -28,17 +28,16 @@ from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 _WHITESPACE_PREFIX_RE = re.compile('([ ]*)[^ ]')
 _KEYVAL_RE = re.compile('([a-zA-Z-]+)[ \t]*:[ \t]*(.*?)')
 
 
-def _parse_cabal_file(cabalfile: IO[str]) -> Dict[str, str]:
-    cabaldata: Dict[str, str] = {}
-    offset: Optional[int] = None
-    key: Optional[str] = None
+def _parse_cabal_file(cabalfile: IO[str]) -> dict[str, str]:
+    cabaldata: dict[str, str] = {}
+    offset: int | None = None
+    key: str | None = None
 
     for line in cabalfile:
         line = line.rstrip()
@@ -78,12 +77,12 @@ def _parse_cabal_file(cabalfile: IO[str]) -> Dict[str, str]:
     return cabaldata
 
 
-def _iter_cabal_hier(path: str) -> Iterable[Dict[str, str]]:
+def _iter_cabal_hier(path: str) -> Iterable[dict[str, str]]:
     for moduledir in os.listdir(path):
         modulepath = os.path.join(path, moduledir)
 
-        cabalpath: Optional[str] = None
-        maxversion: Optional[str] = None
+        cabalpath: str | None = None
+        maxversion: str | None = None
 
         for versiondir in os.listdir(modulepath):
             if versiondir == 'preferred-versions':
@@ -104,12 +103,12 @@ def _extract_tarinfo(tar: tarfile.TarFile, tarinfo: tarfile.TarInfo) -> str:
     return extracted.read().decode('utf-8-sig')
 
 
-def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
-    preferred_versions: Dict[str, str] = {}
+def _iter_hackage_tarfile(path: str) -> Iterable[dict[str, str]]:
+    preferred_versions: dict[str, str] = {}
 
-    current_name: Optional[str] = None
-    maxversion: Optional[str] = None
-    maxversion_data: Optional[str] = None
+    current_name: str | None = None
+    maxversion: str | None = None
+    maxversion_data: str | None = None
 
     with tarfile.open(path, 'r|*') as tar:
         for tarinfo in tar:
@@ -142,9 +141,9 @@ def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
             yield _parse_cabal_file(StringIO(maxversion_data))
 
 
-def _iter_hackage_tarfile_multipass(path: str) -> Iterable[Dict[str, str]]:
-    preferred_versions: Dict[str, str] = {}
-    latest_versions: Dict[str, List[Any]] = {}  # name -> [version, count]
+def _iter_hackage_tarfile_multipass(path: str) -> Iterable[dict[str, str]]:
+    preferred_versions: dict[str, str] = {}
+    latest_versions: dict[str, list[Any]] = {}  # name -> [version, count]
 
     # Pass 1: gather preferred versions
     with tarfile.open(path, 'r|*') as tar:
@@ -159,6 +158,8 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[Dict[str, str]]:
             tarpath = tarinfo.name.split('/')
             if tarpath[-1].endswith('.cabal'):
                 name, version = tarpath[0:2]
+                if 'hledger' in name and version == '1.24.99':
+                    continue  # XXX: support preferred_versions properly
                 if name not in latest_versions or version_compare(version, latest_versions[name][0]) > 0:
                     latest_versions[name] = [version, 1]
                 elif version == latest_versions[name][0]:
@@ -180,10 +181,10 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[Dict[str, str]]:
 
 class HackageParserBase(Parser):
     @abstractmethod
-    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
         pass
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for cabaldata in self._iterate(path):
             with factory.begin() as pkg:
                 pkg.add_name(cabaldata['name'], NameType.HACKAGE_NAME)
@@ -208,15 +209,15 @@ class HackageParserBase(Parser):
 
 
 class HackageParser(HackageParserBase):
-    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
         yield from _iter_cabal_hier(path)
 
 
 class HackageTarParser(HackageParserBase):
-    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
         yield from _iter_hackage_tarfile(path)
 
 
 class HackageTar01Parser(HackageParserBase):
-    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
         yield from _iter_hackage_tarfile_multipass(path)

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Dict, Iterable, List, Union
+from typing import Any, Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -24,10 +24,9 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_dict
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
-def extract_nix_maintainers(items: Iterable[Union[str, Dict[str, str]]]) -> Iterable[str]:
+def extract_nix_maintainers(items: Iterable[str | dict[str, str]]) -> Iterable[str]:
     for item in items:
         # old format, currently used in stable; parse email out of 'name <email>' string
         # items without closing '>' are quite common, just skip them
@@ -43,7 +42,7 @@ def extract_nix_maintainers(items: Iterable[Union[str, Dict[str, str]]]) -> Iter
             #    yield item['github'].lower() + '@github'
 
 
-def extract_nix_licenses(whatever: Any) -> List[str]:
+def extract_nix_licenses(whatever: Any) -> list[str]:
     if isinstance(whatever, str):
         return [whatever]
     elif isinstance(whatever, list):
@@ -81,12 +80,16 @@ _BLACKLIST2 = {
 
 
 class NixJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
             with factory.begin(key) as pkg:
                 # these should eventually go away as soon as the data is fixed
                 # in nix (e.g. via manual pnames) and is properly exposed
                 if 'node-_at' in packagedata['name']:
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
+                if packagedata['name'].startswith('_at'):
                     pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
 
@@ -169,10 +172,6 @@ class NixJsonParser(Parser):
                 # XXX: move to rules
                 if pname.endswith('-git'):
                     pkg.add_name(pname[:-4], NameType.NIX_PNAME)
-                    pkg.set_flags(PackageFlags.IGNORE)
-
-                # XXX: move to rules
-                if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
                     pkg.set_flags(PackageFlags.IGNORE)
 
                 # XXX: move to rules

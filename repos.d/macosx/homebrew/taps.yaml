@@ -26,4 +26,4 @@
       url: 'https://github.com/brewsci/homebrew-bio/blob/master/Formula/{srcname}.rb'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/brewsci/homebrew-bio/master/Formula/{srcname}.rb'
-  tags: [ all, production, brew ]
+  groups: [ all, production, brew ]

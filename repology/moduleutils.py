@@ -19,7 +19,7 @@ import importlib
 import importlib.util
 import inspect
 import os
-from typing import Any, Dict, Iterable, Optional, Type
+from typing import Any, Iterable, Type
 
 
 __all__ = [
@@ -47,27 +47,27 @@ class ClassFactory:
 
                     yield '.'.join([module] + relpath[:-3].split(os.sep))
 
-    def __init__(self, modulename: str, suffix: Optional[str] = None, superclass: Optional[Type[Any]] = None) -> None:
-        self.classes: Dict[str, Any] = {}
+    def __init__(self, modulename: str, suffix: str | None = None, superclass: Type[Any] | None = None) -> None:
+        self.classes: dict[str, Any] = {}
 
         for submodulename in ClassFactory._enumerate_all_submodules(modulename):
             submodule = importlib.import_module(submodulename)
             for name, member in inspect.getmembers(submodule):
-                suitable = True
+                if suffix is not None and not name.endswith(suffix):
+                    continue
 
-                if suffix is not None:
-                    suitable &= name.endswith(suffix)
+                try:  # workaround for https://bugs.python.org/issue45326
+                    if superclass is not None and (not inspect.isclass(member) or not issubclass(member, superclass)):
+                        continue
+                except TypeError:
+                    continue
 
-                if superclass is not None:
-                    suitable &= inspect.isclass(member) and issubclass(member, superclass)
-
-                if suitable:
-                    self.classes[name] = member
+                self.classes[name] = member
 
     def spawn(self, name: str, *args: Any, **kwargs: Any) -> Any:
         return self.classes[name](*args, **kwargs)
 
-    def spawn_with_known_args(self, name: str, kwargs: Dict[str, Any]) -> Any:
+    def spawn_with_known_args(self, name: str, kwargs: dict[str, Any]) -> Any:
         class_ = self.classes[name]
 
         filtered_kwargs = {

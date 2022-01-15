@@ -16,6 +16,7 @@
         url: 'http://vault.centos.org/centos/6/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -28,7 +29,7 @@
   #    url: 'https://git.centos.org/rpms/{srcname}/blob/c6{centossuffix}/f/SPECS/{srcname}.spec'
   #  - type: PACKAGE_RECIPE_RAW
   #    url: 'https://git.centos.org/rpms/{srcname}/raw/c6{centossuffix}/f/SPECS/{srcname}.spec'
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
 
 - name: centos_7
   type: repository
@@ -45,6 +46,7 @@
         url: 'http://vault.centos.org/centos/7/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -56,7 +58,7 @@
       url: 'https://git.centos.org/rpms/{srcname}/blob/c7{centossuffix}/f/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.centos.org/rpms/{srcname}/raw/c7{centossuffix}/f/SPECS/{srcname}.spec'
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
 
 - name: centos_8
   type: repository
@@ -73,6 +75,7 @@
         url: 'http://vault.centos.org/centos/8/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: CentOS home
@@ -84,14 +87,44 @@
       url: 'https://git.centos.org/rpms/{srcname}/blob/c8{centossuffix}/f/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.centos.org/rpms/{srcname}/raw/c8{centossuffix}/f/SPECS/{srcname}.spec'
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
+
+- name: centos_8_stream
+  type: repository
+  desc: CentOS 8 Stream
+  statsgroup: CentOS
+  family: centos
+  ruleset: [centos, rpm]
+  color: '932279'
+  minpackages: 2000
+  sources:
+    - name: [ AppStream, BaseOS, PowerTools, extras ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://vault.centos.org/centos/8/{source}/Source/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  repolinks:
+    - desc: CentOS home
+      url: https://www.centos.org/
+  packagelinks:
+    # not sure of centossuffix works correctly here
+    - type: PACKAGE_SOURCES
+      url: 'https://git.centos.org/rpms/{srcname}/tree/c8s{centossuffix}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.centos.org/rpms/{srcname}/blob/c8s{centossuffix}/f/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.centos.org/rpms/{srcname}/raw/c8s{centossuffix}/f/SPECS/{srcname}.spec'
+  groups: [ all, production, centos, rpm ]
 
 - name: almalinux_8
   type: repository
   desc: AlmaLinux 8
   statsgroup: CentOS
   family: centos
-  #color: '932279'
+  color: '082336'
   minpackages: 2500
   sources:
     - name: [ AppStream, BaseOS, PowerTools, extras ]
@@ -100,8 +133,30 @@
         url: 'https://repo.almalinux.org/almalinux/8/{source}/Source/'
       parser:
         class: RepodataParser
+        vertags: el
       subrepo: '{source}'
   repolinks:
     - desc: AlmaLinux home
       url: https://almalinux.org/
-  tags: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm ]
+
+- name: rocky_8
+  type: repository
+  desc: Rocky Linux 8
+  statsgroup: CentOS
+  family: centos
+  color: '10b981'
+  minpackages: 2500
+  sources:
+    - name: [ AppStream, BaseOS, PowerTools, extras ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://download.rockylinux.org/pub/rocky/8/{source}/source/tree/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rocky Linux home
+      url: https://rockylinux.org/
+  groups: [ all, production, centos, rpm ]

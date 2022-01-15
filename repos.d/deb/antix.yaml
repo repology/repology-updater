@@ -20,7 +20,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  tags: [ all, production, antix ]
+  groups: [ all, production, antix ]
 
 - name: antix_17
   type: repository
@@ -40,7 +40,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  tags: [ all, production, antix ]
+  groups: [ all, production, antix ]
 
 - name: antix_19
   type: repository
@@ -60,8 +60,27 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  tags: [ all, production, antix ]
+  groups: [ all, production, antix ]
+
+- name: antix_21
+  type: repository
+  desc: antiX-21
+  family: debuntu
+  ruleset: [ debuntu, antix ]
+  minpackages: 300
+  sources:
+    - name: [ dev, main, nonfree, nosystemd ]
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/bullseye/dists/bullseye/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: antiX Linux home
+      url: https://antixlinux.com/
+  groups: [ all, production, antix ]
 
 # Probable future releases would be called
-# 21 = bullseye
 # 23 = bookworm

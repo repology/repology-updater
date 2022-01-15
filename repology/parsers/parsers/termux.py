@@ -24,11 +24,10 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
-from repology.transformer import PackageTransformer
 
 
 class TermuxJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_left_greedy(':')
 
         with open(path, 'r', encoding='utf-8') as jsonfile:
@@ -52,6 +51,6 @@ class TermuxJsonParser(Parser):
                 # maintainer may also be in '@username' form
                 match = re.search('(?:^| )@([^ ]+)$', packagedata['maintainer'])
                 if match:
-                    pkg.add_maintainers(match.group(1).lower() + '@termux')
+                    pkg.add_maintainers(match.group(1).lower() + '@github')
 
                 yield pkg

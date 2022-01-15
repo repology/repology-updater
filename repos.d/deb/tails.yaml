@@ -20,7 +20,7 @@
   repolinks:
     - desc: Tails home
       url: https://tails.boum.org/
-  tags: [ all, production, tails ]
+  groups: [ all, production, tails ]
 
 - name: tails_devel
   sortname: tails_1
@@ -41,4 +41,4 @@
   repolinks:
     - desc: Tails home
       url: https://tails.boum.org/
-  tags: [ all, production, tails ]
+  groups: [ all, production, tails ]

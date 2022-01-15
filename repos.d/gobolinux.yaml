@@ -30,4 +30,4 @@
       url: 'https://github.com/gobolinux/Recipes/blob/master/{name}/{origversion}/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/gobolinux/Recipes/master/{name}/{origversion}/{?patch}'
-  tags: [ all, production, have_testdata ]
+  groups: [ all, production, have_testdata ]

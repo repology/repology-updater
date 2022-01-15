@@ -23,7 +23,7 @@ from datetime import date
 
 from voluptuous import All, Any, Contains, MultipleInvalid, Required, Schema, Url
 
-import yaml
+from repology.yamlloader import YamlConfig
 
 
 families = [
@@ -35,6 +35,7 @@ families = [
     'appget',
     'arch',
     'ataraxia',
+    'baulk',
     'buckaroo',
     'carbs',
     'centos',
@@ -78,8 +79,10 @@ families = [
     'macports',
     'mageia',
     'mer',
+    'mpr',
     'msys2',
     'nix',
+    'noir',
     'npackd',
     'openbsd',
     'openindiana',
@@ -102,9 +105,11 @@ families = [
     'rudix',
     'sagemath',
     'salix',
+    'sclo',
     'scoop',
     'sisyphus',
     'slackbuilds',
+    'spack',
     'tinycore',
     'slackware',
     'slitaz',
@@ -112,6 +117,7 @@ families = [
     'solus',
     't2',
     'termux',
+    'ubi',
     'vcpkg',
     'void',
     'wikidata',
@@ -120,6 +126,7 @@ families = [
 ]
 
 rulesets = families + [
+    'amazon',
     'antergos',
     'antix',
     'apertis',
@@ -133,6 +140,7 @@ rulesets = families + [
     'debian',
     'deepin',
     'dports',
+    'endlessos',
     'entware',
     'epel',
     'frugalware',
@@ -146,21 +154,26 @@ rulesets = families + [
     'maemo',
     'manjaro',
     'melpa',
+    'melpa_stable',
+    'melpa_unstable',
     'mint',
     'msys2_mingw',
     'msys2_msys2',
     'mx',
+    'nix_old_node_naming',
     'openeuler',
     'packman',
     'parabola',
     'pardus',
     'parrot',
     'pureos',
+    'raspbian',
     'rebornos',
     'rpm',
     'rpmsphere',
     'siduction',
     'slitaz_next',
+    'stackage',
     'trisquel',
     'ubuntu',
     'unitedrpms',
@@ -170,8 +183,7 @@ rulesets = families + [
 
 packagelinks = [
     {
-        'desc': str,  # XXX: remove with complete switch to generalized links
-        'type': str,  # XXX: make mandatory with complete switch to generalized links
+        Required('type'): str,
         Required('url'): Url(),
     }
 ]
@@ -243,6 +255,7 @@ schemas = {
                         'src': bool,
                         'binary': bool,
                         'arch_from_filename': bool,
+                        'vertags': Any(str, [str]),
 
                         # srclist
                         'encoding': Any('utf-8', 'cp1251'),
@@ -259,10 +272,13 @@ schemas = {
 
                         # kiss
                         'maintainer_from_git': bool,
-                        'blob_prefix': str,
+                        'use_meta': bool,
 
                         # debian
                         'allowed_vcs_urls': str,
+
+                        # aur
+                        'maintainer_host': str,
                     },
                     'packagelinks': packagelinks,
                 }
@@ -276,7 +292,7 @@ schemas = {
                 }
             ],
             'packagelinks': packagelinks,
-            'tags': [
+            'groups': [
                 str
             ]
         }
@@ -290,7 +306,6 @@ schemas = {
             'verpat': str,
             'wwwpart': Any(str, [str]),
             'wwwpat': str,
-            'family': Any(Any(*families), [Any(*families)]),  # XXX: legacy; remove after rules converted to ruleset
             'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),
             'noruleset': Any(Any(*rulesets), [Any(*rulesets)]),
             'category': Any(str, [str]),
@@ -333,8 +348,7 @@ schemas = {
 
 
 def get_yaml(path: str) -> Any:
-    with open(path) as yamlfile:
-        return yaml.safe_load(yamlfile)
+    return YamlConfig.from_path(path).get_items()
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -354,7 +368,7 @@ def main() -> int:
         try:
             Schema(schemas[options.schema])(get_yaml(path))
         except MultipleInvalid as e:
-            print('Bad schema for {}: {}'.format(path, str(e)))
+            print(f'Bad schema for {path}: {str(e)}')
             errors += 1
 
     return 1 if errors else 0

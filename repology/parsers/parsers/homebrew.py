@@ -20,11 +20,10 @@ from typing import Iterable
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
-from repology.transformer import PackageTransformer
 
 
 class HomebrewJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
                 pkg.add_name(packagedata['name'], NameType.HOMEBREW_NAME)
@@ -39,7 +38,7 @@ class HomebrewJsonParser(Parser):
 
 
 class HomebrewCaskJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, (None,)):
             with factory.begin(packagedata['token']) as pkg:
                 pkg.add_name(packagedata['token'], NameType.HOMEBREW_CASK_TOKEN)

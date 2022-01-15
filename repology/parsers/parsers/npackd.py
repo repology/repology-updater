@@ -16,12 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Dict, Iterable, List
+from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import iter_xml_elements_at_level, safe_findalltexts, safe_findtext, safe_getattr
-from repology.transformer import PackageTransformer
 
 
 _BLACKLISTED_CATEGORIES = set([
@@ -43,15 +42,15 @@ def _filter_categories(categories: Iterable[str]) -> Iterable[str]:
 @dataclass
 class PackageData:
     title: str
-    licenses: List[str]
-    categories: List[str]
-    urls: List[str]
+    licenses: list[str]
+    categories: list[str]
+    urls: list[str]
 
 
 class NpackdXmlParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        licenses: Dict[str, str] = {}
-        packages: Dict[str, PackageData] = {}
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        licenses: dict[str, str] = {}
+        packages: dict[str, PackageData] = {}
 
         for entry in iter_xml_elements_at_level(path, 1, ['license', 'package', 'version']):
             if entry.tag == 'license':

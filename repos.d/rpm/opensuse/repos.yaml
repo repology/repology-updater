@@ -28,245 +28,48 @@
 #
 #   is a correct link.
 
-- name: opensuse_education_tumbleweed
-  sortname: opensusez_education
+{% macro opensuse_extra_repo(name, minpackages, wiki=None) %}
+{% set path = name|replace(':', ':/') %}
+{% set underscore_name = name|lower|replace(':', '_') %}
+- name: opensuse_{{underscore_name}}_tumbleweed
+  sortname: opensusez_{{underscore_name}}
   type: repository
-  desc: openSUSE Education Tumbleweed
+  desc: openSUSE {{name}} Tumbleweed
   family: opensuse
   ruleset: [opensuse,rpm]
   color: '6da741'
-  minpackages: 300
+  minpackages: {{minpackages}}
   sources:
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/Education/openSUSE_Tumbleweed/
+        url: https://download.opensuse.org/repositories/{{path}}/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/Education/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/Education/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_emulators_tumbleweed
-  sortname: opensusez_emulators
-  type: repository
-  desc: openSUSE Emulators Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 100
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/Emulators/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/Emulators/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/Emulators/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_games_tumbleweed
-  sortname: opensusez_games
-  type: repository
-  desc: openSUSE Games Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 600
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
+  {% if wiki %}
   repolinks:
-    - desc: openSUSE:Games wiki page
-      url: https://en.opensuse.org/openSUSE:Games
+    - desc: {{wiki}} wiki page
+      url: https://en.opensuse.org/{{wiki}}
+  {% endif %}
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/games/{srcname}'
+      url: 'https://build.opensuse.org/package/show/{{name}}/{srcname}'
     - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/games/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+      url: 'https://build.opensuse.org/package/view_file/{{name}}/{srcname}/{srcname}.spec?expand=1'
+  groups: [ all, production, opensuse, opensuse_extra, rpm ]
+{% endmacro %}
 
-- name: opensuse_graphics_tumbleweed
-  sortname: opensusez_graphics
-  type: repository
-  desc: openSUSE Graphics Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 150
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/graphics/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/graphics/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/graphics/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_multimedia_apps_tumbleweed
-  sortname: opensusez_multimedia:apps
-  type: repository
-  desc: openSUSE Multimedia:Apps Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 200
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/multimedia:/apps/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/multimedia:apps/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/multimedia:apps/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_multimedia_libs_tumbleweed
-  sortname: opensusez_multimedia:libs
-  type: repository
-  desc: openSUSE Multimedia:Libs Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 200
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/multimedia:/libs/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/multimedia:libs/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/multimedia:libs/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_network_tumbleweed
-  sortname: opensusez_network
-  type: repository
-  desc: openSUSE Network Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 200
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/network/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/network/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/network/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_science_tumbleweed
-  sortname: opensusez_science
-  type: repository
-  desc: openSUSE Science Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 600
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/science/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/science/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/science/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_security_tumbleweed
-  sortname: opensusez_security
-  type: repository
-  desc: openSUSE Security Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 150
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/security/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/security/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
-
-- name: opensuse_hardware_sdr_tumbleweed
-  sortname: opensusez_hardware_sdr
-  type: repository
-  desc: openSUSE Hardware:SDR Tumbleweed
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 120
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/repositories/hardware:/sdr/openSUSE_Tumbleweed/
-      parser:
-        class: RepodataParser
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/hardware:sdr/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/hardware:sdr/{srcname}/{srcname}.spec?expand=1'
-  tags: [ all, production, opensuse, rpm ]
+{{ opensuse_extra_repo('Education', minpackages=300) }}
+{{ opensuse_extra_repo('Emulators', minpackages=100) }}
+{{ opensuse_extra_repo('games', minpackages=600, wiki='openSUSE:Games') }}
+{{ opensuse_extra_repo('graphics', minpackages=200) }}
+{{ opensuse_extra_repo('hardware:sdr', minpackages=120) }}
+{{ opensuse_extra_repo('multimedia:apps', minpackages=200) }}
+{{ opensuse_extra_repo('multimedia:libs', minpackages=200) }}
+{{ opensuse_extra_repo('network', minpackages=200) }}
+{{ opensuse_extra_repo('science', minpackages=900) }}
+{{ opensuse_extra_repo('security', minpackages=150) }}
+{{ opensuse_extra_repo('server:irc', minpackages=25) }}
+{{ opensuse_extra_repo('shells', minpackages=25) }}

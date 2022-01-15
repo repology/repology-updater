@@ -27,4 +27,4 @@
       url: 'https://github.com/BlackArch/blackarch/blob/master/packages/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/BlackArch/blackarch/master/packages/{srcname}/PKGBUILD'
-  tags: [ all, production ]
+  groups: [ all, production ]

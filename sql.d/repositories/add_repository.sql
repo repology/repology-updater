@@ -29,16 +29,8 @@ INSERT INTO repositories(
 	metadata,
 
 	sortname,
-	"type",
 	"desc",
-	statsgroup,
-	singular,
-	family,
-	color,
-	shadow,
-	incomplete,
-	repolinks,
-	packagelinks
+	incomplete
 ) VALUES (
 	(
 		SELECT min(allids.id)
@@ -64,14 +56,6 @@ INSERT INTO repositories(
 	%(metadata)s,
 
 	%(metadata)s::json->>'sortname',
-	%(metadata)s::json->>'type',
 	%(metadata)s::json->>'desc',
-	%(metadata)s::json->>'statsgroup',
-	%(metadata)s::json->>'singular',
-	%(metadata)s::json->>'family',
-	%(metadata)s::json->>'color',
-	(%(metadata)s::json->>'shadow')::boolean,
-	(%(metadata)s::json->>'incomplete')::boolean,
-	%(metadata)s::json->'repolinks',
-	%(metadata)s::json->'packagelinks'
+	(%(metadata)s::json->>'incomplete')::boolean
 );

@@ -20,7 +20,6 @@ from typing import Iterable
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import iter_xml_elements_at_level
-from repology.transformer import PackageTransformer
 
 
 def _expand_multiline_licenses(text: str) -> Iterable[str]:
@@ -28,7 +27,7 @@ def _expand_multiline_licenses(text: str) -> Iterable[str]:
 
 
 class SolusIndexParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for entry in iter_xml_elements_at_level(path, 1, ['Package']):
             with factory.begin() as pkg:
                 pkg.add_name(entry.findtext('Name'), NameType.SOLUS_NAME)

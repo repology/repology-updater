@@ -22,11 +22,10 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 from repology.parsers.versions import VersionStripper
-from repology.transformer import PackageTransformer
 
 
 class MacPortsJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('+')
 
         for pkgdata in iter_json_list(path, ('ports', None)):

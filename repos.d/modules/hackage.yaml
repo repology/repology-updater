@@ -5,6 +5,7 @@
   type: modules
   desc: Hackage
   family: hackage
+  ruleset: hackage
   color: "293845"
   minpackages: 12000
   # default_maintainer is set from the parser
@@ -24,14 +25,15 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'http://hackage.haskell.org/package/{name}'
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 - name: stackage_nighly
   type: modules
   desc: Stackage Nightly
   family: hackage
+  ruleset: [hackage, stackage]
   color: "293845"
-  minpackages: 2350
+  minpackages: 2800
   sources:
     - name: nightly.html
       fetcher:
@@ -48,14 +50,15 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://www.stackage.org/nightly/package/{name}-{origversion}'
-  tags: [ all, production, stackage ]
+  groups: [ all, production, stackage ]
 
 - name: stackage_lts
   type: modules
   desc: Stackage LTS Haskell
   family: hackage
+  ruleset: [hackage, stackage]
   color: "293845"
-  minpackages: 2450
+  minpackages: 2700
   sources:
     - name: lts.html
       fetcher:
@@ -72,4 +75,4 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://www.stackage.org/lts/package/{name}-{origversion}'
-  tags: [ all, production, stackage ]
+  groups: [ all, production, stackage ]

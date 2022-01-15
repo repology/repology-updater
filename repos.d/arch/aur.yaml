@@ -8,22 +8,17 @@
   family: arch
   ruleset: [ arch, aur ]
   color: '0088cc'
-  update_period: 3h
   minpackages: 48000
   default_maintainer: fallback-mnt-aur@repology
   sources:
-    - name: aur
+    - name: packages-meta-ext-v1.json
       fetcher:
-        class: AURFetcher
-        fetch_delay: 0.5
-        fetch_timeout: 10
-        # https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
-        # says the limit is 4443, but it doesn't seem to be enforced in practice,
-        # so up to the maximum allowed in practice
-        max_api_url_length: 6500
-        url: https://aur.archlinux.org/
+        class: FileFetcher
+        url: https://aur.archlinux.org/packages-meta-ext-v1.json.gz
+        # despite what the url says, returns plain JSON with transfer-encoding, thus no compression: is needed
       parser:
-        class: AURParser
+        class: AURJsonParser
+        maintainer_host: aur
   repolinks:
     - desc: AUR Home
       url: https://aur.archlinux.org/
@@ -34,14 +29,13 @@
       url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={srcname|quote}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 - name: chaotic-aur
   type: repository
   desc: Chaotic-AUR
   family: arch
   ruleset: [ arch, aur ]
-  update_period: 3h
   minpackages: 0
   sources:
     - name: chaotic-aur-x86_64
@@ -57,4 +51,32 @@
   repolinks:
     - desc: Chaotic-AUR Home
       url: https://lonewolf.pedrohlc.com/chaotic-aur/
-  tags: [ all, production ]
+  groups: [ all, production ]
+
+- name: mpr
+  type: repository
+  desc: MPR
+  family: mpr
+  ruleset: mpr
+  minpackages: 100
+  default_maintainer: fallback-mnt-mpr@repology
+  sources:
+    - name: packages-meta-ext-v1.json
+      fetcher:
+        class: FileFetcher
+        url: https://mpr.hunterwittenborn.com/packages-meta-ext-v1.json.gz
+        # despite what the url says, returns plain JSON with transfer-encoding, thus no compression: is needed
+      parser:
+        class: AURJsonParser
+        maintainer_host: mpr
+  repolinks:
+    - desc: MPR Home
+      url: https://mpr.hunterwittenborn.com/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://mpr.hunterwittenborn.com/packages/{binname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/tree/PKGBUILD?h={srcname|quote}'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
+  groups: [ all ]

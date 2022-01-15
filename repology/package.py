@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
-from typing import Any, ClassVar, Dict, List, Optional, Tuple, cast
+from typing import Any, ClassVar
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -43,11 +43,11 @@ class PackageStatus:
     @staticmethod
     def is_ignored(val: int) -> bool:
         """Return whether a specified val is equivalent to ignored."""
-        return (val == PackageStatus.IGNORED or
-                val == PackageStatus.INCORRECT or
-                val == PackageStatus.UNTRUSTED or
-                val == PackageStatus.NOSCHEME or
-                val == PackageStatus.ROLLING)
+        return (val == PackageStatus.IGNORED
+                or val == PackageStatus.INCORRECT
+                or val == PackageStatus.UNTRUSTED
+                or val == PackageStatus.NOSCHEME
+                or val == PackageStatus.ROLLING)
 
     @staticmethod
     def as_string(val: int) -> str:
@@ -74,7 +74,7 @@ class PackageFlags:
     UNTRUSTED: ClassVar[int] = 1 << 4
     NOSCHEME: ClassVar[int] = 1 << 5
     ROLLING: ClassVar[int] = 1 << 7
-    OUTDATED: ClassVar[int] = 1 << 8
+    SINK: ClassVar[int] = 1 << 8
     LEGACY: ClassVar[int] = 1 << 9
     P_IS_PATCH: ClassVar[int] = 1 << 10
     ANY_IS_PATCH: ClassVar[int] = 1 << 11
@@ -85,6 +85,8 @@ class PackageFlags:
     VULNERABLE: ClassVar[int] = 1 << 16
     ALTSCHEME: ClassVar[int] = 1 << 17
     NOLEGACY: ClassVar[int] = 1 << 18
+    OUTDATED: ClassVar[int] = 1 << 19
+    RECALLED: ClassVar[int] = 1 << 20
 
     ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
@@ -99,7 +101,7 @@ class PackageFlags:
         """
         if val & PackageFlags.ROLLING:
             return 1
-        if val & PackageFlags.OUTDATED:
+        if val & PackageFlags.SINK:
             return -1
         return 0
 
@@ -118,7 +120,7 @@ class PackageFlags:
                 PackageFlags.UNTRUSTED: 'UNTRUSTED',
                 PackageFlags.NOSCHEME: 'NOSCHEME',
                 PackageFlags.ROLLING: 'ROLLING',
-                PackageFlags.OUTDATED: 'OUTDATED',
+                PackageFlags.SINK: 'SINK',
                 PackageFlags.LEGACY: 'LEGACY',
                 PackageFlags.P_IS_PATCH: 'P_IS_PATCH',
                 PackageFlags.ANY_IS_PATCH: 'ANY_IS_PATCH',
@@ -128,6 +130,9 @@ class PackageFlags:
                 PackageFlags.ALTVER: 'ALTVER',
                 PackageFlags.VULNERABLE: 'VULNERABLE',
                 PackageFlags.ALTSCHEME: 'ALTSCHEME',
+                PackageFlags.NOLEGACY: 'NOLEGACY',
+                PackageFlags.OUTDATED: 'OUTDATED',
+                PackageFlags.RECALLED: 'RECALLED',
             }.items() if val & var
         )
 
@@ -287,42 +292,42 @@ class Package:
         'branch',
     ]
 
-    _hashable_slots: ClassVar[List[str]] = [slot for slot in __slots__ if slot != 'versionclass']
+    _hashable_slots: ClassVar[list[str]] = [slot for slot in __slots__ if slot != 'versionclass']
 
     repo: str
     family: str
-    subrepo: Optional[str]
+    subrepo: str | None
 
-    name: Optional[str]
-    srcname: Optional[str]
-    binname: Optional[str]
-    binnames: Optional[List[str]]
-    trackname: Optional[str]
+    name: str | None
+    srcname: str | None
+    binname: str | None
+    binnames: list[str] | None
+    trackname: str | None
     visiblename: str
     projectname_seed: str
 
     origversion: str
     rawversion: str
 
-    arch: Optional[str]
+    arch: str | None
 
-    maintainers: Optional[List[str]]
-    category: Optional[str]
-    comment: Optional[str]
-    licenses: Optional[List[str]]
+    maintainers: list[str] | None
+    category: str | None
+    comment: str | None
+    licenses: list[str] | None
 
-    extrafields: Optional[Dict[str, Any]]
+    extrafields: dict[str, Any] | None
 
-    cpe_vendor: Optional[str]
-    cpe_product: Optional[str]
-    cpe_edition: Optional[str]
-    cpe_lang: Optional[str]
-    cpe_sw_edition: Optional[str]
-    cpe_target_sw: Optional[str]
-    cpe_target_hw: Optional[str]
-    cpe_other: Optional[str]
+    cpe_vendor: str | None
+    cpe_product: str | None
+    cpe_edition: str | None
+    cpe_lang: str | None
+    cpe_sw_edition: str | None
+    cpe_target_sw: str | None
+    cpe_target_hw: str | None
+    cpe_other: str | None
 
-    links: Optional[List[Tuple[int, str]]]
+    links: list[tuple[int, str]] | None
 
     effname: str
 
@@ -331,8 +336,8 @@ class Package:
 
     flags: int
     shadow: bool
-    flavors: List[str]
-    branch: Optional[str]
+    flavors: list[str]
+    branch: str | None
 
     def __init__(self, *,
                  repo: str,
@@ -348,38 +353,38 @@ class Package:
 
                  versionclass: int,
 
-                 subrepo: Optional[str] = None,
+                 subrepo: str | None = None,
 
-                 name: Optional[str] = None,
-                 srcname: Optional[str] = None,
-                 binname: Optional[str] = None,
-                 binnames: Optional[List[str]] = None,
-                 trackname: Optional[str] = None,
+                 name: str | None = None,
+                 srcname: str | None = None,
+                 binname: str | None = None,
+                 binnames: list[str] | None = None,
+                 trackname: str | None = None,
 
-                 arch: Optional[str] = None,
+                 arch: str | None = None,
 
-                 maintainers: Optional[List[str]] = None,
-                 category: Optional[str] = None,
-                 comment: Optional[str] = None,
-                 licenses: Optional[List[str]] = None,
+                 maintainers: list[str] | None = None,
+                 category: str | None = None,
+                 comment: str | None = None,
+                 licenses: list[str] | None = None,
 
-                 extrafields: Optional[Dict[str, Any]] = None,
+                 extrafields: dict[str, Any] | None = None,
 
-                 cpe_vendor: Optional[str] = None,
-                 cpe_product: Optional[str] = None,
-                 cpe_edition: Optional[str] = None,
-                 cpe_lang: Optional[str] = None,
-                 cpe_sw_edition: Optional[str] = None,
-                 cpe_target_sw: Optional[str] = None,
-                 cpe_target_hw: Optional[str] = None,
-                 cpe_other: Optional[str] = None,
+                 cpe_vendor: str | None = None,
+                 cpe_product: str | None = None,
+                 cpe_edition: str | None = None,
+                 cpe_lang: str | None = None,
+                 cpe_sw_edition: str | None = None,
+                 cpe_target_sw: str | None = None,
+                 cpe_target_hw: str | None = None,
+                 cpe_other: str | None = None,
 
-                 links: Optional[List[Tuple[int, str]]] = None,
+                 links: list[tuple[int, str]] | None = None,
 
                  flags: int = 0,
                  shadow: bool = False,
-                 flavors: Optional[List[str]] = None,
-                 branch: Optional[str] = None):
+                 flavors: list[str] | None = None,
+                 branch: str | None = None):
         # parsed, immutable
         self.repo = repo
         self.family = family
@@ -460,29 +465,26 @@ class Package:
         return version_compare(
             self.version,
             other.version,
-            ((self.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
-            ((self.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH),
-            ((other.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
-            ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
+            ((self.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH)
+            | ((self.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH),
+            ((other.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH)
+            | ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
         )
 
     def get_classless_hash(self) -> int:
-        return cast(
-            int,
-            xxhash.xxh64_intdigest(
-                # least-overhead stable binary encoding of meaningful Package fields (I could come with)
-                pickle.dumps(
-                    [
-                        (slot, value)
-                        for slot in Package._hashable_slots
-                        if (value := getattr(self, slot, None)) is not None
-                    ]
-                )
+        return xxhash.xxh64_intdigest(
+            # least-overhead stable binary encoding of meaningful Package fields (I could come with)
+            pickle.dumps(
+                [
+                    (slot, value)
+                    for slot in Package._hashable_slots
+                    if (value := getattr(self, slot, None)) is not None
+                ]
             )
         ) & 0x7fffffffffffffff  # to fit into PostgreSQL integer
 
     def __repr__(self) -> str:
-        return 'Package(repo={}, name={}, version={})'.format(self.repo, self.name, self.version)
+        return f'Package(repo={self.repo}, name={self.name}, version={self.version})'
 
     # XXX: add signature to this, see https://github.com/python/mypy/issues/6523
     @property

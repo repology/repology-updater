@@ -21,4 +21,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://f-droid.org/packages/{name}/'
-  tags: [ all, production ]
+  groups: [ all, production ]

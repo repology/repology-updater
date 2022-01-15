@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Iterable
 
 from libversion import version_compare
 
@@ -25,10 +25,9 @@ from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
-def _as_maybe_str(v: Any) -> Optional[str]:
+def _as_maybe_str(v: Any) -> str | None:
     if v is None:
         return None
     if isinstance(v, list):
@@ -46,7 +45,7 @@ def _as_str(v: Any) -> str:
     return str(v)
 
 
-def _as_list(v: Any) -> List[Any]:
+def _as_list(v: Any) -> list[Any]:
     if v is None:
         return []
     if not isinstance(v, list):
@@ -54,7 +53,7 @@ def _as_list(v: Any) -> List[Any]:
     return v
 
 
-def _iter_packages(path: str) -> Iterable[Dict[str, Any]]:
+def _iter_packages(path: str) -> Iterable[dict[str, Any]]:
     for filename in os.listdir(path):
         if not filename.endswith('.json'):
             continue
@@ -63,7 +62,7 @@ def _iter_packages(path: str) -> Iterable[Dict[str, Any]]:
             yield from (hit['fields'] for hit in json.load(jsonfile))
 
 
-def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> Tuple[str, PackageMaker]:
+def _parse_package(pkg: PackageMaker, fields: dict[str, Any]) -> tuple[str, PackageMaker]:
     distribution = _as_str(fields['distribution'])
     pkg.add_name(distribution, NameType.CPAN_NAME)
 
@@ -86,7 +85,7 @@ def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> Tuple[str, Pack
     return distribution, pkg
 
 
-def _parse_latest_packages(packages: Iterable[Dict[str, Any]], latest_versions: Dict[str, str], factory: PackageFactory) -> Iterable[PackageMaker]:
+def _parse_latest_packages(packages: Iterable[dict[str, Any]], latest_versions: dict[str, str], factory: PackageFactory) -> Iterable[PackageMaker]:
     for fields in packages:
         # only take latest versions (there's only one of them per distribution)
         if _as_str(fields['status']) != 'latest':
@@ -102,7 +101,7 @@ def _parse_latest_packages(packages: Iterable[Dict[str, Any]], latest_versions: 
         yield pkg
 
 
-def _parse_devel_packages(packages: Iterable[Dict[str, Any]], latest_versions: Dict[str, str], factory: PackageFactory) -> Iterable[PackageMaker]:
+def _parse_devel_packages(packages: Iterable[dict[str, Any]], latest_versions: dict[str, str], factory: PackageFactory) -> Iterable[PackageMaker]:
     for fields in packages:
         if _as_str(fields['maturity']) != 'developer':
             continue
@@ -119,8 +118,8 @@ def _parse_devel_packages(packages: Iterable[Dict[str, Any]], latest_versions: D
 
 
 class MetacpanAPIParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        latest_versions: Dict[str, str] = {}
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        latest_versions: dict[str, str] = {}
 
         yield from _parse_latest_packages(_iter_packages(path), latest_versions, factory)
         yield from _parse_devel_packages(_iter_packages(path), latest_versions, factory)

@@ -17,14 +17,14 @@
 
 import urllib.parse
 from itertools import product
-from typing import Any, Callable, Dict, Iterator
+from typing import Any, Callable, Iterator
 
 from repology.package import Package
 
 __all__ = ['format_package_links']
 
 
-_filters: Dict[str, Callable[[str], str]] = {
+_filters: dict[str, Callable[[str], str]] = {
     'lowercase': lambda x: x.lower(),
     'firstletter': lambda x: x.lower()[0],
     'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
@@ -46,7 +46,7 @@ def _safe_int(arg: str) -> int:
 
 class FieldGatheringMapping:
     _package: Package
-    _fields: Dict[str, Any]
+    _fields: dict[str, Any]
     _skip: bool
 
     def __init__(self, package: Package) -> None:
@@ -120,7 +120,7 @@ class FieldGatheringMapping:
 
         return ''
 
-    def generate_mappings(self) -> Iterator[Dict[str, Any]]:
+    def generate_mappings(self) -> Iterator[dict[str, Any]]:
         if self._skip:
             return
 

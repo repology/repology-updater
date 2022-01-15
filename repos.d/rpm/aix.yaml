@@ -19,4 +19,4 @@
   packagelinks:
     - type: PACKAGE_RECIPE_RAW
       url: 'ftp://www.oss4aix.org/SPECS/{nevr}.spec'
-  tags: [ all, production ]
+  groups: [ all, production ]

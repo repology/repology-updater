@@ -21,18 +21,18 @@
   repolinks:
     - desc: Apertis home
       url: https://www.apertis.org/
-  tags: [ all, production, apertis ]
+  groups: [ all, production, apertis ]
 
 - name: apertis_v2021
   type: repository
-  desc: Apertis v2021 Development
+  desc: Apertis v2021
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, apertis]
   color: '3a5a80'
   minpackages: 3500
   sources:
-    - name: [ v2021dev3/development, v2021dev3/target, v2021dev3/sdk, v2021dev3/hmi ]
+    - name: [ v2021/development, v2021/target, v2021/sdk, v2021/hmi, v2021-updates/development, v2021-updates/target, v2021-updates/sdk, v2021-updates/hmi ]
       fetcher:
         class: FileFetcher
         url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
@@ -43,4 +43,26 @@
   repolinks:
     - desc: Apertis home
       url: https://www.apertis.org/
-  tags: [ all, production, apertis ]
+  groups: [ all, production, apertis ]
+
+- name: apertis_v2022
+  type: repository
+  desc: Apertis v2022 Development
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, apertis]
+  color: '3a5a80'
+  minpackages: 3500
+  sources:
+    - name: [ v2022dev2/development, v2022dev2/target, v2022dev2/sdk, v2022dev2/hmi ]
+      fetcher:
+        class: FileFetcher
+        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Apertis home
+      url: https://www.apertis.org/
+  groups: [ all, production, apertis ]

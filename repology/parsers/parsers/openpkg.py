@@ -22,11 +22,10 @@ from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import safe_findalltexts, safe_findtext
-from repology.transformer import PackageTransformer
 
 
 class OpenPkgRdfParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         root = xml.etree.ElementTree.parse(path)
 
         repository = root.find('{http://www.openpkg.org/xml-rdf-index/0.9}Repository')

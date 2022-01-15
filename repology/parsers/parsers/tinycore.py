@@ -17,15 +17,14 @@
 
 import os
 import re
-from typing import Dict, Iterable
+from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
-def _parse_infofile(path: str) -> Dict[str, str]:
-    data: Dict[str, str] = {}
+def _parse_infofile(path: str) -> dict[str, str]:
+    data: dict[str, str] = {}
 
     with open(path, 'r', encoding='utf-8', errors='ignore') as infofile:
         key = None
@@ -47,7 +46,7 @@ def _parse_infofile(path: str) -> Dict[str, str]:
 
 
 class TczInfoParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for filename in os.listdir(path):
             if not filename.endswith('.tcz.info'):
                 continue

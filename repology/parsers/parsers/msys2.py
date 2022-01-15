@@ -17,17 +17,16 @@
 
 import os
 from collections import defaultdict
-from typing import Dict, Iterable, List
+from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
-from repology.transformer import PackageTransformer
 
 
-def _parse_descfile(path: str) -> Dict[str, List[str]]:
-    data: Dict[str, List[str]] = defaultdict(list)
+def _parse_descfile(path: str) -> dict[str, list[str]]:
+    data: dict[str, list[str]] = defaultdict(list)
 
     with open(path, 'r', encoding='utf-8') as descfile:
         key = ''
@@ -42,8 +41,8 @@ def _parse_descfile(path: str) -> Dict[str, List[str]]:
 
 
 class MSYS2DescParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        normalize_version = VersionStripper().strip_right('-')
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        normalize_version = VersionStripper().strip_right('-').strip_left('~')
 
         for packagedir in os.listdir(path):
             with factory.begin(packagedir) as pkg:

@@ -6,7 +6,7 @@
   desc: Sabayon
   statsgroup: Gentoo
   family: gentoo
-  minpackages: 400
+  minpackages: 300
   default_maintainer: fallback-mnt-sabayon@repology
   sources:
     - name: sabayon
@@ -28,7 +28,7 @@
       url: 'https://github.com/Sabayon/sabayon-distro/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/Sabayon/sabayon-distro/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production ]
+  groups: [ all, production ]
 
 - name: sabayon_for_gentoo
   type: repository
@@ -57,4 +57,4 @@
       url: 'https://github.com/Sabayon/for-gentoo/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/Sabayon/for-gentoo/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  tags: [ all, production ]
+  groups: [ all, production ]

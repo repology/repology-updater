@@ -20,4 +20,4 @@
   repolinks:
     - desc: Deb Multimedia home
       url: http://www.deb-multimedia.org/
-  tags: [ all, production, deb_multimedia ]
+  groups: [ all, production, deb_multimedia ]

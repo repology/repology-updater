@@ -17,7 +17,7 @@
 
 import json
 from functools import cmp_to_key
-from typing import Dict, Iterable
+from typing import Iterable
 
 from libversion import version_compare
 
@@ -25,10 +25,9 @@ from repology.logger import Logger
 from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
-def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
+def _iter_packages(path: str) -> Iterable[dict[str, str]]:
     with open(path, 'r', encoding='utf-8') as jsonfile:
         for item in json.load(jsonfile)['results']['bindings']:
             yield {
@@ -37,7 +36,7 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
 
 
 class WikidataJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         total_entries = 0
 
         for packagedata in _iter_packages(path):

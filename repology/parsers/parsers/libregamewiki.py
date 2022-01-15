@@ -22,12 +22,17 @@ from urllib.parse import unquote
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 class LibreGameWikiParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        root = xml.etree.ElementTree.parse(path)
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        with open(path) as fd:
+            data = fd.read()
+
+        # plug incorrect XML
+        data = data.replace('value="Special:Search">', 'value="Special:Search"/>')
+
+        root = xml.etree.ElementTree.fromstring(data)
 
         content = root.find('.//div[@id="mw-content-text"]')
         if content is None:

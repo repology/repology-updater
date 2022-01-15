@@ -18,12 +18,11 @@
 import os
 import re
 import sqlite3
-from typing import Any, Dict, Iterable, Optional
+from typing import Any, Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.transformer import PackageTransformer
 
 
 def _normalize_version(version: str) -> str:
@@ -39,7 +38,7 @@ def _normalize_version(version: str) -> str:
 
 
 # XXX: use repology.parsers.sqlite.iter_sqlite instead
-def _iter_sqlports(path: str) -> Iterable[Dict[str, Any]]:
+def _iter_sqlports(path: str) -> Iterable[dict[str, Any]]:
     columns = [
         'fullpkgpath',
         'categories',
@@ -67,6 +66,10 @@ def _iter_sqlports(path: str) -> Iterable[Dict[str, Any]]:
     db = sqlite3.connect(path)
     cur = db.cursor()
     #cur.execute('SELECT {} FROM Ports LEFT JOIN Paths USING(fullpkgpath)'.format(','.join(columns)))
+    # Note that this is somewhat memory-hungry compared to other parsers
+    # sqlite takes about 200MB mem, for this query, even with `limit 1`,
+    # and this may be reproduced even with `sqlite3` utility. No idea if
+    # that can be improved.
     cur.execute('SELECT {} FROM Ports'.format(','.join(columns)))
 
     while True:
@@ -77,7 +80,7 @@ def _iter_sqlports(path: str) -> Iterable[Dict[str, Any]]:
         yield dict(zip(columns, row))
 
 
-def _iter_distfiles(row: Dict[str, Any]) -> Iterable[str]:
+def _iter_distfiles(row: dict[str, Any]) -> Iterable[str]:
     if row['distfiles'] is None:
         return
 
@@ -121,10 +124,10 @@ def _strip_flavors_from_stem(stem: str, flavors: Iterable[str]) -> str:
 class OpenBSDsqlportsParser(Parser):
     _path_to_database: str
 
-    def __init__(self, path_to_database: Optional[str] = None) -> None:
+    def __init__(self, path_to_database: str | None = None) -> None:
         self._path_to_database = path_to_database or ''
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for row in _iter_sqlports(os.path.join(path + self._path_to_database)):
             with factory.begin(row['fullpkgpath']) as pkg:
                 # there are a lot of potential name sources in sqlports, namely:

@@ -6,6 +6,7 @@ libversion
 lxml
 protobuf
 psycopg2
+pydantic
 pyparsing
 requests
 rubymarshal>=1.2.6

@@ -12,11 +12,10 @@
       fetcher:
         class: GitFetcher
         url: 'https://github.com/CarbsLinux/repository.git'
-        depth: null
-        sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
+        sparse_checkout: [ '**/version', '**/sources', '**/patches', '**/meta' ]
       parser:
         class: KissGitParser
-        maintainer_from_git: true
+        use_meta: true
   repolinks:
     - desc: Carbs Linux home
       url: https://carbslinux.org/
@@ -27,4 +26,4 @@
       url: 'https://github.com/CarbsLinux/repository/blob/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/CarbsLinux/repository/master/{path}/patches/{?patch}'
-  tags: [ all, production ]
+  groups: [ all, production ]

@@ -16,16 +16,15 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Iterable, List
+from typing import Iterable
 
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import XmlElement, iter_xml_elements_at_level, safe_findtext
-from repology.transformer import PackageTransformer
 
 
-def _get_attrs(elt: XmlElement, path: str, attrname: str) -> List[str]:
+def _get_attrs(elt: XmlElement, path: str, attrname: str) -> list[str]:
     res = []
 
     for e in elt.findall(path):
@@ -46,7 +45,7 @@ class FreeSoftwareDirectoryXMLParser(Parser):
     def __init__(self, high_priority: bool = False) -> None:
         self._high_priority = high_priority
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         # All encounered version_status values:
         # alpha, beta, developmental, historical, mature, planning, rolling, stable, testing, unknown, unstable
         _unstable_versions = {'alpha', 'beta', 'developmental', 'planning', 'testing', 'unstable'}

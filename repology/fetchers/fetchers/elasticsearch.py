@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Any, Dict, Optional
+from typing import Any
 
 import requests
 
@@ -29,12 +29,12 @@ from repology.logger import Logger
 
 class ElasticSearchFetcher(ScratchDirFetcher):
     _url: str
-    _scroll_url: Optional[str]
-    _scroll: Optional[str]
-    _request_data: Dict[str, Any]
+    _scroll_url: str | None
+    _scroll: str | None
+    _request_data: dict[str, Any]
     _do_http: PoliteHTTP
 
-    def __init__(self, url: str, scroll_url: Optional[str] = None, es_query: Optional[str] = None, es_filter: Optional[str] = None, es_fields: Optional[str] = None, es_size: int = 5000, es_scroll: str = '1m', fetch_timeout: int = 5, fetch_delay: Optional[int] = None):
+    def __init__(self, url: str, scroll_url: str | None = None, es_query: str | None = None, es_filter: str | None = None, es_fields: str | None = None, es_size: int = 5000, es_scroll: str = '1m', fetch_timeout: int = 5, fetch_delay: int | None = None):
         self._url = url
         self._scroll_url = scroll_url
         self._scroll = es_scroll

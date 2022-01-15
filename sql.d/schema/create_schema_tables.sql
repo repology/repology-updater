@@ -247,20 +247,12 @@ CREATE TABLE repositories (
 
 	ruleset_hash text NULL,
 
-	-- metadata from config
+	-- metadata from config and some chosen fields as separate columns
 	metadata jsonb NOT NULL,
 
 	sortname text NOT NULL,
-	"type" text NOT NULL,
 	"desc" text NOT NULL,
-	statsgroup text NOT NULL,
-	singular text NOT NULL,
-	family text NOT NULL,
-	color text,
-	shadow boolean NOT NULL,
-	incomplete boolean NOT NULL DEFAULT FALSE,
-	repolinks jsonb NOT NULL,
-	packagelinks jsonb NOT NULL
+	incomplete boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE UNIQUE INDEX ON repositories(name);
@@ -511,6 +503,7 @@ CREATE TABLE IF NOT EXISTS reports (
 	need_verignore boolean NOT NULL,
 	need_split boolean NOT NULL,
 	need_merge boolean NOT NULL,
+	need_vuln boolean NOT NULL,
 	comment text,
 	reply text,
 	accepted boolean
@@ -579,7 +572,8 @@ DROP TABLE IF EXISTS project_hashes CASCADE;
 
 CREATE TABLE project_hashes (
 	effname text NOT NULL PRIMARY KEY,
-	hash bigint NOT NULL
+	hash bigint NOT NULL,
+	last_updated timestamp with time zone
 );
 
 --------------------------------------------------------------------------------
@@ -696,6 +690,7 @@ CREATE TABLE manual_cpes (
 
 CREATE UNIQUE INDEX ON manual_cpes(effname, cpe_product, cpe_vendor, cpe_edition, cpe_lang, cpe_sw_edition, cpe_target_sw, cpe_target_hw, cpe_other);
 CREATE INDEX ON manual_cpes(cpe_product, cpe_vendor);
+CREATE INDEX ON manual_cpes(added_ts DESC);
 
 
 DROP TABLE IF EXISTS project_cpe CASCADE;
@@ -742,6 +737,7 @@ CREATE TABLE cves (
 );
 
 CREATE INDEX ON cves USING gin (cpe_pairs);
+CREATE INDEX ON cves(published DESC);
 
 -- cpe dictionary
 DROP TABLE IF EXISTS cpe_dictionary CASCADE;

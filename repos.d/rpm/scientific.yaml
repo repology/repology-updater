@@ -18,4 +18,4 @@
   repolinks:
     - desc: Scientific Linux home
       url: http://scientificlinux.org/
-  tags: [ all, production, scientific ]
+  groups: [ all, production, scientific ]

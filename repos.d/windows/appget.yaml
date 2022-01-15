@@ -28,4 +28,4 @@
       url: 'https://github.com/appget/appget.packages/blob/master/manifests/{srcname}/{yamlname}.yaml'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/appget/appget.packages/master/manifests/{srcname}/{yamlname}.yaml'
-  tags: [ all, production ]
+  groups: [ all, production ]

@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import ClassVar, Optional, Tuple, Type, Union
+from typing import ClassVar, Type
 
 __all__ = ['nevra_construct', 'nevra_parse', 'EpochMode']
 
@@ -30,8 +30,8 @@ class EpochMode:
 # https://github.com/python/mypy/issues/4236
 #EpochType = TypeVar('EpochType', str, int)
 
-def nevra_parse(nevra: str, epoch_mode: int = EpochMode.PRESERVE, epoch_type: Type[Union[str, int]] = str) -> Tuple[str, Union[int, str, None], str, str, str]:
-    epoch: Union[int, str, None] = None
+def nevra_parse(nevra: str, epoch_mode: int = EpochMode.PRESERVE, epoch_type: Type[str | int] = str) -> tuple[str, int | str | None, str, str, str]:
+    epoch: int | str | None = None
 
     rest = nevra
 
@@ -57,7 +57,7 @@ def nevra_parse(nevra: str, epoch_mode: int = EpochMode.PRESERVE, epoch_type: Ty
     return (name, epoch, version, release, architecture)
 
 
-def nevra_construct(name: Optional[str], epoch: Union[str, int, None], version: str, release: Optional[str] = None, architecture: Optional[str] = None, epoch_mode: int = EpochMode.TRIM) -> str:
+def nevra_construct(name: str | None, epoch: str | int | None, version: str, release: str | None = None, architecture: str | None = None, epoch_mode: int = EpochMode.TRIM) -> str:
     result = ''
 
     if version is None:

@@ -19,9 +19,8 @@
 
 import argparse
 import sys
-from datetime import timedelta
 from timeit import default_timer as timer
-from typing import Any, Callable, Iterable, List, TypeVar
+from typing import Any, Callable, Iterable, TypeVar
 
 from repology.config import config
 from repology.database import Database
@@ -31,7 +30,9 @@ from repology.querymgr import QueryManager
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
+from repology.transformer.ruleset import Ruleset
 from repology.update import UpdateProcess
+from repology.yamlloader import ParsedConfigCache, YamlConfig
 
 
 T = TypeVar('T')
@@ -66,29 +67,41 @@ class Environment:
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, application_name='repology-update')
 
     @cached_method
+    def get_parsed_config_cache(self) -> ParsedConfigCache | None:
+        return ParsedConfigCache(self.options.config_cache) if self.options.config_cache else None
+
+    @cached_method
     def get_logging_database_connection(self) -> Database:
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, autocommit=True, application_name='repology-update-logging')
 
     @cached_method
+    def get_repos_config(self) -> YamlConfig:
+        return YamlConfig.from_path(self.options.repos_dir, self.get_parsed_config_cache())
+
+    @cached_method
     def get_repo_manager(self) -> RepositoryManager:
-        return RepositoryManager(self.options.repos_dir)
+        return RepositoryManager(self.get_repos_config())
 
     @cached_method
     def get_repo_processor(self) -> RepositoryProcessor:
         return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, self.options.parseddir, safety_checks=self.options.enable_safety_checks)
 
     @cached_method
-    def get_package_transformer(self) -> PackageTransformer:
-        return PackageTransformer(self.get_repo_manager(), self.options.rules_dir)
+    def get_rules_config(self) -> YamlConfig:
+        return YamlConfig.from_path(self.options.rules_dir, self.get_parsed_config_cache())
 
     @cached_method
-    def get_enabled_repo_names(self) -> List[str]:
-        return self.get_repo_manager().get_names(reponames=self.options.enabled_repositories)
+    def get_ruleset(self) -> Ruleset:
+        return Ruleset(self.get_rules_config())
 
     @cached_method
-    def get_processable_repo_names(self) -> List[str]:
+    def get_enabled_repo_names(self) -> list[str]:
+        return self.get_repo_manager().get_names(self.options.enabled_repositories)
+
+    @cached_method
+    def get_processable_repo_names(self) -> list[str]:
         enabled = set(self.get_enabled_repo_names())
-        return [reponame for reponame in self.get_repo_manager().get_names(reponames=self.options.reponames) if reponame in enabled]
+        return [reponame for reponame in self.get_repo_manager().get_names(self.options.reponames) if reponame in enabled]
 
     @cached_method
     def get_main_logger(self) -> Logger:
@@ -102,7 +115,9 @@ def process_repositories(env: Environment) -> None:
     database = env.get_main_database_connection()
 
     for reponame in env.get_processable_repo_names():
-        update_period = timedelta(seconds=env.get_repo_manager().get_metadatas([reponame])[0]['update_period'])
+        repository = env.get_repo_manager().get_repository(reponame)
+
+        update_period = repository.update_period
         since_last_fetched = database.get_repository_since_last_fetched(reponame)
 
         skip_fetch = since_last_fetched is not None and since_last_fetched < update_period
@@ -142,9 +157,9 @@ def process_repositories(env: Environment) -> None:
             database.commit()
 
         if env.get_options().parse:
-            transformer = env.get_package_transformer()
+            ruleset = env.get_ruleset()
 
-            ruleset_hash_changed = transformer.get_ruleset_hash() != database.get_repository_ruleset_hash(reponame)
+            ruleset_hash_changed = ruleset.get_hash() != database.get_repository_ruleset_hash(reponame)
 
             if ruleset_hash_changed:
                 env.get_main_logger().log('parsing {}'.format(reponame))
@@ -159,10 +174,14 @@ def process_repositories(env: Environment) -> None:
             database.commit()
 
             try:
+                transformer = PackageTransformer(ruleset, reponame, repository.ruleset)
+
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as runlogger:
                     env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
 
                 env.get_main_logger().get_indented().log('done')
+
+                transformer.finalize()
             except KeyboardInterrupt:
                 raise
             except Exception as e:
@@ -170,7 +189,7 @@ def process_repositories(env: Environment) -> None:
                 if env.get_options().fatal:
                     raise
 
-            database.update_repository_ruleset_hash(reponame, transformer.get_ruleset_hash())
+            database.update_repository_ruleset_hash(reponame, ruleset.get_hash())
             database.mark_repository_parsed(reponame)
             database.commit()
 
@@ -194,17 +213,17 @@ def update_repositories(env: Environment) -> None:
 
     logger.log('updating repositories metadata')
 
-    config_repos = env.get_repo_manager().get_metadatas(env.get_enabled_repo_names())
+    config_repos = env.get_repo_manager().get_repositories(env.get_enabled_repo_names())
     db_repos = database.get_repositories_statuses()
 
-    new_reponames = set(repo['name'] for repo in config_repos) - set(repo['name'] for repo in db_repos)
-    deprecated_reponames = set(repo['name'] for repo in db_repos if repo['state'] != 'legacy') - set(repo['name'] for repo in config_repos)
+    new_reponames = set(repo.name for repo in config_repos) - set(repo['name'] for repo in db_repos)
+    deprecated_reponames = set(repo['name'] for repo in db_repos if repo['state'] != 'legacy') - set(repo.name for repo in config_repos)
 
     for repo in config_repos:
-        if repo['name'] in new_reponames:
-            database.add_repository(repo)
+        if repo.name in new_reponames:
+            database.add_repository(env.get_repo_manager().get_repository_json(repo.name))
         else:
-            database.update_repository(repo)
+            database.update_repository(env.get_repo_manager().get_repository_json(repo.name))
 
     for reponame in deprecated_reponames:
         database.deprecate_repository(reponame)
@@ -280,16 +299,6 @@ def database_update_post(env: Environment) -> None:
     database.commit()
 
 
-def dump_rules(env: Environment) -> None:
-    statistics = env.get_package_transformer().get_statistics()
-
-    for block in statistics.blocks:
-        print('{')
-        for rule, checks, matches in block:
-            print('    {:7} {:7}  {}'.format(checks, matches, (rule[:80] + '...') if len(rule) > 80 else rule))
-        print('}')
-
-
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
@@ -299,7 +308,8 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument('-U', '--rules-dir', default=config['RULES_DIR'], help='path to directory with rules')
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
-    parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) which are enabled and shown in repology')
+    parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|group', nargs='*', help='own or group name(s) of repositories which are enabled and shown in repology')
+    parser.add_argument('--config-cache', default=config['CONFIG_CACHE_DIR'], help='path to directory for caching parsed repository and rule data')
 
     grp = parser.add_argument_group('Initialization actions (destructive!)')
     grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
@@ -317,7 +327,8 @@ def parse_arguments() -> argparse.Namespace:
 
     grp = parser.add_argument_group('Informational queries')
     grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
-    grp.add_argument('-r', '--dump-rules', action='store_true', help='dump rule statistics')
+    grp.add_argument('--dump-repositories', action='store_true', help='dump parsed repositories config')
+    grp.add_argument('--dump-rules', action='store_true', help='dump parsed rules config')
 
     grp = parser.add_argument_group('Flags')
     grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
@@ -327,7 +338,7 @@ def parse_arguments() -> argparse.Namespace:
 
     grp.add_argument('--fatal', action='store_true', help='treat single repository processing failure as fatal')
 
-    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) to process')
+    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|group', nargs='*', help='own or group name(s) of repositories to process')
 
     return parser.parse_args()
 
@@ -351,8 +362,9 @@ def main() -> int:
         # and this will look loke a hang, and parse run duration will be incorrect
         env.get_main_logger().log('loading rules')
         env.get_repo_processor()
+        env.get_ruleset()
 
-    if options.fetch or options.parse or options.database or options.postupdate or options.repositories:
+    if options.fetch or options.parse or options.database or options.repositories:
         update_repositories(env)
 
     if options.fetch or options.parse:
@@ -364,11 +376,14 @@ def main() -> int:
     if options.postupdate:
         database_update_post(env)
 
-    if options.dump_rules:
-        dump_rules(env)
-
     if options.check_totals or options.fix_totals:
         handle_totals(env, options.fix_totals)
+
+    if options.dump_repositories:
+        print(env.get_repos_config().dump())
+
+    if options.dump_rules:
+        print(env.get_rules_config().dump())
 
     env.get_main_logger().log('total time taken: {:.2f} seconds'.format((timer() - start)))
 

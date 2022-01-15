@@ -2,407 +2,64 @@
 # OpenWRT
 ###########################################################################
 
-# official package list URLs are really e.g.
+# URLs of official package lists are actually like
 # https://downloads.openwrt.org/releases/17.01.7/packages/x86_64/{source}/Packages.manifest
 # but e.g. releases/17.01.*/packages are all links to e.g.
 # ../packages-17.01 so use the latter urls directly
 
-- name: openwrt_17_01_x86_64
-  type: repository
-  desc: OpenWrt 17.01 x86_64
-  statsgroup: OpenWrt
-  family: openwrt
-  color: '5d6993'
-  minpackages: 4000
-  default_maintainer: fallback-mnt-openwrt@repology
-  sources:
-    - name: base
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-    - name: luci
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-    - name: packages
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-    - name: routing
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-    - name: telephony
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: OpenWrt home
-      url: https://openwrt.org/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, production, openwrt ]
+{% set subrepos_repos = {
+  'base': 'openwrt/openwrt',
+  'luci': 'openwrt/luci',
+  'packages': 'openwrt/packages',
+  'routing': 'openwrt-routing/packages',
+  'telephony': 'openwrt/telephony',
+} %}
 
-- name: openwrt_18_06_x86_64
+{% macro openwrt(version, arch, minpackages, packagelinks=True, disabled=False) %}
+{% set dotversion = version %}
+{% set usversion = version.replace('.', '_') %}
+{% set branch = 'master' if version == 'snapshot' else 'openwrt-' + dotversion %}
+{% set packagesdir = 'packages' if version == 'snapshot' else 'packages-' + dotversion %}
+- name: openwrt_{{usversion}}_{{arch}}
   type: repository
-  desc: OpenWrt 18.06 x86_64
+  desc: OpenWrt {{dotversion}} {{arch}}
   statsgroup: OpenWrt
   family: openwrt
   color: '5d6993'
-  minpackages: 5000
+  minpackages: {{minpackages}}
   default_maintainer: fallback-mnt-openwrt@repology
   sources:
-    - name: base
+    {% for subrepo in ['base', 'luci', 'packages', 'routing', 'telephony'] %}
+    - name: {{subrepo}}
       fetcher:
         class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
+        url: 'https://downloads.openwrt.org/releases/{{packagesdir}}/{{arch}}/{source}/Packages.manifest'
       parser:
         class: OpenWrtPackagesParser
       subrepo: '{source}'
+    {% if packagelinks %}
       packagelinks:
         - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/openwrt/tree/openwrt-18.06/{path}'
+          url: 'https://github.com/{{subrepos_repos[subrepo]}}/tree/{{branch}}/{path}'
         - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/openwrt/blob/openwrt-18.06/{path}/Makefile'
+          url: 'https://github.com/{{subrepos_repos[subrepo]}}/blob/{{branch}}/{path}/Makefile'
         - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/openwrt/openwrt-18.06/{path}/Makefile'
-    - name: luci
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/luci/tree/openwrt-18.06/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/luci/blob/openwrt-18.06/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/luci/openwrt-18.06/{path}/Makefile'
-    - name: packages
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/packages/tree/openwrt-18.06/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/packages/blob/openwrt-18.06/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/packages/openwrt-18.06/{path}/Makefile'
-    - name: routing
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt-routing/packages/tree/openwrt-18.06/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt-routing/packages/blob/openwrt-18.06/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt-routing/packages/openwrt-18.06/{path}/Makefile'
-    - name: telephony
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/telephony/tree/openwrt-18.06/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/telephony/blob/openwrt-18.06/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/telephony/openwrt-18.06/{path}/Makefile'
+          url: 'https://raw.githubusercontent.com/{{subrepos_repos[subrepo]}}/{{branch}}/{path}/Makefile'
+    {% endif %}
+    {% endfor %}
   repolinks:
     - desc: OpenWrt home
       url: https://openwrt.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, production, openwrt ]
+  groups: [ all, openwrt {% if not disabled %}, production{% endif %} ]
+{% endmacro %}
 
-- name: openwrt_19_07_x86_64
-  type: repository
-  desc: OpenWrt 19.07 x86_64
-  statsgroup: OpenWrt
-  family: openwrt
-  color: '5d6993'
-  minpackages: 6000
-  default_maintainer: fallback-mnt-openwrt@repology
-  sources:
-    - name: base
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/openwrt/tree/openwrt-19.07/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/openwrt/blob/openwrt-19.07/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/openwrt/openwrt-19.07/{path}/Makefile'
-    - name: luci
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/luci/tree/openwrt-19.07/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/luci/blob/openwrt-19.07/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/luci/openwrt-19.07/{path}/Makefile'
-    - name: packages
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/packages/tree/openwrt-19.07/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/packages/blob/openwrt-19.07/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/packages/openwrt-19.07/{path}/Makefile'
-    - name: routing
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt-routing/packages/tree/openwrt-19.07/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt-routing/packages/blob/openwrt-19.07/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt-routing/packages/openwrt-19.07/{path}/Makefile'
-    - name: telephony
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/telephony/tree/openwrt-19.07/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/telephony/blob/openwrt-19.07/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/telephony/openwrt-19.07/{path}/Makefile'
-  repolinks:
-    - desc: OpenWrt home
-      url: https://openwrt.org/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, production, openwrt ]
-
-- name: openwrt_21_02_x86_64
-  type: repository
-  desc: OpenWrt 21.02 x86_64
-  statsgroup: OpenWrt
-  family: openwrt
-  color: '5d6993'
-  minpackages: 6000
-  default_maintainer: fallback-mnt-openwrt@repology
-  sources:
-    - name: base
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-21.02/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/openwrt/tree/openwrt-21.02/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/openwrt/blob/openwrt-21.02/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/openwrt/openwrt-21.02/{path}/Makefile'
-    - name: luci
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-21.02/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/luci/tree/openwrt-21.02/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/luci/blob/openwrt-21.02/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/luci/openwrt-21.02/{path}/Makefile'
-    - name: packages
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-21.02/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/packages/tree/openwrt-21.02/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/packages/blob/openwrt-21.02/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/packages/openwrt-21.02/{path}/Makefile'
-    - name: routing
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-21.02/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt-routing/packages/tree/openwrt-21.02/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt-routing/packages/blob/openwrt-21.02/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt-routing/packages/openwrt-21.02/{path}/Makefile'
-    - name: telephony
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages-21.02/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/telephony/tree/openwrt-21.02/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/telephony/blob/openwrt-21.02/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/telephony/openwrt-21.02/{path}/Makefile'
-  repolinks:
-    - desc: OpenWrt home
-      url: https://openwrt.org/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, openwrt ]  # disable until official release
-
-- name: openwrt_snapshot_x86_64
-  type: repository
-  desc: OpenWrt snapshot x86_64
-  statsgroup: OpenWrt
-  family: openwrt
-  color: '5d6993'
-  minpackages: 0
-  default_maintainer: fallback-mnt-openwrt@repology
-  sources:
-    - name: base
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/openwrt/tree/master/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/openwrt/blob/master/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/openwrt/master/{path}/Makefile'
-    - name: luci
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/luci/tree/master/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/luci/blob/master/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/luci/master/{path}/Makefile'
-    - name: packages
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/packages/tree/master/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/packages/blob/master/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/packages/master/{path}/Makefile'
-    - name: routing
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt-routing/packages/tree/master/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt-routing/packages/blob/master/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt-routing/packages/master/{path}/Makefile'
-    - name: telephony
-      fetcher:
-        class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/packages/x86_64/{source}/Packages.manifest'
-      parser:
-        class: OpenWrtPackagesParser
-      subrepo: '{source}'
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://github.com/openwrt/telephony/tree/master/{path}'
-        - type: PACKAGE_RECIPE
-          url: 'https://github.com/openwrt/telephony/blob/master/{path}/Makefile'
-        - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/openwrt/telephony/master/{path}/Makefile'
-  repolinks:
-    - desc: OpenWrt home
-      url: https://openwrt.org/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://openwrt.org/packages/pkgdata/{binname}'
-  tags: [ all, openwrt ]  # disabled: like LEDE, it's too blinky
+# no links because there's no 17.01 branch in the repos
+{{ openwrt('17.01', 'x86_64', minpackages=4000, packagelinks=False) }}
+{{ openwrt('18.06', 'x86_64', minpackages=5000) }}
+{{ openwrt('19.07', 'x86_64', minpackages=6000) }}
+{{ openwrt('21.02', 'x86_64', minpackages=8000) }}
+# disabled because of package blinks
+{{ openwrt('snapshot', 'x86_64', minpackages=0, disabled=True) }}

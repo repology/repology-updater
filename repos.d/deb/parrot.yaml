@@ -13,25 +13,39 @@
 # https://docs.parrotsec.org/doku.php/mirrors-list only says there should be [3] in sources.list.d/parrot.list
 #
 # Quick check shows all repos are the same. We're also using [3] here
+#
+# XXX: The above written is partly outdated, there's dists/lts vs. dists/parrot now
+# which seem to be the same
 
-- name: parrot
+{% macro parrot(name, minpackages, updates=True) %}
+{% set lname = name|lower %}
+- name: parrot_{{lname}}
   type: repository
-  desc: Parrot
+  desc: Parrot {{name}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [ debuntu, parrot ]
   color: '95b8c8'
-  minpackages: 27000
+  minpackages: {{minpackages}}
   sources:
-    - name: [ main, contrib, non-free ]
+    {% for sub1 in [lname, lname + '-updates' if updates else None]|select %}
+    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    {% set sub = sub1 + '/' + sub2 %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://deb.parrotsec.org/parrot/dists/stable/{source}/source/Sources.gz'
+        url: 'https://deb.parrotsec.org/parrot/dists/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Parrot Project home
       url: https://parrotsec.org/
-  tags: [ all, production ]
+  groups: [ all, production, parrot ]
+{% endmacro %}
+
+{{ parrot('LTS', minpackages=30000) }}
+{{ parrot('Rolling', minpackages=33000, updates=False) }}

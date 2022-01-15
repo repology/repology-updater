@@ -17,7 +17,6 @@
 
 import fnmatch
 import os
-from typing import Optional
 
 from repology.packagemaker import PackageMaker
 
@@ -25,7 +24,7 @@ from repology.packagemaker import PackageMaker
 __all__ = ['add_patch_files']
 
 
-def add_patch_files(pkg: PackageMaker, path: str, pattern: Optional[str] = None) -> None:
+def add_patch_files(pkg: PackageMaker, path: str, pattern: str | None = None) -> None:
     # skip symlinked directory - in most cases we can't construct links out of these
     if not os.path.isdir(path) or os.path.islink(path):
         return

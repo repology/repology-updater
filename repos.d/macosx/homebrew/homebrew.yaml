@@ -30,7 +30,7 @@
       url: 'https://github.com/Homebrew/homebrew-core/blob/master/Formula/{srcname}.rb'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/{srcname}.rb'
-  tags: [ all, production, brew ]
+  groups: [ all, production, brew ]
 
 - name: homebrew_casks
   type: repository
@@ -59,4 +59,4 @@
       url: 'https://github.com/Homebrew/homebrew-cask/blob/master/Casks/{srcname}.rb'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/{srcname}.rb'
-  tags: [ all, production, brew ]
+  groups: [ all, production, brew ]

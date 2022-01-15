@@ -24,4 +24,4 @@
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://crates.io/crates/{name}'
-  tags: [ all, production ]
+  groups: [ all, production ]

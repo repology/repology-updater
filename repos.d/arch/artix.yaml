@@ -13,11 +13,11 @@
     - name: [ system, world, galaxy ]
       fetcher:
         class: TarFetcher
-        url: 'https://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.xz'
+        url: 'https://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
   repolinks:
     - desc: Artix Linux home
       url: https://artixlinux.org/
-  tags: [ all, production ]
+  groups: [ all, production ]

@@ -19,4 +19,4 @@
       url: https://distrowatch.com/
     - desc: Packages Tracked by DistroWatch
       url: https://distrowatch.com/packages.php
-  tags: [ all, production ]
+  groups: [ all, production ]

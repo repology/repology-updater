@@ -21,11 +21,10 @@ import lxml.html
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.transformer import PackageTransformer
 
 
 class KaOSHTMLParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="ctable"]')[0].xpath('./form/tr[position()>3 and position()<last()-3]'):
             pkg = factory.begin()
 

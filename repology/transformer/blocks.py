@@ -18,7 +18,7 @@
 import re
 from abc import ABC, abstractmethod
 from collections import defaultdict
-from typing import Dict, Iterable, List, MutableSet, Pattern, Tuple
+from typing import Iterable, Pattern
 
 from repology.package import Package
 from repology.transformer.rule import Rule
@@ -34,7 +34,7 @@ class RuleBlock(ABC):
         pass
 
     @abstractmethod
-    def get_rule_range(self) -> Tuple[int, int]:
+    def get_rule_range(self) -> tuple[int, int]:
         pass
 
 
@@ -50,15 +50,15 @@ class SingleRuleBlock(RuleBlock):
     def iter_all_rules(self) -> Iterable[Rule]:
         return [self._rule]
 
-    def get_rule_range(self) -> Tuple[int, int]:
+    def get_rule_range(self) -> tuple[int, int]:
         return self._rule.number, self._rule.number
 
 
 class NameMapRuleBlock(RuleBlock):
-    _rules: List[Rule]
-    _name_map: Dict[str, List[Rule]]
+    _rules: list[Rule]
+    _name_map: dict[str, list[Rule]]
 
-    def __init__(self, rules: List[Rule]) -> None:
+    def __init__(self, rules: list[Rule]) -> None:
         self._rules = rules
         self._name_map = defaultdict(list)
 
@@ -91,19 +91,19 @@ class NameMapRuleBlock(RuleBlock):
     def iter_all_rules(self) -> Iterable[Rule]:
         yield from self._rules
 
-    def get_rule_range(self) -> Tuple[int, int]:
+    def get_rule_range(self) -> tuple[int, int]:
         return self._rules[0].number, self._rules[-1].number
 
 
 class CoveringRuleBlock(RuleBlock):
-    _names: MutableSet[str]
+    _names: set[str]
     _megaregexp: Pattern[str]
-    _sub_blocks: List[RuleBlock]
+    _sub_blocks: list[RuleBlock]
 
-    def __init__(self, blocks: List[RuleBlock]) -> None:
+    def __init__(self, blocks: list[RuleBlock]) -> None:
         self._names = set()
 
-        megaregexp_parts: List[str] = []
+        megaregexp_parts: list[str] = []
         for block in blocks:
             for rule in block.iter_all_rules():
                 if rule.names:
@@ -126,5 +126,5 @@ class CoveringRuleBlock(RuleBlock):
         for block in self._sub_blocks:
             yield from block.iter_all_rules()
 
-    def get_rule_range(self) -> Tuple[int, int]:
+    def get_rule_range(self) -> tuple[int, int]:
         return self._sub_blocks[0].get_rule_range()[0], self._sub_blocks[-1].get_rule_range()[-1]

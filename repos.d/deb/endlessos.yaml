@@ -1,0 +1,50 @@
+###########################################################################
+# Endless OS
+###########################################################################
+- name: endlessos_4_0
+  type: repository
+  desc: Endless OS 4.0
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, endlessos]
+  color: 'bf6603'
+  minpackages: 50
+  sources:
+    - name: [core, endless]
+      fetcher:
+        class: FileFetcher
+        url: 'https://deb.endlessos.org/debian/dists/eos4.0/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Endless OS home
+      url: https://www.endlessos.org/os
+    - desc: Endless OS GitHub org
+      url: https://github.com/endlessm/
+  groups: [ all, production, endlessos ]
+
+- name: endlessos_master
+  type: repository
+  desc: Endless OS master
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, endlessos]
+  color: 'bf6603'
+  minpackages: 50
+  sources:
+    - name: [core, endless]
+      fetcher:
+        class: FileFetcher
+        url: 'https://deb.endlessos.org/debian/dists/master/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Endless OS home
+      url: https://www.endlessos.org/os
+    - desc: Endless OS GitHub org
+      url: https://github.com/endlessm/
+  groups: [ all, production, endlessos ]

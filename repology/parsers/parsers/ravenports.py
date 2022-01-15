@@ -20,11 +20,10 @@ from typing import Iterable
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
-from repology.transformer import PackageTransformer
 
 
 class RavenportsJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+    def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, ('ravenports', None)):
             with factory.begin() as pkg:
                 pkg.add_name(packagedata['namebase'], NameType.RAVENPORTS_NAMEBASE)
@@ -38,6 +37,8 @@ class RavenportsJsonParser(Parser):
 
                 pkg.set_extra_field('bucket', packagedata['bucket'])
                 pkg.set_extra_field('variant', packagedata['variants'][0]['label'])
+
+                # TODO: process all variants instead of the first one
 
                 if 'cpe' in packagedata:
                     pkg.add_cpe(**{

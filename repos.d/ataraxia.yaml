@@ -3,7 +3,7 @@
 ###########################################################################
 - name: ataraxia
   type: repository
-  desc: Ataraxia Linux
+  desc: Ataraxia GNU/Linux
   family: ataraxia
   ruleset: ataraxia
   minpackages: 800
@@ -11,19 +11,19 @@
     - name: repo.json
       fetcher:
         class: FileFetcher
-        url: 'https://raw.githubusercontent.com/ataraxialinux/ataraxia/master/packages/repo'
+        url: 'https://gitlab.com/ataraxialinux/ataraxia/-/raw/master/packages/repo'
       parser:
         class: AtaraxiaJsonParser
   repolinks:
     - desc: Ataraxia Linux home
-      url: https://ataraxialinux.github.io/
+      url: https://ataraxialinux.org/
     - desc: Ataraxia Linux source repository
-      url: https://github.com/ataraxialinux/ataraxia
+      url: https://gitlab.com/ataraxialinux/ataraxia/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/ataraxialinux/ataraxia/tree/master/packages/{srcname}'
+      url: 'https://gitlab.com/ataraxialinux/ataraxia/-/tree/master/packages/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/ataraxialinux/ataraxia/blob/master/packages/{srcname}/KagamiBuild'
+      url: 'https://gitlab.com/ataraxialinux/ataraxia/-/blob/master/packages/{srcname}/KagamiBuild'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/ataraxialinux/ataraxia/master/packages/{srcname}/KagamiBuild'
-  tags: [ all, production ]
+      url: 'https://gitlab.com/ataraxialinux/ataraxia/-/raw/master/packages/{srcname}/KagamiBuild'
+  groups: [ all, production ]

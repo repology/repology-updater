@@ -16,6 +16,7 @@
         url: https://archives.fedoraproject.org/pub/archive/epel/6/SRPMS/
       parser:
         class: RepodataParser
+        vertags: el
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
@@ -29,58 +30,38 @@
   #    url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel6/f/{srcname}.spec'
   #  - type: PACKAGE_RECIPE_RAW
   #    url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel6/f/{srcname}.spec'
-  tags: [ all, production, epel ]
+  groups: [ all, production, epel ]
 
-- name: epel_7
+{% macro epel(version, minpackages, subdir) %}
+- name: epel_{{version}}
   type: repository
-  desc: EPEL 7
+  desc: EPEL {{version}}
   statsgroup: EPEL
   family: fedora
   ruleset: [fedora, rpm, epel]
   color: 'ff0000'
-  minpackages: 6000
+  minpackages: {{minpackages}}
   sources:
     - name: data
       fetcher:
         class: RepodataFetcher
-        url: https://dl.fedoraproject.org/pub/epel/7/SRPMS/
+        url: https://dl.fedoraproject.org/pub/epel/{{version}}/{{subdir}}/
       parser:
         class: RepodataParser
+        vertags: el
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/epel7'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/epel{{version}}'
     - type: PACKAGE_RECIPE
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel7/f/{srcname}.spec'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel{{version}}/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel7/f/{srcname}.spec'
-  tags: [ all, production, epel ]
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel{{version}}/f/{srcname}.spec'
+  groups: [ all, production, epel ]
+{% endmacro %}
 
-- name: epel_8
-  type: repository
-  desc: EPEL 8
-  statsgroup: EPEL
-  family: fedora
-  ruleset: [fedora, rpm, epel]
-  color: 'ff0000'
-  minpackages: 150
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
-      parser:
-        class: RepodataParser
-  repolinks:
-    - desc: EPEL wiki page
-      url: https://fedoraproject.org/wiki/EPEL
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/epel8'
-    - type: PACKAGE_RECIPE
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel8/f/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel8/f/{srcname}.spec'
-  tags: [ all, production, epel ]
+{{ epel(7, minpackages=7000, subdir="SRPMS") }}
+{{ epel(8, minpackages=4000, subdir="Everything/SRPMS") }}
+{{ epel(9, minpackages=300, subdir="Everything/source/tree") }}

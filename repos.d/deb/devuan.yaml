@@ -5,7 +5,7 @@
 ###########################################################################
 - name: devuan_1_0
   type: repository
-  desc: Devuan 1.0 (Jessie)
+  desc: Devuan 1.0 # Jessie
   statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
@@ -22,11 +22,11 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_2_0
   type: repository
-  desc: Devuan 2.0 (ASCII)
+  desc: Devuan 2.0 # ASCII
   statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
@@ -43,11 +43,11 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_3_0
   type: repository
-  desc: Devuan 3.0 (Beowulf)
+  desc: Devuan 3.0 # Beowulf
   statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
@@ -64,11 +64,11 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_4_0
   type: repository
-  desc: Devuan 4.0 (Chimaera)
+  desc: Devuan 4.0 # Chimaera
   statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
@@ -85,7 +85,7 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
 
 - name: devuan_unstable
   type: repository
@@ -106,4 +106,4 @@
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
-  tags: [ all, production, devuan ]
+  groups: [ all, production, devuan ]
