@@ -1,0 +1,28 @@
+###########################################################################
+# yiffOS
+###########################################################################
+- name: yiffos_knot
+  type: repository
+  desc: yiffOS Knot
+  family: yiffos
+  ruleset: yiffos
+  minpackages: 100
+  sources:
+    - name: packages
+      fetcher:
+        class: GitFetcher
+        url: https://gitlab.com/yiffos/packaging/packages.git
+        branch: knot
+      parser:
+        class: YiffOSJsonParser
+  repolinks:
+    - desc: yiffOS home
+      url: https://yiffos.gay/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://gitlab.com/yiffos/packaging/packages/-/tree/knot/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://gitlab.com/yiffos/packaging/packages/-/blob/knot/{srcname}/PKGSCRIPT'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitlab.com/yiffos/packaging/packages/-/raw/knot/{srcname}/PKGSCRIPT'
+  groups: [ all, production, yiffos ]
