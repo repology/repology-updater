@@ -27,7 +27,7 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/NixOS/nixpkgs/blob/release-21.05/{posfile}#L{posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/release-21.05/{?posfile}#L{?posline}'
   groups: [ all, production, nix ]
 
 - name: nix_stable_21_11
@@ -56,7 +56,7 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/NixOS/nixpkgs/blob/release-21.11/{posfile}#L{posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/release-21.11/{?posfile}#L{?posline}'
   groups: [ all, production, nix ]
 
 - name: nix_unstable
@@ -84,5 +84,5 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/NixOS/nixpkgs/blob/master/{posfile}#L{posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/master/{?posfile}#L{?posline}'
   groups: [ all, production, have_testdata, nix ]
