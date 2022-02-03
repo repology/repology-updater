@@ -9,6 +9,7 @@
   ruleset: [fedora, rpm, epel]
   color: 'ff0000'
   minpackages: 5000
+  valid_till: 2020-11-30
   sources:
     - name: data
       fetcher:
