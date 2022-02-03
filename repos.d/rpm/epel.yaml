@@ -31,6 +31,7 @@
   #  - type: PACKAGE_RECIPE_RAW
   #    url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel6/f/{srcname}.spec'
   groups: [ all, production, epel ]
+  valid_till: 2020-11-30
 
 {% macro epel(version, minpackages, subdir) %}
 - name: epel_{{version}}
