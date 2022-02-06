@@ -47,8 +47,8 @@ class GuixFetcher(ScratchDirFetcher):
 
                 # get number of pages, if there are more than 1 of them
                 if numpages == 1:
-                    for pagebutton in lxml.html.document_fromstring(text).xpath('.//nav[@class="page-selector"]/a'):
-                        numpages = max(numpages, int(pagebutton.text))
+                    for pagebutton in lxml.html.document_fromstring(text).xpath('.//nav[@class="page-selector"]/a'):  # type: ignore
+                        numpages = max(numpages, int(pagebutton.text))  # type: ignore
 
                 # save HTML
                 with open(os.path.join(statedir.get_path(), '{}-{}.html'.format(letter, page)), 'w', encoding='utf-8') as pagefile:
