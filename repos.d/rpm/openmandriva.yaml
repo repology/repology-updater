@@ -56,9 +56,7 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.1/{srcname}.spec'
-  # 2021-03-15 04:03:45 ERROR: HTTPError: 404 Client Error: Not Found for url: http://abf-downloads.openmandriva.org/4.1/repository/SRPMS/main/release/repodata/repomd.xml
-
-  groups: [ all, openmandriva, rpm ]
+  groups: [ all, production, openmandriva, rpm ]
 
 - name: openmandriva_4_2
   type: repository
@@ -67,7 +65,7 @@
   family: openmandriva
   ruleset: [openmandriva, rpm]
   color: '045e9d'
-  minpackages: 10000
+  minpackages: 11000
   sources:
     - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
       fetcher:
@@ -86,7 +84,35 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.2/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.2/{srcname}.spec'
-  groups: [ all, openmandriva, rpm ] # no repos yet
+  groups: [ all, production, openmandriva, rpm ]
+
+- name: openmandriva_4_3
+  type: repository
+  desc: OpenMandriva 4.3
+  statsgroup: OpenMandriva
+  family: openmandriva
+  ruleset: [openmandriva, rpm]
+  color: '045e9d'
+  minpackages: 11000
+  sources:
+    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://abf-downloads.openmandriva.org/4.3/repository/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: OpenMandriva home
+      url: https://openmandriva.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.3'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.3/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.3/{srcname}.spec'
+  groups: [ all, openmandriva, rpm ] # no main/updates repository yet
 
 - name: openmandriva_rolling
   type: repository
@@ -95,7 +121,7 @@
   family: openmandriva
   ruleset: [openmandriva, rpm]
   color: '045e9d'
-  minpackages: 10000
+  minpackages: 11000
   sources:
     - name: [ main/release, non-free/release, restricted/release, unsupported/release ]
       fetcher:
@@ -114,9 +140,7 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/rolling/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/rolling/{srcname}.spec'
-  # 2021-03-15 04:03:57 ERROR: HTTPError: 403 Client Error: Forbidden for url: http://abf-downloads.openmandriva.org/rolling/repository/SRPMS/unsupported/release/repodata/repomd.xml
-
-  groups: [ all, openmandriva, rpm ]
+  groups: [ all, production, openmandriva, rpm ]
 
 - name: openmandriva_cooker
   sortname: openmandriva_zcooker
@@ -126,7 +150,7 @@
   family: openmandriva
   ruleset: [openmandriva, rpm]
   color: '045e9d'
-  minpackages: 10000
+  minpackages: 11000
   sources:
     # all updates subrepos are empty and all testing subrepos contain 5 packages in total,
     # most of them are quite old. so not including these subrepositories here
