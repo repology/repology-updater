@@ -23,6 +23,28 @@
       url: http://www.slackware.com/
   groups: [ all, production, slackware ]
 
+- name: slackware_15_0
+  sortname: slackware32_15_0
+  type: repository
+  desc: Slackware 15.0
+  statsgroup: Slackware
+  family: slackware
+  color: '0000ff'
+  minpackages: 1600
+  default_maintainer: volkerdi@slackware.com
+  sources:
+    - name: [slackware,patches,extra]
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirrors.slackware.com/slackware/slackware-15.0/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Slackware Home
+      url: http://www.slackware.com/
+  groups: [ all, production, slackware ]
+
 - name: slackware_current
   sortname: slackware32_current
   type: repository
@@ -30,7 +52,7 @@
   statsgroup: Slackware
   family: slackware
   color: '0000ff'
-  minpackages: 1300
+  minpackages: 1600
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
@@ -45,6 +67,7 @@
       url: http://www.slackware.com/
   groups: [ all, production, slackware ]
 
+# Slackware64
 - name: slackware64_14_2
   type: repository
   desc: Slackware64 14.2
@@ -66,13 +89,34 @@
       url: http://www.slackware.com/
   groups: [ all, production, slackware ]
 
+- name: slackware64_15_0
+  type: repository
+  desc: Slackware64 15.0
+  statsgroup: Slackware
+  family: slackware
+  color: '0000ff'
+  minpackages: 1600
+  default_maintainer: volkerdi@slackware.com
+  sources:
+    - name: [slackware64,patches,extra]
+      fetcher:
+        class: FileFetcher
+        url: 'https://mirrors.slackware.com/slackware/slackware64-15.0/{source}/PACKAGES.TXT'
+      parser:
+        class: SlackwarePackagesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Slackware Home
+      url: http://www.slackware.com/
+  groups: [ all, production, slackware ]
+
 - name: slackware64_current
   type: repository
   desc: Slackware64 current
   statsgroup: Slackware
   family: slackware
   color: '0000ff'
-  minpackages: 1300
+  minpackages: 1600
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware64,patches,extra]
@@ -87,6 +131,7 @@
       url: http://www.slackware.com/
   groups: [ all, production, slackware ]
 
+# Slackwarearm
 - name: slackwarearm_14_2
   type: repository
   desc: Slackwarearm 14.2
@@ -114,7 +159,7 @@
   statsgroup: Slackware
   family: slackware
   color: '0000ff'
-  minpackages: 1300
+  minpackages: 1500
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
