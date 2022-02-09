@@ -85,4 +85,4 @@
   packagelinks:
     - type: PACKAGE_RECIPE
       url: 'https://github.com/NixOS/nixpkgs/blob/master/{?posfile}#L{?posline}'
-  groups: [ all, have_testdata, nix ]
+  groups: [ all, production, have_testdata, nix ]
