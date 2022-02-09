@@ -211,6 +211,15 @@ class NixJsonParser(Parser):
                         # XXX: uses MELPA versions which are timestamps
                         pkg.set_flags(PackageFlags.UNTRUSTED)
                 else:
+                    # perl packages have improper file position due to broken builtin operation
+                    # https://github.com/NixOS/nix/issues/6068
+                    # XXX: Remove once fixed upstream
+                    if 'perl' in key and 'Packages' in key:
+                        # All perl packages are auto-generated. So location is unambiguous
+                        pkg.set_extra_field('posfile', 'pkgs/top-level/perl-packages.nix')
+                        pkg.set_extra_field('posline', '8')  # beginning of logic
+                        yield pkg
+
                     pkg.log('dropping, no position recorded in meta', severity=Logger.ERROR)
                     continue
 
