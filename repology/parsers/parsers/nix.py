@@ -211,7 +211,7 @@ class NixJsonParser(Parser):
                         # XXX: uses MELPA versions which are timestamps
                         pkg.set_flags(PackageFlags.UNTRUSTED)
                 else:
-                    pkg.log('dropping, no position recorded in meta', severity=Logger.ERROR)
-                    continue
+                    pkg.log('no position recorded in meta', severity=Logger.ERROR)
+                    pkg.set_flags(PackageFlags.UNTRUSTED)
 
                 yield pkg
