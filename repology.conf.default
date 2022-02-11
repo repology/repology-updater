@@ -101,3 +101,8 @@ REPOLOGY_HOME = 'https://repology.org'
 # ignored
 #
 HISTORY_CUTOFF_TIMESTAMP = 0
+
+#
+# Path to maintainers.yaml config
+#
+MAINTAINERS_CONFIG = 'maintainers.yaml'

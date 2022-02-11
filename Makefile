@@ -31,3 +31,4 @@ mypy:
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")
+	python3 repology-schemacheck.py -s maintainers maintainers.yaml

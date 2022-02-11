@@ -344,6 +344,12 @@ schemas = {
             'replaceinname': dict,
             'warning': str,
         }
+    ],
+    'maintainers': [
+        {
+            Required('maintainer'): str,
+            'hide': bool,
+        }
     ]
 }
 

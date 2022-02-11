@@ -26,6 +26,7 @@ from repology.config import config
 from repology.database import Database
 from repology.dblogger import LogRunManager
 from repology.logger import FileLogger, Logger, StderrLogger
+from repology.maintainermgr import MaintainerManager
 from repology.querymgr import QueryManager
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
@@ -107,6 +108,14 @@ class Environment:
     def get_main_logger(self) -> Logger:
         return FileLogger(self.options.logfile) if self.options.logfile else StderrLogger()
 
+    @cached_method
+    def get_maintainers_config(self) -> YamlConfig:
+        return YamlConfig.from_path(self.options.maintainers_config, self.get_parsed_config_cache())
+
+    @cached_method
+    def get_maintainer_manager(self) -> MaintainerManager:
+        return MaintainerManager(self.get_maintainers_config())
+
     def get_options(self) -> argparse.Namespace:
         return self.options
 
@@ -175,9 +184,10 @@ def process_repositories(env: Environment) -> None:
 
             try:
                 transformer = PackageTransformer(ruleset, reponame, repository.ruleset)
+                maintainermgr = env.get_maintainer_manager()
 
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as runlogger:
-                    env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
+                    env.get_repo_processor().parse([reponame], transformer=transformer, maintainermgr=maintainermgr, logger=runlogger)
 
                 env.get_main_logger().get_indented().log('done')
 
@@ -310,6 +320,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|group', nargs='*', help='own or group name(s) of repositories which are enabled and shown in repology')
     parser.add_argument('--config-cache', default=config['CONFIG_CACHE_DIR'], help='path to directory for caching parsed repository and rule data')
+    parser.add_argument('--maintainers-config', default=config['MAINTAINERS_CONFIG'], help='path to maintainers.yaml')
 
     grp = parser.add_argument_group('Initialization actions (destructive!)')
     grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')

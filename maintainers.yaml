@@ -1,5 +1,4 @@
-# This is not used yet, but it will contain additional
-# information on maintainers
+# Currently a blacklist of maintainers which do not want to appear
+# on Repology
 
-# merge multiple emails (from report)
-- [ gurkan@linuks.mine.nu, gurkan@phys.ethz.ch, alex@aiei.ch ]
+- { maintainer: will.t.murphy@gmail.com, hide: true }
