@@ -47,14 +47,36 @@
 
 - name: apertis_v2022
   type: repository
-  desc: Apertis v2022 Development
+  desc: Apertis v2022
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, apertis]
   color: '3a5a80'
   minpackages: 3500
   sources:
-    - name: [ v2022dev2/development, v2022dev2/target, v2022dev2/sdk, v2022dev2/hmi ]
+    - name: [ v2022/development, v2022/target, v2022/sdk, v2022/hmi, v2022-updates/development, v2022-updates/target, v2022-updates/sdk, v2022-updates/hmi ]
+      fetcher:
+        class: FileFetcher
+        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Apertis home
+      url: https://www.apertis.org/
+  groups: [ all, production, apertis ]
+
+- name: apertis_v2023
+  type: repository
+  desc: Apertis v2023 Development
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, apertis]
+  color: '3a5a80'
+  minpackages: 3500
+  sources:
+    - name: [ v2023dev1/development, v2023dev1/target, v2023dev1/sdk, v2023dev1/hmi ]
       fetcher:
         class: FileFetcher
         url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
