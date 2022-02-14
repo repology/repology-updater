@@ -407,7 +407,7 @@
     - name: development
       fetcher:
         class: RepodataFetcher
-        url: https://mirror.yandex.ru/fedora/linux/development/35/Everything/source/tree/
+        url: https://mirror.yandex.ru/fedora/linux/releases/35/Everything/source/tree/
       parser:
         class: RepodataParser
         vertags: fc
