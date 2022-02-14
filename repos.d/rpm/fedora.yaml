@@ -27,12 +27,13 @@
   valid_till: {{valid_till}}
   {% endif %}
   sources:
+    {% set mainrepo='development' if development else 'release' %}
     {% if not archived %}
     # Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
     # here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
     # mirrors
     {% endif %}
-    - name: {% if development %}development{% else %}release{% endif %}
+    - name: {{mainrepo}}
       fetcher:
         class: RepodataFetcher
         {% if archived %}
@@ -45,7 +46,7 @@
       parser:
         class: RepodataParser
         vertags: fc
-      subrepo: '{source}'
+      subrepo: {{mainrepo}}
     {% if version != 'rawhide' %}
     - name: updates
       fetcher:
@@ -59,7 +60,7 @@
       parser:
         class: RepodataParser
         vertags: fc
-      subrepo: '{source}'
+      subrepo: updates
     {% endif %}
   repolinks:
     - desc: Fedora home
@@ -78,15 +79,15 @@
   groups: [ all, production, fedora, rpm ]
 {% endmacro %}
 
-{{ fedora(26, minpackages=21000, valid_till='2018-05-29', archived=True) }}
-{{ fedora(27, minpackages=22000, valid_till='2018-11-30', archived=True) }}
+{{ fedora(26, minpackages=22000, valid_till='2018-05-29', archived=True) }}
+{{ fedora(27, minpackages=23000, valid_till='2018-11-30', archived=True) }}
 {{ fedora(28, minpackages=24000, valid_till='2019-05-28', archived=True) }}
 {{ fedora(29, minpackages=24000, valid_till='2019-11-26', archived=True) }}
 {{ fedora(30, minpackages=24000, valid_till='2020-05-26', archived=True) }}
 {{ fedora(31, minpackages=24000, valid_till='2020-11-24', archived=True) }}
-{{ fedora(32, minpackages=22000, valid_till='2021-05-25') }}
-{{ fedora(33, minpackages=22000, valid_till='2021-11-23') }}
-{{ fedora(34, minpackages=22000, valid_till='2022-05-17') }}
-{{ fedora(35, minpackages=22000, valid_till='2022-11-30') }}
-{{ fedora(36, minpackages=22000, valid_till='2023-05-24', development=True) }}
-{{ fedora('rawhide', minpackages=20000, development=True) }}
+{{ fedora(32, minpackages=24000, valid_till='2021-05-25') }}
+{{ fedora(33, minpackages=24000, valid_till='2021-11-23') }}
+{{ fedora(34, minpackages=24000, valid_till='2022-05-17') }}
+{{ fedora(35, minpackages=24000, valid_till='2022-11-30') }}
+{{ fedora(36, minpackages=21000, valid_till='2023-05-24', development=True) }}
+{{ fedora('rawhide', minpackages=21000, development=True) }}
