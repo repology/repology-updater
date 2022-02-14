@@ -2,7 +2,7 @@
 # Ubuntu
 ###########################################################################
 
-{% macro ubuntu(major, minor, codename, minpackages, backports=True, proposed=False, valid_till=Null) %}
+{% macro ubuntu(major, minor, codename, minpackages, backports=True, proposed=False, valid_till=Null, packages=True) %}
 - name: ubuntu_{{major}}_{{minor}}
   type: repository
   desc: Ubuntu {{major}}.{{minor}}
@@ -30,8 +30,10 @@
     - desc: Ubuntu packages in {{codename}}
       url: https://packages.ubuntu.com/{{codename}}/
   packagelinks:
+    {% if packages %}
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.ubuntu.com/source/{{codename}}/{srcname}'
+    {% endif %}
     - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_ISSUE_TRACKER
@@ -113,8 +115,11 @@
 {% endif %}
 {% endmacro %}
 
-{{ ubuntu('14', '04', 'trusty',  minpackages=23000, valid_till='2024-04-25') }}
-{{ ubuntu('16', '04', 'xenial',  minpackages=26000, valid_till='2026-04-23') }}
+# Packages argument refer to availability on https://packages.ubuntu.com/
+# Check News section and Distribution dropdown on the site to see whether
+# a specific release is supported
+{{ ubuntu('14', '04', 'trusty',  minpackages=23000, valid_till='2024-04-25', packages=false) }}
+{{ ubuntu('16', '04', 'xenial',  minpackages=26000, valid_till='2026-04-23', packages=false) }}
 {{ ubuntu('18', '04', 'bionic',  minpackages=29000, valid_till='2028-04-26') }}
 {{ ubuntu('20', '04', 'focal',   minpackages=29000, valid_till='2030-04-23') }}
 {{ ubuntu('21', '04', 'hirsute', minpackages=30000, valid_till='2022-01-20') }}
