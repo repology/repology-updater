@@ -1,90 +1,38 @@
 ###########################################################################
 # Apertis
 ###########################################################################
-- name: apertis_v2020
-  type: repository
-  desc: Apertis v2020
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, apertis]
-  color: '3a5a80'
-  minpackages: 3500
-  sources:
-    - name: [ v2020/development, v2020/target, v2020/sdk, v2020/hmi, v2020-updates/development, v2020-updates/target, v2020-updates/sdk, v2020-updates/hmi ]
-      fetcher:
-        class: FileFetcher
-        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Apertis home
-      url: https://www.apertis.org/
-  groups: [ all, production, apertis ]
 
-- name: apertis_v2021
+{% macro apertis(version, minpackages, suffix='', development=False) %}
+- name: apertis_v{{version}}
   type: repository
-  desc: Apertis v2021
+  desc: Apertis v{{version}}{% if development %} Development{% endif %}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, apertis]
   color: '3a5a80'
-  minpackages: 3500
+  minpackages: {{minpackages}}
   sources:
-    - name: [ v2021/development, v2021/target, v2021/sdk, v2021/hmi, v2021-updates/development, v2021-updates/target, v2021-updates/sdk, v2021-updates/hmi ]
+    {% set v = 'v' + version|string + suffix %}
+    {% for sub1 in ([v] if development else [v, v + '-updates']) %}
+    {% for sub2 in ['development', 'target', 'sdk', 'hmi'] %}
+    {% set source = sub1 + '/' + sub2 %}
+    - name: {{source}}
       fetcher:
         class: FileFetcher
-        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
+        url: 'https://repositories.apertis.org/apertis/dists/{{source}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{source}}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Apertis home
       url: https://www.apertis.org/
   groups: [ all, production, apertis ]
+{% endmacro %}
 
-- name: apertis_v2022
-  type: repository
-  desc: Apertis v2022
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, apertis]
-  color: '3a5a80'
-  minpackages: 3500
-  sources:
-    - name: [ v2022/development, v2022/target, v2022/sdk, v2022/hmi, v2022-updates/development, v2022-updates/target, v2022-updates/sdk, v2022-updates/hmi ]
-      fetcher:
-        class: FileFetcher
-        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Apertis home
-      url: https://www.apertis.org/
-  groups: [ all, production, apertis ]
-
-- name: apertis_v2023
-  type: repository
-  desc: Apertis v2023 Development
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, apertis]
-  color: '3a5a80'
-  minpackages: 3500
-  sources:
-    - name: [ v2023dev1/development, v2023dev1/target, v2023dev1/sdk, v2023dev1/hmi ]
-      fetcher:
-        class: FileFetcher
-        url: 'https://repositories.apertis.org/apertis/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Apertis home
-      url: https://www.apertis.org/
-  groups: [ all, production, apertis ]
+{{ apertis(2020, minpackages=3500) }}
+{{ apertis(2021, minpackages=3500) }}
+{{ apertis(2022, minpackages=3500) }}
+{{ apertis(2023, suffix='dev1', minpackages=3500, development=true) }}
