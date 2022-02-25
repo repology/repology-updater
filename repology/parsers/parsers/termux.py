@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019,2021-2022 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,6 +20,7 @@ import re
 from typing import Iterable
 
 from repology.logger import Logger
+from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -43,8 +44,6 @@ class TermuxJsonParser(Parser):
                 pkg.set_version(packagedata['version'], normalize_version)
 
                 pkg.set_summary(packagedata['description'])
-                pkg.add_homepages(packagedata['homepage'])
-                pkg.add_downloads(packagedata.get('srcurl'))
 
                 pkg.add_maintainers(extract_maintainers(packagedata['maintainer']))
 
@@ -52,5 +51,16 @@ class TermuxJsonParser(Parser):
                 match = re.search('(?:^| )@([^ ]+)$', packagedata['maintainer'])
                 if match:
                     pkg.add_maintainers(match.group(1).lower() + '@github')
+
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, packagedata['homepage'])
+                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, packagedata.get('srcurl'))
+
+                pkg.add_links(LinkType.PACKAGE_SOURCES, packagedata['package_sources_url'])
+                pkg.add_links(LinkType.PACKAGE_RECIPE, packagedata['package_recipe_url'])
+                pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, packagedata['package_recipe_url_raw'])
+
+                for url, raw_url in zip(packagedata['package_patch_urls'], packagedata['package_patch_raw_urls']):
+                    pkg.add_links(LinkType.PACKAGE_PATCH, url)
+                    pkg.add_links(LinkType.PACKAGE_PATCH_RAW, raw_url)
 
                 yield pkg
