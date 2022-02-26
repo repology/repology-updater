@@ -119,6 +119,35 @@
       url: 'https://git.centos.org/rpms/{srcname}/raw/c8s{centossuffix}/f/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
+- name: centos_stream_9
+  type: repository
+  desc: CentOS Stream 9
+  statsgroup: CentOS
+  family: centos
+  ruleset: [centos, rpm]
+  color: '932279'
+  minpackages: 2000
+  sources:
+    - name: [ AppStream, BaseOS, CBR ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirror.stream.centos.org/9-stream/{source}/source/tree/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  repolinks:
+    - desc: CentOS home
+      url: https://www.centos.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/tree/c9s'
+    - type: PACKAGE_RECIPE
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c9s/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c9s/{srcname}.spec'
+  groups: [ all, production, centos, rpm ]
+
 - name: almalinux_8
   type: repository
   desc: AlmaLinux 8
