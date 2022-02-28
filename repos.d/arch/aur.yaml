@@ -58,7 +58,7 @@
   desc: MPR
   family: mpr
   ruleset: mpr
-  minpackages: 100
+  minpackages: 200
   default_maintainer: fallback-mnt-mpr@repology
   sources:
     - name: packages-meta-ext-v1.json
@@ -79,4 +79,4 @@
       url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/tree/PKGBUILD?h={srcname|quote}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
-  groups: [ all ]
+  groups: [ all, production ]
