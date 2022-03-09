@@ -64,19 +64,17 @@
     - name: packages-meta-ext-v1.json
       fetcher:
         class: FileFetcher
-        url: https://mpr.hunterwittenborn.com/packages-meta-ext-v1.json.gz
+        url: https://mpr.makedeb.org/packages-meta-ext-v1.json.gz
         # despite what the url says, returns plain JSON with transfer-encoding, thus no compression: is needed
       parser:
         class: AURJsonParser
         maintainer_host: mpr
   repolinks:
     - desc: MPR Home
-      url: https://mpr.hunterwittenborn.com/
+      url: https://mpr.makedeb.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://mpr.hunterwittenborn.com/packages/{binname}'
+      url: 'https://mpr.makedeb.org/packages/{binname}'
     - type: PACKAGE_RECIPE
-      url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/tree/PKGBUILD?h={srcname|quote}'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://mpr.hunterwittenborn.com/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
+      url: 'https://mpr.makedeb.org/pkgbase/{srcname}/git/tree/PKGBUILD'
   groups: [ all, production ]
