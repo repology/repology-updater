@@ -153,9 +153,9 @@
       url: http://arm.slackware.com/
   groups: [ all, production, slackware ]
 
-- name: slackwarearm_current
+- name: slackwarearm_15_0
   type: repository
-  desc: Slackwarearm current
+  desc: Slackwarearm 15.0
   statsgroup: Slackware
   family: slackware
   color: '0000ff'
@@ -165,7 +165,7 @@
     - name: [slackware,patches,extra]
       fetcher:
         class: FileFetcher
-        url: 'http://slackware.uk/slackwarearm/slackwarearm-current/{source}/PACKAGES.TXT'
+        url: 'http://slackware.uk/slackwarearm/slackwarearm-15.0/{source}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: '{source}'
