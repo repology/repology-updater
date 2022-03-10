@@ -77,4 +77,6 @@
       url: 'https://mpr.makedeb.org/packages/{binname}'
     - type: PACKAGE_RECIPE
       url: 'https://mpr.makedeb.org/pkgbase/{srcname}/git/tree/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://mpr.makedeb.org/pkgbase/{srcname}/git/raw/PKGBUILD'
   groups: [ all, production ]
