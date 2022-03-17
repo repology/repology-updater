@@ -84,5 +84,5 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/NixOS/nixpkgs/blob/master/{?posfile}#L{?posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/{?posfile}#L{?posline}'
   groups: [ all, production, have_testdata, nix ]
