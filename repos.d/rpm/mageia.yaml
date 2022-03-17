@@ -1,5 +1,7 @@
 ###########################################################################
 # Mageia
+#
+# EoLs: https://www.mageia.org/en/support/
 ###########################################################################
 - name: mageia_7
   type: repository
@@ -9,6 +11,7 @@
   ruleset: [mageia, rpm]
   color: '262f45'
   minpackages: 14000
+  valid_till: 2021-06-30
   sources:
       # XXX: */backports_testing and */updates_testing not included, are these needed?
     - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
@@ -37,6 +40,7 @@
   ruleset: [mageia, rpm]
   color: '262f45'
   minpackages: 14000
+  valid_till: 2022-08-31
   sources:
       # XXX: */backports_testing and */updates_testing not included, are these needed?
     - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
