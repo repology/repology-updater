@@ -70,3 +70,89 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/archlinux/svntogit-{archrepo}/packages/{srcname}/trunk/PKGBUILD'
   groups: [ all, production ]
+
+{% for arch in ['powerpc', 'powerpc64le', 'riscv64'] %}
+- name: archpower_{{arch}}
+  type: repository
+  desc: ArchPOWER {{arch}}
+  statsgroup: Arch+derivs
+  family: arch
+  color: '0088cc'
+  minpackages: 2000
+  sources:
+    - name: {{arch}}
+      fetcher:
+        class: TarFetcher
+        url: 'https://repo.archlinuxpower.org/base/{{arch}}/base.db.tar.zst'
+      parser:
+        class: ArchDBParser
+    - name: any
+      fetcher:
+        class: TarFetcher
+        url: 'https://repo.archlinuxpower.org/base/any/base-any.db.tar.zst'
+      parser:
+        class: ArchDBParser
+  repolinks:
+    - desc: ArchPOWER home
+      url: https://archlinuxpower.org/
+    - desc: GitHub repository
+      url: https://github.com/kth5/archpower
+  # XXX: could add packagelink to GH repo, but that's not possible
+  groups: [ all, production, arch_extra ]
+{% endfor %}
+
+{% for arch in ['i486', 'i686', 'pentium4'] %}
+- name: archlinux32_{{arch}}
+  type: repository
+  desc: Arch Linux 32 {{arch}}
+  statsgroup: Arch+derivs
+  family: arch
+  color: '0088cc'
+  minpackages: 9500
+  sources:
+    {% for sub in ['core', 'extra', 'community'] %}
+    - name: {{sub}}
+      fetcher:
+        class: TarFetcher
+        url: 'https://mirror.archlinux32.org/{{arch}}/{{sub}}/{{sub}}.db.tar.gz'
+      parser:
+        class: ArchDBParser
+      source: {{sub}}
+    {% endfor %}
+  repolinks:
+    - desc: Arch Linux 32 home
+      url: https://archlinux32.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://www.archlinux32.org/packages/{{arch}}/{{sub}}/{binname}/'
+  groups: [ all, production, arch_extra ]
+{% endfor %}
+
+{% for arch in ['aarch64', 'armv7h'] %}
+- name: archlinuxarm_{{arch}}
+  type: repository
+  desc: Arch Linux ARM {{arch}}
+  statsgroup: Arch+derivs
+  family: arch
+  color: '0088cc'
+  minpackages: 9500
+  sources:
+    {% for sub in ['core', 'extra', 'community'] %}
+    - name: {{sub}}
+      fetcher:
+        class: TarFetcher
+        url: 'http://gr.mirror.archlinuxarm.org/{{arch}}/{{sub}}/{{sub}}.db.tar.gz'
+      parser:
+        class: ArchDBParser
+      source: {{sub}}
+    {% endfor %}
+  repolinks:
+    - desc: Arch Linux ARM home
+      url: https://archlinuxarm.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://archlinuxarm.org/packages/{{arch}}/{binname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://archlinuxarm.org/packages/{{arch}}/{binname}/files/PKGBUILD'
+  groups: [ all, production, arch_extra ]
+{% endfor %}
