@@ -50,7 +50,7 @@
     - name: pentoo-overlay
       fetcher:
         class: GitFetcher
-        url: git://github.com/pentoo/pentoo-overlay.git
+        url: https://github.com/pentoo/pentoo-overlay.git
         sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       parser:
         class: GentooGitParser
@@ -84,7 +84,7 @@
     - name: gentoo-science
       fetcher:
         class: GitFetcher
-        url: git://github.com/gentoo-mirror/science.git
+        url: https://github.com/gentoo-mirror/science.git
         sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       parser:
         class: GentooGitParser
