@@ -66,6 +66,7 @@ WITH old AS (
 		old.effname IS NULL AS is_added,
 		new.effname IS NULL AS is_removed,
 		old.effname IS NOT NULL AND new.effname IS NOT NULL AS is_changed,
+		-- XXX: these do NOT take alternative versions into account
 		version_set_changed(old.devel_versions, new.devel_versions) AS is_devel_update,
 		version_set_changed(old.newest_versions, new.newest_versions) AS is_newest_update,
 

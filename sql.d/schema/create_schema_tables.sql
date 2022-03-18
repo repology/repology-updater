@@ -434,6 +434,19 @@ CREATE TABLE repository_events_archive (
 	data jsonb NOT NULL
 );
 
+-- global events
+DROP TABLE IF EXISTS global_version_events CASCADE;
+
+CREATE TABLE global_version_events (
+	effname text NOT NULL,
+	ts timestamp with time zone NOT NULL,
+	type global_version_event_type NOT NULL,
+	spread smallint NOT NULL,
+	data jsonb NOT NULL
+);
+
+CREATE INDEX ON global_version_events(ts DESC);
+
 --------------------------------------------------------------------------------
 -- Statistics
 --------------------------------------------------------------------------------

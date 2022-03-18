@@ -174,6 +174,9 @@ class UpdateProcess:
         self._logger.log('updating repository events')
         self._database.update_repository_events()
 
+        self._logger.log('updating global events')
+        self._database.update_global_events()
+
         self._logger.log('updating projects turnover')
         self._database.update_projects_turnover()
 

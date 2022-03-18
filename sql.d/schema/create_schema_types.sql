@@ -35,6 +35,13 @@ CREATE TYPE maintainer_repo_metapackages_event_type AS enum(
 	'removed'
 );
 
+DROP TYPE IF EXISTS global_version_event_type CASCADE;
+
+CREATE TYPE global_version_event_type AS enum(
+	'newest_update',
+	'devel_update'
+);
+
 DROP TYPE IF EXISTS repository_state CASCADE;
 
 CREATE TYPE repository_state AS enum(
