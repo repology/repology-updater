@@ -76,7 +76,7 @@ class UpdateProcess:
         self._logger.log('forcing update for projects affected by changed CPEs')
         self._database.update_force_project_updates_by_cpe()
 
-    def _push_packages(self, projects: Iterable[list[Package]]) -> None:
+    def _push_packages(self, projects: Iterable[list[Package]], max_updates: int | None = None) -> None:
         self._logger.log('updating projects')
 
         field_stats_per_repo: dict[str, FieldStatistics] = defaultdict(FieldStatistics)
@@ -109,6 +109,9 @@ class UpdateProcess:
             if stats.total - prev_total >= 10000 or prev_total == 0:
                 self._logger.log(f'  at "{change.effname}": {stats}')
                 prev_total = stats.total
+
+            if max_updates is not None and stats.total - stats.unchanged >= max_updates:
+                break
 
         changed_projects.flush()
         self._logger.log(f'  done: {stats}')
@@ -246,8 +249,8 @@ class UpdateProcess:
         def __init__(self, update: 'UpdateProcess') -> None:
             self._update = update
 
-        def push_packages(self, projects: Iterable[list[Package]]) -> None:
-            self._update._push_packages(projects)
+        def push_packages(self, projects: Iterable[list[Package]], max_updates: int | None = None) -> None:
+            self._update._push_packages(projects, max_updates)
 
         def set_history_cutoff_timestamp(self, timestamp: int) -> None:
             self._update._history_cutoff_timestamp = timestamp

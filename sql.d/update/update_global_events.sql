@@ -27,6 +27,7 @@ WITH old AS (
 			WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)
 		) AS newest_versions
 	FROM old_packages
+	WHERE NOT (flags & (32768 | 131072))::bool
 	GROUP BY effname
 ), new AS (
 	SELECT
@@ -50,13 +51,15 @@ WITH old AS (
 				AND NOT (flags & (4 | 8 | 16))::bool
 		) AS newest_repos
 	FROM incoming_packages
+	WHERE NOT (flags & (32768 | 131072))::bool  -- ignore altscheme and altver, only support primary version for now
 	GROUP BY effname
 ), diff AS (
 	SELECT
 		effname,
 
-		old.devel_versions IS DISTINCT FROM new.devel_versions AS is_devel_update,
-		old.newest_versions IS DISTINCT FROM new.newest_versions AS is_newest_update,
+		-- XXX: these do NOT take alternative versions into account
+		version_set_changed(old.devel_versions, new.devel_versions) AS is_devel_update,
+		version_set_changed(old.newest_versions, new.newest_versions) AS is_newest_update,
 
 		new.devel_versions AS devel_versions,
 		new.newest_versions AS newest_versions,

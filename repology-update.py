@@ -289,7 +289,10 @@ def database_update(env: Environment) -> None:
         update.set_history_cutoff_timestamp(env.get_options().history_cutoff_timestamp)
 
         if not env.get_options().skip_packages:
-            update.push_packages(env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger))
+            update.push_packages(
+                env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger),
+                max_updates=env.get_options().max_updates
+            )
 
     for reponame in env.get_enabled_repo_names():
         database.mark_repository_updated(reponame)
@@ -348,6 +351,8 @@ def parse_arguments() -> argparse.Namespace:
     grp.add_argument('--history-cutoff-timestamp', default=config['HISTORY_CUTOFF_TIMESTAMP'], help='timestamp before which history is untrusted')
 
     grp.add_argument('--fatal', action='store_true', help='treat single repository processing failure as fatal')
+
+    grp.add_argument('--max-updates', type=int, help='maximal number of project updates to perform')
 
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|group', nargs='*', help='own or group name(s) of repositories to process')
 

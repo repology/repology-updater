@@ -117,14 +117,14 @@
         url: 'https://mirror.archlinux32.org/{{arch}}/{{sub}}/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
-      source: {{sub}}
+      subrepo: {{sub}}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://www.archlinux32.org/packages/{{arch}}/{{sub}}/{binname}/'
     {% endfor %}
   repolinks:
     - desc: Arch Linux 32 home
       url: https://archlinux32.org/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://www.archlinux32.org/packages/{{arch}}/{{sub}}/{binname}/'
   groups: [ all, production, arch_extra ]
 {% endfor %}
 
@@ -144,7 +144,7 @@
         url: 'http://gr.mirror.archlinuxarm.org/{{arch}}/{{sub}}/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
-      source: {{sub}}
+      subrepo: {{sub}}
     {% endfor %}
   repolinks:
     - desc: Arch Linux ARM home
