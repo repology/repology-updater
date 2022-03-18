@@ -63,6 +63,8 @@ WITH old AS (
 
 		new.devel_versions AS devel_versions,
 		new.newest_versions AS newest_versions,
+		old.devel_versions AS old_devel_versions,
+		old.newest_versions AS old_newest_versions,
 		devel_repos,
 		newest_repos
 	FROM old RIGHT JOIN new USING(effname)
@@ -89,6 +91,7 @@ FROM (
 		'newest_update'::global_version_event_type AS type,
 		jsonb_strip_nulls(jsonb_build_object(
 			'versions', newest_versions,
+			'old_versions', old_newest_versions,
 			'repos', newest_repos
 		)) AS data
 	FROM diff WHERE is_newest_update AND newest_versions IS NOT NULL
@@ -101,6 +104,7 @@ FROM (
 		'devel_update'::global_version_event_type AS type,
 		jsonb_strip_nulls(jsonb_build_object(
 			'versions', devel_versions,
+			'old_versions', old_devel_versions,
 			'repos', devel_repos
 		)) AS data
 	FROM diff WHERE is_devel_update AND devel_versions IS NOT NULL
