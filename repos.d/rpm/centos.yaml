@@ -145,7 +145,7 @@
     - type: PACKAGE_RECIPE
       url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c9s/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c9s/{srcname}.spec'
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/raw/c9s/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
 - name: almalinux_8
