@@ -12,9 +12,20 @@
 #
 #  url: 'https://packages.fedoraproject.org/pkgs/{srcname}'
 
+# Note that https://download.fedoraproject.org/pub/fedora redirects to a geo mirror; the process
+# is unstable and may interleave fresh and outdated mirrors and make package versions jump around.
+# https://mirror.yandex.ru/fedora/linux/ specific would be is preferred as it's closest to repology
+# instance, but it's currently unstable as well, so a random Europe mirror from
+# https://admin.fedoraproject.org/mirrormanager/ is used
+
+{#% set main_mirror = 'https://mirror.yandex.ru/fedora/linux' %#}
+{% set main_mirror = 'https://fr2.rpmfind.net/linux/fedora/linux' %}
+{% set archive_mirror = 'https://archives.fedoraproject.org/pub/archive/fedora/linux' %}
+
 {% macro fedora(version, minpackages, valid_till, development=False, archived=False) %}
 {% set fversion = 'rawhide' if version == 'rawhide' else 'f' + version|string %}
 {% set ucversion = version|title %}
+{% set mirror = archive_mirror if archived else main_mirror %}
 - name: fedora_{{version}}
   type: repository
   desc: Fedora {{ucversion}}
@@ -28,20 +39,13 @@
   {% endif %}
   sources:
     {% set mainrepo='development' if development else 'release' %}
-    {% if not archived %}
-    # Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
-    # here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
-    # mirrors
-    {% endif %}
     - name: {{mainrepo}}
       fetcher:
         class: RepodataFetcher
-        {% if archived %}
-        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/{{version}}/Everything/source/tree/
-        {% elif development %}
-        url: https://mirror.yandex.ru/fedora/linux/development/{{version}}/Everything/source/tree/
+        {% if development %}
+        url: {{mirror}}/development/{{version}}/Everything/source/tree/
         {% else %}
-        url: https://mirror.yandex.ru/fedora/linux/releases/{{version}}/Everything/source/tree/
+        url: {{mirror}}/releases/{{version}}/Everything/source/tree/
         {% endif %}
       parser:
         class: RepodataParser
@@ -52,11 +56,7 @@
       fetcher:
         class: RepodataFetcher
         {% set source_subdir='Everything/source/tree' if version >= 35 else 'Everything/SRPMS' if version >= 28 else 'SRPMS' %}
-        {% if archived %}
-        url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/{{version}}/{{source_subdir}}/
-        {% else %}
-        url: https://mirror.yandex.ru/fedora/linux/updates/{{version}}/{{source_subdir}}/
-        {% endif %}
+        url: {{mirror}}/updates/{{version}}/{{source_subdir}}/
       parser:
         class: RepodataParser
         vertags: fc
