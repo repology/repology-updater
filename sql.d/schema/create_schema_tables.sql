@@ -445,7 +445,10 @@ CREATE TABLE global_version_events (
 	data jsonb NOT NULL
 );
 
-CREATE INDEX ON global_version_events(ts DESC);
+CREATE INDEX global_version_events_ts_idx ON global_version_events(ts DESC);
+
+-- keep spread threshold in sync with get_important_updates.sql from webapp
+CREATE INDEX global_version_events_ts_idx_partial ON global_version_events(ts DESC) WHERE type = 'newest_update'::global_version_event_type AND spread > 5;
 
 --------------------------------------------------------------------------------
 -- Statistics
