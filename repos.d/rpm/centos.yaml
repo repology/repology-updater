@@ -128,7 +128,7 @@
   color: '932279'
   minpackages: 2000
   sources:
-    - name: [ AppStream, BaseOS, CBR ]
+    - name: [ AppStream, BaseOS, CRB ]
       fetcher:
         class: RepodataFetcher
         url: 'http://mirror.stream.centos.org/9-stream/{source}/source/tree/'
