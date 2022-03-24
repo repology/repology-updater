@@ -89,9 +89,9 @@
       url: 'https://git.centos.org/rpms/{srcname}/raw/c8{centossuffix}/f/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
-- name: centos_8_stream
+- name: centos_stream_8
   type: repository
-  desc: CentOS 8 Stream
+  desc: CentOS Stream 8
   statsgroup: CentOS
   family: centos
   ruleset: [centos, rpm]
