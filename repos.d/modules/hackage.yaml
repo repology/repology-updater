@@ -33,7 +33,7 @@
   family: hackage
   ruleset: [hackage, stackage]
   color: "293845"
-  minpackages: 2800
+  minpackages: 2500
   sources:
     - name: nightly.html
       fetcher:
