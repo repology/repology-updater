@@ -29,7 +29,7 @@
   statsgroup: Debian+derivs
   family: debuntu
   color: '56347c'
-  minpackages: 10
+  minpackages: 1
   sources:
     - name: main
       fetcher:
