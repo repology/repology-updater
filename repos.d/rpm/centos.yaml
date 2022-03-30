@@ -153,6 +153,7 @@
   desc: AlmaLinux 8
   statsgroup: CentOS
   family: centos
+  ruleset: [centos, rpm]
   color: '082336'
   minpackages: 2500
   sources:
@@ -174,6 +175,7 @@
   desc: Rocky Linux 8
   statsgroup: CentOS
   family: centos
+  ruleset: [centos, rpm]
   color: '10b981'
   minpackages: 2500
   sources:
