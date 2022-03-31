@@ -53,7 +53,7 @@
   family: gentoo
   ruleset: [gentoo, funtoo]
   color: '4e4e71'
-  minpackages: 31000
+  minpackages: 30000
   default_maintainer: fallback-mnt-funtoo@repology
   sources:
     {% for kit in kits %}
