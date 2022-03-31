@@ -130,6 +130,9 @@ class NameType:
     SAGEMATH_NAME: ClassVar[int] = 300
     SAGEMATH_PROJECT_NAME: ClassVar[int] = 301
 
+    PACSTALL_NAME: ClassVar[int] = 310
+    PACSTALL_VISIBLENAME: ClassVar[int] = IGNORED
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -498,6 +501,14 @@ _MAPPINGS = [
         trackname=NameType.SAGEMATH_NAME,
         visiblename=NameType.SAGEMATH_NAME,
         projectname_seed=NameType.SAGEMATH_PROJECT_NAME,
+    ),
+    # Pacstall
+    _NameMapping(
+        srcname=NameType.PACSTALL_NAME,
+        binname=NameType.PACSTALL_NAME,
+        trackname=NameType.PACSTALL_NAME,
+        visiblename=NameType.PACSTALL_NAME,
+        projectname_seed=NameType.PACSTALL_NAME,
     ),
 ]
 

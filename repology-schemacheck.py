@@ -92,6 +92,7 @@ families = [
     'opensuse',
     'openwrt',
     'os4depot',
+    'pacstall',
     'pclinuxos',
     'pisi',
     'pkgsrc',

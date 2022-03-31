@@ -1,0 +1,22 @@
+###########################################################################
+# Pacstall
+###########################################################################
+- name: pacstall
+  type: repository
+  desc: pacstall
+  family: pacstall
+  ruleset: pacstall
+  minpackages: 200
+  sources:
+    - name: repology.json
+      fetcher:
+        class: FileFetcher
+        url: https://pacstall.dev/api/repology
+      parser:
+        class: PacstallJsonParser
+  repolinks:
+    - desc: Pacstall home
+      url: https://pacstall.dev/
+    - desc: Default pacscripts repository
+      url: https://github.com/pacstall/pacstall-programs
+  groups: [ all, production ]
