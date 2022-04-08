@@ -51,7 +51,7 @@
   repolinks:
     - desc: Chaotic-AUR Home
       url: https://lonewolf.pedrohlc.com/chaotic-aur/
-  groups: [ all, production ]
+  groups: [ all ] # broken: garbage in info for cl-alexandria-git-r284.2c1968d-1:
 
 - name: mpr
   type: repository
