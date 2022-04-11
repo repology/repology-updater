@@ -108,4 +108,5 @@ FROM (
 			'repos', devel_repos
 		)) AS data
 	FROM diff WHERE is_devel_update AND devel_versions IS NOT NULL
-) AS events;
+) AS events
+WHERE EXISTS (SELECT * FROM metapackages WHERE metapackages.effname = events.effname AND num_repos_nonshadow > 0);
