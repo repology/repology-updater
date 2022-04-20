@@ -333,9 +333,10 @@ def test_noruleset():
 def test_category():
     check_transformer(
         '[ { category: foo, setname: quux }, { category: [ baz ], setname: bat } ]',
-        PackageSample(name='p1', version='1.0', category='foo').expect(effname='quux'),
-        PackageSample(name='p2', version='2.0', category='bar').expect(effname='p2'),
-        PackageSample(name='p3', version='3.0', category='baz').expect(effname='bat'),
+        PackageSample(name='p1', version='1.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0', category='foo').expect(effname='quux'),
+        PackageSample(name='p3', version='2.0', category='bar').expect(effname='p3'),
+        PackageSample(name='p4', version='3.0', category='baz').expect(effname='bat'),
     )
 
 
