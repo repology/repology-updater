@@ -339,6 +339,17 @@ def test_category():
     )
 
 
+def test_categorypat():
+    check_transformer(
+        '[ { categorypat: "a.*b", setname: quux } ]',
+        PackageSample(name='p1', version='1.0').expect(effname='p1'),
+        PackageSample(name='p2', version='1.0', category='a').expect(effname='p2'),
+        PackageSample(name='p3', version='1.0', category='AB').expect(effname='quux'),
+        PackageSample(name='p4', version='1.0', category='A-B').expect(effname='quux'),
+        PackageSample(name='p5', version='1.0', category='-a-b-').expect(effname='p5'),
+    )
+
+
 def test_category_case():
     check_transformer(
         '[ { category: categ1, setname: ok1 }, { category: CATEG2, setname: ok2 }, { category: categ3, setname: ok3 }, { category: CATEG4, setname: ok4 } ]',
