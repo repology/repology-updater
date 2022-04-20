@@ -59,7 +59,7 @@ def category(ruledata: Any) -> Matcher:
 
 @_matcher_generator
 def categorypat(ruledata: Any) -> Matcher:
-    categorypat_re = re.compile(ruledata['categorypat'].replace('\n', ''), re.ASCII)
+    categorypat_re = re.compile(ruledata['categorypat'].replace('\n', '').lower(), re.ASCII)
 
     def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
         return categorypat_re.fullmatch(package.category.lower()) is not None if package.category else False
