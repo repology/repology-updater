@@ -135,7 +135,8 @@ class NixJsonParser(Parser):
                     continue
 
                 if not packagedata['version']:
-                    continue  # no version - silently ignore
+                    pkg.log(f'dropping "{packagedata["name"]}", no version defined', severity=Logger.ERROR)
+                    continue
 
                 if re.match('[0-9].*[a-z].*-[0-9]', packagedata['version'].lower()):
                     letters = ''.join(c for c in packagedata['version'].lower() if c.isalpha())
