@@ -20,7 +20,7 @@
       url: https://slackbuilds.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://slackbuilds.org/repository/14.2/{srcname}/'
+      url: 'https://slackbuilds.org/repository/15.0/{srcname}/'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://slackbuilds.org/slackbuilds/14.2/{srcname}/{srcname|basename}.SlackBuild'
+      url: 'https://slackbuilds.org/slackbuilds/15.0/{srcname}/{srcname|basename}.SlackBuild'
   groups: [ all, production, have_testdata ]
