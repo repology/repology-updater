@@ -16,7 +16,7 @@
         class: TermuxJsonParser
   repolinks:
     - desc: Termux home
-      url: https://termux.com/
+      url: https://termux.org/
     - desc: Packages repository
       url: https://github.com/termux/termux-packages
   # packagelinks produced by the parser
