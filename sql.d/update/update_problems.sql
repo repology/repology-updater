@@ -55,15 +55,17 @@ WITH packages_links_expanded AS (
 		ipv4_success,
 		ipv4_last_success,
 		first_extracted,
-		ipv4_permanent_redirect_target
+		ipv4_permanent_redirect_target,
+		link_type
 	FROM packages_links_maintainers_expanded INNER JOIN links ON(links.id = link_id)
-	WHERE link_type = 0  -- UPSTREAM_HOMEPAGE
+	WHERE link_type IN (0, 1)  -- UPSTREAM_HOMEPAGE, UPSTREAM_DOWNLOAD
 ), homepage_problems AS (
 	SELECT id, repo, visiblename, effname, maintainer,
 		'homepage_dead'::problem_type AS problem_type,
 		jsonb_build_object('url', url, 'code', ipv4_status_code) AS data
 	FROM packages_homepages
 	WHERE
+		link_type = 0 AND
 		NOT ipv4_success AND
 		(
 			(ipv4_last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
@@ -75,6 +77,7 @@ WITH packages_links_expanded AS (
 		jsonb_build_object('url', url, 'target', ipv4_permanent_redirect_target) AS data
 	FROM packages_homepages
 	WHERE
+		link_type = 0 AND
 		replace(url, 'http://', 'https://') = ipv4_permanent_redirect_target
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
@@ -82,6 +85,7 @@ WITH packages_links_expanded AS (
 		jsonb_build_object('url', url) AS data
 	FROM packages_homepages
 	WHERE
+		link_type = 0 AND
 		url SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
 		url SIMILAR TO 'https?://code.google.com(/%%)?'
 
@@ -90,6 +94,7 @@ WITH packages_links_expanded AS (
 		jsonb_build_object('url', url) AS data
 	FROM packages_homepages
 	WHERE
+		link_type = 0 AND
 		url SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?'
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
@@ -97,6 +102,7 @@ WITH packages_links_expanded AS (
 		jsonb_build_object('url', url) AS data
 	FROM packages_homepages
 	WHERE
+		link_type = 0 AND
 		url SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?'
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
@@ -104,7 +110,28 @@ WITH packages_links_expanded AS (
 		jsonb_build_object('url', url) AS data
 	FROM packages_homepages
 	WHERE
+		link_type = 0 AND
 		url SIMILAR TO 'https?://search.cpan.org(/%%)?'
+
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'download_dead'::problem_type AS problem_type,
+		jsonb_build_object('url', url, 'code', ipv4_status_code) AS data
+	FROM packages_homepages
+	WHERE
+		link_type = 1 AND
+		NOT ipv4_success AND
+		(
+			(ipv4_last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
+			ipv4_last_success < now() - INTERVAL '30' DAY
+		)
+
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'download_permanent_https_redirect'::problem_type AS problem_type,
+		jsonb_build_object('url', url, 'target', ipv4_permanent_redirect_target) AS data
+	FROM packages_homepages
+	WHERE
+		link_type = 1 AND
+		replace(url, 'http://', 'https://') = ipv4_permanent_redirect_target
 )
 INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
 SELECT id, repo, visiblename, effname, maintainer, problem_type, data
