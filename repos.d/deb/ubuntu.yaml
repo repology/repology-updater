@@ -122,6 +122,7 @@
 {{ ubuntu('16', '04', 'xenial',  minpackages=26000, valid_till='2026-04-23', packages=false) }}
 {{ ubuntu('18', '04', 'bionic',  minpackages=29000, valid_till='2028-04-26') }}
 {{ ubuntu('20', '04', 'focal',   minpackages=29000, valid_till='2030-04-23') }}
-{{ ubuntu('21', '04', 'hirsute', minpackages=30000, valid_till='2022-01-20') }}
+{{ ubuntu('21', '04', 'hirsute', minpackages=30000, valid_till='2022-01-20', packages=false) }}
 {{ ubuntu('21', '10', 'impish',  minpackages=32000, valid_till='2022-07-14') }}
-{{ ubuntu('22', '04', 'jammy',   minpackages=32000, valid_till='2032-04-21', backports=false, proposed=true) }}
+{{ ubuntu('22', '04', 'jammy',   minpackages=32000, valid_till='2032-04-21') }}
+{{ ubuntu('22', '10', 'kinetic', minpackages=33000,                          backports=false, proposed=true) }}
