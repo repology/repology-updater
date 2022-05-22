@@ -63,10 +63,11 @@
       url: 'https://abf.io/import/{srcname}/raw/rosa2016.1/{srcname}.spec'
   groups: [ all, production, rosa ]
 
-# Note: since Rosa 2019.1, use of urpmi metadate (info.xml) is discouraged
+# Note: rosa2021.1+ does not have urpmi-compatible metadata
+# Note: rosa2019.1 was renamed to rosa2021.1, keeping old "name"
 - name: rosa_2019_1
   type: repository
-  desc: Rosa 2019.1
+  desc: Rosa 2021.1
   statsgroup: Rosa
   family: rosa
   ruleset: [rosa, rpm]
@@ -77,7 +78,7 @@
     - name: [ main/release, non-free/release, contrib/release ]
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.rosalinux.ru/rosa2019.1/repository/SRPMS/{source}/'
+        url: 'http://abf-downloads.rosalinux.ru/rosa2021.1/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
       subrepo: '{source}'
@@ -86,11 +87,11 @@
       url: http://en.rosalinux.com/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://abf.io/import/{srcname}/tree/rosa2019.1'
+      url: 'https://abf.io/import/{srcname}/tree/rosa2021.1'
     - type: PACKAGE_RECIPE
-      url: 'https://abf.io/import/{srcname}/blob/rosa2019.1/{srcname}.spec'
+      url: 'https://abf.io/import/{srcname}/blob/rosa2021.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://abf.io/import/{srcname}/raw/rosa2019.1/{srcname}.spec'
+      url: 'https://abf.io/import/{srcname}/raw/rosa2021.1/{srcname}.spec'
   groups: [ all, production, rosa ]
 
 - name: rosa_server_6_9
