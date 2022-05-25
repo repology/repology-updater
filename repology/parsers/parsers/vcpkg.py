@@ -31,8 +31,7 @@ from repology.parsers.patches import add_patch_files
 def _normalize_version(version: str) -> str:
     version = re.sub('[^0-9]*vcpkg.*$', '', version)  # vcpkg stuff
     version = re.sub('(alpha|beta|rc|patch)-([0-9]+)$', '\\1\\2', version)  # save from the following rule
-    version = re.sub('-[0-9]+$', '', version)  # cut off revision
-    version = re.sub('-[0-9a-f]{6,}$', '', version)  # drop commits
+    version = re.sub('-[0-9a-f]{6,}$', '', version)  # drop commits and years
 
     return version
 
