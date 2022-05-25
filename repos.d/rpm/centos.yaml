@@ -160,7 +160,7 @@
     - name: [ AppStream, BaseOS, PowerTools, extras ]
       fetcher:
         class: RepodataFetcher
-        url: 'https://repo.almalinux.org/almalinux/8/{source}/Source/'
+        url: 'https://repo.almalinux.org/vault/8/{source}/Source/'
       parser:
         class: RepodataParser
         vertags: el
@@ -168,7 +168,29 @@
   repolinks:
     - desc: AlmaLinux home
       url: https://almalinux.org/
-  groups: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm, almalinux ]
+
+- name: almalinux_9
+  type: repository
+  desc: AlmaLinux 9
+  statsgroup: CentOS
+  family: centos
+  ruleset: [centos, rpm]
+  color: '082336'
+  minpackages: 2000
+  sources:
+    - name: [ AppStream, BaseOS, CRB ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://repo.almalinux.org/almalinux/9/{source}/Source/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  repolinks:
+    - desc: AlmaLinux home
+      url: https://almalinux.org/
+  groups: [ all, production, centos, rpm, almalinux ]
 
 - name: rocky_8
   type: repository
