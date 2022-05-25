@@ -89,5 +89,5 @@
 {{ fedora(33, minpackages=24000, valid_till='2021-11-23') }}
 {{ fedora(34, minpackages=24000, valid_till='2022-05-17') }}
 {{ fedora(35, minpackages=24000, valid_till='2022-11-30') }}
-{{ fedora(36, minpackages=21000, valid_till='2023-05-24', development=True) }}
+{{ fedora(36, minpackages=21000, valid_till='2023-05-24') }}
 {{ fedora('rawhide', minpackages=21000, development=True) }}
