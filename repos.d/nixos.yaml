@@ -59,6 +59,35 @@
       url: 'https://github.com/NixOS/nixpkgs/blob/release-21.11/{?posfile}#L{?posline}'
   groups: [ all, production, nix ]
 
+- name: nix_stable_22_05
+  type: repository
+  desc: nixpkgs stable 22.05
+  statsgroup: nix
+  family: nix
+  ruleset: nix
+  color: '7eb2dd'
+  minpackages: 70000
+  valid_till: 2022-12-31
+  default_maintainer: fallback-mnt-nix@repology
+  sources:
+    - name: packages.json
+      fetcher:
+        class: FileFetcher
+        url: https://channels.nixos.org/nixos-22.05/packages.json.br
+      parser:
+        class: NixJsonParser
+  repolinks:
+    - desc: NixOS home
+      url: https://nixos.org
+    - desc: NixOS packages
+      url: https://search.nixos.org/packages
+    - desc: GitHub repository
+      url: https://github.com/NixOS/nixpkgs
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/NixOS/nixpkgs/blob/release-22.05/{?posfile}#L{?posline}'
+  groups: [ all, production, nix ]
+
 - name: nix_unstable
   type: repository
   desc: nixpkgs unstable
