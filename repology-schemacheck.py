@@ -138,6 +138,7 @@ rulesets = families + [
     'blackarch',
     'bunsenlabs',
     'calculate',
+    'cachyos',
     'deb_multimedia',
     'debian',
     'deepin',

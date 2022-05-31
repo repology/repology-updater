@@ -1,0 +1,44 @@
+###########################################################################
+# CachyOS
+###########################################################################
+- name: cachyos_generic
+  type: repository
+  desc: CachyOS Generic
+  statsgroup: Arch+derivs
+  family: arch
+  ruleset: [ arch, cachyos ]
+  color: '00ac89'
+  minpackages: 2300
+  sources:
+    - name: cachyos
+      fetcher:
+        class: TarFetcher
+        url: 'https://nl.cachyos.org/repo/x86_64/{source}/{source}.db.tar.zst'
+      parser:
+        class: ArchDBParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: CachyOS home
+      url: https://cachyos.org/
+  groups: [ all, production ]
+
+- name: cachyos_optimized
+  type: repository
+  desc: CachyOS Optimized
+  statsgroup: Arch+derivs
+  family: arch
+  ruleset: [ arch, cachyos ]
+  color: '00ac89'
+  minpackages: 2300
+  sources:
+    - name: cachyos-v3
+      fetcher:
+        class: TarFetcher
+        url: 'https://nl.cachyos.org/repo/x86_64_v3/{source}/{source}.db.tar.zst'
+      parser:
+        class: ArchDBParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: CachyOS home
+      url: https://cachyos.org/
+  groups: [ all, production ]
