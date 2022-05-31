@@ -182,7 +182,7 @@
     - name: [ AppStream, BaseOS, CRB ]
       fetcher:
         class: RepodataFetcher
-        url: 'https://repo.almalinux.org/almalinux/9/{source}/Source/'
+        url: 'https://repo.almalinux.org/vault/9/{source}/Source/'
       parser:
         class: RepodataParser
         vertags: el
