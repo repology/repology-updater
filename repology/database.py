@@ -27,11 +27,11 @@ class Database:
 
     def __init__(self, dsn: str, querymgr: QueryManager, readonly: bool = True, autocommit: bool = False, application_name: str | None = None) -> None:
         self._db = psycopg2.connect(dsn, application_name=application_name)
-        self._db.set_session(readonly=readonly, autocommit=autocommit)  # type: ignore  # broken typing stubs for psycopg2
+        self._db.set_session(readonly=readonly, autocommit=autocommit)
         querymgr.inject_queries(self, self._db)
 
     def commit(self) -> None:
-        self._db.commit()  # type: ignore  # broken typing stubs for psycopg2
+        self._db.commit()
 
     # this class is filled by methods by querymgr
     # mypy doesn't know about them so we have to silence it this way
