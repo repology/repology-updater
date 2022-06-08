@@ -51,7 +51,7 @@
   repolinks:
     - desc: Chaotic-AUR Home
       url: https://aur.chaotic.cx
-  groups: [ all ]
+  groups: [ all, production ]
 
 - name: mpr
   type: repository
