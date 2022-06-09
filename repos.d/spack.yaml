@@ -13,18 +13,18 @@
     - name: repology.json
       fetcher:
         class: FileFetcher
-        url: https://raw.githubusercontent.com/spack/packages/main/data/repology.json
+        url: https://raw.githubusercontent.com/spack/packages.spack.io/main/data/repology.json
         allow_zero_size: false
       parser:
         class: SpackJsonParser
   repolinks:
     - desc: Spack Catalog
-      url: https://spack.github.io/packages/
+      url: https://spack.github.io/packages.spack.io/
     - desc: Spack GitHub repository
       url: https://github.com/spack/spack
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://spack.github.io/packages/package.html?name={name}'
+      url: 'https://spack.github.io/packages.spack.io/package.html?name={name}'
     - type: PACKAGE_SOURCES
       url: 'https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/{name}'
     - type: PACKAGE_RECIPE
