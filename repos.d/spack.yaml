@@ -19,7 +19,7 @@
         class: SpackJsonParser
   repolinks:
     - desc: Spack Catalog
-      url: https://spack.github.io/packages.spack.io
+      url: https://spack.github.io/packages.spack.io/
     - desc: Spack GitHub repository
       url: https://github.com/spack/spack
   packagelinks:
