@@ -50,7 +50,7 @@
       #    url: 'https://archlinux.pkgs.org/rolling/chaotic-aur-x86_64/{binname}-{rawversion}-x86_64.pkg.tar.zst.html'
   repolinks:
     - desc: Chaotic-AUR Home
-      url: https://aur.chaotic.cx
+      url: https://aur.chaotic.cx/
   groups: [ all, production ]
 
 - name: mpr
