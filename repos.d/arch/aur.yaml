@@ -35,7 +35,7 @@
   type: repository
   desc: Chaotic-AUR
   family: arch
-  ruleset: [ arch, aur ]
+  ruleset: [ arch, aur, chaotic-aur ]
   minpackages: 0
   sources:
     - name: chaotic-aur-x86_64
