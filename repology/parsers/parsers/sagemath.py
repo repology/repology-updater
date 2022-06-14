@@ -1,4 +1,4 @@
-# Copyright (C) 2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2021-2022 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -18,6 +18,7 @@
 import os
 from typing import Iterable
 
+from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.patches import add_patch_files
@@ -43,21 +44,26 @@ class SageMathParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('.p')
 
-        for versionfile in walk_tree(path, name='package-version.txt'):
-            pkgpath = os.path.dirname(versionfile)
-            with factory.begin(pkgpath) as pkg:
-                pkg.add_name(os.path.basename(pkgpath), NameType.SAGEMATH_NAME)
+        for versionfile_abs in walk_tree(path, name='package-version.txt'):
+            pkgpath_abs = os.path.dirname(versionfile_abs)
+            pkgpath_rel = os.path.relpath(pkgpath_abs, path)
+            with factory.begin(pkgpath_rel) as pkg:
+                pkg.add_name(os.path.basename(pkgpath_rel), NameType.SAGEMATH_NAME)
 
-                projectname = os.path.basename(pkgpath)
-                if os.path.exists(os.path.join(pkgpath, 'install-requires.txt')):
+                projectname = os.path.basename(pkgpath_rel)
+                if os.path.exists(os.path.join(pkgpath_abs, 'install-requires.txt')):
                     projectname = 'python:' + projectname
 
                 pkg.add_name(projectname, NameType.SAGEMATH_PROJECT_NAME)
 
-                with open(versionfile) as fd:
-                    pkg.set_version(fd.read().strip(), normalize_version)
+                try:
+                    with open(versionfile_abs) as fd:
+                        pkg.set_version(fd.read().strip(), normalize_version)
+                except FileNotFoundError:
+                    pkg.log('cannot read package-version.txt (likely being a broken symlink to src/ which is not checked out)', Logger.ERROR)
+                    continue
 
-                if upstream_url := _parse_upstream_url(pkgpath):
+                if upstream_url := _parse_upstream_url(pkgpath_abs):
                     pkg.add_downloads(
                         upstream_url.replace(
                             'VERSION',
@@ -65,6 +71,6 @@ class SageMathParser(Parser):
                         )
                     )
 
-                add_patch_files(pkg, os.path.join(pkgpath, 'patches'), '*.patch')
+                add_patch_files(pkg, os.path.join(pkgpath_abs, 'patches'), '*.patch')
 
                 yield pkg
