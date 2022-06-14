@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2022 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -50,7 +50,7 @@ def _parse_infofile(path: str) -> dict[str, str]:
 
         for line in infofile:
             line = line.strip()
-            if not line:
+            if not line or line.startswith('#'):
                 continue
 
             if key:  # continued
