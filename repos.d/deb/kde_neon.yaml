@@ -5,7 +5,7 @@
   type: repository
   desc: KDE neon User
   family: debuntu
-  minpackages: 400  # by unique projects
+  minpackages: 400
   sources:
     - name: main
       fetcher:
@@ -29,7 +29,7 @@
   type: repository
   desc: KDE neon User LTS
   family: debuntu
-  minpackages: 400  # by unique projects
+  minpackages: 400
   sources:
     - name: main
       fetcher:
@@ -44,55 +44,7 @@
     - desc: KDE neon home
       url: https://neon.kde.org/
     - desc: KDE neon git repositories
-      url: https://packaging.neon.kde.org/
-    - desc: KDE neon wiki
-      url: https://community.kde.org/Neon/Git
-  groups: [ all, production, kde_neon ]
-
-- name: kde_neon_dev_stable
-  type: repository
-  desc: KDE neon Dev Stable
-  family: debuntu
-  minpackages: 400
-  sources:
-    - name: main
-      fetcher:
-        class: FileFetcher
-        url: http://archive.neon.kde.org/dev/stable/dists/focal/main/source/Sources.gz
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-        allowed_vcs_urls: 'https://invent.kde.org/neon/'
-      subrepo: main
-  repolinks:
-    - desc: KDE neon home
-      url: https://neon.kde.org/
-    - desc: KDE neon git repositories
-      url: https://packaging.neon.kde.org/
-    - desc: KDE neon wiki
-      url: https://community.kde.org/Neon/Git
-  groups: [ all, production, kde_neon ]
-
-- name: kde_neon_dev_unstable
-  type: repository
-  desc: KDE neon Dev Unstable
-  family: debuntu
-  minpackages: 400
-  sources:
-    - name: main
-      fetcher:
-        class: FileFetcher
-        url: http://archive.neon.kde.org/dev/unstable/dists/focal/main/source/Sources.gz
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-        allowed_vcs_urls: 'https://invent.kde.org/neon/'
-      subrepo: main
-  repolinks:
-    - desc: KDE neon home
-      url: https://neon.kde.org/
-    - desc: KDE neon git repositories
-      url: https://packaging.neon.kde.org/
+      url: https://invent.kde.org/neon
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
   groups: [ all, production, kde_neon ]
@@ -106,7 +58,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/unstable/dists/focal/main/source/Sources.gz
+        url: http://archive.neon.kde.org/unstable/dists/jammy/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -116,10 +68,10 @@
     - desc: KDE neon home
       url: https://neon.kde.org/
     - desc: KDE neon git repositories
-      url: https://packaging.neon.kde.org/
+      url: https://invent.kde.org/neon
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  groups: [ all, kde_neon ] # same as dev unstable
+  groups: [ all, production, kde_neon ]
 
 - name: kde_neon_testing
   type: repository
@@ -130,7 +82,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: http://archive.neon.kde.org/testing/dists/focal/main/source/Sources.gz
+        url: http://archive.neon.kde.org/testing/dists/jammy/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -140,7 +92,7 @@
     - desc: KDE neon home
       url: https://neon.kde.org/
     - desc: KDE neon git repositories
-      url: https://packaging.neon.kde.org/
+      url: https://invent.kde.org/neon
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
-  groups: [ all, kde_neon ] # same as dev stable
+  groups: [ all, production, kde_neon ]
