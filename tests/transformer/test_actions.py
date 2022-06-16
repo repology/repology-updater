@@ -255,3 +255,45 @@ def test_addflavor():
         PackageSample(name='foo-suffix').expect(flavors=['suffix']),
         PackageSample(name='foo').expect(flavors=[]),
     )
+
+
+def test_setflavor():
+    check_transformer(
+        '[ { name: matched, setflavor: true } ]',
+        PackageSample().expect(flavors=[]),
+        PackageSample(name='matched').expect(flavors=['matched']),
+        PackageSample(name='matched', flavors=['a', 'b']).expect(flavors=['matched']),
+    )
+
+    check_transformer(
+        '[ { name: matched, setflavor: f } ]',
+        PackageSample().expect(flavors=[]),
+        PackageSample(name='matched').expect(flavors=['f']),
+        PackageSample(name='matched', flavors=['a', 'b']).expect(flavors=['f']),
+    )
+
+    check_transformer(
+        '[ { name: matched, setflavor: "$0" } ]',
+        PackageSample().expect(flavors=[]),
+        PackageSample(name='matched').expect(flavors=['matched']),
+    )
+
+    check_transformer(
+        '[ { namepat: "(ma).*", setflavor: "$1" } ]',
+        PackageSample().expect(flavors=[]),
+        PackageSample(name='matched').expect(flavors=['ma']),
+    )
+
+    check_transformer(
+        '[ { name: matched, setflavor: [a,b,c] } ]',
+        PackageSample().expect(flavors=[]),
+        PackageSample(name='matched').expect(flavors=['a', 'b', 'c']),
+    )
+
+    check_transformer(
+        '[ { namepat: "(prefix-)?foo(-suffix)?", setflavor: ["$1", "$2"] } ]',
+        PackageSample(name='prefix-foo-suffix').expect(flavors=['prefix', 'suffix']),
+        PackageSample(name='prefix-foo').expect(flavors=['prefix']),
+        PackageSample(name='foo-suffix').expect(flavors=['suffix']),
+        PackageSample(name='foo').expect(flavors=[]),
+    )

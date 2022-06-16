@@ -316,6 +316,33 @@ def addflavor(ruledata: Any) -> Action:
 
 
 @_action_generator
+def setflavor(ruledata: Any) -> Action:
+    tmp_flavors: list[str] | None
+
+    if isinstance(ruledata['setflavor'], str):
+        tmp_flavors = [ruledata['setflavor']]
+    elif isinstance(ruledata['setflavor'], list):
+        tmp_flavors = ruledata['setflavor']
+    elif not isinstance(ruledata['setflavor'], bool):
+        raise RuntimeError('setflavor must be boolean or str or list')
+    else:
+        tmp_flavors = None
+
+    want_flavors: list[str] | None = tmp_flavors
+
+    def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+        flavors: list[str] = want_flavors if want_flavors else [package.effname]
+
+        flavors = [match_context.sub_name_dollars(flavor, package.effname) for flavor in flavors]
+
+        flavors = [flavor.strip('-') for flavor in flavors]
+
+        package.flavors = [flavor for flavor in flavors if flavor]
+
+    return action
+
+
+@_action_generator
 def resetflavors(ruledata: Any) -> Action:
     def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
         package.flavors = []
