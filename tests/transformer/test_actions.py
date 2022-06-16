@@ -217,6 +217,12 @@ def test_last():
 
 def test_addflavor():
     check_transformer(
+        '[ { name: matched, addflavor: true } ]',
+        PackageSample().expect(flavors=[]),
+        PackageSample(name='matched').expect(flavors=['matched']),
+    )
+
+    check_transformer(
         '[ { name: matched, addflavor: f } ]',
         PackageSample().expect(flavors=[]),
         PackageSample(name='matched').expect(flavors=['f']),
