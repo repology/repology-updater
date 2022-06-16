@@ -29,7 +29,7 @@ from repology.packagemaker import NameType, PackageFactory
 def spawn_package(
     *,
     name: str = 'dummyname',
-    version: str = '0',
+    version: str = '1.0',
     repo: str = 'dummyrepo',
     flags: int = 0,
     family: str | None = None,
