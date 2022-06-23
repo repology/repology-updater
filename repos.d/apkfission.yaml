@@ -1,0 +1,42 @@
+###########################################################################
+# APK Fission packages
+#
+# https://apkfission.net/install.html
+###########################################################################
+
+{% macro apkfission(version, archs=['aarch64','armv7','pmmx','ppc','ppc64','x86_64']) %}
+- name: apkfission_adelie_{{version|replace('.', '_')}}
+  type: repository
+  desc: APK Fission for Adélie {{version|title}}
+  statsgroup: APKFission
+  family: apkfission
+  ruleset: adelie
+  default_maintainer: fallback-mnt-apkfission@repology
+  sources:
+    {% for subrepo in ['main', 'nonfree'] %}
+    - name: {{subrepo}}/x86_64
+      fetcher:
+        class: TarFetcher
+        url: 'http://distfiles.apkfission.net/adelie/{{version}}/{{subrepo}}/x86_64/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
+      subrepo: {{subrepo}}/x86_64
+    {% endfor %}
+  repolinks:
+    - desc: APK Fission home
+      url: https://apkfission.net/
+  minpackages: 50
+  packagelinks:
+    {% for subrepo in ['main', 'nonfree'] %}
+    - type: PACKAGE_SOURCES
+      url: 'https://git.adelielinux.org/apkfission/packages/-/tree/master/{{subrepo}}/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.adelielinux.org/apkfission/packages/-/blob/master/{{subrepo}}/{srcname}/APKBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.adelielinux.org/apkfission/packages/-/raw/master/{{subrepo}}/{srcname}/APKBUILD'
+    {% endfor %}
+  groups: [ all, production, apkfission ]
+{% endmacro %}
+
+# 1.0 will coincide with Adélie 1.0 release
+{{ apkfission('current') }}
