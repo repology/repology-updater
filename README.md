@@ -100,7 +100,7 @@ the actual ones to `repology.conf`.
 ### Populating the database
 
 Note that you need more than 11GiB of disk space for Repology
-PostgreSQL database and additioannly more than 11GiB space for raw
+PostgreSQL database and additionally more than 11GiB space for raw
 and parsed repository data if you decide to run a complete update
 process.
 
