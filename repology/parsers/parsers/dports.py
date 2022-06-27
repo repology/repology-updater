@@ -17,7 +17,6 @@
 
 from typing import Iterable
 
-from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -29,13 +28,12 @@ class DPortsIndexParser(Parser):
         normalize_version = VersionStripper().strip_right(',').strip_right('_')
 
         with open(path, encoding='utf-8') as indexfile:
-            for line in indexfile:
-                pkg = factory.begin()
+            for nline, line in enumerate(indexfile, 1):
+                pkg = factory.begin(f'line {nline}')
 
                 fields = line.strip().split('|')
                 if len(fields) != 13:
-                    pkg.log('skipping, unexpected number of fields {}'.format(len(fields)), severity=Logger.ERROR)
-                    continue
+                    raise RuntimeError(f'unexpected number of fields ({len(fields)}) at line {nline}')
 
                 name, version = fields[0].rsplit('-', 1)
 
