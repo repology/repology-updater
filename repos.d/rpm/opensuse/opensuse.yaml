@@ -263,6 +263,20 @@
       parser:
         class: RepodataParser
       subrepo: updates/non-oss
+    - name: backports-update
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.3/backports/
+      parser:
+        class: RepodataParser
+      subrepo: updates/backports
+    - name: sle-update
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.3/sle/
+      parser:
+        class: RepodataParser
+      subrepo: updates/sle      
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -301,22 +315,35 @@
       parser:
         class: RepodataParser
       subrepo: main/non-oss
-    # XXX: not there yet
-    #- name: updates-oss
-    #  fetcher:
-    #    class: RepodataFetcher
-    #    url: http://download.opensuse.org/update/leap/15.4/oss/
-    #  parser:
-    #    class: RepodataParser
-    #  subrepo: updates/oss
-    #- name: updates-non-oss
-    #  fetcher:
-    #    class: RepodataFetcher
-    #    url: http://download.opensuse.org/update/leap/15.4/non-oss/
-    #  parser:
-    #    class: RepodataParser
-    #  subrepo: updates/non-oss
-  repolinks:
+      - name: updates-oss
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.4/oss/
+      parser:
+        class: RepodataParser
+      subrepo: updates/oss
+    - name: updates-non-oss
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.4/non-oss/
+      parser:
+        class: RepodataParser
+      subrepo: updates/non-oss
+    - name: backports-update
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.4/backports/
+      parser:
+        class: RepodataParser
+      subrepo: updates/backports
+    - name: sle-update
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.4/sle/
+      parser:
+        class: RepodataParser
+      subrepo: updates/sle    
+   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
     - desc: openSUSE package search
