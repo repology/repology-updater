@@ -51,7 +51,7 @@
   repolinks:
     - desc: Chaotic-AUR Home
       url: https://aur.chaotic.cx/
-  groups: [ all, production ]
+  groups: [ all ]  # prone to providing zero-filled desc files (atow, electron15-bin-15.5.7-1/desc)
 
 - name: mpr
   type: repository
