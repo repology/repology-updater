@@ -34,7 +34,6 @@
   groups: [ all, production, nix ]
 {% endmacro %}
 
-{{ nix('21.11', minpackages=70000, valid_till='2022-06-30') }}
 {{ nix('22.05', minpackages=70000, valid_till='2022-12-31') }}
 
 - name: nix_unstable
