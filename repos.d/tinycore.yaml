@@ -18,6 +18,6 @@
         class: TczInfoParser
     # XXX: add x86, armv6, armv7 repos
   repolinks:
-    - desc: Tincy Core Linux home
+    - desc: Tiny Core Linux home
       url: http://www.tinycorelinux.net/
   groups: [ ]  # disabled, too much garbage in package names and versions
