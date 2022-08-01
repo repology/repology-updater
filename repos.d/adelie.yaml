@@ -10,14 +10,20 @@
   minpackages: 900
   default_maintainer: fallback-mnt-adelie@repology
   sources:
-    # XXX: add all arches?
-    - name: [ system, user ]
+    - name: [ system/aarch64, system/armv7, system/pmmx, system/ppc, system/ppc64, system/x86_64 ]
       fetcher:
         class: TarFetcher
-        url: 'https://distfiles.adelielinux.org/adelie/current/{source}/ppc64/APKINDEX.tar.gz'
+        url: 'https://distfiles.adelielinux.org/adelie/current/{source}/APKINDEX.tar.gz'
       parser:
         class: ApkIndexParser
-      subrepo: '{source}'
+      subrepo: system
+    - name: [ user/aarch64, user/armv7, user/pmmx, user/ppc, user/ppc64, user/x86_64 ]
+      fetcher:
+        class: TarFetcher
+        url: 'https://distfiles.adelielinux.org/adelie/current/{source}/APKINDEX.tar.gz'
+      parser:
+        class: ApkIndexParser
+      subrepo: user
   repolinks:
     - desc: Adélie Linux home
       url: https://adelielinux.org/
