@@ -37,7 +37,7 @@ class RPMFTPListParser(Parser):
 
                     name, epoch, version, release, arch = nevra_parse(filename)
 
-                    assert(arch == 'src')
+                    assert arch == 'src'
 
                     pkg.add_name(name, NameType.SRCRPM_NAME)
 

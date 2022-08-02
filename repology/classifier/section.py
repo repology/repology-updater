@@ -71,19 +71,19 @@ class Section:
         return not self.guard or self.guard(group)
 
     def get_next_section(self) -> 'Section':
-        assert(self.next_section)
+        assert self.next_section
         return self.next_section
 
     def __repr__(self) -> str:
         if self.first_package is not None and self.first_package is self.first_package_alt:
-            assert(self.last_package)
+            assert self.last_package
             return f'Section("{self.name}", versions=[{self.first_package.version}, {self.last_package.version}])'
         elif self.first_package is not None:
-            assert(self.last_package)
-            assert(self.first_package_alt)
+            assert self.last_package
+            assert self.first_package_alt
             return f'Section("{self.name}", versions=[{self.first_package.version} ({self.first_package_alt.version}), {self.last_package.version}])'
         elif self.first_package_alt is not None:
-            assert(self.last_package)
+            assert self.last_package
             return f'Section("{self.name}", versions=[({self.first_package_alt.version}), {self.last_package.version}])'
         else:
             return f'Section("{self.name}", empty)'

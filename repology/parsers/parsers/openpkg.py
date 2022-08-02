@@ -30,7 +30,7 @@ class OpenPkgRdfParser(Parser):
 
         repository = root.find('{http://www.openpkg.org/xml-rdf-index/0.9}Repository')
 
-        assert(repository is not None)
+        assert repository is not None
 
         for item in repository.findall('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description'):
             with factory.begin() as pkg:

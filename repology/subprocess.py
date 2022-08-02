@@ -34,7 +34,7 @@ def run_subprocess(command: list[str], logger: Logger, cwd: str | None = None) -
                           encoding='utf-8',
                           errors='ignore',
                           cwd=cwd) as proc:
-        assert(proc.stdout)
+        assert proc.stdout
         for line in proc.stdout:
             logger.get_indented().log(line.strip())
         proc.wait()
@@ -59,7 +59,7 @@ def get_subprocess_output(command: list[str], logger: Logger, cwd: str | None = 
                           encoding='utf-8',
                           errors='ignore',
                           cwd=cwd) as proc:
-        assert(proc.stdout)
+        assert proc.stdout
         for line in proc.stdout:
             res += line
         proc.wait()

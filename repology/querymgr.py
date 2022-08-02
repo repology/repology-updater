@@ -215,7 +215,7 @@ class QueryManager:
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_TUPLES:
                 return args[0]
 
-            assert(query.argsmode == QueryMetadata.ARGSMODE_NORMAL)
+            assert query.argsmode == QueryMetadata.ARGSMODE_NORMAL
 
             args_for_query = {}
             for narg, argname in enumerate(query.args):

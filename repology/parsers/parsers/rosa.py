@@ -39,7 +39,7 @@ class RosaInfoXmlParser(Parser):
             with factory.begin() as pkg:
                 name, epoch, version, release, arch = nevra_parse(info.attrib['fn'])
 
-                assert(arch == 'src')
+                assert arch == 'src'
 
                 pkg.add_name(name, NameType.SRCRPM_NAME)
 

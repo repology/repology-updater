@@ -31,7 +31,7 @@ def _as_maybe_str(v: Any) -> str | None:
     if v is None:
         return None
     if isinstance(v, list):
-        assert(len(v) == 1)
+        assert len(v) == 1
         return str(v[0])
     return str(v)
 
@@ -40,7 +40,7 @@ def _as_str(v: Any) -> str:
     if v is None:
         raise RuntimeError('unexpected empty value')
     if isinstance(v, list):
-        assert(len(v) == 1)
+        assert len(v) == 1
         return str(v[0])
     return str(v)
 

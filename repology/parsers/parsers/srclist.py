@@ -38,7 +38,7 @@ class SrcListParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for header in rpm.readHeaderListFromFile(path):
             with factory.begin() as pkg:
-                assert(header.isSource())  # binary packages not supported yet
+                assert header.isSource()  # binary packages not supported yet
 
                 def sanitize_key(key: Any) -> Any:
                     return rpm.tagnames[key].lower() if key in rpm.tagnames else key

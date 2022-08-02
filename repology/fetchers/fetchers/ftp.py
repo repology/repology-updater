@@ -28,11 +28,11 @@ class FTPListFetcher(ScratchFileFetcher):
         super(FTPListFetcher, self).__init__()
 
         self.url = urlparse(url, scheme='ftp', allow_fragments=False)
-        assert(self.url.scheme == 'ftp')
+        assert self.url.scheme == 'ftp'
         self.fetch_timeout = fetch_timeout
 
     def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
-        assert(self.url.hostname is not None)
+        assert self.url.hostname is not None
 
         ftp = ftplib.FTP(
             host=self.url.hostname,
