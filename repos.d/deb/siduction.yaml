@@ -38,7 +38,7 @@
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, siduction]
-  minpackages: 10
+  minpackages: 1
   sources:
     - name: [ main, contrib, non-free ]
       fetcher:
