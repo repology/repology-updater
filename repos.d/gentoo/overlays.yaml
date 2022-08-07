@@ -107,6 +107,38 @@
   groups: [ all, production, gentoo-overlays ]
 
 ###########################################################################
+# Wayland Desktop
+###########################################################################
+- name: gentoo_ovl_wayland_desktop
+  type: repository
+  desc: Gentoo overlay Wayland Desktop
+  family: gentoo
+  color: 'f7a9b8'
+  minpackages: 100
+  default_maintainer: floss@bsd.ac
+  sources:
+    - name: gentoo-wayland-desktop
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/gentoo-mirror/wayland-desktop.git
+        sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      parser:
+        class: GentooGitParser
+        require_md5cache_metadata: true
+        require_xml_metadata: true
+  repolinks:
+    - desc: GitHub page
+      url: https://github.com/gentoo-mirror/wayland-desktop
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/gentoo-mirror/wayland-desktop/tree/master/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/gentoo-mirror/wayland-desktop/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/gentoo-mirror/wayland-desktop/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+  groups: [ all, production, gentoo-overlays ]
+
+###########################################################################
 # Disabled overlays (not really useful)
 ###########################################################################
 - name: gentoo_ovl_games
