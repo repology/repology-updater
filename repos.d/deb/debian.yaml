@@ -54,6 +54,14 @@
       parser:
         class: DebianSourcesParser
       subrepo: '{source}'
+    - name: [ stretch/updates/main, stretch/updates/contrib, stretch/updates/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://security.debian.org/debian-security/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
@@ -123,6 +131,14 @@
       fetcher:
         class: FileFetcher
         url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+    - name: [ buster/updates/main, buster/updates/contrib, buster/updates/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://security.debian.org/debian-security/dists/{source}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -201,6 +217,14 @@
       parser:
         class: DebianSourcesParser
       subrepo: '{source}'
+    - name: [ bullseye-security/main, bullseye-security/contrib, bullseye-security/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://security.debian.org/debian-security/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
@@ -271,6 +295,14 @@
       fetcher:
         class: FileFetcher
         url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+    - name: [ bookworm-security/main, bookworm-security/contrib, bookworm-security/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://security.debian.org/debian-security/dists/{source}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
