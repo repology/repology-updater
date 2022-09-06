@@ -20,6 +20,14 @@
       parser:
         class: DebianSourcesParser
       subrepo: '{source}'
+    - name: [ jessie/updates/main, jessie/updates/contrib, jessie/updates/non-free ]
+      fetcher:
+        class: FileFetcher
+        url: 'http://security.debian.org/debian-security/dists/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
