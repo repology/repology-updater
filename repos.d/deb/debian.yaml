@@ -443,7 +443,7 @@
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.debian.org/{srcname}'
     - type: PACKAGE_BUILD_STATUS
-      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=exprimental'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=experimental'
     - type: PACKAGE_STATISTICS
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   groups: [ all, production, debian ]
