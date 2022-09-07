@@ -375,7 +375,8 @@ _MAPPINGS = [
     ),
     # F-Droid
     _NameMapping(
-        name=NameType.FDROID_ID,
+        srcname=NameType.FDROID_ID,
+        binname=NameType.FDROID_ID,
         trackname=NameType.FDROID_ID,
         visiblename=NameType.FDROID_NAME,
         projectname_seed=NameType.FDROID_NAME,

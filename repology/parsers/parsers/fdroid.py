@@ -18,7 +18,7 @@
 import xml.etree.ElementTree
 from typing import Iterable
 
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import safe_findtext
@@ -34,8 +34,12 @@ class FDroidParser(Parser):
                 # org.primftpd: name="primiti\nve ftpd"
                 app.add_name(safe_findtext(application, 'name').replace('\n', ''), NameType.FDROID_NAME)
                 app.add_licenses(application.findtext('license'))
-                app.add_categories(application.findtext('category'))
-                app.add_homepages(application.findtext('web'))
+                app.add_categories(safe_findtext(application, 'categories').split(','))
+                app.add_links(LinkType.UPSTREAM_HOMEPAGE, application.findtext('web'))
+                app.add_links(LinkType.UPSTREAM_HOMEPAGE, application.findtext('source'))
+                app.add_links(LinkType.UPSTREAM_ISSUE_TRACKER, application.findtext('issues'))
+                app.add_links(LinkType.UPSTREAM_CHANGELOG, application.findtext('changelog'))
+                app.add_links(LinkType.UPSTREAM_DONATION, application.findtext('donate'))
                 app.set_summary(application.findtext('summary'))
 
                 upstream_version_code = int(safe_findtext(application, 'marketvercode'))

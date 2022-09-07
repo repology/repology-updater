@@ -20,5 +20,5 @@
       url: https://f-droid.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://f-droid.org/packages/{name}/'
+      url: 'https://f-droid.org/packages/{srcname}/'
   groups: [ all, production ]
