@@ -341,13 +341,13 @@ _MAPPINGS = [
     ),
     # Chocolatey
     _NameMapping(
-        name=NameType.CHOCOLATEY_TITLE,
+        binname=NameType.CHOCOLATEY_TITLE,
         trackname=NameType.CHOCOLATEY_TITLE,
         visiblename=NameType.CHOCOLATEY_METADATA_TITLE,  # may be empty
         projectname_seed=NameType.CHOCOLATEY_TITLE,
     ),
     _NameMapping(
-        name=NameType.CHOCOLATEY_TITLE,
+        binname=NameType.CHOCOLATEY_TITLE,
         trackname=NameType.CHOCOLATEY_TITLE,
         visiblename=NameType.CHOCOLATEY_TITLE,
         projectname_seed=NameType.CHOCOLATEY_TITLE,

@@ -23,7 +23,7 @@
       url: https://github.com/chocolatey/chocolatey-package-requests
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://community.chocolatey.org/packages/{name}'
+      url: 'https://community.chocolatey.org/packages/{binname}'
   groups: [ all, production ]
 
 # it's similar, but contains too many packages, with the same verioning problems
