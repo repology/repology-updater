@@ -43,7 +43,7 @@ WITH old_links AS (
 	SELECT
 		link_id,
 		coalesce(new.refcount, 0) - coalesce(old.refcount, 0) AS delta_refcount,
-		new.priority
+		new.priority AS priority
 	FROM old FULL OUTER JOIN new USING(link_id)
 	WHERE
 		coalesce(new.refcount, 0) != coalesce(old.refcount, 0)
@@ -52,12 +52,11 @@ WITH old_links AS (
 UPDATE links
 SET
 	refcount = refcount + delta_refcount,
-	priority = CASE WHEN refcount + delta_refcount = 0 THEN greatest(links.priority, delta.priority) ELSE FALSE END,
+	priority = links.priority OR delta.priority,
 	orphaned_since = CASE WHEN refcount + delta_refcount = 0 THEN now() ELSE NULL END
 FROM delta
 WHERE
-	links.id = delta.link_id
-	AND (delta_refcount != 0 OR delta.priority > links.priority);
+	links.id = delta.link_id;
 
 {% if analyze %}
 ANALYZE links;
