@@ -45,6 +45,6 @@ class FreeBSDIndexParser(Parser):
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))
                 pkg.add_categories(fields[6].split())
-                pkg.add_homepages(fields[9])
+                pkg.add_homepages(fields[9].split())
 
                 yield pkg
