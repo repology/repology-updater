@@ -52,7 +52,7 @@ WITH old_links AS (
 UPDATE links
 SET
 	refcount = refcount + delta_refcount,
-	priority = links.priority OR delta.priority,
+	priority = links.priority OR coalesce(delta.priority, false),
 	orphaned_since = CASE WHEN refcount + delta_refcount = 0 THEN now() ELSE NULL END
 FROM delta
 WHERE
