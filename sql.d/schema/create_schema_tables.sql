@@ -502,7 +502,9 @@ CREATE TABLE links (
 	ipv6_last_failure timestamp with time zone,
 	ipv6_success boolean,
 	ipv6_status_code smallint,
-	ipv6_permanent_redirect_target text
+	ipv6_permanent_redirect_target text,
+
+	check_duration float
 );
 
 CREATE UNIQUE INDEX ON links(url);
