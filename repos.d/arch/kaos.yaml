@@ -26,7 +26,7 @@
       url: https://github.com/KaOSx
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
+      url: "https://kaosx.us/packages/view.php?name={subrepo}/{binname}-{rawversion}"
     - type: PACKAGE_RECIPE
       url: "https://github.com/KaOSx/{subrepo}/blob/master/{srcname}/PKGBUILD"
     - type: PACKAGE_RECIPE_RAW
@@ -57,7 +57,7 @@
       url: https://github.com/KaOSx
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
+      url: "https://kaosx.us/packages/view.php?name={subrepo}/{binname}-{rawversion}"
   groups: [ all, production ]
 
 - name: kaos_kde_next
@@ -84,5 +84,5 @@
       url: https://github.com/KaOSx
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={binname}-{rawversion}"
+      url: "https://kaosx.us/packages/view.php?name={subrepo}/{binname}-{rawversion}"
   groups: [ all, production ]
