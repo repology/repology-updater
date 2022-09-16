@@ -219,7 +219,7 @@
       url: "https://wikidata.org/"
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: "https://www.wikidata.org/wiki/{name}"
+      url: "https://www.wikidata.org/wiki/{srcname}"
   groups: [ all, production ]
 
 # Some additional useful requests

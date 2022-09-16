@@ -21,5 +21,5 @@
       url: http://freshcode.club/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'http://freshcode.club/projects/{name}'
+      url: 'http://freshcode.club/projects/{srcname}'
   groups: [ all, production ]

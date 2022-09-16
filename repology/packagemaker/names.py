@@ -162,9 +162,9 @@ class NameType:
 
     SPACK_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    DISTROWATCH_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    DISTROWATCH_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    FRESHCODE_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    FRESHCODE_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
     RAVENPORTS_NAMEBASE: ClassVar[int] = GENERIC_GEN_NAME
 
@@ -305,7 +305,7 @@ _MAPPINGS = [
     ),
     # Wikidata
     _NameMapping(
-        name=NameType.WIKIDATA_ENTITY,
+        srcname=NameType.WIKIDATA_ENTITY,
         visiblename=NameType.WIKIDATA_LABEL,
         projectname_seed=NameType.WIKIDATA_REPOLOGY_PROJECT_NAME,
         trackname=NameType.WIKIDATA_ENTITY,
@@ -368,7 +368,7 @@ _MAPPINGS = [
     ),
     # Wiki
     _NameMapping(
-        name=NameType.WIKI_PAGE,
+        srcname=NameType.WIKI_PAGE,
         visiblename=NameType.WIKI_TITLE,
         projectname_seed=NameType.WIKI_TITLE,
         trackname=NameType.WIKI_PAGE,
