@@ -201,7 +201,7 @@
   color: '10b981'
   minpackages: 2500
   sources:
-    - name: [ AppStream, BaseOS, PowerTools, extras ]
+    - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, ResilientStorage, extras ]
       fetcher:
         class: RepodataFetcher
         url: 'https://download.rockylinux.org/pub/rocky/8/{source}/source/tree/'
@@ -212,4 +212,26 @@
   repolinks:
     - desc: Rocky Linux home
       url: https://rockylinux.org/
-  groups: [ all, production, centos, rpm ]
+  groups: [ all, production, centos, rpm, rockylinux ]
+
+- name: rocky_9
+  type: repository
+  desc: Rocky Linux 9
+  statsgroup: CentOS
+  family: centos
+  ruleset: [centos, rpm]
+  color: '10b981'
+  minpackages: 2000
+  sources:
+    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage, SAP, SAPHANA, extras ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://download.rockylinux.org/pub/rocky/9/{source}/source/tree/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rocky Linux home
+      url: https://rockylinux.org/
+  groups: [ all, production, centos, rpm, rockylinux ]
