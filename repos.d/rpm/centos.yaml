@@ -69,7 +69,7 @@
   color: '932279'
   minpackages: 2000
   sources:
-    - name: [ AppStream, BaseOS, PowerTools, extras ]
+    - name: [ AppStream, BaseOS, HighAvailability, PowerTools, extras ]
       fetcher:
         class: RepodataFetcher
         url: 'http://vault.centos.org/centos/8/{source}/Source/'
@@ -98,7 +98,7 @@
   color: '932279'
   minpackages: 2000
   sources:
-    - name: [ AppStream, BaseOS, PowerTools, extras ]
+    - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, extras ]
       fetcher:
         class: RepodataFetcher
         url: 'http://vault.centos.org/centos/8-stream/{source}/Source/'
@@ -128,7 +128,7 @@
   color: '932279'
   minpackages: 2000
   sources:
-    - name: [ AppStream, BaseOS, CRB ]
+    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage ]
       fetcher:
         class: RepodataFetcher
         url: 'http://mirror.stream.centos.org/9-stream/{source}/source/tree/'
@@ -157,7 +157,7 @@
   color: '082336'
   minpackages: 2500
   sources:
-    - name: [ AppStream, BaseOS, PowerTools, extras ]
+    - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, ResilientStorage, extras ]
       fetcher:
         class: RepodataFetcher
         url: 'https://repo.almalinux.org/vault/8/{source}/Source/'
@@ -179,7 +179,7 @@
   color: '082336'
   minpackages: 2000
   sources:
-    - name: [ AppStream, BaseOS, CRB ]
+    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage, SAP, SAPHANA, extras ]
       fetcher:
         class: RepodataFetcher
         url: 'https://repo.almalinux.org/vault/9/{source}/Source/'
