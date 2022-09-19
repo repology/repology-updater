@@ -9,6 +9,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  valid_till: 2020-11-30
   sources:
     - name: [ os, updates ]
       fetcher:
@@ -39,6 +40,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2500
+  valid_till: 2024-06-30
   sources:
     - name: [ os, updates, extras ]
       fetcher:
@@ -68,6 +70,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  valid_till: 2021-12-31
   sources:
     - name: [ AppStream, BaseOS, HighAvailability, PowerTools, extras ]
       fetcher:
@@ -97,6 +100,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  valid_till: 2024-05-31
   sources:
     - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, extras ]
       fetcher:
@@ -127,6 +131,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  valid_till: 2027-05-31
   sources:
     - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage ]
       fetcher:
@@ -156,6 +161,7 @@
   ruleset: [centos, rpm]
   color: '082336'
   minpackages: 2500
+  valid_till: 2029-05-31
   sources:
     - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, ResilientStorage, extras ]
       fetcher:
@@ -178,6 +184,7 @@
   ruleset: [centos, rpm]
   color: '082336'
   minpackages: 2000
+  valid_till: 2032-05-31
   sources:
     - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage, SAP, SAPHANA, extras ]
       fetcher:
@@ -200,6 +207,7 @@
   ruleset: [centos, rpm]
   color: '10b981'
   minpackages: 2500
+  valid_till: 2029-05-31
   sources:
     - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, ResilientStorage, extras ]
       fetcher:
@@ -222,6 +230,7 @@
   ruleset: [centos, rpm]
   color: '10b981'
   minpackages: 2000
+  valid_till: 2032-05-31
   sources:
     - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage, SAP, SAPHANA, extras ]
       fetcher:
