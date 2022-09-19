@@ -220,6 +220,13 @@
   repolinks:
     - desc: Rocky Linux home
       url: https://rockylinux.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/tree/r8'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/blob/r8/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/raw/r8/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm, rockylinux ]
 
 - name: rocky_9
@@ -243,4 +250,11 @@
   repolinks:
     - desc: Rocky Linux home
       url: https://rockylinux.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/tree/r9'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/blob/r9/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/raw/r9/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm, rockylinux ]
