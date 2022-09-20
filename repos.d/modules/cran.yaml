@@ -15,13 +15,13 @@
         class: CRANCheckSummaryParser
   shadow: true
   repolinks:
-    - desc: R project home
-      url: https://www.r-project.org/
     - desc: CRAN home
       url: https://cran.r-project.org/
+    - desc: R project home
+      url: https://www.r-project.org/
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'https://cran.r-project.org/web/packages/{name}/index.html'
+      url: 'https://cran.r-project.org/package={name}'
     - type: PROJECT_DOWNLOAD
       url: 'https://cran.r-project.org/src/contrib/{name}_{rawversion}.tar.gz'
   groups: [ all, production ]
