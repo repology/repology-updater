@@ -353,7 +353,9 @@ _MAPPINGS = [
     ),
     # ReactOS
     _NameMapping(
-        name=NameType.REACTOS_FILENAME,
+        srcname=NameType.REACTOS_FILENAME,
+        # according to https://reactos.org/wiki/RAPPS#Command_Line_Support
+        binname=NameType.REACTOS_FILENAME,
         trackname=NameType.REACTOS_FILENAME,
         visiblename=NameType.REACTOS_NAME,
         projectname_seed=NameType.REACTOS_FILENAME,
