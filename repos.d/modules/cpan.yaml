@@ -65,5 +65,5 @@
       url: https://www.cpan.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://metacpan.org/dist/{name}'
+      url: 'https://metacpan.org/dist/{srcname}'
   groups: [ all, production ]

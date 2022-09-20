@@ -21,7 +21,7 @@
       url: https://www.r-project.org/
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'https://cran.r-project.org/package={name}'
+      url: 'https://cran.r-project.org/package={srcname}'
     - type: PROJECT_DOWNLOAD
-      url: 'https://cran.r-project.org/src/contrib/{name}_{rawversion}.tar.gz'
+      url: 'https://cran.r-project.org/src/contrib/{srcname}_{rawversion}.tar.gz'
   groups: [ all, production ]

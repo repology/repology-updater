@@ -21,5 +21,5 @@
       url: https://pypi.python.org/pypi
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'https://pypi.org/project/{name}/'
+      url: 'https://pypi.org/project/{srcname}/'
   groups: [all, production]

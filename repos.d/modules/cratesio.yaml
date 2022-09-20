@@ -23,5 +23,5 @@
       url: https://crates.io/
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'https://crates.io/crates/{name}'
+      url: 'https://crates.io/crates/{srcname}'
   groups: [ all, production ]

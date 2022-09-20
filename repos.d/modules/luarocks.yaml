@@ -20,5 +20,5 @@
   # XXX: not usable because uploader name is not known
   #packagelinks:
   #  - desc: LuaRocks page
-  #    url: 'https://luarocks.org/modules/{uploader}/{name}/{rawversion}'
+  #    url: 'https://luarocks.org/modules/{uploader}/{srcname}/{rawversion}'
   groups: [ all, production ]

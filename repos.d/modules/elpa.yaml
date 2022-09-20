@@ -21,7 +21,7 @@
       url: https://elpa.gnu.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://elpa.gnu.org/packages/{name}.html'
+      url: 'https://elpa.gnu.org/packages/{srcname}.html'
   groups: [ all, production, elpa ]
 
 - name: melpa
@@ -44,7 +44,7 @@
       url: https://melpa.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://melpa.org/#/{name}'
+      url: 'https://melpa.org/#/{srcname}'
   groups: [ all, production, elpa ]
 
 - name: melpa_stable
@@ -67,5 +67,5 @@
       url: https://stable.melpa.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://stable.melpa.org/#/{name}'
+      url: 'https://stable.melpa.org/#/{srcname}'
   groups: [ all, production, elpa ]

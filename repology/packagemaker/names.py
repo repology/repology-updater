@@ -145,23 +145,26 @@ class NameType:
 
     GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_GEN_NAME
 
-    RUBYGEMS_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    RUBYGEMS_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    PYPI_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    # since binary artifacts (e.g. wheels) are distributed, we also
+    # set biname
+    PYPI_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
-    CPAN_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    CPAN_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    LUAROCKS_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    LUAROCKS_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    CRATESIO_ID: ClassVar[int] = GENERIC_GEN_NAME
+    CRATESIO_ID: ClassVar[int] = GENERIC_SRC_NAME
 
-    ELPA_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    ELPA_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    CRAN_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    # see package pages, binaries are published as well
+    CRAN_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
-    HACKAGE_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    HACKAGE_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    STACKAGE_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    STACKAGE_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
     SPACK_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
