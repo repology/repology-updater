@@ -176,7 +176,7 @@ class NameType:
 
     SCOOP_NAME: ClassVar[int] = GENERIC_BIN_NAME
 
-    CRUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    CRUX_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
     KISS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
