@@ -10,14 +10,14 @@
     - name: CPAN
       fetcher:
         class: FileFetcher
-        url: http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
+        url: https://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
         compression: gz
       parser:
         class: CPANPackagesParser
   shadow: true
   repolinks:
     - desc: CPAN
-      url: http://cpan.org/
+      url: https://www.cpan.org/
   groups: [ all, production, have_testdata ]
 
 - name: metacpan
