@@ -7,6 +7,7 @@
   family: kiss
   ruleset: kiss
   minpackages: 50
+  valid_till: 2021-09-17  # discontinued
   sources:
     - name: repo
       fetcher:

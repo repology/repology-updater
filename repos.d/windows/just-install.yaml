@@ -11,6 +11,7 @@
   ruleset: [justinstall, windows]
   color: 'eac03c'
   minpackages: 200
+  valid_till: 2021-12-07  # discontinued
   sources:
     - name: just-install.json
       fetcher:
