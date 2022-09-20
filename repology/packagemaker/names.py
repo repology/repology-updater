@@ -139,7 +139,11 @@ class NameType:
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
-    TERMUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    # Note that packages reside in subdirs such as packages/,
+    # root-packages/, x11-packages/ and it may be that srcname
+    # should include directory as well. However these are names
+    # reported by upstream and these seem to be unique ATOW
+    TERMUX_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
     VCPKG_SOURCE: ClassVar[int] = GENERIC_GEN_NAME
 
