@@ -192,7 +192,9 @@ class NameType:
 
     JUSTINSTALL_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    DISTRI_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    # judging by https://distr1.org/things-to-try/ binary packages
+    # are available
+    DISTRI_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
     APK_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
