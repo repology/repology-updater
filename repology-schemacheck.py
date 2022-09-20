@@ -36,7 +36,6 @@ families = [
     'arch',
     'ataraxia',
     'baulk',
-    'buckaroo',
     'carbs',
     'centos',
     'chakra',

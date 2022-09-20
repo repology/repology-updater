@@ -136,9 +136,6 @@ class NameType:
     PACSTALL_NAME: ClassVar[int] = 310
     PACSTALL_VISIBLENAME: ClassVar[int] = IGNORED
 
-    BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
-    BUCKAROO_FILENAME: ClassVar[int] = IGNORED
-
     # Note that packages reside in subdirs such as packages/,
     # root-packages/, x11-packages/ and it may be that srcname
     # should include directory as well. However these are names
