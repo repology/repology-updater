@@ -20,7 +20,7 @@
       url: https://github.com/baulk
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/baulk/bucket/blob/master/bucket/{name}.json'
+      url: 'https://github.com/baulk/bucket/blob/master/bucket/{srcname}.json'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/baulk/bucket/master/bucket/{name}.json'
+      url: 'https://raw.githubusercontent.com/baulk/bucket/master/bucket/{srcname}.json'
   groups: [ all, production ]

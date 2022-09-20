@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import warnings
+
 from dataclasses import dataclass
 from typing import ClassVar
 
@@ -30,6 +32,7 @@ class NameType:
     GENERIC_GEN_NAME: ClassVar[int] = 1000
     GENERIC_SRC_NAME: ClassVar[int] = 1001
     GENERIC_BIN_NAME: ClassVar[int] = 1002
+    GENERIC_SRCBIN_NAME: ClassVar[int] = 1003
 
     # Common patterns: name + optional basename
     GENERIC_NOBN_NAME: ClassVar[int] = 1010
@@ -190,7 +193,7 @@ class NameType:
 
     ATARAXIA_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    BAULK_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    BAULK_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
     YIFFOS_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
@@ -282,6 +285,13 @@ _MAPPINGS = [
         trackname=NameType.GENERIC_BIN_NAME,
         visiblename=NameType.GENERIC_BIN_NAME,
         projectname_seed=NameType.GENERIC_BIN_NAME,
+    ),
+    _NameMapping(
+        srcname=NameType.GENERIC_SRCBIN_NAME,
+        binname=NameType.GENERIC_SRCBIN_NAME,
+        trackname=NameType.GENERIC_SRCBIN_NAME,
+        visiblename=NameType.GENERIC_SRCBIN_NAME,
+        projectname_seed=NameType.GENERIC_SRCBIN_NAME,
     ),
     _NameMapping(
         srcname=NameType.GENERIC_CATNAME_FULL_NAME,
@@ -540,6 +550,8 @@ class NameMapper:
 
         for out_name, in_name in mapping.__dict__.items():
             if in_name is not None:
+                if out_name == 'name':
+                    warnings.warn('using generic name in name mappings is deprecated', DeprecationWarning)
                 setattr(mapped, out_name, self._names[in_name])
 
         return mapped
