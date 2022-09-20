@@ -190,7 +190,7 @@ class NameType:
 
     KWORT_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    JUSTINSTALL_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    JUSTINSTALL_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
     # judging by https://distr1.org/things-to-try/ binary packages
     # are available
