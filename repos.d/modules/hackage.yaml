@@ -49,7 +49,7 @@
       url: https://www.stackage.org/nightly
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'https://www.stackage.org/nightly/package/{srcname}-{origversion}'
+      url: 'https://www.stackage.org/nightly/package/{srcname}-{rawversion}'
   groups: [ all, production, stackage ]
 
 - name: stackage_lts
@@ -74,5 +74,5 @@
       url: https://www.stackage.org/lts
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'https://www.stackage.org/lts/package/{srcname}-{origversion}'
+      url: 'https://www.stackage.org/lts/package/{srcname}-{rawversion}'
   groups: [ all, production, stackage ]
