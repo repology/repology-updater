@@ -147,7 +147,7 @@ class NameType:
 
     VCPKG_SOURCE: ClassVar[int] = GENERIC_GEN_NAME
 
-    GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_GEN_NAME
+    GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_SRC_NAME
 
     RUBYGEMS_NAME: ClassVar[int] = GENERIC_SRC_NAME
 

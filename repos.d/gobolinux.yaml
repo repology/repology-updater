@@ -21,13 +21,13 @@
       url: https://github.com/gobolinux/Recipes
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/gobolinux/Recipes/tree/master/{name}/{origversion}'
+      url: 'https://github.com/gobolinux/Recipes/tree/master/{srcname}/{rawversion}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/gobolinux/Recipes/blob/master/{name}/{origversion}/Recipe'
+      url: 'https://github.com/gobolinux/Recipes/blob/master/{srcname}/{rawversion}/Recipe'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/gobolinux/Recipes/master/{name}/{origversion}/Recipe'
+      url: 'https://raw.githubusercontent.com/gobolinux/Recipes/master/{srcname}/{rawversion}/Recipe'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/gobolinux/Recipes/blob/master/{name}/{origversion}/{?patch}'
+      url: 'https://github.com/gobolinux/Recipes/blob/master/{srcname}/{rawversion}/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/gobolinux/Recipes/master/{name}/{origversion}/{?patch}'
+      url: 'https://raw.githubusercontent.com/gobolinux/Recipes/master/{srcname}/{rawversion}/{?patch}'
   groups: [ all, production, have_testdata ]
