@@ -40,9 +40,9 @@ class OS4DepotIndexParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for category, filename, size, date, version, description in _iter_index(path):
             with factory.begin(filename) as pkg:
-                pkg.set_extra_field('filename', filename)
-
-                pkg.add_name(filename.rsplit('.', 1)[0], NameType.OS4DEPOT_NAME)
+                pkg.add_name(category + '/' + filename, NameType.OS4DEPOT_PATH)
+                pkg.add_name(filename, NameType.OS4DEPOT_FILENAME_EXT)
+                pkg.add_name(filename.split('.', 1)[0], NameType.OS4DEPOT_FILENAME_NO_EXT)
 
                 if not version:
                     pkg.log('skipping, no version', Logger.ERROR)

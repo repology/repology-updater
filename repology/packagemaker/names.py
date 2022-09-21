@@ -135,6 +135,10 @@ class NameType:
     PACSTALL_NAME: ClassVar[int] = 310
     PACSTALL_VISIBLENAME: ClassVar[int] = IGNORED
 
+    OS4DEPOT_PATH: ClassVar[int] = 320  # foo/bar/baz.lha
+    OS4DEPOT_FILENAME_EXT: ClassVar[int] = 321  # baz.lha
+    OS4DEPOT_FILENAME_NO_EXT: ClassVar[int] = 322  # baz
+
     # Note that packages reside in subdirs such as packages/,
     # root-packages/, x11-packages/ and it may be that srcname
     # should include directory as well. However these are names
@@ -181,8 +185,6 @@ class NameType:
     KISS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
     HPUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
-
-    OS4DEPOT_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
     KWORT_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
@@ -527,6 +529,13 @@ _MAPPINGS = [
         trackname=NameType.PACSTALL_NAME,
         visiblename=NameType.PACSTALL_NAME,
         projectname_seed=NameType.PACSTALL_NAME,
+    ),
+    # OS4Depot
+    _NameMapping(
+        binname=NameType.OS4DEPOT_PATH,
+        trackname=NameType.OS4DEPOT_PATH,
+        visiblename=NameType.OS4DEPOT_FILENAME_EXT,
+        projectname_seed=NameType.OS4DEPOT_FILENAME_NO_EXT,
     ),
 ]
 
