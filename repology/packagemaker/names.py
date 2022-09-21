@@ -347,7 +347,11 @@ _MAPPINGS = [
     ),
     # Npackd
     _NameMapping(
-        name=NameType.NPACKD_FULLNAME,
+        # XXX: note that despite that npackd manages binary software,
+        # this is srcname as it refers to how the recipe is called
+        # See https://github.com/repology/repology-updater/issues/944#issuecomment-1251327958
+        srcname=NameType.NPACKD_FULLNAME,
+        binname=NameType.NPACKD_FULLNAME,
         visiblename=NameType.NPACKD_TITLE,
         projectname_seed=NameType.NPACKD_LASTNAME,
         trackname=NameType.NPACKD_FULLNAME,

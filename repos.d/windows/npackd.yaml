@@ -23,7 +23,7 @@
       url: https://www.npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{name}/{rawversion}'
+      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, production, npackd ]
 
 - name: npackd_stable
@@ -46,7 +46,7 @@
       url: https://www.npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{name}/{rawversion}'
+      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, production, npackd ]
 
 - name: npackd_libs
@@ -69,7 +69,7 @@
       url: https://www.npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{name}/{rawversion}'
+      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, npackd ]  # disabled (experimental), see #863
 
 - name: npackd_stable64
@@ -92,5 +92,5 @@
       url: https://www.npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{name}/{rawversion}'
+      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, production, npackd ]
