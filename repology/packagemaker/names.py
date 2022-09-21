@@ -92,9 +92,6 @@ class NameType:
     SLACKWARE_FULL_NAME: ClassVar[int] = IGNORED
     SLACKWARE_PSEUDO_FULL_NAME: ClassVar[int] = 172
 
-    T2_NAME: ClassVar[int] = 180
-    T2_FULL_NAME: ClassVar[int] = 181
-
     SRCRPM_NAME: ClassVar[int] = 190
 
     BINRPM_NAME: ClassVar[int] = 200
@@ -239,6 +236,8 @@ class NameType:
 
     SLACKBUILDS_NAME: ClassVar[int] = GENERIC_CATNAME_NAME
     SLACKBUILDS_FULL_NAME: ClassVar[int] = GENERIC_CATNAME_FULL_NAME
+
+    T2_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
 
 @dataclass
@@ -426,14 +425,6 @@ _MAPPINGS = [
         visiblename=NameType.SLACKWARE_NAME,
         projectname_seed=NameType.SLACKWARE_NAME,
         trackname=NameType.SLACKWARE_PSEUDO_FULL_NAME,
-    ),
-    # T2
-    _NameMapping(
-        name=NameType.T2_NAME,
-        srcname=NameType.T2_FULL_NAME,
-        trackname=NameType.T2_NAME,
-        visiblename=NameType.T2_NAME,
-        projectname_seed=NameType.T2_NAME,
     ),
     # RPM
     _NameMapping(

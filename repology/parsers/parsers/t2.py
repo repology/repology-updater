@@ -93,7 +93,7 @@ class T2DescParser(Parser):
                 data = _parse_descfile(desc_path, pkg)
 
                 pkg.add_name(name, NameType.T2_NAME)
-                pkg.add_name(pkgpath, NameType.T2_FULL_NAME)
+                pkg.set_extra_field('path', pkgpath)
                 pkg.set_version(data['version'][0])
                 pkg.set_summary(data['title'][0])
 
