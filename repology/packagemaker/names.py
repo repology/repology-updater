@@ -182,7 +182,10 @@ class NameType:
 
     CRUX_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    KISS_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    # though in fact packages reside in subdirectories such as
+    # core/ and extras/, only package name is used to reference
+    # the package, e.g. in depends
+    KISS_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
     HPUX_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
