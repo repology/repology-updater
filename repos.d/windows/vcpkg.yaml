@@ -20,13 +20,13 @@
       url: https://github.com/Microsoft/vcpkg
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/Microsoft/vcpkg/tree/master/ports/{name}'
+      url: 'https://github.com/Microsoft/vcpkg/tree/master/ports/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/Microsoft/vcpkg/blob/master/ports/{name}/portfile.cmake'
+      url: 'https://github.com/Microsoft/vcpkg/blob/master/ports/{srcname}/portfile.cmake'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/Microsoft/vcpkg/master/ports/{name}/portfile.cmake'
+      url: 'https://raw.githubusercontent.com/Microsoft/vcpkg/master/ports/{srcname}/portfile.cmake'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/Microsoft/vcpkg/blob/master/ports/{name}/{?patch}'
+      url: 'https://github.com/Microsoft/vcpkg/blob/master/ports/{srcname}/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/Microsoft/vcpkg/master/ports/{name}/{?patch}'
+      url: 'https://raw.githubusercontent.com/Microsoft/vcpkg/master/ports/{srcname}/{?patch}'
   groups: [ all, production ]

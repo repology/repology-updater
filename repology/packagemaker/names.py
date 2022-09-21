@@ -142,7 +142,7 @@ class NameType:
     # reported by upstream and these seem to be unique ATOW
     TERMUX_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
-    VCPKG_SOURCE: ClassVar[int] = GENERIC_GEN_NAME
+    VCPKG_SOURCE: ClassVar[int] = GENERIC_SRC_NAME
 
     GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_SRC_NAME
 
