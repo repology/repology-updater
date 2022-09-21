@@ -28,13 +28,15 @@ from repology.parsers.patches import add_patch_files
 
 
 def _expand_mirrors(url: str) -> str:
+    # see Resources/Defaults/Settings/Compile/Compile.conf from https://github.com/gobolinux/Compile
     http_sourceforge = 'http://downloads.sourceforge.net'
     ftp_gnu = 'ftp://ftp.gnu.org/gnu'
+    ftp_alpha_gnu = 'ftp://alpha.gnu.org/gnu'
     return url.replace('$httpSourceforge', http_sourceforge) \
               .replace('${httpSourceforge}', http_sourceforge) \
               .replace('$ftpGnu', ftp_gnu) \
               .replace('${ftpGnu}', ftp_gnu) \
-              .replace('$ftpAlphaGnu', ftp_gnu)
+              .replace('$ftpAlphaGnu', ftp_alpha_gnu)
 
 
 class GoboLinuxGitParser(Parser):
