@@ -184,7 +184,7 @@ class NameType:
 
     KISS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    HPUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    HPUX_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
     KWORT_NAME: ClassVar[int] = GENERIC_GEN_NAME
 

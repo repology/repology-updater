@@ -20,5 +20,5 @@
       url: http://hpux.connect.org.uk/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'http://hpux.connect.org.uk/hppd{path}/{name}-{origversion}/'
+      url: 'http://hpux.connect.org.uk/hppd{path}/{srcname}-{rawversion}/'
   groups: [ all, production, hpux ]
