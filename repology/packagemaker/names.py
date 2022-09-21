@@ -170,7 +170,7 @@ class NameType:
 
     STACKAGE_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
-    SPACK_NAME: ClassVar[int] = GENERIC_GEN_NAME
+    SPACK_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
     DISTROWATCH_NAME: ClassVar[int] = GENERIC_SRC_NAME
 

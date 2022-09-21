@@ -24,15 +24,15 @@
       url: https://github.com/spack/spack
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://spack.github.io/packages.spack.io/package.html?name={name}'
+      url: 'https://spack.github.io/packages.spack.io/package.html?name={srcname}'
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/{name}'
+      url: 'https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/package.py'
+      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{srcname}/package.py'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{name}/package.py'
+      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{srcname}/package.py'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{name}/{?patch}'
+      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{srcname}/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{name}/{?patch}'
+      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{srcname}/{?patch}'
   groups: [ all, production ]
