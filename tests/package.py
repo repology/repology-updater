@@ -42,7 +42,7 @@ def spawn_package(
 ) -> Package:
     m = PackageFactory().begin()
 
-    m.add_name(name, NameType.GENERIC_GEN_NAME)
+    m.add_name(name, NameType.GENERIC_SRCBIN_NAME)
     m.set_version(version)
 
     m.set_flags(flags)

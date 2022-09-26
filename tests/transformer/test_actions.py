@@ -149,14 +149,14 @@ def test_setbranchcomps():
 def test_setname():
     check_transformer(
         '[ { setname: "bar" } ]',
-        PackageSample(name='foo').expect(name='foo', effname='bar'),
+        PackageSample(name='foo').expect(srcname='foo', effname='bar'),
     )
 
 
 def test_setname_subst():
     check_transformer(
         '[ { setname: "bar_$0" } ]',
-        PackageSample(name='foo').expect(name='foo', effname='bar_foo'),
+        PackageSample(name='foo').expect(srcname='foo', effname='bar_foo'),
     )
 
 
@@ -204,7 +204,7 @@ def test_setver_setname_subst():
 def test_tolowername():
     check_transformer(
         '[ { tolowername: true } ]',
-        PackageSample(name='fOoBaR').expect(name='fOoBaR', effname='foobar'),
+        PackageSample(name='fOoBaR').expect(srcname='fOoBaR', effname='foobar'),
     )
 
 

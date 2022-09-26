@@ -29,7 +29,7 @@ def test_basic():
                 name='foo',
                 version='1.1',
             ),
-            'https://example.com/{name}/{version}'
+            'https://example.com/{srcname}/{rawversion}'
         )
     ) == [
         'https://example.com/foo/1.1'
@@ -43,7 +43,7 @@ def test_filter():
                 name='FOO',
                 version='1.1',
             ),
-            'https://example.com/{name|lowercase}'
+            'https://example.com/{srcname|lowercase}'
         )
     ) == [
         'https://example.com/foo'
@@ -75,4 +75,4 @@ def test_raises():
     assert list(format_package_links(package, 'https://example.com/{?unknown}')) == []
 
     with pytest.raises(RuntimeError):
-        list(format_package_links(package, 'https://example.com/{name|unknownfilter}'))
+        list(format_package_links(package, 'https://example.com/{srcname|unknownfilter}'))
