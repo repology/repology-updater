@@ -32,4 +32,4 @@
 {% endmacro %}
 
 {{ openeuler('20', '03', minpackages=1500) }}
-{{ openeuler('22', '03', minpackages=1500) }}
+{{ openeuler('22', '03', minpackages=3000) }}
