@@ -23,11 +23,11 @@
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/el{{version}}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/el6'
     - type: PACKAGE_RECIPE
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/el{{version}}/f/{srcname}.spec'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/el6/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/el{{version}}/f/{srcname}.spec'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/el6/f/{srcname}.spec'
   groups: [ all, production, epel ]
 
 {% macro epel(version, minpackages, subdir) %}
