@@ -3,19 +3,20 @@
 #
 # https://crux.nu/ports/
 ###########################################################################
-- name: crux_34
+{% macro crux(version, minpackages) %}
+- name: crux_{{version|replace('.', '')}}
   type: repository
-  desc: CRUX 3.4
+  desc: CRUX {{version}}
   statsgroup: CRUX
   family: crux
   ruleset: crux
-  minpackages: 1000
+  minpackages: {{minpackages}}
   update_period: 6h
   sources:
     - name: CRUX-ports-JSON
       fetcher:
         class: FileFetcher
-        url: https://crux.nu/files/repology-3.4.json
+        url: https://crux.nu/files/repology-{{version}}.json
       parser:
         class: CRUXPortsJsonParser
   repolinks:
@@ -25,61 +26,13 @@
       url: https://crux.nu/portdb/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{srcname}/'
+      url: 'https://crux.nu/ports/crux-{{version}}/{subrepo}/{srcname}/'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://crux.nu/ports/crux-3.4/{subrepo}/{srcname}/Pkgfile'
+      url: 'https://crux.nu/ports/crux-{{version}}/{subrepo}/{srcname}/Pkgfile'
   groups: [ all, production, crux ]
+{% endmacro %}
 
-- name: crux_35
-  type: repository
-  desc: CRUX 3.5
-  statsgroup: CRUX
-  family: crux
-  ruleset: crux
-  minpackages: 1500
-  update_period: 6h
-  sources:
-    - name: CRUX-ports-JSON
-      fetcher:
-        class: FileFetcher
-        url: https://crux.nu/files/repology-3.5.json
-      parser:
-        class: CRUXPortsJsonParser
-  repolinks:
-    - desc: CRUX home
-      url: https://crux.nu/
-    - desc: CRUX port browser
-      url: https://crux.nu/portdb/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{srcname}/'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://crux.nu/ports/crux-3.5/{subrepo}/{srcname}/Pkgfile'
-  groups: [ all, production, crux ]
-
-- name: crux_36
-  type: repository
-  desc: CRUX 3.6
-  statsgroup: CRUX
-  family: crux
-  ruleset: crux
-  minpackages: 1500
-  update_period: 6h
-  sources:
-    - name: CRUX-ports-JSON
-      fetcher:
-        class: FileFetcher
-        url: https://crux.nu/files/repology-3.6.json
-      parser:
-        class: CRUXPortsJsonParser
-  repolinks:
-    - desc: CRUX home
-      url: https://crux.nu/
-    - desc: CRUX port browser
-      url: https://crux.nu/portdb/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://crux.nu/ports/crux-3.6/{subrepo}/{srcname}/'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://crux.nu/ports/crux-3.6/{subrepo}/{srcname}/Pkgfile'
-  groups: [ all, production, crux ]
+{{ crux('3.4', minpackages=1000) }}
+{{ crux('3.5', minpackages=1500) }}
+{{ crux('3.6', minpackages=1500) }}
+{{ crux('3.7', minpackages=1500) }}
