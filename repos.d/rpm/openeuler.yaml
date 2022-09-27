@@ -1,18 +1,19 @@
 ###########################################################################
 # openEuler
 ###########################################################################
-- name: openeuler_20_03
+{% macro openeuler(major, minor, minpackages) %}
+- name: openeuler_{{major}}_{{minor}}
   type: repository
-  desc: openEuler 20.03
+  desc: openEuler {{major}}.{{minor}}
   statsgroup: openEuler
   family: centos
   ruleset: [centos, rpm, openeuler]
-  minpackages: 1500
+  minpackages: {{minpackages}}
   sources:
     - name: source
       fetcher:
         class: RepodataFetcher
-        url: https://repo.openeuler.org/openEuler-20.03-LTS/source/
+        url: https://repo.openeuler.org/openEuler-{{major}}.{{minor}}-LTS/source/
       parser:
         class: RepodataParser
         vertags: oe
@@ -22,37 +23,13 @@
       url: https://openeuler.org/en/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/src-openeuler/{srcname}/tree/openEuler-20.03-LTS/'
+      url: 'https://gitee.com/src-openeuler/{srcname}/tree/openEuler-{{major}}.{{minor}}-LTS/'
     - type: PACKAGE_RECIPE
-      url: 'https://gitee.com/src-openeuler/{srcname}/blob/openEuler-20.03-LTS/{srcname}.spec'
+      url: 'https://gitee.com/src-openeuler/{srcname}/blob/openEuler-{{major}}.{{minor}}-LTS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitee.com/src-openeuler/{srcname}/raw/openEuler-20.03-LTS/{srcname}.spec'
+      url: 'https://gitee.com/src-openeuler/{srcname}/raw/openEuler-{{major}}.{{minor}}-LTS/{srcname}.spec'
   groups: [ all, production, openeuler, rpm ]
+{% endmacro %}
 
-- name: openeuler_22_03
-  type: repository
-  desc: openEuler 22.03
-  statsgroup: openEuler
-  family: centos
-  ruleset: [centos, rpm, openeuler]
-  minpackages: 1500
-  sources:
-    - name: source
-      fetcher:
-        class: RepodataFetcher
-        url: https://repo.openeuler.org/openEuler-22.03-LTS/source/
-      parser:
-        class: RepodataParser
-        vertags: oe
-      subrepo: '{source}'
-  repolinks:
-    - desc: openEuler home
-      url: https://openeuler.org/en/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/src-openeuler/{srcname}/tree/openEuler-22.03-LTS/'
-    - type: PACKAGE_RECIPE
-      url: 'https://gitee.com/src-openeuler/{srcname}/blob/openEuler-22.03-LTS/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitee.com/src-openeuler/{srcname}/raw/openEuler-22.03-LTS/{srcname}.spec'
-  groups: [ all, production, openeuler, rpm ]
+{{ openeuler('20', '03', minpackages=1500) }}
+{{ openeuler('22', '03', minpackages=1500) }}
