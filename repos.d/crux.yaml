@@ -32,7 +32,5 @@
   groups: [ all, production, crux ]
 {% endmacro %}
 
-{{ crux('3.4', minpackages=1000) }}
-{{ crux('3.5', minpackages=1500) }}
 {{ crux('3.6', minpackages=1500) }}
 {{ crux('3.7', minpackages=1500) }}
