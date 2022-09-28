@@ -3,7 +3,7 @@
 #
 # https://crux.nu/ports/
 ###########################################################################
-{% macro crux(version, minpackages) %}
+{% macro crux(version, minpackages, valid_till=None) %}
 - name: crux_{{version|replace('.', '')}}
   type: repository
   desc: CRUX {{version}}
@@ -32,7 +32,7 @@
   groups: [ all, production, crux ]
 {% endmacro %}
 
-{{ crux('3.4', minpackages=1000) }}
-{{ crux('3.5', minpackages=1500) }}
+{{ crux('3.4', minpackages=1000, valid_till='2020-12-08') }}
+{{ crux('3.5', minpackages=1500, valid_till='2022-09-26') }}
 {{ crux('3.6', minpackages=1500) }}
 {{ crux('3.7', minpackages=1500) }}
