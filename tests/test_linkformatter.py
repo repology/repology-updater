@@ -28,11 +28,12 @@ def test_basic():
             spawn_package(
                 name='foo',
                 version='1.1',
+                arch='x86_64',
             ),
-            'https://example.com/{srcname}/{rawversion}'
+            'https://example.com/{srcname}/{rawversion}/{arch}'
         )
     ) == [
-        'https://example.com/foo/1.1'
+        'https://example.com/foo/1.1/x86_64'
     ]
 
 

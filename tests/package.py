@@ -39,6 +39,7 @@ def spawn_package(
     flavors: list[str] | None = None,
     branch: str | None = None,
     links: list[tuple[int, str]] | None = None,
+    arch: str | None = None,
 ) -> Package:
     m = PackageFactory().begin()
 
@@ -49,6 +50,7 @@ def spawn_package(
     m.set_summary(comment)
     m.add_categories(category)
     m.add_maintainers(maintainers)
+    m.set_arch(arch)
 
     if links:
         for link_type, url in links:
