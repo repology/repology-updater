@@ -164,6 +164,7 @@ class LinkType:
     UPSTREAM_WIKI: ClassVar[int] = 23
     PACKAGE_STATISTICS: ClassVar[int] = 25
     PACKAGE_BUILD_STATUS: ClassVar[int] = 26
+    PACKAGE_BUILD_LOGS: ClassVar[int] = 27
     OTHER: ClassVar[int] = 99
 
     @staticmethod
@@ -195,6 +196,7 @@ class LinkType:
             LinkType.UPSTREAM_WIKI: 'UPSTREAM_WIKI',
             LinkType.PACKAGE_STATISTICS: 'PACKAGE_STATISTICS',
             LinkType.PACKAGE_BUILD_STATUS: 'PACKAGE_BUILD_STATUS',
+            LinkType.PACKAGE_BUILD_LOGS: 'PACKAGE_BUILD_LOGS',
             LinkType.OTHER: 'OTHER',
         }[val]
 
@@ -227,6 +229,7 @@ class LinkType:
             'UPSTREAM_WIKI': LinkType.UPSTREAM_WIKI,
             'PACKAGE_STATISTICS': LinkType.PACKAGE_STATISTICS,
             'PACKAGE_BUILD_STATUS': LinkType.PACKAGE_BUILD_STATUS,
+            'PACKAGE_BUILD_LOGS': LinkType.PACKAGE_BUILD_LOGS,
             'OTHER': LinkType.OTHER,
         }[val]
 
