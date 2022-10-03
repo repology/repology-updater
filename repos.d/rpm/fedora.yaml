@@ -70,6 +70,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.fedoraproject.org/pkgs/{srcname}/'
     - type: PACKAGE_SOURCES
       url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/{{fversion}}'
     - type: PACKAGE_RECIPE
