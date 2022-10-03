@@ -88,6 +88,15 @@ class FieldGatheringMapping:
         elif field == 'centossuffix':
             value = '-extras' if self._package.subrepo == 'extras' else ''
             is_optional = True
+        elif field == 'rpmversion':
+            # XXX: convert these to generic NEVRA parsiong code from repology.parsers.nevra
+            version, release = self._package.rawversion.rsplit('-', 1)
+            if ':' in version:
+                epoch, version = version.rsplit(':', 1)
+            value = version
+        elif field == 'rpmrelease':
+            version, release = self._package.rawversion.rsplit('-', 1)
+            value = release
         elif self._package.extrafields is not None and field in self._package.extrafields:
             value = self._package.extrafields[field]
 

@@ -37,6 +37,21 @@ def test_basic():
     ]
 
 
+def test_rpm_getters():
+    assert list(
+        format_package_links(
+            spawn_package(
+                name='foo',
+                version='1:2.3-el4',
+                arch='x86_64',
+            ),
+            'https://example.com/{rpmversion}/{rpmrelease}'
+        )
+    ) == [
+        'https://example.com/2.3/el4'
+    ]
+
+
 def test_filter():
     assert list(
         format_package_links(
