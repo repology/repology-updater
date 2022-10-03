@@ -58,6 +58,8 @@
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.fedoraproject.org/pkgs/{srcname}/'
     - type: PACKAGE_SOURCES
       url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/epel{{version}}'
     - type: PACKAGE_RECIPE
