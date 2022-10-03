@@ -28,6 +28,13 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/el6/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/el6/f/{srcname}.spec'
+    # could be more specific, but we need binname(s) for that
+    # see https://github.com/repology/repology-updater/issues/1274
+    # see the same for fedora
+    #- type: PACKAGE_BUILD_LOG
+    #  url: 'https://kojipkgs.fedoraproject.org/packages/{srcname}/{rpmversion}/{rpmrelease}/data/logs/{arch}/build.log'
+    - type: PACKAGE_BUILD_LOGS
+      url: 'https://kojipkgs.fedoraproject.org/packages/{srcname}/{rpmversion}/{rpmrelease}/data/logs/'
   groups: [ all, production, epel ]
 
 {% macro epel(version, minpackages, subdir) %}
@@ -57,6 +64,13 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel{{version}}/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel{{version}}/f/{srcname}.spec'
+    # could be more specific, but we need binname(s) for that
+    # see https://github.com/repology/repology-updater/issues/1274
+    # see the same for fedora
+    #- type: PACKAGE_BUILD_LOG
+    #  url: 'https://kojipkgs.fedoraproject.org/packages/{srcname}/{rpmversion}/{rpmrelease}/data/logs/{arch}/build.log'
+    - type: PACKAGE_BUILD_LOGS
+      url: 'https://kojipkgs.fedoraproject.org/packages/{srcname}/{rpmversion}/{rpmrelease}/data/logs/'
   groups: [ all, production, epel ]
 {% endmacro %}
 
