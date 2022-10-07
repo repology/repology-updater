@@ -40,13 +40,17 @@
   color: '045e9d'
   minpackages: {{minpackages}}
   sources:
-    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
+    {% for sub1 in ['main', 'non-free', 'restricted', 'unsupported'] %}
+    {% for sub2 in ['release', 'updates'] %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/{{version}}/repository/SRPMS/{source}/'
+        url: 'http://abf-downloads.openmandriva.org/{{version}}/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: OpenMandriva home
       url: https://openmandriva.org/
