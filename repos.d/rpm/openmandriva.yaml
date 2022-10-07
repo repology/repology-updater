@@ -30,19 +30,20 @@
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.0/{srcname}.spec'
   groups: [ all, production, openmandriva, rpm ]
 
-- name: openmandriva_4_1
+{% macro openmandriva(version, minpackages) %}
+- name: openmandriva_{{version|replace('.', '_')}}
   type: repository
-  desc: OpenMandriva 4.1
+  desc: OpenMandriva {{version}}
   statsgroup: OpenMandriva
   family: openmandriva
   ruleset: [openmandriva, rpm]
   color: '045e9d'
-  minpackages: 10000
+  minpackages: {{minpackages}}
   sources:
     - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/4.1/repository/SRPMS/{source}/'
+        url: 'http://abf-downloads.openmandriva.org/{{version}}/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
       subrepo: '{source}'
@@ -51,68 +52,17 @@
       url: https://openmandriva.org/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.1'
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/{{version}}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.1/{srcname}.spec'
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/{{version}}/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.1/{srcname}.spec'
+      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/{{version}}/{srcname}.spec'
   groups: [ all, production, openmandriva, rpm ]
+{% endmacro %}
 
-- name: openmandriva_4_2
-  type: repository
-  desc: OpenMandriva 4.2
-  statsgroup: OpenMandriva
-  family: openmandriva
-  ruleset: [openmandriva, rpm]
-  color: '045e9d'
-  minpackages: 11000
-  sources:
-    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/4.2/repository/SRPMS/{source}/'
-      parser:
-        class: RepodataParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: OpenMandriva home
-      url: https://openmandriva.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.2'
-    - type: PACKAGE_RECIPE
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.2/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.2/{srcname}.spec'
-  groups: [ all, production, openmandriva, rpm ]
-
-- name: openmandriva_4_3
-  type: repository
-  desc: OpenMandriva 4.3
-  statsgroup: OpenMandriva
-  family: openmandriva
-  ruleset: [openmandriva, rpm]
-  color: '045e9d'
-  minpackages: 11000
-  sources:
-    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/updates ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/4.3/repository/SRPMS/{source}/'
-      parser:
-        class: RepodataParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: OpenMandriva home
-      url: https://openmandriva.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.3'
-    - type: PACKAGE_RECIPE
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.3/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.3/{srcname}.spec'
-  groups: [ all, openmandriva, rpm ] # no main/updates repository yet
+{{ openmandriva("4.1", minpackages=10000) }}
+{{ openmandriva("4.2", minpackages=11000) }}
+{{ openmandriva("4.3", minpackages=11000) }}
 
 - name: openmandriva_rolling
   type: repository
