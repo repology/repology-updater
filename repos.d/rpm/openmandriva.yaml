@@ -14,7 +14,7 @@
     - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release ]
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/4.0/repository/SRPMS/{source}/'
+        url: 'http://abf-downloads.openmandriva.org/release_archives/4.0/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
       subrepo: '{source}'
@@ -30,7 +30,8 @@
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.0/{srcname}.spec'
   groups: [ all, production, openmandriva, rpm ]
 
-{% macro openmandriva(version, minpackages) %}
+{% macro openmandriva(version, minpackages, archived=False) %}
+{% set subdir = 'release_archives/' if archived else '' %}
 - name: openmandriva_{{version|replace('.', '_')}}
   type: repository
   desc: OpenMandriva {{version}}
@@ -45,7 +46,7 @@
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/{{version}}/repository/SRPMS/{{sub1}}/{{sub2}}/'
+        url: 'http://abf-downloads.openmandriva.org/{{subdir}}{{version}}/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
       subrepo: {{sub1}}/{{sub2}}
@@ -64,8 +65,8 @@
   groups: [ all, production, openmandriva, rpm ]
 {% endmacro %}
 
-{{ openmandriva("4.1", minpackages=10000) }}
-{{ openmandriva("4.2", minpackages=11000) }}
+{{ openmandriva("4.1", archived=True, minpackages=10000) }}
+{{ openmandriva("4.2", archived=True, minpackages=11000) }}
 {{ openmandriva("4.3", minpackages=11000) }}
 
 - name: openmandriva_rolling
