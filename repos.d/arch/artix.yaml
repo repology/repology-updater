@@ -13,7 +13,7 @@
     - name: [ system, world, galaxy ]
       fetcher:
         class: TarFetcher
-        url: 'https://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'http://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
