@@ -135,7 +135,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'http://gr.mirror.archlinuxarm.org/{{arch}}/{{sub}}/{{sub}}.db.tar.gz'
+        url: 'http://hu.mirror.archlinuxarm.org/{{arch}}/{{sub}}/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}
