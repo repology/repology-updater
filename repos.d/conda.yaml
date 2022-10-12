@@ -7,13 +7,12 @@
   family: conda
   minpackages: 1
   sources:
-    - name: [noarch, linux-32, linux-64, osx-64, win-32, win-64]
+    - name: channeldata.json
       fetcher:
         class: FileFetcher
-        url: 'https://conda.anaconda.org/conda-forge/{source}/repodata.json'
+        url: 'https://conda.anaconda.org/conda-forge/channeldata.json'
       parser:
-        class: CondaRepodataJsonParser
-      subrepo: '{source}'
+        class: CondaChanneldataJsonParser
   repolinks:
     - desc: conda-forge home
       url: https://conda-forge.org/
@@ -25,13 +24,12 @@
   family: conda
   minpackages: 1
   sources:
-    - name: [noarch, linux-32, linux-64, osx-32, osx-64, win-32, win-64]
+    - name: channeldata.json
       fetcher:
         class: FileFetcher
-        url: 'https://conda.anaconda.org/bioconda/{source}/repodata.json'
+        url: 'https://conda.anaconda.org/bioconda/channeldata.json'
       parser:
-        class: CondaRepodataJsonParser
-      subrepo: '{source}'
+        class: CondaChanneldataJsonParser
   repolinks:
     - desc: Bioconda home
       url: https://bioconda.github.io/
