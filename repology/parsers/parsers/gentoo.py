@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import xml.etree.ElementTree
 from dataclasses import dataclass, field
 from typing import Iterable
@@ -25,7 +26,6 @@ from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.parsers.versions import VersionStripper
 
 
 def _parse_conditional_expr(string: str) -> Iterable[str]:
@@ -148,6 +148,14 @@ def _parse_md5cache_metadata(path: str) -> dict[str, str]:
     return result
 
 
+def _normalize_version(version: str) -> str:
+    # Strictly speaking, stripping everything starting with '-' should be sufficient here
+    # However there've been at least one case in funtoo of version '0.11.0-rc1'
+    # which should've been 0.11.0_rc1 by gentoo rules, so use more explicit pattern
+    # to avoid producing incorrect results
+    return re.sub('-r[0-9]+$', '', version)
+
+
 class GentooGitParser(Parser):
     _require_xml_metadata: bool
     _require_md5cache_metadata: bool
@@ -157,8 +165,6 @@ class GentooGitParser(Parser):
         self._require_md5cache_metadata = require_md5cache_metadata
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        normalize_version = VersionStripper().strip_right_greedy('-')
-
         for category, package in _iter_packages(path):
             with factory.begin(category + '/' + package) as pkg:
                 pkg.add_name(package, NameType.GENTOO_NAME)
@@ -185,7 +191,7 @@ class GentooGitParser(Parser):
                 for ebuild in _iter_ebuilds(path, category, package):
                     subpkg = pkg.clone(append_ident='/' + ebuild)
 
-                    subpkg.set_version(ebuild[len(package) + 1:], normalize_version)
+                    subpkg.set_version(ebuild[len(package) + 1:], _normalize_version)
                     if subpkg.version.endswith('9999'):
                         subpkg.set_flags(PackageFlags.ROLLING)
 
