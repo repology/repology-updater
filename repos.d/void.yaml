@@ -17,7 +17,7 @@
     - name: [ x86_64, nonfree/x86_64 ]
       fetcher:
         class: TarFetcher
-        url: 'https://alpha.de.repo.voidlinux.org/current/{source}-repodata'
+        url: 'https://repo-default.voidlinux.org/current/{source}-repodata'
       parser:
         class: VoidLinuxPlistParser
       subrepo: '{source}'
