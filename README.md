@@ -33,6 +33,7 @@ Needed for fetching/parsing repository data:
   - Python module [pyparsing](https://github.com/pyparsing/pyparsing)
   - Python module [protobuf](https://github.com/protocolbuffers/protobuf)
   - Python module [zstandard](https://pypi.org/project/zstandard/)
+  - Python module [tomli](https://pypi.org/project/tomli/)
   - Python module sqlite3 (part of Python, sometimes packaged separately)
   - [git](https://git-scm.com/)
   - [rsync](https://rsync.samba.org/)

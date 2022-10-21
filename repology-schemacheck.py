@@ -59,6 +59,7 @@ families = [
     'freshcode',
     'fsd',
     'gentoo',
+    'glaucus',
     'gobolinux',
     'guix',
     'hackage',

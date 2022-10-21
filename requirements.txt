@@ -10,5 +10,6 @@ pydantic
 pyparsing
 requests
 rubymarshal>=1.2.6
+tomli
 xxhash
 zstandard
