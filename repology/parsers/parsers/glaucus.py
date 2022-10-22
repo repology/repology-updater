@@ -45,10 +45,11 @@ class GlaucusGitParser(Parser):
                     raise RuntimeError(f'package subdir "{package_subdir}" is expected to be equal to package name "{pkgdata["nom"]}"')
 
                 if 'ver' not in pkgdata:
-                    pkg.log('package without version', Logger.ERROR)
+                    pkg.log('package without version, skipping', Logger.ERROR)
                     continue
                 if 'url' not in pkgdata:
-                    pkg.log('package without url', Logger.WARNING)
+                    pkg.log('package without url, assuming virtual package and skipping', Logger.ERROR)
+                    continue
 
                 pkg.set_version(pkgdata['ver'])
                 pkg.set_summary(pkgdata.get('cnt'))
