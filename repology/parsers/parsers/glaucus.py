@@ -24,6 +24,7 @@ from repology.logger import Logger
 from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.walk import walk_tree
 
 
@@ -36,8 +37,9 @@ class GlaucusGitParser(Parser):
             with factory.begin(package_subdir) as pkg:
                 patches_path_abs = os.path.join(package_path_abs, 'patches')
 
-                with open(ceras_path_abs, 'rb') as f:
-                    pkgdata = tomli.load(f)
+                with open(ceras_path_abs, 'r') as f:
+                    ceras_contents = f.read()
+                    pkgdata = tomli.loads(ceras_contents)
 
                 pkg.add_name(pkgdata['nom'], NameType.GENERIC_SRC_NAME)
 
@@ -54,6 +56,10 @@ class GlaucusGitParser(Parser):
                 pkg.set_version(pkgdata['ver'])
                 pkg.set_summary(pkgdata.get('cnt'))
                 pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, pkgdata.get('url'))
+
+                for line in ceras_contents.split('\n'):
+                    if line.startswith('# Voyager:'):
+                        pkg.add_maintainers(extract_maintainers(line.split(':', 1)[1]))
 
                 if os.path.exists(patches_path_abs):
                     pkg.set_extra_field(
