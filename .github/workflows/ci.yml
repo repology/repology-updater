@@ -4,7 +4,7 @@ jobs:
   build:
     env:
       REPOLOGY_CONFIG: repology-test.conf.default
-      POSTGRESQL: 14
+      POSTGRESQL: 15
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +16,7 @@ jobs:
         # depends for jsonslicer, postgresql-liversion, rpm4 respectively
         run: |
           curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main 14" > /etc/apt/sources.list.d/pgdg.list'
+          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main $POSTGRESQL" > /etc/apt/sources.list.d/pgdg.list'
           sudo apt-get update
           sudo apt-get install libyajl-dev
           sudo apt-get install postgresql-$POSTGRESQL postgresql-server-dev-$POSTGRESQL
@@ -61,6 +61,7 @@ jobs:
           sudo -u postgres psql -c "CREATE DATABASE repology_test;"
           sudo -u postgres psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"
           sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
+          sudo -u postgres psql -d repology_test -c "GRANT CREATE ON SCHEMA public TO PUBLIC"
           sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
           sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS libversion"
       - name: Check YAML schemas

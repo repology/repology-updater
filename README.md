@@ -20,7 +20,7 @@ which updates the repository information. See also the
   - Python module [pyyaml](http://pyyaml.org/)
   - Python module [xxhash](https://github.com/ifduyue/python-xxhash)
   - Python module [pydantic](https://pydantic-docs.helpmanual.io/)
-  - [PostgreSQL](https://www.postgresql.org/) 14.0+
+  - [PostgreSQL](https://www.postgresql.org/) 15.0+
   - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
 Needed for fetching/parsing repository data:
@@ -91,6 +91,7 @@ commands to create the database for repology:
 psql --username postgres -c "CREATE DATABASE repology"
 psql --username postgres -c "CREATE USER repology WITH PASSWORD 'repology'"
 psql --username postgres -c "GRANT ALL ON DATABASE repology TO repology"
+psql --username postgres --dbname repology -c "GRANT CREATE ON SCHEMA public TO PUBLIC"
 psql --username postgres --dbname repology -c "CREATE EXTENSION pg_trgm"
 psql --username postgres --dbname repology -c "CREATE EXTENSION libversion"
 ```
