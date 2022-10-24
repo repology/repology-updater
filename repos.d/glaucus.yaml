@@ -26,5 +26,5 @@
     - type: PACKAGE_PATCH
       url: 'https://github.com/glaucuslinux/cerata/blob/master/{srcname}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/glaucuslinux/cerata/master/{srcname}/{?patch}'
+      url: 'https://raw.githubusercontent.com/glaucuslinux/cerata/master/{srcname}/patches/{?patch}'
   groups: [ all, production ]
