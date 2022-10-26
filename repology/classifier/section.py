@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Callable, Optional
+from typing import Callable, Self
 
 from repology.classifier.group import VersionGroup
 from repology.package import Package, PackageStatus
@@ -29,7 +29,7 @@ class Section:
     name: str
     newest_status: int
     guard: GuardFn | None = None
-    next_section: Optional['Section'] = None
+    next_section: Self | None = None
 
     first_package: Package | None = None
     first_package_alt: Package | None = None
@@ -70,7 +70,7 @@ class Section:
     def is_suitable_for_group(self, group: VersionGroup) -> bool:
         return not self.guard or self.guard(group)
 
-    def get_next_section(self) -> 'Section':
+    def get_next_section(self) -> Self:
         assert self.next_section
         return self.next_section
 

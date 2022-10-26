@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
-from typing import Any, ClassVar, TypeAlias, Union
+from typing import Any, ClassVar, TypeAlias
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -244,7 +244,7 @@ class LinkType:
         ]
 
 
-PackageLinkTuple: TypeAlias = Union[tuple[int, str], tuple[int, str, str]]
+PackageLinkTuple: TypeAlias = tuple[int, str] | tuple[int, str, str]
 
 
 class Package:

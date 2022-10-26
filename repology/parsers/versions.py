@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Callable
+from typing import Any, Callable, Self
 
 from libversion import version_compare
 
@@ -32,19 +32,19 @@ class VersionStripper:
     def __init__(self) -> None:
         self._strips = []
 
-    def strip_left(self, separator: str) -> 'VersionStripper':
+    def strip_left(self, separator: str) -> Self:
         self._strips.append(lambda s: s.split(separator, 1)[-1])
         return self
 
-    def strip_left_greedy(self, separator: str) -> 'VersionStripper':
+    def strip_left_greedy(self, separator: str) -> Self:
         self._strips.append(lambda s: s.rsplit(separator, 1)[-1])
         return self
 
-    def strip_right(self, separator: str) -> 'VersionStripper':
+    def strip_right(self, separator: str) -> Self:
         self._strips.append(lambda s: s.rsplit(separator, 1)[0])
         return self
 
-    def strip_right_greedy(self, separator: str) -> 'VersionStripper':
+    def strip_right_greedy(self, separator: str) -> Self:
         self._strips.append(lambda s: s.split(separator, 1)[0])
         return self
 

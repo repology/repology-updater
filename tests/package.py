@@ -18,7 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
-from typing import Any
+from typing import Any, Self
 
 import pytest
 
@@ -75,7 +75,7 @@ class PackageSample:
         self.package = spawn_package(**pkgargs)
         self.expectations = {}
 
-    def expect(self, **expectations: Any) -> 'PackageSample':
+    def expect(self, **expectations: Any) -> Self:
         self.expectations = expectations
         return self
 

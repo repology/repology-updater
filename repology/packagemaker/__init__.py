@@ -19,7 +19,7 @@ import warnings
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Iterable, Type, TypeVar
+from typing import Any, Callable, Iterable, Self, Type, TypeVar
 
 from repology.logger import Logger, NoopLogger
 from repology.package import LinkType, Package, PackageLinkTuple, PackageStatus
@@ -410,7 +410,7 @@ class PackageMaker(PackageMakerBase):
     def __getattr__(self, key: str) -> Any:
         return getattr(self._package, key)
 
-    def __enter__(self) -> 'PackageMaker':
+    def __enter__(self) -> Self:
         return self
 
     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> bool | None:
