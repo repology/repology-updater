@@ -7,11 +7,11 @@ jobs:
       POSTGRESQL: 15
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10.0"
+          python-version: "3.11"
       - name: Install dependencies
         # depends for jsonslicer, postgresql-liversion, rpm4 respectively
         run: |
