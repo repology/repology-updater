@@ -117,21 +117,6 @@ class RepositoryProcessor:
                     packagemaker.log(str(e), Logger.ERROR)
                     raise
 
-                # transform
-                if transformer:
-                    transformer.process(package)
-
-                # skip removed packages
-                if package.has_flag(PackageFlags.REMOVE):
-                    continue
-
-                # postprocess flavors
-                def strip_flavor(flavor: str) -> str:
-                    flavor.removeprefix(package.effname + '-')
-                    return flavor
-
-                package.flavors = sorted(set(map(strip_flavor, package.flavors)))
-
                 # add packagelinks
                 packagelinks: list[tuple[int, str]] = []
                 for pkglink in source.packagelinks + repository.packagelinks:
@@ -150,6 +135,21 @@ class RepositoryProcessor:
                 else:
                     seen = set(package.links)
                     package.links.extend(link for link in packagelinks if link not in seen)
+
+                # transform
+                if transformer:
+                    transformer.process(package)
+
+                # skip removed packages
+                if package.has_flag(PackageFlags.REMOVE):
+                    continue
+
+                # postprocess flavors
+                def strip_flavor(flavor: str) -> str:
+                    flavor.removeprefix(package.effname + '-')
+                    return flavor
+
+                package.flavors = sorted(set(map(strip_flavor, package.flavors)))
 
                 # postprocess maintainers
                 if maintainermgr and package.maintainers:
