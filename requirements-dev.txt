@@ -4,6 +4,7 @@ flake8-import-order
 flake8-quotes
 lxml-stubs
 mypy
+py  # to fix pytest-regtest with pytest>=7.2
 pytest
 pytest-cov
 pytest-datadir
