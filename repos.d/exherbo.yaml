@@ -6,7 +6,7 @@
   desc: Exherbo
   family: exherbo
   color: 'a1da91'
-  minpackages: 8000
+  minpackages: 7500
   default_maintainer: fallback-mnt-exherbo@repology
   sources:
     - name: packages.json
