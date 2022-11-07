@@ -1,0 +1,32 @@
+###########################################################################
+# Terra
+###########################################################################
+- name: terra_37
+  type: repository
+  desc: Terra 37
+  family: fedora
+  ruleset: [fedora, rpm]
+  minpackages: 500
+  sources:
+    - name: repo.xml
+      fetcher:
+        class: RepodataFetcher
+        url: https://repos.fyralabs.com/terra37/
+      parser:
+        class: RepodataParser
+        src: true
+        binary: true
+        vertags: fc
+  repolinks:
+    - desc: Terra home
+      url: https://terra.fyralabs.com/
+    - desc: GitHub organization
+      url: https://github.com/terrapkg
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/terrapkg/packages/tree/main/anda/{srcname|quote}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/terrapkg/packages/blob/main/anda/{srcname|quote}/{srcname|quote}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/terrapkg/packages/main/anda/{srcname|quote}/{srcname|quote}.spec'
+  groups: [ all, production, terra ]
