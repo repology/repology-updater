@@ -100,5 +100,6 @@
 {{ fedora(34, minpackages=24000, valid_till='2022-06-07') }}
 {{ fedora(35, minpackages=24000, valid_till='2022-11-15') }}
 {{ fedora(36, minpackages=24000, valid_till='2023-05-16') }}
-{{ fedora(37, minpackages=21000, valid_till='2023-11-14', development=True) }}
+{{ fedora(37, minpackages=21000, valid_till='2023-11-14') }}
+{# fedora(38, minpackages=21000, valid_till='2024-05-14', development=True) #}
 {{ fedora('rawhide', minpackages=21000, development=True) }}
