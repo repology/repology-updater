@@ -171,11 +171,6 @@ class NixJsonParser(Parser):
                     pkg.add_categories(keyparts[0])
 
                 # XXX: move to rules
-                if pname.endswith('-git'):
-                    pkg.add_name(pname[:-4], NameType.NIX_PNAME)
-                    pkg.set_flags(PackageFlags.IGNORE)
-
-                # XXX: move to rules
                 if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
                     pkg.set_flags(PackageFlags.IGNORE)
 
