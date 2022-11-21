@@ -35,7 +35,7 @@ class SisyphusJsonParser(Parser):
         for packagedata in iter_json_list(path, ('packages', None)):
             with factory.begin() as pkg:
                 pkg.add_name(packagedata['name'], NameType.SRCRPM_NAME)
-                pkg.add_binnames(binary['name'] for binary in packagedata['binaries'])
+                pkg.add_binnames(sorted(binary['name'] for binary in packagedata['binaries']))
 
                 version, flags = parse_rpm_version(self._vertags, packagedata['version'], packagedata['release'])
                 pkg.set_version(version)
