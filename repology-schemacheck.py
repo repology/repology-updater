@@ -163,7 +163,6 @@ rulesets = families + [
     'msys2_mingw',
     'msys2_msys2',
     'mx',
-    'nix_old_node_naming',
     'openeuler',
     'packman',
     'parabola',
