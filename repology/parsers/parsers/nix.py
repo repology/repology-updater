@@ -191,14 +191,8 @@ class NixJsonParser(Parser):
                 if 'position' in meta:
                     posfile, posline = meta['position'].rsplit(':', 1)
 
-                    if posfile.startswith('pkgs/development/r-modules/generic-builder.nix'):
-                        # the same line pkgs/development/r-modules/generic-builder.nix#53
-                        # is set as a position for 22k r modules; close to overflowing 32k
-                        # link refcount so skip it
-                        pass
-                    else:
-                        pkg.set_extra_field('posfile', posfile)
-                        pkg.set_extra_field('posline', posline)
+                    pkg.set_extra_field('posfile', posfile)
+                    pkg.set_extra_field('posline', posline)
                 else:
                     pkg.log('no position recorded in meta', severity=Logger.ERROR)
                     pkg.set_flags(PackageFlags.UNTRUSTED)
