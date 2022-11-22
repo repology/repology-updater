@@ -504,7 +504,7 @@ CREATE TABLE links (
 	ipv6_status_code smallint,
 	ipv6_permanent_redirect_target text,
 
-	check_duration float
+	check_duration real
 );
 
 CREATE UNIQUE INDEX ON links(url);
