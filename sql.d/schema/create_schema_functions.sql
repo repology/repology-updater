@@ -183,15 +183,21 @@ BEGIN
 			WITH expanded AS (
 				SELECT
 					json_array_elements(links)->0 AS link_type,
-					json_array_elements(links)->>1 AS url
+					json_array_elements(links)->>1 AS url,
+					json_array_elements(links)->>2 AS fragment
 			), translated AS (
 				SELECT
 					link_type,
-					(SELECT id FROM links WHERE links.url = expanded.url) AS link_id
+					(SELECT id FROM links WHERE links.url = expanded.url) AS link_id,
+					fragment
 				FROM expanded
 			), joined AS (
 				SELECT
-					json_build_array(link_type, link_id) AS link
+					CASE
+						WHEN fragment IS NULL
+						THEN json_build_array(link_type, link_id)
+						ELSE json_build_array(link_type, link_id, fragment)
+					END AS link
 				FROM translated
 			)
 			SELECT json_agg(link) FROM joined

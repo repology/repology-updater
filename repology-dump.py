@@ -37,7 +37,7 @@ def format_package_field(key: str, value: Any) -> str:
         return PackageFlags.as_string(value)
     if key == 'links':
         if value:
-            return '[' + ', '.join(f'{LinkType.as_string(link_type)}={url}' for link_type, url in value) + ']'
+            return '[' + ', '.join(f'{LinkType.as_string(link_type)}={"#".join(url_frag)}' for link_type, *url_frag in value) + ']'
         else:
             return 'None'
     if isinstance(value, dict):

@@ -37,7 +37,7 @@ class FieldStatistics:
                 new_fields = True
 
         if (links := getattr(package, 'links', None)):
-            for link_type, _ in links:
+            for link_type, *_ in links:
                 self._used_link_types.add(link_type)
 
         if new_fields:

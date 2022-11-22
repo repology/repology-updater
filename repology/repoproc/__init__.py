@@ -118,12 +118,12 @@ class RepositoryProcessor:
                     raise
 
                 # add packagelinks
-                packagelinks: list[tuple[int, str]] = []
+                packagelinks: list[tuple[int, str] | tuple[int, str, str]] = []
                 for pkglink in source.packagelinks + repository.packagelinks:
                     link_type = pkglink.type
                     try:
                         packagelinks.extend(
-                            (link_type, url)
+                            (link_type, *url.split('#', 1))  # type: ignore
                             for url in format_package_links(package, pkglink.url)
                         )
                     except Exception as e:

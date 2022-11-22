@@ -278,6 +278,14 @@ def test_wwwpat():
     )
 
 
+def test_wwwpat_fragment():
+    check_transformer(
+        '[ { wwwpat: ".*foo.com/#xxx.*", setname: bar } ]',
+        PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.com/#xxx')]).expect(effname='bar'),
+        PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.com/xxx')]).expect(effname='p2'),
+    )
+
+
 def test_wwwpart():
     check_transformer(
         '[ { wwwpart: "foo", setname: bar } ]',
@@ -290,6 +298,7 @@ def test_wwwpart():
 
 
 def test_wwwpart_case():
+    # wwwpat is NOT case senseitive
     check_transformer(
         '[ { wwwpart: homepage1, setname: ok1 }, { wwwpart: HOMEPAGE2, setname: ok2 }, { wwwpart: homepage3, setname: ok3 }, { wwwpart: HOMEPAGE4, setname: ok4 } ]',
         PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://homepage1')]).expect(effname='ok1'),
@@ -300,6 +309,14 @@ def test_wwwpart_case():
         PackageSample(name='p6', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://HOMEPAGE3')]).expect(effname='ok3'),
         PackageSample(name='p7', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://homepage4')]).expect(effname='ok4'),
         PackageSample(name='p8', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'http://HOMEPAGE4')]).expect(effname='ok4'),
+    )
+
+
+def test_wwwpart_fragment():
+    check_transformer(
+        '[ { wwwpart: "foo.com/#xxx", setname: bar } ]',
+        PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.com/#xxx')]).expect(effname='bar'),
+        PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.com/xxx')]).expect(effname='p2'),
     )
 
 

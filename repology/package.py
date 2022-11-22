@@ -330,7 +330,7 @@ class Package:
     cpe_target_hw: str | None
     cpe_other: str | None
 
-    links: list[tuple[int, str]] | None
+    links: list[tuple[int, str] | tuple[int, str, str]] | None
 
     effname: str
 
@@ -382,7 +382,7 @@ class Package:
                  cpe_target_hw: str | None = None,
                  cpe_other: str | None = None,
 
-                 links: list[tuple[int, str]] | None = None,
+                 links: list[tuple[int, str] | tuple[int, str, str]] | None = None,
 
                  flags: int = 0,
                  shadow: bool = False,

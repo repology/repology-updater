@@ -99,7 +99,7 @@ class PackageTemplate:
 
     flavors: list[str]
 
-    links: list[tuple[int, str]]
+    links: list[tuple[int, str] | tuple[int, str, str]]
 
     def __init__(self) -> None:
         self.subrepo = None
@@ -325,7 +325,7 @@ class PackageMaker(PackageMakerBase):
         urls = self._normalize_args(args, 'link', str, link_normalizers)
 
         if urls:
-            self._package.links.extend((link_type, url) for url in urls)
+            self._package.links.extend((link_type, *url.rstrip('#').split('#', 1)) for url in urls)  # type: ignore
 
     def set_flags(self, mask: int, is_set: bool = True) -> None:
         if is_set:
