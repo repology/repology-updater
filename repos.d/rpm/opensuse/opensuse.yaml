@@ -55,47 +55,50 @@
       url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:42.3:Update/{srcname}/{srcname}.spec?expand=1'
   groups: [ all, production, opensuse, rpm ]
 
-- name: opensuse_leap_15_0
+{% macro opensuse_leap(version, minpackages, valid_till=None) %}
+- name: opensuse_leap_{{version|replace('.', '_')}}
   type: repository
-  desc: openSUSE Leap 15.0
+  desc: openSUSE Leap {{version}}
   statsgroup: openSUSE
   family: opensuse
   ruleset: [opensuse,rpm]
   color: '6da741'
-  valid_till: 2019-12-03
-  minpackages: 11000
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
     - name: oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.0/repo/oss/
+        url: http://download.opensuse.org/source/distribution/leap/{{version}}/repo/oss/
       parser:
         class: RepodataParser
-        vertags: lp
+        vertags: [lp,bp]  # none up to 42.3, lp for [15.0, 15.2], bp since 15.3
       subrepo: main/oss
     - name: non-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
+        url: http://download.opensuse.org/source/distribution/leap/{{version}}/repo/non-oss/
       parser:
         class: RepodataParser
-        vertags: lp
+        vertags: [lp,bp]
       subrepo: main/non-oss
     - name: updates-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.0/oss/
+        url: http://download.opensuse.org/update/leap/{{version}}/oss/
       parser:
         class: RepodataParser
-        vertags: lp
+        vertags: [lp,bp]
       subrepo: updates/oss
     - name: updates-non-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.0/non-oss/
+        url: http://download.opensuse.org/update/leap/{{version}}/non-oss/
       parser:
         class: RepodataParser
-        vertags: lp
+        vertags: [lp,bp]
       subrepo: updates/non-oss
   repolinks:
     - desc: openSUSE home
@@ -103,180 +106,20 @@
     - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
-    # NOTE: openSUSE:Leap:15.0:Update automatically inherits openSUSE:Leap:15.0
+    # NOTE: openSUSE:Leap:X:Update automatically inherits openSUSE:Leap:X:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.0:Update/{srcname}'
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:{{version}}:Update/{srcname}'
     - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.0:Update/{srcname}/{srcname}.spec?expand=1'
+      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:{{version}}:Update/{srcname}/{srcname}.spec?expand=1'
   groups: [ all, production, opensuse, rpm ]
+{% endmacro %}
 
-- name: opensuse_leap_15_1
-  type: repository
-  desc: openSUSE Leap 15.1
-  statsgroup: openSUSE
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 10500
-  valid_till: 2021-01-31
-  sources:
-    - name: oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.1/repo/oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: main/oss
-    - name: non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.1/repo/non-oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: main/non-oss
-    - name: updates-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.1/oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: updates/oss
-    - name: updates-non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.1/non-oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: updates/non-oss
-  repolinks:
-    - desc: openSUSE home
-      url: https://www.opensuse.org/
-    - desc: openSUSE package search
-      url: https://software.opensuse.org/
-  packagelinks:
-    # NOTE: openSUSE:Leap:15.1:Update automatically inherits openSUSE:Leap:15.1
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.1:Update/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.1:Update/{srcname}/{srcname}.spec?expand=1'
-  groups: [ all, production, opensuse, rpm ]
-
-- name: opensuse_leap_15_2
-  type: repository
-  desc: openSUSE Leap 15.2
-  statsgroup: openSUSE
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 10500
-  valid_till: 2021-12-31
-  sources:
-    - name: oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.2/repo/oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: main/oss
-    - name: non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.2/repo/non-oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: main/non-oss
-    - name: updates-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.2/oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: updates/oss
-    - name: updates-non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.2/non-oss/
-      parser:
-        class: RepodataParser
-        vertags: pm
-      subrepo: updates/non-oss
-  repolinks:
-    - desc: openSUSE home
-      url: https://www.opensuse.org/
-    - desc: openSUSE package search
-      url: https://software.opensuse.org/
-  packagelinks:
-    # NOTE: openSUSE:Leap:15.2:Update automatically inherits openSUSE:Leap:15.2
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.2:Update/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.2:Update/{srcname}/{srcname}.spec?expand=1'
-  groups: [ all, production, opensuse, rpm ]
-
-- name: opensuse_leap_15_3
-  type: repository
-  desc: openSUSE Leap 15.3
-  statsgroup: openSUSE
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  minpackages: 10500
-  sources:
-    - name: oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.3/repo/oss/
-      parser:
-        class: RepodataParser
-      subrepo: main/oss
-    - name: non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/15.3/repo/non-oss/
-      parser:
-        class: RepodataParser
-      subrepo: main/non-oss
-    - name: updates-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.3/oss/
-      parser:
-        class: RepodataParser
-      subrepo: updates/oss
-    - name: updates-non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.3/non-oss/
-      parser:
-        class: RepodataParser
-      subrepo: updates/non-oss
-  repolinks:
-    - desc: openSUSE home
-      url: https://www.opensuse.org/
-    - desc: openSUSE package search
-      url: https://software.opensuse.org/
-  packagelinks:
-    # NOTE: openSUSE:Leap:15.3:Update automatically inherits openSUSE:Leap:15.3
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.3:Update/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:15.3:Update/{srcname}/{srcname}.spec?expand=1'
-  groups: [ all, production, opensuse, rpm ]
+{{ opensuse_leap('15.0', minpackages=11000, valid_till='2019-12-03') }}
+{{ opensuse_leap('15.1', minpackages=10500, valid_till='2021-01-31') }}
+{{ opensuse_leap('15.2', minpackages=10500, valid_till='2021-12-31') }}
+{{ opensuse_leap('15.3', minpackages=10500) }}
 
 - name: opensuse_leap_15_4
   type: repository
@@ -293,6 +136,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.4/repo/oss/
       parser:
         class: RepodataParser
+        vertags: [lp,bp]
       subrepo: main/oss
     - name: non-oss
       fetcher:
@@ -300,6 +144,7 @@
         url: http://download.opensuse.org/source/distribution/leap/15.4/repo/non-oss/
       parser:
         class: RepodataParser
+        vertags: [lp,bp]
       subrepo: main/non-oss
     # XXX: not there yet
     #- name: updates-oss
