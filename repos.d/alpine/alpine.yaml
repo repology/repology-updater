@@ -66,4 +66,5 @@
 {{ alpine('3.14', minpackages=14000) }}
 {{ alpine('3.15', minpackages=15000) }}
 {{ alpine('3.16', minpackages=16000) }}
-{{ alpine('edge', minpackages=16000, subrepos=['community', 'main', 'testing']) }}
+{{ alpine('3.17', minpackages=16000) }}
+{{ alpine('edge', minpackages=20000, subrepos=['community', 'main', 'testing']) }}
