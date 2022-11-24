@@ -1,0 +1,69 @@
+###########################################################################
+# Debian Janitor
+#
+# https://janitor.debian.net/fresh
+###########################################################################
+
+- name: debian_janitor_releases
+  type: repository
+  desc: Debian Janitor - Fresh Releases
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '32638f'
+  minpackages: 100
+  sources:
+    - name: [ main ]
+      fetcher:
+        class: FileFetcher
+        url: 'https://janitor.debian.net/dists/fresh-releases/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian Janitor Homepage
+      url: https://janitor.debian.net/
+    - desc: Debian Janitor Wiki
+      url: https://wiki.debian.org/Janitor
+    - desc: Fresh Releases
+      url: https://janitor.debian.net/fresh-releases
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://janitor.debian.net/fresh-releases/pkg/{srcname}'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://janitor.debian.net/fresh-releases/pkg/{srcname}/build.log'
+    - type: PACKAGE_SOURCES
+      url: 'https://janitor.debian.net/git/{srcname}/fresh-releases/main'
+  groups: [ all, production, debian-janitor ]
+
+- name: debian_janitor_snapshots
+  type: repository
+  desc: Debian Janitor - Fresh Snapshots
+  statsgroup: Debian+derivs
+  family: debuntu
+  color: '32638f'
+  minpackages: 100
+  sources:
+    - name: [ main ]
+      fetcher:
+        class: FileFetcher
+        url: 'https://janitor.debian.net/dists/fresh-snapshots/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian Janitor Homepage
+      url: https://janitor.debian.net/
+    - desc: Debian Janitor Wiki
+      url: https://wiki.debian.org/Janitor
+    - desc: Fresh Snapshots
+      url: https://janitor.debian.net/fresh-snapshots
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}/build.log'
+    - type: PACKAGE_SOURCES
+      url: 'https://janitor.debian.net/git/{srcname}/fresh-snapshots/main'
+  groups: [ all, production, debian-janitor ]
