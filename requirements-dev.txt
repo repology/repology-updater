@@ -1,6 +1,6 @@
 flake8
 flake8-builtins
-flake8-quotes
+#flake8-quotes
 lxml-stubs
 mypy
 py  # to fix pytest-regtest with pytest>=7.2
