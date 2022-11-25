@@ -15,7 +15,7 @@
     - name: [ contrib, main, non-free ]
       fetcher:
         class: FileFetcher
-        url: 'http://http.kali.org/kali/dists/kali-rolling/{source}/source/Sources.gz'
+        url: 'https://http.kali.org/kali/dists/kali-rolling/{source}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -26,23 +26,22 @@
     - desc: Kali Linux home
       url: https://www.kali.org/
   groups: [ all, production, kali ]
+
 - name: kali_bleeding_edge
   type: repository
   desc: Kali Linux Bleeding Edge
   statsgroup: Debian+derivs
   family: debuntu
   color: '32638f'
-  minpackages: 27000
+  minpackages: 50
   sources:
     - name: [ contrib, main, non-free ]
       fetcher:
         class: FileFetcher
-        url: 'http://http.kali.org/kali/dists/kali-bleeding-edge/{source}/source/Sources.gz'
+        url: 'https://http.kali.org/kali/dists/kali-bleeding-edge/{source}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-        # we only need sources for kalilinux unique packages, others are from debian
-        #allowed_vcs_urls: "https://gitlab.com/kalilinux/packages/"
       subrepo: '{source}'
   repolinks:
     - desc: Kali Linux home
