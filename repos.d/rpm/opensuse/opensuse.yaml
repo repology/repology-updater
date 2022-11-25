@@ -122,6 +122,7 @@
 {{ opensuse_leap('15.2', minpackages=10500, valid_till='2022-01-04') }}
 {{ opensuse_leap('15.3', minpackages=10500, valid_till='2022-12-01') }} # expected eol date
 {{ opensuse_leap('15.4', minpackages=10500, valid_till='2023-12-01') }} # expected eol date
+{{ opensuse_leap('15.5', minpackages=10500, valid_till='2023-12-01') }} # expected eol date
 
 - name: opensuse_tumbleweed
   type: repository
