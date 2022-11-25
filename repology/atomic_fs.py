@@ -24,15 +24,18 @@ __all__ = ['AtomicDir', 'AtomicFile']
 
 
 class _AtomicFSObject:
+    _path: str
+    _canceled: bool
+
     def __init__(self, path: str) -> None:
-        self.path = path
-        self.canceled = False
+        self._path = path
+        self._canceled = False
 
     def _get_new_path(self) -> str:
-        return self.path + '.new'
+        return self._path + '.new'
 
     def _get_old_path(self) -> str:
-        return self.path + '.old'
+        return self._path + '.old'
 
     def _cleanup(self) -> None:
         for path in [self._get_new_path(), self._get_old_path()]:
@@ -46,16 +49,16 @@ class _AtomicFSObject:
             raise RuntimeError('no now state')
 
         # assuming old path was already cleaned up
-        if os.path.exists(self.path):
-            os.rename(self.path, self._get_old_path())
+        if os.path.exists(self._path):
+            os.rename(self._path, self._get_old_path())
 
-        os.rename(self._get_new_path(), self.path)
+        os.rename(self._get_new_path(), self._path)
 
     def get_path(self) -> str:
         return self._get_new_path()
 
     def cancel(self) -> None:
-        self.canceled = True
+        self._canceled = True
 
 
 class AtomicDir(_AtomicFSObject):
@@ -68,7 +71,7 @@ class AtomicDir(_AtomicFSObject):
         return self
 
     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
-        if not exc_type and not self.canceled:
+        if not exc_type and not self._canceled:
             self._replace()
 
         self._cleanup()
@@ -92,7 +95,7 @@ class AtomicFile(_AtomicFSObject):
     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
         self._file.close()
 
-        if not exc_type and not self.canceled:
+        if not exc_type and not self._canceled:
             self._replace()
 
         self._cleanup()
