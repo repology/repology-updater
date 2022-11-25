@@ -71,9 +71,9 @@ class FileFetcher(ScratchFileFetcher):
             logger.log('got 403 not modified')
             return False
 
-        size = os.path.getsize(statefile.get_path())
+        size = statefile.get_file().tell()
 
-        logger.log('size is {} byte(s)'.format(size))
+        logger.log(f'size is {size} byte(s)')
 
         if size == 0 and not self.allow_zero_size:
             raise RuntimeError('refusing zero size file')
