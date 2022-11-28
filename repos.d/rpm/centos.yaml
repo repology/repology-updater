@@ -16,6 +16,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  # See https://en.wikipedia.org/wiki/CentOS for EOL date
   valid_till: 2020-11-30
   sources:
     - name: [ os, updates ]
@@ -47,6 +48,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2500
+  # See https://wiki.centos.org/About/Product for EOL date
   valid_till: 2024-06-30
   sources:
     - name: [ os, updates, extras ]
@@ -77,6 +79,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  # See https://www.centos.org/centos-linux-eol/ for EOL date
   valid_till: 2021-12-31
   sources:
     - name: [ AppStream, BaseOS, HighAvailability, PowerTools, extras ]
@@ -107,6 +110,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  # See https://wiki.centos.org/About/Product for EOL date
   valid_till: 2024-05-31
   sources:
     - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, extras ]
@@ -138,6 +142,7 @@
   ruleset: [centos, rpm]
   color: '932279'
   minpackages: 2000
+  # See https://centos.org/stream9/ for EOL date
   valid_till: 2027-05-31
   sources:
     - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage ]
@@ -192,6 +197,7 @@
   groups: [ all, production, centos, rpm, almalinux ]
 {% endmacro %}
 
+# See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ almalinux(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ almalinux(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
 
@@ -234,6 +240,7 @@
   groups: [ all, production, centos, rpm, rockylinux ]
 {% endmacro %}
 
+# See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ rocky(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ rocky(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
 
@@ -268,5 +275,6 @@
   groups: [ all, production, centos, rpm, eurolinux ]
 {% endmacro %}
 
-{{ eurolinux(8, minpackages=5000, subrepos=['appstream', 'baseos', 'highavability', 'powertools', 'resilientstorage']) }}
-{{ eurolinux(9, minpackages=3000, subrepos=['appstream', 'baseos', 'highavailability', 'powertools', 'resilientstorage']) }}
+# See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
+{{ eurolinux(8, minpackages=5000, valid_till='2029-05-31', subrepos=['appstream', 'baseos', 'highavability', 'powertools', 'resilientstorage']) }}
+{{ eurolinux(9, minpackages=3000, valid_till='2032-05-31', subrepos=['appstream', 'baseos', 'highavailability', 'powertools', 'resilientstorage']) }}
