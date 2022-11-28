@@ -54,13 +54,6 @@
       parser:
         class: MSYS2DescParser
       subrepo: x86_64
-    - name: i686
-      fetcher:
-        class: TarFetcher
-        url: http://repo.msys2.org/msys/i686/msys.db.tar.zst
-      parser:
-        class: MSYS2DescParser
-      subrepo: i686
   repolinks:
     - desc: MSYS2 homepage
       url: http://www.msys2.org/
