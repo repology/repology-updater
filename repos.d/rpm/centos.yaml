@@ -262,17 +262,19 @@
 ###########################################################################
 # EuroLinux
 ###########################################################################
-{% macro eurolinux(version, minpackages) %}
-{% set highavailability = 'highavability' if version == 8 else 'highavailability' %}
+{% macro eurolinux(version, minpackages, subrepos, valid_till=None) %}
 - name: eurolinux_{{version}}
   type: repository
   desc: EuroLinux {{version}}
   family: centos
   ruleset: [centos, rpm]
   color: '095da5'
-  minpackages: 4000
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
-    {% for sub in ['appstream', 'baseos', highavailability, 'powertools', 'resilientstorage'] %}
+    {% for sub in subrepos %}
     - name: {{sub}}
       fetcher:
         class: RepodataFetcher
@@ -288,5 +290,5 @@
   groups: [ all, production, centos, rpm, eurolinux ]
 {% endmacro %}
 
-{{ eurolinux(8, minpackages=5000) }}
-{{ eurolinux(9, minpackages=3000) }}
+{{ eurolinux(8, minpackages=5000, subrepos=['appstream', 'baseos', 'highavability', 'powertools', 'resilientstorage']) }}
+{{ eurolinux(9, minpackages=3000, subrepos=['appstream', 'baseos', 'highavailability', 'powertools', 'resilientstorage']) }}
