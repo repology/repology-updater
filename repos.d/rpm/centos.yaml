@@ -153,111 +153,82 @@
       url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/raw/c9s/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
-- name: almalinux_8
+###########################################################################
+# AlmaLinux
+###########################################################################
+{% macro almalinux(version, minpackages, subrepos, valid_till=None) %}
+- name: almalinux_{{version}}
   type: repository
-  desc: AlmaLinux 8
+  desc: AlmaLinux {{version}}
   statsgroup: CentOS
   family: centos
   ruleset: [centos, rpm]
   color: '082336'
-  minpackages: 2500
-  valid_till: 2029-05-31
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
-    - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, ResilientStorage, extras ]
+    {% for sub in subrepos %}
+    - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'https://repo.almalinux.org/vault/8/{source}/Source/'
+        url: 'https://repo.almalinux.org/vault/{{version}}/{{sub}}/Source/'
       parser:
         class: RepodataParser
         vertags: el
-      subrepo: '{source}'
+      subrepo: '{{sub}}'
+    {% endfor %}
   repolinks:
     - desc: AlmaLinux home
       url: https://almalinux.org/
   groups: [ all, production, centos, rpm, almalinux ]
+{% endmacro %}
 
-- name: almalinux_9
-  type: repository
-  desc: AlmaLinux 9
-  statsgroup: CentOS
-  family: centos
-  ruleset: [centos, rpm]
-  color: '082336'
-  minpackages: 2000
-  valid_till: 2032-05-31
-  sources:
-    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage, SAP, SAPHANA, extras ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'https://repo.almalinux.org/vault/9/{source}/Source/'
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: '{source}'
-  repolinks:
-    - desc: AlmaLinux home
-      url: https://almalinux.org/
-  groups: [ all, production, centos, rpm, almalinux ]
+{{ almalinux(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
+{{ almalinux(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
 
-- name: rocky_8
+###########################################################################
+# Rocky
+###########################################################################
+{% macro rocky(version, minpackages, subrepos, valid_till=None) %}
+- name: rocky_{{version}}
   type: repository
-  desc: Rocky Linux 8
+  desc: Rocky Linux {{version}}
   statsgroup: CentOS
   family: centos
   ruleset: [centos, rpm]
   color: '10b981'
-  minpackages: 2500
-  valid_till: 2029-05-31
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
-    - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, ResilientStorage, extras ]
+    {% for sub in subrepos %}
+    - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'https://download.rockylinux.org/pub/rocky/8/{source}/source/tree/'
+        url: 'https://download.rockylinux.org/pub/rocky/{{version}}/{{sub}}/source/tree/'
       parser:
         class: RepodataParser
         vertags: el
-      subrepo: '{source}'
+      subrepo: '{{sub}}'
+    {% endfor %}
   repolinks:
     - desc: Rocky Linux home
       url: https://rockylinux.org/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/tree/r8'
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/tree/r{{version}}'
     - type: PACKAGE_RECIPE
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/blob/r8/SPECS/{srcname}.spec'
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/blob/r{{version}}/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/raw/r8/SPECS/{srcname}.spec'
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/raw/r{{version}}/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm, rockylinux ]
+{% endmacro %}
 
-- name: rocky_9
-  type: repository
-  desc: Rocky Linux 9
-  statsgroup: CentOS
-  family: centos
-  ruleset: [centos, rpm]
-  color: '10b981'
-  minpackages: 2000
-  valid_till: 2032-05-31
-  sources:
-    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage, SAP, SAPHANA, extras ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'https://download.rockylinux.org/pub/rocky/9/{source}/source/tree/'
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: '{source}'
-  repolinks:
-    - desc: Rocky Linux home
-      url: https://rockylinux.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/tree/r9'
-    - type: PACKAGE_RECIPE
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/blob/r9/SPECS/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/raw/r9/SPECS/{srcname}.spec'
-  groups: [ all, production, centos, rpm, rockylinux ]
+{{ rocky(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
+{{ rocky(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
 
 ###########################################################################
 # EuroLinux
