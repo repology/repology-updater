@@ -20,4 +20,25 @@
   repolinks:
     - desc: EuroLinux Home
       url: http://euro-linux.com/
-  groups: [ all, production, eurolinux ]
+  groups: [ all, production, centos, rpm, eurolinux ]
+
+- name: eurolinux_9
+  type: repository
+  desc: EuroLinux 9
+  family: centos
+  ruleset: [centos, rpm]
+  color: '095da5'
+  minpackages: 2000
+  sources:
+    - name: [ appstream, baseos, highavailability, powertools, resilientstorage ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://vault.cdn.euro-linux.com/sources/eurolinux/9/baseos/x86_64/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  repolinks:
+    - desc: EuroLinux Home
+      url: http://euro-linux.com/
+  groups: [ all, production, centos, rpm, eurolinux ]
