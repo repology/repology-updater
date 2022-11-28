@@ -213,3 +213,35 @@
     - desc: Rocky Linux home
       url: https://rockylinux.org/
   groups: [ all, production, centos, rpm ]
+
+###########################################################################
+# EuroLinux
+###########################################################################
+{% macro eurolinux(version, minpackages) %}
+{% set highavailability = 'highavability' if version == 8 else 'highavailability' %}
+- name: eurolinux_{{version}}
+  type: repository
+  desc: EuroLinux {{version}}
+  family: centos
+  ruleset: [centos, rpm]
+  color: '095da5'
+  minpackages: 4000
+  sources:
+    {% for sub in ['appstream', 'baseos', highavailability, 'powertools', 'resilientstorage'] %}
+    - name: {{sub}}
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://vault.cdn.euro-linux.com/sources/eurolinux/{{version}}/{{sub}}/x86_64/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: {{sub}}
+    {% endfor %}
+  repolinks:
+    - desc: EuroLinux Home
+      url: http://euro-linux.com/
+  groups: [ all, production, centos, rpm, eurolinux ]
+{% endmacro %}
+
+{{ eurolinux(8, minpackages=5000) }}
+{{ eurolinux(9, minpackages=3000) }}
