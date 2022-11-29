@@ -44,7 +44,7 @@
   family: msys2
   ruleset: [msys2, msys2_msys2, windows]
   color: 'ef7f1a'
-  minpackages: 1100
+  minpackages: 500
   sources:
     # NOTE: no database for source packages
     - name: x86_64
