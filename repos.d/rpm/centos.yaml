@@ -145,7 +145,7 @@
   # See https://centos.org/stream9/ for EOL date
   valid_till: 2027-05-31
   sources:
-    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage ]
+    - name: [ AppStream, BaseOS, CRB, HighAvailability, RT, ResilientStorage ]  # NFV is missing
       fetcher:
         class: RepodataFetcher
         url: 'http://mirror.stream.centos.org/9-stream/{source}/source/tree/'
