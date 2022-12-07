@@ -32,7 +32,7 @@ def test_name():
 
 def test_name_multi():
     # XXX: may not in fact cover multi-name branch of `name' matcher
-    # bacause rules with multiple names are split to single-name rules
+    # because rules with multiple names are split to single-name rules
     # in Ruleset as an optimization
     check_transformer(
         '[ { name: [p1,p2], setname: bar } ]',

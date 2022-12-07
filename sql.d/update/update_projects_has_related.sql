@@ -16,7 +16,7 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 -- XXX: AS METARIALIZED here yields a bit better performance;
--- may add it when we swith to Pg12 everywhere and require it
+-- may add it when we switch to Pg12 everywhere and require it
 WITH metapackages_with_related AS (
 	SELECT DISTINCT metapackage_id
 	FROM url_relations

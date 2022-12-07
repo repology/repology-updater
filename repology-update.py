@@ -136,7 +136,7 @@ def process_repositories(env: Environment) -> None:
         elif env.get_options().fetch:
             env.get_main_logger().log('fetching {}'.format(reponame))
 
-            # make sure hash is reset untill it's known that the update did not untroduce any changes
+            # make sure hash is reset until it's known that the update did not untroduce any changes
             old_hash = database.get_repository_ruleset_hash(reponame)
             database.update_repository_ruleset_hash(reponame, None)
             database.commit()

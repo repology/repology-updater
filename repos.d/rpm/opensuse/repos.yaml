@@ -5,7 +5,7 @@
 # XXX: packagelinks problems:
 #
 # - We don't have information on than a package is produced by multibuild.
-#   For intance, for mumps-mvapich2 package we generate spec link
+#   For instance, for mumps-mvapich2 package we generate spec link
 #
 #     https://build.opensuse.org/package/view_file/science/mumps-mvapich2/mumps-mvapich2.spec
 #

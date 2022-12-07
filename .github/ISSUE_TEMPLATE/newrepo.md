@@ -52,7 +52,7 @@ Other useful link types include package page, package related issues, build stat
 
 **Additional details**
 <!--
-- More links, such as distibution/repository homepage or GitHub organization
+- More links, such as distribution/repository homepage or GitHub organization
 - Brand color, if any
 - EoL date, if applicable
 - Contact in case of fetch failures or data problems
