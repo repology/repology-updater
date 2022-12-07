@@ -138,7 +138,7 @@ Next, run the update process:
 ```
 
 Expect it to take several hours the first time, subsequent updates
-will be faster. You can use the same commant to updated. Brief
+will be faster. You can use the same command to updated. Brief
 explanation of options used here:
 
   - `--fetch` tells the utility to fetch raw repository data

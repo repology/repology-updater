@@ -74,7 +74,7 @@ class WingetGitParser(Parser):
                 pkg.add_name(pkgdata['PackageIdentifier'].split('.', 1)[-1], NameType.WINGET_ID_NAME)
                 pkg.add_name(pkgdata['PackageName'], NameType.WINGET_NAME)
                 pkg.add_name(pkgloc.relevant_path, NameType.WINGET_PATH)
-                # Moniker field is optional and mosty useless
+                # Moniker field is optional and mostly useless
 
                 version = pkgdata['PackageVersion']
                 if isinstance(version, float):

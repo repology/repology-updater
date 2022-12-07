@@ -42,7 +42,7 @@ class FreshcodeParser(Parser):
                 pkg.set_version(entry['version'])
 
                 pkg.add_homepages(entry.get('homepage'))
-                pkg.set_summary(entry.get('summary'))  # cound use `or entry.get('description'))`, but it's long multiline
+                pkg.set_summary(entry.get('summary'))  # could use `or entry.get('description'))`, but it's long multiline
                 #pkg.add_maintainers(entry.get('submitter') + '@freshcode')  # unfiltered garbage
                 #pkg.add_downloads(entry.get('download'))  # ignore for now, may contain download page urls instead of file urls
                 pkg.add_licenses(entry.get('license'))
