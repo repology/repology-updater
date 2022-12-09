@@ -12,14 +12,12 @@
   color: '32638f'
   minpackages: 100
   sources:
-    - name: [ main ]
+    - name: main
       fetcher:
         class: FileFetcher
-        url: 'https://janitor.debian.net/dists/fresh-releases/{source}/source/Sources.gz'
-        compression: gz
+        url: 'https://janitor.debian.net/dists/fresh-releases/main/source/Sources.gz'
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
   repolinks:
     - desc: Debian Janitor Homepage
       url: https://janitor.debian.net/
@@ -44,14 +42,12 @@
   color: '32638f'
   minpackages: 100
   sources:
-    - name: [ main ]
+    - name: main
       fetcher:
         class: FileFetcher
-        url: 'https://janitor.debian.net/dists/fresh-snapshots/{source}/source/Sources.gz'
-        compression: gz
+        url: 'https://janitor.debian.net/dists/fresh-snapshots/main/source/Sources.gz'
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
   repolinks:
     - desc: Debian Janitor Homepage
       url: https://janitor.debian.net/
