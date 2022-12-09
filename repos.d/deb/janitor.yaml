@@ -3,10 +3,9 @@
 #
 # https://janitor.debian.net/fresh
 ###########################################################################
-
 - name: debian_janitor_releases
   type: repository
-  desc: Debian Janitor - Fresh Releases
+  desc: Debian Janitor - Releases
   statsgroup: Debian+derivs
   family: debuntu
   color: '32638f'
@@ -36,7 +35,7 @@
 
 - name: debian_janitor_snapshots
   type: repository
-  desc: Debian Janitor - Fresh Snapshots
+  desc: Debian Janitor - Snapshots
   statsgroup: Debian+derivs
   family: debuntu
   color: '32638f'
