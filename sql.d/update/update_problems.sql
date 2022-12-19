@@ -55,7 +55,7 @@ WITH packages_links_expanded AS (
 		ipv4_success,
 		ipv4_last_success,
 		first_extracted,
-		ipv4_permanent_redirect_target,
+		coalesce(ipv6_permanent_redirect_target, ipv4_permanent_redirect_target) as permanent_redirect_target,
 		link_type
 	FROM packages_links_maintainers_expanded INNER JOIN links ON(links.id = link_id)
 	WHERE link_type IN (0, 1)  -- UPSTREAM_HOMEPAGE, UPSTREAM_DOWNLOAD
@@ -74,11 +74,11 @@ WITH packages_links_expanded AS (
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
 		'homepage_permanent_https_redirect'::problem_type AS problem_type,
-		jsonb_build_object('url', url, 'target', ipv4_permanent_redirect_target) AS data
+		jsonb_build_object('url', url, 'target', permanent_redirect_target) AS data
 	FROM packages_homepages
 	WHERE
 		link_type = 0 AND
-		replace(url, 'http://', 'https://') = ipv4_permanent_redirect_target
+		replace(url, 'http://', 'https://') = permanent_redirect_target
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
 		'homepage_discontinued_google'::problem_type AS problem_type,
@@ -127,11 +127,11 @@ WITH packages_links_expanded AS (
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
 		'download_permanent_https_redirect'::problem_type AS problem_type,
-		jsonb_build_object('url', url, 'target', ipv4_permanent_redirect_target) AS data
+		jsonb_build_object('url', url, 'target', permanent_redirect_target) AS data
 	FROM packages_homepages
 	WHERE
 		link_type = 1 AND
-		replace(url, 'http://', 'https://') = ipv4_permanent_redirect_target
+		replace(url, 'http://', 'https://') = permanent_redirect_target
 )
 INSERT INTO problems(package_id, repo, name, effname, maintainer, "type", data)
 SELECT id, repo, visiblename, effname, maintainer, problem_type, data
