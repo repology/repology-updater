@@ -29,6 +29,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
+        extra_garbage_words: [{{codename}}, linuxmint, mint]
       subrepo: {{subrepo}}
     {% endfor %}
   repolinks:
@@ -59,6 +60,7 @@
         compression: gz
       parser:
         class: DebianSourcesParser
+        extra_garbage_words: [{{codename}}, linuxmint, mint]
       subrepo: {{subrepo}}
     {% endfor %}
   repolinks:
