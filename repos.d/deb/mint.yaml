@@ -64,7 +64,7 @@
   repolinks:
     - desc: Linux Mint home
       url: https://linuxmint.com/
-  groups: [ all, production, mint ]
+  groups: [ all, production, mint, lmde ]
 {% endmacro %}
 
 # https://en.wikipedia.org/wiki/Linux_Mint
@@ -89,5 +89,8 @@
 {{ mint(20, 2, 'uma',     minpackages=100, valid_till='2025-04-30') }}
 {{ mint(20, 3, 'una',     minpackages=100, valid_till='2025-04-30') }}
 
-{{ lmde(4, 'debbie', minpackages=100) }}
-{#{ lmde(5, 'elsie',  minpackages=100) }#}
+{{ mint(21, 0, 'vanessa', minpackages=100, valid_till='2027-04-30') }}
+{{ mint(21, 1, 'vera',    minpackages=100, valid_till='2027-04-30') }}
+
+{{ lmde(4, 'debbie', minpackages=100, valid_till='2022-08-31') }}
+{{ lmde(5, 'elsie',  minpackages=100) }}
