@@ -18,28 +18,28 @@
 import pytest
 
 from repology.package import PackageFlags as Pf
-from repology.parsers.versions import parse_debian_version
+from repology.parsers.versions import DebianVersionParser
 
 
 def test_basic():
-    assert parse_debian_version('1.2.3-1') == ('1.2.3', 0)
+    assert DebianVersionParser().parse('1.2.3-1') == ('1.2.3', 0)
 
 
 def test_revision():
-    assert parse_debian_version('1.2.3-1.2.3') == ('1.2.3', 0)
+    assert DebianVersionParser().parse('1.2.3-1.2.3') == ('1.2.3', 0)
 
 
 def test_revision_is_not_greedy():
-    assert parse_debian_version('1-2-3-4')[0] == '1-2-3'
+    assert DebianVersionParser().parse('1-2-3-4')[0] == '1-2-3'
 
 
 @pytest.mark.xfail(reason='cannot tell this case from snapshots like 1-20210101')
 def test_minus_parts_do_not_produce_extra_flags():
-    assert parse_debian_version('1-2-3-4')[1] == 0
+    assert DebianVersionParser().parse('1-2-3-4')[1] == 0
 
 
 def test_epoch():
-    assert parse_debian_version('1:1.2.3-1') == ('1.2.3', 0)
+    assert DebianVersionParser().parse('1:1.2.3-1') == ('1.2.3', 0)
 
 
 @pytest.mark.parametrize('suffix', [
@@ -49,11 +49,11 @@ def test_epoch():
     '+ds3',
 ])
 def test_garbage_suffixes(suffix: str):
-    assert parse_debian_version(f'1.1.2{suffix}-2') == ('1.1.2', 0)
+    assert DebianVersionParser().parse(f'1.1.2{suffix}-2') == ('1.1.2', 0)
 
 
 def test_inseparable_garbage():
-    assert parse_debian_version('1.1.2dfsg3') == ('1.1.2dfsg3', Pf.INCORRECT)
+    assert DebianVersionParser().parse('1.1.2dfsg3') == ('1.1.2dfsg3', Pf.INCORRECT)
 
 
 @pytest.mark.parametrize('version,expected_flags', [
@@ -110,7 +110,7 @@ def test_inseparable_garbage():
     ('2.is.really.1', Pf.INCORRECT),
 ])
 def test_suffixes(version: str, expected_flags: int):
-    assert parse_debian_version(f'{version}-1') == (version, expected_flags)
+    assert DebianVersionParser().parse(f'{version}-1') == (version, expected_flags)
 
 
 @pytest.mark.parametrize('version,expected_version,expected_flags', [
@@ -128,7 +128,7 @@ def test_suffixes(version: str, expected_flags: int):
     pytest.param('1.5.0~rc2+git20210630+ds-2', '1.5.0~rc2+git20210630', Pf.DEVEL | Pf.IGNORE, id='goldendict'),
 ])
 def test_real_world(version: str, expected_version: str, expected_flags: int):
-    fixed_version, flags = parse_debian_version(version)
+    fixed_version, flags = DebianVersionParser().parse(version)
     assert fixed_version == expected_version
     assert flags == expected_flags
 
@@ -143,6 +143,13 @@ def test_real_world(version: str, expected_version: str, expected_flags: int):
 ])
 def test_real_world_weak(version: str, expected_version: str, expected_flags: int):
     # checks for existence of specified flags, ignores other flags
-    fixed_version, flags = parse_debian_version(version)
+    fixed_version, flags = DebianVersionParser().parse(version)
     assert fixed_version == expected_version
     assert flags & expected_flags == expected_flags
+
+
+def test_extra_garbage_words():
+    assert DebianVersionParser().parse('1.1.2+foofoofoo') == ('1.1.2+foofoofoo', Pf.IGNORE | Pf.ANY_IS_PATCH)
+    assert DebianVersionParser().parse('1.1.2+foofoofoo1') == ('1.1.2+foofoofoo1', Pf.IGNORE | Pf.ANY_IS_PATCH)
+    assert DebianVersionParser(['foofoofoo']).parse('1.1.2+foofoofoo') == ('1.1.2', 0)
+    assert DebianVersionParser(['foofoofoo']).parse('1.1.2+foofoofoo1') == ('1.1.2', 0)

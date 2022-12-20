@@ -23,7 +23,7 @@ from libversion import version_compare
 from repology.package import PackageFlags
 
 
-__all__ = ['VersionStripper', 'parse_rpm_version', 'parse_debian_version']
+__all__ = ['DebianVersionParser', 'VersionStripper', 'parse_rpm_version']
 
 
 class VersionStripper:
@@ -104,10 +104,18 @@ def parse_rpm_version(vertags: list[str], version: str, release: str) -> tuple[s
     return version, flags
 
 
+_DEBIAN_DEFAULT_GARBAGE_WORDS = [
+    'debian',
+    'dfsg',
+    'ds',
+    'mx',
+    'nmu',
+    'pristine',
+    'repack',
+    'stable',
+    'ubuntu',
+]
 _DEBIAN_SPLIT_RE = re.compile('(?=[+~-]+)')
-_DEBIAN_GARBAGE = 'dfsg|nmu|repack|ds|debian|mx|pristine|stable|ubuntu'
-_DEBIAN_GARBAGE_PART_RE = re.compile('[+~-]+(?:' + _DEBIAN_GARBAGE + ')[.0-9]*', re.IGNORECASE)
-_DEBIAN_EMBEDDED_GARBAGE_RE = re.compile('(?:' + _DEBIAN_GARBAGE + '|is|real|revert)')
 _DEBIAN_GOOD_PRERELEASE_LONG_PART_RE = re.compile('[+~-]+(?:alpha|beta|rc|dev|pre[a-z]*)[.0-9]*', re.IGNORECASE)
 _DEBIAN_GOOD_PRERELEASE_SHORT_PART_RE = re.compile('~[ab][0-9]{0,2}', re.IGNORECASE)
 _DEBIAN_GOOD_POSTRELEASE_PART_RE = re.compile('[+-]+(post[a-z]*)[.0-9]*', re.IGNORECASE)
@@ -115,72 +123,82 @@ _DEBIAN_ALPHA_RE = re.compile('[a-zA-Z]')
 _DEBIAN_POST_ALPHA_RE = re.compile('[+][a-zA-Z]')
 
 
-def parse_debian_version(version: str) -> tuple[str, int]:
-    # Epoch and revision
-    version = version.split(':', 1)[-1]
-    version = version.rsplit('-', 1)[0]
+class DebianVersionParser:
+    _garbage_part_re: re.Pattern[str]
+    _embedded_garbage_re: re.Pattern[str]
 
-    flags = 0
+    def __init__(self, extra_garbage_words: list[str] | None = None) -> None:
+        garbage_words = _DEBIAN_DEFAULT_GARBAGE_WORDS + (extra_garbage_words if extra_garbage_words else [])
+        embedded_garbage_words = garbage_words + ['is', 'real', 'revert']
+        self._garbage_part_re = re.compile('[+~-]+(?:' + '|'.join(garbage_words) + ')[.0-9]*', re.IGNORECASE)
+        self._embedded_garbage_re = re.compile('(?:' + '|'.join(embedded_garbage_words) + ')')
 
-    # Process parts
-    parts = _DEBIAN_SPLIT_RE.split(version)
-    version = parts[0]
-    alpha_parts_count = 0
+    def parse(self, version: str) -> tuple[str, int]:
+        # Epoch and revision
+        version = version.split(':', 1)[-1]
+        version = version.rsplit('-', 1)[0]
 
-    for part in parts[1:]:
-        if _DEBIAN_GARBAGE_PART_RE.fullmatch(part) is not None:
-            # Garbage parts which have nothing to do with upstream
-            # version, such as `+dfsg1`. Drop these.
-            continue
+        flags = 0
 
-        # Count parts which contain letters
-        this_alpha_part_pos = None
-        if _DEBIAN_ALPHA_RE.search(part) is not None:
-            this_alpha_part_pos = alpha_parts_count
-            alpha_parts_count += 1
+        # Process parts
+        parts = _DEBIAN_SPLIT_RE.split(version)
+        version = parts[0]
+        alpha_parts_count = 0
 
-        # Allowed meaningful prerelease parts, such as `~beta2`
-        if _DEBIAN_GOOD_PRERELEASE_LONG_PART_RE.fullmatch(part) is not None:
-            flags |= PackageFlags.DEVEL
+        for part in parts[1:]:
+            if self._garbage_part_re.fullmatch(part) is not None:
+                # Garbage parts which have nothing to do with upstream
+                # version, such as `+dfsg1`. Drop these.
+                continue
+
+            # Count parts which contain letters
+            this_alpha_part_pos = None
+            if _DEBIAN_ALPHA_RE.search(part) is not None:
+                this_alpha_part_pos = alpha_parts_count
+                alpha_parts_count += 1
+
+            # Allowed meaningful prerelease parts, such as `~beta2`
+            if _DEBIAN_GOOD_PRERELEASE_LONG_PART_RE.fullmatch(part) is not None:
+                flags |= PackageFlags.DEVEL
+                version += part
+                continue
+
+            # Allowed meaningful prerelease short parts, such as `~b2`
+            if _DEBIAN_GOOD_PRERELEASE_SHORT_PART_RE.fullmatch(part) is not None:
+                flags |= PackageFlags.DEVEL
+                version += part
+                continue
+
+            # Allowed meaningful postrelease parts, such as `-patch1`
+            if _DEBIAN_GOOD_POSTRELEASE_PART_RE.fullmatch(part) is not None:
+                version += part
+                continue
+
+            # Pre-snapshots. Marked incorrect as the "future" version they
+            # are based on is made up, with the exception of when it's equal
+            # to 0 which indicates that upstream has no official releases
+            if part.startswith('~'):
+                flags |= PackageFlags.IGNORE if version_compare(parts[0], '0') == 0 else PackageFlags.INCORRECT
+                version += part
+                continue
+
+            #
+            # The remaining cases are (assumed) post-snapshots
+            #
+
+            # Special handling for post- suffixes which start with letter,
+            # such as `1.1+git20210203`. These are marked ANY_IS_PATCH to
+            # compare greater than e.g. `1.1`, respecting intended `+`
+            # behavior. Unfortunately, we can only handle first such suffix
+            if this_alpha_part_pos == 0 and _DEBIAN_POST_ALPHA_RE.match(part) is not None:
+                flags |= PackageFlags.ANY_IS_PATCH
+
+            flags |= PackageFlags.IGNORE
             version += part
-            continue
 
-        # Allowed meaningful prerelease short parts, such as `~b2`
-        if _DEBIAN_GOOD_PRERELEASE_SHORT_PART_RE.fullmatch(part) is not None:
-            flags |= PackageFlags.DEVEL
-            version += part
-            continue
+        if self._embedded_garbage_re.search(version) is not None:
+            # Remaining garbage bits which cannot be separated from upstream
+            # version. Always incorrect.
+            flags |= PackageFlags.INCORRECT
 
-        # Allowed meaningful postrelease parts, such as `-patch1`
-        if _DEBIAN_GOOD_POSTRELEASE_PART_RE.fullmatch(part) is not None:
-            version += part
-            continue
-
-        # Pre-snapshots. Marked incorrect as the "future" version they
-        # are based on is made up, with the exception of when it's equal
-        # to 0 which indicates that upstream has no official releases
-        if part.startswith('~'):
-            flags |= PackageFlags.IGNORE if version_compare(parts[0], '0') == 0 else PackageFlags.INCORRECT
-            version += part
-            continue
-
-        #
-        # The remaining cases are (assumed) post-snapshots
-        #
-
-        # Special handling for post- suffixes which start with letter,
-        # such as `1.1+git20210203`. These are marked ANY_IS_PATCH to
-        # compare greater than e.g. `1.1`, respecting intended `+`
-        # behavior. Unfortunately, we can only handle first such suffix
-        if this_alpha_part_pos == 0 and _DEBIAN_POST_ALPHA_RE.match(part) is not None:
-            flags |= PackageFlags.ANY_IS_PATCH
-
-        flags |= PackageFlags.IGNORE
-        version += part
-
-    if _DEBIAN_EMBEDDED_GARBAGE_RE.search(version) is not None:
-        # Remaining garbage bits which cannot be separated from upstream
-        # version. Always incorrect.
-        flags |= PackageFlags.INCORRECT
-
-    return version, flags
+        return version, flags

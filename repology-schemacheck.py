@@ -278,6 +278,7 @@ schemas = {
 
                         # debian
                         'allowed_vcs_urls': str,
+                        'extra_garbage_words': Any(str, [str]),
 
                         # aur
                         'maintainer_host': str,

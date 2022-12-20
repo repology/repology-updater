@@ -22,7 +22,7 @@ from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.parsers.versions import parse_debian_version
+from repology.parsers.versions import DebianVersionParser
 
 
 _DEBIAN_KEYVAL_RE = re.compile('([A-Za-z0-9_-]+):(.*?)')
@@ -80,9 +80,17 @@ def _extract_vcs_link(pkgdata: dict[str, str]) -> str | None:
 
 class DebianSourcesParser(Parser):
     _allowed_vcs_urls_re: re.Pattern[str] | None
+    _version_parser: DebianVersionParser
 
-    def __init__(self, allowed_vcs_urls: str | None = None) -> None:
+    def __init__(self, allowed_vcs_urls: str | None = None, extra_garbage_words: list[str] | str | None = None) -> None:
         self._allowed_vcs_urls_re = None if allowed_vcs_urls is None else re.compile(allowed_vcs_urls, re.IGNORECASE)
+        match extra_garbage_words:
+            case str():
+                self._version_parser = DebianVersionParser([extra_garbage_words])
+            case list():
+                self._version_parser = DebianVersionParser(extra_garbage_words)
+            case _:
+                self._version_parser = DebianVersionParser()
 
     def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:
         if 'Binary' not in pkgdata or 'Source' in pkgdata:
@@ -93,7 +101,7 @@ class DebianSourcesParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in _iter_packages(path):
             with factory.begin(pkgdata['Package']) as pkg:
-                fixed_version, flags = parse_debian_version(pkgdata['Version'])
+                fixed_version, flags = self._version_parser.parse(pkgdata['Version'])
 
                 pkg.set_version(fixed_version)
                 pkg.set_rawversion(pkgdata['Version'])
