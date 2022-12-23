@@ -21,7 +21,7 @@
       url: http://t2sde.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'http://t2sde.org/packages/{path}'
+      url: 'http://t2sde.org/packages/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'http://svn.exactcode.de/t2/trunk/package/{path}/'
     - type: PACKAGE_PATCH_RAW
