@@ -2,7 +2,7 @@
 # Apertis
 ###########################################################################
 
-{% macro apertis(version, minpackages, suffix='', development=False) %}
+{% macro apertis(version, minpackages, suffix='', development=False, hmi=False) %}
 - name: apertis_v{{version}}
   type: repository
   desc: Apertis v{{version}}{% if development %} Development{% endif %}
@@ -14,7 +14,7 @@
   sources:
     {% set v = 'v' + version|string + suffix %}
     {% for sub1 in ([v] if development else [v, v + '-updates']) %}
-    {% for sub2 in ['development', 'target', 'sdk', 'hmi'] %}
+    {% for sub2 in (['development', 'target', 'sdk', 'hmi'] if hmi else ['development', 'target', 'sdk']) %}
     {% set source = sub1 + '/' + sub2 %}
     - name: {{source}}
       fetcher:
@@ -32,7 +32,8 @@
   groups: [ all, production, apertis ]
 {% endmacro %}
 
-{{ apertis(2020, minpackages=3500) }}
-{{ apertis(2021, minpackages=3500) }}
-{{ apertis(2022, minpackages=3500) }}
-{{ apertis(2023, suffix='dev1', minpackages=3500, development=true) }}
+{{ apertis(2020, minpackages=3500, hmi=true) }}
+{{ apertis(2021, minpackages=3500, hmi=true) }}
+{{ apertis(2022, minpackages=3500, hmi=true) }}
+{{ apertis(2023, minpackages=3500) }}
+{{ apertis(2024, suffix='dev1', minpackages=3500, development=true) }}
