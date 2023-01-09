@@ -30,6 +30,11 @@ class GuixJsonParser(Parser):
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['name'], NameType.GUIX_NAME)
+
+                if not pkgdata['version']:
+                    pkg.log('dropping versionless package', Logger.ERROR)
+                    continue
+
                 pkg.set_version(pkgdata['version'])
                 pkg.set_summary(pkgdata['synopsis'])
                 pkg.add_homepages(pkgdata.get('homepage'))
