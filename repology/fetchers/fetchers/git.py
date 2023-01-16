@@ -76,9 +76,18 @@ class GitFetcher(PersistentDirFetcher):
         r = Runner(logger=logger, cwd=statepath)
 
         old_url = r.get('git', 'remote', 'get-url', 'origin').strip()
+        old_branch = r.get('git', 'rev-parse', '--abbrev-ref', 'HEAD').strip()
+
+        need_refetch = False
 
         if old_url != self._url:
             logger.log(f'repository URL has changed {old_url} -> {self._url}, will clone from scratch')
+            need_refetch = True
+        if old_branch != self._branch:
+            logger.log(f'repository branch has changed {old_branch} -> {self._branch}, will clone from scratch')
+            need_refetch = True
+
+        if need_refetch:
             shutil.rmtree(statepath)
             return self._do_fetch(statepath, logger)
 
