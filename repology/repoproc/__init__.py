@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import itertools
 import os
 from typing import Iterable, Iterator
 
@@ -32,6 +31,7 @@ from repology.parsers import Parser
 from repology.repomgr import PackageLinkOrder, Repository, RepositoryManager, RepositoryNameList, Source
 from repology.repoproc.serialization import ChunkedSerializer, heap_deserialize
 from repology.transformer import PackageTransformer
+from repology.utils.itertools import chain_optionals, unicalize
 
 
 MAX_PACKAGES_PER_CHUNK = 10240
@@ -136,14 +136,7 @@ class RepositoryProcessor:
                         packagemaker.log(f'cannot spawn package link from template "{pkglink.url}": {str(e)}', Logger.ERROR)
                         raise
 
-                seen_links = set()
-                final_links: list[tuple[int, str] | tuple[int, str, str]] = []
-                for link in itertools.chain(packagelinks_pre, package.links or [], packagelinks_post):
-                    if link not in seen_links:
-                        seen_links.add(link)
-                        final_links.append(link)
-
-                package.links = final_links
+                package.links = list(unicalize(chain_optionals(packagelinks_pre, package.links, packagelinks_post)))
 
                 # transform
                 if transformer:

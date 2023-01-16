@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -27,6 +27,7 @@ from repology.packagemaker import normalizers as nzs
 from repology.packagemaker.names import NameMapper
 from repology.packagemaker.names import NameType as NameType
 from repology.packagemaker.normalizers import NormalizerFunction
+from repology.utils.itertools import unicalize
 
 
 __all__ = ['NameType', 'PackageFactory', 'PackageMaker']
@@ -216,28 +217,6 @@ def _simple_setter(fieldname: str, want_type: Type[Any], *normalizers: Normalize
 T = TypeVar('T')
 
 
-def _as_opt_list(items: Iterable[T]) -> list[T] | None:
-    return list(items) or None
-
-
-def _as_unique_list(items: Iterable[T]) -> list[T]:
-    seen = set()
-    res = []
-    for item in items:
-        if item not in seen:
-            seen.add(item)
-            res.append(item)
-    return res
-
-
-def _as_opt_unique_list(items: Iterable[T]) -> list[T] | None:
-    return _as_unique_list(items) or None
-
-
-def _as_opt_first_from_list(items: Iterable[T]) -> T | None:
-    return next(iter(items), None)
-
-
 class PackageMaker(PackageMakerBase):
     _package: PackageTemplate
     _name_mapper: NameMapper
@@ -350,7 +329,7 @@ class PackageMaker(PackageMakerBase):
         maintainers: list[str] | None = None
 
         if self._package.maintainers:
-            maintainers = _as_opt_unique_list(self._package.maintainers)
+            maintainers = list(unicalize(self._package.maintainers)) or None
         elif default_maintainer:
             maintainers = [default_maintainer]
 
@@ -375,7 +354,7 @@ class PackageMaker(PackageMakerBase):
             name=names.name,
             srcname=names.srcname,
             binname=names.binname,
-            binnames=_as_opt_unique_list(self._package.binnames),
+            binnames=list(unicalize(self._package.binnames)) or None,
             trackname=names.trackname,
             visiblename=names.visiblename,
             projectname_seed=names.projectname_seed,
@@ -387,9 +366,9 @@ class PackageMaker(PackageMakerBase):
             arch=self._package.arch,
 
             maintainers=maintainers,
-            category=_as_opt_first_from_list(self._package.categories),  # TODO: convert to array
+            category=self._package.categories[0] if self._package.categories else None,  # TODO: convert to array
             comment=self._package.summary,
-            licenses=_as_opt_unique_list(self._package.licenses),
+            licenses=list(unicalize(self._package.licenses)) or None,
 
             flags=self._package.flags,
             shadow=shadow,
@@ -405,9 +384,9 @@ class PackageMaker(PackageMakerBase):
             cpe_target_hw=self._package.cpe_target_hw,
             cpe_other=self._package.cpe_other,
 
-            flavors=_as_unique_list(self._package.flavors),  # TODO: convert to string
+            flavors=list(unicalize(self._package.flavors)),  # TODO: convert to string
 
-            links=_as_opt_unique_list(self._package.links),
+            links=list(unicalize(self._package.links)) or None,
 
             # XXX: see comment for PackageStatus.UNPROCESSED
             # XXX: duplicate code: PackageTransformer does the same
