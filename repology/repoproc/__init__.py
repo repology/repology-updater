@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import itertools
 import os
 from typing import Iterable, Iterator
 
@@ -28,7 +29,7 @@ from repology.package import Package, PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
-from repology.repomgr import Repository, RepositoryManager, RepositoryNameList, Source
+from repology.repomgr import PackageLinkOrder, Repository, RepositoryManager, RepositoryNameList, Source
 from repology.repoproc.serialization import ChunkedSerializer, heap_deserialize
 from repology.transformer import PackageTransformer
 
@@ -118,23 +119,31 @@ class RepositoryProcessor:
                     raise
 
                 # add packagelinks
-                packagelinks: list[tuple[int, str] | tuple[int, str, str]] = []
+                packagelinks_pre: list[tuple[int, str] | tuple[int, str, str]] = []
+                packagelinks_post: list[tuple[int, str] | tuple[int, str, str]] = []
                 for pkglink in source.packagelinks + repository.packagelinks:
-                    link_type = pkglink.type
                     try:
-                        packagelinks.extend(
-                            (link_type, *url.split('#', 1))  # type: ignore
+                        links_iter: Iterator[tuple[int, str] | tuple[int, str, str]] = (
+                            (pkglink.type, *url.split('#', 1))  # type: ignore
                             for url in format_package_links(package, pkglink.url)
                         )
+
+                        if pkglink.order == PackageLinkOrder.PREPEND:
+                            packagelinks_pre.extend(links_iter)
+                        else:
+                            packagelinks_post.extend(links_iter)
                     except Exception as e:
                         packagemaker.log(f'cannot spawn package link from template "{pkglink.url}": {str(e)}', Logger.ERROR)
                         raise
 
-                if package.links is None:
-                    package.links = packagelinks
-                else:
-                    seen = set(package.links)
-                    package.links.extend(link for link in packagelinks if link not in seen)
+                seen_links = set()
+                final_links: list[tuple[int, str] | tuple[int, str, str]] = []
+                for link in itertools.chain(packagelinks_pre, package.links or [], packagelinks_post):
+                    if link not in seen_links:
+                        seen_links.add(link)
+                        final_links.append(link)
+
+                package.links = final_links
 
                 # transform
                 if transformer:

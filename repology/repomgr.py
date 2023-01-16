@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2021, 2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -83,10 +83,16 @@ def _listify(arg: Any) -> list[Any]:
         return arg
 
 
+class PackageLinkOrder(str, Enum):
+    PREPEND = 'prepend'
+    APPEND = 'append'
+
+
 @dataclass
 class PackageLink:
     type: int  # noqa
     url: str
+    order: PackageLinkOrder = PackageLinkOrder.APPEND
 
 
 @dataclass
@@ -160,7 +166,13 @@ class RepositoryManager:
                             subrepo=processed_sourcedata.get('subrepo'),
                             fetcher=processed_sourcedata['fetcher'],
                             parser=processed_sourcedata['parser'],
-                            packagelinks=[PackageLink(type=LinkType.from_string(linkdata['type']), url=linkdata['url']) for linkdata in processed_sourcedata.get('packagelinks', [])],
+                            packagelinks=[
+                                PackageLink(
+                                    type=LinkType.from_string(linkdata['type']),
+                                    url=linkdata['url'],
+                                    order=linkdata.get('order', 'append'),
+                                )
+                                for linkdata in processed_sourcedata.get('packagelinks', [])],
                         )
                     )
 
@@ -186,7 +198,14 @@ class RepositoryManager:
                 incomplete=repodata.get('incomplete', False),
 
                 repolinks=repodata.get('repolinks', []),
-                packagelinks=[PackageLink(type=LinkType.from_string(linkdata['type']), url=linkdata['url']) for linkdata in repodata.get('packagelinks', [])],
+                packagelinks=[
+                    PackageLink(
+                        type=LinkType.from_string(linkdata['type']),
+                        url=linkdata['url'],
+                        order=linkdata.get('order', 'append'),
+                    )
+                    for linkdata in repodata.get('packagelinks', [])
+                ],
 
                 groups=repodata.get('groups', []) + list(extra_groups),
 
