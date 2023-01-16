@@ -13,6 +13,7 @@
       fetcher:
         class: GitFetcher
         url: 'https://github.com/glaucuslinux/cerata'
+        branch: main
       parser:
         class: GlaucusGitParser
   repolinks:
