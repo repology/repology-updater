@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import pickle
-from typing import Any, ClassVar
+from typing import Any, ClassVar, TypeAlias, Union
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -244,6 +244,9 @@ class LinkType:
         ]
 
 
+PackageLinkTuple: TypeAlias = Union[tuple[int, str], tuple[int, str, str]]
+
+
 class Package:
     __slots__ = [
         # parsed, immutable
@@ -330,7 +333,7 @@ class Package:
     cpe_target_hw: str | None
     cpe_other: str | None
 
-    links: list[tuple[int, str] | tuple[int, str, str]] | None
+    links: list[PackageLinkTuple] | None
 
     effname: str
 
@@ -382,7 +385,7 @@ class Package:
                  cpe_target_hw: str | None = None,
                  cpe_other: str | None = None,
 
-                 links: list[tuple[int, str] | tuple[int, str, str]] | None = None,
+                 links: list[PackageLinkTuple] | None = None,
 
                  flags: int = 0,
                  shadow: bool = False,

@@ -24,7 +24,7 @@ from repology.linkformatter import format_package_links
 from repology.logger import Logger, NoopLogger
 from repology.maintainermgr import MaintainerManager
 from repology.moduleutils import ClassFactory
-from repology.package import Package, PackageFlags
+from repology.package import Package, PackageFlags, PackageLinkTuple
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
@@ -119,11 +119,11 @@ class RepositoryProcessor:
                     raise
 
                 # add packagelinks
-                packagelinks_pre: list[tuple[int, str] | tuple[int, str, str]] = []
-                packagelinks_post: list[tuple[int, str] | tuple[int, str, str]] = []
+                packagelinks_pre: list[PackageLinkTuple] = []
+                packagelinks_post: list[PackageLinkTuple] = []
                 for pkglink in source.packagelinks + repository.packagelinks:
                     try:
-                        links_iter: Iterator[tuple[int, str] | tuple[int, str, str]] = (
+                        links_iter: Iterator[PackageLinkTuple] = (
                             (pkglink.type, *url.split('#', 1))  # type: ignore
                             for url in format_package_links(package, pkglink.url)
                         )

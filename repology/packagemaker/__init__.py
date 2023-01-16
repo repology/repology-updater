@@ -22,7 +22,7 @@ from functools import wraps
 from typing import Any, Callable, Iterable, Type, TypeVar
 
 from repology.logger import Logger, NoopLogger
-from repology.package import LinkType, Package, PackageStatus
+from repology.package import LinkType, Package, PackageLinkTuple, PackageStatus
 from repology.packagemaker import normalizers as nzs
 from repology.packagemaker.names import NameMapper
 from repology.packagemaker.names import NameType as NameType
@@ -100,7 +100,7 @@ class PackageTemplate:
 
     flavors: list[str]
 
-    links: list[tuple[int, str] | tuple[int, str, str]]
+    links: list[PackageLinkTuple]
 
     def __init__(self) -> None:
         self.subrepo = None
