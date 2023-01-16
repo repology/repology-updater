@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2021 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -24,7 +24,7 @@ from repology.package import Package
 __all__ = ['format_package_links']
 
 
-_filters: dict[str, Callable[[str], str]] = {
+_FILTERS: dict[str, Callable[[str], str]] = {
     'lowercase': lambda x: x.lower(),
     'firstletter': lambda x: x.lower()[0],
     'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
@@ -115,9 +115,9 @@ class FieldGatheringMapping:
             self._fields[key] = value
         elif isinstance(value, str):
             for filtername in filters:
-                if filtername not in _filters:
+                if filtername not in _FILTERS:
                     raise RuntimeError(f'unknown filter "filtername" in "{field}"')
-                value = _filters[filtername](value)
+                value = _FILTERS[filtername](value)
 
             self._fields[key] = [value]
         else:
