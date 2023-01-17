@@ -92,7 +92,7 @@ class PackageLinkOrder(str, Enum):
 class PackageLink:
     type: int  # noqa
     url: str
-    order: PackageLinkOrder = PackageLinkOrder.APPEND
+    order: PackageLinkOrder = PackageLinkOrder.PREPEND
 
 
 @dataclass
@@ -170,7 +170,7 @@ class RepositoryManager:
                                 PackageLink(
                                     type=LinkType.from_string(linkdata['type']),
                                     url=linkdata['url'],
-                                    order=linkdata.get('order', 'append'),
+                                    order=linkdata.get('order', 'prepend'),
                                 )
                                 for linkdata in processed_sourcedata.get('packagelinks', [])],
                         )
@@ -202,7 +202,7 @@ class RepositoryManager:
                     PackageLink(
                         type=LinkType.from_string(linkdata['type']),
                         url=linkdata['url'],
-                        order=linkdata.get('order', 'append'),
+                        order=linkdata.get('order', 'prepend'),
                     )
                     for linkdata in repodata.get('packagelinks', [])
                 ],
