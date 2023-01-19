@@ -16,6 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from collections import defaultdict
+from itertools import chain
 from typing import Iterable, Iterator
 
 from repology.atomic_fs import AtomicDir
@@ -28,10 +30,10 @@ from repology.package import Package, PackageFlags, PackageLinkTuple
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
-from repology.repomgr import PackageLinkOrder, Repository, RepositoryManager, RepositoryNameList, Source
+from repology.repomgr import Repository, RepositoryManager, RepositoryNameList, Source
 from repology.repoproc.serialization import ChunkedSerializer, heap_deserialize
 from repology.transformer import PackageTransformer
-from repology.utils.itertools import chain_optionals, unicalize
+from repology.utils.itertools import unicalize
 
 
 MAX_PACKAGES_PER_CHUNK = 10240
@@ -119,24 +121,32 @@ class RepositoryProcessor:
                     raise
 
                 # add packagelinks
-                packagelinks_pre: list[PackageLinkTuple] = []
-                packagelinks_post: list[PackageLinkTuple] = []
+                packagelinks: dict[int, list[PackageLinkTuple]] = defaultdict(list)
                 for pkglink in source.packagelinks + repository.packagelinks:
                     try:
-                        links_iter: Iterator[PackageLinkTuple] = (
+                        packagelinks[pkglink.priority].extend(
                             (pkglink.type, *url.split('#', 1))  # type: ignore
                             for url in format_package_links(package, pkglink.url)
                         )
-
-                        if pkglink.order == PackageLinkOrder.PREPEND:
-                            packagelinks_pre.extend(links_iter)
-                        else:
-                            packagelinks_post.extend(links_iter)
                     except Exception as e:
                         packagemaker.log(f'cannot spawn package link from template "{pkglink.url}": {str(e)}', Logger.ERROR)
                         raise
 
-                package.links = list(unicalize(chain_optionals(packagelinks_pre, package.links, packagelinks_post)))
+                if package.links:
+                    packagelinks[0].extend(package.links)
+
+                package.links = list(
+                    unicalize(
+                        chain.from_iterable(
+                            links for _, links in sorted(
+                                packagelinks.items(),
+                                # stable descending sort on priority
+                                key=lambda t: t[0],
+                                reverse=True
+                            )
+                        )
+                    )
+                )
 
                 # transform
                 if transformer:

@@ -53,6 +53,7 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openwrt.org/packages/pkgdata/{binname}'
+      priority: 2
   groups: [ all, openwrt {% if not disabled %}, production{% endif %} ]
 {% endmacro %}
 

@@ -83,16 +83,11 @@ def _listify(arg: Any) -> list[Any]:
         return arg
 
 
-class PackageLinkOrder(str, Enum):
-    PREPEND = 'prepend'
-    APPEND = 'append'
-
-
 @dataclass
 class PackageLink:
     type: int  # noqa
     url: str
-    order: PackageLinkOrder = PackageLinkOrder.PREPEND
+    priority: int = 1
 
 
 @dataclass
@@ -170,7 +165,7 @@ class RepositoryManager:
                                 PackageLink(
                                     type=LinkType.from_string(linkdata['type']),
                                     url=linkdata['url'],
-                                    order=linkdata.get('order', 'prepend'),
+                                    priority=linkdata.get('priority', 1),
                                 )
                                 for linkdata in processed_sourcedata.get('packagelinks', [])],
                         )
@@ -202,7 +197,7 @@ class RepositoryManager:
                     PackageLink(
                         type=LinkType.from_string(linkdata['type']),
                         url=linkdata['url'],
-                        order=linkdata.get('order', 'prepend'),
+                        priority=linkdata.get('priority', 1),
                     )
                     for linkdata in repodata.get('packagelinks', [])
                 ],

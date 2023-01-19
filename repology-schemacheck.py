@@ -21,7 +21,7 @@ import argparse
 import sys
 from datetime import date
 
-from voluptuous import All, Any, Contains, MultipleInvalid, Required, Schema, Url
+from voluptuous import All, Any, Contains, MultipleInvalid, NotIn, Required, Schema, Url
 
 from repology.yamlloader import YamlConfig
 
@@ -187,7 +187,7 @@ packagelinks = [
     {
         Required('type'): str,
         Required('url'): Url(),
-        'order': Any('append', 'prepend'),
+        'priority': All(int, NotIn([0], 'priority 0 is reserved for generated links'))
     }
 ]
 
