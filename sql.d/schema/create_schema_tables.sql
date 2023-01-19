@@ -396,6 +396,8 @@ CREATE TABLE maintainer_repo_metapackages_events (
 
 CREATE INDEX ON maintainer_repo_metapackages_events(maintainer_id, repository_id, ts DESC);
 
+DROP TABLE IF EXISTS maintainer_repo_metapackages_events_archive CASCADE;
+
 CREATE TABLE maintainer_repo_metapackages_events_archive (
 	maintainer_id integer NOT NULL,
 	repository_id smallint NOT NULL,
@@ -423,6 +425,8 @@ CREATE TABLE repository_events (
 );
 
 CREATE INDEX ON repository_events(repository_id, ts DESC);
+
+DROP TABLE IF EXISTS repository_events_archive CASCADE;
 
 CREATE TABLE repository_events_archive (
 	repository_id smallint NOT NULL,
