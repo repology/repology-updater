@@ -8,6 +8,7 @@
   desc: Debian Janitor - Releases
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu,debjanitor]
   color: '32638f'
   minpackages: 100
   sources:
@@ -38,6 +39,7 @@
   desc: Debian Janitor - Snapshots
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu,debjanitor]
   color: '32638f'
   minpackages: 100
   sources:

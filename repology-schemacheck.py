@@ -141,6 +141,7 @@ rulesets = families + [
     'chaotic-aur',
     'deb_multimedia',
     'debian',
+    'debjanitor',
     'deepin',
     'dports',
     'endlessos',
