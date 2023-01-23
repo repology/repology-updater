@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2019, 2021, 2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,9 +16,10 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import xml.etree.ElementTree
 from typing import Iterable
 from urllib.parse import unquote
+
+import lxml
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -26,50 +27,39 @@ from repology.parsers import Parser
 
 class LibreGameWikiParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        with open(path) as fd:
-            data = fd.read()
+        root = lxml.html.parse(path).getroot()
 
-        # plug incorrect XML
-        data = data.replace('value="Special:Search">', 'value="Special:Search"/>')
-
-        root = xml.etree.ElementTree.fromstring(data)
-
-        content = root.find('.//div[@id="mw-content-text"]')
-        if content is None:
+        if (content := root.find('.//div[@id="mw-content-text"]')) is None:
             raise RuntimeError('Cannot find <div id="mw-content-text"> element')
 
         for item in content.findall('.//div[@style="float:left; width:25.3em; height:8.5em; border:1px solid #ccc; padding:0.1em; margin-bottom: 2em; margin-right: 1em; overflow:hidden"]'):
-            pkg = factory.begin()
+            with factory.begin() as pkg:
+                # name
+                if (cell := item.find('./p[1]/b[1]/a[1]')) is None or not cell.text:
+                    continue
 
-            # name
-            cell = item.find('./p[1]/b[1]/a[1]')
+                pkg.add_name(cell.text, NameType.WIKI_TITLE)
+                pkg.add_name(unquote(cell.attrib['href'].rsplit('/', 1)[-1]), NameType.WIKI_PAGE)
 
-            if cell is None or not cell.text:
-                continue
+                # version
+                if (cell := item.find('./p[2]')) is None or not cell.text:
+                    pkg.log('cannot parse version')
+                    continue
 
-            pkg.add_name(cell.text, NameType.WIKI_TITLE)
-            pkg.add_name(unquote(cell.attrib['href'].rsplit('/', 1)[-1]), NameType.WIKI_PAGE)
+                version = cell.text
 
-            # version
-            cell = item.find('./p[2]')
-            if cell is None or not cell.text:
-                continue
+                if match := re.match('(.*) \\(.*\\)$', version):
+                    pkg.set_version(match.group(1))
+                    pkg.set_rawversion(version)
+                else:
+                    pkg.set_version(version)
 
-            version = cell.text
+                # www
+                for a in item.findall('./p[2]/a'):
+                    if a.text == 'Website':
+                        pkg.add_homepages(a.attrib['href'])
 
-            match = re.match('(.*) \\(.*\\)$', version)
-            if match:
-                pkg.set_version(match.group(1))
-                pkg.set_rawversion(version)
-            else:
-                pkg.set_version(version)
+                # category
+                pkg.add_categories('games')
 
-            # www
-            for a in item.findall('./p[2]/a'):
-                if a.text == 'Website':
-                    pkg.add_homepages(a.attrib['href'])
-
-            # category
-            pkg.add_categories('games')
-
-            yield pkg
+                yield pkg
