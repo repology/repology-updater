@@ -23,7 +23,7 @@
       url: https://git.savannah.gnu.org/cgit/guix.git/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://guix.gnu.org/packages/{srcname}-{rawversion}/'
+      url:  'https://packages.guix.gnu.org/packages/{srcname}/{rawversion}/'
     - type: PACKAGE_RECIPE
       url: 'https://git.savannah.gnu.org/cgit/guix.git/tree/{loc_path}#n{loc_line|dec}'
   groups: [ all, production ]
