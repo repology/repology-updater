@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -227,14 +227,14 @@ class GentooGitParser(Parser):
 
                         if 'SRC_URI' in md5cache_metadata:
                             # skip local files
-                            subpkg.add_downloads(filter(lambda s: '/' in s, _parse_conditional_expr(md5cache_metadata['SRC_URI'])))
+                            subpkg.add_links(LinkType.UPSTREAM_DOWNLOAD, filter(lambda s: '/' in s, _parse_conditional_expr(md5cache_metadata['SRC_URI'])))
 
-                        subpkg.add_homepages(md5cache_metadata.get('HOMEPAGE', '').split(' '))
+                        subpkg.add_links(LinkType.UPSTREAM_HOMEPAGE, md5cache_metadata.get('HOMEPAGE', '').split(' '))
                     elif self._require_md5cache_metadata:
                         subpkg.log('cannot find metadata ({}), package dropped'.format(os.path.relpath(md5cache_metadata_path, path)), Logger.ERROR)
                         continue
 
                     # upstreams should be added after "real" homepages
-                    subpkg.add_homepages(xml_metadata.upstreams)
+                    subpkg.add_links(LinkType.UPSTREAM_HOMEPAGE, xml_metadata.upstreams)
 
                     yield subpkg
