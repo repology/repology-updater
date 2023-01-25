@@ -78,21 +78,36 @@ def _iter_ebuilds(path: str, category: str, package: str) -> Iterable[str]:
 
 
 _link_templates_by_upstream_type = {
+    # one of the source for these, see
+    # https://github.com/pkgcore/pkgcheck/blob/4d74d90aa601b5caab445a9dd88c649c0b02856f/src/pkgcheck/checks/network.py#L282
+    # however not that it does not always provide canonical links and is not always complete
+    # XXX: find canonical source for these in portage
+    # XXX: we can also generate UPSTREAM_REPOSITORY for some of these
     'bitbucket': 'https://bitbucket.org/{}',
     'cpan': 'https://metacpan.org/release/{}',
-    'cpan-module': None,  # should be handled by cpan
+    'cpan-module': None,  # module names which do not imply link construction; perl modules in gentoo should also have 'cpan' upstream which does handle links
     'ctan': 'https://www.ctan.org/pkg/{}',
-    'freecode': 'http://freecode.com/projects/{}',
-    'freshmeat': 'http://freshmeat.net/projects/{}/',
+    'freecode': 'http://freecode.com/projects/{}',  # probably dead
+    'freedesktop-gitlab': 'https://gitlab.freedesktop.org/{}',
+    'freshmeat': 'http://freshmeat.net/projects/{}/',  # probably dead
+    'gentoo': 'https://gitweb.gentoo.org/{}.git/',
     'github': 'https://github.com/{}',
     'gitlab': 'https://gitlab.com/{}',
+    'gnome-gitlab': 'https://gitlab.gnome.org/{}',
     'google-code': 'https://code.google.com/p/{}/',
+    'hackage': 'https://hackage.haskell.org/package/{}',
+    'heptapod': 'https://foss.heptapod.net/{}',
     'launchpad': 'https://launchpad.net/{}',
-    'pear': 'http://pear.php.net/package/{}',
+    'osdn': 'https://osdn.net/projects/{}/',
+    'pear': 'https://pear.php.net/package/{}',
+    'pecl': 'https://pecl.php.net/package/{}',
     'pypi': 'https://pypi.org/project/{}/',
     'rubygems': 'https://rubygems.org/gems/{}',
+    'savannah': 'https://savannah.gnu.org/projects/{}',
+    'savannah-nongnu': 'https://savannah.nongnu.org/projects/{}',
     'sourceforge': 'https://sourceforge.net/projects/{}/',
     'sourceforge-jp': 'https://osdn.net/projects/{}/',
+    'sourcehut': 'https://sr.ht/{}/',
 }
 
 
