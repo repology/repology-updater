@@ -1,5 +1,6 @@
 ###########################################################################
 # Trisquel
+# valid_till sourced from: https://en.wikipedia.org/wiki/Trisquel
 ###########################################################################
 - name: trisquel_6_0
   sortname: trisquel_06_0
@@ -10,6 +11,7 @@
   ruleset: [debuntu, trisquel]
   color: '669fe7'
   minpackages: 20000
+  valid_till: 2017-04-31
   sources:
     - name: [ toutatis/main, toutatis-updates/main ]
       fetcher:
@@ -32,6 +34,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 50
+  valid_till: 2017-04-31
   sources:
     - name: [ toutatis-backports/main ]
       fetcher:
@@ -54,6 +57,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 23000
+  valid_till: 2019-04-31
   sources:
     - name: [ belenos/main, belenos-updates/main ]
       fetcher:
@@ -76,6 +80,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 50
+  valid_till: 2019-04-31
   sources:
     - name: [ belenos-backports/main ]
       fetcher:
@@ -98,6 +103,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 26000
+  valid_till: 2021-04-30
   sources:
     - name: [ flidas/main, flidas-updates/main ]
       fetcher:
@@ -120,6 +126,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 20
+  valid_till: 2021-04-30
   sources:
     - name: [ flidas-backports/main ]
       fetcher:
@@ -142,6 +149,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 26000
+  valid_till: 2023-04-31
   sources:
     - name: [ etiona/main, etiona-updates/main ]
       fetcher:
@@ -164,6 +172,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 20
+  valid_till: 2023-04-31
   sources:
     - name: [ etiona-backports/main ]
       fetcher:
@@ -185,6 +194,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 26000
+  valid_till: 2025-04-31
   sources:
     - name: [ nabia/main, nabia-updates/main ]
       fetcher:
@@ -206,6 +216,7 @@
   family: debuntu
   color: '669fe7'
   minpackages: 20
+  valid_till: 2025-04-31
   sources:
     - name: [ nabia-backports/main ]
       fetcher:
