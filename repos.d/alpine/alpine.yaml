@@ -1,7 +1,7 @@
 ###########################################################################
 # Alpine Linux aports
 #
-# https://wiki.alpinelinux.org/wiki/Alpine_Linux:Releases
+# https://alpinelinux.org/releases/
 ###########################################################################
 
 # XXX: packagelinks problems:
@@ -12,7 +12,7 @@
 # and we no longer care if original files are deleted
 #
 
-{% macro alpine(version, minpackages, subrepos=['community','main']) %}
+{% macro alpine(version, minpackages, valid_till=None, subrepos=['community','main']) %}
 {% set vversion = 'edge' if version == 'edge' else 'v' + version %}
 - name: alpine_{{version|replace('.', '_')}}
   {% if version >= '3.8' and version <= '3.9' %}
@@ -23,6 +23,9 @@
   statsgroup: Alpine
   family: alpine
   minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   default_maintainer: fallback-mnt-alpine@repology
   sources:
     {% for subrepo in subrepos %}
@@ -57,14 +60,14 @@
   groups: [ all, production, alpine ]
 {% endmacro %}
 
-{{ alpine('3.8', minpackages=8500) }}
-{{ alpine('3.9', minpackages=9000) }}
-{{ alpine('3.10', minpackages=9000) }}
-{{ alpine('3.11', minpackages=10000) }}
-{{ alpine('3.12', minpackages=11000) }}
-{{ alpine('3.13', minpackages=13000) }}
-{{ alpine('3.14', minpackages=14000) }}
-{{ alpine('3.15', minpackages=15000) }}
-{{ alpine('3.16', minpackages=16000) }}
-{{ alpine('3.17', minpackages=16000) }}
+{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01') }}
+{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01') }}
+{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01') }}
+{{ alpine('3.11', minpackages=10000, valid_till='2021-11-01') }}
+{{ alpine('3.12', minpackages=11000, valid_till='2022-05-01') }}
+{{ alpine('3.13', minpackages=13000, valid_till='2022-11-01') }}
+{{ alpine('3.14', minpackages=14000, valid_till='2023-05-01') }}
+{{ alpine('3.15', minpackages=15000, valid_till='2023-11-01') }}
+{{ alpine('3.16', minpackages=16000, valid_till='2024-05-23') }}
+{{ alpine('3.17', minpackages=16000, valid_till='2024-11-22') }}
 {{ alpine('edge', minpackages=20000, subrepos=['community', 'main', 'testing']) }}
