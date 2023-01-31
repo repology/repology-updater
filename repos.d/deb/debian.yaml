@@ -16,6 +16,9 @@
   ruleset: [debuntu, debian]
   color: 'c70036'
   minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
     {% for sub1 in [codename, codename + '-updates', security_sub1] %}
     {% for sub2 in ['main', 'contrib', 'non-free'] %}
