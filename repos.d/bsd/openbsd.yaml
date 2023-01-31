@@ -25,15 +25,11 @@
       url: https://www.openbsd.org/faq/faq15.html
     - desc: openports.pl
       url: https://openports.pl/
-    - desc: openports.se
-      url: http://openports.se/
     - desc: OpenBSD ports CVS repository
       url: http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://openports.pl/path/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'http://openports.se/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{srcname}/'
     # XXX: no Makefile link as in many cases Makefiles just refer to subports
