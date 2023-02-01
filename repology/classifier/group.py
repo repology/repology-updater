@@ -26,8 +26,8 @@ def _group_packages_by_version(packages: Iterable[Package]) -> Iterator[list[Pac
 
     Groups a sequence of packages sorted by version into
     a sequence of lists, each containing packages with
-    equally compared version"""
-
+    equally compared version
+    """
     current: list[Package] = []
 
     for package in packages:

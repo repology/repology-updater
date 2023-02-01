@@ -179,7 +179,6 @@ def _preprocess_packages(packages: Iterable[Package]) -> Iterator[Package]:
     away. `versionclass` is set immediately for these and
     they are excluded from the output.
     """
-
     for package in packages:
         if package.has_flag(PackageFlags.ROLLING):
             package.versionclass = PackageStatus.ROLLING
@@ -192,7 +191,6 @@ def classify_packages(packages: Sequence[Package]) -> None:
 
     Fill `versionclass` field of given packages.
     """
-
     # Determine of package is unique, e.g. we need to use `unique`
     # status instead of `newest`.
     is_unique = _is_packageset_unique(packages)

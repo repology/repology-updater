@@ -21,7 +21,7 @@ from collections import defaultdict
 
 
 class RuleMatchStatistics:
-    """Registry of Rule match frequency
+    """Registry of Rule match frequency.
 
     This class stores information in Rule match frequency, e.g. how
     many times a Rule was matched per total number of Packages
@@ -34,6 +34,7 @@ class RuleMatchStatistics:
     may change between parse runes, so Rules are instead referenced
     by their hashes.
     """
+
     __slots__ = ['_total_packages', '_rule_match_counts']
 
     _total_packages: int
