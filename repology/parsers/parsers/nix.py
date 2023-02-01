@@ -37,9 +37,8 @@ def extract_nix_maintainers(items: Iterable[str | dict[str, str]]) -> Iterable[s
         elif isinstance(item, dict):
             if 'email' in item:
                 yield item['email'].lower()
-            # do we need these?
-            #if 'github' in item:
-            #    yield item['github'].lower() + '@github'
+            if 'github' in item:
+                yield item['github'].lower() + '@github'
 
 
 def extract_nix_licenses(whatever: Any) -> list[str]:
