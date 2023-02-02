@@ -1,6 +1,6 @@
 ###########################################################################
 # Trisquel
-# valid_till sourced from: https://en.wikipedia.org/wiki/Trisquel
+# valid_till sourced from: https://en.wikipedia.org/wiki/Trisquel (release announcements say it's supported "until april")
 ###########################################################################
 - name: trisquel_6_0
   sortname: trisquel_06_0
