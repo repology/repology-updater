@@ -37,7 +37,11 @@ def extract_nix_maintainers(items: Iterable[str | dict[str, str]]) -> Iterable[s
         elif isinstance(item, dict):
             if 'email' in item:
                 yield item['email'].lower()
-            if 'github' in item:
+            elif 'github' in item:
+                # XXX: maintainer entry may have both email and github id.
+                # We only pick one as we don't want to duplicate maintainers,
+                # but if we at some point have multiple aliases for the same
+                # maintainer, we can extract both
                 yield item['github'].lower() + '@github'
 
 
