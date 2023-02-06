@@ -36,26 +36,6 @@ def _normalize_version(version: str) -> str:
     return version
 
 
-def _read_control_file(path: str) -> dict[str, Any]:
-    control_to_manifest_key_map = {
-        'Source': 'name',
-        'Version': 'version-string',
-        'Description': 'description',
-        'Homepage': 'homepage',
-    }
-
-    res: dict[str, Any] = {}
-
-    with open(path, 'r', encoding='utf-8', errors='ignore') as controlfile:
-        for line in controlfile:
-            key, *rest = map(str.strip, line.strip().split(':', 1))
-
-            if len(rest) == 1 and key in control_to_manifest_key_map and control_to_manifest_key_map[key] not in res:
-                res[control_to_manifest_key_map[key]] = rest[0]
-
-    return res
-
-
 def _read_manifest_file(path: str) -> dict[str, Any]:
     with open(path) as manifestfile:
         return cast(dict[str, Any], json.load(manifestfile))
@@ -73,23 +53,12 @@ def _grep_file(path: str, sample: str) -> bool:
 
 class VcpkgGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        has_control_files = False
-
         for pkgdir in os.listdir(os.path.join(path, 'ports')):
             with factory.begin(pkgdir) as pkg:
                 package_path_abs = os.path.join(path, 'ports', pkgdir)
-                controlpath = os.path.join(package_path_abs, 'CONTROL')
                 manifestpath = os.path.join(package_path_abs, 'vcpkg.json')
 
-                # read either of old-style control (CONTROL) or new-style manifest (vcpkg.json) file
-                if os.path.exists(manifestpath):
-                    pkgdata = _read_manifest_file(manifestpath)
-                elif os.path.exists(controlpath):
-                    has_control_files = True
-                    pkgdata = _read_control_file(controlpath)
-                else:
-                    pkg.log('neither control nor manifest file found', Logger.ERROR)
-                    continue
+                pkgdata = _read_manifest_file(manifestpath)
 
                 if pkgdata['name'] != pkgdir:
                     raise RuntimeError(f'sanity check failed: source {pkgdata["name"]} != directory {pkgdir}')
@@ -131,6 +100,3 @@ class VcpkgGitParser(Parser):
                 add_patch_files(pkg, package_path_abs, '*.patch')
 
                 yield pkg
-
-        if not has_control_files:
-            factory.log("No CONTROL files seen in the repository, seems like it's time to refactor vcpkg parser and remove legacy bits")
