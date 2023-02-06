@@ -320,6 +320,21 @@ def test_wwwpart_fragment():
     )
 
 
+def test_sourceforge():
+    check_transformer(
+        '[ { sourceforge: "foo", setname: bar } ]',
+        PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.sourceforge.net/')]).expect(effname='bar'),
+        PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://xfoo.sourceforge.net/')]).expect(effname='p2'),
+        PackageSample(name='p3', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foox.sourceforge.net/')]).expect(effname='p3'),
+        PackageSample(name='p4', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foo.sourceforge.io/')]).expect(effname='bar'),
+        PackageSample(name='p5', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://xfoo.sourceforge.io/')]).expect(effname='p5'),
+        PackageSample(name='p6', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://foox.sourceforge.io/')]).expect(effname='p6'),
+        PackageSample(name='p7', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://sourceforge.net/projects/foo/')]).expect(effname='bar'),
+        PackageSample(name='p8', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://sourceforge.net/projects/xfoo/')]).expect(effname='p8'),
+        PackageSample(name='p9', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://sourceforge.net/projects/foox/')]).expect(effname='p9'),
+    )
+
+
 def test_summpart():
     check_transformer(
         '[ { summpart: Browser, setname: match }, { wwwpart: shouldnotmatch, setname: false } ]',

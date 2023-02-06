@@ -338,6 +338,37 @@ def wwwpart(ruledata: Any) -> Matcher:
 
 
 @_matcher_generator
+def sourceforge(ruledata: Any) -> Matcher:
+    url_prefixes = []
+    for project in yaml_as_lowercase_list(ruledata['sourceforge']):
+        url_prefixes.extend([
+            f'https://sourceforge.net/projects/{project}/',
+            f'https://{project}.sourceforge.net/',
+            f'https://{project}.sourceforge.io/',
+
+            # XXX: these are legacy redirects and should be removed from here someday
+            f'http://sourceforge.net/projects/{project}/',
+            f'http://{project}.sourceforge.net/',
+            f'http://{project}.sourceforge.io/',
+            f'https://{project}.sf.net/',
+            f'http://{project}.sf.net/',
+        ])
+
+    def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+        if package.links is not None:
+            for link_type, *url_frag in package.links:
+                lower_url = '#'.join(url_frag).lower()
+                if LinkType.is_relevant_for_rule_matching(link_type):
+                    for prefix in url_prefixes:
+                        if lower_url.startswith(prefix):
+                            return True
+
+        return False
+
+    return matcher
+
+
+@_matcher_generator
 def summpart(ruledata: Any) -> Matcher:
     summparts = yaml_as_lowercase_list(ruledata['summpart'])
 
