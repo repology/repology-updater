@@ -4,8 +4,8 @@
 
 {% macro debian(version, codename, minpackages, valid_till=None, backports=True, packages_page=True, buildd_page=True) %}
 {% set compression = 'gz' if version < 9 else 'xz' %}
-{% set security_sub1 = codename + '/updates' if version < 11 else codename + '-security' %}
 {% set sortversion = '0' + (version|string) if version < 10 else version %}
+{% set subrepos2 = ['main', 'contrib', 'non-free'] if version < 12 else ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
 
 - name: debian_{{version}}
   sortname: debian_{{sortversion}}
@@ -20,21 +20,29 @@
   valid_till: {{valid_till}}
   {% endif %}
   sources:
-    {% for sub1 in [codename, codename + '-updates', security_sub1] %}
-    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    {% for sub1 in [codename, codename + '-updates'] %}
+    {% for sub2 in subrepos2 %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        {% if sub1 == security_sub1 %}
-        url: 'http://security.debian.org/debian-security/dists/{{sub1}}/{{sub2}}/source/Sources.{{compression}}'
-        {% else %}
-        url: 'http://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.{{compression}}'
-        {% endif %}
+        url: 'https://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.{{compression}}'
         compression: {{compression}}
       parser:
         class: DebianSourcesParser
       subrepo: {{sub1}}/{{sub2}}
     {% endfor %}
+    {% endfor %}
+
+    {% set sub1 = codename + '/updates' if version < 11 else codename + '-security' %}
+    {% for sub2 in subrepos2 %}
+    - name: {{sub1}}/{{sub2}}
+      fetcher:
+        class: FileFetcher
+        url: 'https://security.debian.org/debian-security/dists/{{sub1}}/{{sub2}}/source/Sources.{{compression}}'
+        compression: {{compression}}
+      parser:
+        class: DebianSourcesParser
+      subrepo: {{sub1}}/{{sub2}}
     {% endfor %}
   repolinks:
     - desc: Debian packages
@@ -74,11 +82,11 @@
   minpackages: 1
   sources:
     {% set sub1 = codename + '-backports' %}
-    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    {% for sub2 in subrepos2 %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.{{compression}}'
+        url: 'https://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.{{compression}}'
         compression: {{compression}}
       parser:
         class: DebianSourcesParser
@@ -132,11 +140,11 @@
   minpackages: 32000
   sources:
     {% set sub1 = 'sid' %}
-    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    {% for sub2 in ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
+        url: 'https://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -173,11 +181,11 @@
   minpackages: 300
   sources:
     {% set sub1 = 'experimental' %}
-    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    {% for sub2 in ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
+        url: 'https://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
