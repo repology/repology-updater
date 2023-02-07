@@ -97,5 +97,6 @@ CREATE TYPE problem_type AS enum(
 	'cpe_unreferenced',
 	'cpe_missing',
 	'download_dead',
-	'download_permanent_https_redirect'
+	'download_permanent_https_redirect',
+	'homepage_sourceforge_missing_trailing_slash'
 );

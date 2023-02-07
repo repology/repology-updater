@@ -106,6 +106,14 @@ WITH packages_links_expanded AS (
 		url SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?'
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
+		'homepage_sourceforge_missing_trailing_slash'::problem_type AS problem_type,
+		jsonb_build_object('url', url) AS data
+	FROM packages_homepages
+	WHERE
+		link_type = 0 AND
+		url SIMILAR TO 'https?://sourceforge.net/projects/[^/]+'
+
+	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
 		'homepage_discontinued_cpan'::problem_type AS problem_type,
 		jsonb_build_object('url', url) AS data
 	FROM packages_homepages
