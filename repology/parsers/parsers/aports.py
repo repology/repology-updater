@@ -52,6 +52,9 @@ class ApkIndexParser(Parser):
                 pkg.add_name(pkgdata['o'], NameType.APK_SMALL_O)
                 pkg.set_version(pkgdata['V'], _normalize_version)
 
+                if re.match('.*_git[0-9]{8}', pkg.version):
+                    pkg.set_flags(PackageFlags.IGNORE)
+
                 pkg.set_summary(pkgdata['T'])
                 pkg.add_homepages(pkgdata['U'])  # XXX: split?
                 pkg.add_licenses(pkgdata['L'])
