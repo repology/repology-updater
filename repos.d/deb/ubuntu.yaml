@@ -118,10 +118,12 @@
 # Packages argument refer to availability on https://packages.ubuntu.com/
 # Check News section and Distribution dropdown on the site to see whether
 # a specific release is supported
-{{ ubuntu('14', '04', 'trusty',  minpackages=23000, valid_till='2024-04-25', packages=false) }}
-{{ ubuntu('16', '04', 'xenial',  minpackages=26000, valid_till='2026-04-23', packages=false) }}
-{{ ubuntu('18', '04', 'bionic',  minpackages=29000, valid_till='2028-04-26') }}
-{{ ubuntu('20', '04', 'focal',   minpackages=29000, valid_till='2030-04-23') }}
-{{ ubuntu('22', '04', 'jammy',   minpackages=32000, valid_till='2032-04-21') }}
-{{ ubuntu('22', '10', 'kinetic', minpackages=33000, backports=false) }}
-{{ ubuntu('23', '04', 'lunar',   minpackages=33000, backports=false, proposed=true) }}
+# Also https://en.wikipedia.org/wiki/Ubuntu#Releases
+# Note that we use general support (not ESM) end dates here
+{{ ubuntu('14', '04', 'trusty',  minpackages=23000, valid_till='2019-04-30', packages=false) }}
+{{ ubuntu('16', '04', 'xenial',  minpackages=26000, valid_till='2021-04-30', packages=false) }}
+{{ ubuntu('18', '04', 'bionic',  minpackages=29000, valid_till='2023-04-30') }}
+{{ ubuntu('20', '04', 'focal',   minpackages=29000, valid_till='2025-04-30') }}
+{{ ubuntu('22', '04', 'jammy',   minpackages=32000, valid_till='2027-04-30') }}
+{{ ubuntu('22', '10', 'kinetic', minpackages=33000, valid_till='2023-07-31', backports=false) }}
+{{ ubuntu('23', '04', 'lunar',   minpackages=33000,                          backports=false, proposed=true) }}
