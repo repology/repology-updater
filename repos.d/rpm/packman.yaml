@@ -10,6 +10,7 @@
   ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
+  valid_till: 2018-05-29   # from corresponding fedora
   sources:
     - name: all
       fetcher:
@@ -32,6 +33,7 @@
   ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
+  valid_till: 2018-11-30   # from corresponding fedora
   sources:
     - name: all
       fetcher:
@@ -54,6 +56,7 @@
   ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
+  valid_till: 2019-05-28   # from corresponding fedora
   sources:
     - name: all
       fetcher:
@@ -76,6 +79,7 @@
   ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
+  valid_till: 2019-11-26   # from corresponding fedora
   sources:
     - name: all
       fetcher:
@@ -98,6 +102,7 @@
   ruleset: [fedora, rpm, packman]
   color: 'dbda04'
   minpackages: 0
+  valid_till: 2020-05-26   # from corresponding fedora
   sources:
     - name: all
       fetcher:
@@ -143,6 +148,7 @@
   ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 900
+  valid_till: 2019-06-30  # from corresponding opensuse
   sources:
     - name: all
       fetcher:
@@ -165,6 +171,7 @@
   ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 800
+  valid_till: 2019-12-03  # from corresponding opensuse
   sources:
     - name: all
       fetcher:
@@ -187,6 +194,7 @@
   ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 500
+  valid_till: 2021-02-02  # from corresponding opensuse
   sources:
     - name: all
       fetcher:
@@ -209,6 +217,7 @@
   ruleset: [opensuse, rpm, packman]
   color: 'dbda04'
   minpackages: 500
+  valid_till: 2022-01-04  # from corresponding opensuse
   sources:
     - name: all
       fetcher:
