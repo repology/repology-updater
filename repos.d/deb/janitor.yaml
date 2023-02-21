@@ -64,3 +64,65 @@
     - type: PACKAGE_SOURCES
       url: 'https://janitor.debian.net/git/{srcname}/fresh-snapshots/main'
   groups: [ all, production, debian-janitor ]
+
+- name: debian_janitor_bullseye_backports
+  type: repository
+  desc: Debian Janitor - Bullseye Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu,debjanitor]
+  color: '32638f'
+  minpackages: 100
+  sources:
+    - name: main
+      fetcher:
+        class: FileFetcher
+        url: 'https://janitor.debian.net/dists/bullseye-backports/main/source/Sources.gz'
+      parser:
+        class: DebianSourcesParser
+  repolinks:
+    - desc: Debian Janitor Homepage
+      url: https://janitor.debian.net/
+    - desc: Debian Janitor Wiki
+      url: https://wiki.debian.org/Janitor
+    - desc: Bullseye Backports
+      url: https://janitor.debian.net/bullseye-backports
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}/build.log'
+    - type: PACKAGE_SOURCES
+      url: 'https://janitor.debian.net/git/{srcname}/bullseye-backports/main'
+  groups: [ all, production, debian-janitor ]
+
+- name: debian_janitor_bookworm_backports
+  type: repository
+  desc: Debian Janitor - Bookworm Backports
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu,debjanitor]
+  color: '32638f'
+  minpackages: 5
+  sources:
+    - name: main
+      fetcher:
+        class: FileFetcher
+        url: 'https://janitor.debian.net/dists/bookworm-backports/main/source/Sources.gz'
+      parser:
+        class: DebianSourcesParser
+  repolinks:
+    - desc: Debian Janitor Homepage
+      url: https://janitor.debian.net/
+    - desc: Debian Janitor Wiki
+      url: https://wiki.debian.org/Janitor
+    - desc: Bookworm Backports
+      url: https://janitor.debian.net/bookworm-backports
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}/build.log'
+    - type: PACKAGE_SOURCES
+      url: 'https://janitor.debian.net/git/{srcname}/bookworm-backports/main'
+  groups: [ all, production, debian-janitor ]
