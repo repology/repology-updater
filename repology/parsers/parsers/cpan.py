@@ -86,6 +86,5 @@ class CPANPackagesParser(Parser):
                 pkg.set_version(package_version)
 
                 pkg.add_maintainers(extract_maintainers(package_path.split('/')[2].lower() + '@cpan'))
-                pkg.add_homepages('http://search.cpan.org/dist/' + package_name + '/')
 
                 yield pkg
