@@ -11,7 +11,7 @@
     - name: packages
       fetcher:
         class: GitFetcher
-        url: https://gitlab.com/yiffos/packaging/packages.git
+        url: https://git.yiffos.gay/Packaging/packages.git
         branch: knot
       parser:
         class: YiffOSJsonParser
@@ -20,9 +20,9 @@
       url: https://yiffos.gay/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://gitlab.com/yiffos/packaging/packages/-/tree/knot/{srcname}'
+      url: 'https://git.yiffos.gay/Packaging/packages/src/branch/knot/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://gitlab.com/yiffos/packaging/packages/-/blob/knot/{srcname}/PKGSCRIPT'
+      url: 'https://git.yiffos.gay/Packaging/packages/src/branch/knot/{srcname}/PKGSCRIPT'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitlab.com/yiffos/packaging/packages/-/raw/knot/{srcname}/PKGSCRIPT'
+      url: 'https://git.yiffos.gay/Packaging/packages/raw/branch/knot/{srcname}/PKGSCRIPT'
   groups: [ all, production, yiffos ]
