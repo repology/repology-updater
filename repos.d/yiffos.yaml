@@ -19,6 +19,8 @@
     - desc: yiffOS home
       url: https://yiffos.gay/
   packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.yiffos.gay/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://git.yiffos.gay/Packaging/packages/src/branch/knot/{srcname}'
     - type: PACKAGE_RECIPE
