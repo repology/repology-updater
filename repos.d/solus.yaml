@@ -25,4 +25,4 @@
       url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml?view=raw'
-  groups: [ all, production ]
+  groups: [ all ]  # fetch problem
