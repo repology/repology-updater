@@ -489,7 +489,7 @@ _MAPPINGS = [
     ),
     # Nix
     _NameMapping(
-        name=NameType.NIX_PNAME,  # it's unknown which is src and bin names for nix
+        srcname=NameType.NIX_ATTRIBUTE_PATH,
         trackname=NameType.NIX_ATTRIBUTE_PATH,
         visiblename=NameType.NIX_PNAME,
         projectname_seed=NameType.NIX_PNAME,
