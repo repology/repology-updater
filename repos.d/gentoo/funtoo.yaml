@@ -83,4 +83,4 @@
       url: https://www.funtoo.org/
     - desc: GitHub organization
       url: https://github.com/funtoo/
-  groups: [ all, production, funtoo ]
+  groups: [ all, funtoo ]
