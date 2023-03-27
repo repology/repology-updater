@@ -6,7 +6,7 @@
   desc: winget
   family: winget
   ruleset: [winget, windows]
-  minpackages: 4000
+  minpackages: 26000
   sources:
     - name: winget-pkgs
       fetcher:
@@ -21,9 +21,5 @@
       url: https://github.com/microsoft/winget-pkgs
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/microsoft/winget-pkgs/tree/master/{yamlpath|dirname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://github.com/microsoft/winget-pkgs/blob/master/{yamlpath}'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/microsoft/winget-pkgs/master/{yamlpath}'
+      url: 'https://github.com/microsoft/winget-pkgs/tree/master/{path}'
   groups: [ all, production ]
