@@ -121,6 +121,7 @@ families = [
     'ubi',
     'vcpkg',
     'void',
+    'wakemeops',
     'wikidata',
     'winget',
     'yacp',

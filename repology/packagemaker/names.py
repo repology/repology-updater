@@ -54,6 +54,7 @@ class NameType:
     NPACKD_LASTNAME: ClassVar[int] = 42
 
     DEBIAN_SOURCE_PACKAGE: ClassVar[int] = 50
+    DEBIAN_BINARY_PACKAGE: ClassVar[int] = 51
 
     OPENWRT_PACKAGE: ClassVar[int] = 60
     OPENWRT_SOURCE: ClassVar[int] = 61
@@ -383,6 +384,16 @@ _MAPPINGS = [
         trackname=NameType.DEBIAN_SOURCE_PACKAGE,
         visiblename=NameType.DEBIAN_SOURCE_PACKAGE,
         projectname_seed=NameType.DEBIAN_SOURCE_PACKAGE,
+    ),
+    _NameMapping(
+        # XXX the only consumer for these ATOW is WakeMeOps repo
+        # which is not genuine Debian, so if we want to support
+        # binary deb distros at some point, WakeMeOps may need
+        # to be switched to dedicated NameType
+        binname=NameType.DEBIAN_BINARY_PACKAGE,
+        trackname=NameType.DEBIAN_BINARY_PACKAGE,
+        visiblename=NameType.DEBIAN_BINARY_PACKAGE,
+        projectname_seed=NameType.DEBIAN_BINARY_PACKAGE,
     ),
     _NameMapping(
         binname=NameType.OPENWRT_PACKAGE,

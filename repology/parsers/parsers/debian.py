@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -143,3 +143,10 @@ class OpenWrtPackagesParser(DebianSourcesParser):
         if pkgpath[2:4] == ['lang' 'erlang']:
             # modules with their own versions packages as a single entity
             pkg.set_flags(PackageFlags.UNTRUSTED)
+
+
+class DebianPackagesParser(DebianSourcesParser):
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:
+        if 'Binary' in pkgdata or 'Source' in pkgdata:
+            raise RuntimeError('Sanity check failed, expected Package descriptions without Binary or Source fields')
+        pkg.add_name(pkgdata['Package'], NameType.DEBIAN_BINARY_PACKAGE)

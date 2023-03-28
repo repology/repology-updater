@@ -1,0 +1,38 @@
+###########################################################################
+# WakeMeOps
+###########################################################################
+- name: wakemeops
+  type: repository
+  desc: WakeMeOps
+  family: wakemeops
+  ruleset: wakemeops
+  color: 'ff6bf0'
+  minpackages: 2500
+  sources:
+    {% for sub in ['desktop', 'dev', 'devops', 'secops', 'terminal'] %}
+    {% for arch in ['amd64', 'armhf', 'arm64'] %}
+    - name: {{sub}}/{{arch}}
+      fetcher:
+        class: FileFetcher
+        url: 'http://deb.wakemeops.com/wakemeops/dists/stable/{{sub}}/binary-{{arch}}/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianPackagesParser
+      subrepo: {{sub}}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: https://docs.wakemeops.com/packages/{binname}
+        - type: PACKAGE_SOURCES
+          url: https://github.com/upciti/wakemeops/tree/main/blueprints/{{sub}}/{binname}
+        - type: PACKAGE_RECIPE
+          url: https://github.com/upciti/wakemeops/blob/main/blueprints/{{sub}}/{binname}/ops2deb.yml
+        - type: PACKAGE_RECIPE_RAW
+          url: https://raw.githubusercontent.com/upciti/wakemeops/main/blueprints/{{sub}}/{binname}/ops2deb.yml
+    {% endfor %}
+    {% endfor %}
+  repolinks:
+    - desc: WakeMeOps home
+      url: https://docs.wakemeops.com/
+    - desc: WakeMeOps GitHub repository
+      url: https://github.com/upciti/wakemeops
+  groups: [ all, production ]
