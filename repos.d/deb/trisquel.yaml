@@ -1,232 +1,81 @@
 ###########################################################################
 # Trisquel
-# valid_till sourced from: https://en.wikipedia.org/wiki/Trisquel (release announcements say it's supported "until april")
 ###########################################################################
-- name: trisquel_6_0
-  sortname: trisquel_06_0
+
+{% macro trisquel(major, minor, codename, minpackages, valid_till, backports=True, packages=True) %}
+- name: trisquel_{{major}}_{{minor}}
+  {% if major < 10 %}
+  sortname: trisquel_0{{major}}_{{minor}}
+  {% endif %}
   type: repository
-  desc: Trisquel 6.0
+  desc: Trisquel {{major}}.{{minor}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, trisquel]
   color: '669fe7'
-  minpackages: 20000
-  valid_till: 2017-04-30
+  minpackages: {{minpackages}}
+  valid_till: {{valid_till}}
   sources:
-    - name: [ toutatis/main, toutatis-updates/main ]
+    {% for sub1 in [codename, codename + '-updates', codename + '-security'] %}
+    {% for sub2 in ['main'] %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        url: 'http://archive.trisquel.info/trisquel/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://packages.trisquel.org/source/{{sub1}}/{srcname}'
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
   groups: [ all, production, trisquel ]
 
-- name: trisquel_6_0_backports
-  sortname: trisquel_06_0_backports
+{% if backports %}
+- name: trisquel_{{major}}_{{minor}}_backports
+  {% if major < 10 %}
+  sortname: trisquel_0{{major}}_{{minor}}_backports
+  {% endif %}
   type: repository
-  desc: Trisquel 6.0 backports
+  desc: Trisquel {{major}}.{{minor}} backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, trisquel]
   color: '669fe7'
-  minpackages: 50
-  valid_till: 2017-04-30
+  minpackages: 1
+  valid_till: {{valid_till}}
   sources:
-    - name: [ toutatis-backports/main ]
+    {% for sub1 in [codename + '-backports'] %}
+    {% for sub2 in ['main'] %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+        url: 'http://archive.trisquel.info/trisquel/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://packages.trisquel.org/source/{{sub1}}/{srcname}'
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
   groups: [ all, production, trisquel ]
+{% endif %}
+{% endmacro %}
 
-- name: trisquel_7_0
-  sortname: trisquel_07_0
-  type: repository
-  desc: Trisquel 7.0
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 23000
-  valid_till: 2019-04-30
-  sources:
-    - name: [ belenos/main, belenos-updates/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
-
-- name: trisquel_7_0_backports
-  sortname: trisquel_07_0_backports
-  type: repository
-  desc: Trisquel 7.0 backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 50
-  valid_till: 2019-04-30
-  sources:
-    - name: [ belenos-backports/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
-
-- name: trisquel_8_0
-  sortname: trisquel_08_0
-  type: repository
-  desc: Trisquel 8.0
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 26000
-  valid_till: 2021-04-30
-  sources:
-    - name: [ flidas/main, flidas-updates/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
-
-- name: trisquel_8_0_backports
-  sortname: trisquel_08_0_backports
-  type: repository
-  desc: Trisquel 8.0 backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 20
-  valid_till: 2021-04-30
-  sources:
-    - name: [ flidas-backports/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
-
-- name: trisquel_9_0
-  sortname: trisquel_09_0
-  type: repository
-  desc: Trisquel 9.0
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 26000
-  valid_till: 2023-04-30
-  sources:
-    - name: [ etiona/main, etiona-updates/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
-
-- name: trisquel_9_0_backports
-  sortname: trisquel_09_0_backports
-  type: repository
-  desc: Trisquel 9.0 backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 20
-  valid_till: 2023-04-30
-  sources:
-    - name: [ etiona-backports/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
-
-- name: trisquel_10_0
-  type: repository
-  desc: Trisquel 10.0
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 26000
-  valid_till: 2025-04-30
-  sources:
-    - name: [ nabia/main, nabia-updates/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
-
-- name: trisquel_10_0_backports
-  type: repository
-  desc: Trisquel 10.0 backports
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '669fe7'
-  minpackages: 20
-  valid_till: 2025-04-30
-  sources:
-    - name: [ nabia-backports/main ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Trisquel home
-      url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
+# valid_till from: https://en.wikipedia.org/wiki/Trisquel (release announcements say it's supported "until april")
+{{ trisquel(6, 0, 'toutatis', minpackages=20000, valid_till='2017-04-30', packages=False) }}
+{{ trisquel(7, 0, 'belenos', minpackages=23000, valid_till='2019-04-30', packages=False) }}
+{{ trisquel(8, 0, 'flidas', minpackages=26000, valid_till='2021-04-30', packages=False) }}
+{{ trisquel(9, 0, 'etiona', minpackages=26000, valid_till='2023-04-30') }}
+{{ trisquel(10, 0, 'nabia', minpackages=26000, valid_till='2025-04-30') }}
+{{ trisquel(11, 0, 'aramo', minpackages=30000, valid_till='2027-04-30') }}
