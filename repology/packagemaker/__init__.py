@@ -335,8 +335,8 @@ class PackageMaker(PackageMakerBase):
 
         names = self._name_mapper.get_mapped_names()
 
-        if names.name is None and names.srcname is None and names.binname is None:
-            raise RuntimeError('Attempt to spawn Package without any name (name, binname, srcname) set')
+        if names.srcname is None and names.binname is None:
+            raise RuntimeError('Attempt to spawn Package without any name (binname, srcname) set')
         if names.trackname is None:
             raise RuntimeError('Attempt to spawn Package with unset trackname')
         if names.visiblename is None:
@@ -351,7 +351,6 @@ class PackageMaker(PackageMakerBase):
             family=family,
             subrepo=self._package.subrepo or subrepo,
 
-            name=names.name,
             srcname=names.srcname,
             binname=names.binname,
             binnames=list(unicalize(self._package.binnames)) or None,

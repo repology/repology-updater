@@ -28,7 +28,8 @@ class CondaRepodataJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgfilename, pkgdata in iter_json_dict(path, ('packages', None)):
             with factory.begin(pkgfilename) as pkg:
-                pkg.add_name(pkgdata['name'], NameType.GENERIC_GEN_NAME)
+                raise RuntimeError('recheck if GENERIC_SRC_NAME is correct here')
+                pkg.add_name(pkgdata['name'], NameType.GENERIC_SRC_NAME)  # type: ignore
                 pkg.set_version(pkgdata['version'])
                 pkg.add_licenses(pkgdata.get('license', ''))
 

@@ -28,7 +28,6 @@ class NameType:
     UNSUPPORTED: ClassVar[int] = 1  # special type which always fails
 
     # Common patterns: single name
-    GENERIC_GEN_NAME: ClassVar[int] = 1000
     GENERIC_SRC_NAME: ClassVar[int] = 1001
     GENERIC_BIN_NAME: ClassVar[int] = 1002
     GENERIC_SRCBIN_NAME: ClassVar[int] = 1003
@@ -187,15 +186,11 @@ class NameType:
 
     HPUX_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
-    KWORT_NAME: ClassVar[int] = GENERIC_GEN_NAME
-
     JUSTINSTALL_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
 
     # judging by https://distr1.org/things-to-try/ binary packages
     # are available
     DISTRI_NAME: ClassVar[int] = GENERIC_SRCBIN_NAME
-
-    APK_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
     SALIX_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
@@ -246,7 +241,6 @@ class _NameMapping:
     visiblename: int
     projectname_seed: int
 
-    name: int | None = None
     srcname: int | None = None
     binname: int | None = None
     trackname: int | None = None
@@ -254,7 +248,6 @@ class _NameMapping:
 
 @dataclass
 class MappedNames:
-    name: str | None = None
     srcname: str | None = None
     binname: str | None = None
     visiblename: str | None = None
@@ -277,12 +270,6 @@ _MAPPINGS = [
         trackname=NameType.GENERIC_NOBN_BASENAME,
         visiblename=NameType.GENERIC_NOBN_NAME,
         projectname_seed=NameType.GENERIC_NOBN_BASENAME,
-    ),
-    _NameMapping(
-        name=NameType.GENERIC_GEN_NAME,
-        trackname=NameType.GENERIC_GEN_NAME,
-        visiblename=NameType.GENERIC_GEN_NAME,
-        projectname_seed=NameType.GENERIC_GEN_NAME,
     ),
     _NameMapping(
         srcname=NameType.GENERIC_SRC_NAME,

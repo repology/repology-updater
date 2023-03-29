@@ -38,7 +38,7 @@ class PackageMakerWrapper:
 
     def __enter__(self) -> PackageMaker:
         self._package_maker = self._factory.begin()
-        self._package_maker.add_name('dummy_package', NameType.GENERIC_GEN_NAME)
+        self._package_maker.add_name('dummy_package', NameType.GENERIC_SRC_NAME)
         self._package_maker.set_version('0dummy0')
         return self._package_maker
 
@@ -62,7 +62,7 @@ def pkg() -> PackageMakerWrapper:
 
 def test_all_fields(pkg):
     with pkg as maker:
-        maker.add_name('foo', NameType.GENERIC_GEN_NAME)
+        maker.add_name('foo', NameType.GENERIC_SRC_NAME)
         maker.set_version('1.0')
         maker.set_summary('foo package')
         maker.add_maintainers(None, 'a@com', [None, ['b@com']], None, 'c@com')
@@ -75,7 +75,7 @@ def test_all_fields(pkg):
         maker.add_downloads(None, [None, 'http://baz/'], 'ftp://quux/')
         maker.add_links(LinkType.OTHER, [['http://yyy/'], None], None, 'http://xxx/')
 
-    assert pkg.name == 'foo'
+    assert pkg.srcname == 'foo'
     assert pkg.version == '1.0'
     assert pkg.maintainers == ['a@com', 'b@com', 'c@com', 'd@com']
     assert pkg.category == 'foo'  # XXX: convert to array
@@ -134,25 +134,25 @@ def test_strip(pkg):
 
 def test_redefine(pkg):
     with pkg as maker:
-        maker.add_name('foo', NameType.GENERIC_GEN_NAME)
-        maker.add_name('bar', NameType.GENERIC_GEN_NAME)
+        maker.add_name('foo', NameType.GENERIC_SRC_NAME)
+        maker.add_name('bar', NameType.GENERIC_SRC_NAME)
         maker.set_version('1.0')
         maker.set_version('1.1')
         maker.set_summary('Foo')
         maker.set_summary('Bar')
 
-    assert pkg.name == 'bar'
+    assert pkg.srcname == 'bar'
     assert pkg.version == '1.1'
     assert pkg.comment == 'Bar'
 
 
 def test_type_normalization1(pkg):
     with pkg as maker:
-        maker.add_name(0, NameType.GENERIC_GEN_NAME)
+        maker.add_name(0, NameType.GENERIC_SRC_NAME)
         maker.set_version(0)
         maker.set_summary(0)
 
-    assert pkg.name == '0'
+    assert pkg.srcname == '0'
     assert pkg.version == '0'
     assert pkg.comment == '0'
 
@@ -160,7 +160,7 @@ def test_type_normalization1(pkg):
 def test_type_normalization2(pkg):
     with pkg as maker:
         with pytest.raises(RuntimeError):
-            maker.add_name([123], NameType.GENERIC_GEN_NAME)
+            maker.add_name([123], NameType.GENERIC_SRC_NAME)
         with pytest.raises(RuntimeError):
             maker.set_version([123])
         with pytest.raises(RuntimeError):
@@ -169,9 +169,9 @@ def test_type_normalization2(pkg):
 
 def test_nulls(pkg):
     with pkg as maker:
-        maker.add_name('foo', NameType.GENERIC_GEN_NAME)
-        maker.add_name('', NameType.GENERIC_GEN_NAME)
-        maker.add_name(None, NameType.GENERIC_GEN_NAME)
+        maker.add_name('foo', NameType.GENERIC_SRC_NAME)
+        maker.add_name('', NameType.GENERIC_SRC_NAME)
+        maker.add_name(None, NameType.GENERIC_SRC_NAME)
         maker.set_version('1.0')
         maker.set_version('')
         maker.set_version(None)
@@ -179,7 +179,7 @@ def test_nulls(pkg):
         maker.set_summary('')
         maker.set_summary(None)
 
-    assert pkg.name == 'foo'
+    assert pkg.srcname == 'foo'
     assert pkg.version == '1.0'
     assert pkg.comment == 'Foo'
 
