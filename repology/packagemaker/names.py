@@ -432,7 +432,7 @@ _MAPPINGS = [
     ),
     # Slackware
     _NameMapping(
-        name=NameType.SLACKWARE_NAME,
+        binname=NameType.SLACKWARE_NAME,
         visiblename=NameType.SLACKWARE_NAME,
         projectname_seed=NameType.SLACKWARE_NAME,
         trackname=NameType.SLACKWARE_PSEUDO_FULL_NAME,
