@@ -11,10 +11,14 @@
     - name: main
       fetcher:
         class: RepodataFetcher
-        url: 'https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo/'
+        url: 'https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo-base-7.3/'
       parser:
         class: RepodataParser
   repolinks:
-    - desc: IBM i Open Source
-      url: 'https://bitbucket.org/ibmi/opensource/src/master/'
+    - desc: Getting Started with IBM i RPMs
+      url: 'https://ibm.biz/ibmi-rpms'
+    - desc: IBM i Open Source Documentation
+      url: 'https://ibm.biz/ibmi-oss-docs'
+    - desc: IBM i Open Source Resources
+      url: 'https://ibm.biz/ibmioss'
   groups: [ all, production, rpm ]
