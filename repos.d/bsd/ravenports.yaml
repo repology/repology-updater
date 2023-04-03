@@ -23,13 +23,13 @@
       url: https://github.com/Ravenports/Ravenports
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'http://ravenports.ironwolf.systems/catalog/bucket_{bucket}/{name}/{variant}/'
+      url: 'http://ravenports.ironwolf.systems/catalog/bucket_{bucket}/{binname}/{variant}/'
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/Ravenports/ravensource/tree/master/bucket_{bucket}/{name}'
+      url: 'https://github.com/Ravenports/ravensource/tree/master/bucket_{bucket}/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/Ravenports/Ravenports/blob/master/bucket_{bucket}/{name}'
+      url: 'https://github.com/Ravenports/Ravenports/blob/master/bucket_{bucket}/{srcname}'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/Ravenports/Ravenports/master/bucket_{bucket}/{name}'
+      url: 'https://raw.githubusercontent.com/Ravenports/Ravenports/master/bucket_{bucket}/{srcname}'
     - type: PACKAGE_BUILD_LOG_RAW  # dragonflybsd specific logs
-      url: 'https://loki.dragonflybsd.org/raven/logs/{name}___{variant}.log'
+      url: 'https://loki.dragonflybsd.org/raven/logs/{binname}___{variant}.log'
   groups: [ all, production ]
