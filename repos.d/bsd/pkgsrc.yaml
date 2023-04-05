@@ -21,9 +21,13 @@
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
+    - desc: pkgsrc.se
+      url: https://pkgsrc.se/
     - desc: pkgsrc CVS repository
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://pkgsrc.se/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-2018Q2'
     - type: PACKAGE_RECIPE_RAW
@@ -49,9 +53,13 @@
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
+    - desc: pkgsrc.se
+      url: https://pkgsrc.se/
     - desc: pkgsrc CVS repository
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://pkgsrc.se/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/'
     - type: PACKAGE_RECIPE_RAW
