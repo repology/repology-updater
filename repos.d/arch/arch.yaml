@@ -71,6 +71,7 @@
   desc: ArchPOWER {{arch}}
   statsgroup: Arch+derivs
   family: arch
+  ruleset: [arch, archpower]
   color: '0088cc'
   minpackages: 2000
   sources:
