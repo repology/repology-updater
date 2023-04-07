@@ -66,12 +66,3 @@ class ClassFactory:
 
     def spawn(self, name: str, *args: Any, **kwargs: Any) -> Any:
         return self.classes[name](*args, **kwargs)
-
-    def spawn_with_known_args(self, name: str, kwargs: dict[str, Any]) -> Any:
-        class_ = self.classes[name]
-
-        filtered_kwargs = {
-            key: value for key, value in kwargs.items() if key in inspect.getfullargspec(class_.__init__).args
-        }
-
-        return class_(**filtered_kwargs)

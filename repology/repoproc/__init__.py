@@ -83,9 +83,9 @@ class RepositoryProcessor:
     def _fetch_source(self, repository: Repository, update: bool, source: Source, logger: Logger) -> bool:
         logger.log(f'fetching source {source.name} started')
 
-        fetcher: Fetcher = self.fetcher_factory.spawn_with_known_args(
+        fetcher: Fetcher = self.fetcher_factory.spawn(
             source.fetcher['class'],
-            source.fetcher
+            **{k: v for k, v in source.fetcher.items() if k != 'class'}
         )
 
         have_changes = fetcher.fetch(
@@ -170,9 +170,9 @@ class RepositoryProcessor:
                 yield package
 
         return postprocess_parsed_packages(
-            self.parser_factory.spawn_with_known_args(
+            self.parser_factory.spawn(
                 source.parser['class'],
-                source.parser
+                **{k: v for k, v in source.parser.items() if k != 'class'}
             ).iter_parse(
                 self._get_state_source_path(repository, source),
                 PackageFactory(logger)
