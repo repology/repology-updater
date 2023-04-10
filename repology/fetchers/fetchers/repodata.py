@@ -54,7 +54,10 @@ class RepodataFetcher(ScratchFileFetcher):
             raise RuntimeError('Cannot find <{}> element in repomd.xml'.format(self.primary_key))
 
         repomd_elt_primary_location = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}location')
-        repomd_elt_primary_checksum = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha256"]')
+        repomd_elt_primary_checksum = (
+            repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha256"]')
+            or repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha512"]')
+        )
 
         if repomd_elt_primary_checksum is None:
             logger.log('no supported checksum', Logger.WARNING)
