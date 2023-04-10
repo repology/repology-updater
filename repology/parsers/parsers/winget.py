@@ -113,6 +113,6 @@ class WingetGitParser(Parser):
                 pkg.set_extra_field('path', pkgpath_rel)
 
                 if not pkg.version:
-                    raise RuntimeError('could not parse required information from all manifests')
+                    pkg.log('could not parse required information from all manifests, skipping', Logger.ERROR)
                 else:
                     yield pkg
