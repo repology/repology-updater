@@ -48,7 +48,7 @@
     {% set git_branch = '?h=' + version + '-stable' %}
     {% endif %}
     - type: PACKAGE_HOMEPAGE
-      url: 'https://pkgs.alpinelinux.org/packages?name={binname}{{pkgs_branch}}'
+      url: 'https://pkgs.alpinelinux.org/packages?name={binname|quote}{{pkgs_branch}}'
     - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}{{git_branch}}'
     - type: PACKAGE_RECIPE
