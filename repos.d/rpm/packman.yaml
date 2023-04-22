@@ -233,6 +233,52 @@
       url: 'http://packman.links2linux.org/package/{srcname}'
   groups: [all, production, packman]
 
+- name: packman_opensuse_leap_15_3
+  type: repository
+  desc: PackMan openSUSE Leap 15.3
+  family: opensuse  # XXX: own family?
+  ruleset: [opensuse, rpm, packman]
+  color: 'dbda04'
+  minpackages: 500
+  valid_till: 2022-12-31  # from corresponding opensuse
+  sources:
+    - name: all
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.3/
+      parser:
+        class: RepodataParser
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'http://packman.links2linux.org/package/{srcname}'
+  groups: [all, production, packman]
+
+- name: packman_opensuse_leap_15_4
+  type: repository
+  desc: PackMan openSUSE Leap 15.4
+  family: opensuse  # XXX: own family?
+  ruleset: [opensuse, rpm, packman]
+  color: 'dbda04'
+  minpackages: 500
+  valid_till: 2023-11-30  # from corresponding opensuse
+  sources:
+    - name: all
+      fetcher:
+        class: RepodataFetcher
+        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.4/
+      parser:
+        class: RepodataParser
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'http://packman.links2linux.org/package/{srcname}'
+  groups: [all, production, packman]
+
 - name: packman_opensuse_tumbleweed
   type: repository
   desc: PackMan openSUSE Tumbleweed
