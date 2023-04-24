@@ -34,5 +34,5 @@
   # but we can fallback to github search
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://github.com/OpenIndiana/oi-userland/search?q={srcname}+filename%3AMakefile&type=Code'
+      url: 'https://github.com/OpenIndiana/oi-userland/search?q={srcname|quote}+filename%3AMakefile&type=Code'
   groups: [ all, production ]
