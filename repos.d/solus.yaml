@@ -11,13 +11,13 @@
     - name: eopkg-index.xml
       fetcher:
         class: FileFetcher
-        url: https://packages.getsol.us/unstable/eopkg-index.xml.xz
+        url: https://cdn.getsol.us/repo/unstable/eopkg-index.xml.xz
         compression: xz
       parser:
         class: SolusIndexParser
   repolinks:
     - desc: Solus home
-      url: https://getsol.us/home/
+      url: https://getsol.us/
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://dev.getsol.us/source/{srcname}/'
@@ -25,4 +25,4 @@
       url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml?view=raw'
-  groups: [ all ]  # fetch problem
+  groups: [ all, production ]
