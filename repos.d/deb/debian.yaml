@@ -122,7 +122,6 @@
 # valid_till: https://wiki.debian.org/LTS
 # pages: https://buildd.debian.org/status/package.php?p=0ad-data&suite=jessie
 # list of repos and backports https://packages.debian.org/stable/
-{{ debian(9, 'stretch', minpackages=24000, valid_till='2022-06-30', buildd_page=False) }}
 {{ debian(10, 'buster', minpackages=28000, valid_till='2024-06-30') }}
 {{ debian(11, 'bullseye', minpackages=30000, valid_till='2026-06-30') }}
 {{ debian(12, 'bookworm', minpackages=30000, valid_till='2028-06-30', backports=False) }}
