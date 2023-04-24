@@ -2,7 +2,7 @@
 # Trisquel
 ###########################################################################
 
-{% macro trisquel(major, minor, codename, minpackages, valid_till, backports=True, packages=True) %}
+{% macro trisquel(major, minor, codename, minpackages, valid_till, backports=True) %}
 - name: trisquel_{{major}}_{{minor}}
   {% if major < 10 %}
   sortname: trisquel_0{{major}}_{{minor}}
@@ -26,11 +26,9 @@
       parser:
         class: DebianSourcesParser
       subrepo: {{sub1}}/{{sub2}}
-    {% if packages %}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
           url: 'https://packages.trisquel.org/source/{{sub1}}/{srcname}'
-    {% endif %}
     {% endfor %}
     {% endfor %}
   repolinks:
@@ -62,11 +60,9 @@
       parser:
         class: DebianSourcesParser
       subrepo: {{sub1}}/{{sub2}}
-    {% if packages %}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
           url: 'https://packages.trisquel.org/source/{{sub1}}/{srcname}'
-    {% endif %}
     {% endfor %}
     {% endfor %}
   repolinks:
@@ -76,11 +72,8 @@
 {% endif %}
 {% endmacro %}
 
+# see https://packages.trisquel.org/
 # valid_till from: https://en.wikipedia.org/wiki/Trisquel (release announcements say it's supported "until april")
-# packages= from https://packages.trisquel.org/
-{{ trisquel(6, 0, 'toutatis', minpackages=20000, valid_till='2017-04-30', packages=False) }}
-{{ trisquel(7, 0, 'belenos', minpackages=23000, valid_till='2019-04-30', packages=False) }}
-{{ trisquel(8, 0, 'flidas', minpackages=26000, valid_till='2021-04-30', packages=False) }}
 {{ trisquel(9, 0, 'etiona', minpackages=26000, valid_till='2023-04-30') }}
 {{ trisquel(10, 0, 'nabia', minpackages=26000, valid_till='2025-04-30') }}
 {{ trisquel(11, 0, 'aramo', minpackages=30000, valid_till='2027-04-30') }}
