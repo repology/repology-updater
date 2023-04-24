@@ -1,17 +1,18 @@
 ###########################################################################
 # Terra
 ###########################################################################
-- name: terra_37
+{% macro terra(version, minpackages) %}
+- name: terra_{{version}}
   type: repository
-  desc: Terra 37
+  desc: Terra {{version}}
   family: fedora
   ruleset: [fedora, rpm]
-  minpackages: 500
+  minpackages: {{minpackages}}
   sources:
     - name: repo.xml
       fetcher:
         class: RepodataFetcher
-        url: https://repos.fyralabs.com/terra37/
+        url: https://repos.fyralabs.com/terra{{version}}/
       parser:
         class: RepodataParser
         src: true
@@ -24,9 +25,15 @@
       url: https://github.com/terrapkg
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/terrapkg/packages/tree/main/anda/{srcname|quote}'
+      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/terrapkg/packages/blob/main/anda/{srcname|quote}/{srcname|quote}.spec'
+      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}/spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/terrapkg/packages/main/anda/{srcname|quote}/{srcname|quote}.spec'
+      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}/spec/raw'
+    # XXX: not all packages are built from spec files, see
+    # https://github.com/repology/repology-updater/issues/1307#issuecomment-1503339868
   groups: [ all, production, terra ]
+{% endmacro %}
+
+{{ terra(37, 500) }}
+{{ terra(38, 500) }}
