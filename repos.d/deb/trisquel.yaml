@@ -26,9 +26,11 @@
       parser:
         class: DebianSourcesParser
       subrepo: {{sub1}}/{{sub2}}
+    {% if packages %}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
           url: 'https://packages.trisquel.org/source/{{sub1}}/{srcname}'
+    {% endif %}
     {% endfor %}
     {% endfor %}
   repolinks:
@@ -60,9 +62,11 @@
       parser:
         class: DebianSourcesParser
       subrepo: {{sub1}}/{{sub2}}
+    {% if packages %}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
           url: 'https://packages.trisquel.org/source/{{sub1}}/{srcname}'
+    {% endif %}
     {% endfor %}
     {% endfor %}
   repolinks:
@@ -73,6 +77,7 @@
 {% endmacro %}
 
 # valid_till from: https://en.wikipedia.org/wiki/Trisquel (release announcements say it's supported "until april")
+# packages= from https://packages.trisquel.org/
 {{ trisquel(6, 0, 'toutatis', minpackages=20000, valid_till='2017-04-30', packages=False) }}
 {{ trisquel(7, 0, 'belenos', minpackages=23000, valid_till='2019-04-30', packages=False) }}
 {{ trisquel(8, 0, 'flidas', minpackages=26000, valid_till='2021-04-30', packages=False) }}
