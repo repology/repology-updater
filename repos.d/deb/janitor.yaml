@@ -4,6 +4,7 @@
 # https://janitor.debian.net/fresh
 ###########################################################################
 - name: debian_janitor_releases
+  sortname: debian_zzzzz_janitor_releases
   type: repository
   desc: Debian Janitor - Releases
   statsgroup: Debian+derivs
@@ -35,6 +36,7 @@
   groups: [ all, production, debian-janitor ]
 
 - name: debian_janitor_snapshots
+  sortname: debian_zzzzz_janitor_snapshots
   type: repository
   desc: Debian Janitor - Snapshots
   statsgroup: Debian+derivs
