@@ -37,7 +37,8 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://cgit.freebsd.org/ports/plain/{srcname}/Makefile'
     - type: PACKAGE_ISSUE_TRACKER
-      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={srcname}'
+      # all open and closed issues with summary containing the portname
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?query_format=advanced&bug_status=__open__&bug_status=__closed__&f0=short_desc&o0=substring&v0={srcname|quote}'
   groups: [ all, production, have_testdata ]
 
 ###########################################################################

@@ -25,7 +25,7 @@
       url: https://www.parabola.nu/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.parabola.nu/packages/?q={binname}'
+      url: 'https://www.parabola.nu/packages/?q={binname|quote}'
   groups: [ all, production ]
 
 - name: parabola_testing
@@ -52,5 +52,5 @@
       url: https://www.parabola.nu/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.parabola.nu/packages/?q={binname}'
+      url: 'https://www.parabola.nu/packages/?q={binname|quote}'
   groups: [ all, production ]

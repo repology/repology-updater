@@ -39,7 +39,7 @@
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname|quote}&build_state=all'
   groups: [ all, production, ubuntu ]
 {% if backports %}
 - name: ubuntu_{{major}}_{{minor}}_backports
@@ -74,7 +74,7 @@
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname|quote}&build_state=all'
   groups: [ all, production, ubuntu ]
 {% endif %}
 {% if proposed %}
@@ -110,7 +110,7 @@
     - type: PACKAGE_ISSUE_TRACKER
       url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_BUILD_STATUS
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname|quote}&build_state=all'
   groups: [ all, production, ubuntu ]
 {% endif %}
 {% endmacro %}
