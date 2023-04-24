@@ -12,7 +12,7 @@
     - name: latest
       fetcher:
         class: FileFetcher
-        url: http://www.midnightbsd.org/magus/api/latest
+        url: https://www.midnightbsd.org/magus/api/latest
         allow_zero_size: false
       parser:
         class: MportsJsonParser
