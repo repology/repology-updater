@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2019, 2021, 2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -26,10 +26,10 @@ class CRANCheckSummaryParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path, 'r', encoding='utf-8') as htmlfile:
             for nline, line in enumerate(htmlfile, 1):
-                match = re.search('<tr> <td> <a href="[^"]+">([^<>]+)</a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', line)
-                if match:
-                    pkg = factory.begin('line {}'.format(nline))
+                if not (match := re.search('<tr> <td> <a href="[^"]+"><span class="CRAN">([^<>]+)</span></a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', line)):
+                    continue
 
+                with factory.begin(f'line {nline}') as pkg:
                     pkg.add_name(match[1], NameType.CRAN_NAME)
                     pkg.set_version(match[2])
 

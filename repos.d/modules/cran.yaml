@@ -5,7 +5,7 @@
   type: modules
   desc: CRAN
   family: cran
-  minpackages: 12000
+  minpackages: 18000
   sources:
     - name: CRAN
       fetcher:
@@ -21,6 +21,7 @@
       url: https://www.r-project.org/
   packagelinks:
     - type: PROJECT_HOMEPAGE
+      # as per linking requirement, see bottom of any of these pages
       url: 'https://cran.r-project.org/package={srcname}'
     - type: PROJECT_DOWNLOAD
       url: 'https://cran.r-project.org/src/contrib/{srcname}_{rawversion}.tar.gz'
