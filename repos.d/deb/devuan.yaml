@@ -3,49 +3,6 @@
 #
 # See release info on https://www.devuan.org/os/releases
 ###########################################################################
-- name: devuan_1_0
-  type: repository
-  desc: Devuan 1.0 # Jessie
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '88839c'
-  minpackages: 20000
-  valid_till: 2020-06-01
-  sources:
-    - name: [ jessie/main, jessie/contrib, jessie/non-free ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Devuan home
-      url: https://devuan.org/
-  groups: [ all, production, devuan ]
-
-- name: devuan_2_0
-  type: repository
-  desc: Devuan 2.0 # ASCII
-  statsgroup: Debian+derivs
-  family: debuntu
-  color: '88839c'
-  minpackages: 20000
-  sources:
-    - name: [ ascii/main, ascii/contrib, ascii/non-free, ascii-updates/main, ascii-updates/contrib, ascii-updates/non-free ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Devuan home
-      url: https://devuan.org/
-  groups: [ all, production, devuan ]
-
 - name: devuan_3_0
   type: repository
   desc: Devuan 3.0 # Beowulf
