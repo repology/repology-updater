@@ -22,11 +22,11 @@
       url: http://pkg.slitaz.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://pkg.slitaz.org/?info={binname}'
+      url: 'https://pkg.slitaz.org/?info={binname|quote}'
     - type: PACKAGE_RECIPE
-      url: 'https://pkg.slitaz.org/?receipt={binname}'
+      url: 'https://pkg.slitaz.org/?receipt={binname|quote}'
     - type: PACKAGE_BUILD_LOG
-      url: 'https://cook.slitaz.org/cooker.cgi?pkg={binname}'
+      url: 'https://cook.slitaz.org/cooker.cgi?pkg={binname|quote}'
   groups: [ all, production, slitaz ]
 
 - name: slitaz_next
