@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019, 2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -54,15 +54,17 @@ class RepodataFetcher(ScratchFileFetcher):
             raise RuntimeError('Cannot find <{}> element in repomd.xml'.format(self.primary_key))
 
         repomd_elt_primary_location = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}location')
-        repomd_elt_primary_checksum = (
-            repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha256"]')
-            or repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha512"]')
-        )
 
-        if repomd_elt_primary_checksum is None:
+        checksum = None
+        for checksum_type in ['sha256', 'sha512']:
+            if (elt := repomd_elt_primary.find(f'./{{http://linux.duke.edu/metadata/repo}}open-checksum[@type="{checksum_type}"]')) is not None:
+                checksum = elt.text
+                break
+        else:
             logger.log('no supported checksum', Logger.WARNING)
-        elif repomd_elt_primary_checksum.text == persdata.get('open-checksum-sha256'):
-            logger.log('checksum not changed: {}'.format(repomd_elt_primary_checksum.text))
+
+        if checksum == persdata.get('open-checksum'):
+            logger.log('checksum not changed: {}'.format(checksum))
             return False
 
         if repomd_elt_primary_location is None:
@@ -83,9 +85,9 @@ class RepodataFetcher(ScratchFileFetcher):
 
         save_http_stream(repodata_url, statefile.get_file(), compression=compression, timeout=self.fetch_timeout)
 
-        if repomd_elt_primary_checksum is not None and repomd_elt_primary_checksum.text:
-            persdata['open-checksum-sha256'] = repomd_elt_primary_checksum.text
-            logger.log('saving checksum: {}'.format(persdata['open-checksum-sha256']))
+        if checksum:
+            persdata['open-checksum'] = checksum
+            logger.log('saving checksum: {}'.format(persdata['open-checksum']))
 
         logger.log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
 
