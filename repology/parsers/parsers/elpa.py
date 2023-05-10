@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019, 2021, 2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -52,10 +52,11 @@ def _parse_data(data: str) -> list[_PackageData]:
     keyval_keywords = (lpar + Suppress(':keywords') + ZeroOrMore(qstring) + rpar).setParseAction(lambda s, l, t: [('keywords', [str(k) for k in t])])
     keyval_commit = (lpar + Suppress(':commit') + dot + qstring + rpar).setParseAction(lambda s, l, t: [('commit', t[0])])
     keyval_maintainer = (lpar + Suppress(':maintainer') + people_list + rpar).setParseAction(lambda s, l, t: [('maintainer', [str(m) for m in t])])
+    keyval_maintainers = (lpar + Suppress(':maintainers') + lpar + people_list + rpar + rpar).setParseAction(lambda s, l, t: [('maintainers', [str(m) for m in t])])
     keyval_author = (lpar + Suppress(':author') + people_list + rpar).setParseAction(lambda s, l, t: [('author', [str(a) for a in t])])
     keyval_authors = (lpar + Suppress(':authors') + OneOrMore(lpar + people_list + rpar) + rpar).setParseAction(lambda s, l, t: [('authors', [str(a) for a in t])])
 
-    keyval_item = keyval_url | keyval_keywords | keyval_commit | keyval_maintainer | keyval_authors | keyval_author
+    keyval_item = keyval_url | keyval_keywords | keyval_commit | keyval_maintainer | keyval_maintainers | keyval_authors | keyval_author
 
     keyvals = (lpar + ZeroOrMore(keyval_item) + rpar).setParseAction(lambda s, l, t: [{k: v for k, v in t}]) | nil.setParseAction(lambda s, l, t: [{}])
 
@@ -77,9 +78,10 @@ class ArchiveContentsParser(Parser):
                 pkg.set_version(pkgdata.version)
                 pkg.set_summary(pkgdata.summary)
 
-                if 'maintainer' in pkgdata.keyvals:
-                    maintainers: list[str] = sum(map(extract_maintainers, pkgdata.keyvals['maintainer']), [])
-                    pkg.add_maintainers(maintainers)
+                for key in ['maintainers', 'maintainer']:
+                    if key in pkgdata.keyvals:
+                        maintainers: list[str] = sum(map(extract_maintainers, pkgdata.keyvals[key]), [])
+                        pkg.add_maintainers(maintainers)
 
                 pkg.add_homepages(pkgdata.keyvals.get('url'))
 
