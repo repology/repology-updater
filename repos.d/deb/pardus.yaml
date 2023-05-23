@@ -1,20 +1,21 @@
 ###########################################################################
 # Pardus
 ###########################################################################
-- name: pardus_17
+{% macro old_pardus(version, codename, minpackages, valid_till) %}
+- name: pardus_{{version}}
   type: repository
-  desc: Pardus 17
+  desc: Pardus {{version}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, pardus]
   color: 'ffcc00'
-  minpackages: 25000
-  valid_till: 2021-05-01  # https://www.pardus.org.tr/en/version-management/
+  minpackages: {{minpackages}}
+  valid_till: {{valid_till}}
   sources:
     - name: [main,contrib,non-free]
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/onyedi/{source}/source/Sources.bz2'
+        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{source}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -24,7 +25,7 @@
     - name: updates-main
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/main/source/Sources.bz2'
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/{{codename}}/main/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -32,7 +33,7 @@
     - name: updates-contrib
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/contrib/source/Sources.bz2'
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/{{codename}}/contrib/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -40,7 +41,7 @@
     - name: updates-non-free
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/non-free/source/Sources.bz2'
+        url: 'http://depo.pardus.org.tr/guvenlik/dists/{{codename}}/non-free/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -49,104 +50,7 @@
     - desc: Pardus home
       url: https://www.pardus.org.tr/
   groups: [ all, production, pardus ]
-
-- name: pardus_19
-  type: repository
-  desc: Pardus 19
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, pardus]
-  color: 'ffcc00'
-  minpackages: 25000
-  valid_till: 2023-05-01  # https://www.pardus.org.tr/en/version-management/
-  sources:
-    - name: [main,contrib,non-free]
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/ondokuz/{source}/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-    # following urls were taken from https://wiki.debian.org/Derivatives/Census/Pardus,
-    # otherwise it's unclear how 'guvenlik' is related to 'pardus'
-    - name: updates-main
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/main/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: 'updates/main'
-    - name: updates-contrib
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/contrib/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: 'updates/contrib'
-    - name: updates-non-free
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/ondokuz/non-free/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: 'updates/non-free'
-  repolinks:
-    - desc: Pardus home
-      url: https://www.pardus.org.tr/
-  groups: [ all, production, pardus ]
-
-- name: pardus_21
-  type: repository
-  desc: Pardus 21
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, pardus]
-  color: 'ffcc00'
-  minpackages: 25000
-  valid_till: 2025-05-01  # https://www.pardus.org.tr/en/version-management/
-  sources:
-    - name: [main,contrib,non-free]
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/yirmibir/{source}/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-    # following urls were taken from https://wiki.debian.org/Derivatives/Census/Pardus,
-    # otherwise it's unclear how 'guvenlik' is related to 'pardus'
-    - name: updates-main
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/yirmibir/main/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: 'updates/main'
-    - name: updates-contrib
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/yirmibir/contrib/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: 'updates/contrib'
-    - name: updates-non-free
-      fetcher:
-        class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/yirmibir/non-free/source/Sources.bz2'
-        compression: bz2
-      parser:
-        class: DebianSourcesParser
-      subrepo: 'updates/non-free'
-  repolinks:
-    - desc: Pardus home
-      url: https://www.pardus.org.tr/
-  groups: [ all, production, pardus ]
+{% endmacro %}
 
 - name: pardus_23
   type: repository
@@ -173,3 +77,8 @@
     - type: PACKAGE_SOURCES
       url: 'http://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
   groups: [ all, production, pardus ]
+
+# see https://www.pardus.org.tr/en/version-management/ for valid_till's
+{{ old_pardus(17, 'onyedi', 25000, '2021-05-01') }}
+{{ old_pardus(19, 'ondokuz', 25000, '2023-05-01') }}
+{{ old_pardus(21, 'yirmibir', 25000, '2025-05-01') }}
