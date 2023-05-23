@@ -52,24 +52,27 @@
   groups: [ all, production, pardus ]
 {% endmacro %}
 
-- name: pardus_23
+{% macro pardus(version, codename, minpackages, valid_till) %}
+- name: pardus_{{version}}
   type: repository
-  desc: Pardus 23
+  desc: Pardus {{version}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,pardus]
   color: "ffcc00"
-  minpackages: 1
-  valid_till: 2027-05-01  # https://www.pardus.org.tr/en/version-management/
+  minpackages: {{minpackages}}
+  valid_till: {{valid_till}}
   sources:
-    - name: [main, contrib, non-free, non-free-firmware]
+    {% for sub in ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/yirmiuc/{source}/source/Sources.bz2'
+        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Pardus home
       url: https://www.pardus.org.tr/
@@ -77,8 +80,10 @@
     - type: PACKAGE_SOURCES
       url: 'http://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
   groups: [ all, production, pardus ]
+{% endmacro %}
 
 # see https://www.pardus.org.tr/en/version-management/ for valid_till's
-{{ old_pardus(17, 'onyedi', 25000, '2021-05-01') }}
-{{ old_pardus(19, 'ondokuz', 25000, '2023-05-01') }}
-{{ old_pardus(21, 'yirmibir', 25000, '2025-05-01') }}
+{{ old_pardus(17, 'onyedi',   minpackages=25000, valid_till='2021-05-01') }}
+{{ old_pardus(19, 'ondokuz',  minpackages=25000, valid_till='2023-05-01') }}
+{{ old_pardus(21, 'yirmibir', minpackages=25000, valid_till='2025-05-01') }}
+{{ pardus(23,     'yirmiuc',  minpackages=1,     valid_till='2027-05-01') }}
