@@ -83,7 +83,5 @@
 {% endmacro %}
 
 # see https://www.pardus.org.tr/en/version-management/ for valid_till's
-{{ old_pardus(17, 'onyedi',   minpackages=25000, valid_till='2021-05-01') }}
-{{ old_pardus(19, 'ondokuz',  minpackages=25000, valid_till='2023-05-01') }}
 {{ old_pardus(21, 'yirmibir', minpackages=25000, valid_till='2025-05-01') }}
 {{ pardus(23,     'yirmiuc',  minpackages=1,     valid_till='2027-05-01') }}
