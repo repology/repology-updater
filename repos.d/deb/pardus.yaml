@@ -155,7 +155,7 @@
   family: debuntu
   ruleset: [debuntu,pardus]
   color: "ffcc00"
-  minpackages: 5000
+  minpackages: 1
   valid_till: 2027-05-01  # https://www.pardus.org.tr/en/version-management/
   sources:
     - name: [main, contrib, non-free, non-free-firmware]
