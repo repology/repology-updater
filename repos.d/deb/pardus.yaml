@@ -147,3 +147,29 @@
     - desc: Pardus home
       url: https://www.pardus.org.tr/
   groups: [ all, production, pardus ]
+
+- name: pardus_23
+  type: repository
+  desc: Pardus 23
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu,pardus]
+  color: "ffcc00"
+  minpackages: 5000
+  valid_till: 2027-05-01  # https://www.pardus.org.tr/en/version-management/
+  sources:
+    - name: [main, contrib, non-free, non-free-firmware]
+      fetcher:
+        class: FileFetcher
+        url: 'http://depo.pardus.org.tr/pardus/dists/yirmiuc/{source}/source/Sources.bz2'
+        compression: bz2
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Pardus home
+      url: https://www.pardus.org.tr/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'http://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
+  groups: [ all, production, pardus ]
