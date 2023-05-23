@@ -108,7 +108,7 @@ class YamlConfig:
         return YamlConfig(items, overall_hash.hexdigest())
 
     def dump(self) -> str:
-        return cast(str, yaml.safe_dump(self._items, default_flow_style=False, sort_keys=False))
+        return yaml.safe_dump(self._items, default_flow_style=False, sort_keys=False)
 
     def get_items(self) -> list[Any]:
         return self._items
