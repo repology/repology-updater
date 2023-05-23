@@ -23,4 +23,7 @@
   repolinks:
     - desc: AIX Toolbox home
       url: https://www.ibm.com/support/pages/aix-toolbox-linux-applications-downloads-alpha
+  packagelinks:
+    - type: PACKAGE_RECIPE_RAW
+      url: https://public.dhe.ibm.com/aix/freeSoftware/aixtoolbox/SPECS/{srcname}-{rawversion|strip_nevra_epoch}.spec
   groups: [ all, production ]

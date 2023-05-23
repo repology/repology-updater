@@ -33,7 +33,8 @@ _FILTERS: dict[str, Callable[[str], str]] = {
     'dirname': lambda x: x.rsplit('/', 1)[0],
     'dec': lambda x: str(_safe_int(x) - 1),
     'inc': lambda x: str(_safe_int(x) + 1),
-    'quote': lambda x: urllib.parse.quote(x)
+    'quote': lambda x: urllib.parse.quote(x),
+    'strip_nevra_epoch': lambda x: x.split(':', 1)[-1],
 }
 
 
