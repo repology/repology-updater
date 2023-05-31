@@ -74,6 +74,5 @@
 
 # see https://packages.trisquel.org/
 # valid_till from: https://en.wikipedia.org/wiki/Trisquel (release announcements say it's supported "until april")
-{{ trisquel(9, 0, 'etiona', minpackages=26000, valid_till='2023-04-30') }}
 {{ trisquel(10, 0, 'nabia', minpackages=26000, valid_till='2025-04-30') }}
 {{ trisquel(11, 0, 'aramo', minpackages=30000, valid_till='2027-04-30') }}
