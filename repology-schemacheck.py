@@ -137,6 +137,7 @@ rulesets = families + [
     'artix',
     'astra',
     'aur',
+    'bioarch'
     'blackarch',
     'bunsenlabs',
     'calculate',
