@@ -1,7 +1,7 @@
 ###########################################################################
 # BioArch
 ###########################################################################
-- name: bioarchlinux
+- name: bioarch
   type: repository
   desc: BioArch
   statsgroup: Arch+derivs
