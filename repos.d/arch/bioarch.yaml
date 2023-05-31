@@ -1,0 +1,29 @@
+###########################################################################
+# BioArch
+###########################################################################
+- name: bioarch
+  type: repository
+  desc: BioArch
+  statsgroup: Arch+derivs
+  family: arch
+  ruleset: [arch, bioarch]
+  color: 'ffffff'
+  minpackages: 4000
+  sources:
+    - name: bioarchlinux
+      fetcher:
+        class: TarFetcher
+        url: 'https://repo.bioarchlinux.org/x86_64/bioarchlinux.db.tar.gz'
+      parser:
+        class: ArchDBParser
+  repolinks:
+    - desc: BioArchLinux home
+      url: https://bioarchlinux.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/BioArchLinux/Packages/blob/master/BioArchLinux/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/BioArchLinux/Packages/blob/master/BioArchLinux/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/BioArchLinux/Packages/master/BioArchLinux/{srcname}/PKGBUILD'
+  groups: [ all, production ]
