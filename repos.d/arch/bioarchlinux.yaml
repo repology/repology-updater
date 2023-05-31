@@ -10,7 +10,7 @@
   color: 'ffffff'
   minpackages: 4000
   sources:
-    - name: [ system, world, galaxy ]
+    - name: bioarchlinux
       fetcher:
         class: TarFetcher
         url: 'https://repo.bioarchlinux.org/x86_64/bioarchlinux.db.tar.gz'
