@@ -71,21 +71,6 @@
 
 # https://en.wikipedia.org/wiki/Linux_Mint
 
-{{ mint(17, 0, 'qiana',   minpackages=100, valid_till='2019-04-30') }}
-{{ mint(17, 1, 'rebecca', minpackages=300, valid_till='2019-04-30') }}
-{{ mint(17, 2, 'rafaela', minpackages=300, valid_till='2019-04-30') }}
-{{ mint(17, 3, 'rosa',    minpackages=300, valid_till='2019-04-30') }}
-
-{{ mint(18, 0, 'sarah',   minpackages=100, valid_till='2021-04-30') }}
-{{ mint(18, 1, 'serena',  minpackages=100, valid_till='2021-04-30') }}
-{{ mint(18, 2, 'sonya',   minpackages=100, valid_till='2021-04-30') }}
-{{ mint(18, 3, 'sylvia',  minpackages=100, valid_till='2021-04-30') }}
-
-{{ mint(19, 0, 'tara',    minpackages=100, valid_till='2023-04-30') }}
-{{ mint(19, 1, 'tessa',   minpackages=100, valid_till='2023-04-30') }}
-{{ mint(19, 2, 'tina',    minpackages=100, valid_till='2023-04-30') }}
-{{ mint(19, 3, 'tricia',  minpackages=100, valid_till='2023-04-30') }}
-
 {{ mint(20, 0, 'ulyana',  minpackages=100, valid_till='2025-04-30') }}
 {{ mint(20, 1, 'ulyssa',  minpackages=100, valid_till='2025-04-30') }}
 {{ mint(20, 2, 'uma',     minpackages=100, valid_till='2025-04-30') }}
