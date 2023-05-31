@@ -26,4 +26,4 @@
       url: 'https://github.com/BioArchLinux/Packages/blob/master/BioArchLinux/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/BioArchLinux/Packages/master/BioArchLinux/{srcname}/PKGBUILD'
-  groups: [ all, production ]
+  groups: [ all, production, scientific ]
