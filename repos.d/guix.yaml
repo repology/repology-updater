@@ -14,6 +14,10 @@
         url: https://guix.gnu.org/packages.json
       parser:
         class: GuixJsonParser
+        download_hosts_blacklist:
+          - bordeaux.guix.gnu.org
+          - ci.guix.gnu.org
+          - tarballs.nixos.org
   repolinks:
     - desc: GNU Guix home
       url: https://guix.gnu.org/

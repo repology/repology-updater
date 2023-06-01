@@ -287,6 +287,9 @@ schemas = {
 
                         # aur
                         'maintainer_host': str,
+
+                        # guix
+                        'download_hosts_blacklist': [str],
                     },
                     'packagelinks': packagelinks,
                 }

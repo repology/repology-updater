@@ -18,6 +18,8 @@
 import re
 from typing import Iterable
 
+import yarl
+
 from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -26,6 +28,11 @@ from repology.parsers.json import iter_json_list
 
 
 class GuixJsonParser(Parser):
+    _download_hosts_blacklist: set[str]
+
+    def __init__(self, download_hosts_blacklist: list[str] | None) -> None:
+        self._download_hosts_blacklist = set(download_hosts_blacklist) if download_hosts_blacklist else set()
+
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
@@ -47,7 +54,11 @@ class GuixJsonParser(Parser):
 
                 for source in pkgdata.get('source', []):
                     if source['type'] == 'url':
-                        pkg.add_downloads(source['urls'])
+                        pkg.add_downloads(
+                            url
+                            for url in source.get('urls', [])
+                            if yarl.URL(url).host not in self._download_hosts_blacklist
+                        )
                         if re.fullmatch('.*-[0-9]+\\.[0-9a-f]{4,}', pkgdata['version']):
                             # snapshot pattern with plain url
                             pkg.set_flags(PackageFlags.IGNORE)  # e.g. snapshot
