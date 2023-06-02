@@ -359,6 +359,7 @@ schemas = {
         {
             Required('maintainer'): str,
             'hide': bool,
+            'replace': str,
         }
     ]
 }

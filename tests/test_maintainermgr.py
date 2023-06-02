@@ -34,3 +34,23 @@ def test_hide():
     assert not m.is_hidden('bar@example.com')
     assert not m.is_hidden('baz@example.com')
     assert not m.is_hidden('quux@example.com')
+
+    assert m.convert_maintainer('foo@example.com') is None
+    assert m.convert_maintainer('bar@example.com') is not None
+    assert m.convert_maintainer('baz@example.com') is not None
+    assert m.convert_maintainer('quux@example.com') is not None
+
+
+def test_replace():
+    config = YamlConfig.from_text(
+        """
+        - { maintainer: foo@example.com, replace: baz@example.com }
+        - { maintainer: bar@example.com }
+        """
+    )
+
+    m = MaintainerManager(config)
+
+    assert m.convert_maintainer('foo@example.com') == 'baz@example.com'
+    assert m.convert_maintainer('bar@example.com') == 'bar@example.com'
+    assert m.convert_maintainer('other@example.com') == 'other@example.com'

@@ -19,15 +19,20 @@ from repology.yamlloader import YamlConfig
 
 
 class MaintainerManager:
-    _hidden_maintainers: set[str]
+    _maintainers_map: dict[str, str | None]
 
     def __init__(self, maintainers_config: YamlConfig) -> None:
-        self._hidden_maintainers = set()
+        self._maintainers_map = dict()
 
-        for maintainerdata in maintainers_config.get_items():
-            maintainer: str | None = maintainerdata.get('maintainer')
-            if maintainer is not None and maintainerdata.get('hide'):
-                self._hidden_maintainers.add(maintainer)
+        for maintainer_data in maintainers_config.get_items():
+            maintainer = maintainer_data['maintainer']
+            if maintainer_data.get('hide', False):
+                self._maintainers_map[maintainer] = None
+            elif (replacement := maintainer_data.get('replace')) is not None:
+                self._maintainers_map[maintainer] = replacement
 
     def is_hidden(self, maintainer: str) -> bool:
-        return maintainer in self._hidden_maintainers
+        return self.convert_maintainer(maintainer) is None
+
+    def convert_maintainer(self, maintainer: str) -> str | None:
+        return self._maintainers_map.get(maintainer, maintainer)
