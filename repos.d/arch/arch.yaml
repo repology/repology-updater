@@ -18,9 +18,9 @@
       subrepo: '{source}'
   repolinks:
     - desc: Arch Linux home
-      url: https://www.archlinux.org/
+      url: https://archlinux.org/
     - desc: Arch Linux Packages
-      url: https://www.archlinux.org/packages/
+      url: https://archlinux.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://archlinux.org/packages/{subrepo}/{arch}/{binname}/'
@@ -49,9 +49,9 @@
       subrepo: '{source}'
   repolinks:
     - desc: Arch Linux home
-      url: https://www.archlinux.org/
+      url: https://archlinux.org/
     - desc: Arch Linux Packages
-      url: https://www.archlinux.org/packages/
+      url: https://archlinux.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://archlinux.org/packages/{subrepo}/{arch}/{binname}/'
