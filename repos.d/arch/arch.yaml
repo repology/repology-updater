@@ -9,7 +9,7 @@
   color: '0088cc'
   minpackages: 9500
   sources:
-    - name: [ core, extra, community, multilib ]
+    - name: [ core, extra, multilib ]
       fetcher:
         class: TarFetcher
         url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
@@ -23,14 +23,13 @@
       url: https://www.archlinux.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.archlinux.org/packages/{subrepo}/{arch}/{binname}/'
-    # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
+      url: 'https://archlinux.org/packages/{subrepo}/{arch}/{binname}/'
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/archlinux/svntogit-{archrepo}/tree/packages/{srcname}/trunk'
+      url: 'https://gitlab.archlinux.org/archlinux/packaging/packages/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/archlinux/svntogit-{archrepo}/blob/packages/{srcname}/trunk/PKGBUILD'
+      url: 'https://gitlab.archlinux.org/archlinux/packaging/packages/{srcname}/-/blob/main/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/archlinux/svntogit-{archrepo}/packages/{srcname}/trunk/PKGBUILD'
+      url: 'https://gitlab.archlinux.org/archlinux/packaging/packages/{srcname}/-/raw/main/PKGBUILD'
   groups: [ all, production, have_testdata ]
 
 - name: arch_testing
@@ -41,7 +40,7 @@
   color: '0088cc'
   minpackages: 1
   sources:
-    - name: [ testing, community-testing, multilib-testing ]
+    - name: [ core-testing, extra-testing, multilib-testing ]
       fetcher:
         class: TarFetcher
         url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
@@ -55,14 +54,13 @@
       url: https://www.archlinux.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.archlinux.org/packages/{subrepo}/{arch}/{binname}/'
-    # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
+      url: 'https://archlinux.org/packages/{subrepo}/{arch}/{binname}/'
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/archlinux/svntogit-{archrepo}/tree/packages/{srcname}/trunk'
+      url: 'https://gitlab.archlinux.org/archlinux/packaging/packages/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/archlinux/svntogit-{archrepo}/blob/packages/{srcname}/trunk/PKGBUILD'
+      url: 'https://gitlab.archlinux.org/archlinux/packaging/packages/{srcname}/-/blob/main/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/archlinux/svntogit-{archrepo}/packages/{srcname}/trunk/PKGBUILD'
+      url: 'https://gitlab.archlinux.org/archlinux/packaging/packages/{srcname}/-/raw/main/PKGBUILD'
   groups: [ all, production ]
 
 {% for arch in ['powerpc', 'powerpc64le', 'riscv64'] %}
