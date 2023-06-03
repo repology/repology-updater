@@ -80,12 +80,6 @@ class FieldGatheringMapping:
             value = self._package.category or ''
         elif field == 'arch':
             value = self._package.arch
-        elif field == 'archrepo':
-            # XXX: switch this to per-source packagelinks in config
-            if self._package.subrepo and self._package.subrepo.startswith('community'):
-                value = 'community'
-            else:
-                value = 'packages'
         elif field == 'centossuffix':
             value = '-extras' if self._package.subrepo == 'extras' else ''
             is_optional = True
