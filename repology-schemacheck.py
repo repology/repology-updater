@@ -79,6 +79,7 @@ families = [
     'macports',
     'mageia',
     'mer',
+    'managarm',
     'mpr',
     'msys2',
     'nix',
