@@ -25,6 +25,7 @@
   desc: OpenWrt {{dotversion}} {{arch}}
   statsgroup: OpenWrt
   family: openwrt
+  ruleset: openwrt
   color: '5d6993'
   minpackages: {{minpackages}}
   default_maintainer: fallback-mnt-openwrt@repology

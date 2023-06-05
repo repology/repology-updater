@@ -6,6 +6,7 @@
   desc: Arch
   statsgroup: Arch+derivs
   family: arch
+  ruleset: arch
   color: '0088cc'
   minpackages: 9500
   sources:
@@ -37,6 +38,7 @@
   desc: Arch Testing
   statsgroup: Arch+derivs
   family: arch
+  ruleset: arch
   color: '0088cc'
   minpackages: 1
   sources:
@@ -100,6 +102,7 @@
   desc: Arch Linux 32 {{arch}}
   statsgroup: Arch+derivs
   family: arch
+  ruleset: arch
   color: '0088cc'
   minpackages: 9500
   sources:
@@ -127,6 +130,7 @@
   desc: Arch Linux ARM {{arch}}
   statsgroup: Arch+derivs
   family: arch
+  ruleset: arch
   color: '0088cc'
   minpackages: 9500
   sources:

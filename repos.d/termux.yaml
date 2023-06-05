@@ -5,6 +5,7 @@
   type: repository
   desc: Termux
   family: termux
+  ruleset: termux
   color: '000000'
   minpackages: 450
   sources:

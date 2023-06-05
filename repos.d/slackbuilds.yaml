@@ -5,6 +5,7 @@
   type: repository
   desc: SlackBuilds
   family: slackbuilds
+  ruleset: slackbuilds
   color: '000000'
   minpackages: 6500
   sources:

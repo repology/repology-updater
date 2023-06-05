@@ -9,6 +9,7 @@
   type: repository
   desc: Elementary OS Stable
   family: debuntu
+  ruleset: debuntu
   minpackages: 0
   sources:
     - name: main
@@ -24,6 +25,7 @@
   type: repository
   desc: Elementary OS Daily
   family: debuntu
+  ruleset: debuntu
   minpackages: 0
   sources:
     - name: main
@@ -39,6 +41,7 @@
   type: repository
   desc: Elementary OS Patches
   family: debuntu
+  ruleset: debuntu
   minpackages: 0
   sources:
     - name: main

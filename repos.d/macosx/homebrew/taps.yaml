@@ -5,6 +5,7 @@
   type: repository
   desc: Homebrew tap Brewsci/bio
   family: homebrew
+  ruleset: homebrew
   color: 'fdb130'
   minpackages: 200
   sources:

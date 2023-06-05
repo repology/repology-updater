@@ -5,6 +5,7 @@
   type: repository
   desc: KDE neon User
   family: debuntu
+  ruleset: debuntu
   minpackages: 400
   sources:
     - name: main
@@ -29,6 +30,7 @@
   type: repository
   desc: KDE neon User LTS
   family: debuntu
+  ruleset: debuntu
   minpackages: 400
   sources:
     - name: main
@@ -53,6 +55,7 @@
   type: repository
   desc: KDE neon Unstable
   family: debuntu
+  ruleset: debuntu
   minpackages: 400
   sources:
     - name: main
@@ -77,6 +80,7 @@
   type: repository
   desc: KDE neon Testing
   family: debuntu
+  ruleset: debuntu
   minpackages: 400
   sources:
     - name: main

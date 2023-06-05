@@ -8,6 +8,7 @@
   desc: BackBox 6
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: debuntu
   color: '32638f'
   minpackages: 10
   sources:
@@ -28,6 +29,7 @@
   desc: BackBox 7
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: debuntu
   color: '32638f'
   minpackages: 10
   sources:

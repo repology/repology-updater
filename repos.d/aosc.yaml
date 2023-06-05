@@ -5,6 +5,7 @@
   type: repository
   desc: AOSC
   family: aosc
+  ruleset: aosc
   minpackages: 4500
   # XXX: remove - there's no maintainer concept, just last committer is tracked
   default_maintainer: fallback-mnt-aosc@repology  # 4 cases of `"committer" : "test <test>"`

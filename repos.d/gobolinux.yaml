@@ -5,6 +5,7 @@
   type: repository
   desc: GoboLinux
   family: gobolinux
+  ruleset: gobolinux
   minpackages: 3500
   sources:
     - name: recipes

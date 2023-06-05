@@ -6,6 +6,7 @@
   desc: Gentoo
   statsgroup: Gentoo
   family: gentoo
+  ruleset: gentoo
   color: '62548f'
   default_maintainer: maintainer-needed@gentoo.org
   minpackages: 26000

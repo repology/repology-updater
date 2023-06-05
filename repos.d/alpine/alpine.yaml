@@ -22,6 +22,7 @@
   desc: Alpine Linux {{version|title}}
   statsgroup: Alpine
   family: alpine
+  ruleset: alpine
   minpackages: {{minpackages}}
   {% if valid_till %}
   valid_till: {{valid_till}}

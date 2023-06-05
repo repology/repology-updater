@@ -6,6 +6,7 @@
   desc: OpenBSD Ports
   singular: OpenBSD port
   family: openbsd
+  ruleset: openbsd
   color: 'f8e808'
   minpackages: 11000
   sources:

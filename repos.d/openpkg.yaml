@@ -5,6 +5,7 @@
   type: repository
   desc: OpenPKG
   family: openpkg
+  ruleset: openpkg
   minpackages: 2100
   sources:
     - name: 00INDEX

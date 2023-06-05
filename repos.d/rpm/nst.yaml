@@ -5,6 +5,7 @@
   type: repository
   desc: Network Security Toolkit 28
   family: fedora
+  ruleset: fedora
   color: '3333ff'
   minpackages: 0
   sources:

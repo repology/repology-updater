@@ -6,6 +6,7 @@
   desc: SliTaz Cooking
   statsgroup: SliTaz
   family: slitaz
+  ruleset: slitaz
   minpackages: 5200
   sources:
     - name: repo.json

@@ -8,6 +8,7 @@
   desc: Devuan 3.0 # Beowulf
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: debuntu
   color: '88839c'
   minpackages: 25000
   sources:
@@ -29,6 +30,7 @@
   desc: Devuan 4.0 # Chimaera
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: debuntu
   color: '88839c'
   minpackages: 27000
   sources:
@@ -50,6 +52,7 @@
   desc: Devuan Unstable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: debuntu
   color: '88839c'
   minpackages: 28000
   sources:

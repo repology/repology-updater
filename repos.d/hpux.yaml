@@ -5,6 +5,7 @@
   type: repository
   desc: HP-UX 11.31
   family: hpux
+  ruleset: hpux
   minpackages: 1500
   sources:
     - name: [ hppa_32, ia64_32, ia64_64 ]

@@ -5,6 +5,7 @@
   type: modules
   desc: RubyGems
   family: rubygems
+  ruleset: rubygems
   color: 'e9573f'
   update_period: 3h
   minpackages: 130000

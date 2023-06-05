@@ -10,6 +10,7 @@
   type: repository
   desc: Sparky Stable
   family: debuntu
+  ruleset: debuntu
   color: '949393'
   minpackages: 150
   sources:
@@ -30,6 +31,7 @@
   type: repository
   desc: Sparky Testing
   family: debuntu
+  ruleset: debuntu
   color: '949393'
   minpackages: 150
   sources:

@@ -6,6 +6,7 @@
   desc: Sabayon
   statsgroup: Gentoo
   family: gentoo
+  ruleset: gentoo
   minpackages: 300
   default_maintainer: fallback-mnt-sabayon@repology
   sources:
@@ -35,6 +36,7 @@
   desc: Sabayon for-gentoo
   statsgroup: Gentoo
   family: gentoo
+  ruleset: gentoo
   minpackages: 100
   default_maintainer: fallback-mnt-sabayon@repology
   sources:

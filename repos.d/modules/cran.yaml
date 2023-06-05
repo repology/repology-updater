@@ -5,6 +5,7 @@
   type: modules
   desc: CRAN
   family: cran
+  ruleset: cran
   minpackages: 18000
   sources:
     - name: CRAN

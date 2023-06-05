@@ -5,6 +5,7 @@
   type: repository
   desc: libreCNC current/core/ar71xx/generic/packages
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -20,6 +21,7 @@
   type: repository
   desc: libreCNC current/core/ar71xx/nand/packages
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -35,6 +37,7 @@
   type: repository
   desc: libreCNC current/core/packages/mips_24kc/base
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -50,6 +53,7 @@
   type: repository
   desc: libreCNC current/core/packages/mips_24kc/packages
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -65,6 +69,7 @@
   type: repository
   desc: libreCNC current/legacy/ar71xx/generic/packages
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -80,6 +85,7 @@
   type: repository
   desc: libreCNC current/main/ar71xx/generic/packages
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -95,6 +101,7 @@
   type: repository
   desc: libreCNC current/main/ar71xx/nand/packages
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -110,6 +117,7 @@
   type: repository
   desc: libreCNC current/main/packages/mips_24kc/base
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages
@@ -125,6 +133,7 @@
   type: repository
   desc: libreCNC current/main/packages/mips_24kc/packages
   family: librecnc  # XXX
+  ruleset: librecnc  # XXX
   minpackages: 1  # XXX
   sources:
     - name: Packages

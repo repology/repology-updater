@@ -5,6 +5,7 @@
   type: modules
   desc: PyPI
   family: pypi
+  ruleset: pypi
   minpackages: 12000
   sources:
     - name: pypicache.json

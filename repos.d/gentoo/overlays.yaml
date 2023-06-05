@@ -5,6 +5,7 @@
   type: repository
   desc: Gentoo overlay GURU
   family: gentoo
+  ruleset: gentoo
   color: '62548f'
   minpackages: 100
   default_maintainer: guru@gentoo.org
@@ -43,6 +44,7 @@
   type: repository
   desc: Gentoo overlay Pentoo
   family: gentoo
+  ruleset: gentoo
   color: '62548f'  # or own color 285c73?
   minpackages: 800
   default_maintainer: fallback-mnt-pentoo@repology
@@ -77,6 +79,7 @@
   type: repository
   desc: Gentoo Science overlay
   family: gentoo
+  ruleset: gentoo
   color: 'f7a8b8'
   minpackages: 500
   default_maintainer: sci@gentoo.org
@@ -113,6 +116,7 @@
   type: repository
   desc: Gentoo Overlay Games
   family: gentoo
+  ruleset: gentoo
   minpackages: 1  #XXX: unknown
   sources:
     - name: games-overlay
@@ -131,6 +135,7 @@
   type: repository
   desc: Gentoo Overlay Gamerlay
   family: gentoo
+  ruleset: gentoo
   minpackages: 1  #XXX: unknown
   sources:
     - name: gamerlay

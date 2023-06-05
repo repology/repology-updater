@@ -27,10 +27,10 @@ from ..package import PackageSample
 
 _repomgr = RepositoryManager(YamlConfig.from_text("""
 [
-    { name: dummyrepo, desc: dummyrepo, family: dummyrepo, sources: [] },
-    { name: foo, desc: foo, family: foo, sources: [] },
-    { name: bar, desc: bar, family: bar, sources: [] },
-    { name: baz, desc: baz, family: baz, sources: [] }
+    { name: dummyrepo, desc: dummyrepo, family: dummyrepo, ruleset: dummyrepo, sources: [] },
+    { name: foo, desc: foo, family: foo, ruleset: foo, sources: [] },
+    { name: bar, desc: bar, family: bar, ruleset: bar, sources: [] },
+    { name: baz, desc: baz, family: baz, ruleset: baz, sources: [] }
 ]
 """))
 

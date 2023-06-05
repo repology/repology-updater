@@ -6,6 +6,7 @@
   type: repository
   desc: Pisi Linux
   family: pisi
+  ruleset: pisi
   minpackages: 1400
   sources:
     - name: [ core, main ]
@@ -34,6 +35,7 @@
   type: repository
   desc: Pisi Linux Contrib
   family: pisi
+  ruleset: pisi
   minpackages: 200
   sources:
     - name: contrib

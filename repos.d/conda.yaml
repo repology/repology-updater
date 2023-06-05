@@ -5,6 +5,7 @@
   type: repository
   desc: conda-forge
   family: conda
+  ruleset: conda
   minpackages: 1
   sources:
     - name: channeldata.json
@@ -22,6 +23,7 @@
   type: repository
   desc: Bioconda
   family: conda
+  ruleset: conda
   minpackages: 1
   sources:
     - name: channeldata.json

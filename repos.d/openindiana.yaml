@@ -6,6 +6,7 @@
   desc: OpenIndiana packages
   singular: OpenIndiana package
   family: openindiana
+  ruleset: openindiana
   minpackages: 1800
   sources:
     - name: [hipster, hipster-encumbered]

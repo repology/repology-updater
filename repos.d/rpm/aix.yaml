@@ -5,6 +5,7 @@
   type: repository
   desc: AIX Open Source Packages
   family: aix
+  ruleset: aix
   minpackages: 7000
   sources:
     - name: LIST

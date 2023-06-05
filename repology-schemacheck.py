@@ -205,7 +205,7 @@ schemas = {
             Required('desc'): str,
             'statsgroup': str,
             Required('family'): Any(*families),
-            'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),  # XXX: make required
+            Required('ruleset'): Any(Any(*rulesets), [Any(*rulesets)]),
             'color': str,
             'valid_till': date,
             'default_maintainer': All(str, Contains('@')),

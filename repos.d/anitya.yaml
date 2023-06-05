@@ -5,6 +5,7 @@
   type: site
   desc: release-monitoring.org
   family: anitya
+  ruleset: anitya
   minpackages: 1  # XXX: unknown
   sources:
     - name: release-monitoring.org

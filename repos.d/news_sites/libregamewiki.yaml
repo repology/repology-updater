@@ -6,6 +6,7 @@
   desc: Libregamewiki
   singular: Libregamewiki entry
   family: libregamewiki
+  ruleset: libregamewiki
   minpackages: 200
   sources:
     - name: newreleases

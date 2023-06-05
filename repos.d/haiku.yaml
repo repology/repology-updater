@@ -5,6 +5,7 @@
   type: repository
   desc: HaikuPorts master
   family: haikuports
+  ruleset: haikuports
   color: "ffc245"
   minpackages: 2000
   sources:

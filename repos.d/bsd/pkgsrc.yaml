@@ -5,6 +5,7 @@
   type: repository
   desc: pkgsrc-2018Q2
   family: pkgsrc
+  ruleset: pkgsrc
   color: 'ff6600'
   valid_till: 2018-10-01
   minpackages: 15000
@@ -38,6 +39,7 @@
   type: repository
   desc: pkgsrc current
   family: pkgsrc
+  ruleset: pkgsrc
   color: 'ff6600'
   minpackages: 15000
   default_maintainer: fallback-mnt-pkgsrc@repology

@@ -5,6 +5,7 @@
   type: repository
   desc: Ravenports
   family: ravenports
+  ruleset: ravenports
   color: "00bcd4"
   minpackages: 1700
   default_maintainer: fallback-mnt-ravenports@repology

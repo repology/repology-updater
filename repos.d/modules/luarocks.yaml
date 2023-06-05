@@ -5,6 +5,7 @@
   type: modules
   desc: LuaRocks
   family: luarocks
+  ruleset: luarocks
   minpackages: 12500  # about 2000 really, but a lot of versions
   sources:
     - name: manifest

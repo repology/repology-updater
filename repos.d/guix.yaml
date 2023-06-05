@@ -5,6 +5,7 @@
   type: repository
   desc: GNU Guix
   family: guix
+  ruleset: guix
   update_period: 1h  # no last-modified or etag support
   minpackages: 9500
   sources:

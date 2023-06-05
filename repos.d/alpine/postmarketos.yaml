@@ -8,6 +8,7 @@
   desc: postmarketOS {{version}}
   statsgroup: postmarketOS
   family: postmarketos
+  ruleset: postmarketos
   minpackages: {{minpackages}}
   default_maintainer: fallback-mnt-postmarketos@repology
   sources:

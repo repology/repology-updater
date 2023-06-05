@@ -182,7 +182,7 @@ class RepositoryManager:
                 desc=repodata['desc'],
                 statsgroup=repodata.get('statsgroup', repodata['desc']),
                 family=repodata['family'],
-                ruleset=_listify(repodata.get('ruleset', repodata['family'])),
+                ruleset=_listify(repodata['ruleset']),
                 color=repodata.get('color'),
                 valid_till=repodata.get('valid_till'),
                 default_maintainer=repodata.get('default_maintainer'),

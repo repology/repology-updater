@@ -6,6 +6,7 @@
   desc: DistroWatch.com
   singular: DistroWatch.com entry
   family: distrowatch
+  ruleset: distrowatch
   minpackages: 200
   sources:
     - name: packages.php

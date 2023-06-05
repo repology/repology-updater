@@ -6,6 +6,7 @@
   type: repository
   desc: F-Droid
   family: fdroid
+  ruleset: fdroid
   minpackages: 10
   sources:
     - name: index.xml

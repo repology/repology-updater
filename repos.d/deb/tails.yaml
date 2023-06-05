@@ -7,6 +7,7 @@
   desc: Tails stable
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: debuntu
   color: '56347c'
   minpackages: 1
   sources:
@@ -28,6 +29,7 @@
   desc: Tails devel
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: debuntu
   color: '56347c'
   minpackages: 1
   sources:

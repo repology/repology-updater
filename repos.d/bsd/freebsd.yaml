@@ -7,6 +7,7 @@
   statsgroup: FreeBSD Ports
   singular: FreeBSD port
   family: freebsd
+  ruleset: freebsd
   color: '990000'
   minpackages: 30000
   sources:

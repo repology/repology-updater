@@ -5,6 +5,7 @@
   type: repository
   desc: Exherbo
   family: exherbo
+  ruleset: exherbo
   color: 'a1da91'
   minpackages: 7500
   default_maintainer: fallback-mnt-exherbo@repology

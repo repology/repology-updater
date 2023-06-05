@@ -5,6 +5,7 @@
   type: repository
   desc: Salix 14.2
   family: salix
+  ruleset: salix
   color: '7ad37a'
   minpackages: 600
   sources:

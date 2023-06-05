@@ -5,6 +5,7 @@
   type: modules
   desc: CPAN
   family: cpan
+  ruleset: cpan
   minpackages: 30000
   sources:
     - name: CPAN
@@ -25,6 +26,7 @@
   type: modules
   desc: MetaCPAN
   family: cpan
+  ruleset: cpan
   minpackages: 30000
   sources:
     - name: metacpan.org

@@ -5,6 +5,7 @@
   type: modules
   desc: crates.io
   family: crates_io
+  ruleset: crates_io
   color: "e8ad39"
   update_period: 3h
   minpackages: 14000
