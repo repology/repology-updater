@@ -165,7 +165,11 @@ class RepositoryProcessor:
 
                 # postprocess maintainers
                 if maintainermgr and package.maintainers:
-                    package.maintainers = [maintainer for maintainer in package.maintainers if not maintainermgr.is_hidden(maintainer)]
+                    package.maintainers = [
+                        converted
+                        for maintainer in package.maintainers
+                        if (converted := maintainermgr.convert_maintainer(maintainer)) is not None
+                    ]
 
                 yield package
 
