@@ -45,6 +45,7 @@ class HomebrewCaskJsonParser(Parser):
                 pkg.add_name(packagedata['name'][0], NameType.HOMEBREW_CASK_FIRST_NAME)
 
                 pkg.set_version(packagedata['version'].split(',')[0])
+                pkg.set_summary(packagedata['desc'])
                 pkg.add_homepages(packagedata['homepage'])
                 pkg.add_downloads(packagedata['url'])
 
