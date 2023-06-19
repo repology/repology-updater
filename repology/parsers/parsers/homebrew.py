@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2021, 2023 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
