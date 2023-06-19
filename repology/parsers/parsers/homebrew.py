@@ -17,6 +17,7 @@
 
 from typing import Iterable
 
+from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -31,8 +32,10 @@ class HomebrewJsonParser(Parser):
                 pkg.add_name(packagedata['oldname'], NameType.HOMEBREW_OLDNAME)
                 pkg.add_name(packagedata['full_name'], NameType.HOMEBREW_FULL_NAME)
                 pkg.set_version(packagedata['versions']['stable'])
+
                 pkg.set_summary(packagedata['desc'])
-                pkg.add_homepages(packagedata['homepage'])
+
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, packagedata['homepage'])
 
                 yield pkg
 
@@ -43,10 +46,11 @@ class HomebrewCaskJsonParser(Parser):
             with factory.begin(packagedata['token']) as pkg:
                 pkg.add_name(packagedata['token'], NameType.HOMEBREW_CASK_TOKEN)
                 pkg.add_name(packagedata['name'][0], NameType.HOMEBREW_CASK_FIRST_NAME)
-
                 pkg.set_version(packagedata['version'].split(',')[0])
+
                 pkg.set_summary(packagedata['desc'])
-                pkg.add_homepages(packagedata['homepage'])
-                pkg.add_downloads(packagedata['url'])
+
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, packagedata['homepage'])
+                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, packagedata['url'])
 
                 yield pkg
