@@ -571,4 +571,8 @@ class NameMapper:
     def describe(self) -> str | None:
         if not self._names:
             return None
-        return '|'.join(v for _, v in sorted(self._names.items()))
+        names = sorted(set(self._names.values()))
+        if len(names) == 1:
+            return names[0]
+        else:
+            return names[0] + ' (' + ', '.join(names[1:]) + ')'
