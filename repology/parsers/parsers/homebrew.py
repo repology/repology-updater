@@ -58,7 +58,7 @@ class HomebrewJsonParser(Parser):
                     if not packagedata['versions'].get(version_type):
                         continue
                     if not packagedata['urls'].get(version_type):
-                        pkg.log(f'{version_type} version defined, but there\'s no corresponding urls entry', Logger.ERROR)
+                        pkg.log(f'{version_type} version defined, but there is no corresponding urls entry', Logger.ERROR)
                         continue
 
                     verpkg = pkg.clone()
