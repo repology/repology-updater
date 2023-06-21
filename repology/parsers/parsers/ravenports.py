@@ -33,7 +33,7 @@ class RavenportsJsonParser(Parser):
 
                 pkg.add_downloads(packagedata['distfile'])
                 pkg.set_summary(packagedata['variants'][0]['sdesc'])
-                pkg.add_maintainers(map(lambda contact: contact.get('email'), packagedata.get('contacts', [])))  # type: ignore
+                pkg.add_maintainers(map(lambda contact: contact.get('email'), packagedata.get('contacts', [])))
 
                 pkg.set_extra_field('bucket', packagedata['bucket'])
                 pkg.set_extra_field('variant', packagedata['variants'][0]['label'])

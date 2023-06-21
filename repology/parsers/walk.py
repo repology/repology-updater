@@ -28,8 +28,7 @@ WalkTreeFilter = Callable[[str], bool]
 def walk_tree(path: str, filt: WalkTreeFilter | None = None, suffix: str | None = None, name: str | None = None) -> Iterable[str]:
     if suffix:
         def suffix_filter(filename: str) -> bool:
-            # mypy unable to deduce types of captured values
-            return filename.endswith(suffix)  # type: ignore
+            return filename.endswith(suffix)
         filt = suffix_filter
     elif name:
         def name_filter(filename: str) -> bool:
