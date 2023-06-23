@@ -115,6 +115,7 @@
         url: 'http://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
+        arch_from_filename: true
       subrepo: '{source}'
   repolinks:
     - desc: OpenMandriva home

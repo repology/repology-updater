@@ -34,7 +34,7 @@ class RepodataParser(Parser):
     _src: bool
     _binary: bool
 
-    # hack for openmandriva 3 which for some reason specifies binary
+    # hack for openmandriva cooker which for some reason specifies binary
     # architectures in '<arch></arch>' for source packages
     _arch_from_filename: bool
 
@@ -59,7 +59,25 @@ class RepodataParser(Parser):
 
         for entry in iter_xml_elements_at_level(path, 1, ['{http://linux.duke.edu/metadata/common}package']):
             if self._arch_from_filename:
-                # XXX: openmandriva 3 hack, to be removed when it EoLs
+                # XXX: openmandriva hack, to be removed when it's fixed
+
+                # From https://t.me/openmandriva:
+                # berolinux: Good catch. The reason is that we're
+                #   now using a different tool for creating the metadata.
+                #   Previously we were using
+                #   https://github.com/rpm-software-management/createrepo_c ,
+                #   but there have been some problems and some lacking
+                #   features (appstream metadata creation at the same
+                #   time etc.) that made us write our own tool for the
+                #   job https://github.com/OpenMandrivaSoftware/repodata-tools
+                # berolinux: The architecture listed there is the one reported by rpm
+                # berolinux: It seems random because the SRPM is
+                #   taken from the first build that finishes
+                # berolinux: We should probably update the tool to
+                #   switch it back to "src" (or better yet, fix rpm to
+                #   not report the architecture for a .src.rpm as the
+                #   architecture it was built on)
+
                 location_elt = entry.find('{http://linux.duke.edu/metadata/common}location')
                 if location_elt is None:
                     raise RuntimeError('Cannot find <location> element')
