@@ -124,7 +124,7 @@
   groups: [ all, production, arch_extra ]
 {% endfor %}
 
-{% for arch in ['aarch64', 'armv7h'] %}
+{% for arch in ['aarch64'] %}  # also arm7h, but the repository contains broken data
 - name: archlinuxarm_{{arch}}
   type: repository
   desc: Arch Linux ARM {{arch}}
