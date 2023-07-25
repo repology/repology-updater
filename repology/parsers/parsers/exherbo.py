@@ -18,6 +18,7 @@
 import re
 from typing import Iterable
 
+from repology.package import LinkType
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -40,6 +41,8 @@ class ExherboJsonParser(Parser):
                 pkg.add_downloads(packagedata['downloads'].split())
                 pkg.set_subrepo(packagedata['repository'])
                 pkg.set_summary(packagedata['summary'])
+                pkg.add_links(LinkType.PACKAGE_RECIPE, packagedata['exheres_url'])
+                pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, packagedata['exheres_url_raw'])
 
                 if pkg.version == 'scm' or pkg.version.endswith('-scm'):  # XXX: to rules?
                     pkg.set_flags(PackageFlags.ROLLING)
