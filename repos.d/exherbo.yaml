@@ -24,12 +24,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://git.exherbo.org/summer/packages/{srcname}/index.html'
-    # XXX: these do not always work as not all repositories are located at git.exherbo.org
-    # need a generic way to provide direct linkt to .exheres file
-    #- type: PACKAGE_SOURCES
-    #  url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{srcname}'
-    #- type: PACKAGE_RECIPE
-    #  url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{srcname}/{srcname|basename}-{rawversion}.exheres-0'
-    #- type: PACKAGE_RECIPE_RAW
-    #  url: 'https://git.exherbo.org/{subrepo}.git/plain/packages/{srcname}/{srcname|basename}-{rawversion}.exheres-0'
   groups: [ all, production ]
