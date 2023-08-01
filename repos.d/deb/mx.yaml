@@ -12,24 +12,27 @@
   color: "6693d6"
   minpackages: 100
   sources:
-    - name: [ main, non-free, ahs ]
+    {% for sub in ['main', 'non-free', 'ahs'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://mxrepo.com/mx/repo/dists/{{codename}}/{source}/source/Sources.gz'
+        url: 'http://mxrepo.com/mx/repo/dists/{{codename}}/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+      packagelinks:
+        - type: PACKAGE_SOURCES
+          url: 'http://mxrepo.com/mx/repo/pool/{{sub}}/{srcname|libfirstletter}/{srcname}/'
+    {% endfor %}
   repolinks:
     - desc: MX Linux
       url: https://mxlinux.org/
     - desc: MX and MEPIS Community Repository
       url: http://mxrepo.com/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
   groups: [ all, production, mx ]
 
+{% if testing %}
 - name: mx_{{version}}_testing
   type: repository
   desc: MX Linux MX-{{version}} Testing
@@ -39,23 +42,23 @@
   color: "6693d6"
   minpackages: 10
   sources:
-    - name: [ test ]
+    - name: test
       fetcher:
         class: FileFetcher
-        url: 'http://mxrepo.com/mx/testrepo/dists/{{codename}}/{source}/source/Sources.gz'
+        url: 'http://mxrepo.com/mx/testrepo/dists/{{codename}}/test/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      packagelinks:
+        - type: PACKAGE_SOURCES
+          url: 'http://mxrepo.com/mx/testrepo/pool/test/{srcname|libfirstletter}/{srcname}/'
   repolinks:
     - desc: MX Linux
       url: https://mxlinux.org/
     - desc: MX and MEPIS Community Repository
       url: http://mxrepo.com/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}/'
   groups: [ all, production, mx ]
+{% endif %}
 {% endmacro %}
 
 {{ mx(19, 'buster') }}
