@@ -60,3 +60,4 @@
 
 {{ mx(19, 'buster') }}
 {{ mx(21, 'bullseye') }}
+{{ mx(23, 'bookworm') }}
