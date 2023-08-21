@@ -37,47 +37,80 @@ def _normalize_version(version: str) -> str:
     return version
 
 
-# XXX: use repology.parsers.sqlite.iter_sqlite instead
-def _iter_sqlports(path: str) -> Iterable[dict[str, Any]]:
-    columns = [
-        'fullpkgpath',
-        'categories',
-        'comment',
-        'distfiles',
-        'fullpkgname',
-        'homepage',
-        'maintainer',
-        'master_sites',
-        'master_sites0',
-        'master_sites1',
-        'master_sites2',
-        'master_sites3',
-        'master_sites4',
-        'master_sites5',
-        'master_sites6',
-        'master_sites7',
-        'master_sites8',
-        'master_sites9',
-        'gh_account',
-        'gh_project',
-        'dist_subdir',
-    ]
+_PORTS_QUERY = """
+SELECT
+    _Paths.FullPkgPath AS fullpkgpath,
+    Categories_ordered.Value AS categories,
+    comment,
+    Distfiles_ordered.Value AS distfiles,
+    fullpkgname,
+    homepage,
+    _Email.Value AS maintainer,
+    _MasterSites.Value AS master_sites,
+    _MasterSites0.Value AS master_sites0,
+    _MasterSites1.Value AS master_sites1,
+    _MasterSites2.Value AS master_sites2,
+    _MasterSites3.Value AS master_sites3,
+    _MasterSites4.Value AS master_sites4,
+    _MasterSites5.Value AS master_sites5,
+    _MasterSites6.Value AS master_sites6,
+    _MasterSites7.Value AS master_sites7,
+    _MasterSites8.Value AS master_sites8,
+    _MasterSites9.Value AS master_sites9,
+    gh_account,
+    gh_project,
+    dist_subdir
+FROM _Ports
+    JOIN _Paths
+        ON Canonical=_Ports.FullPkgPath
+    JOIN Categories_ordered
+        ON Categories_ordered.FullPkgpath=_Ports.FullPkgpath
+    LEFT JOIN Distfiles_ordered
+        ON Distfiles_ordered.FullPkgpath=_Ports.FullPkgpath AND Distfiles_ordered.SUFX IS NULL AND Distfiles_ordered.Type=1
+    LEFT JOIN _MasterSites
+        ON _MasterSites.FullPkgPath=_Ports.FullPkgPath AND _MasterSites.N IS NULL
+    LEFT JOIN _MasterSites _MasterSites0
+        ON _MasterSites0.FullPkgPath=_Ports.FullPkgPath AND _MasterSites0.N = 0
+    LEFT JOIN _MasterSites _MasterSites1
+        ON _MasterSites1.FullPkgPath=_Ports.FullPkgPath AND _MasterSites1.N = 1
+    LEFT JOIN _MasterSites _MasterSites2
+        ON _MasterSites2.FullPkgPath=_Ports.FullPkgPath AND _MasterSites2.N = 2
+    LEFT JOIN _MasterSites _MasterSites3
+        ON _MasterSites3.FullPkgPath=_Ports.FullPkgPath AND _MasterSites3.N = 3
+    LEFT JOIN _MasterSites _MasterSites4
+        ON _MasterSites4.FullPkgPath=_Ports.FullPkgPath AND _MasterSites4.N = 4
+    LEFT JOIN _MasterSites _MasterSites5
+        ON _MasterSites5.FullPkgPath=_Ports.FullPkgPath AND _MasterSites5.N = 5
+    LEFT JOIN _MasterSites _MasterSites6
+        ON _MasterSites6.FullPkgPath=_Ports.FullPkgPath AND _MasterSites6.N = 6
+    LEFT JOIN _MasterSites _MasterSites7
+        ON _MasterSites7.FullPkgPath=_Ports.FullPkgPath AND _MasterSites7.N = 7
+    LEFT JOIN _MasterSites _MasterSites8
+        ON _MasterSites8.FullPkgPath=_Ports.FullPkgPath AND _MasterSites8.N = 8
+    LEFT JOIN _MasterSites _MasterSites9
+        ON _MasterSites9.FullPkgPath=_Ports.FullPkgPath AND _MasterSites9.N = 9
+    JOIN _Email
+        ON _Email.KeyRef=MAINTAINER
+"""
 
+
+def _iter_sqlports(path: str) -> Iterable[dict[str, Any]]:
     db = sqlite3.connect(path)
+    db.row_factory = sqlite3.Row
     cur = db.cursor()
-    #cur.execute('SELECT {} FROM Ports LEFT JOIN Paths USING(fullpkgpath)'.format(','.join(columns)))
-    # Note that this is somewhat memory-hungry compared to other parsers
-    # sqlite takes about 200MB mem, for this query, even with `limit 1`,
-    # and this may be reproduced even with `sqlite3` utility. No idea if
-    # that can be improved.
-    cur.execute('SELECT {} FROM Ports'.format(','.join(columns)))
+    cur.execute(_PORTS_QUERY)
 
     while True:
         row = cur.fetchone()
         if row is None:
             break
 
-        yield dict(zip(columns, row))
+        yield dict(
+            zip(
+                (key.lower() for key in row.keys()),
+                row
+            )
+        )
 
 
 def _iter_distfiles(row: dict[str, Any]) -> Iterable[str]:
