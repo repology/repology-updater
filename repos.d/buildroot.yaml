@@ -1,0 +1,34 @@
+###########################################################################
+# Buildroot
+###########################################################################
+{% macro buildroot(branch) %}
+- name: buildroot_{{branch}}
+  type: repository
+  desc: Buildroot {{branch}}
+  family: buildroot
+  ruleset: buildroot
+  minpackages: 2900
+  sources:
+    - name: {{branch}}.json
+      fetcher:
+        class: FileFetcher
+        url: http://autobuild.buildroot.net/stats/{{branch}}.json
+      parser:
+        class: BuildrootJsonParser
+  repolinks:
+    - desc: Buildroot home
+      url: https://buildroot.org/
+    - desc: Buildroot git repository
+      url: https://git.busybox.net/buildroot/
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: https://git.busybox.net/buildroot/tree/{path}?h={{branch}}
+    - type: PACKAGE_RECIPE_RAW
+      url: https://git.busybox.net/buildroot/plain/{path}?h={{branch}}
+  groups: [ all, production, buildroot ]
+{% endmacro %}
+
+# http://autobuild.buildroot.net/stats/
+{{ buildroot('master') }}
+{{ buildroot('2023.02.x') }}
+{{ buildroot('2023.05.x') }}
