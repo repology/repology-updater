@@ -42,4 +42,8 @@ class BuildrootJsonParser(Parser):
                     cpe_components = cpeid.split(':')
                     pkg.add_cpe(cpe_components[3], cpe_components[4])
 
+                pkg.set_extra_field('pkg_path', pkgdata['pkg_path'])
+                if patch_files := pkgdata['patch_files']:
+                    pkg.set_extra_field('patch', patch_files)
+
                 yield pkg

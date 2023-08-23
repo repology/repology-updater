@@ -2,6 +2,7 @@
 # Buildroot
 ###########################################################################
 {% macro buildroot(branch) %}
+{% set branchparam = '?h=' + branch if branch != 'master' else '' %}
 - name: buildroot_{{branch}}
   type: repository
   desc: Buildroot {{branch}}
@@ -22,9 +23,13 @@
       url: https://git.busybox.net/buildroot/
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: https://git.busybox.net/buildroot/tree/{path}?h={{branch}}
+      url: https://git.busybox.net/buildroot/tree/{path}{{branchparam}}
     - type: PACKAGE_RECIPE_RAW
-      url: https://git.busybox.net/buildroot/plain/{path}?h={{branch}}
+      url: https://git.busybox.net/buildroot/plain/{path}{{branchparam}}
+    - type: PACKAGE_PATCH
+      url: https://git.busybox.net/buildroot/tree/{pkg_path}/{?patch}{{branchparam}}
+    - type: PACKAGE_PATCH_RAW
+      url: https://git.busybox.net/buildroot/plain/{pkg_path}/{?patch}{{branchparam}}
   groups: [ all, production, buildroot ]
 {% endmacro %}
 
