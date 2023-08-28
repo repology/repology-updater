@@ -3,80 +3,29 @@
 #
 # EoLs: https://www.mageia.org/en/support/
 ###########################################################################
-- name: mageia_7
+{% macro mageia(version, valid_till=None, has_madb_entry=True) %}
+- name: mageia_{{version}}
   type: repository
-  desc: Mageia 7
+  desc: Mageia {{version}}
   statsgroup: Mageia
   family: mageia
   ruleset: [mageia, rpm]
   color: '262f45'
-  minpackages: 14000
-  valid_till: 2021-06-30
+  minpackages: 15000
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
       # XXX: */backports_testing and */updates_testing not included, are these needed?
+    {% if version != 'cauldron' %}
     - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'https://mirrors.kernel.org/mageia/distrib/7/SRPMS/{source}/'
-      parser:
-        class: RepodataParser
-        vertags: mga
-      subrepo: '{source}'
-  repolinks:
-    - desc: Mageia home
-      url: https://www.mageia.org/en/
-    - desc: Mageia App Db
-      url: https://madb.mageia.org/
-  packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{srcname|quote}'
-  groups: [ all, production, mageia, rpm ]
-
-- name: mageia_8
-  type: repository
-  desc: Mageia 8
-  statsgroup: Mageia
-  family: mageia
-  ruleset: [mageia, rpm]
-  color: '262f45'
-  minpackages: 14000
-  valid_till: 2022-08-31
-  sources:
-      # XXX: */backports_testing and */updates_testing not included, are these needed?
-    - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'https://mirrors.kernel.org/mageia/distrib/8/SRPMS/{source}/'
-      parser:
-        class: RepodataParser
-        vertags: mga
-      subrepo: '{source}'
-  repolinks:
-    - desc: Mageia home
-      url: https://www.mageia.org/en/
-    - desc: Mageia App Db
-      url: https://madb.mageia.org/
-  # No suck distribution on mageia app db (yet)
-  #packagelinks:
-  #  - type: PACKAGE_HOMEPAGE
-  #    url: 'https://madb.mageia.org/package/show/source/1/application/0/release/8/name/{srcname|quote}'
-  groups: [ all, production, mageia, rpm ]
-
-- name: mageia_cauldron
-  type: repository
-  desc: Mageia Cauldron
-  statsgroup: Mageia
-  family: mageia
-  ruleset: [mageia, rpm]
-  color: '262f45'
-  minpackages: 13000
-  sources:
-      # XXX: */updates_testing not included, are these needed?
+    {% else %}
       # XXX: */backports, */backports_testing and */updates don't gave repomd.xml indexes
     - name: [ core/release, nonfree/release, tainted/release ]
+    {% endif %}
       fetcher:
         class: RepodataFetcher
-        url: 'https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/{source}/'
+        url: 'https://mirrors.kernel.org/mageia/distrib/{{version}}/SRPMS/{source}/'
       parser:
         class: RepodataParser
         vertags: mga
@@ -86,12 +35,19 @@
       url: https://www.mageia.org/en/
     - desc: Mageia App Db
       url: https://madb.mageia.org/
+  {% if has_madb_entry %}
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      # XXX: directories in this url work as CGI params:
+      # Note: directories in this url work as CGI params:
       # source=1 (show source packages)
       # application=0 (show all packages, not only applications)
-      # release=cauldron (select release)
+      # release={{version}} (select release)
       # name=XXX (package name)
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/cauldron/name/{srcname|quote}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/{{version}}/name/{srcname|quote}'
+  {% endif %}
   groups: [ all, production, mageia, rpm ]
+{% endmacro %}
+
+{{ mageia(7, valid_till='2021-06-30') }}
+{{ mageia(8, valid_till='2023-11-30') }}
+{{ mageia('cauldron') }}
