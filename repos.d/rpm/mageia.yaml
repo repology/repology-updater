@@ -16,20 +16,20 @@
   valid_till: {{valid_till}}
   {% endif %}
   sources:
-      # XXX: */backports_testing and */updates_testing not included, are these needed?
-    {% if version != 'cauldron' %}
-    - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
-    {% else %}
-      # XXX: */backports, */backports_testing and */updates don't gave repomd.xml indexes
-    - name: [ core/release, nonfree/release, tainted/release ]
-    {% endif %}
+    # */backports_testing and */updates_testing not included, are these needed?
+    # cauldron noes not seem to have updates and backports subrepos, is this correct?
+    {% for sub1 in ['core', 'nonfree', 'tainted'] %}
+    {% for sub2 in (['release', 'updates', 'backports'] if version != 'cauldron' else ['release']) %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'https://mirrors.kernel.org/mageia/distrib/{{version}}/SRPMS/{source}/'
+        url: 'https://mirrors.kernel.org/mageia/distrib/{{version}}/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
         vertags: mga
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Mageia home
       url: https://www.mageia.org/en/
