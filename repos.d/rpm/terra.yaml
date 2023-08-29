@@ -25,11 +25,11 @@
       url: https://github.com/terrapkg
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}'
+      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binorsrcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}/spec'
+      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binorsrcname}/spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}/spec/raw'
+      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binorsrcname}/spec/raw'
     # XXX: not all packages are built from spec files, see
     # https://github.com/repology/repology-updater/issues/1307#issuecomment-1503339868
   groups: [ all, production, terra ]

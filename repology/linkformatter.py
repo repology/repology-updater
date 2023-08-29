@@ -72,6 +72,8 @@ class FieldGatheringMapping:
             value = self._package.srcname
         elif field == 'binname':
             value = self._package.binname
+        elif field == 'binorsrcname':
+            value = self._package.binname or self._package.srcname
         elif field == 'subrepo':
             value = self._package.subrepo
         elif field == 'rawversion':
