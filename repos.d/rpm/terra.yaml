@@ -9,29 +9,47 @@
   ruleset: [fedora, rpm]
   minpackages: {{minpackages}}
   sources:
-    - name: repo.xml
+    # Note: terra contains packages build in different ways, see
+    # https://github.com/repology/repology-updater/issues/1307 for some details
+    # There are two distinctive types of packages, which may be distinguinsed by
+    # arch. At least packagelinks differ for these.
+    - name: repo.xml.src
       fetcher:
         class: RepodataFetcher
         url: https://repos.fyralabs.com/terra{{version}}/
       parser:
         class: RepodataParser
         src: true
+        binary: false
+        vertags: fc
+      packagelinks:
+        - type: PACKAGE_SOURCES
+          url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}/spec'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}/spec/raw'
+    - name: repo.xml.bin
+      fetcher:
+        class: RepodataFetcher
+        url: https://repos.fyralabs.com/terra{{version}}/
+      parser:
+        class: RepodataParser
+        src: false
         binary: true
         vertags: fc
+      packagelinks:
+        - type: PACKAGE_SOURCES
+          url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binname}'
+        - type: PACKAGE_RECIPE
+          url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binname}/spec'
+        - type: PACKAGE_RECIPE_RAW
+          url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binname}/spec/raw'
   repolinks:
     - desc: Terra home
       url: https://terra.fyralabs.com/
     - desc: GitHub organization
       url: https://github.com/terrapkg
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binorsrcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binorsrcname}/spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binorsrcname}/spec/raw'
-    # XXX: not all packages are built from spec files, see
-    # https://github.com/repology/repology-updater/issues/1307#issuecomment-1503339868
   groups: [ all, production, terra ]
 {% endmacro %}
 
