@@ -47,6 +47,9 @@ class CygwinParser(Parser):
                     pkg.add_links(LinkType.PACKAGE_RECIPE, packagedata['build_recipe'])
                     pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, packagedata['build_recipe'].replace('/tree/', '/plain/'))
 
+                if 'license' in packagedata:
+                    pkg.add_licenses(packagedata['license'])  # a SPDX license expression
+
                 for maturity in ['stable', 'test']:
                     if maturity not in packagedata['versions']:
                         continue
