@@ -18,7 +18,7 @@
 import re
 from typing import Iterable
 
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -42,6 +42,10 @@ class CygwinParser(Parser):
 
                 if 'homepage' in packagedata:
                     pkg.add_homepages(packagedata['homepage'])
+
+                if 'build_recipe' in packagedata:
+                    pkg.add_links(LinkType.PACKAGE_RECIPE, packagedata['build_recipe'])
+                    pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, packagedata['build_recipe'].replace('/tree/', '/plain/'))
 
                 for maturity in ['stable', 'test']:
                     if maturity not in packagedata['versions']:
