@@ -48,7 +48,6 @@
   groups: [ all, production, mageia, rpm ]
 {% endmacro %}
 
-{{ mageia(7, valid_till='2021-06-30') }}
 {{ mageia(8, valid_till='2023-11-30') }}
 {# mageia(9, valid_till='2025-03-31') #} # only enable as soon as madb entries appear
 {{ mageia('cauldron') }}
