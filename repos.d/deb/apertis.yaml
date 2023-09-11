@@ -32,7 +32,6 @@
   groups: [ all, production, apertis ]
 {% endmacro %}
 
-{{ apertis(2020, minpackages=3500, hmi=true) }}
 {{ apertis(2021, minpackages=3500, hmi=true) }}
 {{ apertis(2022, minpackages=3500, hmi=true) }}
 {{ apertis(2023, minpackages=3500) }}
