@@ -23,8 +23,6 @@ from repology.querymgr import QueryManager
 
 
 class Database:
-    _db: 'psycopg2.connection'
-
     def __init__(self, dsn: str, querymgr: QueryManager, readonly: bool = True, autocommit: bool = False, application_name: str | None = None) -> None:
         self._db = psycopg2.connect(dsn, application_name=application_name)
         self._db.set_session(readonly=readonly, autocommit=autocommit)
