@@ -17,13 +17,13 @@
       parser:
         class: SolusIndexParser
   repolinks:
-    - desc: Solus home
+    - desc: Solus Home
       url: https://getsol.us/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://dev.getsol.us/source/{srcname}/'
+      url: 'https://github.com/getsolus/packages/tree/main/packages/{srcname|firstletter}/{srcname}/'
     - type: PACKAGE_RECIPE
-      url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml'
+      url: 'https://github.com/getsolus/packages/blob/main/packages/{srcname|firstletter}/{srcname}/package.yml'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml?view=raw'
+      url: 'https://raw.githubusercontent.com/getsolus/packages/main/packages/{srcname|firstletter}/{srcname}/package.yml'
   groups: [ all, production ]
