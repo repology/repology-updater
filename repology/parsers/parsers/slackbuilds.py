@@ -83,6 +83,12 @@ class SlackBuildsParser(Parser):
 
                 variables = _parse_infofile(info_path)
 
+                if 'PRGNAM' not in variables:
+                    # XXX: make it fatal someday when we can rollback
+                    # to previous repo version after failed parsing
+                    pkg.log('PRGNAM missing', severity=Logger.ERROR)
+                    continue
+
                 if variables['PRGNAM'] != pkgname:
                     pkg.log(f'PRGNAM "{variables["PRGNAM"]}" != pkgname "{pkgname}"', severity=Logger.ERROR)
                     continue
