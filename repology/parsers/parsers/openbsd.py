@@ -95,7 +95,6 @@ def _iter_sqlports(path: str) -> Iterator[Port]:
         yield Port(**row_dict, distfiles_cursor=distfiles_cursor)
 
 
-# TODO: drop _distfiles.N for sqlports >= 7.49
 _DISTFILES_QUERY = """
 SELECT
     _sites.Value AS sites,
