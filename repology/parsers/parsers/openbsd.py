@@ -18,8 +18,10 @@
 import os
 import re
 import sqlite3
-from typing import Any, Iterable
+from dataclasses import dataclass
+from typing import Iterable, Iterator
 
+from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -39,24 +41,13 @@ def _normalize_version(version: str) -> str:
 
 _PORTS_QUERY = """
 SELECT
+    _Ports.FullPkgPath AS id_,
     _Paths.FullPkgPath AS fullpkgpath,
     Categories_ordered.Value AS categories,
     comment,
-    Distfiles_ordered.Value AS distfiles,
     fullpkgname,
     homepage,
     _Email.Value AS maintainer,
-    _MasterSites.Value AS master_sites,
-    _MasterSites0.Value AS master_sites0,
-    _MasterSites1.Value AS master_sites1,
-    _MasterSites2.Value AS master_sites2,
-    _MasterSites3.Value AS master_sites3,
-    _MasterSites4.Value AS master_sites4,
-    _MasterSites5.Value AS master_sites5,
-    _MasterSites6.Value AS master_sites6,
-    _MasterSites7.Value AS master_sites7,
-    _MasterSites8.Value AS master_sites8,
-    _MasterSites9.Value AS master_sites9,
     gh_account,
     gh_project,
     dist_subdir
@@ -65,79 +56,75 @@ FROM _Ports
         ON Canonical=_Ports.FullPkgPath
     JOIN Categories_ordered
         ON Categories_ordered.FullPkgpath=_Ports.FullPkgpath
-    LEFT JOIN Distfiles_ordered
-        ON Distfiles_ordered.FullPkgpath=_Ports.FullPkgpath AND Distfiles_ordered.SUFX IS NULL AND Distfiles_ordered.Type=1
-    LEFT JOIN _MasterSites
-        ON _MasterSites.FullPkgPath=_Ports.FullPkgPath AND _MasterSites.N IS NULL
-    LEFT JOIN _MasterSites _MasterSites0
-        ON _MasterSites0.FullPkgPath=_Ports.FullPkgPath AND _MasterSites0.N = 0
-    LEFT JOIN _MasterSites _MasterSites1
-        ON _MasterSites1.FullPkgPath=_Ports.FullPkgPath AND _MasterSites1.N = 1
-    LEFT JOIN _MasterSites _MasterSites2
-        ON _MasterSites2.FullPkgPath=_Ports.FullPkgPath AND _MasterSites2.N = 2
-    LEFT JOIN _MasterSites _MasterSites3
-        ON _MasterSites3.FullPkgPath=_Ports.FullPkgPath AND _MasterSites3.N = 3
-    LEFT JOIN _MasterSites _MasterSites4
-        ON _MasterSites4.FullPkgPath=_Ports.FullPkgPath AND _MasterSites4.N = 4
-    LEFT JOIN _MasterSites _MasterSites5
-        ON _MasterSites5.FullPkgPath=_Ports.FullPkgPath AND _MasterSites5.N = 5
-    LEFT JOIN _MasterSites _MasterSites6
-        ON _MasterSites6.FullPkgPath=_Ports.FullPkgPath AND _MasterSites6.N = 6
-    LEFT JOIN _MasterSites _MasterSites7
-        ON _MasterSites7.FullPkgPath=_Ports.FullPkgPath AND _MasterSites7.N = 7
-    LEFT JOIN _MasterSites _MasterSites8
-        ON _MasterSites8.FullPkgPath=_Ports.FullPkgPath AND _MasterSites8.N = 8
-    LEFT JOIN _MasterSites _MasterSites9
-        ON _MasterSites9.FullPkgPath=_Ports.FullPkgPath AND _MasterSites9.N = 9
     JOIN _Email
         ON _Email.KeyRef=MAINTAINER
 """
 
 
-def _iter_sqlports(path: str) -> Iterable[dict[str, Any]]:
+@dataclass
+class Port:
+    id_: int
+    fullpkgpath: str
+    categories: str
+    comment: str | None
+    fullpkgname: str
+    homepage: str | None
+    maintainer: str
+    gh_account: str | None
+    gh_project: str | None
+    dist_subdir: str | None
+    distfiles_cursor: sqlite3.Cursor
+
+
+def _iter_sqlports(path: str) -> Iterator[Port]:
     db = sqlite3.connect(path)
     db.row_factory = sqlite3.Row
+
     cur = db.cursor()
     cur.execute(_PORTS_QUERY)
 
-    while True:
-        row = cur.fetchone()
-        if row is None:
-            break
-
-        yield dict(
+    while (row := cur.fetchone()) is not None:
+        distfiles_cursor = db.cursor()
+        distfiles_cursor.execute(_DISTFILES_QUERY, (row['id_'],))
+        row_dict = dict(
             zip(
                 (key.lower() for key in row.keys()),
                 row
             )
         )
+        yield Port(**row_dict, distfiles_cursor=distfiles_cursor)
 
 
-def _iter_distfiles(row: dict[str, Any]) -> Iterable[str]:
-    if row['distfiles'] is None:
-        return
+# TODO: drop _distfiles.N for sqlports >= 7.49
+_DISTFILES_QUERY = """
+SELECT
+    _sites.Value AS sites,
+    _fetchfiles.Value AS file
+FROM _distfiles
+    JOIN _fetchfiles
+        ON KeyRef=_Distfiles.Value
+    LEFT JOIN _sites
+        ON _sites.FullPkgPath=_Distfiles.FullPkgPath AND (coalesce(_distfiles.N, _distfiles.SUFX) is not distinct from _sites.N)
+WHERE
+    _distfiles.FullPkgPath = ?
+"""
 
-    for distfile in row['distfiles'].split():
+
+def _iter_distfiles(port: Port) -> Iterator[str]:
+    while (row := port.distfiles_cursor.fetchone()) is not None:
+        sites, file = row
+
         # process distfile renames
         # Example: deco-{deco/archive/}1.6.4.tar.gz is downloaded as deco/archive/1.6.4.tar.gz
         # but saved as deco-1.6.4.tar.gz
-        match = re.fullmatch('(.*)\\{(.*)\\}(.*)', distfile)
-        if match:
-            distfile = match.group(2) + match.group(3)
-
-        # determine master_sites (1.tgz uses master_sites, 1.gz:0 uses master_sites0 etc.)
-        match = re.fullmatch('(.*):([0-9])', distfile)
-        if match:
-            distfile = match.group(1)
-            master_sites = row['master_sites' + match.group(2)]
-        else:
-            master_sites = row['master_sites']
+        if (match := re.fullmatch(r'(.*)\{(.*)\}(.*)', file)) is not None:
+            file = match.group(2) + match.group(3)
 
         # fallback to openbsd distfiles mirror
-        if not master_sites:
-            master_sites = 'http://ftp.openbsd.org/pub/OpenBSD/distfiles/{}/'.format(row['dist_subdir'])
+        if not sites:
+            sites = 'http://ftp.openbsd.org/pub/OpenBSD/distfiles/' + (f'{port.dist_subdir}/' if port.dist_subdir else '')
 
-        yield from (master_site + distfile for master_site in master_sites.split())
+        yield from (site + file for site in sites.split())
 
 
 def _strip_flavors_from_stem(stem: str, flavors: Iterable[str]) -> str:
@@ -161,8 +148,8 @@ class OpenBSDsqlportsParser(Parser):
         self._path_to_database = path_to_database or ''
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        for row in _iter_sqlports(os.path.join(path + self._path_to_database)):
-            with factory.begin(row['fullpkgpath']) as pkg:
+        for port in _iter_sqlports(os.path.join(path + self._path_to_database)):
+            with factory.begin(port.fullpkgpath) as pkg:
                 # there are a lot of potential name sources in sqlports, namely:
                 # fullpkgpath, fullpkgname, pkgname, pkgspec, pkgstem, pkgpath (comes from Paths table)
                 # * pkgname may be NULL, so ignoring it
@@ -175,8 +162,8 @@ class OpenBSDsqlportsParser(Parser):
                 # As a result, we're basically left with fullpkgpath (which is path in ports tree + flavors)
                 # and fullpkgname (which is package name aka stem + version + flavors)
 
-                pkgpath, *flavors = row['fullpkgpath'].split(',')
-                stem, version = re.sub('(-[^0-9][^-]*)+$', '', row['fullpkgname']).rsplit('-', 1)
+                pkgpath, *flavors = port.fullpkgpath.split(',')
+                stem, version = re.sub('(-[^0-9][^-]*)+$', '', port.fullpkgname).rsplit('-', 1)
 
                 stripped_stem = _strip_flavors_from_stem(stem, flavors)
 
@@ -185,12 +172,12 @@ class OpenBSDsqlportsParser(Parser):
                 pkg.add_name(stripped_stem, NameType.OPENBSD_STRIPPED_STEM)
                 pkg.add_flavors(flavors)
                 pkg.set_version(version, _normalize_version)
-                pkg.set_summary(row['comment'])
-                pkg.add_homepages(row['homepage'])
-                if row['gh_account'] and row['gh_project']:
-                    pkg.add_homepages('https://github.com/{}/{}'.format(row['gh_account'], row['gh_project']))
-                pkg.add_maintainers(extract_maintainers(row['maintainer']))
-                pkg.add_categories(row['categories'].split())
-                pkg.add_downloads(_iter_distfiles(row))
+                pkg.set_summary(port.comment)
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, port.homepage)
+                if port.gh_account and port.gh_project:
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, f'https://github.com/{port.gh_account}/{port.gh_project}')
+                pkg.add_maintainers(extract_maintainers(port.maintainer))
+                pkg.add_categories(port.categories.split())
+                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, _iter_distfiles(port))
 
                 yield pkg
