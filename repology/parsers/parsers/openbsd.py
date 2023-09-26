@@ -104,7 +104,7 @@ FROM _distfiles
     JOIN _fetchfiles
         ON KeyRef=_Distfiles.Value
     LEFT JOIN _sites
-        ON _sites.FullPkgPath=_Distfiles.FullPkgPath AND (coalesce(_distfiles.N, _distfiles.SUFX) is not distinct from _sites.N)
+        ON _sites.FullPkgPath=_Distfiles.FullPkgPath AND _distfiles.SUFX is not distinct from _sites.N
 WHERE
     _distfiles.FullPkgPath = ?
 """
