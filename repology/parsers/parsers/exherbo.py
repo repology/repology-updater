@@ -18,8 +18,8 @@
 import re
 from typing import Iterable
 
-from repology.package import LinkType
-from repology.package import PackageFlags
+from repology.logger import Logger
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -37,8 +37,16 @@ class ExherboJsonParser(Parser):
                 pkg.add_name(packagedata['category'] + '/' + packagedata['name'], NameType.EXHERBO_FULL_NAME)
                 pkg.set_version(packagedata['version'], _normalize_version)
                 pkg.add_categories(packagedata['category'])
-                pkg.add_homepages(packagedata['homepage'].split())
-                pkg.add_downloads(packagedata['downloads'].split())
+
+                if homepage := packagedata.get('homepage'):
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, homepage.split())
+                elif packagedata['category'] != 'virtual':
+                    pkg.log('homepage missing', Logger.ERROR)
+
+                if downloads := packagedata.get('downloads'):
+                    # mostly expected, e.g. for scm packages
+                    pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, downloads.split())
+
                 pkg.set_subrepo(packagedata['repository'])
                 pkg.set_summary(packagedata['summary'])
                 pkg.add_links(LinkType.PACKAGE_RECIPE, packagedata['exheres_url'])
