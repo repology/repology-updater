@@ -2,7 +2,7 @@
 # Debian
 ###########################################################################
 
-{% macro debian(version, codename, minpackages, valid_till=None, backports=True, packages_page=True, buildd_page=True) %}
+{% macro debian(version, codename, minpackages, valid_till=None, backports=True, backports_sloppy=True, packages_page=True, buildd_page=True) %}
 {% set sortversion = '0' + (version|string) if version < 10 else version %}
 {% set subrepos2 = ['main', 'contrib', 'non-free'] if version < 12 else ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
 
@@ -117,6 +117,47 @@
       url: 'https://qa.debian.org/popcon-graph.php?packages={srcname|quote}'
   groups: [ all, production, debian ]
 {% endif %}
+
+{% if backports_sloppy %}
+- name: debian_{{version}}_backports_sloppy
+  sortname: debian_{{sortversion}}_backports_sloppy
+  type: repository
+  desc: Debian {{version}} Backports sloppy
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, debian]
+  color: 'c70036'
+  minpackages: 1
+  sources:
+    {% set sub1 = codename + '-backports-sloppy' %}
+    {% for sub2 in subrepos2 %}
+    - name: {{sub1}}/{{sub2}}
+      fetcher:
+        class: FileFetcher
+        url: 'https://ftp.debian.org/debian/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://sources.debian.org/src/{srcname}/{rawversion}/'
+    - type: PACKAGE_ISSUE_TRACKER
+      url: 'https://bugs.debian.org/{srcname}'
+    {% if buildd_page %}
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://buildd.debian.org/status/package.php?p={srcname|quote}&suite={{codename}}-backports-sloppy'
+    {% endif %}
+    - type: PACKAGE_STATISTICS
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname|quote}'
+  groups: [ all, production, debian ]
+{% endif %}
 {% endmacro %}
 
 # valid_till: https://wiki.debian.org/LTS
@@ -124,8 +165,8 @@
 # list of repos and backports https://packages.debian.org/stable/
 {{ debian(10, 'buster', minpackages=28000, valid_till='2024-06-30') }}
 {{ debian(11, 'bullseye', minpackages=30000, valid_till='2026-06-30') }}
-{{ debian(12, 'bookworm', minpackages=30000, valid_till='2028-06-30', backports=False) }}
-{{ debian(13, 'trixie', minpackages=30000, packages_page=False, backports=False) }}
+{{ debian(12, 'bookworm', minpackages=30000, valid_till='2028-06-30', backports=False, backports_sloppy=False) }}
+{{ debian(13, 'trixie', minpackages=30000, packages_page=False, backports=False, backports_sloppy=False) }}
 
 # Rolling
 - name: debian_unstable
