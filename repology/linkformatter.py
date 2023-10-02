@@ -26,9 +26,9 @@ __all__ = ['format_package_links']
 
 _FILTERS: dict[str, Callable[[str], str]] = {
     'lowercase': lambda x: x.lower(),
-    'firstletter': lambda x: x.lower()[0],
-    'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
-    'stripdmo': lambda x: x[:-4] if x.endswith('-dmo') else x,
+    'first_letter': lambda x: x.lower()[0],
+    'lib_or_first_letter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
+    'strip_dmo': lambda x: x[:-4] if x.endswith('-dmo') else x,
     'basename': lambda x: x.rsplit('/', 1)[-1],
     'dirname': lambda x: x.rsplit('/', 1)[0],
     'dec': lambda x: str(_safe_int(x) - 1),
