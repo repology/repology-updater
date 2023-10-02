@@ -29,6 +29,15 @@
   repolinks:
     - desc: Apertis home
       url: https://www.apertis.org/
+    - desc: Apertis GitLab
+      url: https://gitlab.apertis.org/
+    - desc: Apertis Quality Assurance reports
+      url: https://qa.apertis.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://gitlab.apertis.org/pkg/{srcname}/-/tree/apertis/{{v}}'
+    - type: PACKAGE_BUILD_STATUS
+      url: 'https://gitlab.apertis.org/pkg/{srcname}/-/pipelines?ref=apertis/{{v}}'
   groups: [ all, production, apertis ]
 {% endmacro %}
 
