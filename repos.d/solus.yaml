@@ -21,9 +21,9 @@
       url: https://getsol.us/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/getsolus/packages/tree/main/packages/{srcname|firstletter}/{srcname}/'
+      url: 'https://github.com/getsolus/packages/tree/main/packages/{srcname|py_or_first_letter}/{srcname}/'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/getsolus/packages/blob/main/packages/{srcname|firstletter}/{srcname}/package.yml'
+      url: 'https://github.com/getsolus/packages/blob/main/packages/{srcname|py_or_first_letter}/{srcname}/package.yml'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/getsolus/packages/main/packages/{srcname|firstletter}/{srcname}/package.yml'
+      url: 'https://raw.githubusercontent.com/getsolus/packages/main/packages/{srcname|py_or_first_letter}/{srcname}/package.yml'
   groups: [ all, production ]
