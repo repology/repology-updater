@@ -94,6 +94,8 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
+    - desc: Backports overview page
+      url: https://backports.debian.org/{{codename}}-backports/overview/
     {% if packages_page %}
     - desc: Debian packages in {{codename}}-backports
       url: https://packages.debian.org/{{codename}}-backports/
@@ -143,6 +145,8 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
+    - desc: Backports overview page
+      url: https://backports.debian.org/{{codename}}-backports-sloppy/overview/
     - desc: Debian package auto-building status
       url: https://buildd.debian.org/
   packagelinks:
