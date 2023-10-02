@@ -11,10 +11,13 @@
     - name: main
       fetcher:
         class: RepodataFetcher
-        url: 'https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo/'
+        url: 'https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo-base-7.3/'
       parser:
         class: RepodataParser
   repolinks:
     - desc: IBM i Open Source
-      url: 'https://bitbucket.org/ibmi/opensource/src/master/'
+      url: 'https://ibmi-oss-docs.readthedocs.io/en/latest/README.html'
+  packagelinks:
+    - type: PACKAGE_RECIPE_RAW
+      url: https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo-base-7.3/specs/{srcname}-{rawversion|strip_nevra_epoch}.spec
   groups: [ all, production, rpm ]
