@@ -28,6 +28,7 @@ _FILTERS: dict[str, Callable[[str], str]] = {
     'lowercase': lambda x: x.lower(),
     'first_letter': lambda x: x.lower()[0],
     'lib_or_first_letter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
+    'py_or_first_letter': lambda x: x.lower()[:2] if x.lower().startswith('py') else x.lower()[0],
     'strip_dmo': lambda x: x[:-4] if x.endswith('-dmo') else x,
     'basename': lambda x: x.rsplit('/', 1)[-1],
     'dirname': lambda x: x.rsplit('/', 1)[0],
