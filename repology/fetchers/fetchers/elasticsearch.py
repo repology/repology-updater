@@ -74,17 +74,14 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             self._do_http(self._scroll_url, method='DELETE', json={'scroll_id': scroll_id}).json()
         except requests.exceptions.HTTPError as e:
             # we don't care too much if removing the scroll fails, it'll timeout anyway
-            # XXX: but log this
-            logger.log('failed to DELETE scroll, server reply follows:\n' + e.response.text, severity=Logger.ERROR)
-            logger.log(e.response.text, severity=Logger.ERROR)
+            logger.log(f'failed to DELETE scroll{": " + e.response.text if e.response else ""}', severity=Logger.ERROR)
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         try:
             self._do_fetch_scroll(statedir, logger)
         except requests.exceptions.HTTPError as e:
             # show server reply as it contains the failure cause
-            logger.log('request failed, server reply follows:\n' + e.response.text, severity=Logger.ERROR)
-            logger.log(e.response.text, severity=Logger.ERROR)
+            logger.log(f'request failed{": " + e.response.text if e.response else ""}', severity=Logger.ERROR)
             raise
 
         return True
