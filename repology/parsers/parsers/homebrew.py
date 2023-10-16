@@ -25,6 +25,21 @@ from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 
 
+_FILE_USINGS = {
+    'homebrew_curl',
+    'nounzip',
+}
+
+_VCS_USINGS = {
+    'bzr',
+    'cvs',
+    'fossil',
+    'git',
+    'hg',
+    'svn',
+}
+
+
 @dataclass
 class _UrlData:
     url: str
@@ -32,13 +47,22 @@ class _UrlData:
     revision: str | None = None
     checksum: str | None = None
     branch: str | None = None
+    using: str | None = None
 
+    # checksum presence is sufficient ATOW, howerver be stricter,
+    # as there seem to be ongoing migration onto `using` field in homebrew
+    # and things may break unexpectedly
     def is_file(self) -> bool:
-        # just checksum seems to be sufficient
-        return self.checksum is not None
+        if self.using is not None:
+            return self.using in _FILE_USINGS and self.checksum is not None
+        else:
+            return self.checksum is not None
 
     def is_vcs(self) -> bool:
-        return self.checksum is None
+        if self.using is not None:
+            return self.using in _VCS_USINGS and self.checksum is None
+        else:
+            return self.checksum is None
 
 
 class HomebrewJsonParser(Parser):
