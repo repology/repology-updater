@@ -26,3 +26,30 @@
     - desc: Deepin home
       url: https://www.deepin.org/
   groups: [ all, production, deepin ]
+
+- name: deepin_23
+  type: repository
+  desc: deepin 23
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [ debuntu, deepin ]
+  color: '949393'
+  minpackages: 8000
+  sources:
+    - name: [ main, community, commercial ]
+      fetcher:
+        class: FileFetcher
+        url: 'https://community-packages.deepin.com/deepin/beige/dists/beige/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: deepin home
+      url: https://www.deepin.org/
+    - desc: deepin open build service instance
+      url: https://build.deepin.com/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/deepin-community/{srcname}'
+  groups: [ all, production, deepin ]
