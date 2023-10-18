@@ -2,11 +2,10 @@
 # Deepin Linux
 ###########################################################################
 
-# Though we reserve place for deepin_{testing,stable} here, unstable
-# is currently the only repo (not taking precise/trusty into account)
 - name: deepin_unstable
+  sortname: deepin_20
   type: repository
-  desc: Deepin
+  desc: deepin 20
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [ debuntu, deepin ]
@@ -23,6 +22,6 @@
         class: DebianSourcesParser
       subrepo: '{source}'
   repolinks:
-    - desc: Deepin home
+    - desc: deepin home
       url: https://www.deepin.org/
   groups: [ all, production, deepin ]
