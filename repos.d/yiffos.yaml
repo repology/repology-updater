@@ -22,9 +22,9 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.yiffos.gay/{srcname}'
     - type: PACKAGE_SOURCES
-      url: 'https://git.yiffos.gay/Packaging/packages/src/branch/knot/{srcname}'
+      url: 'https://git.yiffos.gay/packaging/packages/-/tree/knot/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://git.yiffos.gay/Packaging/packages/src/branch/knot/{srcname}/PKGSCRIPT'
+      url: 'https://git.yiffos.gay/packaging/packages/-/blob/knot/{srcname}/PKGSCRIPT'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.yiffos.gay/Packaging/packages/raw/branch/knot/{srcname}/PKGSCRIPT'
+      url: 'https://git.yiffos.gay/packaging/packages/-/raw/knot/{srcname}/PKGSCRIPT'
   groups: [ all, production, yiffos ]
