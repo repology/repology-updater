@@ -21,7 +21,7 @@
       parser:
         class: DebianSourcesParser
         # we only need sources for kalilinux unique packages, others are from debian
-        #allowed_vcs_urls: "https://gitlab.com/kalilinux/packages/"
+        allowed_vcs_urls: https://gitlab.com/kalilinux/packages/
       subrepo: '{source}'
   repolinks:
     - desc: Kali Linux home
@@ -44,6 +44,8 @@
         compression: gz
       parser:
         class: DebianSourcesParser
+        # we only need sources for kalilinux unique packages, others are from debian
+        allowed_vcs_urls: https://gitlab.com/kalilinux/packages/
       subrepo: '{source}'
   repolinks:
     - desc: Kali Linux home
