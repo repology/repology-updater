@@ -304,7 +304,7 @@ class PackageMaker(PackageMakerBase):
         urls = self._normalize_args(args, 'link', str, link_normalizers)
 
         if urls:
-            self._package.links.extend((link_type, *url.rstrip('#').split('#', 1)) for url in urls)  # type: ignore
+            self._package.links.extend((link_type, *url.rstrip('#').split('#', 1)) for url in urls)
 
     def set_flags(self, mask: int, is_set: bool = True) -> None:
         if is_set:
