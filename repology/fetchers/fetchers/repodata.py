@@ -80,6 +80,8 @@ class RepodataFetcher(ScratchFileFetcher):
             compression = 'xz'
         elif repodata_url.endswith('bz2'):
             compression = 'bz2'
+        elif repodata_url.endswith('zst'):
+            compression = 'zstd'
 
         logger.log('fetching {}'.format(repodata_url))
 
