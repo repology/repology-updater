@@ -11,7 +11,7 @@
     - name: yacp
       fetcher:
         class: FileFetcher
-        url: https://yacp.osdn.jp/packages.json.xz
+        url: https://yetanothercygwinports.sourceforge.io/packages.json.xz
         compression: xz
       parser:
         class: YACPJsonParser
