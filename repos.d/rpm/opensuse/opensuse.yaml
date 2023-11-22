@@ -100,7 +100,20 @@
         class: RepodataParser
         vertags: [lp,bp]
       subrepo: updates/non-oss
-    # XXX: add backports and sle subrepos as long as these are enabled by default
+    - name: backports-update
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.3/backports/
+      parser:
+        class: RepodataParser
+      subrepo: updates/backports
+    - name: sle-update
+      fetcher:
+        class: RepodataFetcher
+        url: http://download.opensuse.org/update/leap/15.3/sle/
+      parser:
+        class: RepodataParser
+      subrepo: updates/sle
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
