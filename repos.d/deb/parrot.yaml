@@ -8,7 +8,7 @@
   family: debuntu
   ruleset: [ debuntu, parrot ]
   color: '95b8c8'
-  minpackages: 60000
+  minpackages: 55000
   sources:
     {% for sub1 in ['parrot', 'parrot-updates'] %}
     {% for sub2 in ['main', 'contrib', 'non-free'] %}
