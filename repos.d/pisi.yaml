@@ -36,7 +36,7 @@
   desc: Pisi Linux Contrib
   family: pisi
   ruleset: pisi
-  minpackages: 200
+  minpackages: 100
   sources:
     - name: contrib
       fetcher:
@@ -58,3 +58,5 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/pisilinux/contrib/master/{srcname}/pspec.xml'
   groups: [ all, production, pisi ]
+
+# TODO: add old_contrib if still relevant https://github.com/pisilinux/old_contrib
