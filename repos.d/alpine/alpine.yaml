@@ -72,4 +72,5 @@
 {{ alpine('3.16', minpackages=16000, valid_till='2024-05-23') }}
 {{ alpine('3.17', minpackages=16000, valid_till='2024-11-22') }}
 {{ alpine('3.18', minpackages=16000, valid_till='2025-05-09') }}
+{{ alpine('3.19', minpackages=16000, valid_till='2025-11-01') }}
 {{ alpine('edge', minpackages=20000, subrepos=['community', 'main', 'testing']) }}
