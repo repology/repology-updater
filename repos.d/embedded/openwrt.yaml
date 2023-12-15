@@ -69,6 +69,7 @@
 {{ openwrt('18.06', 'x86_64', minpackages=5000, valid_till='2021-06-01') }}
 {{ openwrt('19.07', 'x86_64', minpackages=6000, valid_till='2022-04-30') }}
 {{ openwrt('21.02', 'x86_64', minpackages=8000, valid_till='2023-04-30') }}
-{{ openwrt('22.03', 'x86_64', minpackages=8000) }}
+{{ openwrt('22.03', 'x86_64', minpackages=8000, valid_till='2024-04-11') }}
+{{ openwrt('23.05', 'x86_64', minpackages=8000) }}
 # disabled because of package blinks
 {{ openwrt('snapshot', 'x86_64', minpackages=0, disabled=True) }}
