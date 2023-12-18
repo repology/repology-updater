@@ -28,7 +28,7 @@
       url: https://janitor.debian.net/fresh-releases
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://janitor.debian.net/fresh-releases/pkg/{srcname}'
+      url: 'https://janitor.debian.net/fresh-releases/pkg/{srcname}/'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://janitor.debian.net/fresh-releases/pkg/{srcname}/build.log'
     - type: PACKAGE_SOURCES
@@ -60,7 +60,7 @@
       url: https://janitor.debian.net/fresh-snapshots
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}'
+      url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}/'
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}/build.log'
     - type: PACKAGE_SOURCES
