@@ -18,7 +18,7 @@
         class: GlaucusGitParser
   repolinks:
     - desc: glaucus home
-      url: https://www.glaucuslinux.org/
+      url: https://glaucuslinux.org/
     - desc: GitHub organization
       url: https://github.com/glaucuslinux
   packagelinks:
