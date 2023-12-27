@@ -17,7 +17,30 @@
       fetcher:
         class: FileFetcher
         #url: 'http://packages.deepin.com/deepin/dists/apricot/{source}/source/Sources.gz'
-        url: 'http://mirror.yandex.ru/mirrors/deepin/packages/dists/apricot/{source}/source/Sources.gz'
+        url: 'http://mirror.yandex.ru/mirrors/deepin/packages/apricot/dists/apricot/{source}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Deepin home
+      url: https://www.deepin.org/
+  groups: [ all, production, deepin ]
+
+- name: deepin_beige
+  type: repository
+  desc: Deepin V23 (beige)
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [ debuntu, deepin ]
+  color: '949393'
+  minpackages: 5000
+  sources:
+    - name: [ main, community, commercial ]
+      fetcher:
+        class: FileFetcher
+        #url: 'https://community-packages.deepin.com/deepin/beige/dists/beige/{source}/source/Sources.gz'
+        url: 'http://mirror.yandex.ru/mirrors/deepin/packages/beige/dists/beige/{source}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
