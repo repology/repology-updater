@@ -126,4 +126,5 @@
 {{ ubuntu('20', '04', 'focal',   minpackages=29000, valid_till='2025-04-30') }}
 {{ ubuntu('22', '04', 'jammy',   minpackages=32000, valid_till='2027-04-30') }}
 {{ ubuntu('23', '04', 'lunar',   minpackages=33000, valid_till='2024-01-31') }}
-{{ ubuntu('23', '10', 'mantic',  minpackages=33000,                          backports=false, proposed=true) }}
+{{ ubuntu('23', '10', 'mantic',  minpackages=33000, valid_till='2024-07-11') }}
+{{ ubuntu('24', '04', 'noble',   minpackages=33000,                          backports=false, proposed=true) }}
