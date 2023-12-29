@@ -13,7 +13,7 @@
   minpackages: {{minpackages}}
   sources:
     {% set v = 'v' + version|string + suffix %}
-    {% for sub1 in ([v] if development else [v, v + '-updates']) %}
+    {% for sub1 in ([v] if development else [v, v + '-updates', v + '-security']) %}
     {% for sub2 in (['development', 'target', 'sdk', 'hmi'] if hmi else ['development', 'target', 'sdk']) %}
     {% set source = sub1 + '/' + sub2 %}
     - name: {{source}}
