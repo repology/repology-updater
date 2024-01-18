@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import ast
 import os
 from collections import defaultdict
 from dataclasses import dataclass
@@ -22,6 +23,7 @@ from typing import Any, Callable, Iterable, Iterator
 
 import yaml
 
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
@@ -84,29 +86,80 @@ def _extract_patches(conandata: dict[str, Any]) -> dict[str, list[str]]:
     return result
 
 
+def _parse_conanfile(source_code: str) -> dict[str, Any]:
+    # Finds the class derived from ConanFile and
+    # extracts all class attributes that are simple literals
+    tree = ast.parse(source_code)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ClassDef):
+            for base in node.bases:
+                if isinstance(base, ast.Name) and base.id == "ConanFile":
+                    return _parse_class_attributes(node)
+    return {}
+
+
+def _parse_class_attributes(conanfile_class: ast.ClassDef) -> dict[str, Any]:
+    attributes = {}
+    for body_item in conanfile_class.body:
+        if isinstance(body_item, ast.Assign):
+            for target in body_item.targets:
+                if isinstance(target, ast.Name):
+                    key = target.id
+                    try:
+                        value = ast.literal_eval(body_item.value)
+                    except ValueError:
+                        # Ignore the value if it is not a literal
+                        continue
+                    attributes[key] = value
+    return attributes
+
+
+def _to_list(data: Any) -> list[Any]:
+    if isinstance(data, (list, tuple)):
+        return data
+    if isinstance(data, str):
+        return [data]
+    return []
+
+
 class ConanGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for conandata_abs_path in walk_tree(path, name='conandata.yml'):
             conandata_rel_path = os.path.relpath(conandata_abs_path, path)
 
             with factory.begin(conandata_rel_path) as pkg:
-                pkg.add_name(conandata_rel_path.split('/')[1], NameType.CONAN_RECIPE_NAME)
-
                 with open(conandata_abs_path) as fd:
                     conandata = yaml.safe_load(fd)
 
                 patches = _extract_patches(conandata)
+
+                conanfile_path = os.path.join(os.path.dirname(conandata_abs_path), 'conanfile.py')
+                if not os.path.exists(conanfile_path):
+                    continue
+                with open(conanfile_path) as fd:
+                    attributes = _parse_conanfile(fd.read())
+
+                pkg.add_name(conandata_rel_path.split('/')[1], NameType.CONAN_RECIPE_NAME)
+                pkg.set_summary(attributes.get('description'))
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, attributes.get('homepage'))
+                pkg.add_licenses(*_to_list(attributes.get('license')))
+                # pkg.add_categories(*_to_list(attributes.get('topics')))
+                pkg.set_extra_field('package_type', attributes.get('package_type'))
 
                 for version_info in _extract_version_infos(conandata):
                     verpkg = pkg.clone(append_ident=':' + version_info.version)
 
                     verpkg.set_version(version_info.version)
 
+                    if version_info.version.startswith('cci.'):
+                        # ConanCenter uses cci.<yyyymmdd> as snapshot versions
+                        verpkg.set_flags(PackageFlags.NOSCHEME)
+
                     # XXX: we may create more subpackages here based on url_info.tags
                     # which may contain various OSes, architectures, compilers and probably
                     # other specifics (see cspice/all/conandata.yml for example)
                     for url_info in version_info.url_infos:
-                        verpkg.add_downloads(url_info.url)
+                        verpkg.add_links(LinkType.UPSTREAM_DOWNLOAD, url_info.url)
 
                     if version_info.version in patches:
                         verpkg.set_extra_field('patch', patches[version_info.version])

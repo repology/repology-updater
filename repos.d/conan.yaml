@@ -12,7 +12,7 @@
       fetcher:
         class: GitFetcher
         url: https://github.com/conan-io/conan-center-index.git
-        sparse_checkout: [ 'recipes/**/config.yml', 'recipes/**/conandata.yml' ]
+        sparse_checkout: [ 'recipes/**/config.yml', 'recipes/**/conandata.yml', 'recipes/**/conanfile.py' ]
       parser:
         class: ConanGitParser
   repolinks:
