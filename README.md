@@ -85,17 +85,24 @@ on localhost.
 
 ### Creating the database
 
-For the following steps you'll need to set up the database. Ensure
-PostgreSQL server is up and running, and execute the following
+For the following steps you'll need to set up the database. For convenience,
+you can use the provided `docker-compose.yml` file to start a PostgreSQL with
+the required extensions installed:
+
+```shell
+docker compose up -d
+```
+
+Ensure PostgreSQL server is up and running, and execute the following
 commands to create the database for repology:
 
 ```shell
-psql --username postgres -c "CREATE DATABASE repology"
-psql --username postgres -c "CREATE USER repology WITH PASSWORD 'repology'"
-psql --username postgres -c "GRANT ALL ON DATABASE repology TO repology"
-psql --username postgres --dbname repology -c "GRANT CREATE ON SCHEMA public TO PUBLIC"
-psql --username postgres --dbname repology -c "CREATE EXTENSION pg_trgm"
-psql --username postgres --dbname repology -c "CREATE EXTENSION libversion"
+psql -h localhost -U postgres -c "CREATE DATABASE repology"
+psql -h localhost -U postgres -c "CREATE USER repology WITH PASSWORD 'repology'"
+psql -h localhost -U postgres -c "GRANT ALL ON DATABASE repology TO repology"
+psql -h localhost -U postgres --dbname repology -c "GRANT CREATE ON SCHEMA public TO PUBLIC"
+psql -h localhost -U postgres --dbname repology -c "CREATE EXTENSION pg_trgm"
+psql -h localhost -U postgres --dbname repology -c "CREATE EXTENSION libversion"
 ```
 
 in the case you want to change the credentials, don't forget to add

@@ -16,7 +16,7 @@
 # Used by repology-update and repology-app
 # Overridable via --dsn command line arg
 #
-DSN = "dbname=repology user=repology password=repology"
+DSN = "host=localhost dbname=repology user=repology password=repology"
 
 #
 # Directory to store repository data in
