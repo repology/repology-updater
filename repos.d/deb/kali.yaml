@@ -13,7 +13,7 @@
   color: '32638f'
   minpackages: 27000
   sources:
-    - name: [ contrib, main, non-free ]
+    - name: [ contrib, main, non-free, non-free-firmware ]
       fetcher:
         class: FileFetcher
         url: 'https://http.kali.org/kali/dists/kali-rolling/{source}/source/Sources.gz'
@@ -37,7 +37,7 @@
   color: '32638f'
   minpackages: 50
   sources:
-    - name: [ contrib, main, non-free ]
+    - name: [ contrib, main, non-free, non-free-firmware ]
       fetcher:
         class: FileFetcher
         url: 'https://http.kali.org/kali/dists/kali-bleeding-edge/{source}/source/Sources.gz'
