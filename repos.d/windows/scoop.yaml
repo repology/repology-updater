@@ -73,4 +73,4 @@
       url: https://github.com/ScoopInstaller/Versions
     - desc: Games repository on GitHub
       url: https://github.com/Calinou/scoop-games
-  groups: [ all ]  # no proper qa, regularly broken json
+  groups: [ all, production ]
