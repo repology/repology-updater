@@ -11,7 +11,7 @@
   family: crux
   ruleset: crux
   minpackages: {{minpackages}}
-  update_period: 6h
+  update_period: 2h
   sources:
     - name: CRUX-ports-JSON
       fetcher:
@@ -34,5 +34,5 @@
 
 {{ crux('3.4', minpackages=1000, valid_till='2020-12-08') }}
 {{ crux('3.5', minpackages=1500, valid_till='2022-09-26') }}
-{{ crux('3.6', minpackages=1500) }}
+{{ crux('3.6', minpackages=1500, valid_till='2023-12-31') }}
 {{ crux('3.7', minpackages=1500) }}
