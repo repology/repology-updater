@@ -33,7 +33,7 @@
       url: 'https://janitor.debian.net/fresh-releases/pkg/{srcname}/build.log'
     - type: PACKAGE_SOURCES
       url: 'https://janitor.debian.net/git/{srcname}/fresh-releases/main'
-  groups: [ all, production, debian-janitor ]
+  groups: [ all, debian-janitor ]
 
 - name: debian_janitor_snapshots
   sortname: debian_zzzzz_janitor_snapshots
@@ -65,4 +65,4 @@
       url: 'https://janitor.debian.net/fresh-snapshots/pkg/{srcname}/build.log'
     - type: PACKAGE_SOURCES
       url: 'https://janitor.debian.net/git/{srcname}/fresh-snapshots/main'
-  groups: [ all, production, debian-janitor ]
+  groups: [ all, debian-janitor ]
