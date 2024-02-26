@@ -38,7 +38,8 @@
   groups: [ all, production, rpmfusion ]
 {% endmacro %}
 
-{{ rpmfusion_fedora(37, minpackages=300) }}
+{{ rpmfusion_fedora(38, minpackages=300) }}
+{{ rpmfusion_fedora(39, minpackages=300) }}
 
 - name: rpmfusion_fedora_rawhide
   type: repository
