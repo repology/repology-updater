@@ -107,7 +107,7 @@
       url: 'https://gitweb.gentoo.org/proj/sci.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitweb.gentoo.org/proj/sci.git/plain/{srcname}/{srcname|basename}-{rawversion}.ebuild'
-  groups: [ all, production, gentoo-overlays ]
+  groups: [ all, gentoo-overlays ]
 
 ###########################################################################
 # Disabled overlays (not really useful)
