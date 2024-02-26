@@ -39,6 +39,10 @@ _DOCUMENT_LABEL_TO_LINK_TYPE = {
 }
 
 
+def _document_label_to_link_type(label: str | None) -> int | None:
+    return _DOCUMENT_LABEL_TO_LINK_TYPE.get(label.lower()) if isinstance(label, str) else None
+
+
 def _iter_directories(path: str) -> Iterable[str]:
     prev_dir: str | None = None
 
@@ -73,7 +77,7 @@ def _parse_manifest(manifest_data: dict[str, Any], pkg: PackageMaker) -> None:
         pkg.add_links(LinkType.UPSTREAM_CHANGELOG, manifest_data.get('ReleaseNotesUrl'))
 
         for documentation in manifest_data.get('Documentations', []):
-            if link_type := _DOCUMENT_LABEL_TO_LINK_TYPE.get(documentation.get('DocumentLabel', '').lower()):
+            if link_type := _document_label_to_link_type(documentation.get('DocumentLabel')) is not None:
                 pkg.add_links(link_type, documentation['DocumentUrl'])
 
         # pkg.set_summary(manifest_data.get('Description'))  # may be long
