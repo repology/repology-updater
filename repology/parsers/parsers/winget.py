@@ -77,7 +77,7 @@ def _parse_manifest(manifest_data: dict[str, Any], pkg: PackageMaker) -> None:
         pkg.add_links(LinkType.UPSTREAM_CHANGELOG, manifest_data.get('ReleaseNotesUrl'))
 
         for documentation in manifest_data.get('Documentations', []):
-            if link_type := _document_label_to_link_type(documentation.get('DocumentLabel')) is not None:
+            if (link_type := _document_label_to_link_type(documentation.get('DocumentLabel'))) is not None:
                 pkg.add_links(link_type, documentation['DocumentUrl'])
 
         # pkg.set_summary(manifest_data.get('Description'))  # may be long
