@@ -18,7 +18,6 @@
 import os
 import re
 import tarfile
-from abc import abstractmethod
 from io import StringIO
 from typing import Any, IO, Iterable
 
@@ -77,68 +76,10 @@ def _parse_cabal_file(cabalfile: IO[str]) -> dict[str, str]:
     return cabaldata
 
 
-def _iter_cabal_hier(path: str) -> Iterable[dict[str, str]]:
-    for moduledir in os.listdir(path):
-        modulepath = os.path.join(path, moduledir)
-
-        cabalpath: str | None = None
-        maxversion: str | None = None
-
-        for versiondir in os.listdir(modulepath):
-            if versiondir == 'preferred-versions':
-                continue
-
-            if maxversion is None or version_compare(versiondir, maxversion) > 0:
-                maxversion = versiondir
-                cabalpath = os.path.join(path, moduledir, maxversion, moduledir + '.cabal')
-
-        if cabalpath is not None:
-            with open(cabalpath) as cabaldata:
-                yield _parse_cabal_file(cabaldata)
-
-
 def _extract_tarinfo(tar: tarfile.TarFile, tarinfo: tarfile.TarInfo) -> str:
     if (extracted := tar.extractfile(tarinfo)) is None:
         raise RuntimeError(f'cannot extract {tarinfo.name}')
     return extracted.read().decode('utf-8-sig')
-
-
-def _iter_hackage_tarfile(path: str) -> Iterable[dict[str, str]]:
-    preferred_versions: dict[str, str] = {}
-
-    current_name: str | None = None
-    maxversion: str | None = None
-    maxversion_data: str | None = None
-
-    with tarfile.open(path, 'r|*') as tar:
-        for tarinfo in tar:
-            tarpath = tarinfo.name.split('/')
-
-            if tarpath[-1] == 'preferred-versions':
-                if current_name is not None:
-                    raise RuntimeError('format assumption failed: preferred-versions go before all packages')
-
-                preferred_versions[tarpath[0]] = _extract_tarinfo(tar, tarinfo)
-            elif tarpath[-1].endswith('.cabal'):
-                name, version = tarpath[0:2]
-
-                if name != current_name:
-                    if current_name is not None and name < current_name:
-                        raise RuntimeError('format assumption failed: packages are alphabetically ordered')
-
-                    if maxversion_data is not None:
-                        yield _parse_cabal_file(StringIO(maxversion_data))
-
-                    current_name = name
-                    maxversion = version
-                    maxversion_data = _extract_tarinfo(tar, tarinfo)
-                else:
-                    if maxversion is None or version_compare(version, maxversion) > 0:
-                        maxversion = version
-                        maxversion_data = _extract_tarinfo(tar, tarinfo)
-
-        if maxversion_data is not None:
-            yield _parse_cabal_file(StringIO(maxversion_data))
 
 
 def _iter_hackage_tarfile_multipass(path: str) -> Iterable[dict[str, str]]:
@@ -179,13 +120,9 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[dict[str, str]]:
                         yield _parse_cabal_file(StringIO(_extract_tarinfo(tar, tarinfo)))
 
 
-class HackageParserBase(Parser):
-    @abstractmethod
-    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
-        pass
-
+class HackageParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        for cabaldata in self._iterate(path):
+        for cabaldata in _iter_hackage_tarfile_multipass(path):
             with factory.begin() as pkg:
                 pkg.add_name(cabaldata['name'], NameType.HACKAGE_NAME)
                 pkg.set_version(cabaldata['version'])
@@ -206,18 +143,3 @@ class HackageParserBase(Parser):
                 # parsing need to be implemented first
 
                 yield pkg
-
-
-class HackageParser(HackageParserBase):
-    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
-        yield from _iter_cabal_hier(path)
-
-
-class HackageTarParser(HackageParserBase):
-    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
-        yield from _iter_hackage_tarfile(path)
-
-
-class HackageTar01Parser(HackageParserBase):
-    def _iterate(self, path: str) -> Iterable[dict[str, str]]:
-        yield from _iter_hackage_tarfile_multipass(path)

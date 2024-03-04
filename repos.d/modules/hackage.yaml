@@ -15,7 +15,7 @@
         class: FileFetcher
         url: http://hackage.haskell.org/01-index.tar.gz
       parser:
-        class: HackageTar01Parser
+        class: HackageParser
   shadow: true
   repolinks:
     - desc: Haskell Language
