@@ -82,7 +82,7 @@ def _extract_tarinfo(tar: tarfile.TarFile, tarinfo: tarfile.TarInfo) -> str:
     return extracted.read().decode('utf-8-sig')
 
 
-def _iter_hackage_tarfile_multipass(path: str) -> Iterable[dict[str, str]]:
+def _iter_hackage_tarfile_multipass(path: str) -> Iterable[tuple[str, dict[str, str]]]:
     preferred_versions: dict[str, str] = {}
     latest_versions: dict[str, list[Any]] = {}  # name -> [version, count]
 
@@ -117,13 +117,13 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[dict[str, str]]:
                     if latest_versions[name][1] > 1:
                         latest_versions[name][1] -= 1
                     else:
-                        yield _parse_cabal_file(StringIO(_extract_tarinfo(tar, tarinfo)))
+                        yield tarinfo.name, _parse_cabal_file(StringIO(_extract_tarinfo(tar, tarinfo)))
 
 
 class HackageParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        for cabaldata in _iter_hackage_tarfile_multipass(path):
-            with factory.begin() as pkg:
+        for filename, cabaldata in _iter_hackage_tarfile_multipass(path):
+            with factory.begin(filename) as pkg:
                 pkg.add_name(cabaldata['name'], NameType.HACKAGE_NAME)
                 pkg.set_version(cabaldata['version'])
 
