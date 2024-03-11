@@ -1,0 +1,28 @@
+###########################################################################
+# Managarm
+###########################################################################
+
+- name: managarm
+  type: repository
+  desc: Managarm
+  family: managarm
+  ruleset: managarm
+  color: "97bde3"
+  minpackages: 240
+  default_maintainer: fallback-mnt-managarm@repology
+  sources:
+    - name: x86_64
+      fetcher:
+        class: TarFetcher
+        url: 'https://builds.managarm.org/repos/packages/managarm/rolling/x86_64-repodata'
+      parser:
+        class: ManagarmPlistParser
+  repolinks:
+    - desc: Managarm home
+      url: https://managarm.org
+    - desc: Managarm build server
+      url: https://builds.managarm.org
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/managarm/bootstrap-managarm'
+  groups: [ all, production ]
