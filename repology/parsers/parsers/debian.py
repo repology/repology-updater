@@ -150,3 +150,9 @@ class DebianPackagesParser(DebianSourcesParser):
         if 'Binary' in pkgdata or 'Source' in pkgdata:
             raise RuntimeError('Sanity check failed, expected Package descriptions without Binary or Source fields')
         pkg.add_name(pkgdata['Package'], NameType.DEBIAN_BINARY_PACKAGE)
+
+class DebianPackagesWithSourceParser(DebianSourcesParser):
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: dict[str, str]) -> None:
+        if 'Binary' in pkgdata:
+            raise RuntimeError('Sanity check failed, expected Package descriptions without Binary field')
+        pkg.add_name(pkgdata['Package'], NameType.DEBIAN_BINARY_PACKAGE)

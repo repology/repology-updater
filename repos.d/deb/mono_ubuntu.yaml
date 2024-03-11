@@ -1,0 +1,36 @@
+###########################################################################
+# Ubuntu
+###########################################################################
+
+{% macro mono_ubuntu(major, minor, codename, minpackages) %}
+- name: mono_ubuntu_{{major}}_{{minor}}
+  type: repository
+  desc: Mono Ubuntu {{major}}.{{minor}}
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: {{ minpackages }}
+  sources:
+    - name: [ {{codename}}/main ]
+      fetcher:
+        class: FileFetcher
+        url: 'https://download.mono-project.com/repo/ubuntu/dists/stable-{{codename}}/main/source/Sources.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Mono Ubuntu packages
+      url: https://download.mono-project.com/repo/ubuntu/
+    - desc: Mono Ubuntu packages in {{codename}}
+      url: https://download.mono-project.com/repo/ubuntu/dists/stable-{{codename}}/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://www.mono-project.com/'
+  groups: [ all, production, mono_ubuntu ]
+{% endmacro %}
+
+# See https://www.mono-project.com/download/stable/#download-lin, focal should work on the later ubuntu releases
+{{ mono_ubuntu('20', '04', 'focal', minpackages=10) }}

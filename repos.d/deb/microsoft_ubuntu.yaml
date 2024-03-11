@@ -1,0 +1,40 @@
+###########################################################################
+# Ubuntu
+###########################################################################
+
+{% macro microsoft_ubuntu(major, minor, codename, minpackages) %}
+- name: microsoft_ubuntu_{{major}}_{{minor}}
+  type: repository
+  desc: Microsoft Ubuntu {{major}}.{{minor}}
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, ubuntu]
+  color: 'e95420'
+  minpackages: {{ minpackages }}
+  sources:
+    - name: [ {{codename}}/main ]
+      fetcher:
+        class: FileFetcher
+        # Using specific arch and Packages.gz as Sources.gz is not populated in this repo
+        url: 'https://packages.microsoft.com/ubuntu/{{major}}.{{minor}}/prod/dists/{{codename}}/main/binary-amd64/Packages.gz'
+        fetch_timeout: 5
+        compression: gz
+      parser:
+        class: DebianPackagesWithSourceParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Microsoft Ubuntu packages
+      url: https://packages.microsoft.com/ubuntu/{{major}}.{{minor}}/
+    - desc: Microsoft Ubuntu packages in {{codename}}
+      url: https://packages.microsoft.com/ubuntu/{{major}}.{{minor}}/prod/dists/{{codename}}/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu'
+  groups: [ all, production, microsoft_ubuntu ]
+{% endmacro %}
+
+# See https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#register-the-microsoft-package-repository
+{{ microsoft_ubuntu('20', '04', 'focal', minpackages=750) }}
+{{ microsoft_ubuntu('22', '04', 'jammy', minpackages=750) }}
+{{ microsoft_ubuntu('23', '04', 'lunar', minpackages=300) }}
+{{ microsoft_ubuntu('23', '10', 'mantic', minpackages=100) }}
