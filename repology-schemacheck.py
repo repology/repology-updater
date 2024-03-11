@@ -181,6 +181,7 @@ rulesets = families + [
     'rpmsphere',
     'siduction',
     'slitaz_next',
+    'slitaz_current',
     'stackage',
     'trisquel',
     'ubuntu',
