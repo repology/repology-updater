@@ -60,3 +60,32 @@
     - type: PACKAGE_BUILD_LOG
       url: 'https://cook.slitaz.org/next/{srcname}/log/'
   groups: [ all, production, slitaz ]
+
+- name: slitaz_current
+  type: repository
+  desc: SliTaz Current
+  statsgroup: SliTaz
+  family: slitaz
+  ruleset: [slitaz,slitaz_current]
+  minpackages: 1500
+  sources:
+    - name: repo.json
+      fetcher:
+        class: FileFetcher
+        url: http://mirror1.slitaz.org/packages/current/repo.json.gz
+        compression: gz
+      parser:
+        class: SliTazJsonParser
+  repolinks:
+    - desc: SliTaz home
+      url: http://www.slitaz.org/
+    - desc: SliTaz packages
+      url: http://pkg.slitaz.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://pkg.slitaz.org/?info={binname|quote}&version=current'
+    - type: PACKAGE_RECIPE
+      url: 'https://pkg.slitaz.org/?receipt={binname|quote}&version=current'
+    - type: PACKAGE_BUILD_LOG
+      url: 'https://cook.slitaz.org/current/cooker.cgi?pkg={binname|quote}'
+  groups: [ all, production, slitaz ]
