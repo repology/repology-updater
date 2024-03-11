@@ -7,7 +7,7 @@
   statsgroup: MidnightBSD mports
   singular: MidnightBSD port
   family: freebsd
-  ruleset: freebsd
+  ruleset: [freebsd, mports]
   minpackages: 3000
   sources:
     - name: latest
