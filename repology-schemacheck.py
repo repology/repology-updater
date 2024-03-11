@@ -165,6 +165,7 @@ rulesets = families + [
     'melpa_stable',
     'melpa_unstable',
     'mint',
+    'mports',
     'msys2_mingw',
     'msys2_msys2',
     'mx',
