@@ -20,7 +20,7 @@
         fetch_timeout: 5
         compression: gz
       parser:
-        class: DebianPackagesWithSourceParser
+        class: DebianPackagesWithSourceFieldParser
       subrepo: '{source}'
   repolinks:
     - desc: Microsoft Ubuntu packages
