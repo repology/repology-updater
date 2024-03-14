@@ -2,7 +2,7 @@
 # Apertis
 ###########################################################################
 
-{% macro apertis(version, minpackages, suffix='', development=False, hmi=False) %}
+{% macro apertis(version, minpackages, suffix='', development=False, hmi=False, valid_till=Null) %}
 - name: apertis_v{{version}}
   type: repository
   desc: Apertis v{{version}}{% if development %} Development{% endif %}
@@ -10,6 +10,9 @@
   family: debuntu
   ruleset: [debuntu, apertis]
   color: '3a5a80'
+  {% if valid_till %}
+  valid_till: {{ valid_till }}
+  {% endif %}
   minpackages: {{minpackages}}
   sources:
     {% set v = 'v' + version|string + suffix %}
@@ -41,8 +44,8 @@
   groups: [ all, production, apertis ]
 {% endmacro %}
 
-{{ apertis(2021, minpackages=3500, hmi=true) }}
-{{ apertis(2022, minpackages=3500) }}
-{{ apertis(2023, minpackages=3500) }}
-{{ apertis(2024, minpackages=3500) }}
-{{ apertis(2025, suffix='dev1', minpackages=3500, development=true) }}
+{{ apertis(2021, minpackages=3500, valid_till='2022-12-31', hmi=true) }}
+{{ apertis(2022, minpackages=3500, valid_till='2023-12-31') }}
+{{ apertis(2023, minpackages=3500, valid_till='2024-12-31') }}
+{{ apertis(2024, minpackages=3500, valid_till='2025-12-31') }}
+{{ apertis(2025, suffix='dev2', minpackages=3500, development=true) }}
