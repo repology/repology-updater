@@ -1,0 +1,40 @@
+###########################################################################
+# Chimera Linux cports
+#
+# https://chimera-linux.org/
+###########################################################################
+
+
+- name: chimera
+  type: repository
+  desc: Chimera Linux
+  statsgroup: Chimera
+  family: chimera
+  ruleset: chimera
+  minpackages: 8000
+  default_maintainer: fallback-mnt-chimera@repology
+  sources:
+    {% for subrepo in ['main', 'contrib', 'user'] %}
+    - name: {{subrepo}}
+      fetcher:
+        class: FileFetcher
+        url: 'https://pkgs.chimera-linux.org/apkindex/current/{{subrepo}}/x86_64'
+      parser:
+        class: ApkIndexParser
+      subrepo: {{subrepo}}
+    {% endfor %}
+  repolinks:
+    - desc: Chimera Linux home
+      url: https://chimera-linux.org/
+    - desc: Chimera Linux packages
+      url: https://pkgs.chimera-linux.org/packages
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://pkgs.chimera-linux.org/packages?name={binname|quote}{{pkgs_branch}}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/chimera-linux/cports/tree/master/{subrepo}/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/chimera-linux/cports/{subrepo}/{srcname}/template.py'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/chimera-linux/cports/master/{subrepo}/{srcname}/template.py'
+  groups: [ all, production, chimera ]
