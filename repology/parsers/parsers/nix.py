@@ -19,7 +19,7 @@ import re
 from typing import Any, Iterable
 
 from repology.logger import Logger
-from repology.package import PackageFlags
+from repology.package import PackageFlags, LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_dict
@@ -177,7 +177,10 @@ class NixJsonParser(Parser):
                 if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
                     pkg.set_flags(PackageFlags.IGNORE)
 
-                pkg.add_homepages(meta.get('homepage'))
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, meta.get('homepage'))
+
+                if 'changelog' in meta:
+                    pkg.add_links(LinkType.UPSTREAM_CHANGELOG, meta.get('changelog'))
 
                 if 'description' in meta:
                     pkg.set_summary(meta['description'].replace('\n', ' '))
