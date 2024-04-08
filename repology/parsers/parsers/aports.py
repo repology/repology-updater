@@ -45,8 +45,15 @@ def _iter_apkindex(path: str) -> Iterator[dict[str, str]]:
 
 
 class ApkIndexParser(Parser):
+    _path_suffix: str | None = None
+
+    def __init__(self, path_suffix: str | None = None) -> None:
+        self._path_suffix = path_suffix
+
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        for pkgdata in _iter_apkindex(os.path.join(path, 'APKINDEX')):
+        index_path = os.path.join(path, self._path_suffix) if self._path_suffix else path
+
+        for pkgdata in _iter_apkindex(index_path):
             with factory.begin(pkgdata['P']) as pkg:
                 pkg.add_name(pkgdata['P'], NameType.APK_BIG_P)
                 pkg.add_name(pkgdata['o'], NameType.APK_SMALL_O)

@@ -18,6 +18,7 @@
         url: http://mirror.postmarketos.org/postmarketos/{{tag}}/aarch64/APKINDEX.tar.gz
       parser:
         class: ApkIndexParser
+        path_suffix: APKINDEX
       subrepo: '{source}'
       {% if version != "20.05" %}
       packagelinks:

@@ -261,6 +261,9 @@ schemas = {
                     Required('parser'): {
                         Required('class'): str,
 
+                        # alpine
+                        'path_suffix': str,
+
                         # rpm
                         'src': bool,
                         'binary': bool,
