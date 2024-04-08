@@ -40,6 +40,7 @@ families = [
     'carbs',
     'centos',
     'chakra',
+    'chimera',
     'chocolatey',
     'conan',
     'conda',

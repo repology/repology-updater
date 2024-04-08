@@ -4,14 +4,13 @@
 # https://chimera-linux.org/
 ###########################################################################
 
-
 - name: chimera
   type: repository
   desc: Chimera Linux
   statsgroup: Chimera
   family: chimera
   ruleset: chimera
-  minpackages: 8000
+  minpackages: 6000
   default_maintainer: fallback-mnt-chimera@repology
   sources:
     {% for subrepo in ['main', 'contrib', 'user'] %}
@@ -34,7 +33,7 @@
     - type: PACKAGE_SOURCES
       url: 'https://github.com/chimera-linux/cports/tree/master/{subrepo}/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/chimera-linux/cports/{subrepo}/{srcname}/template.py'
+      url: 'https://github.com/chimera-linux/cports/blob/master/{subrepo}/{srcname}/template.py'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/chimera-linux/cports/master/{subrepo}/{srcname}/template.py'
-  groups: [ all, production, chimera ]
+  groups: [ all, production ]
