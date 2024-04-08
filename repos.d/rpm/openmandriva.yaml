@@ -68,6 +68,7 @@
 {{ openmandriva("4.1", archived=True, minpackages=10000) }}
 {{ openmandriva("4.2", archived=True, minpackages=11000) }}
 {{ openmandriva("4.3", minpackages=11000) }}
+{{ openmandriva("5.0", minpackages=11000) }}
 
 - name: openmandriva_rolling
   type: repository
