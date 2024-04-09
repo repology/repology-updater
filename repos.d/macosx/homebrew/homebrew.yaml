@@ -27,9 +27,9 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://formulae.brew.sh/formula/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/Homebrew/homebrew-core/blob/master/Formula/{srcname}.rb'
+      url: 'https://github.com/Homebrew/homebrew-core/blob/master/Formula/{srcname|lib_or_first_letter}/{srcname}.rb'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/{srcname}.rb'
+      url: 'https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/{srcname|lib_or_first_letter}/{srcname}.rb'
   groups: [ all, production, brew ]
 
 - name: homebrew_casks
@@ -56,7 +56,7 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://formulae.brew.sh/cask/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/Homebrew/homebrew-cask/blob/master/Casks/{srcname}.rb'
+      url: 'https://github.com/Homebrew/homebrew-cask/blob/master/Casks/{srcname|first_letter}/{srcname}.rb'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/{srcname}.rb'
+      url: 'https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/{srcname|first_letter}/{srcname}.rb'
   groups: [ all, production, brew ]
