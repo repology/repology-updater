@@ -23,7 +23,7 @@
       subrepo: {{sub}}
       packagelinks:
         - type: PACKAGE_SOURCES
-          url: 'http://mxrepo.com/mx/repo/pool/{{sub}}/{srcname|lib_or_first_letter}/{srcname}/'
+          url: 'http://mxrepo.com/mx/repo/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
     {% endfor %}
   repolinks:
     - desc: MX Linux
@@ -51,7 +51,7 @@
         class: DebianSourcesParser
       packagelinks:
         - type: PACKAGE_SOURCES
-          url: 'http://mxrepo.com/mx/testrepo/pool/test/{srcname|lib_or_first_letter}/{srcname}/'
+          url: 'http://mxrepo.com/mx/testrepo/pool/test/{srcname|lib_and_first_letter}/{srcname}/'
   repolinks:
     - desc: MX Linux
       url: https://mxlinux.org/

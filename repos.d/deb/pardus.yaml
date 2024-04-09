@@ -78,7 +78,7 @@
       url: https://www.pardus.org.tr/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'http://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|lib_or_first_letter}/{srcname}/'
+      url: 'http://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|lib_and_first_letter}/{srcname}/'
   groups: [ all, production, pardus ]
 {% endmacro %}
 
