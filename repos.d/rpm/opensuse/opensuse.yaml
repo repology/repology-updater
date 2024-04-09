@@ -103,14 +103,14 @@
     - name: backports-update
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.3/backports/
+        url: http://download.opensuse.org/update/leap/{{version}}/backports/
       parser:
         class: RepodataParser
       subrepo: updates/backports
     - name: sle-update
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/15.3/sle/
+        url: http://download.opensuse.org/update/leap/{{version}}/sle/
       parser:
         class: RepodataParser
       subrepo: updates/sle
