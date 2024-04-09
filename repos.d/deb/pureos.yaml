@@ -1,44 +1,37 @@
 ###########################################################################
 # PureOS
 ###########################################################################
-- name: pureos_amber
+{% macro pureos(codename, minpackages) %}
+- name: pureos_{{codename}}
   type: repository
-  desc: PureOS Amber
+  desc: PureOS {{codename}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, pureos]
   color: '000000'
   minpackages: 26000
   sources:
-    - name: main
+    {% set subrepos1 = [codename] if codename == 'landing' else [codename, codename + '-updates'] %}
+    {% for sub1 in subrepos1 %}
+    {% set sub2 = 'main' %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://repo.pureos.net/pureos/dists/amber/main/source/Sources.xz'
+        url: 'https://repo.pureos.net/pureos/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
+      subrepo: {{sub1}}/{{sub2}}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://software.pureos.net/package/src/pureos/{{sub1}}/{srcname}'
+    {% endfor %}
   repolinks:
     - desc: PureOS home
       url: https://pureos.net/
   groups: [ all, production, pureos ]
+{% endmacro %}
 
-- name: pureos_landing
-  type: repository
-  desc: PureOS landing
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [debuntu, pureos]
-  color: '000000'
-  minpackages: 26000
-  sources:
-    - name: main
-      fetcher:
-        class: FileFetcher
-        url: 'http://repo.pureos.net/pureos/dists/landing/main/source/Sources.xz'
-        compression: xz
-      parser:
-        class: DebianSourcesParser
-  repolinks:
-    - desc: PureOS home
-      url: https://pureos.net/
-  groups: [ all, production, pureos ]
+{{ pureos('amber', 26000) }}
+{{ pureos('byzantium', 28000) }}
+{{ pureos('landing', 32000) }}
