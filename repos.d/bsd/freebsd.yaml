@@ -35,6 +35,8 @@
       url: 'https://www.freshports.org/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://cgit.freebsd.org/ports/tree/{srcname}/'
+    - type: PACKAGE_RECIPE
+      url: 'https://cgit.freebsd.org/ports/tree/{srcname}/Makefile'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://cgit.freebsd.org/ports/plain/{srcname}/Makefile'
     - type: PACKAGE_ISSUE_TRACKER
