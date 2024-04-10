@@ -17,6 +17,7 @@
         url: 'https://distfiles.adelielinux.org/adelie/current/{source}/ppc64/APKINDEX.tar.gz'
       parser:
         class: ApkIndexParser
+        path_suffix: APKINDEX
       subrepo: '{source}'
   repolinks:
     - desc: Adélie Linux home
