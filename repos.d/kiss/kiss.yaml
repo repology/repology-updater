@@ -6,44 +6,42 @@
   desc: KISS Linux Main
   family: kiss
   ruleset: kiss
-  minpackages: 110
+  minpackages: 130
   sources:
     - name: repo
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/kisslinux/repo.git'
+        url: 'https://codeberg.org/kiss-community/repo.git'
         depth: null
         sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
       parser:
         class: KissGitParser
         maintainer_from_git: true
   repolinks:
-    - desc: KISS Linux home
-      url: https://kisslinux.xyz/
-    - desc: KISS Linux - Package System
-      url: https://kisslinux.xyz/package-system/
-    - desc: Main Repositories on GitHub
-      url: https://github.com/kisslinux/repo
+    - desc: KISS Linux Community home
+      url: https://kisscommunity.org/
+    - desc: Main repository
+      url: https://codeberg.org/kiss-community/repo/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/kisslinux/repo/tree/master/{path}'
+      url: 'https://codeberg.org/kiss-community/repo/src/branch/master/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/kisslinux/repo/blob/master/{path}/patches/{?patch}'
+      url: 'https://codeberg.org/kiss-community/repo/src/branch/master/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/kisslinux/repo/master/{path}/patches/{?patch}'
-  groups: []  # unparsable, see #1166
+      url: 'https://codeberg.org/kiss-community/repo/raw/branch/master/{path}/patches/{?patch}'
+  groups: [ all, production, kiss ]
 
 - name: kiss_community
   type: repository
   desc: KISS Linux Community
   family: kiss
   ruleset: kiss
-  minpackages: 20
+  minpackages: 300
   sources:
     - name: repo
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/kisslinux/community.git'
+        url: 'https://codeberg.org/kiss-community/community/'
         branch: main
         depth: null
         sparse_checkout: [ '**/version', '**/sources', '**/patches' ]
@@ -51,17 +49,15 @@
         class: KissGitParser
         maintainer_from_git: true
   repolinks:
-    - desc: KISS Linux home
-      url: https://kisslinux.xyz/
-    - desc: KISS Linux - Package System
-      url: https://kisslinux.xyz/package-system/
-    - desc: Community Repository on GitHub
-      url: https://github.com/kisslinux/repo-community
+    - desc: KISS Linux Community home
+      url: https://kisscommunity.org/
+    - desc: Community repository
+      url: https://codeberg.org/kiss-community/community/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/kisslinux/community/tree/main/{path}'
+      url: 'https://codeberg.org/kiss-community/community/src/branch/main/{path}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/kisslinux/community/blob/main/{path}/patches/{?patch}'
+      url: 'https://codeberg.org/kiss-community/community/src/branch/main/{path}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/kisslinux/community/main/{path}/patches/{?patch}'
-  groups: [ all, kiss ]
+      url: 'https://codeberg.org/kiss-community/community/raw/branch/main/{path}/patches/{?patch}'
+  groups: [ all, production, kiss ]
