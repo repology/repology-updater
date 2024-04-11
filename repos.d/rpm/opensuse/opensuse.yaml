@@ -55,7 +55,7 @@
       url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:42.3:Update/{srcname}/{srcname}.spec?expand=1'
   groups: [ all, production, opensuse, rpm ]
 
-{% macro opensuse_leap(version, minpackages, valid_till=None) %}
+{% macro opensuse_leap(version, minpackages, valid_till=None, backports=True, sle=True) %}
 - name: opensuse_leap_{{version|replace('.', '_')}}
   type: repository
   desc: openSUSE Leap {{version}}
@@ -100,6 +100,7 @@
         class: RepodataParser
         vertags: [lp,bp]
       subrepo: updates/non-oss
+    {% if backports %}
     - name: backports-update
       fetcher:
         class: RepodataFetcher
@@ -107,6 +108,8 @@
       parser:
         class: RepodataParser
       subrepo: updates/backports
+    {% endif %}
+    {% if sle %}
     - name: sle-update
       fetcher:
         class: RepodataFetcher
@@ -114,6 +117,7 @@
       parser:
         class: RepodataParser
       subrepo: updates/sle
+    {% endif %}
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -131,12 +135,13 @@
 {% endmacro %}
 
 # https://en.opensuse.org/Lifetime
-{{ opensuse_leap('15.0', minpackages=11000, valid_till='2019-12-03') }}
-{{ opensuse_leap('15.1', minpackages=10500, valid_till='2021-02-02') }}
-{{ opensuse_leap('15.2', minpackages=10500, valid_till='2022-01-04') }}
-{{ opensuse_leap('15.3', minpackages=10500, valid_till='2022-12-31') }}
-{{ opensuse_leap('15.4', minpackages=10500, valid_till='2023-12-01') }} # expected eol date
-{{ opensuse_leap('15.5', minpackages=10500) }}
+{{ opensuse_leap('15.0', minpackages=12000, valid_till='2019-12-03', backports=false, sle=false) }}
+{{ opensuse_leap('15.1', minpackages=13000, valid_till='2021-02-02', backports=false, sle=false) }}
+{{ opensuse_leap('15.2', minpackages=15000, valid_till='2022-01-04', backports=false, sle=false) }}
+{{ opensuse_leap('15.3', minpackages=17000, valid_till='2022-12-31') }}
+{{ opensuse_leap('15.4', minpackages=19000, valid_till='2023-12-31') }} # expected eol date
+{{ opensuse_leap('15.5', minpackages=18000, valid_till='2024-12-31') }} # expected eol date
+{{ opensuse_leap('15.6', minpackages=15000, valid_till='2025-12-31') }} # expected eol date
 
 - name: opensuse_tumbleweed
   type: repository
