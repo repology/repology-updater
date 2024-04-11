@@ -17,6 +17,7 @@
 
 import json
 import os
+import time
 from itertools import count
 
 from repology.atomic_fs import AtomicDir
@@ -26,19 +27,36 @@ from repology.logger import Logger
 
 
 class CratesIOFetcher(ScratchDirFetcher):
-    def __init__(self, url: str, per_page: int = 100, fetch_timeout: int = 5, fetch_delay: int | None = None):
+    def __init__(self, url: str, per_page: int = 100, fetch_timeout: int = 5, fetch_delay: int | None = None, max_tries: int = 5, retry_delay: int = 5):
         self.url = url
         self.per_page = per_page
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
+        self.max_tries = max_tries
+        self.retry_delay = retry_delay
+
+    def _do_fetch_retry(self, url: str, logger: Logger) -> str:
+        num_try = 1
+        while True:
+            logger.log(f'getting {url}' if num_try == 1 else f'getting {url} (try #{num_try})')
+
+            try:
+                return self.do_http(url).text
+            except ConnectionError as e:
+                if num_try >= self.max_tries:
+                    raise
+                else:
+                    logger.log(f'failed to fetch {url}: {str(e)}, retrying after delay...', Logger.ERROR)
+                    time.sleep(self.retry_delay)
+                    num_try += 1
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         page_counter = count()
         query = '?per_page={}&sort=alpha'.format(self.per_page)
         while query:
             url = self.url + query
-            logger.log('getting ' + url)
+            #logger.log('getting ' + url)
 
-            text = self.do_http(url).text
+            text = self._do_fetch_retry(url, logger)
             with open(os.path.join(statedir.get_path(), '{}.json'.format(next(page_counter))), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
                 pagefile.flush()
