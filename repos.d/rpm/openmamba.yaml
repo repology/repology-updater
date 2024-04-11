@@ -13,7 +13,7 @@
     - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: http://cdn.openmamba.org/pub/openmamba/{{sub}}/SRPMS.base/
+        url: https://cdn.openmamba.org/pub/openmamba/{{sub}}/SRPMS.base/
       parser:
         class: RepodataParser
         vertags: mamba
@@ -21,10 +21,12 @@
       packagelinks:
         - type: PACKAGE_HOMEPAGE
           url: 'https://openmamba.org/en/packages/?tag={{sub}}&pkg={srcname}.source'  # Note that this does not need |quote for some reason
+        - type: PACKAGE_SOURCES
+          url: 'https://src.openmamba.org/rpms/{srcname|Plus}'
         - type: PACKAGE_RECIPE
-          url: 'https://openmamba.org/en/show/?file=/pub/openmamba/{{sub}}/specs/{srcname}.spec'
+          url: 'https://src.openmamba.org/rpms/{srcname|Plus}/src/branch/main/{srcname}.spec'
         - type: PACKAGE_RECIPE_RAW
-          url: 'https://openmamba.org/pub/openmamba/{{sub}}/specs/{srcname}.spec'
+          url: 'https://src.openmamba.org/rpms/{srcname|Plus}/raw/branch/main/{srcname}.spec'
     {% endfor %}
   repolinks:
     - desc: openmamba home

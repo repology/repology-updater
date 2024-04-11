@@ -37,6 +37,7 @@ _FILTERS: dict[str, Callable[[str], str]] = {
     'inc': lambda x: str(_safe_int(x) + 1),
     'quote': lambda x: urllib.parse.quote(x),
     'strip_nevra_epoch': lambda x: x.split(':', 1)[-1],
+    'Plus': lambda x: x.replace('+', 'Plus'),
 }
 
 
