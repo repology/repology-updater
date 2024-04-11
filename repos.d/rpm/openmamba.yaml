@@ -9,7 +9,7 @@
   color: '5bb138'
   minpackages: 5100
   sources:
-    {% for sub in ['devel', 'devel-games', 'devel-makedist', 'devel-autodist', 'devel-misc', 'devel-future'] %}
+    {% for sub in ['base', 'devel-makedist', 'devel-autodist', 'devel-misc', 'devel-future'] %}
     - name: {{sub}}
       fetcher:
         class: RepodataFetcher
