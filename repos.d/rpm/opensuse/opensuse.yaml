@@ -15,28 +15,28 @@
     - name: oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/42.3/repo/oss/suse/
+        url: https://download.opensuse.org/source/distribution/leap/42.3/repo/oss/suse/
       parser:
         class: RepodataParser
       subrepo: main/oss
     - name: non-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
+        url: https://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
       parser:
         class: RepodataParser
       subrepo: main/non-oss
     - name: updates-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/42.3/oss/
+        url: https://download.opensuse.org/update/leap/42.3/oss/
       parser:
         class: RepodataParser
       subrepo: updates/oss
     - name: updates-non-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/42.3/non-oss/
+        url: https://download.opensuse.org/update/leap/42.3/non-oss/
       parser:
         class: RepodataParser
       subrepo: updates/non-oss
@@ -71,7 +71,7 @@
     - name: oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/{{version}}/repo/oss/
+        url: https://download.opensuse.org/source/distribution/leap/{{version}}/repo/oss/
       parser:
         class: RepodataParser
         vertags: [lp,bp]  # none up to 42.3, lp for [15.0, 15.2], bp since 15.3
@@ -79,7 +79,7 @@
     - name: non-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/source/distribution/leap/{{version}}/repo/non-oss/
+        url: https://download.opensuse.org/source/distribution/leap/{{version}}/repo/non-oss/
       parser:
         class: RepodataParser
         vertags: [lp,bp]
@@ -87,7 +87,7 @@
     - name: updates-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/{{version}}/oss/
+        url: https://download.opensuse.org/update/leap/{{version}}/oss/
       parser:
         class: RepodataParser
         vertags: [lp,bp]
@@ -95,7 +95,7 @@
     - name: updates-non-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/{{version}}/non-oss/
+        url: https://download.opensuse.org/update/leap/{{version}}/non-oss/
       parser:
         class: RepodataParser
         vertags: [lp,bp]
@@ -103,14 +103,14 @@
     - name: backports-update
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/{{version}}/backports/
+        url: https://download.opensuse.org/update/leap/{{version}}/backports/
       parser:
         class: RepodataParser
       subrepo: updates/backports
     - name: sle-update
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/update/leap/{{version}}/sle/
+        url: https://download.opensuse.org/update/leap/{{version}}/sle/
       parser:
         class: RepodataParser
       subrepo: updates/sle
@@ -148,12 +148,12 @@
   minpackages: 10000
   sources:
     # NOTE1: there are two url schemes, apparently with same contents
-    # http://download.opensuse.org/source/tumbleweed/repo/oss/
-    # http://download.opensuse.org/tumbleweed/repo/src-oss/
+    # https://download.opensuse.org/source/tumbleweed/repo/oss/
+    # https://download.opensuse.org/tumbleweed/repo/src-oss/
     - name: src-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/tumbleweed/repo/src-oss/
+        url: https://download.opensuse.org/tumbleweed/repo/src-oss/
       parser:
         class: RepodataParser
       subrepo: src-oss
@@ -165,7 +165,7 @@
     - name: src-non-oss
       fetcher:
         class: RepodataFetcher
-        url: http://download.opensuse.org/tumbleweed/repo/src-non-oss/
+        url: https://download.opensuse.org/tumbleweed/repo/src-non-oss/
       parser:
         class: RepodataParser
       subrepo: src-non-oss
