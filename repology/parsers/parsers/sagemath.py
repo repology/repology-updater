@@ -51,7 +51,8 @@ class SageMathParser(Parser):
                 pkg.add_name(os.path.basename(pkgpath_rel), NameType.SAGEMATH_NAME)
 
                 projectname = os.path.basename(pkgpath_rel)
-                if os.path.exists(os.path.join(pkgpath_abs, 'install-requires.txt')):
+                if os.path.exists(os.path.join(pkgpath_abs, 'install-requires.txt')) or os.path.exists(os.path.join(pkgpath_abs, 'version_requirements.txt')):
+                    # version_requirements.txt has replaced install-requires.txt in Sage 10.4.beta3
                     projectname = 'python:' + projectname
 
                 pkg.add_name(projectname, NameType.SAGEMATH_PROJECT_NAME)
