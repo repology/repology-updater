@@ -2,8 +2,9 @@
 # KISS Linux
 ###########################################################################
 - name: kiss_main
+  sortname: kiss__0
   type: repository
-  desc: KISS Linux Main
+  desc: KISS Community - main
   family: kiss
   ruleset: kiss
   minpackages: 130
@@ -32,8 +33,9 @@
   groups: [ all, production, kiss ]
 
 - name: kiss_community
+  sortname: kiss__1  # followed by kiss games and possibly other additional repos
   type: repository
-  desc: KISS Linux Community
+  desc: KISS Community - community
   family: kiss
   ruleset: kiss
   minpackages: 300
