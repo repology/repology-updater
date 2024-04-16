@@ -25,7 +25,7 @@
   repolinks:
     - desc: SparkyLinux home
       url: https://sparkylinux.org/
-  groups: [ all, production, sparky ]
+  groups: [ all, sparky ]
 
 - name: sparky_testing
   type: repository
@@ -46,4 +46,4 @@
   repolinks:
     - desc: SparkyLinux home
       url: https://sparkylinux.org/
-  groups: [ all, production, sparky ]
+  groups: [ all, sparky ]
