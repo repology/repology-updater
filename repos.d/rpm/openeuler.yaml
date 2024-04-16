@@ -1,10 +1,10 @@
 ###########################################################################
 # openEuler
 ###########################################################################
-{% macro openeuler(major, minor, minpackages) %}
+{% macro openeuler(major, minor, minpackages, suffix='') %}
 - name: openeuler_{{major}}_{{minor}}
   type: repository
-  desc: openEuler {{major}}.{{minor}}
+  desc: openEuler {{major}}.{{minor}}{{ suffix }}
   statsgroup: openEuler
   family: centos
   ruleset: [centos, rpm, openeuler]
@@ -13,23 +13,23 @@
     - name: source
       fetcher:
         class: RepodataFetcher
-        url: https://repo.openeuler.org/openEuler-{{major}}.{{minor}}-LTS/source/
+        url: https://repo.openeuler.org/openEuler-{{major}}.{{minor}}{{suffix}}/source/
       parser:
         class: RepodataParser
         vertags: oe
-      subrepo: '{source}'
   repolinks:
     - desc: openEuler home
       url: https://openeuler.org/en/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/src-openeuler/{srcname}/tree/openEuler-{{major}}.{{minor}}-LTS/'
+      url: 'https://gitee.com/src-openeuler/{srcname}/tree/openEuler-{{major}}.{{minor}}{{suffix}}/'
     - type: PACKAGE_RECIPE
-      url: 'https://gitee.com/src-openeuler/{srcname}/blob/openEuler-{{major}}.{{minor}}-LTS/{srcname}.spec'
+      url: 'https://gitee.com/src-openeuler/{srcname}/blob/openEuler-{{major}}.{{minor}}{{suffix}}/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitee.com/src-openeuler/{srcname}/raw/openEuler-{{major}}.{{minor}}-LTS/{srcname}.spec'
+      url: 'https://gitee.com/src-openeuler/{srcname}/raw/openEuler-{{major}}.{{minor}}{{suffix}}/{srcname}.spec'
   groups: [ all, production, openeuler, rpm ]
 {% endmacro %}
 
-{{ openeuler('20', '03', minpackages=1500) }}
-{{ openeuler('22', '03', minpackages=3000) }}
+{{ openeuler('20', '03', suffix='-LTS', minpackages=1500) }}
+{{ openeuler('22', '03', suffix='-LTS', minpackages=3000) }}
+{{ openeuler('23', '09',                minpackages=3000) }}
