@@ -21,6 +21,9 @@
         url: https://channels.nixos.org/nixos-{{branch}}/packages.json.br
       parser:
         class: NixJsonParser
+        {% if branch %}
+        branch: "{{branch}}"
+        {% endif %}
   repolinks:
     - desc: NixOS home
       url: https://nixos.org
