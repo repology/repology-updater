@@ -57,8 +57,19 @@ def extract_nix_licenses(whatever: Any) -> list[str]:
     elif isinstance(whatever, dict) and 'fullname' in whatever:
         return [whatever['fullname']]
     else:
-        #factory.log('unable to parse license {}'.format(whatever), severity=Logger.ERROR)
+        # factory.log('unable to parse license {}'.format(whatever), severity=Logger.ERROR)
         return []
+
+
+def nix_has_logs(meta: dict[str, Any], arch: str) -> bool:
+    return not (
+        meta.get('broken', False)
+        or meta.get('unfree', False)
+        or meta.get('insecure', False)
+        or arch not in meta.get('platforms', [])
+        or arch in meta.get('badPlatforms', [])
+        or arch not in meta.get('hydraPlatforms', [arch])
+    )
 
 
 _BLACKLIST1 = {
@@ -81,8 +92,20 @@ _BLACKLIST2 = {
     'airstrike-pre',
 }
 
+_BUILD_LOGS_LINK_TEMPLATES = {
+    ('linux', False): 'https://hydra.nixos.org/job/nixos/trunk-combined/nixpkgs.{key}.{arch}-linux',
+    ('linux', True): 'https://hydra.nixos.org/job/nixos/release-{branch}/nixpkgs.{key}.{arch}-linux',
+    ('darwin', False): 'https://hydra.nixos.org/job/nixpkgs/trunk/{key}.{arch}-darwin',
+    ('darwin', True): 'https://hydra.nixos.org/job/nixpkgs/nixpkgs-{branch}-darwin/{key}.{arch}-darwin',
+}
+
 
 class NixJsonParser(Parser):
+    _branch: str | None
+
+    def __init__(self, branch: str | None = None) -> None:
+        self._branch = branch
+
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
             with factory.begin(key) as pkg:
@@ -177,10 +200,14 @@ class NixJsonParser(Parser):
                 if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
                     pkg.set_flags(PackageFlags.IGNORE)
 
-                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, meta.get('homepage'))
+                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, meta.get('homepage', None))
+                pkg.add_links(LinkType.UPSTREAM_CHANGELOG, meta.get('changelog', None))
 
-                if 'changelog' in meta:
-                    pkg.add_links(LinkType.UPSTREAM_CHANGELOG, meta.get('changelog'))
+                for arch, platform in [('x86_64', 'linux'), ('aarch64', 'linux'), ('x86_64', 'darwin'), ('aarch64', 'darwin')]:
+                    if nix_has_logs(meta, f'{arch}-{platform}') and (
+                        template := _BUILD_LOGS_LINK_TEMPLATES.get((platform, self._branch is not None))
+                    ):
+                        pkg.add_links(LinkType.PACKAGE_BUILD_LOGS, template.format(key=key, branch=self._branch, arch=arch))
 
                 if 'description' in meta:
                     pkg.set_summary(meta['description'].replace('\n', ' '))

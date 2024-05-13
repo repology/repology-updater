@@ -297,6 +297,9 @@ schemas = {
 
                         # guix
                         'download_hosts_blacklist': [str],
+
+                        # nixos
+                        'branch': str,
                     },
                     'packagelinks': packagelinks,
                 }
