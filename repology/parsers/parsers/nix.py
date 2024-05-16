@@ -202,6 +202,7 @@ class NixJsonParser(Parser):
 
                 pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, meta.get('homepage', None))
                 pkg.add_links(LinkType.UPSTREAM_CHANGELOG, meta.get('changelog', None))
+                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD_PAGE, meta.get('downloadPage', None))
 
                 for arch, platform in [('x86_64', 'linux'), ('aarch64', 'linux'), ('x86_64', 'darwin'), ('aarch64', 'darwin')]:
                     if nix_has_logs(meta, f'{arch}-{platform}') and (
