@@ -58,7 +58,7 @@ WITH packages_links_expanded AS (
 		coalesce(ipv6_permanent_redirect_target, ipv4_permanent_redirect_target) as permanent_redirect_target,
 		link_type
 	FROM packages_links_maintainers_expanded INNER JOIN links ON(links.id = link_id)
-	WHERE link_type IN (0, 1)  -- UPSTREAM_HOMEPAGE, UPSTREAM_DOWNLOAD
+	WHERE link_type IN (0, 1, 28)  -- UPSTREAM_HOMEPAGE, UPSTREAM_DOWNLOAD, UPSTREAM_DOWNLOAD_PAGE
 ), homepage_problems AS (
 	SELECT id, repo, visiblename, effname, maintainer,
 		'homepage_dead'::problem_type AS problem_type,

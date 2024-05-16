@@ -165,6 +165,7 @@ class LinkType:
     PACKAGE_STATISTICS: ClassVar[int] = 25
     PACKAGE_BUILD_STATUS: ClassVar[int] = 26
     PACKAGE_BUILD_LOGS: ClassVar[int] = 27
+    UPSTREAM_DOWNLOAD_PAGE: ClassVar[int] = 28
     OTHER: ClassVar[int] = 99
 
     @staticmethod
@@ -197,6 +198,7 @@ class LinkType:
             LinkType.PACKAGE_STATISTICS: 'PACKAGE_STATISTICS',
             LinkType.PACKAGE_BUILD_STATUS: 'PACKAGE_BUILD_STATUS',
             LinkType.PACKAGE_BUILD_LOGS: 'PACKAGE_BUILD_LOGS',
+            LinkType.UPSTREAM_DOWNLOAD_PAGE: 'UPSTREAM_DOWNLOAD_PAGE',
             LinkType.OTHER: 'OTHER',
         }[val]
 
@@ -230,6 +232,7 @@ class LinkType:
             'PACKAGE_STATISTICS': LinkType.PACKAGE_STATISTICS,
             'PACKAGE_BUILD_STATUS': LinkType.PACKAGE_BUILD_STATUS,
             'PACKAGE_BUILD_LOGS': LinkType.PACKAGE_BUILD_LOGS,
+            'UPSTREAM_DOWNLOAD_PAGE': LinkType.UPSTREAM_DOWNLOAD_PAGE,
             'OTHER': LinkType.OTHER,
         }[val]
 
