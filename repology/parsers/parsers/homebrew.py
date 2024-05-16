@@ -71,7 +71,6 @@ class HomebrewJsonParser(Parser):
             with factory.begin() as pkg:
                 pkg.add_name(packagedata['name'], NameType.HOMEBREW_NAME)
                 pkg.add_name(packagedata['name'].split('@', 1)[0], NameType.HOMEBREW_NAME_PRE_AT)
-                pkg.add_name(packagedata['oldname'], NameType.HOMEBREW_OLDNAME)
                 pkg.add_name(packagedata['full_name'], NameType.HOMEBREW_FULL_NAME)
 
                 pkg.set_summary(packagedata['desc'])

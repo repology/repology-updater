@@ -82,7 +82,6 @@ class NameType:
 
     HOMEBREW_NAME: ClassVar[int] = 150
     HOMEBREW_NAME_PRE_AT: ClassVar[int] = 151
-    HOMEBREW_OLDNAME: ClassVar[int] = IGNORED
     HOMEBREW_FULL_NAME: ClassVar[int] = IGNORED
 
     HOMEBREW_CASK_TOKEN: ClassVar[int] = 160
