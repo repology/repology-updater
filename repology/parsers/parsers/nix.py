@@ -66,7 +66,7 @@ def nix_has_logs(meta: dict[str, Any], arch: str) -> bool:
         meta.get('broken', False)
         or meta.get('unfree', False)
         or meta.get('insecure', False)
-        or arch not in meta.get('platforms', [])
+        or arch not in meta.get('platforms', [arch])
         or arch in meta.get('badPlatforms', [])
         or arch not in meta.get('hydraPlatforms', [arch])
     )
