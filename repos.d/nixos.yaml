@@ -42,6 +42,7 @@
 {{ nix('22.11', minpackages=85000, valid_till='2023-06-30') }}
 {{ nix('23.05', minpackages=90000, valid_till='2023-12-31') }}
 {{ nix('23.11', minpackages=90000, valid_till='2024-06-30') }}
+{{ nix('24.05', minpackages=100000, valid_till='2024-12-31') }}
 
 - name: nix_unstable
   type: repository
