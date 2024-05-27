@@ -72,6 +72,30 @@
       url: https://en.altlinux.org/PlatformTen
   groups: [ all, production, sisyphus ]
 
+- name: alt_p11
+  sortname: alt_p11
+  type: repository
+  desc: ALT Linux p11
+  statsgroup: ALT Sisyphus
+  family: sisyphus
+  ruleset: [sisyphus, rpm]
+  color: 'baccdd'
+  minpackages: 18000
+  sources:
+    - name: p11
+      fetcher:
+        class: FileFetcher
+        url: 'https://rdb.altlinux.org/api/export/repology/p11'
+      parser:
+        class: SisyphusJsonParser
+        vertags: alt
+  repolinks:
+    - desc: ALT p11 packages
+      url: https://packages.altlinux.org/en/p11/packages
+    - desc: p11 on ALT Linux Wiki
+      url: https://en.altlinux.org/PlatformEleven
+  groups: [ all, production, sisyphus ]
+
 # automatically imported packages; duplicate already existing packages and versions,
 # and has it's own comparison and garbage problems, so not enabled in production
 - name: altsisyphus_autoimports
