@@ -11,7 +11,7 @@
     - name: CPAN
       fetcher:
         class: FileFetcher
-        url: https://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
+        url: https://www.cpan.org/modules/02packages.details.txt.gz
         compression: gz
       parser:
         class: CPANPackagesParser
