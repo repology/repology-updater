@@ -326,8 +326,8 @@ def wwwpart(ruledata: Any) -> Matcher:
     def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
         if package.links is not None:
             for link_type, *url_frag in package.links:
-                lower_url = '#'.join(url_frag).lower()
                 if LinkType.is_relevant_for_rule_matching(link_type):
+                    lower_url = '#'.join(url_frag).lower()
                     for wwwpart in wwwparts:
                         if wwwpart in lower_url:
                             return True
