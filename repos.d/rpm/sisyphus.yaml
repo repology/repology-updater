@@ -8,7 +8,7 @@
   family: sisyphus
   ruleset: [sisyphus, rpm]
   color: 'baccdd'
-  minpackages: 17000
+  minpackages: 18000
   sources:
     - name: sisyphus
       fetcher:
@@ -51,9 +51,9 @@
   groups: [ all, production, sisyphus ]
 {% endmacro %}
 
-{{ alt(9, wikipage="Ninth_Platform", minpackages=18000) }}
-{{ alt(10, wikipage="PlatformTen", minpackages=17000) }}
-{{ alt(11, wikipage="PlatformEleven", minpackages=17000) }}
+{{ alt(9, wikipage="Ninth_Platform", minpackages=17000) }}
+{{ alt(10, wikipage="PlatformTen", minpackages=18000) }}
+{{ alt(11, wikipage="PlatformEleven", minpackages=18000) }}
 
 # automatically imported packages; duplicate already existing packages and versions,
 # and has it's own comparison and garbage problems, so not enabled in production
