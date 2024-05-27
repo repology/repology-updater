@@ -24,53 +24,35 @@
       url: https://en.altlinux.org/Sisyphus
   groups: [ all, production, sisyphus ]
 
-- name: alt_p9
-  sortname: alt_p09
+{% macro alt(number, wikipage, minpackages) %}
+{% set sortnumber = '0' + (number|string) if number < 10 else number %}
+- name: alt_p{{number}}
+  sortname: alt_p{{sortnumber}}
   type: repository
-  desc: ALT Linux p9
+  desc: ALT Linux p{{number}}
   statsgroup: ALT Sisyphus
   family: sisyphus
   ruleset: [sisyphus, rpm]
   color: 'baccdd'
-  minpackages: 18000
+  minpackages: {{minpackages}}
   sources:
-    - name: p9
+    - name: p{{number}}
       fetcher:
         class: FileFetcher
-        url: 'https://rdb.altlinux.org/api/export/repology/p9'
+        url: 'https://rdb.altlinux.org/api/export/repology/p{{number}}'
       parser:
         class: SisyphusJsonParser
         vertags: alt
   repolinks:
-    - desc: ALT p9 packages
-      url: https://packages.altlinux.org/en/p9/packages
-    - desc: p9 on ALT Linux Wiki
-      url: https://en.altlinux.org/Ninth_Platform
+    - desc: ALT p{{number}} packages
+      url: https://packages.altlinux.org/en/p{{number}}/packages
+    - desc: p{{number}} on ALT Linux Wiki
+      url: https://en.altlinux.org/{{wikipage}}
   groups: [ all, production, sisyphus ]
+{% endmacro %}
 
-- name: alt_p10
-  sortname: alt_p10
-  type: repository
-  desc: ALT Linux p10
-  statsgroup: ALT Sisyphus
-  family: sisyphus
-  ruleset: [sisyphus, rpm]
-  color: 'baccdd'
-  minpackages: 17000
-  sources:
-    - name: p10
-      fetcher:
-        class: FileFetcher
-        url: 'https://rdb.altlinux.org/api/export/repology/p10'
-      parser:
-        class: SisyphusJsonParser
-        vertags: alt
-  repolinks:
-    - desc: ALT p10 packages
-      url: https://packages.altlinux.org/en/p10/packages
-    - desc: p10 on ALT Linux Wiki
-      url: https://en.altlinux.org/PlatformTen
-  groups: [ all, production, sisyphus ]
+{{ alt(9, wikipage="Ninth_Platform", minpackages=18000) }}
+{{ alt(10, wikipage="PlatformTen", minpackages=17000) }}
 
 # automatically imported packages; duplicate already existing packages and versions,
 # and has it's own comparison and garbage problems, so not enabled in production
