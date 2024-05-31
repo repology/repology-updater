@@ -85,12 +85,13 @@ class T2DescParser(Parser):
             rel_desc_path = os.path.relpath(desc_path, path)
             with factory.begin(rel_desc_path) as pkg:
                 pkgpath = os.path.dirname(rel_desc_path)
-                name = os.path.basename(pkgpath)
-
-                if name + '.desc' != os.path.basename(rel_desc_path):
-                    raise RuntimeError('Path inconsistency (expected .../foo/foo.desc)')
+                subdir = os.path.basename(pkgpath)
+                name = os.path.basename(rel_desc_path).removesuffix('.desc')
 
                 data = _parse_descfile(desc_path, pkg)
+
+                if subdir != name:
+                    pkg.log(f'recipe directory "{subdir}" != recipe name "{name}", this is not expected', Logger.WARNING)
 
                 pkg.add_name(name, NameType.T2_NAME)
                 pkg.set_extra_field('path', pkgpath)
