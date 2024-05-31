@@ -22,4 +22,4 @@
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://github.com/microsoft/winget-pkgs/tree/master/{path}'
-  groups: [ all, production ]
+  groups: [ all ]
