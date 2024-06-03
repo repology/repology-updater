@@ -88,10 +88,10 @@ class T2DescParser(Parser):
                 subdir = os.path.basename(pkgpath)
                 name = os.path.basename(rel_desc_path).removesuffix('.desc')
 
-                data = _parse_descfile(desc_path, pkg)
-
                 if subdir != name:
-                    pkg.log(f'recipe directory "{subdir}" != recipe name "{name}", this is not expected', Logger.WARNING)
+                    raise RuntimeError(f'recipe name "{name}" is different from its subdirectory name "{subdir}", this is not expected; see https://github.com/rxrbln/t2sde/issues/173')
+
+                data = _parse_descfile(desc_path, pkg)
 
                 pkg.add_name(name, NameType.T2_NAME)
                 pkg.set_extra_field('path', pkgpath)
