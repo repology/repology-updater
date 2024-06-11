@@ -145,6 +145,23 @@ def _is_packageset_unique(packages: Sequence[Package]) -> bool:
     return True
 
 
+def _is_nix_mixed_snapshot_schemes_case(packages: Sequence[Package]) -> bool:
+    # hack/special case: nix has changed snapshot scheme from YYYY-MM-DD to
+    # 0-unstable-YYYY-MM-DD since the former compares as greater, we can't
+    # suppress ignore for nix, as it would make older snapshots outdated
+    # newer ones
+    has_old_scheme = False
+    has_new_scheme = False
+    if packages[0].family == 'nix':
+        for package in packages:
+            if package.version.startswith('20'):
+                has_old_scheme = True
+            elif package.version.startswith('0-unstable-'):
+                has_new_scheme = True
+
+    return has_old_scheme and has_new_scheme
+
+
 def _should_suppress_ignore(packages: Sequence[Package]) -> bool:
     if len(packages) <= 1:
         return True
@@ -159,6 +176,9 @@ def _should_suppress_ignore(packages: Sequence[Package]) -> bool:
         # condition 3: must not be noscheme
         if package.has_flag(PackageFlags.NOSCHEME):
             return False
+
+    if _is_nix_mixed_snapshot_schemes_case(packages):
+        return False
 
     return True
 
