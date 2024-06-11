@@ -9,7 +9,7 @@
   desc: Kali Linux Rolling
   statsgroup: Debian+derivs
   family: debuntu
-  ruleset: debuntu
+  ruleset: [debuntu, kali]
   color: '32638f'
   minpackages: 27000
   sources:
@@ -33,7 +33,7 @@
   desc: Kali Linux Bleeding Edge
   statsgroup: Debian+derivs
   family: debuntu
-  ruleset: debuntu
+  ruleset: [debuntu, kali]
   color: '32638f'
   minpackages: 50
   sources:
