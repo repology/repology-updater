@@ -54,7 +54,7 @@ class GlaucusGitParser(Parser):
                     continue
 
                 pkg.set_version(pkgdata['ver'])
-                pkg.set_summary(pkgdata.get('cnt'))
+                pkg.set_summary(pkgdata.get('bld'))
                 pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, pkgdata.get('url'))
 
                 for line in ceras_contents.split('\n'):
