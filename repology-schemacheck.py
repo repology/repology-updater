@@ -170,6 +170,8 @@ rulesets = families + [
     'mports',
     'msys2_mingw',
     'msys2_msys2',
+    'msys2_clang64',
+    'msys2_ucrt64',
     'mx',
     'openeuler',
     'packman',

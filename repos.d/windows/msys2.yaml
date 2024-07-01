@@ -1,43 +1,7 @@
 ###########################################################################
 # MSYS2
+# See https://packages.msys2.org/repos for all repos
 ###########################################################################
-- name: msys2_mingw
-  type: repository
-  desc: MSYS2 mingw
-  family: msys2
-  ruleset: [msys2, msys2_mingw, windows]
-  color: 'ef7f1a'
-  minpackages: 2500
-  sources:
-    # NOTE: no database for source packages
-    - name: x86_64
-      fetcher:
-        class: TarFetcher
-        url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.zst
-      parser:
-        class: MSYS2DescParser
-      subrepo: x86_64
-    - name: i686
-      fetcher:
-        class: TarFetcher
-        url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.zst
-      parser:
-        class: MSYS2DescParser
-      subrepo: i686
-  repolinks:
-    - desc: MSYS2 homepage
-      url: http://www.msys2.org/
-    - desc: MSYS2 mingw repository
-      url: http://repo.msys2.org/mingw/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
-  groups: [ all, production, msys2 ]
-
 - name: msys2_msys2
   type: repository
   desc: MSYS2 msys2
@@ -46,7 +10,6 @@
   color: 'ef7f1a'
   minpackages: 500
   sources:
-    # NOTE: no database for source packages
     - name: x86_64
       fetcher:
         class: TarFetcher
@@ -60,10 +23,114 @@
     - desc: MSYS2 msys repository
       url: http://repo.msys2.org/msys/
   packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.msys2.org/package/{binname}?repo=msys&variant={subrepo}'
     - type: PACKAGE_SOURCES
       url: 'https://github.com/msys2/MSYS2-packages/tree/master/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/msys2/MSYS2-packages/blob/master/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/msys2/MSYS2-packages/master/{srcname}/PKGBUILD'
+  groups: [ all, production, msys2 ]
+
+- name: msys2_mingw
+  type: repository
+  desc: MSYS2 mingw
+  family: msys2
+  ruleset: [msys2, msys2_mingw, windows]
+  color: 'ef7f1a'
+  minpackages: 2500
+  sources:
+    - name: x86_64
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.zst
+      parser:
+        class: MSYS2DescParser
+      subrepo: x86_64
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://packages.msys2.org/package/{binname}?repo=mingw64'
+    - name: i686
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.zst
+      parser:
+        class: MSYS2DescParser
+      subrepo: i686
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://packages.msys2.org/package/{binname}?repo=mingw32'
+  repolinks:
+    - desc: MSYS2 homepage
+      url: http://www.msys2.org/
+    - desc: MSYS2 mingw repository
+      url: http://repo.msys2.org/mingw/mingw64/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
+  groups: [ all, production, msys2 ]
+
+- name: msys2_ucrt64
+  type: repository
+  desc: MSYS2 ucrt64
+  family: msys2
+  ruleset: [msys2, msys2_ucrt64, windows]
+  color: 'ef7f1a'
+  minpackages: 2900
+  sources:
+    - name: ucrt64
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/mingw/ucrt64/ucrt64.db.tar.zst
+      parser:
+        class: MSYS2DescParser
+  repolinks:
+    - desc: MSYS2 homepage
+      url: http://www.msys2.org/
+    - desc: MSYS2 ucrt64 repository
+      url: http://repo.msys2.org/mingw/ucrt64/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.msys2.org/package/{binname}?repo=ucrt64'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
+  groups: [ all, production, msys2 ]
+
+- name: msys2_clang64
+  type: repository
+  desc: MSYS2 clang64
+  family: msys2
+  ruleset: [msys2, msys2_clang64, windows]
+  color: 'ef7f1a'
+  minpackages: 2900
+  sources:
+    - name: clang64
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/mingw/clang64/clang64.db.tar.zst
+      parser:
+        class: MSYS2DescParser
+  repolinks:
+    - desc: MSYS2 homepage
+      url: http://www.msys2.org/
+    - desc: MSYS2 clang64 repository
+      url: http://repo.msys2.org/mingw/clang64/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.msys2.org/package/{binname}?repo=clang64'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
   groups: [ all, production, msys2 ]
