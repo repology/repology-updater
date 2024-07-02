@@ -135,6 +135,8 @@ class NameType:
     OS4DEPOT_FILENAME_EXT: ClassVar[int] = 321  # baz.lha
     OS4DEPOT_FILENAME_NO_EXT: ClassVar[int] = 322  # baz
 
+    CHROMEBREW_NAME: ClassVar[int] = 330
+
     # Note that packages reside in subdirs such as packages/,
     # root-packages/, x11-packages/ and it may be that srcname
     # should include directory as well. However these are names
@@ -533,6 +535,13 @@ _MAPPINGS = [
         trackname=NameType.OS4DEPOT_PATH,
         visiblename=NameType.OS4DEPOT_FILENAME_EXT,
         projectname_seed=NameType.OS4DEPOT_FILENAME_NO_EXT,
+    ),
+    # Chromebrew
+    _NameMapping(
+        srcname=NameType.CHROMEBREW_NAME,
+        trackname=NameType.CHROMEBREW_NAME,
+        visiblename=NameType.CHROMEBREW_NAME,
+        projectname_seed=NameType.CHROMEBREW_NAME,
     ),
 ]
 

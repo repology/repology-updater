@@ -41,6 +41,7 @@ families = [
     'centos',
     'chakra',
     'chimera',
+    'chromebrew',
     'chocolatey',
     'conan',
     'conda',

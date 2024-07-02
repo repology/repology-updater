@@ -1,0 +1,28 @@
+###########################################################################
+# Chromebrew
+###########################################################################
+- name: chromebrew
+  type: repository
+  desc: Chromebrew
+  family: chromebrew
+  ruleset: chromebrew
+  minpackages: 2000
+  sources:
+    # note: dump is claimed to be updated weekly https://github.com/repology/repology-updater/issues/1236#issuecomment-2171019435
+    - name: repology.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/chromebrew/chromebrew/master/tools/repology.json
+      parser:
+        class: ChromebrewJsonParser
+  repolinks:
+    - desc: Chromebrew home
+      url: https://chromebrew.github.io/
+    - desc: Chromebrew repository on GitHub
+      url: https://github.com/chromebrew/chromebrew
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/chromebrew/chromebrew/blob/master/packages/{srcname}.rb'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/chromebrew/chromebrew/master/packages/{srcname}.rb'
+  groups: [ all ]
