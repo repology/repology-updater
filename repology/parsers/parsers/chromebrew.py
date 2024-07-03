@@ -18,7 +18,6 @@
 from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
-from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 
@@ -32,7 +31,4 @@ class ChromebrewJsonParser(Parser):
                 pkg.set_summary(pkgdata['description'])
                 pkg.add_homepages(pkgdata['homepage'])
                 pkg.add_licenses(pkgdata['license'])
-                if '-' in pkgdata['version']:
-                    # no way to tell whether these are revisions, snapshots or parts of actual version
-                    pkg.set_flags(PackageFlags.UNTRUSTED)
                 yield pkg
