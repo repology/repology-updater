@@ -8,11 +8,12 @@
   ruleset: [centos, rpm]
   color: '000096'
   minpackages: 4000
+  valid_till: 2024-06-30
   sources:
     - name: main
       fetcher:
         class: RepodataFetcher
-        url: 'http://ftp.scientificlinux.org/linux/scientific/7x/SRPMS/'
+        url: 'http://ftp.scientificlinux.org/linux/scientific/obsolete/7x/SRPMS/'
       parser:
         class: RepodataParser
   repolinks:
