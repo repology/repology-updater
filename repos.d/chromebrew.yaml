@@ -25,4 +25,4 @@
       url: 'https://github.com/chromebrew/chromebrew/blob/master/packages/{srcname}.rb'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/chromebrew/chromebrew/master/packages/{srcname}.rb'
-  groups: [ all ]
+  groups: [ all, production ]
