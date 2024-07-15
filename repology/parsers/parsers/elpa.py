@@ -54,10 +54,11 @@ def _parse_data(data: str) -> list[_PackageData]:
     keyval_maintainer = (lpar + Suppress(':maintainer') + people_list + rpar).setParseAction(lambda s, l, t: [('maintainer', [str(m) for m in t])])
     keyval_maintainer_multi = (lpar + Suppress(':maintainer') + OneOrMore(lpar + people_list + rpar) + rpar).setParseAction(lambda s, l, t: [('maintainer_multi', [str(m) for m in t])])
     keyval_maintainers = (lpar + Suppress(':maintainers') + lpar + people_list + rpar + rpar).setParseAction(lambda s, l, t: [('maintainers', [str(m) for m in t])])
+    keyval_maintainers_multi = (lpar + Suppress(':maintainers') + OneOrMore(lpar + people_list + rpar) + rpar).setParseAction(lambda s, l, t: [('maintainers_multi', [str(m) for m in t])])
     keyval_author = (lpar + Suppress(':author') + people_list + rpar).setParseAction(lambda s, l, t: [('author', [str(a) for a in t])])
     keyval_authors = (lpar + Suppress(':authors') + OneOrMore(lpar + people_list + rpar) + rpar).setParseAction(lambda s, l, t: [('authors', [str(a) for a in t])])
 
-    keyval_item = keyval_url | keyval_keywords | keyval_commit | keyval_maintainer | keyval_maintainer_multi | keyval_maintainers | keyval_authors | keyval_author
+    keyval_item = keyval_url | keyval_keywords | keyval_commit | keyval_maintainer | keyval_maintainer_multi | keyval_maintainers | keyval_maintainers_multi | keyval_authors | keyval_author
 
     keyvals = (lpar + ZeroOrMore(keyval_item) + rpar).setParseAction(lambda s, l, t: [{k: v for k, v in t}]) | nil.setParseAction(lambda s, l, t: [{}])
 
@@ -79,7 +80,7 @@ class ArchiveContentsParser(Parser):
                 pkg.set_version(pkgdata.version)
                 pkg.set_summary(pkgdata.summary)
 
-                for key in ['maintainers', 'maintainer', 'maintainer_multi']:
+                for key in ['maintainer', 'maintainer_multi', 'maintainers', 'maintainers_multi']:
                     if key in pkgdata.keyvals:
                         maintainers: list[str] = sum(map(extract_maintainers, pkgdata.keyvals[key]), [])
                         pkg.add_maintainers(maintainers)
