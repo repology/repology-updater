@@ -1,18 +1,19 @@
 ###########################################################################
 # elrepo.org
 ###########################################################################
-- name: elrepo_el7
+{% macro elrepo(version, minpackages, enable_extras, enable_testing) %}
+- name: elrepo_el{{version}}
   type: repository
-  desc: ELRepo el7
+  desc: ELRepo el{{version}}
   family: centos
   ruleset: [centos, rpm]
   color: '1938ad'
-  minpackages: 80
+  minpackages: {{minpackages}}
   sources:
     - name: elrepo
       fetcher:
         class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/elrepo/el7/SRPMS/'
+        url: 'http://mirrors.coreix.net/elrepo/elrepo/el{{version}}/SRPMS/'
       parser:
         class: RepodataParser
         vertags: [elrepo,el]
@@ -25,9 +26,10 @@
   #    url: 'http://elrepo.org/tiki/{name}'
   groups: [ all, production, elrepo ]
 
-- name: elrepo_el7_extras
+{% if enable_extras %}
+- name: elrepo_el{{version}}_extras
   type: repository
-  desc: ELRepo el7 Extras
+  desc: ELRepo el{{version}} Extras
   family: centos
   ruleset: [centos, rpm]
   color: '1938ad'
@@ -36,7 +38,7 @@
     - name: elrepo
       fetcher:
         class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/extras/el7/SRPMS/'
+        url: 'http://mirrors.coreix.net/elrepo/extras/el{{version}}/SRPMS/'
       parser:
         class: RepodataParser
         vertags: [elrepo,el]
@@ -46,11 +48,13 @@
   #packagelinks:
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
-  groups: [ elrepo ]  # no useful packages
+  groups: [ elrepo, production, elrepo ]
+{% endif %}
 
-- name: elrepo_el7_testing
+{% if enable_testing %}
+- name: elrepo_el{{version}}_testing
   type: repository
-  desc: ELRepo el7 Testing
+  desc: ELRepo el{{version}} Testing
   family: centos
   ruleset: [centos, rpm]
   color: '1938ad'
@@ -59,7 +63,7 @@
     - name: elrepo
       fetcher:
         class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/testing/el7/SRPMS/'
+        url: 'http://mirrors.coreix.net/elrepo/testing/el{{version}}/SRPMS/'
       parser:
         class: RepodataParser
         vertags: [elrepo,el]
@@ -70,72 +74,8 @@
   #  - desc: Package details on elrepo.org
   #    url: 'http://elrepo.org/tiki/{name}'
   groups: [ all, production, elrepo ]
+{% endif %}
+{% endmacro %}
 
-- name: elrepo_el8
-  type: repository
-  desc: ELRepo el8
-  family: centos
-  ruleset: [centos, rpm]
-  color: '1938ad'
-  minpackages: 0
-  sources:
-    - name: elrepo
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/elrepo/el8/SRPMS/'
-      parser:
-        class: RepodataParser
-        vertags: [elrepo,el]
-  repolinks:
-    - desc: ELRepo.org
-      url: http://elrepo.org
-  #packagelinks:
-  #  - desc: Package details on elrepo.org
-  #    url: 'http://elrepo.org/tiki/{name}'
-  groups: [ elrepo ]  # no useful packages
-
-- name: elrepo_el8_extras
-  type: repository
-  desc: ELRepo el8 Extras
-  family: centos
-  ruleset: [centos, rpm]
-  color: '1938ad'
-  minpackages: 0
-  sources:
-    - name: elrepo
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/extras/el8/SRPMS/'
-      parser:
-        class: RepodataParser
-        vertags: [elrepo,el]
-  repolinks:
-    - desc: ELRepo.org
-      url: http://elrepo.org
-  #packagelinks:
-  #  - desc: Package details on elrepo.org
-  #    url: 'http://elrepo.org/tiki/{name}'
-  groups: [ elrepo ]  # no useful packages
-
-- name: elrepo_el8_testing
-  type: repository
-  desc: ELRepo el8 Testing
-  family: centos
-  ruleset: [centos, rpm]
-  color: '1938ad'
-  minpackages: 0
-  sources:
-    - name: elrepo
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/testing/el8/SRPMS/'
-      parser:
-        class: RepodataParser
-        vertags: [elrepo,el]
-  repolinks:
-    - desc: ELRepo.org
-      url: http://elrepo.org
-  #packagelinks:
-  #  - desc: Package details on elrepo.org
-  #    url: 'http://elrepo.org/tiki/{name}'
-  groups: [ elrepo ]  # no useful packages
+{{ elrepo(8, minpackages=200, enable_extras=false, enable_testing=true) }}
+{{ elrepo(9, minpackages=300, enable_extras=false, enable_testing=true) }}
