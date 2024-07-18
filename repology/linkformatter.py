@@ -114,7 +114,7 @@ class FieldGatheringMapping:
         elif isinstance(value, str):
             for filtername in filters:
                 if filtername not in _FILTERS:
-                    raise RuntimeError(f'unknown filter "filtername" in "{field}"')
+                    raise RuntimeError(f'unknown filter "{filtername}" in "{field}"')
                 value = _FILTERS[filtername](value)
 
             self._fields[key] = [value]
