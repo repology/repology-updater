@@ -1,0 +1,30 @@
+###########################################################################
+# SerpentOs
+###########################################################################
+- name: serpentos
+  type: repository
+  desc: Serpent OS
+  family: serpentos
+  ruleset: serpentos
+  minpackages: 400
+  sources:
+    - name: recipes
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/serpent-os/recipes.git'
+        branch: main
+      parser:
+        class: SerpentOsGitParser
+  repolinks:
+    - desc: Serpent OS home
+      url: https://serpentos.com/
+    - desc: Recipes repository
+      url: https://github.com/serpent-os/recipes
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/serpent-os/recipes/tree/main/{srcname|first_letter}/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/serpent-os/recipes/blob/main/{srcname|first_letter}/{srcname}/stone.yaml'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/serpent-os/recipes/main/{srcname|first_letter}/{srcname}/stone.yaml'
+  groups: [ all, production ]

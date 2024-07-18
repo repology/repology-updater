@@ -111,6 +111,7 @@ families = [
     'salix',
     'sclo',
     'scoop',
+    'serpentos',
     'sisyphus',
     'slackbuilds',
     'spack',
