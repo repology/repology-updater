@@ -77,6 +77,8 @@ class HomebrewJsonParser(Parser):
 
                 pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, packagedata['homepage'])
 
+                pkg.set_extra_field('ruby_source_path', packagedata['ruby_source_path'])
+
                 for version_type, flags in [('stable', 0), ('head', PackageFlags.ROLLING)]:
                     if not packagedata['versions'].get(version_type):
                         continue
@@ -114,5 +116,7 @@ class HomebrewCaskJsonParser(Parser):
 
                 pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, packagedata['homepage'])
                 pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, packagedata['url'])
+
+                pkg.set_extra_field('ruby_source_path', packagedata['ruby_source_path'])
 
                 yield pkg
