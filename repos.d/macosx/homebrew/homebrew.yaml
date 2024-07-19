@@ -8,7 +8,7 @@
   family: homebrew
   ruleset: [homebrew, macosx]
   color: 'fdb130'
-  minpackages: 4500
+  minpackages: 9000
   sources:
     - name: formula.json
       fetcher:
@@ -38,7 +38,7 @@
   family: homebrew_casks
   ruleset: [homebrew_casks, macosx, macosxbins]
   color: 'fdb130'
-  minpackages: 3300
+  minpackages: 6000
   sources:
     - name: cask.json
       fetcher:
