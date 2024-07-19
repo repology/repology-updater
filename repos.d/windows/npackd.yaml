@@ -1,7 +1,7 @@
 ###########################################################################
 # Npackd
 #
-# Repositories list: https://www.npackd.org/rep
+# Repositories list: https://npackd.org/rep
 ###########################################################################
 - name: npackd_unstable
   type: repository
@@ -15,15 +15,15 @@
     - name: rep.xml
       fetcher:
         class: FileFetcher
-        url: https://www.npackd.org/rep/xml?tag=unstable
+        url: https://npackd.org/rep/xml?tag=unstable
       parser:
         class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
-      url: https://www.npackd.org/
+      url: https://npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
+      url: 'https://npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, production, npackd ]
 
 - name: npackd_stable
@@ -38,15 +38,15 @@
     - name: rep.xml
       fetcher:
         class: FileFetcher
-        url: https://www.npackd.org/rep/xml?tag=stable
+        url: https://npackd.org/rep/xml?tag=stable
       parser:
         class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
-      url: https://www.npackd.org/
+      url: https://npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
+      url: 'https://npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, production, npackd ]
 
 - name: npackd_libs
@@ -61,15 +61,15 @@
     - name: rep.xml
       fetcher:
         class: FileFetcher
-        url: https://www.npackd.org/rep/xml?tag=libs
+        url: https://npackd.org/rep/xml?tag=libs
       parser:
         class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
-      url: https://www.npackd.org/
+      url: https://npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
+      url: 'https://npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, npackd ]  # disabled (experimental), see #863
 
 - name: npackd_stable64
@@ -84,13 +84,13 @@
     - name: rep.xml
       fetcher:
         class: FileFetcher
-        url: https://www.npackd.org/rep/xml?tag=stable64
+        url: https://npackd.org/rep/xml?tag=stable64
       parser:
         class: NpackdXmlParser
   repolinks:
     - desc: Npackd home
-      url: https://www.npackd.org/
+      url: https://npackd.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://www.npackd.org/p/{srcname}/{rawversion}'
+      url: 'https://npackd.org/p/{srcname}/{rawversion}'
   groups: [ all, production, npackd ]
