@@ -10,7 +10,7 @@
   color: '787dab'
   minpackages: 10000
   sources:
-    - name: [ core, extra, community, libre, pcr ]
+    - name: [ core, extra, libre, pcr ]
       fetcher:
         class: TarFetcher
         url: 'https://repo.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
