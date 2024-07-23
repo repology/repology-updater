@@ -33,3 +33,4 @@
 {{ openeuler('20', '03', suffix='-LTS', minpackages=1500) }}
 {{ openeuler('22', '03', suffix='-LTS', minpackages=3000) }}
 {{ openeuler('23', '09',                minpackages=3000) }}
+{{ openeuler('24', '03', suffix='-LTS', minpackages=3000) }}
