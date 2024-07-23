@@ -1,0 +1,24 @@
+###########################################################################
+# opam (OCaml)
+###########################################################################
+- name: opam
+  type: modules
+  desc: opam
+  family: opam
+  ruleset: opam
+  minpackages: 4000
+  sources:
+    - name: stats.json
+      fetcher:
+        class: FileFetcher
+        url: https://opam.ocaml.org/json/stats.json
+      parser:
+        class: OpamStatsJsonParser
+  shadow: true
+  repolinks:
+    - desc: opam - OCaml Package Manager
+      url: https://opam.ocaml.org/
+  packagelinks:
+    - type: PROJECT_HOMEPAGE
+      url: 'https://opam.ocaml.org/packages/{srcname}/'
+  groups: [all, production]

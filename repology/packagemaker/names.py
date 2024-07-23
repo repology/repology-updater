@@ -240,6 +240,8 @@ class NameType:
 
     SERPENTOS_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
+    OPAM_NAME: ClassVar[int] = GENERIC_SRC_NAME
+
 
 @dataclass
 class _NameMapping:
