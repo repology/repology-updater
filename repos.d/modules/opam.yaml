@@ -18,6 +18,8 @@
   repolinks:
     - desc: opam - OCaml Package Manager
       url: https://opam.ocaml.org/
+    - desc: opam packages
+      url: https://opam.ocaml.org/packages/
   packagelinks:
     - type: PROJECT_HOMEPAGE
       url: 'https://opam.ocaml.org/packages/{srcname}/'
