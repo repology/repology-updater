@@ -306,6 +306,9 @@ schemas = {
 
                         # nixos
                         'branch': str,
+
+                        # homebrew
+                        'require_ruby_source_path': bool,
                     },
                     'packagelinks': packagelinks,
                 }

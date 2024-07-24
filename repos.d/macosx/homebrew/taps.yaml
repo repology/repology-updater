@@ -15,6 +15,7 @@
         url: https://brewsci.github.io/homebrew-bio/api/formula.json
       parser:
         class: HomebrewJsonParser
+        require_ruby_source_path: false
   repolinks:
     - desc: Brewsci/bio home
       url: https://brewsci.github.io/homebrew-bio/

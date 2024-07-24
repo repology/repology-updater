@@ -66,6 +66,11 @@ class _UrlData:
 
 
 class HomebrewJsonParser(Parser):
+    _require_ruby_source_path: bool
+
+    def __init__(self, require_ruby_source_path: bool = True) -> None:
+        self._require_ruby_source_path = require_ruby_source_path
+
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
@@ -77,7 +82,10 @@ class HomebrewJsonParser(Parser):
 
                 pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, packagedata['homepage'])
 
-                pkg.set_extra_field('ruby_source_path', packagedata['ruby_source_path'])
+                if ruby_source_path := packagedata.get('ruby_source_path'):
+                    pkg.set_extra_field('ruby_source_path', ruby_source_path)
+                elif self._require_ruby_source_path:
+                    raise RuntimeError('required "ruby_source_path" property missing')
 
                 for version_type, flags in [('stable', 0), ('head', PackageFlags.ROLLING)]:
                     if not packagedata['versions'].get(version_type):
