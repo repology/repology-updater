@@ -6,7 +6,7 @@
   type: repository
   desc: Terra {{version}}
   family: fedora
-  ruleset: [fedora, rpm]
+  ruleset: [fedora, rpm, terra]
   minpackages: {{minpackages}}
   sources:
     # Note: terra contains packages build in different ways, see

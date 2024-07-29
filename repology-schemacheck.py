@@ -190,6 +190,7 @@ rulesets = families + [
     'slitaz_next',
     'slitaz_current',
     'stackage',
+    'terra',
     'trisquel',
     'ubuntu',
     'unitedrpms',
