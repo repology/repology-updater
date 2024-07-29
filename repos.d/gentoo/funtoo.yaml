@@ -55,6 +55,7 @@
   color: '4e4e71'
   minpackages: 30000
   default_maintainer: fallback-mnt-funtoo@repology
+  valid_till: 2024-07-26
   sources:
     {% for kit in kits %}
     {% set default_branch = '1.4-release' %}
