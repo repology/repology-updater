@@ -278,3 +278,48 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ eurolinux(8, minpackages=5000, valid_till='2029-05-31', subrepos=['appstream', 'baseos', 'highavability', 'powertools', 'resilientstorage']) }}
 {{ eurolinux(9, minpackages=3000, valid_till='2032-05-31', subrepos=['appstream', 'baseos', 'highavailability', 'powertools', 'resilientstorage']) }}
+
+###########################################################################
+# MSVSphere
+###########################################################################
+{% macro msvsphere(version, minpackages, subrepos, valid_till=None) %}
+- name: msvsphere_{{version}}
+  type: repository
+  desc: MSVSphere {{version}}
+  statsgroup: CentOS
+  family: centos
+  ruleset: [centos, rpm]
+  color: 'b511bA'
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
+  sources:
+    {% for sub in subrepos %}
+    - name: {{sub}}
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://repo1.msvsphere-os.ru/vault/{{version}}/{{sub}}/sources/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{{sub}}'
+    {% endfor %}
+  repolinks:
+    - desc: MSVSphere home
+      url: https://msvsphere-os.ru/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://git.inferitos.ru/rpms/{srcname}/src/branch/i{{version}}c'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.inferitos.ru/rpms/{srcname}/src/branch/i{{version}}c/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.inferitos.ru/rpms/{srcname}/raw/branch/i{{version}}c/SPECS/{srcname}.spec'
+  groups: [ all, production, centos, rpm, msvsphere ]
+{% endmacro %}
+
+# See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
+# Release 8 coming soon
+#{{ msvsphere(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','Extras']) }}
+{{ msvsphere(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','Extras', 'LibreOffice']) }}
+
