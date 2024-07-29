@@ -9,6 +9,7 @@
   ruleset: gentoo
   minpackages: 300
   default_maintainer: fallback-mnt-sabayon@repology
+  valid_till: 2021-08-15  # last commit date
   sources:
     - name: sabayon
       fetcher:
@@ -19,9 +20,6 @@
         class: GentooGitParser
         require_md5cache_metadata: false
         require_xml_metadata: false
-  repolinks:
-    - desc: Sabayon Linux home
-      url: https://www.sabayon.org/
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{srcname}'
@@ -39,6 +37,7 @@
   ruleset: gentoo
   minpackages: 100
   default_maintainer: fallback-mnt-sabayon@repology
+  valid_till: 2021-08-15  # last commit date
   sources:
     - name: sabayon
       fetcher:
@@ -49,9 +48,6 @@
         class: GentooGitParser
         require_md5cache_metadata: false
         require_xml_metadata: false
-  repolinks:
-    - desc: Sabayon Linux home
-      url: https://www.sabayon.org/
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://github.com/Sabayon/for-gentoo/tree/master/{srcname}'
