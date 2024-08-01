@@ -321,4 +321,4 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 # Release 8 coming soon
 #{{ msvsphere(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','Extras']) }}
-{{ msvsphere(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','Extras', 'LibreOffice']) }}
+{{ msvsphere(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage']) }}
