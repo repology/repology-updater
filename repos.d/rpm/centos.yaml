@@ -308,6 +308,13 @@
   repolinks:
     - desc: MSVSphere home
       url: https://msvsphere-os.ru/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://git.inferitos.ru/rpms/{srcname}/src/branch/i{{version}}c'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.inferitos.ru/rpms/{srcname}/src/branch/i{{version}}c/SPECS/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.inferitos.ru/rpms/{srcname}/raw/branch/i{{version}}c/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm, msvsphere ]
 {% endmacro %}
 
