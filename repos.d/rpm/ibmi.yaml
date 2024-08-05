@@ -17,6 +17,8 @@
   repolinks:
     - desc: IBM i Open Source
       url: 'https://ibmi-oss-docs.readthedocs.io/en/latest/README.html'
+    - desc: IBM i Open Source Resources
+      url: 'https://ibm.github.io/ibmi-oss-resources/'
   packagelinks:
     - type: PACKAGE_RECIPE_RAW
       url: https://public.dhe.ibm.com/software/ibmi/products/pase/rpms/repo-base-7.3/specs/{srcname}-{rawversion|strip_nevra_epoch}.spec
