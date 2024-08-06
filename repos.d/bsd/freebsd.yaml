@@ -14,7 +14,7 @@
     - name: INDEX
       fetcher:
         class: FileFetcher
-        url: https://download.FreeBSD.org/ports/index/INDEX-13.bz2
+        url: https://download.FreeBSD.org/ports/index/INDEX-14.bz2
         allow_zero_size: false
         compression: bz2
       parser:
