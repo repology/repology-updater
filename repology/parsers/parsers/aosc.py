@@ -31,6 +31,9 @@ class AoscPkgsParser(Parser):
         normalize_version = VersionStripper().strip_left(':')
 
         for pkgdata in iter_json_list(path, ('packages', None)):
+            if pkgdata['category'] == 'meta' and pkgdata['section'] == 'bases':
+                # skip dummy packages in meta-bases section
+                continue
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['name'], NameType.AOSC_NAME)
                 pkg.add_name(pkgdata['directory'], NameType.AOSC_DIRECTORY)
