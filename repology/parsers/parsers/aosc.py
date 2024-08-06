@@ -19,7 +19,7 @@
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -58,6 +58,8 @@ class AoscPkgsParser(Parser):
                 pkg.set_rawversion(pkgdata['full_version'])
                 pkg.add_categories(pkgdata['pkg_section'], pkgdata['section'])
                 pkg.set_summary(pkgdata['description'])
+
+                pkg.add_links(LinkType.PACKAGE_SOURCES, pkgdata['srcurl'])
 
                 # just a committer, doesn't seem suitable
                 #pkg.add_maintainers(extract_maintainers(pkgdata['committer']))
