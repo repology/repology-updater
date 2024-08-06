@@ -31,4 +31,4 @@
     #  url: 'https://github.com/AOSC-Dev/{tree}/blob/{branch}/{srcname}/autobuild/build'
     #- type: PACKAGE_RECIPE_RAW
     #  url: 'https://raw.githubusercontent.com/AOSC-Dev/{tree}/{branch}/{srcname}/autobuild/build'
-  groups: [ all ]  # https://packages.aosc.io returns 500 for more than a month
+  groups: [ all, production ]
