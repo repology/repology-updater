@@ -10,7 +10,7 @@
   color: '29add2'
   minpackages: 4000
   sources:
-    - name: [ system, world, galaxy ]
+    - name: [ system, world, galaxy, lib32 ]
       fetcher:
         class: TarFetcher
         url: 'http://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
@@ -20,4 +20,47 @@
   repolinks:
     - desc: Artix Linux home
       url: https://artixlinux.org/
+    - desc: Artix Linux Packages
+      url: https://packages.artixlinux.org/packages/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.artixlinux.org/packages/{subrepo}/{arch}/{binname}/'
+    - type: PACKAGE_SOURCES
+      url: 'https://gitea.artixlinux.org/packages/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://gitea.artixlinux.org/packages/{srcname}/src/branch/master/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitea.artixlinux.org/packages/{srcname}/raw/branch/master/PKGBUILD'
+  groups: [ all, production ]
+
+- name: artix_testing
+  type: repository
+  desc: Artix Testing
+  statsgroup: Arch+derivs
+  family: arch
+  ruleset: arch
+  color: '29add2'
+  minpackages: 1
+  sources:
+    - name: [ system-gremlins, world-gremlins, galaxy-gremlins, lib32-gremlins ]
+      fetcher:
+        class: TarFetcher
+        url: 'http://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
+      parser:
+        class: ArchDBParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Artix Linux home
+      url: https://artixlinux.org/
+    - desc: Artix Linux Packages
+      url: https://packages.artixlinux.org/packages/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.artixlinux.org/packages/{subrepo}/{arch}/{binname}/'
+    - type: PACKAGE_SOURCES
+      url: 'https://gitea.artixlinux.org/packages/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://gitea.artixlinux.org/packages/{srcname}/src/branch/master/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitea.artixlinux.org/packages/{srcname}/raw/branch/master/PKGBUILD'
   groups: [ all, production ]
