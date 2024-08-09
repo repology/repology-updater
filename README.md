@@ -33,7 +33,6 @@ Needed for fetching/parsing repository data:
   - Python module [rpm](http://rpm.org/) (comes with RPM package manager)
   - Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
   - Python module sqlite3 (part of Python, sometimes packaged separately)
-  - Python module sqlite3 (part of Python, sometimes packaged separately)
   - Python module [tomli](https://pypi.org/project/tomli/)
   - Python module [yarl](https://github.com/aio-libs/yarl)
   - Python module [zstandard](https://pypi.org/project/zstandard/)
