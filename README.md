@@ -20,7 +20,7 @@ which updates the repository information. See also the
   - Python module [pyyaml](http://pyyaml.org/)
   - Python module [xxhash](https://github.com/ifduyue/python-xxhash)
   - Python module [pydantic](https://pydantic-docs.helpmanual.io/)
-  - [PostgreSQL](https://www.postgresql.org/) 15.0+
+  - [PostgreSQL](https://www.postgresql.org/) 16.0+
   - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
 Needed for fetching/parsing repository data:
