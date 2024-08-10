@@ -59,7 +59,11 @@ class AoscPkgsParser(Parser):
                 pkg.add_categories(pkgdata['pkg_section'], pkgdata['section'])
                 pkg.set_summary(pkgdata['description'])
 
-                pkg.add_links(LinkType.PACKAGE_SOURCES, pkgdata['srcurl'])
+                srctype = pkgdata['srctype']
+                if srctype == 'Git' or srctype == 'Svn' or srctype == 'Bzr':
+                    pkg.add_links(LinkType.UPSTREAM_REPOSITORY, pkgdata['srcurl'])
+                elif srctype == 'Tarball':
+                    pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, pkgdata['srcurl'])
 
                 # just a committer, doesn't seem suitable
                 #pkg.add_maintainers(extract_maintainers(pkgdata['committer']))
