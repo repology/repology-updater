@@ -34,6 +34,9 @@ class AoscPkgsParser(Parser):
             if pkgdata['category'] == 'meta' and pkgdata['section'] == 'bases':
                 # skip dummy packages in meta-bases section
                 continue
+            if pkgdata['category'] == 'core' and pkgdata['section'] == 'misc':
+                # skip core-misc, which includes only the aosc-aaa package
+                continue
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['name'], NameType.AOSC_NAME)
                 pkg.add_name(pkgdata['directory'], NameType.AOSC_DIRECTORY)
