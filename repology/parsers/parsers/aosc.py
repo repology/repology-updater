@@ -49,6 +49,10 @@ class AoscPkgsParser(Parser):
                     NameType.AOSC_FULLPATH
                 )
 
+                if not pkgdata['section'] or not pkgdata['category']:
+                    # XXX: make this fatal, as these are used to construct on of a Names
+                    pkg.log('empty section or category', Logger.ERROR)
+
                 pkg.set_extra_field('tree', pkgdata['tree'])
                 pkg.set_extra_field('branch', pkgdata['branch'])
 
