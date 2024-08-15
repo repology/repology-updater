@@ -19,7 +19,7 @@ from typing import Any, Iterable
 
 from libversion import version_compare
 
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_dict
@@ -65,6 +65,14 @@ class SpackJsonParser(Parser):
                         verpkg.set_flags(PackageFlags.ROLLING)
 
                     verpkg.set_version(pkgverdata['version'], normalize_version)
-                    verpkg.add_downloads(pkgverdata['downloads'])
+
+                    if downloads := pkgverdata.get('downloads'):
+                        verpkg.add_links(LinkType.UPSTREAM_DOWNLOAD, downloads)
+                    elif repositories := pkgverdata.get('repositories'):
+                        if isinstance(repositories, dict):
+                            # XXX: legacy, repositories are expected to be a list https://github.com/spack/packages.spack.io/pull/24
+                            verpkg.add_links(LinkType.UPSTREAM_REPOSITORY, repositories['url'])
+                        elif isinstance(repositories, list):
+                            verpkg.add_links(LinkType.UPSTREAM_REPOSITORY, [repository['url'] for repository in repositories])
 
                     yield verpkg
