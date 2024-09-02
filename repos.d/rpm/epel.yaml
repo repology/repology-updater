@@ -1,44 +1,10 @@
 ###########################################################################
 # EPEL
 ###########################################################################
-- name: epel_6
-  type: repository
-  desc: EPEL 6
-  statsgroup: EPEL
-  family: fedora
-  ruleset: [fedora, rpm, epel]
-  color: 'ff0000'
-  minpackages: 5000
-  valid_till: 2020-11-30
-  sources:
-    - name: data
-      fetcher:
-        class: RepodataFetcher
-        url: https://archives.fedoraproject.org/pub/archive/epel/6/SRPMS/
-      parser:
-        class: RepodataParser
-        vertags: el
-  repolinks:
-    - desc: EPEL wiki page
-      url: https://fedoraproject.org/wiki/EPEL
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/el6'
-    - type: PACKAGE_RECIPE
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/el6/f/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/el6/f/{srcname}.spec'
-    # could be more specific, but we need binname(s) for that
-    # see https://github.com/repology/repology-updater/issues/1274
-    # see the same for fedora
-    #- type: PACKAGE_BUILD_LOG
-    #  url: 'https://kojipkgs.fedoraproject.org/packages/{srcname}/{rpmversion}/{rpmrelease}/data/logs/{arch}/build.log'
-    - type: PACKAGE_BUILD_LOGS
-      url: 'https://kojipkgs.fedoraproject.org/packages/{srcname}/{rpmversion}/{rpmrelease}/data/logs/'
-  groups: [ all, production, epel ]
-
-{% macro epel(version, minpackages, subdir) %}
+{% macro epel(version, minpackages, subdir, valid_till=None, archived=False) %}
+{% set sortversion = '0' + (version|string) if version < 10 else version %}
 - name: epel_{{version}}
+  sortname: epel_{{sortversion}}
   type: repository
   desc: EPEL {{version}}
   statsgroup: EPEL
@@ -46,11 +12,18 @@
   ruleset: [fedora, rpm, epel]
   color: 'ff0000'
   minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
     - name: data
       fetcher:
         class: RepodataFetcher
+        {% if archived %}
+        url: https://archives.fedoraproject.org/pub/archive/epel/{{version}}/{{subdir}}/
+        {% else %}
         url: https://dl.fedoraproject.org/pub/epel/{{version}}/{{subdir}}/
+        {% endif %}
       parser:
         class: RepodataParser
         vertags: el
@@ -58,6 +31,14 @@
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
+    {% if version == 6 %}
+    - type: PACKAGE_SOURCES
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/el6'
+    - type: PACKAGE_RECIPE
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/el6/f/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/el6/f/{srcname}.spec'
+    {% else %}
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.fedoraproject.org/pkgs/{srcname}/'
     - type: PACKAGE_SOURCES
@@ -66,6 +47,7 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel{{version}}/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel{{version}}/f/{srcname}.spec'
+    {% endif %}
     # could be more specific, but we need binname(s) for that
     # see https://github.com/repology/repology-updater/issues/1274
     # see the same for fedora
@@ -76,6 +58,10 @@
   groups: [ all, production, epel ]
 {% endmacro %}
 
-{{ epel(7, minpackages=7000, subdir="SRPMS") }}
-{{ epel(8, minpackages=4000, subdir="Everything/SRPMS") }}
-{{ epel(9, minpackages=300, subdir="Everything/source/tree") }}
+# EoLs assumed to be based on corresponding RHEL releases
+# https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux#Product_life_cycle
+{{ epel(6, minpackages=5000, subdir="SRPMS",                  valid_till="2020-11-30", archived=True) }}
+{{ epel(7, minpackages=7000, subdir="SRPMS",                  valid_till="2024-06-30", archived=True) }}
+{{ epel(8, minpackages=5000, subdir="Everything/SRPMS",       valid_till="2029-05-31") }}
+{{ epel(9, minpackages=7000, subdir="Everything/source/tree", valid_till="2032-05-31") }}
+{{ epel(10, minpackages=700, subdir="Everything/source/tree") }}
