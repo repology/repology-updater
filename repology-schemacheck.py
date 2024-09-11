@@ -125,6 +125,7 @@ families = [
     'termux',
     'ubi',
     'vcpkg',
+    'vscmarketplace',
     'void',
     'wakemeops',
     'wikidata',

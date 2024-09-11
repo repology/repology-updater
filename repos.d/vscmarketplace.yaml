@@ -1,0 +1,20 @@
+###########################################################################
+# VSC Marketplace
+###########################################################################
+- name: vscmarketplace
+  type: repository
+  desc: Visual Studio Code Marketplace
+  family: vscmarketplace
+  ruleset: vscmarketplace
+  minpackages: 3000
+  sources:
+    - name: packages
+      fetcher:
+        class: VSCMarketplaceFetcher
+      parser:
+        class: VSCMarketplaceParser
+  repolinks:
+    - desc: Visual Studio Code Marketplace
+      url: https://marketplace.visualstudio.com/vscode
+  packagelinks: []
+  groups: [ all, production ]
