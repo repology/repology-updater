@@ -35,5 +35,6 @@
 
 # http://autobuild.buildroot.net/stats/
 {{ buildroot('master') }}
-{{ buildroot('2023.02.x') }}
-{{ buildroot('2023.05.x') }}
+{{ buildroot('2024.02.x') }}
+{{ buildroot('2024.05.x') }}
+{{ buildroot('2024.08.x') }}
