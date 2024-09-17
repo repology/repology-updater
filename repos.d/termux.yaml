@@ -20,5 +20,28 @@
       url: https://termux.org/
     - desc: Packages repository
       url: https://github.com/termux/termux-packages
-  # packagelinks produced by the parser
+  # NOTE: packagelinks produced by the parser
+  groups: [ all, production ]
+
+- name: tur
+  sortname: termux_ur
+  type: repository
+  desc: Termux User Repository
+  family: termux
+  ruleset: termux
+  color: '000000'
+  minpackages: 200
+  sources:
+    - name: packages.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/termux-user-repository/tur-repology-metadata/master/packages.json
+      parser:
+        class: TermuxJsonParser
+  repolinks:
+    - desc: Termux home
+      url: https://termux.org/
+    - desc: Termux User Repository
+      url: https://github.com/termux-user-repository/tur
+  # NOTE: packagelinks produced by the parser
   groups: [ all, production ]
