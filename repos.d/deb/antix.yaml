@@ -20,7 +20,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  groups: [ all, production, antix ]
+  groups: [ all, antix ]
 
 - name: antix_17
   type: repository
@@ -40,7 +40,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  groups: [ all, production, antix ]
+  groups: [ all, antix ]
 
 - name: antix_19
   type: repository
@@ -60,7 +60,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  groups: [ all, production, antix ]
+  groups: [ all, antix ]
 
 - name: antix_21
   type: repository
@@ -80,7 +80,7 @@
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/
-  groups: [ all, production, antix ]
+  groups: [ all, antix ]
 
 # Probable future releases would be called
 # 23 = bookworm
