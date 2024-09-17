@@ -7,7 +7,7 @@
   family: termux
   ruleset: termux
   color: '000000'
-  minpackages: 450
+  minpackages: 2000
   sources:
     - name: packages.json
       fetcher:
