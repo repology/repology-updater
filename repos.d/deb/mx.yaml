@@ -2,7 +2,7 @@
 # MX Linux
 ###########################################################################
 
-{% macro mx(version, codename, testing=True) %}
+{% macro mx(version, codename, testing=True, valid_till=Null) %}
 - name: mx_{{version}}
   type: repository
   desc: MX Linux MX-{{version}}
@@ -10,6 +10,9 @@
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   minpackages: 100
   sources:
     {% for sub in ['main', 'non-free', 'ahs'] %}
@@ -40,6 +43,9 @@
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   minpackages: 10
   sources:
     - name: test
@@ -61,6 +67,7 @@
 {% endif %}
 {% endmacro %}
 
-{{ mx(19, 'buster') }}
+# valid_till according to https://endoflife.date/mxlinux
+{{ mx(19, 'buster', valid_till="2024-06-30") }}
 {{ mx(21, 'bullseye') }}
 {{ mx(23, 'bookworm') }}
