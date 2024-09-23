@@ -1,0 +1,28 @@
+###########################################################################
+# OpenVSX
+###########################################################################
+# NOTE: API returns more data for individual packages, including upstream
+# url. Unfortunately, we cannot fetch individual API output for every package
+# Also if ?size=10000 breaks at some point, we'll have to disable this
+- name: openvsx
+  type: modules
+  desc: Open VSX
+  family: openvsx
+  ruleset: openvsx
+  minpackages: 3500
+  sources:
+    - name: search.json
+      fetcher:
+        class: FileFetcher
+        url: https://open-vsx.org/api/-/search?size=10000
+        allow_zero_size: false
+      parser:
+        class: OpenVSXParser
+  shadow: true
+  repolinks:
+    - desc: Open VSX registry
+      url: https://open-vsx.org/
+  packagelinks:
+    - type: PROJECT_HOMEPAGE
+      url: 'https://open-vsx.org/extension/{srcname}'
+  groups: [ all, production ]

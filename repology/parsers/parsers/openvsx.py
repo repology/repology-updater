@@ -22,22 +22,27 @@ from typing import Iterable
 from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 
 
 class OpenVSXParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        with open(path, 'r') as extdatafile:
-            extension_data = json.load(extdatafile)
-            raw_extensions = extension_data['extensions']
-
-        for extension in raw_extensions:
+        for extension in iter_json_list(path, ('extensions', None)):
             with factory.begin() as pkg:
                 # TODO: More metadata is available, it's just harder to fetch and will require its own fetcher, in all likelihood
-                pkg.add_name('vscode-extension:{namespace}-{name}'.format(**extension), NameType.GENERIC_SRC_NAME)
+                namespace = extension['namespace']
+                name = extension['name']
+                pkg.add_name(f'{namespace}.{name}', NameType.OPENVSX_NAMESPACE_DOT_NAME)
+                pkg.add_name(f'{namespace}/{name}', NameType.OPENVSX_NAMESPACE_SLASH_NAME)
+                pkg.add_name(extension.get('displayName', name), NameType.OPENVSX_DISPLAYNAME)
                 pkg.set_version(extension['version'])
-                pkg.set_summary(extension['description'])
-                pkg.add_maintainers('{namespace}@openvsx'.format(**extension))
-                pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, 'https://open-vsx.org/extension/{namespace}/{name}'.format(**extension))
-                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, extension['files']['download'])
+                pkg.set_summary(extension.get('description'))
+                pkg.add_maintainers(f'{namespace}@openvsx')
+
+                if not extension['files']:
+                    continue
+
+                pkg.add_links(LinkType.PROJECT_DOWNLOAD, extension['files']['download'])
+                pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, extension['files']['download'].rsplit('/', 1)[0] + '/package.json')
 
                 yield pkg

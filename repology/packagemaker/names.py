@@ -137,6 +137,10 @@ class NameType:
 
     CHROMEBREW_NAME: ClassVar[int] = 330
 
+    OPENVSX_DISPLAYNAME: ClassVar[int] = 340
+    OPENVSX_NAMESPACE_SLASH_NAME: ClassVar[int] = 341
+    OPENVSX_NAMESPACE_DOT_NAME: ClassVar[int] = 342
+
     # Note that packages reside in subdirs such as packages/,
     # root-packages/, x11-packages/ and it may be that srcname
     # should include directory as well. However these are names
@@ -546,6 +550,16 @@ _MAPPINGS = [
         trackname=NameType.CHROMEBREW_NAME,
         visiblename=NameType.CHROMEBREW_NAME,
         projectname_seed=NameType.CHROMEBREW_NAME,
+    ),
+    # OpenVSX
+    _NameMapping(
+        # assuming srcname according to URLs on open-vsx.org
+        srcname=NameType.OPENVSX_NAMESPACE_SLASH_NAME,
+        # assuming binname according to https://stackoverflow.com/questions/34286515/how-to-install-visual-studio-code-extensions-from-command-line,
+        binname=NameType.OPENVSX_NAMESPACE_DOT_NAME,
+        trackname=NameType.OPENVSX_NAMESPACE_DOT_NAME,
+        visiblename=NameType.OPENVSX_DISPLAYNAME,
+        projectname_seed=NameType.OPENVSX_NAMESPACE_DOT_NAME,
     ),
 ]
 
