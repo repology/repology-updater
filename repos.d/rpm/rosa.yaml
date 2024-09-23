@@ -5,6 +5,9 @@
 # abf-downloads.rosalinux.ru is primary repository location
 # mirror.rosalab.ru is secondary mirror which does not contain unreleased repos (ROSA 2019.x ATOW)
 # XXX: check how abf-downloads behave, then switch all repos to it
+# NOTE: regarding valid_till, according to http://wiki.rosalab.ru/ru/index.php/Политика_выпуска_ROSA_Desktop,
+# releases are numbered <YEAR>.<HALF YEAR>, and are supported for 2 years. So for YYYY.1 we assume support
+# until <YYYY+2>.06.30. We've tried to contact rosa support regarding EoL dates, but with no success.
 - name: rosa_2014_1
   type: repository
   desc: Rosa 2014.1
@@ -12,6 +15,7 @@
   family: rosa
   ruleset: [rosa, rpm]
   color: '3757a1'
+  valid_till: 2016-06-30
   minpackages: 27000
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
@@ -41,6 +45,7 @@
   family: rosa
   ruleset: [rosa, rpm]
   color: '3757a1'
+  valid_till: 2018-06-30
   minpackages: 21000
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
@@ -72,6 +77,7 @@
   family: rosa
   ruleset: [rosa, rpm]
   color: '3757a1'
+  #valid_till: 2023-06-30  # expected EoL, but in fact still supported
   minpackages: 11000
   sources:
     # note */updates and */testing repositories are empty ATOW
