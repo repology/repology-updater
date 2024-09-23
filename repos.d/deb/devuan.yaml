@@ -10,6 +10,7 @@
   family: debuntu
   ruleset: debuntu
   color: '88839c'
+  valid_till: 2024-06-30
   minpackages: 25000
   sources:
     - name: [ beowulf/main, beowulf/contrib, beowulf/non-free, beowulf-updates/main, beowulf-updates/contrib, beowulf-updates/non-free ]
