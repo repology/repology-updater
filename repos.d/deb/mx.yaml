@@ -69,5 +69,5 @@
 
 # valid_till according to https://endoflife.date/mxlinux
 {{ mx(19, 'buster', valid_till="2024-06-30") }}
-{{ mx(21, 'bullseye') }}
-{{ mx(23, 'bookworm') }}
+{{ mx(21, 'bullseye', valid_till="2026-06-30") }}
+{{ mx(23, 'bookworm', valid_till="2028-06-10") }}
