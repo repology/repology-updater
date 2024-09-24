@@ -1,0 +1,28 @@
+###########################################################################
+# Side Linux
+###########################################################################
+- name: side
+  type: repository
+  desc: Side Linux
+  family: pisi
+  ruleset: [pisi, side]
+  minpackages: 700
+  sources:
+    - name: side
+      fetcher:
+        class: GitFetcher
+        url: 'https://codeberg.org/side/side.git'
+        sparse_checkout: [ '**/pspec.xml' ]
+      parser:
+        class: PisiParser
+  repolinks:
+    - desc: Side Linux
+      url: https://codeberg.org/side
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://codeberg.org/side/side/src/branch/upstream/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://codeberg.org/side/side/src/branch/upstream/{srcname}/pspec.xml'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://codeberg.org/side/side/raw/branch/upstream/{srcname}/pspec.xml'
+  groups: [ all, production ]

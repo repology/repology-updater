@@ -187,6 +187,7 @@ rulesets = families + [
     'rebornos',
     'rpm',
     'rpmsphere',
+    'side',
     'siduction',
     'slitaz_next',
     'slitaz_current',
