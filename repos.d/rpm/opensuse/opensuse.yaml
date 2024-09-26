@@ -139,7 +139,7 @@
 {{ opensuse_leap('15.1', minpackages=13000, valid_till='2021-02-02', backports=false, sle=false) }}
 {{ opensuse_leap('15.2', minpackages=15000, valid_till='2022-01-04', backports=false, sle=false) }}
 {{ opensuse_leap('15.3', minpackages=17000, valid_till='2022-12-31') }}
-{{ opensuse_leap('15.4', minpackages=19000, valid_till='2023-12-31') }} # expected eol date
+{{ opensuse_leap('15.4', minpackages=19000, valid_till='2023-12-31') }}
 {{ opensuse_leap('15.5', minpackages=18000, valid_till='2024-12-31') }} # expected eol date
 {{ opensuse_leap('15.6', minpackages=15000, valid_till='2025-12-31') }} # expected eol date
 
