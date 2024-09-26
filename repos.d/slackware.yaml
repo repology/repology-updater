@@ -10,6 +10,7 @@
   ruleset: slackware
   color: '0000ff'
   minpackages: 1400
+  valid_till: 2024-01-01
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
@@ -79,6 +80,7 @@
   ruleset: slackware
   color: '0000ff'
   minpackages: 1400
+  valid_till: 2024-01-01  # assumed from regular slackware
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware64,patches,extra]
@@ -146,6 +148,7 @@
   ruleset: slackware
   color: '0000ff'
   minpackages: 1400
+  valid_till: 2024-01-01  # assumed from regular slackware
   default_maintainer: volkerdi@slackware.com
   sources:
     - name: [slackware,patches,extra]
