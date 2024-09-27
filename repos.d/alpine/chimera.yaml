@@ -13,7 +13,7 @@
   minpackages: 6000
   default_maintainer: fallback-mnt-chimera@repology
   sources:
-    {% for subrepo in ['main', 'contrib', 'user'] %}
+    {% for subrepo in ['main', 'user'] %}
     - name: {{subrepo}}
       fetcher:
         class: FileFetcher
