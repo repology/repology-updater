@@ -138,35 +138,199 @@ class PackageFlags:
 
 
 class LinkType:
+    "LinkType defines different types of URLs associated with packages and projects"
+
     UPSTREAM_HOMEPAGE: ClassVar[int] = 0
+    """
+    Link to the upstream project's homepage
+
+    Examples:
+    - https://www.gnu.org/software/bash/ - GNU Bash
+    - https://plotly.com/python/ - Plotly Python library
+    - https://kde.org/plasma-desktop/ - KDE Plasma Desktop
+    """
+
     UPSTREAM_DOWNLOAD: ClassVar[int] = 1
+    """
+    Link to the upstream project's download page
+
+    Examples:
+    - https://ftp.gnu.org/gnu/bash/ - GNU Bash
+    """
+
     UPSTREAM_REPOSITORY: ClassVar[int] = 2
+    """
+    Link to the upstream project's source repository
+
+    Examples:
+    - https://git.savannah.gnu.org/git/bash.git - GNU Bash
+    - https://github.com/plotly/plotly.py - Plotly Python library
+    - https://invent.kde.org/plasma/kwin - KWin
+    """
+
     UPSTREAM_ISSUE_TRACKER: ClassVar[int] = 3
+    """
+    Link to the upstream project's issue tracker
+
+    Examples:
+    - https://github.com/plotly/plotly.py/issues - Plotly Python library
+    """
+
     PROJECT_HOMEPAGE: ClassVar[int] = 4
+    """
+    Link to the project homepage on the official distribution site
+
+    Examples:
+    - https://pypi.org/project/plotly/ - Plotly Python library
+    - https://lib.rs/crates/wry - wry Rust library
+    - https://cran.r-project.org/web/packages/ggplot2/index.html - ggplot2 R library
+    """
+
     PACKAGE_HOMEPAGE: ClassVar[int] = 5
+    """
+    Link to the downstream repository's package page
+
+    Examples:
+    - https://archlinux.org/packages/core/x86_64/bash/ - GNU Bash
+    """
+
     PACKAGE_DOWNLOAD: ClassVar[int] = 6
+    """
+    Link to the downstream repository's package download page
+
+    Examples:
+    - https://archlinux.org/packages/core/x86_64/bash/download/ - GNU Bash
+    """
+
     PACKAGE_SOURCES: ClassVar[int] = 7
+    """
+    The package source code that is built by the downstream repository (this may be a custom fork)
+
+    At least one of PACKAGE_SOURCES, PACKAGE_RECIPE, or PACKAGE_RECIPE_RAW SHOULD be provided for each package.
+
+    Examples:
+    - https://sources.debian.org/src/gnome-desktop/43.2-2/ - GNOME Desktop
+    """
+
     PACKAGE_ISSUE_TRACKER: ClassVar[int] = 8
+    """
+    Link to the downstream repository's issue tracker for the package
+    """
+
     PACKAGE_RECIPE: ClassVar[int] = 9
+    """
+    Link to the repository's build recipe for the package
+
+    At least one of PACKAGE_SOURCES, PACKAGE_RECIPE, or PACKAGE_RECIPE_RAW SHOULD be provided for each package.
+    """
+
     PACKAGE_RECIPE_RAW: ClassVar[int] = 10
+    """
+    Link to the raw repository's build recipe for the package
+
+    At least one of PACKAGE_SOURCES, PACKAGE_RECIPE, or PACKAGE_RECIPE_RAW SHOULD be provided for each package.
+    """
+
     PACKAGE_PATCH: ClassVar[int] = 11
+    """
+    Link to downstream patches applied to the package
+    """
+
     PACKAGE_PATCH_RAW: ClassVar[int] = 12
+    """
+    Link to the raw downstream patches applied to the package
+    """
+
     PACKAGE_BUILD_LOG: ClassVar[int] = 13
+    """
+    Link to the downstream repository's build logs for the package
+    """
+
     PACKAGE_BUILD_LOG_RAW: ClassVar[int] = 14
-    PACKAGE_NEW_VERSION_CHECKER: ClassVar[int] = 15
+    """
+    Link to the raw downstream repository's build logs for the package
+    """
+
+    PACKAGE_NEW_VERSION_CHECKER: ClassVar[int] = 15 # This appears to be unused. Worth removing?
+    """
+    Unknown
+    """
+
     UPSTREAM_DOCUMENTATION: ClassVar[int] = 16
+    """
+    Link to the upstream project's documentation
+
+    Examples:
+    - https://plotly.com/python/ - Plotly Python library
+    """
+
     UPSTREAM_CHANGELOG: ClassVar[int] = 17
+    """
+    Link to the upstream project's changelog
+
+    Examples:
+    - https://github.com/plotly/plotly.py/blob/master/CHANGELOG.md - Plotly Python library
+    """
+
     PROJECT_DOWNLOAD: ClassVar[int] = 18
-    UPSTREAM_DONATION: ClassVar[int] = 19  # XXX: to be used sparingly not to provide obsolete funding info
+    """
+    Link to download the project from the official distribution site
+
+    Examples:
+    - https://pypi.org/project/plotly/#files - Plotly Python library
+    """
+
+    UPSTREAM_DONATION: ClassVar[int] = 19
+    """
+    Link for donations to the upstream project
+
+    This should be used sparingly, as donation links can become outdated and/or may not be relevant to the project anymore.
+    """
+
     UPSTREAM_DISCUSSION: ClassVar[int] = 20
+    """
+    Link to discussions about the upstream project
+    """
+
     UPSTREAM_COVERAGE: ClassVar[int] = 21
+    """
+    Link to code coverage reports for the upstream project
+    """
+
     UPSTREAM_CI: ClassVar[int] = 22
+    """
+    Link to continuous integration for the upstream project
+    """
+
     UPSTREAM_WIKI: ClassVar[int] = 23
+    """
+    Link to the upstream project's wiki
+    """
+
     PACKAGE_STATISTICS: ClassVar[int] = 25
+    """
+    Link to downstream repository statistics for the package
+    """
+
     PACKAGE_BUILD_STATUS: ClassVar[int] = 26
-    PACKAGE_BUILD_LOGS: ClassVar[int] = 27
-    UPSTREAM_DOWNLOAD_PAGE: ClassVar[int] = 28
+    """
+    A link to a page indicating the build status of the package in the downstream repository
+    """
+
+    PACKAGE_BUILD_LOGS: ClassVar[int] = 27 # Duplicate of PACKAGE_BUILD_LOG. Worth removing?
+    """
+    Identical to PACKAGE_BUILD_LOG
+    """
+
+    UPSTREAM_DOWNLOAD_PAGE: ClassVar[int] = 28 # Duplicate of UPSTREAM_DOWNLOAD. Worth removing?
+    """
+    Identical to UPSTREAM_DOWNLOAD
+    """
+
     OTHER: ClassVar[int] = 99
+    """
+    Miscellaneous links
+    """
 
     @staticmethod
     def as_string(val: int) -> str:
