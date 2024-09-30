@@ -52,5 +52,6 @@ class FDroidParser(Parser):
 
                         pkg.set_version(version)
                         pkg.set_flags(PackageFlags.DEVEL if version_code > upstream_version_code else 0)
+                        pkg.set_extra_field('versioncode', version_code)
 
                         yield pkg

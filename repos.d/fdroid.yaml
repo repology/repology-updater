@@ -22,4 +22,6 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://f-droid.org/packages/{srcname}/'
+    - type: PACKAGE_BUILD_LOG_RAW
+      url: 'https://f-droid.org/repo/{srcname}_{versioncode}.log.gz'
   groups: [ all, production ]
