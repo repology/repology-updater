@@ -1,6 +1,5 @@
 ###########################################################################
 # F-Droid android repository
-# we only take a few projects from here which have compatible versioning scheme
 ###########################################################################
 - name: fdroid
   type: repository
@@ -26,4 +25,28 @@
       url: 'https://f-droid.org/repo/{srcname}_{versioncode}.log.gz'
     - type: PACKAGE_RECIPE
       url: 'https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/{srcname}.yml'
-  groups: [ all, production ]
+  groups: [ all, production, android ]
+
+- name: izzyondroid
+  type: repository
+  desc: IzzyOnDroid
+  family: izzyondroid
+  ruleset: fdroid
+  minpackages: 10
+  sources:
+    - name: index.xml
+      fetcher:
+        class: FileFetcher
+        url: https://apt.izzysoft.de/fdroid/repo/index.xml
+      parser:
+        class: FDroidParser
+  shadow: true
+  repolinks:
+    - desc: IzzyOnDroid
+      url: https://apt.izzysoft.de/fdroid/index.php
+    - desc: IzzyOnDroid info page
+      url: 'https://apt.izzysoft.de/fdroid/index/info' # "Applications in this repository are official binaries built by the original application developers, taken from their resp. repositories (mostly Github)."
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://apt.izzysoft.de/fdroid/index/apk/{srcname}'
+  groups: [ all, production, android ]
