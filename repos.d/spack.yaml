@@ -1,9 +1,53 @@
 ###########################################################################
 # Spack
 ###########################################################################
+{% macro spack(branch, data_ref, minpackages) %}
+- name: spack_{{branch|replace('.', '_')|replace('v', '')}}
+  type: repository
+  desc: Spack version {{branch}}
+  statsgroup: spack
+  family: spack
+  ruleset: spack
+  color: "0f3a80"
+  minpackages: {{minpackages}}
+  default_maintainer: fallback-mnt-spack@repology
+  sources:
+    - name: repology.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/Pandaipip1/packages.spack.io/{{data_ref}}/data/repology.json
+        allow_zero_size: false
+      parser:
+        class: SpackJsonParser
+  repolinks:
+    - desc: Spack Catalog
+      url: https://spack.github.io/packages.spack.io/
+    - desc: Spack GitHub repository
+      url: https://github.com/spack/spack
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://spack.github.io/packages.spack.io/package.html?name={srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/spack/spack/tree/{{branch}}/var/spack/repos/builtin/packages/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/spack/spack/blob/{{branch}}/var/spack/repos/builtin/packages/{srcname}/package.py'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/spack/spack/{{branch}}/var/spack/repos/builtin/packages/{srcname}/package.py'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/spack/spack/blob/{{branch}}/var/spack/repos/builtin/packages/{srcname}/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/spack/spack/{{branch}}/var/spack/repos/builtin/packages/{srcname}/{?patch}'
+  groups: [ all, production, spack ]
+{% endmacro %}
+
+{{ spack('v0.22.2', data_ref='edb236320c277c096afa4f15a4d2055047790009', minpackages=5000 }}
+{{ spack('v0.22.1', data_ref='991586b552b0d4536cde4afa3d1fbef6b66233d8', minpackages=5000 }}
+{{ spack('v0.22.0', data_ref='124cf71850d5ae7ca5d120fe1616f3300cf5c822', minpackages=5000 }}
+
 - name: spack
   type: repository
-  desc: Spack
+  desc: Spack Rolling
+  statsgroup: spack
   family: spack
   ruleset: spack
   color: "0f3a80"
@@ -35,4 +79,4 @@
       url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{srcname}/{?patch}'
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{srcname}/{?patch}'
-  groups: [ all, production ]
+  groups: [ all, production, spack ]
