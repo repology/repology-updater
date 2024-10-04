@@ -17,8 +17,8 @@
 
 from typing import Iterable
 
-from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
+from repology.package import LinkType
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -30,21 +30,19 @@ class FreeBSDIndexParser(Parser):
 
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
-                pkg = factory.begin()
+                with factory.begin() as pkg:
+                    fields = line.strip().split('|')
+                    if len(fields) != 13:
+                        raise RuntimeError(f'unexpected number of fields {len(fields)} != 13')
 
-                fields = line.strip().split('|')
-                if len(fields) != 13:
-                    pkg.log('skipping, unexpected number of fields {}'.format(len(fields)), severity=Logger.ERROR)
-                    continue
+                    name, version = fields[0].rsplit('-', 1)
 
-                name, version = fields[0].rsplit('-', 1)
+                    pkg.add_name(name, NameType.BSD_PKGNAME)
+                    pkg.add_name('/'.join(fields[1].rsplit('/', 2)[1:]), NameType.BSD_ORIGIN)
+                    pkg.set_version(version, normalize_version)
+                    pkg.set_summary(fields[3])
+                    pkg.add_maintainers(extract_maintainers(fields[5]))
+                    pkg.add_categories(fields[6].split())
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, fields[9].split())
 
-                pkg.add_name(name, NameType.BSD_PKGNAME)
-                pkg.add_name('/'.join(fields[1].rsplit('/', 2)[1:]), NameType.BSD_ORIGIN)
-                pkg.set_version(version, normalize_version)
-                pkg.set_summary(fields[3])
-                pkg.add_maintainers(extract_maintainers(fields[5]))
-                pkg.add_categories(fields[6].split())
-                pkg.add_homepages(fields[9].split())
-
-                yield pkg
+                    yield pkg
