@@ -30,7 +30,9 @@
   groups: [ all, production, openeuler, rpm ]
 {% endmacro %}
 
-{{ openeuler('20', '03', suffix='-LTS', minpackages=1500) }}
-{{ openeuler('22', '03', suffix='-LTS', minpackages=3000) }}
-{{ openeuler('23', '09',                minpackages=3000) }}
+{{ openeuler('20', '03', suffix='-LTS-SP4', minpackages=1500) }}
+{{ openeuler('22', '03', suffix='-LTS-SP1', minpackages=3000) }}
+{{ openeuler('22', '03', suffix='-LTS-SP3', minpackages=3000) }}
+{{ openeuler('22', '03', suffix='-LTS-SP4', minpackages=3000) }}
 {{ openeuler('24', '03', suffix='-LTS', minpackages=3000) }}
+{{ openeuler('24', '09',                minpackages=3000) }}
