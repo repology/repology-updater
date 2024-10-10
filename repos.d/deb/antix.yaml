@@ -1,38 +1,30 @@
 ###########################################################################
 # AntiX
 ###########################################################################
-- name: antix_jessie
-  sortname: antix_16
+{% macro antix(version, name, minpackages, valid_till=None) %}
+{% if version == 16 %}
+- name: antix_{{name}}
+  sortname: antix_{{version}}
+{% else %}
+- name: antix_{{version}}
+{% endif %}
   type: repository
-  desc: antiX-16
+  desc: antiX-{{version}}
   family: debuntu
   ruleset: [ debuntu, antix ]
-  minpackages: 100
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
+    {% if version == 16 %}
     - name: [ dev, main, nosystemd ]
-      fetcher:
-        class: FileFetcher
-        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/jessie/dists/jessie/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: antiX Linux home
-      url: https://antixlinux.com/
-  groups: [ all, antix ]
-
-- name: antix_17
-  type: repository
-  desc: antiX-17
-  family: debuntu
-  ruleset: [ debuntu, antix ]
-  minpackages: 200
-  sources:
+    {% else %}
     - name: [ dev, main, nonfree, nosystemd ]
+    {% endif %}
       fetcher:
         class: FileFetcher
-        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/stretch/dists/stretch/{source}/source/Sources.gz'
+        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/{{name}}/dists/{{name}}/{source}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -41,46 +33,11 @@
     - desc: antiX Linux home
       url: https://antixlinux.com/
   groups: [ all, antix ]
+{% endmacro %}
 
-- name: antix_19
-  type: repository
-  desc: antiX-19
-  family: debuntu
-  ruleset: [ debuntu, antix ]
-  minpackages: 300
-  sources:
-    - name: [ dev, main, nonfree, nosystemd ]
-      fetcher:
-        class: FileFetcher
-        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/buster/dists/buster/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: antiX Linux home
-      url: https://antixlinux.com/
-  groups: [ all, antix ]
-
-- name: antix_21
-  type: repository
-  desc: antiX-21
-  family: debuntu
-  ruleset: [ debuntu, antix ]
-  minpackages: 300
-  sources:
-    - name: [ dev, main, nonfree, nosystemd ]
-      fetcher:
-        class: FileFetcher
-        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/bullseye/dists/bullseye/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: antiX Linux home
-      url: https://antixlinux.com/
-  groups: [ all, antix ]
-
-# Probable future releases would be called
-# 23 = bookworm
+# https://endoflife.date/antix
+{{ antix(16, 'jessie',   minpackages=100, valid_till="2020-06-30") }}
+{{ antix(17, 'stretch',  minpackages=200, valid_till="2022-06-30") }}
+{{ antix(19, 'buster',   minpackages=300, valid_till="2024-06-30") }}
+{{ antix(21, 'bullseye', minpackages=300, valid_till="2026-06-30") }}
+{{ antix(23, 'bookworm', minpackages=300, valid_till="2028-06-30") }}
