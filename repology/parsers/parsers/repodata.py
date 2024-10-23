@@ -130,6 +130,11 @@ class RepodataParser(Parser):
                                                 '{http://linux.duke.edu/metadata/rpm}license'))
                 pkg.set_arch(entry.findtext('{http://linux.duke.edu/metadata/common}arch'))
 
+                provides = entry.findall('{http://linux.duke.edu/metadata/common}format/'
+                                         '{http://linux.duke.edu/metadata/rpm}provides/'
+                                         '{http://linux.duke.edu/metadata/rpm}entry')
+                pkg.add_binnames((elt.attrib['name'] for elt in provides))
+
                 packager = entry.findtext('{http://linux.duke.edu/metadata/common}packager')
                 if packager:
                     pkg.add_maintainers(extract_maintainers(packager))
