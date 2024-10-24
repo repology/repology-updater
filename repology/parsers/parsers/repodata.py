@@ -40,7 +40,9 @@ class RepodataParser(Parser):
 
     _vertags: list[str]
 
-    def __init__(self, src: bool = True, binary: bool = False, arch_from_filename: bool = False, vertags: Any = None) -> None:
+    _binnames_from_provides: bool
+
+    def __init__(self, src: bool = True, binary: bool = False, arch_from_filename: bool = False, vertags: Any = None, binnames_from_provides: bool = True) -> None:
         if not src and not binary:
             raise RuntimeError('at least one of "src" and "binary" modes for RepodataParser must be enabled')
 
@@ -48,11 +50,18 @@ class RepodataParser(Parser):
         self._binary = binary
         self._arch_from_filename = arch_from_filename
         self._vertags = parse_rpm_vertags(vertags)
+        self._binnames_from_provides = binnames_from_provides
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
         skipped_archs: dict[str, int] = Counter()
+
+        skipped_provides_without_version = 0
+        skipped_provides_without_version_sample = set()
+        skipped_provides_with_parentheses = 0
+        skipped_provides_with_parentheses_sample = set()
+        has_provides = False
 
         if self._arch_from_filename:
             factory.log('mitigation for incorrect <arch></arch> enabled', severity=Logger.WARNING)
@@ -130,10 +139,31 @@ class RepodataParser(Parser):
                                                 '{http://linux.duke.edu/metadata/rpm}license'))
                 pkg.set_arch(entry.findtext('{http://linux.duke.edu/metadata/common}arch'))
 
-                provides = entry.findall('{http://linux.duke.edu/metadata/common}format/'
-                                         '{http://linux.duke.edu/metadata/rpm}provides/'
-                                         '{http://linux.duke.edu/metadata/rpm}entry')
-                pkg.add_binnames((elt.attrib['name'] for elt in provides))
+                # Provides can contain all kinds of garbage apart from binary packages,
+                # especially in Terra repositories. Examples:
+                #   <rpm:entry name="rpm_macro(_sccache)"/>
+                #   <rpm:entry name="libapparmor.so.1.18.0-4.0.2-1.fc41.aarch64.debug()(64bit)"/>
+                #   <rpm:entry name="pkgconfig(libapparmor)" flags="EQ" epoch="0" ver="4.0.2"/>
+                #   <rpm:entry name="debuginfo(build-id)" flags="EQ" epoch="0" ver="06b5e8418ffeef59bc0d31a91900ebdd8bddc2b5"/>
+                # We try
+                for provides in entry.findall('{http://linux.duke.edu/metadata/common}format/'
+                                              '{http://linux.duke.edu/metadata/rpm}provides/'
+                                              '{http://linux.duke.edu/metadata/rpm}entry'):
+                    has_provides = True
+                    if not self._binnames_from_provides:
+                        continue
+                    # epoch is optional for e.g. openmandriva
+                    if 'rel' not in provides.attrib or 'ver' not in provides.attrib:
+                        skipped_provides_without_version += 1
+                        if len(skipped_provides_without_version_sample) < 10:
+                            skipped_provides_without_version_sample.add(provides.attrib['name'])
+                        continue
+                    if '(' in provides.attrib['name']:
+                        skipped_provides_with_parentheses += 1
+                        if len(skipped_provides_with_parentheses_sample) < 10:
+                            skipped_provides_with_parentheses_sample.add(provides.attrib['name'])
+                        continue
+                    pkg.add_binnames(provides.attrib['name'])
 
                 packager = entry.findtext('{http://linux.duke.edu/metadata/common}packager')
                 if packager:
@@ -143,6 +173,19 @@ class RepodataParser(Parser):
 
         for arch, numpackages in sorted(skipped_archs.items()):
             factory.log('skipped {} packages(s) with disallowed architecture {}'.format(numpackages, arch))
+
+        if has_provides and not self._binnames_from_provides:
+            factory.log('not extracting binary package names from <rpm:provides> entries for this repository, because explicitly disabled in config', severity=Logger.ERROR)
+
+        if skipped_provides_without_version:
+            factory.log(f'skipped {skipped_provides_without_version} <rpm:provides> entries with incomplete version (rel/ver)', severity=Logger.WARNING)
+            for name in sorted(skipped_provides_without_version_sample):
+                factory.log(f'  example: {name}')
+
+        if skipped_provides_with_parentheses:
+            factory.log(f'skipped {skipped_provides_with_parentheses} <rpm:provides> entries with parentheses', severity=Logger.WARNING)
+            for name in sorted(skipped_provides_with_parentheses_sample):
+                factory.log(f'  example: {name}')
 
 
 class RepodataSqliteParser(Parser):

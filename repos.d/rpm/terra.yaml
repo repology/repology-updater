@@ -13,6 +13,7 @@
     # https://github.com/repology/repology-updater/issues/1307 for some details
     # There are two distinctive types of packages, which may be distinguinsed by
     # arch. At least packagelinks differ for these.
+    # XXX: as of 2024-10-24, there are no src packages
     - name: repo.xml.src
       fetcher:
         class: RepodataFetcher
@@ -22,6 +23,7 @@
         src: true
         binary: false
         vertags: fc
+        binnames_from_provides: false  # provides contain all sorts of garbage
       packagelinks:
         - type: PACKAGE_SOURCES
           url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{srcname}'
@@ -38,6 +40,7 @@
         src: false
         binary: true
         vertags: fc
+        binnames_from_provides: false  # provides contain all sorts of garbage
       packagelinks:
         - type: PACKAGE_SOURCES
           url: 'https://madoguchi.fyralabs.com/redirect/terra{{version}}/packages/{binname}'
