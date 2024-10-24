@@ -125,7 +125,8 @@
 {{ ubuntu('18', '04', 'bionic',   minpackages=29000, valid_till='2023-05-31', packages=false) }}
 {{ ubuntu('20', '04', 'focal',    minpackages=29000, valid_till='2025-05-29') }}
 {{ ubuntu('22', '04', 'jammy',    minpackages=32000, valid_till='2027-06-01') }}
-{{ ubuntu('23', '04', 'lunar',    minpackages=33000, valid_till='2024-01-25') }}
+{{ ubuntu('23', '04', 'lunar',    minpackages=33000, valid_till='2024-01-25', packages=false) }}
 {{ ubuntu('23', '10', 'mantic',   minpackages=33000, valid_till='2024-07-11') }}
 {{ ubuntu('24', '04', 'noble',    minpackages=33000, valid_till='2029-05-31') }}
-{{ ubuntu('24', '10', 'oracular', minpackages=33000,                          backports=false, proposed=true) }}
+{{ ubuntu('24', '10', 'oracular', minpackages=33000, valid_till='2025-07-01') }} # EoL at month precision, needs clarification
+{{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-01', backports=false, proposed=true) }} # EoL at month precision, needs clarification
