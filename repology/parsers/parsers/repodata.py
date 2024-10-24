@@ -58,9 +58,9 @@ class RepodataParser(Parser):
         skipped_archs: dict[str, int] = Counter()
 
         skipped_provides_without_version = 0
-        skipped_provides_without_version_sample = set()
+        skipped_provides_without_version_sample: set[str] = set()
         skipped_provides_with_parentheses = 0
-        skipped_provides_with_parentheses_sample = set()
+        skipped_provides_with_parentheses_sample: set[str] = set()
         has_provides = False
 
         if self._arch_from_filename:
