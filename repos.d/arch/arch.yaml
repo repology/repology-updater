@@ -3,7 +3,7 @@
 ###########################################################################
 - name: arch
   type: repository
-  desc: Arch
+  desc: Arch Linux
   statsgroup: Arch+derivs
   family: arch
   ruleset: arch
