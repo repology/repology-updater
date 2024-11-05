@@ -12,7 +12,7 @@
 # and we no longer care if original files are deleted
 #
 
-{% macro alpine(version, minpackages, valid_till=None, subrepos=['community','main']) %}
+{% macro alpine(version, minpackages, valid_till=None, subrepos=['community','main'], package_page=True, build_logs=True) %}
 {% set vversion = 'edge' if version == 'edge' else 'v' + version %}
 - name: alpine_{{version|replace('.', '_')}}
   {% if version >= '3.8' and version <= '3.9' %}
@@ -49,23 +49,29 @@
     {% set pkgs_branch = '&branch=v' + version %}
     {% set git_branch = '?h=' + version + '-stable' %}
     {% endif %}
+    {% if package_page %}
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkgs.alpinelinux.org/packages?name={binname|quote}{{pkgs_branch}}'
+    {% endif %}
     - type: PACKAGE_SOURCES
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}{{git_branch}}'
     - type: PACKAGE_RECIPE
       url: 'https://git.alpinelinux.org/aports/tree/{subrepo}/{srcname}/APKBUILD{{git_branch}}'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://git.alpinelinux.org/aports/plain/{subrepo}/{srcname}/APKBUILD{{git_branch}}'
+    {% if build_logs %}
     - type: PACKAGE_BUILD_LOG_RAW
       url: 'https://build.alpinelinux.org/buildlogs/build-{{version|replace('.', '-')}}-x86_64/{subrepo}/{srcname}/{srcname}-{rawversion}.log'
+    {% endif %}
   groups: [ all, production, alpine ]
 {% endmacro %}
 
-{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01') }}
-{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01') }}
-{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01') }}
-{{ alpine('3.11', minpackages=10000, valid_till='2021-11-01') }}
+# package pages are not available for older versions, see dropdown on e.g. https://pkgs.alpinelinux.org/packages?name=zsh
+# likewise, build logs for older versions are not available, see https://build.alpinelinux.org/buildlogs/
+{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01', package_page=False, build_logs=False) }}
+{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01', package_page=False, build_logs=False) }}
+{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01', package_page=False, build_logs=False) }}
+{{ alpine('3.11', minpackages=10000, valid_till='2021-11-01', package_page=False) }}
 {{ alpine('3.12', minpackages=11000, valid_till='2022-05-01') }}
 {{ alpine('3.13', minpackages=13000, valid_till='2022-11-01') }}
 {{ alpine('3.14', minpackages=14000, valid_till='2023-05-01') }}
