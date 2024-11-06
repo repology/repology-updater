@@ -1,9 +1,7 @@
 ###########################################################################
 # Mageia
-#
-# EoLs: https://www.mageia.org/en/support/
 ###########################################################################
-{% macro mageia(version, valid_till=None, has_madb_entry=True) %}
+{% macro mageia(version, valid_till=None) %}
 - name: mageia_{{version}}
   type: repository
   desc: Mageia {{version}}
@@ -19,7 +17,7 @@
     # */backports_testing and */updates_testing not included, are these needed?
     # cauldron noes not seem to have updates and backports subrepos, is this correct?
     {% for sub1 in ['core', 'nonfree', 'tainted'] %}
-    {% for sub2 in (['release', 'updates', 'backports'] if version != 'cauldron' else ['release']) %}
+    {% for sub2 in ['release', 'updates', 'backports'] %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
@@ -35,19 +33,14 @@
       url: https://www.mageia.org/en/
     - desc: Mageia App Db
       url: https://madb.mageia.org/
-  {% if has_madb_entry %}
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      # Note: directories in this url work as CGI params:
-      # source=1 (show source packages)
-      # application=0 (show all packages, not only applications)
-      # release={{version}} (select release)
-      # name=XXX (package name)
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/{{version}}/name/{srcname|quote}'
-  {% endif %}
+      url: 'https://madb.mageialinux-online.org/rpmshow?rpm={srcname|quote}&repo={{version}}-SRPMS-core-release&distribution={{version}}&architecture=x86_64&graphical=0'
   groups: [ all, production, mageia, rpm ]
 {% endmacro %}
 
-{{ mageia(8, valid_till='2023-11-30') }}
-{# mageia(9, valid_till='2025-03-31') #} # only enable as soon as madb entries appear
+# https://www.mageia.org/en/support/
+# https://en.wikipedia.org/wiki/Mageia#Version_history
+{{ mageia('8', valid_till='2023-11-30') }}
+{{ mageia('9', valid_till='2025-03-31') }}
 {{ mageia('cauldron') }}
