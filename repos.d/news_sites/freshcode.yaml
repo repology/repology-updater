@@ -7,7 +7,7 @@
   singular: freshcode.club entry
   family: freshcode
   ruleset: freshcode
-  minpackages: 1200
+  minpackages: 1000
   sources:
     - name: feed
       fetcher:
