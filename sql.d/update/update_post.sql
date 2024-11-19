@@ -75,7 +75,8 @@ WHERE refcount = 0 AND orphaned_since < now() - INTERVAL '1' MONTH;
 	num_projects_newest,
 	num_projects_outdated,
 	num_projects_comparable,
-	num_projects_problematic
+	num_projects_problematic,
+	num_projects_vulnerable
 {% endmacro %}
 
 WITH duplicate_rows AS (
