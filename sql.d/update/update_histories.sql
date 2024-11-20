@@ -20,14 +20,7 @@
 --------------------------------------------------------------------------------
 
 -- per-repository counters
-INSERT INTO repositories_history (
-	ts,
-	snapshot
-)
-SELECT
-	now(),
-	jsonb_object_agg(snapshot.name, to_jsonb(snapshot) - 'name')
-FROM (
+WITH repositories_counters AS (
 	SELECT
 		name,
 		num_metapackages,
@@ -40,7 +33,22 @@ FROM (
 		num_maintainers,
 		num_metapackages_vulnerable
 	FROM repositories
-) AS snapshot;
+	WHERE state != 'legacy'
+), snapshot_candidate AS (
+	SELECT
+		now() AS ts,
+		jsonb_object_agg(repositories_counters.name, to_jsonb(repositories_counters) - 'name') AS snapshot
+	FROM repositories_counters
+)
+INSERT INTO repositories_history (
+	ts,
+	snapshot
+)
+SELECT
+	ts,
+	snapshot
+FROM snapshot_candidate
+WHERE snapshot IS NOT NULL;
 
 INSERT INTO repositories_history_new (
 	repository_id,
@@ -67,7 +75,8 @@ SELECT
 	num_metapackages_comparable,
 	num_metapackages_problematic,
 	num_metapackages_vulnerable
-FROM repositories;
+FROM repositories
+WHERE state != 'legacy';
 
 -- global statistics
 INSERT INTO statistics_history (
