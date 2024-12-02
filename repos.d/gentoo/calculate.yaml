@@ -7,7 +7,7 @@
   statsgroup: Gentoo
   family: gentoo
   ruleset: [gentoo, calculate]
-  minpackages: 100
+  minpackages: 50
   default_maintainer: fallback-mnt-calculate@repology
   sources:
     - name: calculate
