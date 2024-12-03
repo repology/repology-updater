@@ -48,4 +48,5 @@
 {{ apertis(2022, minpackages=3500, valid_till='2023-12-31') }}
 {{ apertis(2023, minpackages=3500, valid_till='2024-12-31') }}
 {{ apertis(2024, minpackages=3500, valid_till='2025-12-31') }}
-{{ apertis(2025, suffix='dev2', minpackages=3500, development=true) }}
+{{ apertis(2025, minpackages=3500, valid_till='2026-12-31') }}
+{{ apertis(2026, suffix='dev1', minpackages=3500, development=true) }}
