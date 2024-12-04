@@ -39,13 +39,15 @@
 {% endmacro %}
 
 {{ rpmfusion_fedora(39, minpackages=300) }}
+{{ rpmfusion_fedora(40, minpackages=300) }}
+{{ rpmfusion_fedora(41, minpackages=300) }}
 
 - name: rpmfusion_fedora_rawhide
   type: repository
   desc: RPM Fusion Fedora Rawhide
   family: fedora
   ruleset: [fedora,rpm]
-  minpackages: 300
+  minpackages: 250
   sources:
     {% for sub1 in ['free', 'nonfree'] %}
     {% set repo_url = 'https://download1.rpmfusion.org/' + sub1 + '/fedora/development/rawhide/Everything/source/SRPMS/' %}
