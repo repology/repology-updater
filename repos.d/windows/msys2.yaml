@@ -134,3 +134,33 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
   groups: [ all, production, msys2 ]
+
+- name: msys2_clangarm64
+  type: repository
+  desc: MSYS2 clangarm64
+  family: msys2
+  ruleset: [msys2, msys2_clangarm64, windows]
+  color: 'ef7f1a'
+  minpackages: 2900
+  sources:
+    - name: clang64
+      fetcher:
+        class: TarFetcher
+        url: http://repo.msys2.org/mingw/clangarm64/clangarm64.db.tar.zst
+      parser:
+        class: MSYS2DescParser
+  repolinks:
+    - desc: MSYS2 homepage
+      url: http://www.msys2.org/
+    - desc: MSYS2 clang64 repository
+      url: http://repo.msys2.org/mingw/clangarm64/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://packages.msys2.org/package/{binname}?repo=clangarm64'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/msys2/MINGW-packages/master/{srcname}/PKGBUILD'
+  groups: [ all, production, msys2 ]
