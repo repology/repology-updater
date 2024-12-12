@@ -91,9 +91,11 @@ WITH duplicate_rows AS (
             lead(row({{ fields() }}), 1) OVER w AS next,
             lag(row({{ fields() }}), 1) OVER w AS prev
         FROM repositories_history_new
-		-- don't unnecessarily thin out whole table each time -
-		-- just process last day worth of history
-		WHERE ts > now() - interval '1' day
+		-- Don't unnecessarily thin out the whole table each time -
+		-- just process last week worth of history. This may produce
+		-- leftovers for repostories which had no stat changes for more
+		-- than a week, but that's not fatal
+		WHERE ts > now() - interval '7' day
         WINDOW w AS (PARTITION by repository_id ORDER BY ts)
     ) AS tmp
     WHERE cur = next AND cur = prev
