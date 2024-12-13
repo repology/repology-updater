@@ -38,7 +38,7 @@ class SerpentOsGitParser(Parser):
                     pkgdata = yaml.safe_load(fd)
 
                 if pkgdata['name'] != subdir:
-                    RuntimeError(f'subdir "{subdir}" != name "{pkgdata["name"]}"')
+                    raise RuntimeError(f'subdir "{subdir}" != name "{pkgdata["name"]}"')
 
                 if isinstance(pkgdata['version'], float):
                     pkg.log(f'version "{pkgdata["version"]}" is a floating point, should be quoted in YAML', Logger.ERROR)
