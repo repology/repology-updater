@@ -474,7 +474,11 @@ DROP TABLE IF EXISTS statistics_history CASCADE;
 
 CREATE TABLE statistics_history (
 	ts timestamp with time zone NOT NULL PRIMARY KEY,
-	snapshot jsonb NOT NULL
+	snapshot jsonb NOT NULL,
+	num_packages integer,
+	num_projects integer,
+	num_problems integer,
+	num_maintainers integer
 );
 
 --------------------------------------------------------------------------------
