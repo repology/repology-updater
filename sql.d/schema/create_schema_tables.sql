@@ -258,13 +258,6 @@ CREATE TABLE repositories (
 CREATE UNIQUE INDEX ON repositories(name);
 
 -- history
-DROP TABLE IF EXISTS repositories_history CASCADE;
-
-CREATE TABLE repositories_history (
-	ts timestamp with time zone NOT NULL PRIMARY KEY,
-	snapshot jsonb NOT NULL
-);
-
 DROP TABLE IF EXISTS repositories_history_new CASCADE;
 
 CREATE TABLE repositories_history_new (
