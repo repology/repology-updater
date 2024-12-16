@@ -15,25 +15,32 @@
   {% endif %}
   minpackages: {{ minpackages }}
   sources:
-    - name: [ {{codename}}/main, {{codename}}/multiverse, {{codename}}/restricted, {{codename}}/universe, {{codename}}-updates/main, {{codename}}-updates/multiverse, {{codename}}-updates/restricted, {{codename}}-updates/universe ]
+    {% for sub1 in [codename, codename + "-updates"] %}
+    {% for sub2 in ["main", "multiverse", "restricted", "universe"] %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         fetch_timeout: 5
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% if packages %}
+      # note that there's no need to toggle updates explicitly (like we do for backports
+      # and proposed) because updates for future releases always exist but are empty
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://packages.ubuntu.com/source/{{sub1}}/{srcname}'
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Ubuntu packages
       url: https://packages.ubuntu.com/
     - desc: Ubuntu packages in {{codename}}
       url: https://packages.ubuntu.com/{{codename}}/
   packagelinks:
-    {% if packages %}
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://packages.ubuntu.com/source/{{codename}}/{srcname}'
-    {% endif %}
     - type: PACKAGE_HOMEPAGE
       url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - type: PACKAGE_ISSUE_TRACKER
@@ -54,15 +61,23 @@
   {% endif %}
   minpackages: 0
   sources:
-    - name: [ {{codename}}-backports/main, {{codename}}-backports/multiverse, {{codename}}-backports/restricted, {{codename}}-backports/universe ]
+    {% set sub1 = codename + "-backports" %}
+    {% for sub2 in ["main", "multiverse", "restricted", "universe"] %}
+    - name: {{codename}}-backports/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         fetch_timeout: 5
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% if packages %}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://packages.ubuntu.com/source/{{sub1}}/{srcname}'
+    {% endif %}
+    {% endfor %}
   repolinks:
     - desc: Ubuntu packages
       url: https://packages.ubuntu.com/
@@ -90,15 +105,18 @@
   {% endif %}
   minpackages: 0
   sources:
-    - name: [ {{codename}}-proposed/main, {{codename}}-proposed/multiverse, {{codename}}-proposed/restricted, {{codename}}-proposed/universe ]
+    {% set sub1 = codename + "-proposed" %}
+    {% for sub2 in ["main", "multiverse", "restricted", "universe"] %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+        url: 'http://ftp.ubuntu.com/ubuntu/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         fetch_timeout: 5
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
   repolinks:
     - desc: Ubuntu packages
       url: https://packages.ubuntu.com/
