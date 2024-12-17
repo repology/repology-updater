@@ -5,3 +5,9 @@ repology.conf
 repologyapp/static/*.gz
 rules.d
 testdata/*.packages
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
