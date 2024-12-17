@@ -90,7 +90,7 @@ WITH duplicate_rows AS (
             row({{ fields() }}) AS cur,
             lead(row({{ fields() }}), 1) OVER w AS next,
             lag(row({{ fields() }}), 1) OVER w AS prev
-        FROM repositories_history_new
+        FROM repositories_history
 		-- Don't unnecessarily thin out the whole table each time -
 		-- just process last week worth of history. This may produce
 		-- leftovers for repostories which had no stat changes for more
@@ -100,10 +100,10 @@ WITH duplicate_rows AS (
     ) AS tmp
     WHERE cur = next AND cur = prev
 )
-DELETE FROM repositories_history_new USING duplicate_rows
+DELETE FROM repositories_history USING duplicate_rows
 WHERE
-	repositories_history_new.repository_id = duplicate_rows.repository_id AND
-	repositories_history_new.ts = duplicate_rows.ts;
+	repositories_history.repository_id = duplicate_rows.repository_id AND
+	repositories_history.ts = duplicate_rows.ts;
 
 {#
 do it manually for now

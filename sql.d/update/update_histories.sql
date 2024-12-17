@@ -19,30 +19,7 @@
 -- History snapshot
 --------------------------------------------------------------------------------
 
--- per-repository counters
---INSERT INTO repositories_history (
---	ts,
---	snapshot
---)
---SELECT
---	now(),
---	jsonb_object_agg(snapshot.name, to_jsonb(snapshot) - 'name')
---FROM (
---	SELECT
---		name,
---		num_metapackages,
---		num_metapackages_unique,
---		num_metapackages_newest,
---		num_metapackages_outdated,
---		num_metapackages_comparable,
---		num_metapackages_problematic,
---		num_problems,
---		num_maintainers,
---		num_metapackages_vulnerable
---	FROM repositories
---) AS snapshot;
-
-INSERT INTO repositories_history_new (
+INSERT INTO repositories_history (
 	repository_id,
 	ts,
 	num_problems,

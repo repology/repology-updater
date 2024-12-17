@@ -258,9 +258,9 @@ CREATE TABLE repositories (
 CREATE UNIQUE INDEX ON repositories(name);
 
 -- history
-DROP TABLE IF EXISTS repositories_history_new CASCADE;
+DROP TABLE IF EXISTS repositories_history CASCADE;
 
-CREATE TABLE repositories_history_new (
+CREATE TABLE repositories_history (
 	repository_id smallint NOT NULL,
 	ts timestamp with time zone NOT NULL,
 	num_problems integer,
