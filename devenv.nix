@@ -4,6 +4,7 @@
 
   packages = [
     pkgs.curl
+    pkgs.html-tidy
     pkgs.zstd
     (pkgs.python3.withPackages (p: [
       # requirements.txt
@@ -45,6 +46,9 @@
       p.voluptuous
       # README.txt
       p.rpm
+      # repology-webapp
+      p.flask
+      p.pillow
     ]))
   ];
 
