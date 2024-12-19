@@ -85,6 +85,7 @@ CREATE TABLE metapackages (
 	has_related boolean NOT NULL DEFAULT false,
 	has_cves boolean NOT NULL DEFAULT false,
 	num_updates integer NOT NULL DEFAULT 0,
+	num_reports integer NOT NULL DEFAULT 0,
 
 	first_seen timestamp with time zone NOT NULL DEFAULT now(),
 	orphaned_at timestamp with time zone
@@ -457,7 +458,9 @@ CREATE TABLE statistics (
 	num_metapackages integer NOT NULL DEFAULT 0,
 	num_problems integer NOT NULL DEFAULT 0,
 	num_maintainers integer NOT NULL DEFAULT 0,
-	num_urls_checked integer NOT NULL DEFAULT 0
+	num_urls_checked integer NOT NULL DEFAULT 0,
+	num_reports_total integer NOT NULL DEFAULT 0,
+	num_reports_open integer NOT NULL DEFAULT 0
 );
 
 INSERT INTO statistics VALUES(DEFAULT);
