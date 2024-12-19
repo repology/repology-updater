@@ -35,6 +35,12 @@ def ros_extract_recipe_url(key, /, *, url, tags, version, **kwargs):
         return url.removesuffix('.git') + f'/blob/{release}/package.xml'
     if 'gitlab' in url:
         return url.removesuffix('.git') + f'/-/blob/{release}/package.xml'
+    if 'bitbucket' in url:
+        # It is not possible to construct a bitbucket url for a file
+        # on a specific tag
+        return
+    err = f'ROS package {key} is neither on github, gitlab, or bitbucket'
+    raise RuntimeError(err)
 
 
 class RosYamlParser(Parser):
@@ -53,10 +59,6 @@ class RosYamlParser(Parser):
 
                 if 'version' not in release:
                     pkg.log(f'dropping {key}: has no version.', severity=Logger.ERROR)
-                    continue
-
-                if 'bitbucket' in release['url']:
-                    pkg.log(f'dropping {key}: RIP bitbucket', severity=Logger.ERROR)
                     continue
 
                 pkg.add_name(key, NameType.ROS_NAME)
