@@ -4,7 +4,7 @@
 {% macro ros(version, name, minpackages, valid_till) %}
 - name: ros_{{version}}_{{name}}
   type: repository
-  desc: ROS {{name}} {% if version > 1 %}(ROS {{version}}){% endif %}
+  desc: ROS {% if version > 1 %}{{ version }} {% endif %}{{name}}
   statsgroup: ros
   family: ros
   ruleset: ros
@@ -40,7 +40,7 @@
 {{ ros(1, 'kinetic', minpackages=950, valid_till='2021-04-30') }}
 {{ ros(1, 'lunar', minpackages=350, valid_till='2019-05-31') }}
 {{ ros(1, 'melodic', minpackages=850, valid_till='2023-06-27') }}
-{{ ros(1, 'noetic', minpackages=750, valid_till='2025-05-31') }}
+{{ ros(1, 'noetic', minpackages=700, valid_till='2025-05-31') }}
 
 {{ ros(2, 'ardent', minpackages=50, valid_till='2018-12-31') }}
 {{ ros(2, 'bouncy', minpackages=50, valid_till='2019-06-30') }}

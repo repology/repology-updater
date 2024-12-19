@@ -21,12 +21,7 @@ from repology.logger import Logger
 from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from yaml import load
-
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
+from yaml import safe_load
 
 
 def ros_extract_recipe_url(key, /, *, url, tags, version, **kwargs):
@@ -45,23 +40,23 @@ def ros_extract_recipe_url(key, /, *, url, tags, version, **kwargs):
 class RosYamlParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         with open(path) as f:
-            data = load(f, Loader=Loader)
+            data = safe_load(f)
         for key, packagedata in data['repositories'].items():
             with factory.begin(key) as pkg:
                 # Some included packages are not yet released,
                 # and only available as source
                 if 'release' not in packagedata:
-                    pkg.log(f'dropping {pkg}: no release', severity=Logger.ERROR)
+                    pkg.log(f'dropping {key}: no release', severity=Logger.ERROR)
                     continue
 
                 release = packagedata['release']
 
                 if 'version' not in release:
-                    pkg.log(f'dropping {pkg}: has no version.', severity=Logger.ERROR)
+                    pkg.log(f'dropping {key}: has no version.', severity=Logger.ERROR)
                     continue
 
                 if 'bitbucket' in release['url']:
-                    pkg.log(f'dropping {pkg}: RIP bitbucket', severity=Logger.ERROR)
+                    pkg.log(f'dropping {key}: RIP bitbucket', severity=Logger.ERROR)
                     continue
 
                 pkg.add_name(key, NameType.ROS_NAME)
@@ -70,12 +65,12 @@ class RosYamlParser(Parser):
                 if recipe_url := ros_extract_recipe_url(key, **release):
                     pkg.add_links(LinkType.PACKAGE_RECIPE, recipe_url)
                 else:
-                    pkg.log(f'{pkg} has no known recipe url', severity=Logger.WARNING)
+                    pkg.log(f'{key} has no known recipe url', severity=Logger.WARNING)
 
                 if source := packagedata.get('source'):
                     pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, source['url'])
                 else:
-                    pkg.log(f'{pkg} has no source', severity=Logger.WARNING)
+                    pkg.log(f'{key} has no source', severity=Logger.WARNING)
 
                 if doc := packagedata.get('doc'):
                     pkg.add_links(LinkType.UPSTREAM_DOCUMENTATION, doc['url'])
