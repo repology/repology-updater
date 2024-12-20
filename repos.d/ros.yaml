@@ -52,5 +52,3 @@
 {{ ros(2, 'humble', minpackages=650, valid_till='2027-05-31') }}
 {{ ros(2, 'iron', minpackages=500, valid_till='2024-11-30') }}
 {{ ros(2, 'jazzy', minpackages=550, valid_till='2029-05-31') }}
-
-{{ ros(2, 'rolling', minpackages=500) }}
