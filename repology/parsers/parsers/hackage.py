@@ -86,14 +86,14 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[tuple[str, dict[str, 
     latest_versions: dict[str, list[Any]] = {}  # name -> [version, count]
 
     # Pass 1: gather preferred versions
-    with tarfile.open(path, 'r|*') as tar:
+    with tarfile.open(path, 'r|*') as tar:  # type: ignore
         for tarinfo in tar:
             tarpath = tarinfo.name.split('/')
             if tarpath[-1] == 'preferred-versions':
                 preferred_versions[tarpath[0]] = _extract_tarinfo(tar, tarinfo)
 
     # Pass 2: gather latest versions
-    with tarfile.open(path, 'r|*') as tar:
+    with tarfile.open(path, 'r|*') as tar:  # type: ignore
         for tarinfo in tar:
             tarpath = tarinfo.name.split('/')
             if tarpath[-1].endswith('.cabal'):
@@ -106,7 +106,7 @@ def _iter_hackage_tarfile_multipass(path: str) -> Iterable[tuple[str, dict[str, 
                     latest_versions[name][1] += 1
 
     # Pass 3: extract cabal files
-    with tarfile.open(path, 'r|*') as tar:
+    with tarfile.open(path, 'r|*') as tar:  # type: ignore
         for tarinfo in tar:
             tarpath = tarinfo.name.split('/')
             if tarpath[-1].endswith('.cabal'):
