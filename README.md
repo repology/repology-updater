@@ -37,7 +37,6 @@ Needed for fetching/parsing repository data:
   - Python module [zstandard](https://pypi.org/project/zstandard/)
   - [git](https://git-scm.com/)
   - [rsync](https://rsync.samba.org/)
-  - [subversion](https://subversion.apache.org/)
 
 ### Development dependencies
 
