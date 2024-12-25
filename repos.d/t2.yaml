@@ -8,10 +8,12 @@
   ruleset: t2
   minpackages: 3000
   sources:
-    - name: packages
+    - name: t2sde
       fetcher:
-        class: SVNFetcher
-        url: 'http://svn.exactcode.de/t2/trunk/package/'
+        class: GitFetcher
+        url: https://github.com/rxrbln/t2sde.git
+        sparse_checkout: ['package/*']
+        branch: main
       parser:
         class: T2DescParser
   repolinks:
