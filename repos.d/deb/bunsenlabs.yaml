@@ -8,7 +8,7 @@
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
-  color: f6b620
+  color: 'f6b620'
   minpackages: 10
   sources:
     - name: [ 'bunsen-hydrogen/main' ]
@@ -35,7 +35,7 @@
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
-  color: f6b620
+  color: 'f6b620'
   minpackages: 10
   sources:
     - name: [ 'helium/main' ]
@@ -62,7 +62,7 @@
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
-  color: f6b620
+  color: 'f6b620'
   minpackages: 1
   sources:
     - name: [ 'jessie-backports/main' ]
@@ -89,7 +89,7 @@
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
-  color: f6b620
+  color: 'f6b620'
   minpackages: 1
   sources:
     - name: [ 'stretch-backports/main' ]

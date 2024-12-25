@@ -6,7 +6,7 @@
   desc: Adélie Linux current
   family: adelie
   ruleset: adelie
-  color: '#880000'
+  color: '880000'
   minpackages: 900
   default_maintainer: fallback-mnt-adelie@repology
   sources:

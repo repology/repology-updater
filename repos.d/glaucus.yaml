@@ -6,7 +6,7 @@
   desc: glaucus
   family: glaucus
   ruleset: glaucus
-  color: 6082b6
+  color: '6082b6'
   minpackages: 100
   sources:
     - name: cerata
