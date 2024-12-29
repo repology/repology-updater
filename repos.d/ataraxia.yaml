@@ -15,8 +15,6 @@
       parser:
         class: AtaraxiaJsonParser
   repolinks:
-    - desc: Ataraxia Linux home
-      url: https://ataraxialinux.org/
     - desc: Ataraxia Linux source repository
       url: https://gitlab.com/ataraxialinux/ataraxia/
   packagelinks:
