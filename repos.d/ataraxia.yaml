@@ -6,6 +6,7 @@
   desc: Ataraxia GNU/Linux
   family: ataraxia
   ruleset: ataraxia
+  valid_till: 2021-09-28
   minpackages: 800
   sources:
     - name: repo.json
