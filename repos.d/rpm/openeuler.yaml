@@ -51,5 +51,6 @@
 {{ openeuler('23.09',         minpackages=3000, valid_till='2024-03') }}
 
 {{ openeuler('24.03-LTS',     minpackages=3000, valid_till='2026-05') }}
+{{ openeuler('24.03-LTS-SP1', minpackages=3000, valid_till='2026-12') }}
 
 {{ openeuler('24.09',         minpackages=3000, valid_till='2025-03') }}
