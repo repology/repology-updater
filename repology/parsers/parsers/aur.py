@@ -42,8 +42,11 @@ class AURJsonParser(Parser):
                 pkg.add_homepages(pkgdata['URL'])
                 pkg.add_licenses(pkgdata.get('License'))
 
-                if 'Maintainer' in pkgdata and pkgdata['Maintainer']:
-                    pkg.add_maintainers(extract_maintainers(pkgdata['Maintainer'] + '@' + self._maintainer_host))
+                if maintainer := pkgdata.get('Maintainer'):
+                    pkg.add_maintainers(extract_maintainers(f'{maintainer}@{self._maintainer_host}'))
+
+                if comaintainers := pkgdata.get('CoMaintainers'):
+                    pkg.add_maintainers(extract_maintainers(f'{maintainer}@{self._maintainer_host}') for maintainer in comaintainers)
 
                 if 'PackageBase' in pkgdata and pkgdata['PackageBase']:
                     pkg.add_name(pkgdata['PackageBase'], NameType.ARCH_BASENAME)
