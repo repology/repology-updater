@@ -39,7 +39,7 @@
   family: kaos
   ruleset: [kaos, kaos_build]
   default_maintainer: demm@kaosx.us
-  minpackages: 10
+  minpackages: 1
   sources:
     - name: [ build ]
       fetcher:
