@@ -131,6 +131,10 @@ class OpenWrtPackagesParser(DebianSourcesParser):
             pkg.add_name(pkgdata['SourceName'], NameType.OPENWRT_SOURCENAME)
         pkg.set_arch(pkgdata['Architecture'])
         pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
+        pkg.add_homepages(pkgdata.get('URL'))
+        if cpeid := pkgdata.get('CPE-ID'):
+            cpe_components = cpeid.split(':')
+            pkg.add_cpe(cpe_components[2], cpe_components[3])
 
         if pkgpath[2:4] == ['lang', 'python']:
             # All python modules are in lang/python, but not all of lang/python are python modules
