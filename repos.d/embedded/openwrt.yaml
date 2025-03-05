@@ -15,7 +15,7 @@
   'telephony': 'openwrt/telephony',
 } %}
 
-{% macro openwrt(version, arch, minpackages, valid_till=None, packagelinks=True, disabled=False) %}
+{% macro openwrt(version, arch, minpackages, valid_till=None, disabled=False) %}
 {% set dotversion = version %}
 {% set usversion = version.replace('.', '_') %}
 {% set branch = 'master' if version == 'snapshot' else 'openwrt-' + dotversion %}
@@ -41,7 +41,6 @@
       parser:
         class: OpenWrtPackagesParser
       subrepo: '{source}'
-    {% if packagelinks %}
       packagelinks:
         - type: PACKAGE_SOURCES
           url: 'https://github.com/{{subrepos_repos[subrepo]}}/tree/{{branch}}/{path}'
@@ -49,7 +48,6 @@
           url: 'https://github.com/{{subrepos_repos[subrepo]}}/blob/{{branch}}/{path}/Makefile'
         - type: PACKAGE_RECIPE_RAW
           url: 'https://raw.githubusercontent.com/{{subrepos_repos[subrepo]}}/{{branch}}/{path}/Makefile'
-    {% endif %}
     {% endfor %}
   repolinks:
     - desc: OpenWrt home
@@ -65,12 +63,7 @@
 # https://endoflife.date/openwrt (for some reason this has more precise info)
 
 # no links because there's no 17.01 branch in the repos
-{{ openwrt('17.01', 'x86_64', minpackages=4000, valid_till='2019-02-01', packagelinks=False) }}
-{{ openwrt('18.06', 'x86_64', minpackages=5000, valid_till='2021-06-01') }}
-{{ openwrt('19.07', 'x86_64', minpackages=6000, valid_till='2022-04-30') }}
-{{ openwrt('21.02', 'x86_64', minpackages=8000, valid_till='2023-04-30') }}
-{{ openwrt('22.03', 'x86_64', minpackages=8000, valid_till='2024-04-11') }}
-{{ openwrt('23.05', 'x86_64', minpackages=8000) }}
+{{ openwrt('23.05', 'x86_64', minpackages=8000, valid_till='2025-08-04') }}
 {{ openwrt('24.10', 'x86_64', minpackages=8000) }}
 # disabled because of package flapping
 {{ openwrt('snapshot', 'x86_64', minpackages=0, disabled=True) }}
