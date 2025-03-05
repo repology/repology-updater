@@ -34,7 +34,7 @@ class RappsParser(Parser):
                 config = configparser.ConfigParser(interpolation=None)
 
                 with open(os.path.join(path, filename), 'r', encoding='utf_8_sig') as f:
-                    config.readfp(f)
+                    config.readfp(f)  # type: ignore
 
                 section = config['Section']
 
