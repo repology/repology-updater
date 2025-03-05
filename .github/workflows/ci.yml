@@ -4,14 +4,14 @@ jobs:
   build:
     env:
       REPOLOGY_CONFIG: repology-test.conf.default
-      POSTGRESQL: 15
-    runs-on: ubuntu-20.04
+      POSTGRESQL: 16
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.12"
       - name: Install dependencies
         # depends for jsonslicer, postgresql-liversion, rpm4 respectively
         run: |
@@ -41,7 +41,7 @@ jobs:
         run: |
           mkdir _rpm
           cd _rpm
-          wget -qO- http://ftp.rpm.org/releases/rpm-4.16.x/rpm-4.16.0.tar.bz2 | tar -xjf- --strip-components 1
+          wget -qO- https://ftp.osuosl.org/pub/rpm/releases/rpm-4.16.x/rpm-4.16.0.tar.bz2 | tar -xjf- --strip-components 1
           export PYTHON_CFLAGS="$(python3-config --cflags)" PYTHON_LIBS="$(python3-config --ldflags)"
           ./configure --enable-python --without-lua --prefix=$pythonLocation
           make
