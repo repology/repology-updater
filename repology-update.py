@@ -132,7 +132,7 @@ def process_repositories(env: Environment) -> None:
         skip_fetch = since_last_fetched is not None and since_last_fetched < update_period
 
         if env.get_options().fetch and skip_fetch:
-            env.get_main_logger().log(f'not fetching {reponame} to honor update period ({update_period-since_last_fetched} left)'.format(reponame))
+            env.get_main_logger().log(f'not fetching {reponame} to honor update period ({update_period - since_last_fetched} left)'.format(reponame))
         elif env.get_options().fetch:
             env.get_main_logger().log('fetching {}'.format(reponame))
 

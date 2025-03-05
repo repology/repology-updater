@@ -65,7 +65,7 @@ class ProjectsChangeStatistics:
         return 1.0 - (self.unchanged / self.total)
 
     def __str__(self) -> str:
-        return f'added {self.added}, removed {self.removed}, changed {self.changed}, unchanged {self.unchanged}, total change {self.change_fraction*100.0:.2f}%'
+        return f'added {self.added}, removed {self.removed}, changed {self.changed}, unchanged {self.unchanged}, total change {self.change_fraction * 100.0:.2f}%'
 
 
 def iter_changed_projects(old_hashes_iter: Iterable[ProjectHash], new_packagesets_iter: Iterable[list[Package]], statistics: ProjectsChangeStatistics) -> Iterable[ChangedProject]:
