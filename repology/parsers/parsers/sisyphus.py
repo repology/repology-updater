@@ -50,7 +50,7 @@ class SisyphusJsonParser(Parser):
                 pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, packagedata['url'])
                 pkg.add_links(LinkType.PACKAGE_HOMEPAGE, packagedata['homepage'])
                 pkg.add_links(LinkType.PACKAGE_RECIPE, packagedata['recipe'])
-                #pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, packagedata['recipe_raw']) # broken
+                pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, packagedata['recipe_raw'])
                 pkg.add_links(LinkType.PACKAGE_ISSUE_TRACKER, packagedata['bugzilla'])
 
                 # TODO: parse CPE data when available
