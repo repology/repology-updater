@@ -80,7 +80,6 @@
   #valid_till: 2023-06-30  # expected EoL, but in fact still supported
   minpackages: 11000
   sources:
-    # note */updates and */testing repositories are empty ATOW
     - name: [ main/release, non-free/release, contrib/release ]
       fetcher:
         class: RepodataFetcher
@@ -98,6 +97,35 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2021.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2021.1/{srcname}.spec'
+  groups: [ all, production, rosa ]
+
+- name: rosa_13
+  sortname: rosa_2023_1
+  type: repository
+  desc: Rosa 13
+  statsgroup: Rosa
+  family: rosa
+  ruleset: [rosa, rpm]
+  color: '3757a1'
+  minpackages: 20000
+  sources:
+    - name: [ main/release, non-free/release, contrib/release ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://abf-downloads.rosa.ru/rosa13/repository/SRPMS/{source}/'
+      parser:
+        class: RepodataParser
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rosa Linux home
+      url: https://rosa.ru/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://abf.io/import/{srcname}/tree/rosa2023.1'
+    - type: PACKAGE_RECIPE
+      url: 'https://abf.io/import/{srcname}/blob/rosa2023.1/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://abf.io/import/{srcname}/raw/rosa2023.1/{srcname}.spec'
   groups: [ all, production, rosa ]
 
 - name: rosa_server_6_9
