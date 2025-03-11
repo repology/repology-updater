@@ -71,6 +71,7 @@
 # Note: rosa2021.1+ does not have urpmi-compatible metadata
 # Note: rosa2019.1 was renamed to rosa2021.1, keeping old "name"
 - name: rosa_2019_1
+  sortname: rosa_2019_1
   type: repository
   desc: Rosa 2021.1
   statsgroup: Rosa
@@ -101,6 +102,7 @@
   groups: [ all, production, rosa ]
 
 - name: rosa_13
+  sortname: rosa_2023_1
   type: repository
   desc: Rosa 13
   statsgroup: Rosa
