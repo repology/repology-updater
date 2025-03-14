@@ -134,6 +134,8 @@ class OpenWrtPackagesParser(DebianSourcesParser):
         pkg.add_homepages(pkgdata.get('URL'))
         if cpeid := pkgdata.get('CPE-ID'):
             cpe_components = cpeid.split(':')
+            if len(cpe_components) < 4:
+                raise RuntimeError(f'unable to parse cpe-id (not enough components): {cpeid}')
             pkg.add_cpe(cpe_components[2], cpe_components[3])
 
         if pkgpath[2:4] == ['lang', 'python']:
