@@ -30,7 +30,7 @@ class FDroidParser(Parser):
 
         for application in root.findall('application'):
             with factory.begin() as app:
-                app.add_name(safe_findtext(application, 'id'), NameType.FDROID_ID)
+                app.add_name(safe_findtext(application, 'id'), NameType.ANDROID_ID)
                 # org.primftpd: name="primiti\nve ftpd"
                 app.add_name(safe_findtext(application, 'name').replace('\n', ''), NameType.FDROID_NAME)
                 app.add_licenses(application.findtext('license'))

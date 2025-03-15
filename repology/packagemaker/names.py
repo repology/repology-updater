@@ -40,6 +40,9 @@ class NameType:
     GENERIC_CATNAME_NAME: ClassVar[int] = 1020
     GENERIC_CATNAME_FULL_NAME: ClassVar[int] = 1021
 
+    # Android
+    ANDROID_ID: ClassVar[int] = 10
+
     # Individual repos
     WIKIDATA_ENTITY: ClassVar[int] = 20
     WIKIDATA_LABEL: ClassVar[int] = 21
@@ -67,7 +70,7 @@ class NameType:
     REACTOS_NAME: ClassVar[int] = 91
 
     FDROID_NAME: ClassVar[int] = 100
-    FDROID_ID: ClassVar[int] = 101
+    FDROID_ID: ClassVar[int] = ANDROID_ID  # Preserved for compatibility; can be removed if unnecessary
 
     CHOCOLATEY_TITLE: ClassVar[int] = 110
     CHOCOLATEY_METADATA_TITLE: ClassVar[int] = 111
@@ -409,9 +412,9 @@ _MAPPINGS = [
     ),
     # F-Droid
     _NameMapping(
-        srcname=NameType.FDROID_ID,
-        binname=NameType.FDROID_ID,
-        trackname=NameType.FDROID_ID,
+        srcname=NameType.ANDROID_ID,
+        binname=NameType.ANDROID_ID,
+        trackname=NameType.ANDROID_ID,
         visiblename=NameType.FDROID_NAME,
         projectname_seed=NameType.FDROID_NAME,
     ),
