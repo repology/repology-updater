@@ -1,0 +1,23 @@
+###########################################################################
+# Obtanium Crowdsourced App Configurations
+###########################################################################
+- name: obtanium
+  type: site
+  desc: Obtanium Crowdsourced Configurations
+  family: obtanium
+  ruleset: obtanium
+  minpackages: 10
+  sources:
+    - name: apps-obtainium-imranr-dev
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/ImranR98/apps.obtainium.imranr.dev.git
+        sparse_checkout: [ 'data/apps/*.json' ]
+      parser:
+        class: ObtaniumJsonParser
+  repolinks:
+    - desc: Obtanium Crowdsourced Configurations
+      url: https://apps.obtanium.imranr.dev/
+    - desc: Obtanium
+      url: https://github.com/ImranR98/Obtainium
+  groups: [ all, production, android ]

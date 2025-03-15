@@ -144,6 +144,8 @@ class NameType:
     OPENVSX_NAMESPACE_SLASH_NAME: ClassVar[int] = 341
     OPENVSX_NAMESPACE_DOT_NAME: ClassVar[int] = 342
 
+    OBTANIUM_DISPLAYNAME: ClassVar[int] = 350
+
     # Note that packages reside in subdirs such as packages/,
     # root-packages/, x11-packages/ and it may be that srcname
     # should include directory as well. However these are names
@@ -563,6 +565,14 @@ _MAPPINGS = [
         trackname=NameType.OPENVSX_NAMESPACE_DOT_NAME,
         visiblename=NameType.OPENVSX_DISPLAYNAME,
         projectname_seed=NameType.OPENVSX_NAMESPACE_DOT_NAME,
+    ),
+    # Obtanium
+    _NameMapping(
+        srcname=NameType.ANDROID_ID,
+        binname=NameType.ANDROID_ID,
+        trackname=NameType.ANDROID_ID,
+        visiblename=NameType.OBTANIUM_DISPLAYNAME,
+        projectname_seed=NameType.OBTANIUM_DISPLAYNAME,
     ),
 ]
 
