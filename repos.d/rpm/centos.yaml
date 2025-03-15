@@ -145,7 +145,7 @@
   # See https://centos.org/stream9/ for EOL date
   valid_till: 2027-05-31
   sources:
-    - name: [ AppStream, BaseOS, CRB, HighAvailability, RT, ResilientStorage ]  # NFV is missing
+    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage ]
       fetcher:
         class: RepodataFetcher
         url: 'http://mirror.stream.centos.org/9-stream/{source}/source/tree/'
@@ -163,6 +163,36 @@
       url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c9s/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/raw/c9s/{srcname}.spec'
+  groups: [ all, production, centos, rpm ]
+
+- name: centos_stream_10
+  type: repository
+  desc: CentOS Stream 10
+  statsgroup: CentOS
+  family: centos
+  ruleset: [centos, rpm]
+  color: '932279'
+  minpackages: 2000
+  # See https://centos.org/centos10/ for EOL date (currently unknown)
+  sources:
+    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT ]
+      fetcher:
+        class: RepodataFetcher
+        url: 'http://mirror.stream.centos.org/10-stream/{source}/source/tree/'
+      parser:
+        class: RepodataParser
+        vertags: el
+      subrepo: '{source}'
+  repolinks:
+    - desc: CentOS home
+      url: https://www.centos.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/tree/c10s'
+    - type: PACKAGE_RECIPE
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c10s/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/raw/c10s/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
 ###########################################################################
