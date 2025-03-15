@@ -40,6 +40,9 @@ class NameType:
     GENERIC_CATNAME_NAME: ClassVar[int] = 1020
     GENERIC_CATNAME_FULL_NAME: ClassVar[int] = 1021
 
+    # Android
+    ANDROID_ID: ClassVar[int] = 10
+
     # Individual repos
     WIKIDATA_ENTITY: ClassVar[int] = 20
     WIKIDATA_LABEL: ClassVar[int] = 21
@@ -67,7 +70,7 @@ class NameType:
     REACTOS_NAME: ClassVar[int] = 91
 
     FDROID_NAME: ClassVar[int] = 100
-    FDROID_ID: ClassVar[int] = 101
+    FDROID_ID: ClassVar[int] = ANDROID_ID  # Preserved for compatibility; can be removed if unnecessary
 
     CHOCOLATEY_TITLE: ClassVar[int] = 110
     CHOCOLATEY_METADATA_TITLE: ClassVar[int] = 111
@@ -140,6 +143,8 @@ class NameType:
     OPENVSX_DISPLAYNAME: ClassVar[int] = 340
     OPENVSX_NAMESPACE_SLASH_NAME: ClassVar[int] = 341
     OPENVSX_NAMESPACE_DOT_NAME: ClassVar[int] = 342
+
+    OBTANIUM_DISPLAYNAME: ClassVar[int] = 350
 
     # Note that packages reside in subdirs such as packages/,
     # root-packages/, x11-packages/ and it may be that srcname
@@ -409,9 +414,9 @@ _MAPPINGS = [
     ),
     # F-Droid
     _NameMapping(
-        srcname=NameType.FDROID_ID,
-        binname=NameType.FDROID_ID,
-        trackname=NameType.FDROID_ID,
+        srcname=NameType.ANDROID_ID,
+        binname=NameType.ANDROID_ID,
+        trackname=NameType.ANDROID_ID,
         visiblename=NameType.FDROID_NAME,
         projectname_seed=NameType.FDROID_NAME,
     ),
@@ -560,6 +565,14 @@ _MAPPINGS = [
         trackname=NameType.OPENVSX_NAMESPACE_DOT_NAME,
         visiblename=NameType.OPENVSX_DISPLAYNAME,
         projectname_seed=NameType.OPENVSX_NAMESPACE_DOT_NAME,
+    ),
+    # Obtanium
+    _NameMapping(
+        srcname=NameType.ANDROID_ID,
+        binname=NameType.ANDROID_ID,
+        trackname=NameType.ANDROID_ID,
+        visiblename=NameType.OBTANIUM_DISPLAYNAME,
+        projectname_seed=NameType.OBTANIUM_DISPLAYNAME,
     ),
 ]
 

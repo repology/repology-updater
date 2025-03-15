@@ -88,6 +88,7 @@ families = [
     'nix',
     'noir',
     'npackd',
+    'obtanium',
     'opam',
     'openbsd',
     'openindiana',
