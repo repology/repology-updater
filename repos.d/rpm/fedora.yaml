@@ -12,13 +12,10 @@
 #
 #  url: 'https://packages.fedoraproject.org/pkgs/{srcname}'
 
-# Note that https://download.fedoraproject.org/pub/fedora redirects to a geo mirror; the process
-# is unstable and may interleave fresh and outdated mirrors and make package versions jump around.
-# https://mirror.yandex.ru/fedora/linux/ specific would be is preferred as it's closest to repology
-# instance, but it's currently unstable as well, so a random Europe mirror from
-# https://admin.fedoraproject.org/mirrormanager/ is used
+# Note that https://download.fedoraproject.org/pub/fedora redirects to a geo mirror. This
+# redirect is unstable and interleave fresh and outdated mirrors and make package versions
+# jump around, so just a random Europe mirror is used
 
-{#% set main_mirror = 'https://mirror.yandex.ru/fedora/linux' %#}
 {% set main_mirror = 'https://fr2.rpmfind.net/linux/fedora/linux' %}
 {% set archive_mirror = 'https://archives.fedoraproject.org/pub/archive/fedora/linux' %}
 
