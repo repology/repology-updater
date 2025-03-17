@@ -15,8 +15,7 @@
     - name: [ contrib, main, non-free ]
       fetcher:
         class: FileFetcher
-        #url: 'http://packages.deepin.com/deepin/dists/apricot/{source}/source/Sources.gz'
-        url: 'http://mirror.yandex.ru/mirrors/deepin/packages/dists/apricot/{source}/source/Sources.gz'
+        url: 'https://community-packages.deepin.com/deepin/apricot/dists/apricot/{source}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
