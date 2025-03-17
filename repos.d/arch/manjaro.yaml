@@ -10,10 +10,10 @@
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ community, core, extra, multilib ]
+    - name: [ core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.yandex.ru/mirrors/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://ipng.mm.fcix.net/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
@@ -31,10 +31,10 @@
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ community, core, extra, multilib ]
+    - name: [ core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.yandex.ru/mirrors/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://ipng.mm.fcix.net/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
@@ -52,10 +52,10 @@
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ community, core, extra, multilib ]
+    - name: [ core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.yandex.ru/mirrors/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://ipng.mm.fcix.net/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
