@@ -102,98 +102,58 @@
       url: 'https://git.centos.org/rpms/{srcname}/raw/c8{centossuffix}/f/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
-- name: centos_stream_8
+###########################################################################
+# CentOS stream
+###########################################################################
+{% macro centos_stream(version, minpackages, valid_till, subrepos, vault=False) %}
+- name: centos_stream_{{version}}
+  sortname: centos_stream_{{'{:02d}'.format(version)}}
   type: repository
-  desc: CentOS Stream 8
+  desc: CentOS Stream {{version}}
   statsgroup: CentOS
   family: centos
   ruleset: [centos, rpm]
   color: '932279'
-  minpackages: 2000
-  # See https://wiki.centos.org/About/Product for EOL date
-  valid_till: 2024-05-31
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
-    - name: [ AppStream, BaseOS, HighAvailability, NFV, PowerTools, RT, extras ]
+    {% for sub in subrepos %}
+    - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://vault.centos.org/centos/8-stream/{source}/Source/'
+        {% if vault %}
+        url: 'https://vault.centos.org/centos/{{version}}-stream/{{sub}}/Source/'
+        {% else %}
+        url: 'https://mirror.stream.centos.org/{{version}}-stream/{{sub}}/source/tree/'
+        {% endif %}
       parser:
         class: RepodataParser
         vertags: el
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/
   packagelinks:
-    # not sure of centossuffix works correctly here
     - type: PACKAGE_SOURCES
-      url: 'https://git.centos.org/rpms/{srcname}/tree/c8s{centossuffix}'
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/tree/c{{version}}s'
     - type: PACKAGE_RECIPE
-      url: 'https://git.centos.org/rpms/{srcname}/blob/c8s{centossuffix}/f/SPECS/{srcname}.spec'
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c{{version}}s/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.centos.org/rpms/{srcname}/raw/c8s{centossuffix}/f/SPECS/{srcname}.spec'
+      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/raw/c{{version}}s/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
+{% endmacro %}
 
-- name: centos_stream_9
-  type: repository
-  desc: CentOS Stream 9
-  statsgroup: CentOS
-  family: centos
-  ruleset: [centos, rpm]
-  color: '932279'
-  minpackages: 2000
-  # See https://centos.org/stream9/ for EOL date
-  valid_till: 2027-05-31
-  sources:
-    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT, ResilientStorage ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://mirror.stream.centos.org/9-stream/{source}/source/tree/'
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: '{source}'
-  repolinks:
-    - desc: CentOS home
-      url: https://www.centos.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/tree/c9s'
-    - type: PACKAGE_RECIPE
-      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c9s/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/raw/c9s/{srcname}.spec'
-  groups: [ all, production, centos, rpm ]
-
-- name: centos_stream_10
-  type: repository
-  desc: CentOS Stream 10
-  statsgroup: CentOS
-  family: centos
-  ruleset: [centos, rpm]
-  color: '932279'
-  minpackages: 2000
-  # See https://centos.org/centos10/ for EOL date (currently unknown)
-  sources:
-    - name: [ AppStream, BaseOS, CRB, HighAvailability, NFV, RT ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://mirror.stream.centos.org/10-stream/{source}/source/tree/'
-      parser:
-        class: RepodataParser
-        vertags: el
-      subrepo: '{source}'
-  repolinks:
-    - desc: CentOS home
-      url: https://www.centos.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/tree/c10s'
-    - type: PACKAGE_RECIPE
-      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/blob/c10s/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitlab.com/redhat/centos-stream/rpms/{srcname}/-/raw/c10s/{srcname}.spec'
-  groups: [ all, production, centos, rpm ]
+# EoLs from:
+# https://wiki.centos.org/About/Product
+# https://centos.org/stream9/
+# https://centos.org/centos10/
+# https://en.wikipedia.org/wiki/CentOS_Stream
+{{ centos_stream(8, minpackages=5000, valid_till='2024-05-31', subrepos=['AppStream', 'BaseOS', 'HighAvailability', 'NFV', 'PowerTools', 'RT', 'extras'], vault=True) }}
+{{ centos_stream(9, minpackages=5000, valid_till='2027-05-31', subrepos=['AppStream', 'BaseOS', 'CRB', 'HighAvailability', 'NFV', 'RT', 'ResilientStorage']) }}
+{{ centos_stream(10, minpackages=5000, valid_till='2030-01-01', subrepos=['AppStream', 'BaseOS', 'CRB', 'HighAvailability', 'NFV', 'RT']) }}
 
 ###########################################################################
 # AlmaLinux
