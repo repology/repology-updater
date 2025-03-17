@@ -23,4 +23,4 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'http://freshcode.club/projects/{srcname}'
-  groups: [ all, production ]
+  groups: [ all ] # HTTP 500 response
