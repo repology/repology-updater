@@ -25,9 +25,8 @@
   groups: [ all, production, sisyphus ]
 
 {% macro alt(number, wikipage, minpackages) %}
-{% set sortnumber = '0' + (number|string) if number < 10 else number %}
 - name: alt_p{{number}}
-  sortname: alt_p{{sortnumber}}
+  sortname: alt_p{{'{:02d}'.format(number)}}
   type: repository
   desc: ALT Linux p{{number}}
   statsgroup: ALT Sisyphus
