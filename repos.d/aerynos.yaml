@@ -1,5 +1,5 @@
 ###########################################################################
-# SerpentOs
+# AerynOS
 ###########################################################################
 - name: serpentos
   sortname: aerynos
@@ -17,7 +17,7 @@
       parser:
         class: SerpentOsGitParser
   repolinks:
-    - desc: Serpent OS home
+    - desc: AerynOS home
       url: https://aerynos.com/
     - desc: Recipes repository
       url: https://github.com/AerynOS/recipes
