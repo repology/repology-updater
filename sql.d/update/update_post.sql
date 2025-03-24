@@ -146,10 +146,3 @@ WHERE
     unclassified_p.effname LIKE '%%-unclassified'
     AND unclassified_r.is_actual = false
     AND classified_r.is_actual is null;
-
---------------------------------------------------------------------------------
--- Remove redirects to nonexisting projects
---------------------------------------------------------------------------------
--- We'll lose redirects to projects which are removed and the reappear this way
---DELETE FROM project_redirects
---WHERE is_actual AND (SELECT num_repos FROM metapackages WHERE id = project_id) = 0;
