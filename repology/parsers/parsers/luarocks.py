@@ -38,7 +38,7 @@ def _parse_data(data: str) -> dict[str, Any]:
 
     # mypy: Call to untyped function "Empty" in typed context
     # srsly? why only Empty, why not other pyparsing classes? how can I fix it?
-    table = lcur + (dict_table | array_table | Empty().setParseAction(lambda s, l, t: [None])) + rcur  # type: ignore
+    table = lcur + (dict_table | array_table | Empty().setParseAction(lambda s, l, t: [None])) + rcur
     value << (qstring | table)
 
     root = ZeroOrMore(keyval).setParseAction(lambda s, l, t: {k: v for k, v in t})
