@@ -128,3 +128,28 @@ WITH moved AS (
 INSERT INTO repository_events_archive(repository_id, ts, metapackage_id, type, data)
 SELECT * FROM moved;
 #}
+
+--------------------------------------------------------------------------------
+-- For projects moved from <foo>-unclassified to <foo>-<bar>, add redirects from <foo> to <foo>-<bar> as well
+--------------------------------------------------------------------------------
+INSERT INTO project_redirects(project_id, repository_id, is_actual, trackname)
+SELECT
+    classified_p.id,
+    unclassified_r.repository_id AS repository_id,
+    false,
+    unclassified_r.trackname AS trackname
+FROM metapackages AS unclassified_p
+INNER JOIN metapackages AS classified_p ON (classified_p.effname = substring(unclassified_p.effname, 0, length(unclassified_p.effname) - 12))
+INNER JOIN project_redirects AS unclassified_r ON (unclassified_r.project_id = unclassified_p.id)
+LEFT JOIN project_redirects AS classified_r ON (classified_r.project_id = classified_p.id AND classified_r.trackname = unclassified_r.trackname AND classified_r.repository_id = unclassified_r.repository_id)
+WHERE
+    unclassified_p.effname LIKE '%%-unclassified'
+    AND unclassified_r.is_actual = false
+    AND classified_r.is_actual is null;
+
+--------------------------------------------------------------------------------
+-- Remove redirects to nonexisting projects
+--------------------------------------------------------------------------------
+-- We'll lose redirects to projects which are removed and the reappear this way
+--DELETE FROM project_redirects
+--WHERE is_actual AND (SELECT num_repos FROM metapackages WHERE id = project_id) = 0;
