@@ -177,6 +177,8 @@ class DebianVersionParser:
             # Pre-snapshots. Marked incorrect as the "future" version they
             # are based on is made up, with the exception of when it's equal
             # to 0 which indicates that upstream has no official releases
+            # XXX: may also be ~~alpha1 or ~beta1 or ~rc which should be treated
+            # normally
             if part.startswith('~'):
                 flags |= PackageFlags.IGNORE if version_compare(parts[0], '0') == 0 else PackageFlags.INCORRECT
                 version += part
