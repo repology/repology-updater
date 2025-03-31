@@ -1,6 +1,9 @@
 ###########################################################################
 # Manjaro (arch derivative)
 ###########################################################################
+# Broken mirrors never to use again:
+# - ipng.mm.fcix.net
+# - mirror.yandex.ru
 - name: manjaro_stable
   type: repository
   desc: Manjaro Stable
@@ -13,7 +16,7 @@
     - name: [ core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'https://ipng.mm.fcix.net/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.kamtv.ru/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
@@ -34,7 +37,7 @@
     - name: [ core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'https://ipng.mm.fcix.net/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.kamtv.ru/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
@@ -55,7 +58,7 @@
     - name: [ core, extra, multilib ]
       fetcher:
         class: TarFetcher
-        url: 'https://ipng.mm.fcix.net/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.kamtv.ru/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: '{source}'
