@@ -19,7 +19,7 @@ import os
 import re
 import sqlite3
 from dataclasses import dataclass
-from typing import Iterable, Iterator
+from typing import Iterable, Iterator, Tuple
 
 from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -37,6 +37,15 @@ def _normalize_version(version: str) -> str:
         version = match.group(1)
 
     return version
+
+
+# splits package name into (stem, version, list of flavors) according to https://man.openbsd.org/packages-specs
+def _split_packagename(packagename: str) -> Tuple[str, str, list[str]]:
+    components = packagename.split('-')
+    for (pos, component) in enumerate(components):
+        if pos > 0 and component and '0' <= component[0] <= '9':
+            return ('-'.join(components[0:pos]), components[pos], components[pos + 1:])
+    raise RuntimeError(f'package name {packagename} does not contain a version')
 
 
 _PORTS_QUERY = """
@@ -162,7 +171,7 @@ class OpenBSDsqlportsParser(Parser):
                 # and fullpkgname (which is package name aka stem + version + flavors)
 
                 pkgpath, *flavors = port.fullpkgpath.split(',')
-                stem, version = re.sub('(-[^0-9][^-]*)+$', '', port.fullpkgname).rsplit('-', 1)
+                stem, version, _ = _split_packagename(port.fullpkgname)
 
                 stripped_stem = _strip_flavors_from_stem(stem, flavors)
 
