@@ -28,4 +28,4 @@
       url: 'https://github.com/AerynOS/recipes/blob/main/{srcname|first_letter}/{srcname}/stone.yaml'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/AerynOS/recipes/main/{srcname|first_letter}/{srcname}/stone.yaml'
-  groups: [ all, production ]
+  groups: [ all ] # fails sanity check
