@@ -30,16 +30,16 @@ from repology.parsers.walk import walk_tree
 
 class GlaucusGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        for ceras_path_abs in walk_tree(path, name='ceras'):
-            package_path_abs = os.path.dirname(ceras_path_abs)
+        for info_path_abs in walk_tree(path, name='info'):
+            package_path_abs = os.path.dirname(info_path_abs)
             package_subdir = os.path.basename(package_path_abs)
 
             with factory.begin(package_subdir) as pkg:
                 patches_path_abs = os.path.join(package_path_abs, 'patches')
 
-                with open(ceras_path_abs, 'r') as f:
-                    ceras_contents = f.read()
-                    pkgdata = tomli.loads(ceras_contents)
+                with open(info_path_abs, 'r') as f:
+                    info_contents = f.read()
+                    pkgdata = tomli.loads(info_contents)
 
                 pkg.add_name(pkgdata['nom'], NameType.GENERIC_SRC_NAME)
 
@@ -56,7 +56,7 @@ class GlaucusGitParser(Parser):
                 pkg.set_version(pkgdata['ver'])
                 pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, pkgdata.get('url'))
 
-                for line in ceras_contents.split('\n'):
+                for line in info_contents.split('\n'):
                     if line.startswith('# Voyager:'):
                         pkg.add_maintainers(extract_maintainers(line.split(':', 1)[1]))
 
