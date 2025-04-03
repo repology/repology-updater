@@ -18,7 +18,7 @@
         class: RepodataFetcher
         # keeps redirecting to dead mirrors
         #url: https://downloads.sourceforge.net/project/unitedrpms/{{version}}/srpm/
-        url: https://kumisystems.dl.sourceforge.net/project/unitedrpms/{{version}}/srpm/
+        url: https://master.dl.sourceforge.net/project/unitedrpms/{{version}}/srpm/
       parser:
         class: RepodataParser
         vertags: fc
