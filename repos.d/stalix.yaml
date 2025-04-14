@@ -6,7 +6,7 @@
   desc: stal/IX
   family: stalix
   ruleset: stalix
-  minpackages: 600
+  minpackages: 1200
   sources:
     - name: dump.json
       fetcher:
