@@ -297,3 +297,19 @@ def test_setflavor():
         PackageSample(name='foo-suffix').expect(flavors=['suffix']),
         PackageSample(name='foo').expect(flavors=[]),
     )
+
+
+def test_recalled_true():
+    check_transformer(
+        '[ { name: p1, recalled: true } ]',
+        PackageSample(name='p1').expect(flags=Pf.RECALLED),
+        PackageSample(name='p2').expect(flags=0),
+    )
+
+
+def test_recalled_false():
+    check_transformer(
+        '[ { name: p1, recalled: false } ]',
+        PackageSample(name='p1', flags=Pf.RECALLED).expect(flags=0),
+        PackageSample(name='p2', flags=Pf.RECALLED).expect(flags=Pf.RECALLED),
+    )

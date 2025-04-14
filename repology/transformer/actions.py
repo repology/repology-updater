@@ -436,3 +436,13 @@ def warning(ruledata: Any) -> Action:
         package_context.add_warning(ruledata['warning'])
 
     return action
+
+
+@_action_generator
+def recalled(ruledata: Any) -> Action:
+    recalled_flag = cast(bool, ruledata['recalled'])
+
+    def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+        package.set_flag(PackageFlags.RECALLED, recalled_flag)
+
+    return action
