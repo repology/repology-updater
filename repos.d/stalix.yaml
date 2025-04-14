@@ -1,0 +1,29 @@
+###########################################################################
+# stal/IX
+###########################################################################
+- name: stalix
+  type: repository
+  desc: stal/IX
+  family: stalix
+  ruleset: stalix
+  minpackages: 600
+  sources:
+    - name: dump.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/stal-ix/ix/refs/heads/main/pkgs/die/scripts/dump.json
+      parser:
+        class: StalixJsonParser
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/stal-ix/ix/tree/main/pkgs/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/stal-ix/ix/blob/main/pkgs/{srcname}/ix.sh'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/stal-ix/ix/main/pkgs/{srcname}/ix.sh'
+  repolinks:
+    - desc: GitHub organization
+      url: https://github.com/stal-ix
+    - desc: Packages repository
+      url: https://github.com/stal-ix/ix/tree/main/pkgs
+  groups: [ all, production ]

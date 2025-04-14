@@ -141,6 +141,10 @@ class NameType:
     OPENVSX_NAMESPACE_SLASH_NAME: ClassVar[int] = 341
     OPENVSX_NAMESPACE_DOT_NAME: ClassVar[int] = 342
 
+    STALIX_PKG_NAME: ClassVar[int] = 350
+    STALIX_IX_PKG_NAME: ClassVar[int] = 351
+    STALIX_IX_PKG_FULL_NAME: ClassVar[int] = 352
+
     # Note that packages reside in subdirs such as packages/,
     # root-packages/, x11-packages/ and it may be that srcname
     # should include directory as well. However these are names
@@ -560,6 +564,14 @@ _MAPPINGS = [
         trackname=NameType.OPENVSX_NAMESPACE_DOT_NAME,
         visiblename=NameType.OPENVSX_DISPLAYNAME,
         projectname_seed=NameType.OPENVSX_NAMESPACE_DOT_NAME,
+    ),
+    # Stalix
+    _NameMapping(
+        srcname=NameType.STALIX_IX_PKG_FULL_NAME,
+        binname=NameType.STALIX_IX_PKG_NAME,
+        trackname=NameType.STALIX_IX_PKG_FULL_NAME,
+        visiblename=NameType.STALIX_IX_PKG_NAME,
+        projectname_seed=NameType.STALIX_PKG_NAME,
     ),
 ]
 

@@ -118,6 +118,7 @@ families = [
     'sisyphus',
     'slackbuilds',
     'spack',
+    'stalix',
     'tinycore',
     'slackware',
     'slitaz',
