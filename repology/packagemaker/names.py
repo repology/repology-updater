@@ -211,6 +211,8 @@ class NameType:
 
     BUILDROOT_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
+    PTXDIST_NAME: ClassVar[int] = GENERIC_SRC_NAME
+
     MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 
