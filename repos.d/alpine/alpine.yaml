@@ -72,7 +72,7 @@
 {{ alpine('3.9', minpackages=9000, valid_till='2020-11-01', package_page=False, build_logs=False) }}
 {{ alpine('3.10', minpackages=9000, valid_till='2021-05-01', package_page=False, build_logs=False) }}
 {{ alpine('3.11', minpackages=10000, valid_till='2021-11-01', package_page=False) }}
-{{ alpine('3.12', minpackages=11000, valid_till='2022-05-01') }}
+{{ alpine('3.12', minpackages=11000, valid_till='2022-05-01', package_page=False) }}
 {{ alpine('3.13', minpackages=13000, valid_till='2022-11-01') }}
 {{ alpine('3.14', minpackages=14000, valid_till='2023-05-01') }}
 {{ alpine('3.15', minpackages=15000, valid_till='2023-11-01') }}
