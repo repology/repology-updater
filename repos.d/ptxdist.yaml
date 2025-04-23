@@ -1,0 +1,27 @@
+###########################################################################
+# PTXdist
+###########################################################################
+- name: ptxdist
+  type: repository
+  desc: PTXdist
+  family: ptxdist
+  ruleset: ptxdist
+  minpackages: 900
+  sources:
+    - name: repology.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/baxeno/ptxdist-repology/refs/heads/main/repology.json
+      parser:
+        class: PtxdistJsonParser
+  repolinks:
+    - desc: PTXdist home
+      url: https://ptxdist.de/
+    - desc: PTXdist repository
+      url: https://git.pengutronix.de/cgit/ptxdist
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: 'https://git.pengutronix.de/cgit/ptxdist/tree/rules/{srcname}.make'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.pengutronix.de/cgit/ptxdist/plain/rules/{srcname}.make'
+  groups: [ all, production ]
