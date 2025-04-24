@@ -11,6 +11,7 @@
     - name: repology.json
       fetcher:
         class: FileFetcher
+        # Note: unofficial dump, see https://github.com/repology/repology-updater/issues/1487#issuecomment-2828618385
         url: https://raw.githubusercontent.com/baxeno/ptxdist-repology/refs/heads/main/repology.json
       parser:
         class: PtxdistJsonParser
