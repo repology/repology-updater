@@ -26,12 +26,6 @@ from repology.parsers.json import iter_json_list
 class PtxdistJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
-            # Based on Chromebrew (removed summary and homepages)
-            # repology/parsers/parsers/chromebrew.py
-            # https://raw.githubusercontent.com/chromebrew/chromebrew/master/tools/repology.json
-
-            # PTXdist JSON output:
-            # https://raw.githubusercontent.com/baxeno/ptxdist-repology/refs/heads/main/repology.json
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['name'], NameType.PTXDIST_NAME)
                 pkg.set_version(pkgdata['version'])
