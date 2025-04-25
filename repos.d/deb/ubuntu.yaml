@@ -145,4 +145,5 @@
 {{ ubuntu('22', '04', 'jammy',    minpackages=32000, valid_till='2027-06-01') }}
 {{ ubuntu('24', '04', 'noble',    minpackages=33000, valid_till='2029-05-31') }}
 {{ ubuntu('24', '10', 'oracular', minpackages=33000, valid_till='2025-07-01') }} # EoL at month precision, needs clarification
-{{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-01', backports=false, proposed=true) }} # EoL at month precision, needs clarification
+{{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-01') }} # EoL at month precision, needs clarification
+{{ ubuntu('25', '10', 'questing',   minpackages=33000, valid_till='2026-07-01', backports=false, proposed=true) }} # EoL at month precision, needs clarification
