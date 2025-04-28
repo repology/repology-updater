@@ -30,7 +30,7 @@
       url: https://git.busybox.net/buildroot/tree/{pkg_path}/{?patch}{{branchparam}}
     - type: PACKAGE_PATCH_RAW
       url: https://git.busybox.net/buildroot/plain/{pkg_path}/{?patch}{{branchparam}}
-  groups: [ all, production, buildroot ]
+  groups: [ all, buildroot ] # data gone
 {% endmacro %}
 
 # http://autobuild.buildroot.net/stats/
