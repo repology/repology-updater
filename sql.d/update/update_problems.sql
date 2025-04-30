@@ -51,25 +51,24 @@ WITH packages_links_expanded AS (
 		effname,
 		maintainer,
 		url,
-		ipv4_status_code,
-		ipv4_success,
-		ipv4_last_success,
+		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_status_code ELSE ipv6_status_code END AS status_code,
+		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_last_success ELSE ipv6_last_success END AS last_success,
 		first_extracted,
-		coalesce(ipv6_permanent_redirect_target, ipv4_permanent_redirect_target) as permanent_redirect_target,
+		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_permanent_redirect_target ELSE ipv6_permanent_redirect_target END AS permanent_redirect_target,
 		link_type
 	FROM packages_links_maintainers_expanded INNER JOIN links ON(links.id = link_id)
 	WHERE link_type IN (0, 1, 28)  -- UPSTREAM_HOMEPAGE, UPSTREAM_DOWNLOAD, UPSTREAM_DOWNLOAD_PAGE
 ), homepage_problems AS (
 	SELECT id, repo, visiblename, effname, maintainer,
 		'homepage_dead'::problem_type AS problem_type,
-		jsonb_build_object('url', url, 'code', ipv4_status_code) AS data
+		jsonb_build_object('url', url, 'code', status_code) AS data
 	FROM packages_homepages
 	WHERE
 		link_type = 0 AND
-		NOT ipv4_success AND
+		status_code != 200 AND
 		(
-			(ipv4_last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
-			ipv4_last_success < now() - INTERVAL '30' DAY
+			(last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
+			last_success < now() - INTERVAL '30' DAY
 		)
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
@@ -123,14 +122,14 @@ WITH packages_links_expanded AS (
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
 		'download_dead'::problem_type AS problem_type,
-		jsonb_build_object('url', url, 'code', ipv4_status_code) AS data
+		jsonb_build_object('url', url, 'code', status_code) AS data
 	FROM packages_homepages
 	WHERE
 		link_type = 1 AND
-		NOT ipv4_success AND
+		status_code != 200 AND
 		(
-			(ipv4_last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
-			ipv4_last_success < now() - INTERVAL '30' DAY
+			(last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
+			last_success < now() - INTERVAL '30' DAY
 		)
 
 	UNION ALL SELECT id, repo, visiblename, effname, maintainer,
