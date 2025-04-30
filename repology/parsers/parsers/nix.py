@@ -219,6 +219,13 @@ class NixJsonParser(Parser):
                     else:
                         pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
 
+                if 'teams' in meta:
+                    if not isinstance(meta['teams'], list):
+                        pkg.log('teams "{}" is not a list'.format(meta['teams']), severity=Logger.ERROR)
+                    else:
+                        for item in meta['teams']:
+                            pkg.add_maintainers(extract_nix_maintainers(item['members']))
+
                 if 'license' in meta:
                     pkg.add_licenses(extract_nix_licenses(meta['license']))
 
