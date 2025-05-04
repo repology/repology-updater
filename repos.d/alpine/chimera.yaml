@@ -11,7 +11,6 @@
   family: chimera
   ruleset: chimera
   minpackages: 6000
-  default_maintainer: fallback-mnt-chimera@repology
   sources:
     {% for subrepo in ['main', 'user'] %}
     - name: {{subrepo}}
