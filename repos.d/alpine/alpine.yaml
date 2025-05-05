@@ -67,14 +67,15 @@
 {% endmacro %}
 
 # package pages are not available for older versions, see dropdown on e.g. https://pkgs.alpinelinux.org/packages?name=zsh
-# likewise, build logs for older versions are not available, see https://build.alpinelinux.org/buildlogs/
-{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01', package_page=False, build_logs=False) }}
-{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01', package_page=False, build_logs=False) }}
-{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01', package_page=False, build_logs=False) }}
-{{ alpine('3.11', minpackages=10000, valid_till='2021-11-01', package_page=False) }}
-{{ alpine('3.12', minpackages=11000, valid_till='2022-05-01', package_page=False) }}
-{{ alpine('3.13', minpackages=13000, valid_till='2022-11-01') }}
-{{ alpine('3.14', minpackages=14000, valid_till='2023-05-01') }}
+# likewise, build logs for older versions are not available, see https://build.alpinelinux.org/buildlogs/ (check not only
+# the existence of a directory for specific release, but actual existence of logs in e.g. 3.11/community
+{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01', build_logs=False, package_page=False) }}
+{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01', build_logs=False, package_page=False) }}
+{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01', build_logs=False, package_page=False) }}
+{{ alpine('3.11', minpackages=10000, valid_till='2021-11-01', build_logs=False, package_page=False) }}
+{{ alpine('3.12', minpackages=11000, valid_till='2022-05-01', build_logs=False, package_page=False) }}
+{{ alpine('3.13', minpackages=13000, valid_till='2022-11-01', build_logs=False) }}
+{{ alpine('3.14', minpackages=14000, valid_till='2023-05-01', build_logs=False) }}
 {{ alpine('3.15', minpackages=15000, valid_till='2023-11-01') }}
 {{ alpine('3.16', minpackages=16000, valid_till='2024-05-23') }}
 {{ alpine('3.17', minpackages=16000, valid_till='2024-11-22') }}
