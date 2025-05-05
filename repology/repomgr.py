@@ -123,6 +123,7 @@ class Repository:
     default_maintainer: Optional[str]
     update_period: datetime.timedelta
     minpackages: int
+    pessimized: Optional[str]
 
     shadow: bool
     incomplete: bool
@@ -188,6 +189,7 @@ class RepositoryManager:
                 default_maintainer=repodata.get('default_maintainer'),
                 update_period=_parse_duration(repodata.get('update_period', 600)),
                 minpackages=repodata.get('minpackages', 0),
+                pessimized=repodata.get('pessimized'),
 
                 shadow=repodata.get('shadow', False),
                 incomplete=repodata.get('incomplete', False),
