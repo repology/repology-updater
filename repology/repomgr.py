@@ -72,6 +72,8 @@ def _parse_duration(arg: str | int | None) -> datetime.timedelta | None:
         return datetime.timedelta(hours=int(arg[:-1]))
     elif arg.endswith('d'):
         return datetime.timedelta(days=int(arg[:-1]))
+    elif arg.endswith('w'):
+        return datetime.timedelta(days=int(arg[:-1]) * 7)
     else:
         return datetime.timedelta(seconds=int(arg))
 
