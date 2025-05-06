@@ -31,7 +31,7 @@
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.0/{srcname}.spec'
   groups: [ all, production, openmandriva, rpm ]
 
-{% macro openmandriva(version, minpackages, valid_till=Null, archived=False) %}
+{% macro openmandriva(version, minpackages, valid_till=Null, archived=False, packagelinks=True) %}
 {% set subdir = 'release_archives/' if archived else '' %}
 - name: openmandriva_{{version|replace('.', '_')}}
   type: repository
@@ -59,6 +59,7 @@
   repolinks:
     - desc: OpenMandriva home
       url: https://openmandriva.org/
+  {% if packagelinks %}
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/{{version}}'
@@ -66,13 +67,14 @@
       url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/{{version}}/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/{{version}}/{srcname}.spec'
+  {% endif %}
   groups: [ all, production, openmandriva, rpm ]
 {% endmacro %}
 
 # valid_till's according to https://en.wikipedia.org/wiki/OpenMandriva_Lx#Stable_branch
 # each release is supported for 1 month after the next release comes out, so we can
 # immediately set valid_till when we add new releases here
-{{ openmandriva("4.1", valid_till="2021-03-12", archived=True, minpackages=10000) }}
+{{ openmandriva("4.1", valid_till="2021-03-12", archived=True, minpackages=10000, packagelinks=False) }}
 {{ openmandriva("4.2", valid_till="2022-03-07", archived=True, minpackages=11000) }}
 {{ openmandriva("4.3", valid_till="2023-12-25", minpackages=11000) }}
 {{ openmandriva("5.0", minpackages=11000) }}
