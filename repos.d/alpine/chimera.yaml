@@ -10,7 +10,7 @@
   statsgroup: Chimera
   family: chimera
   ruleset: chimera
-  minpackages: 6000
+  minpackages: 10000
   default_maintainer: fallback-mnt-chimera@repology
   sources:
     {% for subrepo in ['main', 'user'] %}
