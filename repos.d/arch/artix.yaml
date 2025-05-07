@@ -10,7 +10,7 @@
   color: '29add2'
   minpackages: 4000
   update_period: 1w
-  pessimized: "does not provide access (HTTP 403) to package sources (https://gitea.artixlinux.org/packages/*)"
+  pessimized: "does not provide access (HTTP 403) to package sources (for instance, https://repology.org/link/https://gitea.artixlinux.org/packages/abseil-cpp)"
   sources:
     - name: [ system, world, galaxy, lib32 ]
       fetcher:

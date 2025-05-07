@@ -13,7 +13,7 @@
   valid_till: {{valid_till}}-01  # only month is specified
   {% endif %}
   update_period: 1w
-  pessimized: "provides incorrect links to some package sources (example: https://gitee.com/src-openeuler/python-jupyter-client/raw/openEuler-24.09/python-jupyter-client.spec, spec file name does not have python- prefix)"
+  pessimized: "provides incorrect links to some package sources (for instance, https://repology.org/link/https://gitee.com/src-openeuler/389-ds-base/tree/openEuler-24.09/)"
   sources:
     - name: source
       fetcher:

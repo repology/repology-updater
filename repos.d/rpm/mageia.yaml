@@ -14,7 +14,7 @@
   valid_till: {{valid_till}}
   {% endif %}
   update_period: 1w
-  pessimized: "does not provide access (HTTP 403) to package sources (https://madb.mageialinux-online.org/rpmshow?...)"
+  pessimized: "does not provide access (HTTP 403) to package sources (for instance, https://repology.org/link/https://madb.mageialinux-online.org/rpmshow%3Frpm%3D7kaa%26repo%3D8-SRPMS-core-release%26distribution%3D8%26architecture%3Dx86_64%26graphical%3D0)"
   sources:
     # */backports_testing and */updates_testing not included, are these needed?
     # cauldron noes not seem to have updates and backports subrepos, is this correct?

@@ -8,6 +8,8 @@
   family: fedora
   ruleset: [fedora, rpm, terra]
   minpackages: {{minpackages}}
+  update_period: 1w
+  pessimized: "does not provide access (HTTP 404) to package sources (for instance, https://repology.org/link/https://madoguchi.fyralabs.com/redirect/terrarawhide/packages/wingpanel-indicator-nightlight-debugsource)"
   sources:
     # Note: terra contains packages build in different ways, see
     # https://github.com/repology/repology-updater/issues/1307 for some details
