@@ -228,6 +228,7 @@ schemas = {
             'default_maintainer': All(str, Contains('@')),
             'update_period': Any(int, str),
             Required('minpackages'): int,
+            'pessimized': str,
             Required('sources'): [
                 {
                     Required('name'): Any(str, [str]),
@@ -314,6 +315,7 @@ schemas = {
 
                         # nixos
                         'branch': str,
+                        'enable_build_log_links': bool,
 
                         # homebrew
                         'require_ruby_source_path': bool,

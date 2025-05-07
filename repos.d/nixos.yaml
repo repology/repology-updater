@@ -1,7 +1,7 @@
 ###########################################################################
 # NixOS packages
 ###########################################################################
-{% macro nix(branch, minpackages, valid_till) %}
+{% macro nix(branch, minpackages, valid_till, build_logs=False) %}
 - name: nix_stable_{{branch|replace('.', '_')}}
   type: repository
   desc: nixpkgs stable {{branch}}
@@ -24,6 +24,9 @@
         {% if branch %}
         branch: "{{branch}}"
         {% endif %}
+        {% if not build_logs %}
+        enable_build_log_links: false
+        {% endif %}
   repolinks:
     - desc: NixOS home
       url: https://nixos.org
@@ -37,13 +40,14 @@
   groups: [ all, production, nix ]
 {% endmacro %}
 
+# Note: build logs should only be enabled for alive branches due to enormous amount of links
 {{ nix('21.11', minpackages=70000, valid_till='2022-06-30') }}
 {{ nix('22.05', minpackages=75000, valid_till='2022-12-31') }}
 {{ nix('22.11', minpackages=85000, valid_till='2023-06-30') }}
 {{ nix('23.05', minpackages=90000, valid_till='2023-12-31') }}
 {{ nix('23.11', minpackages=90000, valid_till='2024-06-30') }}
 {{ nix('24.05', minpackages=100000, valid_till='2024-12-31') }}
-{{ nix('24.11', minpackages=100000, valid_till='2025-06-30') }}
+{{ nix('24.11', minpackages=100000, valid_till='2025-06-30', build_logs=True) }}
 
 - name: nix_unstable
   type: repository

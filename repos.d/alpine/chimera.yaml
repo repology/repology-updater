@@ -10,7 +10,7 @@
   statsgroup: Chimera
   family: chimera
   ruleset: chimera
-  minpackages: 6000
+  minpackages: 10000
   sources:
     {% for subrepo in ['main', 'user'] %}
     - name: {{subrepo}}

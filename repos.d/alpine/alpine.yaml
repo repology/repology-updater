@@ -12,7 +12,7 @@
 # and we no longer care if original files are deleted
 #
 
-{% macro alpine(version, minpackages, valid_till=None, subrepos=['community','main'], package_page=True, build_logs=True) %}
+{% macro alpine(version, minpackages, valid_till=None, subrepos=['community','main'], package_page=True, build_logs=False) %}
 {% set vversion = 'edge' if version == 'edge' else 'v' + version %}
 - name: alpine_{{version|replace('.', '_')}}
   {% if version >= '3.8' and version <= '3.9' %}
@@ -28,6 +28,8 @@
   valid_till: {{valid_till}}
   {% endif %}
   default_maintainer: fallback-mnt-alpine@repology
+  update_period: 1w
+  pessimized: "does not provide access (HTTP 403) to package sources (for instance, https://repology.org/link/https://git.alpinelinux.org/aports/plain/community/anki/APKBUILD)"
   sources:
     {% for subrepo in subrepos %}
     - name: {{subrepo}}
@@ -67,10 +69,12 @@
 {% endmacro %}
 
 # package pages are not available for older versions, see dropdown on e.g. https://pkgs.alpinelinux.org/packages?name=zsh
-# likewise, build logs for older versions are not available, see https://build.alpinelinux.org/buildlogs/
-{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01', package_page=False, build_logs=False) }}
-{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01', package_page=False, build_logs=False) }}
-{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01', package_page=False, build_logs=False) }}
+# likewise, build logs for older versions are not available, see https://build.alpinelinux.org/buildlogs/ (check not only
+# the existence of a directory for specific release, but actual existence of logs in e.g. 3.11/community
+# Or rather, only enable build_logs for supported alpine releases
+{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01', package_page=False) }}
+{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01', package_page=False) }}
+{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01', package_page=False) }}
 {{ alpine('3.11', minpackages=10000, valid_till='2021-11-01', package_page=False) }}
 {{ alpine('3.12', minpackages=11000, valid_till='2022-05-01', package_page=False) }}
 {{ alpine('3.13', minpackages=13000, valid_till='2022-11-01') }}
@@ -79,7 +83,7 @@
 {{ alpine('3.16', minpackages=16000, valid_till='2024-05-23') }}
 {{ alpine('3.17', minpackages=16000, valid_till='2024-11-22') }}
 {{ alpine('3.18', minpackages=16000, valid_till='2025-05-09') }}
-{{ alpine('3.19', minpackages=16000, valid_till='2025-11-01') }}
-{{ alpine('3.20', minpackages=23000, valid_till='2026-04-01') }}
-{{ alpine('3.21', minpackages=24000, valid_till='2026-11-01') }}
-{{ alpine('edge', minpackages=31000, subrepos=['community', 'main', 'testing']) }}
+{{ alpine('3.19', minpackages=16000, valid_till='2025-11-01', build_logs=True) }}
+{{ alpine('3.20', minpackages=23000, valid_till='2026-04-01', build_logs=True) }}
+{{ alpine('3.21', minpackages=24000, valid_till='2026-11-01', build_logs=True) }}
+{{ alpine('edge', minpackages=31000, build_logs=True, subrepos=['community', 'main', 'testing']) }}

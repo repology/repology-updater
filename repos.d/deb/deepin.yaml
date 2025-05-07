@@ -33,6 +33,8 @@
   ruleset: [ debuntu, deepin ]
   color: '949393'
   minpackages: 8000
+  update_period: 1w
+  pessimized: "does not provide access (HTTP 404) to package sources (for instance, https://repology.org/link/https://github.com/deepin-community/linux)"
   sources:
     - name: [ main, community, commercial ]
       fetcher:

@@ -72,6 +72,8 @@ def _parse_duration(arg: str | int | None) -> datetime.timedelta | None:
         return datetime.timedelta(hours=int(arg[:-1]))
     elif arg.endswith('d'):
         return datetime.timedelta(days=int(arg[:-1]))
+    elif arg.endswith('w'):
+        return datetime.timedelta(days=int(arg[:-1]) * 7)
     else:
         return datetime.timedelta(seconds=int(arg))
 
@@ -123,6 +125,7 @@ class Repository:
     default_maintainer: Optional[str]
     update_period: datetime.timedelta
     minpackages: int
+    pessimized: Optional[str]
 
     shadow: bool
     incomplete: bool
@@ -188,6 +191,7 @@ class RepositoryManager:
                 default_maintainer=repodata.get('default_maintainer'),
                 update_period=_parse_duration(repodata.get('update_period', 600)),
                 minpackages=repodata.get('minpackages', 0),
+                pessimized=repodata.get('pessimized'),
 
                 shadow=repodata.get('shadow', False),
                 incomplete=repodata.get('incomplete', False),

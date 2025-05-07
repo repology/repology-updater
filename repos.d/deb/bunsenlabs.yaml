@@ -10,6 +10,8 @@
   ruleset: [debuntu,bunsenlabs]
   color: 'f6b620'
   minpackages: 10
+  update_period: 1w
+  pessimized: "does not provide access (HTTP 404) to package sources (for instance, https://repology.org/link/https://www.bunsenlabs.org/repoidx.html%3Fk%3Dname-description%26v%3Dconkymisc)"
   sources:
     - name: [ 'bunsen-hydrogen/main' ]
       fetcher:
@@ -37,6 +39,8 @@
   ruleset: [debuntu,bunsenlabs]
   color: 'f6b620'
   minpackages: 10
+  update_period: 1w
+  pessimized: "does not provide access (HTTP 404) to package sources (for intance, https://repology.org/link/https://www.bunsenlabs.org/repoidx.html%3Fk%3Dname-description%26v%3Dconkymisc)"
   sources:
     - name: [ 'helium/main' ]
       fetcher:
@@ -64,6 +68,8 @@
   ruleset: [debuntu,bunsenlabs]
   color: 'f6b620'
   minpackages: 1
+  update_period: 1w
+  pessimized: "does not provide access (HTTP 404) to package sources (for instance, https://repology.org/link/https://www.bunsenlabs.org/repoidx.html%3Fk%3Dname-description%26v%3Dconkymisc)"
   sources:
     - name: [ 'jessie-backports/main' ]
       fetcher:
@@ -91,6 +97,8 @@
   ruleset: [debuntu,bunsenlabs]
   color: 'f6b620'
   minpackages: 1
+  update_period: 1w
+  pessimized: "does not provide access (HTTP 404) to package sources (for instance, https://repology.org/link/https://www.bunsenlabs.org/repoidx.html%3Fk%3Dname-description%26v%3Dconkymisc)"
   sources:
     - name: [ 'stretch-backports/main' ]
       fetcher:

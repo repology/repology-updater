@@ -102,9 +102,11 @@ _BUILD_LOGS_LINK_TEMPLATES = {
 
 class NixJsonParser(Parser):
     _branch: str | None
+    _enable_build_log_links: bool
 
-    def __init__(self, branch: str | None = None) -> None:
+    def __init__(self, branch: str | None = None, enable_build_log_links: bool = True) -> None:
         self._branch = branch
+        self._enable_build_log_links = enable_build_log_links
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
@@ -204,11 +206,12 @@ class NixJsonParser(Parser):
                 pkg.add_links(LinkType.UPSTREAM_CHANGELOG, meta.get('changelog', None))
                 pkg.add_links(LinkType.UPSTREAM_DOWNLOAD_PAGE, meta.get('downloadPage', None))
 
-                for arch, platform in [('x86_64', 'linux'), ('aarch64', 'linux'), ('x86_64', 'darwin'), ('aarch64', 'darwin')]:
-                    if nix_has_logs(meta, f'{arch}-{platform}') and (
-                        template := _BUILD_LOGS_LINK_TEMPLATES.get((platform, self._branch is not None))
-                    ):
-                        pkg.add_links(LinkType.PACKAGE_BUILD_LOGS, template.format(key=key, branch=self._branch, arch=arch))
+                if self._enable_build_log_links:
+                    for arch, platform in [('x86_64', 'linux'), ('aarch64', 'linux'), ('x86_64', 'darwin'), ('aarch64', 'darwin')]:
+                        if nix_has_logs(meta, f'{arch}-{platform}') and (
+                            template := _BUILD_LOGS_LINK_TEMPLATES.get((platform, self._branch is not None))
+                        ):
+                            pkg.add_links(LinkType.PACKAGE_BUILD_LOGS, template.format(key=key, branch=self._branch, arch=arch))
 
                 if 'description' in meta:
                     pkg.set_summary(meta['description'].replace('\n', ' '))
