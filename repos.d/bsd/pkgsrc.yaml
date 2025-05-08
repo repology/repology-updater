@@ -33,6 +33,8 @@
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-2018Q2'
     - type: PACKAGE_RECIPE_RAW
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q2'
+  # XXX: reenable this starting from 2025_2 as it should've switched to more reliable index generation,
+  # see https://github.com/repology/repology-updater/issues/1494
   groups: [ all, pkgsrc ]  # disabled due to constantly broken INDEX
 
 - name: pkgsrc_current
@@ -66,4 +68,4 @@
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/'
     - type: PACKAGE_RECIPE_RAW
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain'
-  groups: [ all, pkgsrc ]  # disabled due to constantly broken INDEX
+  groups: [ all, production, pkgsrc ]
