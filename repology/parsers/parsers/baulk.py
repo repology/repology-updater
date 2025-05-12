@@ -47,6 +47,8 @@ class BaulkGitParser(Parser):
                     pkg.set_flags(PackageFlags.UNTRUSTED)
 
                 pkg.add_homepages(homepage)
-                pkg.add_downloads(pkgdata.get('url'), pkgdata.get('url64'))
+
+                for architecture in pkgdata['architecture'].values():
+                    pkg.add_downloads(architecture['url'])
 
                 yield pkg
