@@ -495,6 +495,8 @@ CREATE TABLE links (
 
 	next_check timestamp with time zone NOT NULL DEFAULT now(),
 	last_checked timestamp with time zone,
+	last_success timestamp with time zone,
+	last_failure timestamp with time zone,
 
 	ipv4_last_success timestamp with time zone,
 	ipv4_last_failure timestamp with time zone,
