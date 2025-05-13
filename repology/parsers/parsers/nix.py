@@ -109,6 +109,8 @@ class NixJsonParser(Parser):
         self._enable_build_log_links = enable_build_log_links
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        max_maintainers = 0
+
         for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
             with factory.begin(key) as pkg:
                 # these should eventually go away as soon as the data is fixed
@@ -222,6 +224,11 @@ class NixJsonParser(Parser):
                     else:
                         pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
 
+                    if len(pkg.maintainers) > 10:
+                        raise RuntimeError('too many maintainers ({len(pkg.maintainers)}) for a single package')
+
+                    max_maintainers = max(max_maintainers, len(pkg.maintainers))
+
                 if 'license' in meta:
                     pkg.add_licenses(extract_nix_licenses(meta['license']))
 
@@ -235,3 +242,5 @@ class NixJsonParser(Parser):
                     pkg.set_flags(PackageFlags.UNTRUSTED)
 
                 yield pkg
+
+        factory.log(f'maximum number of package maintainers: {max_maintainers}', severity=Logger.NOTICE)
