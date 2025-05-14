@@ -221,7 +221,7 @@ class NixJsonParser(Parser):
                 if 'maintainers' in meta:
                     maintainers = set(extract_nix_maintainers(meta['maintainers']))
 
-                    team_maintainers = set()
+                    team_maintainers: set[str] = set()
                     for team in meta.get('teams', []):
                         team_maintainers.update(extract_nix_maintainers(team['members']))
                     maintainers -= team_maintainers
