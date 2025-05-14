@@ -225,7 +225,7 @@ class NixJsonParser(Parser):
                         pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
 
                     if len(pkg.maintainers) > 10:
-                        raise RuntimeError('too many maintainers ({len(pkg.maintainers)}) for a single package')
+                        raise RuntimeError(f'too many maintainers ({len(pkg.maintainers)}) for a single package')
 
                     max_maintainers = max(max_maintainers, len(pkg.maintainers))
 
