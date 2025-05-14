@@ -19,5 +19,5 @@
       url: http://www.perzl.org/aix/index.php?n=Main.HomePage
   packagelinks:
     - type: PACKAGE_RECIPE_RAW
-      url: 'ftp://www.oss4aix.org/SPECS/{nevr}.spec'
+      url: 'http://www.oss4aix.org/download/SPECS/{nevr}.spec'
   groups: [ all, production ]
