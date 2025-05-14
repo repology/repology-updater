@@ -227,7 +227,7 @@ class NixJsonParser(Parser):
                     maintainers -= team_maintainers
 
                     if len(maintainers) > 10:
-                       raise RuntimeError(f'too many maintainers ({len(maintainers)}: {", ".join(sorted(maintainers))}) for a single package')
+                        raise RuntimeError(f'too many maintainers ({len(maintainers)}: {", ".join(sorted(maintainers))}) for a single package')
 
                     pkg.add_maintainers(maintainers)
                     max_maintainers = max(max_maintainers, len(maintainers))
