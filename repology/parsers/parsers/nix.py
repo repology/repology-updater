@@ -219,15 +219,18 @@ class NixJsonParser(Parser):
                     pkg.set_summary(meta['description'].replace('\n', ' '))
 
                 if 'maintainers' in meta:
-                    if not isinstance(meta['maintainers'], list):
-                        pkg.log('maintainers "{}" is not a list'.format(meta['maintainers']), severity=Logger.ERROR)
-                    else:
-                        pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
+                    maintainers = set(extract_nix_maintainers(meta['maintainers']))
 
-                    if len(pkg.maintainers) > 10:
-                        raise RuntimeError(f'too many maintainers ({len(pkg.maintainers)}) for a single package')
+                    team_maintainers = set()
+                    for team in meta.get('teams', []):
+                        team_maintainers.update(extract_nix_maintainers(team['members']))
+                    maintainers -= team_maintainers
 
-                    max_maintainers = max(max_maintainers, len(pkg.maintainers))
+                    if len(maintainers) > 10:
+                       raise RuntimeError(f'too many maintainers ({len(maintainers)}: {", ".join(sorted(maintainers))}) for a single package')
+
+                    pkg.add_maintainers(maintainers)
+                    max_maintainers = max(max_maintainers, len(maintainers))
 
                 if 'license' in meta:
                     pkg.add_licenses(extract_nix_licenses(meta['license']))
