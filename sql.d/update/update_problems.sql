@@ -52,7 +52,7 @@ WITH packages_links_expanded AS (
 		maintainer,
 		url,
 		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_status_code ELSE ipv6_status_code END AS status_code,
-		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_last_success ELSE ipv6_last_success END AS last_success,
+		last_success,
 		first_extracted,
 		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_permanent_redirect_target ELSE ipv6_permanent_redirect_target END AS permanent_redirect_target,
 		link_type
