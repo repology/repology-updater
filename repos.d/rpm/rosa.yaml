@@ -8,65 +8,6 @@
 # NOTE: regarding valid_till, according to http://wiki.rosalab.ru/ru/index.php/Политика_выпуска_ROSA_Desktop,
 # releases are numbered <YEAR>.<HALF YEAR>, and are supported for 2 years. So for YYYY.1 we assume support
 # until <YYYY+2>.06.30. We've tried to contact rosa support regarding EoL dates, but with no success.
-- name: rosa_2014_1
-  type: repository
-  desc: Rosa 2014.1
-  statsgroup: Rosa
-  family: rosa
-  ruleset: [rosa, rpm]
-  color: '3757a1'
-  valid_till: 2016-06-30
-  minpackages: 27000
-  sources:
-    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
-        compression: xz
-      parser:
-        class: RosaInfoXmlParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Rosa Linux home
-      url: http://en.rosalinux.com/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://abf.io/import/{srcname}/tree/rosa2014.1'
-    - type: PACKAGE_RECIPE
-      url: 'https://abf.io/import/{srcname}/blob/rosa2014.1/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://abf.io/import/{srcname}/raw/rosa2014.1/{srcname}.spec'
-  groups: [ all, production, rosa ]
-
-- name: rosa_2016_1
-  type: repository
-  desc: Rosa 2016.1
-  statsgroup: Rosa
-  family: rosa
-  ruleset: [rosa, rpm]
-  color: '3757a1'
-  valid_till: 2018-06-30
-  minpackages: 21000
-  sources:
-    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
-        compression: xz
-      parser:
-        class: RosaInfoXmlParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Rosa Linux home
-      url: http://en.rosalinux.com/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://abf.io/import/{srcname}/tree/rosa2016.1'
-    - type: PACKAGE_RECIPE
-      url: 'https://abf.io/import/{srcname}/blob/rosa2016.1/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://abf.io/import/{srcname}/raw/rosa2016.1/{srcname}.spec'
-  groups: [ all, production, rosa ]
 
 # Note: rosa2021.1+ does not have urpmi-compatible metadata
 # Note: rosa2019.1 was renamed to rosa2021.1, keeping old "name"
