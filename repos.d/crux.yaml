@@ -11,6 +11,9 @@
   family: crux
   ruleset: crux
   minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
     - name: CRUX-ports-JSON
       fetcher:
