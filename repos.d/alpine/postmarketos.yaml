@@ -1,7 +1,7 @@
 ###########################################################################
 # PostmarketOS
 ###########################################################################
-{% macro postmarketos(version, minpackages) %}
+{% macro postmarketos(version, minpackages, valid_till=None) %}
 {% set tag = 'master' if version == 'master' else 'v' + version %}
 - name: postmarketos_{{version}}
   type: repository
@@ -10,6 +10,9 @@
   family: postmarketos
   ruleset: postmarketos
   minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   default_maintainer: fallback-mnt-postmarketos@repology
   sources:
     - name: aarch64
@@ -20,12 +23,10 @@
         class: ApkIndexParser
         path_suffix: APKINDEX
       subrepo: '{source}'
-      {% if version != "20.05" %}
       packagelinks:
         # XXX: want package recipe, but no way to know path under https://gitlab.com/postmarketOS/pmaports/
         - type: PACKAGE_HOMEPAGE
           url: http://pkgs.postmarketos.org/package/{{tag}}/postmarketos/aarch64/device-pine64-pinetab-phosh
-      {% endif %}
   repolinks:
     - desc: postmarketOS home
       url: https://postmarketos.org/
@@ -36,7 +37,10 @@
   groups: [ all, production, postmarketos ]
 {% endmacro %}
 
-{{ postmarketos('20.05', minpackages=300) }}
-{{ postmarketos('21.03', minpackages=500) }}
-{{ postmarketos('22.12', minpackages=300) }}
+# EoLs according to https://endoflife.date/postmarketos
+{{ postmarketos('22.12', minpackages=300, valid_till="2023-06-07") }}
+{{ postmarketos('23.06', minpackages=300, valid_till="2024-01-18") }}
+{{ postmarketos('23.12', minpackages=300, valid_till="2024-06-16") }}
+{{ postmarketos('24.06', minpackages=300, valid_till="2025-01-23") }}
+{{ postmarketos('24.12', minpackages=300) }}
 {{ postmarketos('master', minpackages=700) }}
