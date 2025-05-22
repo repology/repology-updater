@@ -79,5 +79,4 @@
 {{ mint(21, 0, 'vanessa', minpackages=100, valid_till='2027-04-30') }}
 {{ mint(21, 1, 'vera',    minpackages=100, valid_till='2027-04-30') }}
 
-{{ lmde(4, 'debbie', minpackages=100, valid_till='2022-08-31') }}
-{{ lmde(5, 'elsie',  minpackages=100) }}
+{{ lmde(5, 'elsie',  minpackages=100, valid_till='2024-07-01') }}
