@@ -24,7 +24,7 @@
       url: https://github.com/spack/spack
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://spack.github.io/packages.spack.io/package.html?name={srcname}'
+      url: 'https://ackages.spack.io/package.html?name={srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/{srcname}'
     - type: PACKAGE_RECIPE

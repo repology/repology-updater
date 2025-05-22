@@ -13,7 +13,7 @@
     - name: packages.json
       fetcher:
         class: FileFetcher
-        url: 'https://summer.exherbolinux.org/packages.json'
+        url: 'https://summer.exherbo.org/packages.json'
       parser:
         class: ExherboJsonParser
   repolinks:
@@ -23,5 +23,5 @@
       url: https://summer.exherbolinux.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://summer.exherbolinux.org/packages/{srcname}/index.html'
+      url: 'https://summer.exherbo.org/packages/{srcname}/index.html'
   groups: [ all, production ]

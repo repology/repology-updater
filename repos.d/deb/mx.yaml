@@ -19,20 +19,20 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://mxrepo.com/mx/repo/dists/{{codename}}/{{sub}}/source/Sources.gz'
+        url: 'https://mxrepo.com/mx/repo/dists/{{codename}}/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
       subrepo: {{sub}}
       packagelinks:
         - type: PACKAGE_SOURCES
-          url: 'http://mxrepo.com/mx/repo/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
+          url: 'https://mxrepo.com/mx/repo/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
     {% endfor %}
   repolinks:
     - desc: MX Linux
       url: https://mxlinux.org/
     - desc: MX and MEPIS Community Repository
-      url: http://mxrepo.com/
+      url: https://mxrepo.com/
   groups: [ all, production, mx ]
 
 {% if testing %}
@@ -51,18 +51,18 @@
     - name: test
       fetcher:
         class: FileFetcher
-        url: 'http://mxrepo.com/mx/testrepo/dists/{{codename}}/test/source/Sources.gz'
+        url: 'https://mxrepo.com/mx/testrepo/dists/{{codename}}/test/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
       packagelinks:
         - type: PACKAGE_SOURCES
-          url: 'http://mxrepo.com/mx/testrepo/pool/test/{srcname|lib_and_first_letter}/{srcname}/'
+          url: 'https://mxrepo.com/mx/testrepo/pool/test/{srcname|lib_and_first_letter}/{srcname}/'
   repolinks:
     - desc: MX Linux
       url: https://mxlinux.org/
     - desc: MX and MEPIS Community Repository
-      url: http://mxrepo.com/
+      url: https://mxrepo.com/
   groups: [ all, production, mx ]
 {% endif %}
 {% endmacro %}

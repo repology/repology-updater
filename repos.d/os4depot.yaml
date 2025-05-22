@@ -14,7 +14,7 @@
     - name: FULLINDEX.readme
       fetcher:
         class: FileFetcher
-        url: 'http://os4depot.net/share/FULLINDEX.readme'
+        url: 'https://os4depot.net/share/FULLINDEX.readme'
       parser:
         class: OS4DepotIndexParser
   shadow: true
@@ -23,5 +23,5 @@
       url: http://os4depot.net/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'http://os4depot.net/index.php?function=showfile&file={binname}'
+      url: 'https://os4depot.net/index.php?function=showfile&file={binname}'
   groups: [ all, production ]
