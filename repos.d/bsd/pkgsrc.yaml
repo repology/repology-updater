@@ -31,9 +31,9 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkgsrc.se/{srcname}'
     - type: PACKAGE_SOURCES
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-{{year}}Q{{quarter}}'
+      url: 'https://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-{{year}}Q{{quarter}}'
     - type: PACKAGE_RECIPE_RAW
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-{{year}}Q{{quarter}}'
+      url: 'https://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-{{year}}Q{{quarter}}'
   groups: [ all, production, pkgsrc ]
 {% endmacro %}
 
@@ -69,7 +69,7 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkgsrc.se/{srcname}'
     - type: PACKAGE_SOURCES
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/'
+      url: 'https://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/'
     - type: PACKAGE_RECIPE_RAW
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain'
+      url: 'https://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain'
   groups: [ all, production, pkgsrc ]
