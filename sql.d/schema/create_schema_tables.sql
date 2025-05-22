@@ -497,6 +497,7 @@ CREATE TABLE links (
 	last_checked timestamp with time zone,
 	last_success timestamp with time zone,
 	last_failure timestamp with time zone,
+	failure_streak smallint,
 
 	ipv4_status_code smallint,
 	ipv4_permanent_redirect_target text,
