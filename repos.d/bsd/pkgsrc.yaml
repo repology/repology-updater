@@ -1,20 +1,21 @@
 ###########################################################################
 # pkgsrc
 ###########################################################################
-- name: pkgsrc_2018_2
+{% macro pkgsrc(year, quarter, minpackages) %}
+- name: pkgsrc_{{year}}_{{quarter}}
   type: repository
-  desc: pkgsrc-2018Q2
+  desc: pkgsrc-{{year}}Q{{quarter}}
   family: pkgsrc
   ruleset: pkgsrc
   color: 'ff6600'
-  valid_till: 2018-10-01
-  minpackages: 15000
+  # valid_till: don't really need, as only supported quarterlies are kept on the server
+  minpackages: 19000
   default_maintainer: fallback-mnt-pkgsrc@repology
   sources:
     - name: INDEX
       fetcher:
         class: FileFetcher
-        url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q2/pkgsrc/INDEX
+        url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-{{year}}Q{{quarter}}/pkgsrc/INDEX
         allow_zero_size: false
         nocache: true
       parser:
@@ -30,12 +31,15 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkgsrc.se/{srcname}'
     - type: PACKAGE_SOURCES
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-2018Q2'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{srcname}/?only_with_tag=pkgsrc-{{year}}Q{{quarter}}'
     - type: PACKAGE_RECIPE_RAW
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q2'
-  # XXX: reenable this starting from 2025_2 as it should've switched to more reliable index generation,
-  # see https://github.com/repology/repology-updater/issues/1494
-  groups: [ all, pkgsrc ]  # disabled due to constantly broken INDEX
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{srcname}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-{{year}}Q{{quarter}}'
+  groups: [ all, production, pkgsrc ]
+{% endmacro %}
+
+# XXX: reenable this starting from 2025_2 as it should've switched to more reliable index generation,
+# see https://github.com/repology/repology-updater/issues/1494
+{# pkgsrc(2025, 2, minpackages=19000) #}
 
 - name: pkgsrc_current
   type: repository
