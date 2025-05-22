@@ -21,7 +21,7 @@
       url: https://bioarchlinux.org/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/BioArchLinux/Packages/blob/master/BioArchLinux/{srcname}'
+      url: 'https://github.com/BioArchLinux/Packages/tree/master/BioArchLinux/{srcname}'
     - type: PACKAGE_RECIPE
       url: 'https://github.com/BioArchLinux/Packages/blob/master/BioArchLinux/{srcname}/PKGBUILD'
     - type: PACKAGE_RECIPE_RAW
