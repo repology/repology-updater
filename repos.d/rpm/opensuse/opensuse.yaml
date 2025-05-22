@@ -1,61 +1,7 @@
 ###########################################################################
 # openSUSE
 ###########################################################################
-- name: opensuse_leap_42_3
-  sortname: opensuse_leap_14_0
-  type: repository
-  desc: openSUSE Leap 42.3
-  statsgroup: openSUSE
-  family: opensuse
-  ruleset: [opensuse,rpm]
-  color: '6da741'
-  valid_till: 2019-06-30
-  minpackages: 10000
-  sources:
-    - name: oss
-      fetcher:
-        class: RepodataFetcher
-        url: https://download.opensuse.org/source/distribution/leap/42.3/repo/oss/suse/
-      parser:
-        class: RepodataParser
-      subrepo: main/oss
-    - name: non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: https://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
-      parser:
-        class: RepodataParser
-      subrepo: main/non-oss
-    - name: updates-oss
-      fetcher:
-        class: RepodataFetcher
-        url: https://download.opensuse.org/update/leap/42.3/oss/
-      parser:
-        class: RepodataParser
-      subrepo: updates/oss
-    - name: updates-non-oss
-      fetcher:
-        class: RepodataFetcher
-        url: https://download.opensuse.org/update/leap/42.3/non-oss/
-      parser:
-        class: RepodataParser
-      subrepo: updates/non-oss
-  repolinks:
-    - desc: openSUSE home
-      url: https://www.opensuse.org/
-    - desc: openSUSE package search
-      url: https://software.opensuse.org/
-  packagelinks:
-    # NOTE: openSUSE:Leap:42.3:Update automatically inherits openSUSE:Leap:42.3
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.3:Update/{srcname}'
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://software.opensuse.org/package/{srcname}'
-    - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:42.3:Update/{srcname}/{srcname}.spec?expand=1'
-  groups: [ all, production, opensuse, rpm ]
-
-{% macro opensuse_leap(version, minpackages, valid_till=None, backports=True, sle=True) %}
+{% macro opensuse_leap(version, minpackages, valid_till=None) %}
 - name: opensuse_leap_{{version|replace('.', '_')}}
   type: repository
   desc: openSUSE Leap {{version}}
@@ -100,7 +46,6 @@
         class: RepodataParser
         vertags: [lp,bp]
       subrepo: updates/non-oss
-    {% if backports %}
     - name: backports-update
       fetcher:
         class: RepodataFetcher
@@ -108,8 +53,6 @@
       parser:
         class: RepodataParser
       subrepo: updates/backports
-    {% endif %}
-    {% if sle %}
     - name: sle-update
       fetcher:
         class: RepodataFetcher
@@ -117,7 +60,6 @@
       parser:
         class: RepodataParser
       subrepo: updates/sle
-    {% endif %}
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -135,10 +77,6 @@
 {% endmacro %}
 
 # https://en.opensuse.org/Lifetime
-{{ opensuse_leap('15.0', minpackages=12000, valid_till='2019-12-03', backports=false, sle=false) }}
-{{ opensuse_leap('15.1', minpackages=13000, valid_till='2021-02-02', backports=false, sle=false) }}
-{{ opensuse_leap('15.2', minpackages=15000, valid_till='2022-01-04', backports=false, sle=false) }}
-{{ opensuse_leap('15.3', minpackages=17000, valid_till='2022-12-31') }}
 {{ opensuse_leap('15.4', minpackages=19000, valid_till='2023-12-31') }}
 {{ opensuse_leap('15.5', minpackages=18000, valid_till='2024-12-31') }} # expected eol date
 {{ opensuse_leap('15.6', minpackages=15000, valid_till='2025-12-31') }} # expected eol date

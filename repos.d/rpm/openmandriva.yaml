@@ -1,36 +1,6 @@
 ###########################################################################
 # OpenMandriva
 ###########################################################################
-- name: openmandriva_4
-  type: repository
-  desc: OpenMandriva 4.0
-  statsgroup: OpenMandriva
-  family: openmandriva
-  ruleset: [openmandriva, rpm]
-  color: '045e9d'
-  valid_till: 2020-03-01
-  minpackages: 10000
-  sources:
-    # XXX: unsupported/updates is some 450MB file instead of repository directory, so excluded from here
-    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release ]
-      fetcher:
-        class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/release_archives/4.0/repository/SRPMS/{source}/'
-      parser:
-        class: RepodataParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: OpenMandriva home
-      url: https://openmandriva.org/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/tree/4.0'
-    - type: PACKAGE_RECIPE
-      url: 'https://github.com/OpenMandrivaAssociation/{srcname}/blob/4.0/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/OpenMandrivaAssociation/{srcname}/4.0/{srcname}.spec'
-  groups: [ all, production, openmandriva, rpm ]
-
 {% macro openmandriva(version, minpackages, valid_till=Null, archived=False, packagelinks=True) %}
 {% set subdir = 'release_archives/' if archived else '' %}
 - name: openmandriva_{{version|replace('.', '_')}}

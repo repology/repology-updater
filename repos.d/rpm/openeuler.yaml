@@ -36,9 +36,6 @@
 {% endmacro %}
 
 # EoLs: https://www.openeuler.org/en/download/archive/
-{{ openeuler('20.03-LTS',     minpackages=1500, valid_till='2022-03') }}
-{{ openeuler('20.03-LTS-SP1', minpackages=1500, valid_till='2022-12') }}
-{{ openeuler('20.03-LTS-SP2', minpackages=1500, valid_till='2022-04') }}
 {{ openeuler('20.03-LTS-SP3', minpackages=1500, valid_till='2025-12') }}
 {{ openeuler('20.03-LTS-SP4', minpackages=1500, valid_till='2025-12') }}
 

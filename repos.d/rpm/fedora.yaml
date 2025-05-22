@@ -52,8 +52,7 @@
     - name: updates
       fetcher:
         class: RepodataFetcher
-        {% set source_subdir='Everything/source/tree' if version >= 35 else 'Everything/SRPMS' if version >= 28 else 'SRPMS' %}
-        url: {{mirror}}/updates/{{version}}/{{source_subdir}}/
+        url: {{mirror}}/updates/{{version}}/Everything/source/tree/
       parser:
         class: RepodataParser
         vertags: fc
@@ -88,17 +87,6 @@
 {% endmacro %}
 
 # Dates from https://en.wikipedia.org/wiki/Fedora_Linux_release_history
-{{ fedora(26, minpackages=22000, valid_till='2018-05-29', archived=True) }}
-{{ fedora(27, minpackages=23000, valid_till='2018-11-30', archived=True) }}
-{{ fedora(28, minpackages=24000, valid_till='2019-05-28', archived=True) }}
-{{ fedora(29, minpackages=24000, valid_till='2019-11-26', archived=True) }}
-{{ fedora(30, minpackages=24000, valid_till='2020-05-26', archived=True) }}
-{{ fedora(31, minpackages=24000, valid_till='2020-11-24', archived=True) }}
-{{ fedora(32, minpackages=24000, valid_till='2021-05-25', archived=True) }}
-{{ fedora(33, minpackages=24000, valid_till='2021-11-30', archived=True) }}
-{{ fedora(34, minpackages=24000, valid_till='2022-06-07', archived=True) }}
-{{ fedora(35, minpackages=24000, valid_till='2022-12-13', archived=True) }}
-{{ fedora(36, minpackages=24000, valid_till='2023-05-16', archived=True) }}
 {{ fedora(37, minpackages=21000, valid_till='2023-12-05', archived=True) }}
 {{ fedora(38, minpackages=21000, valid_till='2024-05-21', archived=True) }}
 {{ fedora(39, minpackages=21000, valid_till='2024-11-26', archived=True) }}

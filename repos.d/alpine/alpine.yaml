@@ -15,9 +15,6 @@
 {% macro alpine(version, minpackages, valid_till=None, subrepos=['community','main'], package_page=True, build_logs=False) %}
 {% set vversion = 'edge' if version == 'edge' else 'v' + version %}
 - name: alpine_{{version|replace('.', '_')}}
-  {% if version >= '3.8' and version <= '3.9' %}
-  sortname: alpine_{{version|replace('.', '_0')}}
-  {% endif %}
   type: repository
   desc: Alpine Linux {{version|title}}
   statsgroup: Alpine
@@ -70,13 +67,7 @@
 # likewise, build logs for older versions are not available, see https://build.alpinelinux.org/buildlogs/ (check not only
 # the existence of a directory for specific release, but actual existence of logs in e.g. 3.11/community
 # Or rather, only enable build_logs for supported alpine releases
-{{ alpine('3.8', minpackages=8500, valid_till='2020-05-01', package_page=False) }}
-{{ alpine('3.9', minpackages=9000, valid_till='2020-11-01', package_page=False) }}
-{{ alpine('3.10', minpackages=9000, valid_till='2021-05-01', package_page=False) }}
-{{ alpine('3.11', minpackages=10000, valid_till='2021-11-01', package_page=False) }}
-{{ alpine('3.12', minpackages=11000, valid_till='2022-05-01', package_page=False) }}
-{{ alpine('3.13', minpackages=13000, valid_till='2022-11-01') }}
-{{ alpine('3.14', minpackages=14000, valid_till='2023-05-01') }}
+#                                                             V may need package_page=False soon, or dropped according to https://github.com/repology/repology-updater/issues/1499
 {{ alpine('3.15', minpackages=15000, valid_till='2023-11-01') }}
 {{ alpine('3.16', minpackages=16000, valid_till='2024-05-23') }}
 {{ alpine('3.17', minpackages=16000, valid_till='2024-11-22') }}
