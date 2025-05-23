@@ -21,7 +21,7 @@
       subrepo: {{sub}}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
-          url: https://docs.wakemeops.com/packages/{binname}
+          url: https://docs.wakemeops.com/packages/{binname}/
         - type: PACKAGE_SOURCES
           url: https://github.com/upciti/wakemeops/tree/main/blueprints/{{sub}}/{binname}
         - type: PACKAGE_RECIPE
