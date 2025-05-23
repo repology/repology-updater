@@ -57,7 +57,7 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/{{name}}/{srcname}/{srcname}.spec?expand=1'
+      url: 'https://build.opensuse.org/projects/{{name}}/packages/{srcname}/files/{srcname}.spec?expand=1'
   groups: [ all, production, opensuse, opensuse_extra, rpm ]
 {% endmacro %}
 

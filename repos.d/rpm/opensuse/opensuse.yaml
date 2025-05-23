@@ -72,7 +72,7 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://software.opensuse.org/package/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://build.opensuse.org/package/view_file/openSUSE:Leap:{{version}}:Update/{srcname}/{srcname}.spec?expand=1'
+      url: 'https://build.opensuse.org/projects/openSUSE:Leap:{{version}}:Update/packages/{srcname}/files/{srcname}.spec?expand=1'
   groups: [ all, production, opensuse, rpm ]
 {% endmacro %}
 
@@ -104,7 +104,7 @@
         - type: PACKAGE_HOMEPAGE
           url: 'https://build.opensuse.org/package/show/openSUSE:Factory/{srcname}'
         - type: PACKAGE_RECIPE
-          url: 'https://build.opensuse.org/package/view_file/openSUSE:Factory/{srcname}/{srcname}.spec?expand=1'
+          url: 'https://build.opensuse.org/projects/openSUSE:Factory/packages/{srcname}/files/{srcname}.spec?expand=1'
     - name: src-non-oss
       fetcher:
         class: RepodataFetcher
@@ -116,7 +116,7 @@
         - type: PACKAGE_HOMEPAGE
           url: 'https://build.opensuse.org/package/show/openSUSE:Factory:NonFree/{srcname}'
         - type: PACKAGE_RECIPE
-          url: 'https://build.opensuse.org/package/view_file/openSUSE:Factory:NonFree/{srcname}/{srcname}.spec?expand=1'
+          url: 'https://build.opensuse.org/projects/openSUSE:Factory:NonFree/packages/{srcname}/files/{srcname}.spec?expand=1'
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
