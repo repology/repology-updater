@@ -51,10 +51,14 @@ WITH packages_links_expanded AS (
 		effname,
 		maintainer,
 		url,
-		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_status_code ELSE ipv6_status_code END AS status_code,
+		CASE
+			WHEN coalesce(ipv4_status_code, 0) == 200 OR coalesce(ipv6_status_code, 0) == 200 THEN 200
+			WHEN coalesce(ipv4_status_code, 0) BETWEEN -99 AND 0 THEN coalesce(ipv6_status_code, 0)
+			ELSE coalesce(ipv4_status_code, 0)
+		END AS status_code,
 		last_success,
 		first_extracted,
-		CASE WHEN ipv4_status_code IS NOT NULL THEN ipv4_permanent_redirect_target ELSE ipv6_permanent_redirect_target END AS permanent_redirect_target,
+		coalesce(ipv4_permanent_redirect_target, ipv6_permanent_redirect_target) AS permanent_redirect_target,
 		link_type
 	FROM packages_links_maintainers_expanded INNER JOIN links ON(links.id = link_id)
 	WHERE link_type IN (0, 1, 28)  -- UPSTREAM_HOMEPAGE, UPSTREAM_DOWNLOAD, UPSTREAM_DOWNLOAD_PAGE
@@ -65,6 +69,7 @@ WITH packages_links_expanded AS (
 	FROM packages_homepages
 	WHERE
 		link_type = 0 AND
+		status_code NOT BETWEEN -99 AND 0 AND
 		status_code != 200 AND
 		(
 			(last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
@@ -126,6 +131,7 @@ WITH packages_links_expanded AS (
 	FROM packages_homepages
 	WHERE
 		link_type = 1 AND
+		status_code NOT BETWEEN -99 AND 0 AND
 		status_code != 200 AND
 		(
 			(last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
