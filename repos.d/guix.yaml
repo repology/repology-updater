@@ -23,12 +23,12 @@
     - desc: GNU Guix home
       url: https://guix.gnu.org/
     - desc: GNU Guix packages
-      url: https://guix.gnu.org/packages/
+      url: https://packages.guix.gnu.org/
     - desc: git repository
-      url: https://git.guix.gnu.org/guix/
+      url: https://codeberg.org/guix/guix/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url:  'https://packages.guix.gnu.org/packages/{srcname}/{rawversion}/'
+      url: 'https://packages.guix.gnu.org/packages/{srcname}/{rawversion}/'
     - type: PACKAGE_RECIPE
-      url: 'https://git.savannah.gnu.org/cgit/guix.git/tree/{loc_path}#n{loc_line|dec}'
+      url: 'https://codeberg.org/guix/guix/src/branch/master/{loc_path}#L{loc_line}'
   groups: [ all, production ]
