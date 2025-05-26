@@ -52,7 +52,7 @@ WITH packages_links_expanded AS (
 		maintainer,
 		url,
 		CASE
-			WHEN coalesce(ipv4_status_code, 0) == 200 OR coalesce(ipv6_status_code, 0) == 200 THEN 200
+			WHEN coalesce(ipv4_status_code, 0) = 200 OR coalesce(ipv6_status_code, 0) = 200 THEN 200
 			WHEN coalesce(ipv4_status_code, 0) BETWEEN -99 AND 0 THEN coalesce(ipv6_status_code, 0)
 			ELSE coalesce(ipv4_status_code, 0)
 		END AS status_code,
