@@ -13,6 +13,11 @@
   {% if valid_till %}
   valid_till: {{valid_till}}
   {% endif %}
+  update_period: 1w
+  pessimized: >-
+    fails to provide actual links to package sources (for intance,
+    https://build.opensuse.org/projects/openSUSE:Leap:15.6:Update/packages/trento-supportconfig-plugin/files/trento-supportconfig-plugin.spec?expand=1
+    has different version than advertised in the repository)
   sources:
     - name: oss
       fetcher:

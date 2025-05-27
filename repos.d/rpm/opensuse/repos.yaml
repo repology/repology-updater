@@ -39,6 +39,8 @@
   ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: {{minpackages}}
+  update_period: 1w
+  pessimized: "fails to provide actual links to package sources (see https://github.com/repology/repology-updater/blob/master/repos.d/rpm/opensuse/repos.yaml#L5-L29, example: https://repology.org/project/openfoam-com/information)"
   sources:
     - name: data
       fetcher:
