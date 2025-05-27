@@ -7,6 +7,7 @@
   family: noir
   ruleset: noir
   minpackages: 110
+  valid_till: 2024-04-05 # last commit
   sources:
     - name: main
       fetcher:
