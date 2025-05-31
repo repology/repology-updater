@@ -17,15 +17,17 @@
       parser:
         class: AoscPkgsParser
   repolinks:
-    - desc: AOSC OS home
+    - desc: AOSC home
       url: https://aosc.io/
-    - desc: AOSC packages
+    - desc: AOSC OS packages
       url: https://packages.aosc.io/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.aosc.io/packages/{binname}'
     - type: PACKAGE_SOURCES
       url: 'https://github.com/AOSC-Dev/{tree}/tree/{branch}/{srcname}'
+    - type: PACKAGE_NEW_VERSION_CHECKER
+      url: 'https://anicca.aosc.io/?search={binname}'
     # These are broken for 73% of packages - recipe may reside in different directory than 'autobuild'
     #- type: PACKAGE_RECIPE
     #  url: 'https://github.com/AOSC-Dev/{tree}/blob/{branch}/{srcname}/autobuild/build'
