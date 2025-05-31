@@ -71,6 +71,9 @@ class AoscPkgsParser(Parser):
                     pkg.add_links(LinkType.UPSTREAM_REPOSITORY, pkgdata['srcurl'])
                 elif srctype == 'Tarball':
                     pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, pkgdata['srcurl'])
+                elif srctype == 'PyPI':
+                    pypi_url = 'https://pypi.org/project/{}/'.format(pkgdata['srcurl'])
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, pypi_url)
 
                 # just a committer, doesn't seem suitable
                 #pkg.add_maintainers(extract_maintainers(pkgdata['committer']))
