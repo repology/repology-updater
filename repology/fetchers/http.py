@@ -138,6 +138,6 @@ def save_http_stream(url: str, outfile: IO[AnyStr], compression: str | None = No
                 chunk = decompressor.read(STREAM_CHUNK_SIZE)
                 if not chunk:
                     break
-                outfile.write(chunk)
+                outfile.write(chunk)  # type: ignore
 
     return response
