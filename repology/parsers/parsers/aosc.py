@@ -67,7 +67,7 @@ class AoscPkgsParser(Parser):
                 pkg.set_summary(pkgdata['description'])
 
                 srctype = pkgdata['srctype']
-                if srctype == 'Git' or srctype == 'Svn' or srctype == 'Bzr':
+                if srctype == 'Git' or srctype == 'SvnSrc' or srctype == 'BzrSrc':
                     pkg.add_links(LinkType.UPSTREAM_REPOSITORY, pkgdata['srcurl'])
                 elif srctype == 'Tarball':
                     pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, pkgdata['srcurl'])
