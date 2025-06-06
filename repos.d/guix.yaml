@@ -8,6 +8,8 @@
   ruleset: guix
   update_period: 1h  # no last-modified or etag support
   minpackages: 9500
+  update_period: 1w
+  pessimized: "does not provide access (connection times out) to package pages (for instance, https://repology.org/link/https://packages.guix.gnu.org/packages/abc-yosyshq/0.53/)"
   sources:
     - name: packages.json
       fetcher:
