@@ -127,6 +127,7 @@ families = [
     'solus',
     't2',
     'termux',
+    'tincan',
     'ubi',
     'vcpkg',
     'void',
