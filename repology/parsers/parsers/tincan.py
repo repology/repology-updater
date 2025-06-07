@@ -1,4 +1,4 @@
-# Copyright (C) 2022 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2025 AVS Origami <avs.origami@gmail.com>
 #
 # This file is part of repology
 #
@@ -38,22 +38,15 @@ class TinCanGitParser(Parser):
             package_path_abs = os.path.dirname(info_path_abs)
             package_subdir = os.path.basename(package_path_abs)
 
-            with factory.begin(package_subdir) as pkg:
-                patches_path_abs = os.path.join(package_path_abs, 'files')
-
+            with factory.begin(package_subdir) as pkg: 
                 with open(info_path_abs, 'r') as f:
                     info_contents = f.read()
                     pkgdata = tomli.loads(info_contents)
 
                 pkg.add_name(package_subdir, NameType.GENERIC_SRC_NAME) 
                 pkg.set_version(pkgdata['meta']['version'])
-                pkg.add_downloads(iter_sources(pkgdata['meta']['sources']))
+                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, iter_sources(pkgdata['meta']['sources']))
                 pkg.add_maintainers(extract_maintainers(pkgdata['meta']['maintainer']))
-
-                if os.path.exists(patches_path_abs):
-                    patches = [os.path.relpath(patch_path_abs, patches_path_abs) for patch_path_abs in walk_tree(patches_path_abs, suffix='.patch')]
-                    if len(patches) > 0:
-                        pkg.set_extra_field('patch', sorted(iter(patches)))
 
                 yield pkg
 
