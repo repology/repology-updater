@@ -1,0 +1,52 @@
+###########################################################################
+# Tin Can Linux
+###########################################################################
+- name: tincan_core
+  type: repository
+  desc: Tin Can Linux - Core
+  family: tincan
+  ruleset: tincan
+  color: 'dea48e'
+  minpackages: 24
+  sources:
+    - name: repo-core
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/tincan-linux/repo-core'
+        branch: main
+      parser:
+        class: TinCanGitParser
+  repolinks:
+    - desc: Tin Can Homepage
+      url: https://tincan-linux.github.io/
+    - desc: GitHub organization
+      url: https://github.com/tincan-linux
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/tincan-linux/repo-core/blob/main/{srcname}'
+  groups: [ all, production ]
+
+- name: tincan_extra
+  type: repository
+  desc: Tin Can Linux - Extra
+  family: tincan
+  ruleset: tincan
+  color: 'dea48e'
+  minpackages: 51
+  sources:
+    - name: repo-extra
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/tincan-linux/repo-extra'
+        branch: main
+      parser:
+        class: TinCanGitParser
+  repolinks:
+    - desc: Tin Can Homepage
+      url: https://tincan-linux.github.io/
+    - desc: GitHub organization
+      url: https://github.com/tincan-linux
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/tincan-linux/repo-extra/blob/main/{srcname}'
+  groups: [ all, production ]
