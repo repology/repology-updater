@@ -9,20 +9,26 @@
   color: 'dea48e'
   minpackages: 75
   sources:
-    - name: [ repo-core, repo-extra ]
+    {% for subrepo in ["core", "extra"] %}
+    - name: repo-{{subrepo}}
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/tincan-linux/{source}'
+        url: 'https://github.com/tincan-linux/repo-{{subrepo}}'
         branch: main
       parser:
         class: TinCanGitParser
-      subrepo: '{source}'
+      subrepo: {{subrepo}}
+      packagelinks:
+      - type: PACKAGE_SOURCES
+        url: 'https://github.com/tincan-linux/repo-{{subrepo}}/blob/main/{srcname}'
+      - type: PACKAGE_PATCH
+        url: 'https://github.com/tincan-linux/repo-{{subrepo}}/blob/main/{srcname}/files/{?patch}'
+      - type: PACKAGE_PATCH_RAW
+        url: 'https://raw.githubusercontent.com/tincan-linux/repo-{{subrepo}}/main/{srcname}/files/{?patch}'
+    {% endfor %}
   repolinks:
     - desc: Tin Can Homepage
       url: https://tincan-linux.github.io/
     - desc: GitHub Organization
       url: https://github.com/tincan-linux
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://github.com/tincan-linux/{subrepo}/blob/main/{srcname}'
   groups: [ all, production ]

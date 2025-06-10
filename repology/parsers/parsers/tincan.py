@@ -20,33 +20,36 @@ from typing import Iterable
 
 import tomli
 
-from repology.logger import Logger
 from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.walk import walk_tree
 
-def iter_sources(sources: list[str]):
-    for url in sources:
-        if '://' in url:
-            yield url
 
 class TinCanGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for info_path_abs in walk_tree(path, name='package.toml'):
             package_path_abs = os.path.dirname(info_path_abs)
             package_subdir = os.path.basename(package_path_abs)
+            files_path_abs = os.path.join(package_path_abs, 'files')
 
-            with factory.begin(package_subdir) as pkg: 
+            with factory.begin(package_subdir) as pkg:
                 with open(info_path_abs, 'r') as f:
                     info_contents = f.read()
                     pkgdata = tomli.loads(info_contents)
 
-                pkg.add_name(package_subdir, NameType.GENERIC_SRC_NAME) 
+                pkg.add_name(package_subdir, NameType.GENERIC_SRC_NAME)
                 pkg.set_version(pkgdata['meta']['version'])
-                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, iter_sources(pkgdata['meta']['sources']))
+                pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, [url for url in pkgdata['meta']['sources'] if '://' in url])
                 pkg.add_maintainers(extract_maintainers(pkgdata['meta']['maintainer']))
 
-                yield pkg
+                if os.path.exists(files_path_abs):
+                    patches = sorted((
+                        os.path.relpath(path, files_path_abs)
+                        for path in walk_tree(files_path_abs, suffix='.patch')
+                    ))
+                    if len(patches) > 0:
+                        pkg.set_extra_field('patch', patches)
 
+                yield pkg
