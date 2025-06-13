@@ -19,4 +19,4 @@
       url: https://pacstall.dev/
     - desc: Default pacscripts repository
       url: https://github.com/pacstall/pacstall-programs
-  groups: [ all ]
+  groups: [ all, production ]
