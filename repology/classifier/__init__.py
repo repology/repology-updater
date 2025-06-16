@@ -156,7 +156,7 @@ def _is_nix_mixed_snapshot_schemes_case(packages: Sequence[Package]) -> bool:
         for package in packages:
             if package.version.startswith('20'):
                 has_old_scheme = True
-            elif package.version.startswith('0-unstable-'):
+            elif '-unstable-' in package.version:
                 has_new_scheme = True
 
     return has_old_scheme and has_new_scheme
