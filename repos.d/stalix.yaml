@@ -27,3 +27,28 @@
     - desc: Packages repository
       url: https://github.com/stal-ix/ix/tree/main/pkgs
   groups: [ all, production ]
+
+- name: stalix_dev
+  type: repository
+  desc: stal/IX dev
+  family: stalix
+  ruleset: stalix
+  minpackages: 1200
+  sources:
+    - name: dump.json
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/pg83/ix/refs/heads/main/pkgs/die/scripts/dump.json
+      parser:
+        class: StalixJsonParser
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/pg83/ix/tree/main/pkgs/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/pg83/ix/blob/main/pkgs/{srcname}/ix.sh'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/pg83/ix/main/pkgs/{srcname}/ix.sh'
+  repolinks:
+    - desc: Packages repository
+      url: https://github.com/pg83/ix/tree/main/pkgs
+  groups: [ all, production ]
