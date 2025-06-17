@@ -45,8 +45,8 @@
 {{ nix('23.05', minpackages=90000, valid_till='2023-12-31') }}
 {{ nix('23.11', minpackages=90000, valid_till='2024-06-30') }}
 {{ nix('24.05', minpackages=100000, valid_till='2024-12-31') }}
-{{ nix('24.11', minpackages=100000, valid_till='2025-06-30', build_logs=True) }}
-{{ nix('25.05', minpackages=100000, valid_till='2025-12-31', build_logs=True) }}
+{{ nix('24.11', minpackages=110000, valid_till='2025-06-30', build_logs=True) }}
+{{ nix('25.05', minpackages=120000, valid_till='2025-12-31', build_logs=True) }}
 
 - name: nix_unstable
   type: repository
@@ -55,7 +55,7 @@
   family: nix
   ruleset: nix
   color: '7eb2dd'
-  minpackages: 90000
+  minpackages: 120000
   default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages-unstable.json
