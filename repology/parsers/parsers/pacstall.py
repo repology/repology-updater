@@ -22,28 +22,32 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.versions import VersionStripper
 
 
 class PacstallJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        normalize_version = VersionStripper().strip_right('-').strip_left(':')
+
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['name'], NameType.PACSTALL_NAME)
                 pkg.add_name(pkgdata['visibleName'], NameType.PACSTALL_VISIBLENAME)
-                pkg.set_version(pkgdata['version'])
+                pkg.set_version(pkgdata['version'], normalize_version)
                 pkg.set_summary(pkgdata['description'])
 
-                if pkgdata['url'].endswith('.git'):
-                    pkg.add_links(LinkType.UPSTREAM_REPOSITORY, pkgdata['url'])
-                else:
-                    pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, pkgdata['url'])
+                for url in pkgdata['url']:
+                    if not url['value'].startswith('http'):
+                        continue
+
+                    if url['value'].endswith('.git'):
+                        pkg.add_links(LinkType.UPSTREAM_REPOSITORY, url['value'])
+                    else:
+                        pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, url['value'])
 
                 pkg.add_links(LinkType.PACKAGE_HOMEPAGE, pkgdata['packageDetailsUrl'])
                 pkg.add_links(LinkType.PACKAGE_RECIPE_RAW, pkgdata['recipeUrl'])
 
-                for patch in pkgdata['patches']:
-                    pkg.add_links(LinkType.PACKAGE_PATCH_RAW, patch)
-
-                pkg.add_maintainers(extract_maintainers(pkgdata['maintainer']['email']))
+                pkg.add_maintainers((maintainer['email'] for maintainer in pkgdata['maintainer']))
 
                 yield pkg

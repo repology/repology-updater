@@ -6,7 +6,7 @@
   desc: pacstall
   family: pacstall
   ruleset: pacstall
-  minpackages: 200
+  minpackages: 700
   sources:
     - name: repology.json
       fetcher:
