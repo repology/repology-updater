@@ -35,8 +35,10 @@ class PacstallJsonParser(Parser):
                 pkg.add_name(pkgdata['visibleName'], NameType.PACSTALL_VISIBLENAME)
                 pkg.set_version(pkgdata['version'], normalize_version)
                 pkg.set_summary(pkgdata['description'])
+                if pkgdata['url'] != None:
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, pkgdata['url'])
 
-                for url in pkgdata['url']:
+                for url in pkgdata['source']:
                     if not url['value'].startswith('http'):
                         continue
 
