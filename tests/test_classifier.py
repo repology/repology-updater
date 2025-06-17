@@ -319,6 +319,13 @@ def test_suppress_ignored():
     )
 
 
+def test_suppress_ignored_nix():
+    check_classify(
+        PackageSample(repo='nix_stable_24_05', family='nix', version='2022-08-31-a0ddab6', flags=Pf.IGNORE).expect(versionclass=Ps.IGNORED),
+        PackageSample(repo='nix_unstable', family='nix', version='0.1.0-unstable-2024-05-07', flags=Pf.IGNORE).expect(versionclass=Ps.IGNORED),
+    )
+
+
 def test_suppress_ignored_rolling():
     check_classify(
         PackageSample(repo='0', family='0', version='3.0', flags=Pf.ROLLING).expect(versionclass=Ps.ROLLING),
