@@ -67,3 +67,36 @@
     - type: PACKAGE_PATCH_RAW
       url: 'https://raw.githubusercontent.com/sagemath/sage/develop/build/pkgs/{srcname}/patches/{?patch}'
   groups: [ all, production, sagemath ]
+
+- name: passagemath
+  type: repository
+  desc: passagemath
+  family: sagemath
+  ruleset: sagemath
+  minpackages: 200
+  sources:
+    - name: sage
+      fetcher:
+        class: GitFetcher
+        url: 'https://github.com/passagemath/passagemath.git'
+        sparse_checkout: ['build/pkgs']
+        branch: main
+      parser:
+        class: SageMathParser
+  repolinks:
+    - desc: passagemath home
+      url: https://github.com/passagemath/passagemath
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://doc.sagemath.org/html/en/reference/spkg/{srcname}.html'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/passagemath/passagemath/tree/develop/build/pkgs/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/passagemath/passagemath/blob/develop/build/pkgs/{srcname}/spkg-install.in'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/passagemath/passagemath/develop/build/pkgs/{srcname}/spkg-install.in'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/passagemath/passagemath/blob/develop/build/pkgs/{srcname}/patches/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/passagemath/passagemath/develop/build/pkgs/{srcname}/patches/{?patch}'
+  groups: [ all, production, sagemath ]
