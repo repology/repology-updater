@@ -56,6 +56,7 @@ WITH packages_links_expanded AS (
 			WHEN coalesce(ipv4_status_code, 0) BETWEEN -99 AND 0 THEN coalesce(ipv6_status_code, 0)
 			ELSE coalesce(ipv4_status_code, 0)
 		END AS status_code,
+		failure_streak,
 		last_success,
 		first_extracted,
 		coalesce(ipv4_permanent_redirect_target, ipv6_permanent_redirect_target) AS permanent_redirect_target,
@@ -71,6 +72,7 @@ WITH packages_links_expanded AS (
 		link_type = 0 AND
 		status_code NOT BETWEEN -99 AND 0 AND
 		status_code != 200 AND
+		failure_streak >= 3 AND
 		(
 			(last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
 			last_success < now() - INTERVAL '30' DAY
@@ -133,6 +135,7 @@ WITH packages_links_expanded AS (
 		link_type = 1 AND
 		status_code NOT BETWEEN -99 AND 0 AND
 		status_code != 200 AND
+		failure_streak >= 3 AND
 		(
 			(last_success IS NULL AND first_extracted < now() - INTERVAL '30' DAY) OR
 			last_success < now() - INTERVAL '30' DAY
