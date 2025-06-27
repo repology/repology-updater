@@ -6,7 +6,7 @@
   desc: RPM Sphere
   family: fedora
   ruleset: [fedora, rpm, rpmsphere]
-  minpackages: 2300
+  minpackages: 2500
   sources:
     - name: source
       fetcher:
@@ -14,7 +14,17 @@
         url: https://raw.githubusercontent.com/rpmsphere/source/master/
       parser:
         class: RepodataParser
+        binary: false
   repolinks:
     - desc: RPM Sphere home
       url: https://rpmsphere.github.io/
+    - desc: RPM Sphere spec repository
+      url: https://github.com/rpmsphere/spec
+    - desc: RPM Sphere source packages repository
+      url: https://github.com/rpmsphere/source
+  packagelinks:
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/rpmsphere/spec/blob/master/{srcname|first_letter}/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/rpmsphere/spec/master/{srcname|first_letter}/{srcname}.spec'
   groups: [ all, production ]
