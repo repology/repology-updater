@@ -18,9 +18,9 @@
         class: ExherboJsonParser
   repolinks:
     - desc: Exherbo home
-      url: https://www.exherbolinux.org/
+      url: https://www.exherbo.org/
     - desc: Exherbo packages
-      url: https://summer.exherbolinux.org/
+      url: https://summer.exherbo.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://summer.exherbo.org/packages/{srcname}/index.html'
