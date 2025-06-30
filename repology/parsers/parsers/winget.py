@@ -99,14 +99,12 @@ class WingetGitParser(Parser):
                         with open(os.path.join(pkgpath_abs, manifest), 'r') as fd:
                             manifest_data = yaml.safe_load(fd)
                     except UnicodeDecodeError:
-                        pkg.log(f'failed to decode {manifest}, probably UTF-16 garbage', Logger.ERROR)
-                        continue
+                        raise RuntimeError(f'failed to decode {manifest}, probably UTF-16 garbage')
                     except yaml.MarkedYAMLError as e:
                         if e.problem_mark:
-                            pkg.log(f'YAML error in {manifest} at line {e.problem_mark.line}: {e.problem}', Logger.ERROR)
+                            raise RuntimeError(f'YAML error in {manifest} at line {e.problem_mark.line}: {e.problem}')
                         else:
-                            pkg.log(f'YAML error in {manifest}: {e.problem}', Logger.ERROR)
-                        continue
+                            raise RuntimeError(f'YAML error in {manifest}: {e.problem}')
 
                     _parse_manifest(manifest_data, pkg)
 
