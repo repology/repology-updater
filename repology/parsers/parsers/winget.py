@@ -69,10 +69,10 @@ def _parse_manifest(manifest_data: dict[str, Any], pkg: PackageMaker) -> None:
         # Moniker field is optional and mostly useless
 
         version = manifest_data['PackageVersion']
-        if isinstance(version, float):
-            pkg.log(f'PackageVersion "{version}" is a floating point, should be quoted in YAML', Logger.WARNING)
+        if not isinstance(version, str):
+            raise RuntimeError(f'PackageVersion "{version}" is not a string (must be quoted in YAML)')
 
-        pkg.set_version(str(version))
+        pkg.set_version(version)
         pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, manifest_data.get('PackageUrl'))
         pkg.add_links(LinkType.UPSTREAM_CHANGELOG, manifest_data.get('ReleaseNotesUrl'))
 
