@@ -1,6 +1,10 @@
 ###########################################################################
 # Slackware
 ###########################################################################
+
+# https://mirrors.slackware.com/mirrorlist/, without trailing slash
+{% set slackware_mirror = "https://mirror.bytemark.co.uk/slackware" %}
+
 - name: slackware_14_2
   sortname: slackware32_14_2
   type: repository
@@ -16,7 +20,7 @@
     - name: [slackware,patches,extra]
       fetcher:
         class: FileFetcher
-        url: 'https://mirrors.slackware.com/slackware/slackware-14.2/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware-14.2/{source}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: '{source}'
@@ -39,7 +43,7 @@
     - name: [slackware,patches,extra]
       fetcher:
         class: FileFetcher
-        url: 'https://mirrors.slackware.com/slackware/slackware-15.0/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware-15.0/{source}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: '{source}'
@@ -62,7 +66,7 @@
     - name: [slackware,patches,extra]
       fetcher:
         class: FileFetcher
-        url: 'https://mirrors.slackware.com/slackware/slackware-current/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware-current/{source}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: '{source}'
@@ -86,7 +90,7 @@
     - name: [slackware64,patches,extra]
       fetcher:
         class: FileFetcher
-        url: 'https://mirrors.slackware.com/slackware/slackware64-14.2/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware64-14.2/{source}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: '{source}'
@@ -108,7 +112,7 @@
     - name: [slackware64,patches,extra]
       fetcher:
         class: FileFetcher
-        url: 'https://mirrors.slackware.com/slackware/slackware64-15.0/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware64-15.0/{source}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: '{source}'
@@ -130,7 +134,7 @@
     - name: [slackware64,patches,extra]
       fetcher:
         class: FileFetcher
-        url: 'https://mirrors.slackware.com/slackware/slackware64-current/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware64-current/{source}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: '{source}'
