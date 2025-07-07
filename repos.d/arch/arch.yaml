@@ -121,7 +121,7 @@
   repolinks:
     - desc: Arch Linux 32 home
       url: https://archlinux32.org/
-  groups: [ all, production, arch_extra ]
+  groups: [ all, arch_extra ]
 {% endfor %}
 
 {% for arch in ['aarch64'] %}  # also arm7h, but the repository contains broken data
