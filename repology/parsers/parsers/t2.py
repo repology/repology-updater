@@ -64,7 +64,7 @@ def _parse_descfile(path: str, logger: Logger) -> dict[str, list[str]]:
         for line in descfile:
             line = line.strip()
 
-            if line.startswith('#') or not line.startswith('['):
+            if not line.startswith('['):
                 continue
 
             match = re.fullmatch(r'\[([^\[\]]+)\]\s*(.*?)', line, re.DOTALL)
