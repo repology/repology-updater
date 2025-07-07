@@ -9,10 +9,10 @@
   color: '6082b6'
   minpackages: 100
   sources:
-    - name: cerata
+    - name: core
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/glaucuslinux/cerata'
+        url: 'https://github.com/glaucuslinux/core'
         branch: main
       parser:
         class: GlaucusGitParser
@@ -23,9 +23,9 @@
       url: https://github.com/glaucuslinux
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/glaucuslinux/cerata/blob/master/{srcname}'
+      url: 'https://github.com/glaucuslinux/core/blob/main/{srcname}'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/glaucuslinux/cerata/blob/master/{srcname}/patches/{?patch}'
+      url: 'https://github.com/glaucuslinux/core/blob/main/{srcname}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/glaucuslinux/cerata/master/{srcname}/patches/{?patch}'
+      url: 'https://raw.githubusercontent.com/glaucuslinux/core/main/{srcname}/patches/{?patch}'
   groups: [ all, production ]

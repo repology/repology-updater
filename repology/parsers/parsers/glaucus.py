@@ -41,10 +41,7 @@ class GlaucusGitParser(Parser):
                     info_contents = f.read()
                     pkgdata = tomli.loads(info_contents)
 
-                pkg.add_name(pkgdata['nom'], NameType.GENERIC_SRC_NAME)
-
-                if package_subdir != pkgdata['nom']:
-                    raise RuntimeError(f'package subdir "{package_subdir}" is expected to be equal to package name "{pkgdata["nom"]}"')
+                pkg.add_name(package_subdir, NameType.GENERIC_SRC_NAME)
 
                 if 'ver' not in pkgdata:
                     pkg.log('package without version, skipping', Logger.ERROR)
