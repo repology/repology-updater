@@ -64,7 +64,7 @@ def _parse_descfile(path: str, logger: Logger) -> dict[str, list[str]]:
         for line in descfile:
             line = line.strip()
 
-            if line.startswith('#'):
+            if line.startswith('#') or not line.startswith('['):
                 continue
 
             match = re.fullmatch(r'\[([^\[\]]+)\]\s*(.*?)', line, re.DOTALL)
@@ -73,7 +73,7 @@ def _parse_descfile(path: str, logger: Logger) -> dict[str, list[str]]:
                 tag = match.group(1).lower()
                 tag = tag_map.get(tag, tag)
                 data[tag].append(match.group(2))
-            elif line:
+            else:
                 logger.log('unexpected line "{}"'.format(line), Logger.WARNING)
 
     return data
