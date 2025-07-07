@@ -30,6 +30,10 @@ Desired human readable title to be shown on the website. Shorter forms preferred
 
 MyMegaRepo 22.04
 
+**Description(s)**
+
+Short description of your repository.
+
 **Repository data location(s)**
 <!--
 Link(s) to machine readable package data (may express multiple links in free form).
@@ -46,7 +50,6 @@ Other useful link types include package page, package related issues, build stat
 - **Recipe**: https://github.com/mymygarepo/packages/blob/master/{pkgname}/recipe.json
 - Package page: https://mymegarepo.org/packages/{pkgname}/
 - Package sources: https://github.com/mymygarepo/packages/tree/master/{pkgname}/
-- Issues: https://bugzilla.mymegarepo.org/buglist.cgi?quicksearch={pkgname}
 - Build status: https://builder.mymegarepo.org/{pkgname}/status
 - Build log: https://builder.mymegarepo.org/{pkgname}/buildlogs/latest
 
