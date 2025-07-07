@@ -44,6 +44,14 @@ def extract_nix_maintainers(items: Iterable[str | dict[str, str]]) -> Iterable[s
                 # maintainer, we can extract both
                 yield item['github'].lower() + '@github'
 
+def extract_nix_teams(teams: Iterable[dict[str, str]]) -> Iterable[str]:
+    for team in teams:
+        if 'githubTeams' in team:
+            for githubTeam in team['githubTeams']:
+                yield 'nixos/' + githubTeam.lower() + '@github-team'
+        else:
+            yield re.sub('[^0-9a-zA-Z]+', '-', team['shortName']).lower() + '@nixpkgs-team'
+
 
 def extract_nix_licenses(whatever: Any) -> list[str]:
     if isinstance(whatever, str):
@@ -220,6 +228,12 @@ class NixJsonParser(Parser):
 
                 if 'maintainers' in meta:
                     maintainers = set(extract_nix_maintainers(meta['maintainers']))
+
+                    team_maintainers: set[str] = set()
+                    for team in meta.get('teams', []):
+                        team_maintainers.update(extract_nix_maintainers(team['members']))
+                        maintainers.update(extract_nix_teams(team))
+                    maintainers -= team_maintainers
 
                     if len(maintainers) > 20:
                         raise RuntimeError(f'too many maintainers ({len(maintainers)}: {", ".join(sorted(maintainers))}) for a single package')
