@@ -23,7 +23,7 @@
       url: https://github.com/glaucuslinux
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/glaucuslinux/core/blob/main/{srcname}'
+      url: 'https://github.com/glaucuslinux/core/tree/main/{srcname}'
     - type: PACKAGE_PATCH
       url: 'https://github.com/glaucuslinux/core/blob/main/{srcname}/patches/{?patch}'
     - type: PACKAGE_PATCH_RAW
