@@ -10,7 +10,7 @@
   family: debuntu
   ruleset: debuntu
   color: '88839c'
-  valid_till: 2024-06-30
+  valid_till: 2024-06-01
   minpackages: 25000
   sources:
     - name: [ beowulf/main, beowulf/contrib, beowulf/non-free, beowulf-updates/main, beowulf-updates/contrib, beowulf-updates/non-free ]
@@ -33,6 +33,7 @@
   family: debuntu
   ruleset: debuntu
   color: '88839c'
+  valid_till: 2026-08-15
   minpackages: 27000
   sources:
     - name: [ chimaera/main, chimaera/contrib, chimaera/non-free, chimaera-updates/main, chimaera-updates/contrib, chimaera-updates/non-free ]
