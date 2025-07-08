@@ -20,7 +20,7 @@
       subrepo: {{subrepo}}
       packagelinks:
       - type: PACKAGE_SOURCES
-        url: 'https://github.com/tincan-linux/repo-{{subrepo}}/blob/main/{srcname}'
+        url: 'https://github.com/tincan-linux/repo-{{subrepo}}/tree/main/{srcname}'
       - type: PACKAGE_PATCH
         url: 'https://github.com/tincan-linux/repo-{{subrepo}}/blob/main/{srcname}/files/{?patch}'
       - type: PACKAGE_PATCH_RAW
