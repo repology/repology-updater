@@ -31,7 +31,7 @@
     {% endfor %}
     {% endfor %}
 
-    {% set sub1 = codename + '/updates' if version < 11 else codename + '-security' %}
+    {% set sub1 = codename + '-security' %}
     {% for sub2 in subrepos2 %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
