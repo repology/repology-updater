@@ -3,12 +3,10 @@
 ###########################################################################
 
 {% macro debian(version, codename, minpackages, valid_till=None, backports=True, backports_sloppy=True, packages_page=True, buildd_page=True, archived=False) %}
-{% set sortversion = '0' + (version|string) if version < 10 else version %}
 {% set subrepos2 = ['main', 'contrib', 'non-free'] if version < 12 else ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
 {% set host = 'archive.debian.org' if archived else 'ftp.debian.org' %}
 
 - name: debian_{{version}}
-  sortname: debian_{{sortversion}}
   type: repository
   desc: Debian {{version}}
   statsgroup: Debian+derivs
@@ -72,7 +70,6 @@
 
 {% if backports %}
 - name: debian_{{version}}_backports
-  sortname: debian_{{sortversion}}_backports
   type: repository
   desc: Debian {{version}} Backports
   statsgroup: Debian+derivs
@@ -123,7 +120,6 @@
 
 {% if backports_sloppy %}
 - name: debian_{{version}}_backports_sloppy
-  sortname: debian_{{sortversion}}_backports_sloppy
   type: repository
   desc: Debian {{version}} Backports sloppy
   statsgroup: Debian+derivs
