@@ -38,7 +38,7 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2021.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2021.1/{srcname}.spec'
-  groups: [ all, production, rosa ]
+  groups: [ all, rosa ]
 
 - name: rosa_13
   sortname: rosa_2023_1
@@ -67,7 +67,7 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2023.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2023.1/{srcname}.spec'
-  groups: [ all, production, rosa ]
+  groups: [ all, rosa ]
 
 - name: rosa_server_6_9
   type: repository
