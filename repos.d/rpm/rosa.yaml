@@ -28,7 +28,7 @@
   repolinks:
     - desc: Packages on ROSA ABF (Automatic Build Farm)
       url: https://abf.io/import
-    - desc: Repositories and snapshots of them
+    - desc: Repositories and snapshots thereof
       url: https://mirror.rosa.ru
     - desc: ROSA Forum (English section)
       url: https://forum.rosa.ru/viewforum.php?f=21
@@ -61,7 +61,7 @@
   repolinks:
     - desc: Packages on ROSA ABF (Automatic Build Farm)
       url: https://abf.io/import
-    - desc: Repositories and snapshots of them
+    - desc: Repositories and snapshots thereof
       url: https://mirror.rosa.ru
     - desc: ROSA Forum (English section)
       url: https://forum.rosa.ru/viewforum.php?f=21
