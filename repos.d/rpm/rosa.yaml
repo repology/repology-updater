@@ -6,7 +6,6 @@
 # mirror.rosa.ru is production repo which mirrors from abf-downloads.rosa.ru
 # Each platform (rosa2021.1, rosa13 etc.) is supported ~5 years.
 
-# Note: rosa2021.1+ does not have urpmi-compatible metadata
 # Note: rosa2019.1 was renamed to rosa2021.1, keeping old "name"
 - name: rosa_2019_1
   type: repository
