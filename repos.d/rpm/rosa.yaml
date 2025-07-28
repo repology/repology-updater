@@ -26,6 +26,7 @@
         class: RepodataParser
       subrepo: '{source}'
   repolinks:
+    # Note: official website rosa.ru is Russian-only
     - desc: Packages on ROSA ABF (Automatic Build Farm)
       url: https://abf.io/import
     - desc: Repositories and snapshots thereof
@@ -59,6 +60,7 @@
         class: RepodataParser
       subrepo: '{source}'
   repolinks:
+    # Note: official website rosa.ru is Russian-only
     - desc: Packages on ROSA ABF (Automatic Build Farm)
       url: https://abf.io/import
     - desc: Repositories and snapshots thereof
