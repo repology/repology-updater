@@ -26,8 +26,12 @@
         class: RepodataParser
       subrepo: '{source}'
   repolinks:
-    - desc: Rosa Linux home
-      url: https://rosa.ru
+    - desc: Packages on ROSA ABF (Automatic Build Farm)
+      url: https://abf.io/import
+    - desc: Repositories and snapshots of them
+      url: https://mirror.rosa.ru
+    - desc: ROSA Forum (English section)
+      url: https://forum.rosa.ru/viewforum.php?f=21
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://abf.io/import/{srcname}/tree/rosa2021.1'
@@ -55,8 +59,12 @@
         class: RepodataParser
       subrepo: '{source}'
   repolinks:
-    - desc: Rosa Linux home
-      url: https://rosa.ru
+    - desc: Packages on ROSA ABF (Automatic Build Farm)
+      url: https://abf.io/import
+    - desc: Repositories and snapshots of them
+      url: https://mirror.rosa.ru
+    - desc: ROSA Forum (English section)
+      url: https://forum.rosa.ru/viewforum.php?f=21
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://abf.io/import/{srcname}/tree/rosa2023.1'
