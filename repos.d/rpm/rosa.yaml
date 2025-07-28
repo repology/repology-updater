@@ -2,12 +2,9 @@
 # Rosa
 ###########################################################################
 # As per rosalinux Mikhail Novosyolov:
-# abf-downloads.rosalinux.ru is primary repository location
-# mirror.rosalab.ru is secondary mirror which does not contain unreleased repos (ROSA 2019.x ATOW)
-# XXX: check how abf-downloads behave, then switch all repos to it
-# NOTE: regarding valid_till, according to http://wiki.rosalab.ru/ru/index.php/Политика_выпуска_ROSA_Desktop,
-# releases are numbered <YEAR>.<HALF YEAR>, and are supported for 2 years. So for YYYY.1 we assume support
-# until <YYYY+2>.06.30. We've tried to contact rosa support regarding EoL dates, but with no success.
+# abf-downloads.rosa.ru is primary repository location, may be temporary inconsistent
+# mirror.rosa.ru is production repo which mirrors from abf-downloads.rosa.ru
+# Each platform (rosa2021.1, rosa13 etc.) is supported ~5 years.
 
 # Note: rosa2021.1+ does not have urpmi-compatible metadata
 # Note: rosa2019.1 was renamed to rosa2021.1, keeping old "name"
@@ -18,19 +15,19 @@
   family: rosa
   ruleset: [rosa, rpm]
   color: '3757a1'
-  #valid_till: 2023-06-30  # expected EoL, but in fact still supported
+  #valid_till: 2026-12-31  # probable EoL date
   minpackages: 11000
   sources:
     - name: [ main/release, non-free/release, contrib/release ]
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.rosalinux.ru/rosa2021.1/repository/SRPMS/{source}/'
+        url: 'https://mirror.rosa.ru/rosa/rosa2021.1/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
-      url: http://en.rosalinux.com/
+      url: https://rosa.ru
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://abf.io/import/{srcname}/tree/rosa2021.1'
@@ -38,7 +35,7 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2021.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2021.1/{srcname}.spec'
-  groups: [ all, rosa ]
+  groups: [ all, production, rosa ]
 
 - name: rosa_13
   sortname: rosa_2023_1
@@ -53,13 +50,13 @@
     - name: [ main/release, non-free/release, contrib/release ]
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.rosa.ru/rosa13/repository/SRPMS/{source}/'
+        url: 'https://mirror.rosa.ru/rosa/rosa13/repository/SRPMS/{source}/'
       parser:
         class: RepodataParser
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
-      url: https://rosa.ru/
+      url: https://rosa.ru
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://abf.io/import/{srcname}/tree/rosa2023.1'
