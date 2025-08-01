@@ -73,4 +73,4 @@
       url: 'https://abf.io/import/{srcname}/blob/rosa2023.1/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://abf.io/import/{srcname}/raw/rosa2023.1/{srcname}.spec'
-  groups: [ all, rosa ]
+  groups: [ all, production, rosa ]
