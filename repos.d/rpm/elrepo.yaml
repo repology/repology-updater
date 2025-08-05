@@ -78,4 +78,4 @@
 {% endmacro %}
 
 {{ elrepo(8, minpackages=100, enable_extras=false, enable_testing=true) }}
-{{ elrepo(9, minpackages=200, enable_extras=false, enable_testing=true) }}
+{{ elrepo(9, minpackages=100, enable_extras=false, enable_testing=true) }}
