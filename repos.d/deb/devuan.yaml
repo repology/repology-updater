@@ -3,29 +3,6 @@
 #
 # See release info on https://www.devuan.org/os/releases
 ###########################################################################
-- name: devuan_3_0
-  type: repository
-  desc: Devuan 3.0 # Beowulf
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: debuntu
-  color: '88839c'
-  valid_till: 2024-06-01
-  minpackages: 25000
-  sources:
-    - name: [ beowulf/main, beowulf/contrib, beowulf/non-free, beowulf-updates/main, beowulf-updates/contrib, beowulf-updates/non-free ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: '{source}'
-  repolinks:
-    - desc: Devuan home
-      url: https://devuan.org/
-  groups: [ all, production, devuan ]
-
 - name: devuan_4_0
   type: repository
   desc: Devuan 4.0 # Chimaera
