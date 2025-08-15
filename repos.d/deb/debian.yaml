@@ -2,7 +2,7 @@
 # Debian
 ###########################################################################
 
-{% macro debian(version, codename, minpackages, valid_till=None, backports=True, backports_sloppy=True, packages_page=True, buildd_page=True, archived=False) %}
+{% macro debian(version, codename, minpackages, valid_till=None, backports=False, backports_sloppy=False, packages_page=True, buildd_page=True, archived=False) %}
 {% set subrepos2 = ['main', 'contrib', 'non-free'] if version < 12 else ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
 {% set host = 'archive.debian.org' if archived else 'ftp.debian.org' %}
 
@@ -164,9 +164,10 @@
 # valid_till: https://wiki.debian.org/LTS
 # pages: https://buildd.debian.org/status/package.php?p=0ad-data&suite=jessie
 # list of repos and backports https://packages.debian.org/stable/
-{{ debian(11, 'bullseye', minpackages=30000, valid_till='2026-06-30', backports=False, backports_sloppy=False) }}
-{{ debian(12, 'bookworm', minpackages=30000, valid_till='2028-06-30', backports_sloppy=False) }}
-{{ debian(13, 'trixie', minpackages=30000, packages_page=False, backports=False, backports_sloppy=False) }}
+{{ debian(11, 'bullseye', minpackages=30000, valid_till='2026-08-31') }}
+{{ debian(12, 'bookworm', minpackages=33000, valid_till='2028-06-30', backports=True) }}
+{{ debian(13, 'trixie',   minpackages=36000, valid_till='2030-06-30') }}
+{{ debian(14, 'forky',    minpackages=36000, valid_till='2032-06-30') }} # EoL assumed
 
 # Rolling
 - name: debian_unstable
@@ -176,7 +177,7 @@
   family: debuntu
   ruleset: [debuntu, debian]
   color: 'c70036'
-  minpackages: 32000
+  minpackages: 36000
   sources:
     {% set sub1 = 'sid' %}
     {% for sub2 in ['main', 'contrib', 'non-free', 'non-free-firmware'] %}
