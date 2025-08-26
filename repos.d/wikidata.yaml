@@ -108,7 +108,8 @@
                             ?versionTypeItem = wd:Q20631656 ||  # release
                             ?versionTypeItem = wd:Q48028851 ||  # patch version
                             ?versionTypeItem = wd:Q55567596 ||  # bug-fix version
-                            ?versionTypeItem = wd:Q51937413,    # general availability version
+                            ?versionTypeItem = wd:Q51937413 ||  # rolling release
+                            ?versionTypeItem = wd:Q1491125,     # general availability version
                             '|S',
                             IF(
                               ?versionTypeItem = wd:Q1072356 ||   # release candidate version
