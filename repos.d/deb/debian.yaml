@@ -166,7 +166,7 @@
 # list of repos and backports https://packages.debian.org/stable/
 {{ debian(11, 'bullseye', minpackages=30000, valid_till='2026-08-31') }}
 {{ debian(12, 'bookworm', minpackages=33000, valid_till='2028-06-30', backports=True) }}
-{{ debian(13, 'trixie',   minpackages=36000, valid_till='2030-06-30') }}
+{{ debian(13, 'trixie',   minpackages=36000, valid_till='2030-06-30', backports=True) }}
 {{ debian(14, 'forky',    minpackages=36000, valid_till='2032-06-30') }} # EoL assumed
 
 # Rolling
