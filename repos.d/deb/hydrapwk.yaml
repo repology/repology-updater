@@ -1,0 +1,28 @@
+###########################################################################
+# HydraPWK
+###########################################################################
+- name: hydrapwk
+  type: repository
+  desc: HydraPWK
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [ debuntu, hydrapwk ]
+  color: 'ec0000'
+  minpackages: 55000
+  sources:
+    {% for component in ['main', 'non-free'] %}
+    {% for arch in ['amd64', 'arm64'] %}
+    - name: yellowdog/{{component}}/{{arch}}
+      fetcher:
+        class: FileFetcher
+        url: 'http://repo.rstrike.my.id/yellowdog/dists/{{component}}/binary-{{arch}}/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: yellowdog/{{component}}
+    {% endfor %}
+    {% endfor %}
+  repolinks:
+    - desc: hydrapwk linux yellowdog repository
+      url: https://hydrapwk.github.io/
+  groups: [ all, production ]

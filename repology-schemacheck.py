@@ -163,6 +163,7 @@ rulesets = families + [
     'frugalware',
     'funtoo',
     'gnuelpa',
+    'hydrapwk',
     'hyperbola',
     'kali',
     'kaos_build',
