@@ -15,7 +15,7 @@
     - name: yellowdog/{{component}}/{{arch}}
       fetcher:
         class: FileFetcher
-        url: 'http://repo.rstrike.my.id/yellowdog/dists/yellowdog/{{component}}/binary-{{arch}}/Packages.gz'
+        url: 'http://repo.rstrike.my.id/yellowdog/dists/yellowdog/{{component}}/sources/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
