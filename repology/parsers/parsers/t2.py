@@ -110,10 +110,6 @@ class T2DescParser(Parser):
                     if url.endswith('/'):
                         url += filename
 
-                    if url.startswith('cvs') or url.startswith('git') or url.startswith('svn') or url.startswith('hg'):
-                        # snapshots basically
-                        pkg.set_flags(PackageFlags.UNTRUSTED)
-
                     pkg.add_downloads(url)
 
                 add_patch_files(pkg, os.path.dirname(desc_path), '*.patch')
