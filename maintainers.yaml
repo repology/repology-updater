@@ -1,3 +1,4 @@
+- { maintainer: aiyion@aur, replace: git@aiyionpri.me }
 - { maintainer: amdmi3@freebsd.org, replace: amdmi3@amdmi3.ru }
 - { maintainer: nim65s@aur, replace: guilhem.saurel@laas.fr }
 - { maintainer: pandapip1@spack, replace: gavinnjohn@gmail.com }
