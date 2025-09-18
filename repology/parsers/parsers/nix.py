@@ -219,12 +219,14 @@ class NixJsonParser(Parser):
                     pkg.set_summary(meta['description'].replace('\n', ' '))
 
                 if 'maintainers' in meta:
-                    maintainers = set(extract_nix_maintainers(meta['maintainers']))
+                    # unlike dict, python set does not preserve order which is required here
+                    # so simulate set with dict until we drop python implementation
+                    maintainers = {m: None for m in extract_nix_maintainers(meta['maintainers'])}
 
                     if len(maintainers) > 20:
                         raise RuntimeError(f'too many maintainers ({len(maintainers)}: {", ".join(sorted(maintainers))}) for a single package')
 
-                    pkg.add_maintainers(maintainers)
+                    pkg.add_maintainers(maintainers.keys())
                     max_maintainers = max(max_maintainers, len(maintainers))
 
                 if 'license' in meta:
