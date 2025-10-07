@@ -84,8 +84,10 @@ _link_templates_by_upstream_type = {
     # XXX: find canonical source for these in portage
     # XXX: we can also generate UPSTREAM_REPOSITORY for some of these
     'bitbucket': 'https://bitbucket.org/{}',
+    'codeberg': 'https://codeberg.org/{}',
     'cpan': 'https://metacpan.org/release/{}',
     'cpan-module': None,  # module names which do not imply link construction; perl modules in gentoo should also have 'cpan' upstream which does handle links
+    'cran': 'https://cran.r-project.org/web/packages/{}/',
     'ctan': 'https://www.ctan.org/pkg/{}',
     'freecode': 'http://freecode.com/projects/{}',  # probably dead
     'freedesktop-gitlab': 'https://gitlab.freedesktop.org/{}',
@@ -97,6 +99,7 @@ _link_templates_by_upstream_type = {
     'google-code': 'https://code.google.com/p/{}/',
     'hackage': 'https://hackage.haskell.org/package/{}',
     'heptapod': 'https://foss.heptapod.net/{}',
+    'kde-invent': 'https://invent.kde.org/{}',
     'launchpad': 'https://launchpad.net/{}',
     'osdn': 'https://osdn.net/projects/{}/',
     'pear': 'https://pear.php.net/package/{}',
@@ -108,6 +111,7 @@ _link_templates_by_upstream_type = {
     'sourceforge': 'https://sourceforge.net/projects/{}/',
     'sourceforge-jp': 'https://osdn.net/projects/{}/',
     'sourcehut': 'https://sr.ht/{}/',
+    'vim': 'https://vim.org/scripts/script.php?script_id={}',
 }
 
 
