@@ -25,10 +25,10 @@
     - desc: Calculate Linux git repository
       url: https://github.com/calculatelinux/calculate
   packagelinks:
-    - type: PACKAGE_HOMEPAGE
-      url: 'https://old.calculate-linux.org/packages/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://git.calculate-linux.org/calculate/calculate-overlay/src/branch/master/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://old.calculate-linux.org/packages/{srcname}/{srcname|basename}-{rawversion}.ebuild'
+      url: 'https://git.calculate-linux.org/calculate/calculate-overlay/src/branch/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://old.calculate-linux.org/packages/{srcname}/{srcname|basename}-{rawversion}.ebuild?format=raw'
+      url: 'https://git.calculate-linux.org/calculate/calculate-overlay/raw/branch/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   groups: [ all, production ]
