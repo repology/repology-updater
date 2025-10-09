@@ -45,8 +45,6 @@
 {{ openeuler('22.03-LTS-SP3', minpackages=3000, valid_till='2025-12') }}
 {{ openeuler('22.03-LTS-SP4', minpackages=3000, valid_till='2026-06') }}
 
-{{ openeuler('23.03',         minpackages=3000, valid_till='2023-09') }}
-
 {{ openeuler('23.09',         minpackages=3000, valid_till='2024-03') }}
 
 {{ openeuler('24.03-LTS',     minpackages=3000, valid_till='2026-05') }}
