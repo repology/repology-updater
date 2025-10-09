@@ -26,13 +26,13 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.spack.io/package.html?name={srcname}'
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/{srcname}'
+      url: 'https://github.com/spack/spack-packages/tree/develop/repos/spack_repo/builtin/packages/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{srcname}/package.py'
+      url: 'https://github.com/spack/spack-packages/blob/develop/repos/spack_repo/builtin/packages/{srcname}/package.py'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{srcname}/package.py'
+      url: 'https://raw.githubusercontent.com/spack/spack-packages/refs/heads/develop/repos/spack_repo/builtin/packages/{srcname}/package.py'
     - type: PACKAGE_PATCH
-      url: 'https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/{srcname}/{?patch}'
+      url: 'https://github.com/spack/spack-packages/tree/develop/repos/spack_repo/builtin/packages/{srcname}/{?patch}'
     - type: PACKAGE_PATCH_RAW
-      url: 'https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/{srcname}/{?patch}'
+      url: 'https://raw.githubusercontent.com/spack/spack-packages/refs/heads/develop/repos/spack_repo/builtin/packages/{srcname}/{?patch}'
   groups: [ all, production ]
