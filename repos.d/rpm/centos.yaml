@@ -64,11 +64,11 @@
       url: https://www.centos.org/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://git.centos.org/rpms/{srcname}/tree/c7{centossuffix}'
+      url: 'https://gitlab.com/CentOS/archives/git.centos.org/rpms/{srcname}/-/tree/c7{centossuffix}'
     - type: PACKAGE_RECIPE
-      url: 'https://git.centos.org/rpms/{srcname}/blob/c7{centossuffix}/f/SPECS/{srcname}.spec'
+      url: 'https://gitlab.com/CentOS/archives/git.centos.org/rpms/{srcname}/-/blob/c7{centossuffix}/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.centos.org/rpms/{srcname}/raw/c7{centossuffix}/f/SPECS/{srcname}.spec'
+      url: 'https://gitlab.com/CentOS/archives/git.centos.org/rpms/{srcname}/-/raw/c7{centossuffix}/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
 - name: centos_8
@@ -95,11 +95,11 @@
       url: https://www.centos.org/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://git.centos.org/rpms/{srcname}/tree/c8{centossuffix}'
+      url: 'https://gitlab.com/CentOS/archives/git.centos.org/rpms/{srcname}/-/tree/c8{centossuffix}'
     - type: PACKAGE_RECIPE
-      url: 'https://git.centos.org/rpms/{srcname}/blob/c8{centossuffix}/f/SPECS/{srcname}.spec'
+      url: 'https://gitlab.com/CentOS/archives/git.centos.org/rpms/{srcname}/-/blob/c8{centossuffix}/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.centos.org/rpms/{srcname}/raw/c8{centossuffix}/f/SPECS/{srcname}.spec'
+      url: 'https://gitlab.com/CentOS/archives/git.centos.org/rpms/{srcname}/-/raw/c8{centossuffix}/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm ]
 
 ###########################################################################
