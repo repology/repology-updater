@@ -106,7 +106,7 @@
   color: '0088cc'
   minpackages: 9500
   sources:
-    {% for sub in ['core', 'extra', 'community'] %}
+    {% for sub in ['core', 'extra'] %}
     - name: {{sub}}
       fetcher:
         class: TarFetcher
@@ -134,7 +134,7 @@
   color: '0088cc'
   minpackages: 9500
   sources:
-    {% for sub in ['core', 'extra', 'community'] %}
+    {% for sub in ['core', 'extra'] %}
     - name: {{sub}}
       fetcher:
         class: TarFetcher
