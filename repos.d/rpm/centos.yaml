@@ -233,6 +233,7 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ rocky(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ rocky(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
+{{ rocky(10, minpackages=2000, valid_till='2035-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','SAP','SAPHANA','extras']) }}
 
 ###########################################################################
 # EuroLinux
