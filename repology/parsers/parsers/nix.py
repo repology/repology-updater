@@ -215,6 +215,20 @@ class NixJsonParser(Parser):
                         ):
                             pkg.add_links(LinkType.PACKAGE_BUILD_LOGS, template.format(key=key, branch=self._branch, arch=arch))
 
+                if 'identifiers' in meta:
+                    cpe = meta['identifiers']['cpeParts']
+                    if 'vendor' in meta['identifiers']['cpeParts']:
+                        pkg.add_cpe(
+                            cpe['vendor'],
+                            cpe['product'],
+                            cpe['edition'],
+                            cpe['language'],
+                            cpe['sw_edition'],
+                            cpe['target_sw'],
+                            cpe['target_hw'],
+                            cpe['other'],
+                        )
+
                 if 'description' in meta:
                     pkg.set_summary(meta['description'].replace('\n', ' '))
 
