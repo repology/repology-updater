@@ -46,7 +46,7 @@
   {% if valid_till %}
   valid_till: {{valid_till}}
   {% endif %}
-  minpackages: 10
+  minpackages: 1
   sources:
     - name: test
       fetcher:
@@ -70,3 +70,4 @@
 # valid_till according to https://endoflife.date/mxlinux
 {{ mx(21, 'bullseye', valid_till="2026-06-30") }}
 {{ mx(23, 'bookworm', valid_till="2028-06-10") }}
+{{ mx(25, 'trixie', valid_till="2030-06-10") }} # EoL assumed
