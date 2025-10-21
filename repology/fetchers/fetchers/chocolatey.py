@@ -31,7 +31,7 @@ class ChocolateyFetcher(ScratchDirFetcher):
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         numpage = 0
-        nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
+        nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion&$orderby=Id'
         while True:
             logger.log('getting ' + nextpageurl)
 
