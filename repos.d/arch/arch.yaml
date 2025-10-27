@@ -151,5 +151,5 @@
       url: 'https://archlinuxarm.org/packages/{{arch}}/{binname}'
     - type: PACKAGE_RECIPE
       url: 'https://archlinuxarm.org/packages/{{arch}}/{binname}/files/PKGBUILD'
-  groups: [ all, production, arch_extra ]
+  groups: [ all, arch_extra ]
 {% endfor %}
