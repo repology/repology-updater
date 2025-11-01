@@ -2,12 +2,7 @@
 # AntiX
 ###########################################################################
 {% macro antix(version, name, minpackages, valid_till=None) %}
-{% if version == 16 %}
-- name: antix_{{name}}
-  sortname: antix_{{version}}
-{% else %}
 - name: antix_{{version}}
-{% endif %}
   type: repository
   desc: antiX-{{version}}
   family: debuntu
@@ -17,11 +12,7 @@
   valid_till: {{valid_till}}
   {% endif %}
   sources:
-    {% if version == 16 %}
-    - name: [ dev, main, nosystemd ]
-    {% else %}
     - name: [ dev, main, nonfree, nosystemd ]
-    {% endif %}
       fetcher:
         class: FileFetcher
         url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/{{name}}/dists/{{name}}/{source}/source/Sources.gz'
@@ -36,8 +27,6 @@
 {% endmacro %}
 
 # https://endoflife.date/antix
-{{ antix(16, 'jessie',   minpackages=100, valid_till="2020-06-30") }}
-{{ antix(17, 'stretch',  minpackages=200, valid_till="2022-06-30") }}
 {{ antix(19, 'buster',   minpackages=300, valid_till="2024-06-30") }}
 {{ antix(21, 'bullseye', minpackages=300, valid_till="2026-06-30") }}
 {{ antix(23, 'bookworm', minpackages=300, valid_till="2028-06-30") }}
