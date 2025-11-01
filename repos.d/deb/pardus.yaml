@@ -16,7 +16,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{{source}}/source/Sources.bz2'
+        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
