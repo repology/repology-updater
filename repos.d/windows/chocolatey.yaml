@@ -27,20 +27,3 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://community.chocolatey.org/packages/{binname}'
   groups: [ all, production ]
-
-# it's similar, but contains too many packages, with the same verioning problems
-- name: nuget
-  type: repository
-  desc: NuGet
-  family: chocolatey
-  ruleset: [chocolatey, windows]
-  minpackages: 1  # XXX: unknown
-  sources:
-    - name: nuget
-      fetcher:
-        class: ChocolateyFetcher
-        url: https://www.nuget.org/api/v2/
-      parser:
-        class: ChocolateyParser
-  shadow: true
-  groups: [ all ]

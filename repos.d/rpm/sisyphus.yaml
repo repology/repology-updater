@@ -53,27 +53,3 @@
 {{ alt(9, wikipage="Ninth_Platform", minpackages=17000) }}
 {{ alt(10, wikipage="PlatformTen", minpackages=18000) }}
 {{ alt(11, wikipage="PlatformEleven", minpackages=18000) }}
-
-# automatically imported packages; duplicate already existing packages and versions,
-# and has it's own comparison and garbage problems, so not enabled in production
-- name: altsisyphus_autoimports
-  type: repository
-  desc: ALT Sisyphus Autoimports
-  family: sisyphus
-  ruleset: [sisyphus, rpm]
-  color: 'baccdd'
-  minpackages: 1  # XXX: unknown
-  sources:
-    - name: [ noarch, x86_64 ]
-      fetcher:
-        class: FileFetcher
-        url: 'http://ftp.altlinux.ru/pub/distributions/ALTLinux/autoimports/Sisyphus/{source}/base/srclist.autoimports.xz'
-        compression: xz
-      parser:
-        class: SrcListParser
-  repolinks:
-    - desc: Sisyphus repository
-      url: http://www.sisyphus.ru/en/
-    - desc: Documentation on Autoimports (russian)
-      url: https://www.altlinux.org/Autoimports
-  groups: [ all ]
