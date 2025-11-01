@@ -235,7 +235,7 @@ class NixJsonParser(Parser):
                 if 'maintainers' in meta:
                     maintainers = list(extract_nix_maintainers(meta['maintainers']))
 
-                    if len(maintainers) > 20:
+                    if len(maintainers) > 24:
                         raise RuntimeError(f'too many maintainers ({len(maintainers)}: {", ".join(maintainers)}) for a single package')
 
                     pkg.add_maintainers(maintainers)
