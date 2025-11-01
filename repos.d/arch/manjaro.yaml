@@ -13,13 +13,15 @@
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ core, extra, multilib ]
+    {% for sub in ['core', 'extra', 'multilib'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.kamtv.ru/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.kamtv.ru/manjaro/stable/{{sub}}/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Manjaro Linux home
       url: https://manjaro.org/
@@ -34,13 +36,15 @@
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ core, extra, multilib ]
+    {% for sub in ['core', 'extra', 'multilib'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.kamtv.ru/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.kamtv.ru/manjaro/testing/{{sub}}/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Manjaro Linux home
       url: https://manjaro.org/
@@ -55,13 +59,15 @@
   color: '34be5b'
   minpackages: 10000
   sources:
-    - name: [ core, extra, multilib ]
+    {% for sub in ['core', 'extra', 'multilib'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.kamtv.ru/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
+        url: 'https://mirror.kamtv.ru/manjaro/unstable/{{sub}}/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Manjaro Linux home
       url: https://manjaro.org/

@@ -15,13 +15,15 @@
   minpackages: 9000
   default_maintainer: fallback-mnt-void@repology
   sources:
-    - name: [ x86_64, nonfree/x86_64 ]
+    {% for sub in ['x86_64', 'nonfree/x86_64'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'https://repo-default.voidlinux.org/current/{source}-repodata'
+        url: 'https://repo-default.voidlinux.org/current/{{sub}}-repodata'
       parser:
         class: VoidLinuxPlistParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Void Linux home
       url: https://voidlinux.org/

@@ -10,22 +10,26 @@
   ruleset: [debuntu, siduction]
   minpackages: 80
   sources:
-    - name: [ main, contrib, non-free ]
+    {% for sub in ['main', 'contrib', 'non-free'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/extra/dists/unstable/{source}/source/Sources.bz2'
+        url: 'http://packages.siduction.org/extra/dists/unstable/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
-      subrepo: 'extra {source}'
-    - name: [ main, contrib, non-free ]
+      subrepo: 'extra {{sub}}'
+    {% endfor %}
+    {% for sub in ['main', 'contrib', 'non-free'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/fixes/dists/unstable/{source}/source/Sources.bz2'
+        url: 'http://packages.siduction.org/fixes/dists/unstable/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
-      subrepo: 'fixes {source}'
+      subrepo: 'fixes {{sub}}'
+    {% endfor %}
   repolinks:
     - desc: Siduction home
       url: https://siduction.org/
@@ -40,22 +44,26 @@
   ruleset: [debuntu, siduction]
   minpackages: 1
   sources:
-    - name: [ main, contrib, non-free ]
+    {% for sub in ['main', 'contrib', 'non-free'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/extra/dists/experimental/{source}/source/Sources.bz2'
+        url: 'http://packages.siduction.org/extra/dists/experimental/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
-      subrepo: 'extra {source}'
-    - name: [ main, contrib, non-free ]
+      subrepo: 'extra {{sub}}'
+    {% endfor %}
+    {% for sub in ['main', 'contrib', 'non-free'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/fixes/dists/experimental/{source}/source/Sources.bz2'
+        url: 'http://packages.siduction.org/fixes/dists/experimental/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
-      subrepo: 'fixes {source}'
+      subrepo: 'fixes {{sub}}'
+    {% endfor %}
   repolinks:
     - desc: Siduction home
       url: https://siduction.org/

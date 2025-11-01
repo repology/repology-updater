@@ -10,14 +10,16 @@
   color: 'd6264f'
   minpackages: 22000
   sources:
-    - name: [contrib,firmware,main,non-free,rpi]
+    {% for sub in ['contrib', 'firmware', 'main', 'non-free', 'rpi'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.raspbian.org/raspbian/dists/oldstable/{source}/source/Sources.xz'
+        url: 'http://archive.raspbian.org/raspbian/dists/oldstable/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
@@ -32,14 +34,16 @@
   color: 'd6264f'
   minpackages: 28000
   sources:
-    - name: [contrib,firmware,main,non-free,rpi]
+    {% for sub in ['contrib', 'firmware', 'main', 'non-free', 'rpi'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.raspbian.org/raspbian/dists/stable/{source}/source/Sources.xz'
+        url: 'http://archive.raspbian.org/raspbian/dists/stable/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/
@@ -54,14 +58,16 @@
   color: 'd6264f'
   minpackages: 31000
   sources:
-    - name: [contrib,firmware,main,non-free,rpi]
+    {% for sub in ['contrib', 'firmware', 'main', 'non-free', 'rpi'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.raspbian.org/raspbian/dists/testing/{source}/source/Sources.xz'
+        url: 'http://archive.raspbian.org/raspbian/dists/testing/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Raspbian home
       url: http://raspbian.org/

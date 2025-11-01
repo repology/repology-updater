@@ -9,14 +9,16 @@
   color: 'c70036'
   minpackages: 300
   sources:
-    - name: [ main, non-free ]
+    {% for sub in ['main', 'non-free'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://www.deb-multimedia.org/dists/unstable/{source}/source/Sources.gz'
+        url: 'http://www.deb-multimedia.org/dists/unstable/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Deb Multimedia home
       url: http://www.deb-multimedia.org/

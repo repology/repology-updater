@@ -56,13 +56,16 @@
   color: '045e9d'
   minpackages: 15000
   sources:
-    - name: [ main/release, non-free/release, restricted/release, unsupported/release ]
+    {% for sub1 in ['main', 'non-free', 'restricted', 'unsupported'] %}
+    {% set sub2 = 'release' %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/rolling/repository/SRPMS/{source}/'
+        url: 'http://abf-downloads.openmandriva.org/rolling/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
   repolinks:
     - desc: OpenMandriva home
       url: https://openmandriva.org/
@@ -87,14 +90,17 @@
   sources:
     # all updates subrepos are empty and all testing subrepos contain 5 packages in total,
     # most of them are quite old. so not including these subrepositories here
-    - name: [ main/release, non-free/release, restricted/release, unsupported/release ]
+    {% for sub1 in ['main', 'non-free', 'restricted', 'unsupported'] %}
+    {% set sub2 = 'release' %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{source}/'
+        url: 'http://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
         arch_from_filename: true
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
   repolinks:
     - desc: OpenMandriva home
       url: https://www.openmandriva.org/

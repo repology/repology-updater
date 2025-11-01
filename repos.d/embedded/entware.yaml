@@ -9,13 +9,15 @@
   minpackages: 14000
   default_maintainer: fallback-mnt-entware@repology
   sources:
-    - name: [ aarch64-k3.10, armv5sf-k3.2, armv7sf-k2.6, armv7sf-k3.2, mipselsf-k3.4, mipssf-k3.4, x64-k3.2 ]
+    {% for sub in ['aarch64-k3.10', 'armv5sf-k3.2', 'armv7sf-k2.6', 'armv7sf-k3.2', 'mipselsf-k3.4', 'mipssf-k3.4', 'x64-k3.2'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://bin.entware.net/{source}/Packages.manifest'
+        url: 'https://bin.entware.net/{{sub}}/Packages.manifest'
       parser:
         class: OpenWrtPackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Entware repository on GitHub
       url: https://github.com/Entware

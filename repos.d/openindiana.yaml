@@ -9,13 +9,15 @@
   ruleset: openindiana
   minpackages: 1800
   sources:
-    - name: [hipster, hipster-encumbered]
+    {% for sub in ['hipster', 'hipster-encumbered'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: "http://pkg.openindiana.org/{source}/catalog/1/catalog.summary.C"
+        url: "http://pkg.openindiana.org/{{sub}}/catalog/1/catalog.summary.C"
       parser:
         class: OpenIndianaSummaryJsonParser
-      subrepo: "{source}"
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: OpenIndiana home
       url: https://www.openindiana.org/

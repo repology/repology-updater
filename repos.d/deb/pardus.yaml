@@ -12,14 +12,16 @@
   minpackages: {{minpackages}}
   valid_till: {{valid_till}}
   sources:
-    - name: [main,contrib,non-free]
+    {% for sub in ['main', 'contrib', 'non-free'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{source}/source/Sources.bz2'
+        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{{source}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
     # following urls were taken from https://wiki.debian.org/Derivatives/Census/Pardus,
     # otherwise it's unclear how 'guvenlik' is related to 'pardus'
     - name: updates-main

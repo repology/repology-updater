@@ -12,14 +12,16 @@
   valid_till: {{valid_till}}
   {% endif %}
   sources:
-    - name: [ dev, main, nonfree, nosystemd ]
+    {% for sub in ['dev', 'main', 'nonfree', 'nosystemd'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/{{name}}/dists/{{name}}/{source}/source/Sources.gz'
+        url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/{{name}}/dists/{{name}}/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: antiX Linux home
       url: https://antixlinux.com/

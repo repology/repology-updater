@@ -9,14 +9,16 @@
   ruleset: [fedora, rpm, amazon]
   minpackages: 2000
   sources:
-    - name: [ main, updates ]
+    {% for sub in ['main', 'updates'] %}
+    - name: {{sub}}
       fetcher:
         class: RepodataSqliteFetcher
         url: 'http://repo.us-west-2.amazonaws.com/latest/{source}/SRPMS/mirror.list'
       parser:
         class: RepodataSqliteParser
         #vertags: amzn  # XXX: not supported in the parser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Amazon Linux AMI
       url: https://aws.amazon.com/amazon-linux-ami/

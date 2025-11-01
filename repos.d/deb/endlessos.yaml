@@ -10,14 +10,16 @@
   color: 'bf6603'
   minpackages: 50
   sources:
-    - name: [core, endless]
+    {% for sub in ['core', 'endless'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://deb.endlessos.org/debian/dists/eos4.0/{source}/source/Sources.xz'
+        url: 'https://deb.endlessos.org/debian/dists/eos4.0/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Endless OS home
       url: https://www.endlessos.org/os
@@ -34,14 +36,16 @@
   color: 'bf6603'
   minpackages: 50
   sources:
-    - name: [core, endless]
+    {% for sub in ['core', 'endless'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://deb.endlessos.org/debian/dists/master/{source}/source/Sources.xz'
+        url: 'https://deb.endlessos.org/debian/dists/master/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Endless OS home
       url: https://www.endlessos.org/os

@@ -12,13 +12,15 @@
   update_period: 1w
   pessimized: "does not provide access (HTTP 403) to package sources (for instance, https://repology.org/link/https://gitea.artixlinux.org/packages/abseil-cpp)"
   sources:
-    - name: [ system, world, galaxy, lib32 ]
+    {% for sub in ['system', 'world', 'galaxy', 'lib32'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
         url: 'http://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Artix Linux home
       url: https://artixlinux.org/
@@ -44,13 +46,15 @@
   color: '29add2'
   minpackages: 1
   sources:
-    - name: [ system-gremlins, world-gremlins, galaxy-gremlins, lib32-gremlins ]
+    {% for sub in ['system-gremlins', 'world-gremlins', 'galaxy-gremlins', 'lib32-gremlins'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
         url: 'http://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
       parser:
         class: ArchDBParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Artix Linux home
       url: https://artixlinux.org/

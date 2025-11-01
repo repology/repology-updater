@@ -19,14 +19,16 @@
   # See https://en.wikipedia.org/wiki/CentOS for EOL date
   valid_till: 2020-11-30
   sources:
-    - name: [ os, updates ]
+    {% for sub in ['os', 'updates'] %}
+    - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://vault.centos.org/centos/6/{source}/Source/'
+        url: 'http://vault.centos.org/centos/6/{{sub}}/Source/'
       parser:
         class: RepodataParser
         vertags: el
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/
@@ -51,14 +53,16 @@
   # See https://wiki.centos.org/About/Product for EOL date
   valid_till: 2024-06-30
   sources:
-    - name: [ os, updates, extras ]
+    {% for sub in ['os', 'updates', 'extras'] %}
+    - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://vault.centos.org/centos/7/{source}/Source/'
+        url: 'http://vault.centos.org/centos/7/{{sub}}/Source/'
       parser:
         class: RepodataParser
         vertags: el
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/
@@ -82,14 +86,16 @@
   # See https://www.centos.org/centos-linux-eol/ for EOL date
   valid_till: 2021-12-31
   sources:
-    - name: [ AppStream, BaseOS, HighAvailability, PowerTools, extras ]
+    {% for sub in ['AppStream', 'BaseOS', 'HighAvailability', 'PowerTools', 'extras'] %}
+    - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://vault.centos.org/centos/8/{source}/Source/'
+        url: 'http://vault.centos.org/centos/8/{{sub}}/Source/'
       parser:
         class: RepodataParser
         vertags: el
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: CentOS home
       url: https://www.centos.org/

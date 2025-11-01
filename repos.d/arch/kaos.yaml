@@ -10,13 +10,15 @@
   color: "1d6fa5"
   minpackages: 1900
   sources:
-    - name: [ apps, core, main ]
+    {% for sub in ['apps', 'core', 'main'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: "https://repo.kaosx.us/{source}/{source}.db"
+        url: "https://repo.kaosx.us/{{sub}}/{{sub}}.db"
       parser:
         class: ArchDBParser
-      subrepo: "{source}"
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: KaOS Home
       url: https://kaosx.us/
@@ -41,13 +43,15 @@
   default_maintainer: demm@kaosx.us
   minpackages: 1
   sources:
-    - name: [ build ]
+    {% for sub in ['build'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: "https://repo.kaosx.us/{source}/{source}.db"
+        url: "https://repo.kaosx.us/{{sub}}/{{sub}}.db"
       parser:
         class: ArchDBParser
-      subrepo: "{source}"
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: KaOS Home
       url: https://kaosx.us/

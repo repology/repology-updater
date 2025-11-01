@@ -14,14 +14,16 @@
   color: '949393'
   minpackages: 150
   sources:
-    - name: [core, stable]
+    {% for sub in ['core', 'stable'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
+        url: 'https://repo.sparkylinux.org/dists/{{sub}}/main/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: SparkyLinux home
       url: https://sparkylinux.org/
@@ -35,14 +37,16 @@
   color: '949393'
   minpackages: 150
   sources:
-    - name: [core, testing]
+    {% for sub in ['core', 'testing'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://repo.sparkylinux.org/dists/{source}/main/source/Sources.gz'
+        url: 'https://repo.sparkylinux.org/dists/{{sub}}/main/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: SparkyLinux home
       url: https://sparkylinux.org/

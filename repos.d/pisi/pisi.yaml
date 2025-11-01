@@ -9,14 +9,16 @@
   ruleset: pisi
   minpackages: 1400
   sources:
-    - name: [ core, main ]
+    {% for sub in ['core', 'main'] %}
+    - name: {{sub}}
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/pisilinux/{source}.git'
+        url: 'https://github.com/pisilinux/{{sub}}.git'
         sparse_checkout: [ '**/pspec.xml' ]
       parser:
         class: PisiParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Pisi Linux home
       url: https://pisilinux.org/

@@ -13,14 +13,18 @@
   valid_till: 2026-08-15
   minpackages: 27000
   sources:
-    - name: [ chimaera/main, chimaera/contrib, chimaera/non-free, chimaera-updates/main, chimaera-updates/contrib, chimaera-updates/non-free ]
+    {% for sub1 in ['chimaera', 'chimaera-updates'] %}
+    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+        url: 'http://deb.devuan.org/merged/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
@@ -35,14 +39,17 @@
   color: '88839c'
   minpackages: 28000
   sources:
-    - name: [ unstable/main, unstable/contrib, unstable/non-free ]
+    {% set sub1 = 'unstable' %}
+    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+        url: 'http://deb.devuan.org/merged/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/

@@ -17,13 +17,16 @@
   #valid_till: 2026-12-31  # probable EoL date
   minpackages: 11000
   sources:
-    - name: [ main/release, non-free/release, contrib/release ]
+    {% for sub1 in ['main', 'non-free', 'contrib'] %}
+    {% set sub2 = 'release' %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'https://mirror.rosa.ru/rosa/rosa2021.1/repository/SRPMS/{source}/'
+        url: 'https://mirror.rosa.ru/rosa/rosa2021.1/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
   repolinks:
     # Note: official website rosa.ru is Russian-only
     - desc: Packages on ROSA ABF (Automatic Build Farm)
@@ -51,13 +54,16 @@
   color: '3757a1'
   minpackages: 20000
   sources:
-    - name: [ main/release, non-free/release, contrib/release ]
+    {% for sub1 in ['main', 'non-free', 'contrib'] %}
+    {% set sub2 = 'release' %}
+    - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'https://mirror.rosa.ru/rosa/rosa13/repository/SRPMS/{source}/'
+        url: 'https://mirror.rosa.ru/rosa/rosa13/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
-      subrepo: '{source}'
+      subrepo: {{sub1}}/{{sub2}}
+    {% endfor %}
   repolinks:
     # Note: official website rosa.ru is Russian-only
     - desc: Packages on ROSA ABF (Automatic Build Farm)

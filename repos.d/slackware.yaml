@@ -17,13 +17,15 @@
   valid_till: 2024-01-01
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware,patches,extra]
+    {% for sub in ['slackware', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: '{{slackware_mirror}}/slackware-14.2/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware-14.2/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
@@ -40,13 +42,15 @@
   minpackages: 1600
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware,patches,extra]
+    {% for sub in ['slackware', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: '{{slackware_mirror}}/slackware-15.0/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware-15.0/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
@@ -63,13 +67,15 @@
   minpackages: 1600
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware,patches,extra]
+    {% for sub in ['slackware', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: '{{slackware_mirror}}/slackware-current/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware-current/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
@@ -87,13 +93,15 @@
   valid_till: 2024-01-01  # assumed from regular slackware
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware64,patches,extra]
+    {% for sub in ['slackware64', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: '{{slackware_mirror}}/slackware64-14.2/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware64-14.2/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
@@ -109,13 +117,15 @@
   minpackages: 1600
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware64,patches,extra]
+    {% for sub in ['slackware64', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: '{{slackware_mirror}}/slackware64-15.0/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware64-15.0/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
@@ -131,13 +141,15 @@
   minpackages: 1600
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware64,patches,extra]
+    {% for sub in ['slackware64', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: '{{slackware_mirror}}/slackware64-current/{source}/PACKAGES.TXT'
+        url: '{{slackware_mirror}}/slackware64-current/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware Home
       url: http://www.slackware.com/
@@ -155,13 +167,15 @@
   valid_till: 2024-01-01  # assumed from regular slackware
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware,patches,extra]
+    {% for sub in ['slackware', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://slackware.uk/slackwarearm/slackwarearm-14.2/{source}/PACKAGES.TXT'
+        url: 'http://slackware.uk/slackwarearm/slackwarearm-14.2/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware ARM / AARCH64
       url: http://arm.slackware.com/
@@ -177,13 +191,15 @@
   minpackages: 1500
   default_maintainer: volkerdi@slackware.com
   sources:
-    - name: [slackware,patches,extra]
+    {% for sub in ['slackware', 'patches', 'extra'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://slackware.uk/slackwarearm/slackwarearm-15.0/{source}/PACKAGES.TXT'
+        url: 'http://slackware.uk/slackwarearm/slackwarearm-15.0/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Slackware ARM / AARCH64
       url: http://arm.slackware.com/

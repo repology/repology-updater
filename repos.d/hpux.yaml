@@ -8,14 +8,16 @@
   ruleset: hpux
   minpackages: 1500
   sources:
-    - name: [ hppa_32, ia64_32, ia64_64 ]
+    {% for sub in ['hppa_32', 'ia64_32', 'ia64_64'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://hpux.connect.org.uk/ftp/depothelper/packages-{source}-11.31.bz2'
+        url: 'http://hpux.connect.org.uk/ftp/depothelper/packages-{{sub}}-11.31.bz2'
         compression: bz2
       parser:
         class: HPPADepothelperListParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: HP-UX Porting and Archive Centre
       url: http://hpux.connect.org.uk/

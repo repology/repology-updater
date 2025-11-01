@@ -10,13 +10,15 @@
   color: '0088cc'
   minpackages: 9500
   sources:
-    - name: [ core, extra, multilib ]
+    {% for sub in ['core', 'extra', 'multilib'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'http://delta.archlinux.fr/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Arch Linux home
       url: https://archlinux.org/
@@ -42,13 +44,15 @@
   color: '0088cc'
   minpackages: 1
   sources:
-    - name: [ core-testing, extra-testing, multilib-testing ]
+    {% for sub in ['core-testing', 'extra-testing', 'multilib-testing'] %}
+    - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'http://delta.archlinux.fr/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Arch Linux home
       url: https://archlinux.org/

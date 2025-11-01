@@ -13,16 +13,18 @@
   color: '32638f'
   minpackages: 27000
   sources:
-    - name: [ contrib, main, non-free, non-free-firmware ]
+    {% for sub in ['contrib', 'main', 'non-free', 'non-free-firmware'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://http.kali.org/kali/dists/kali-rolling/{source}/source/Sources.gz'
+        url: 'https://http.kali.org/kali/dists/kali-rolling/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
         # we only need sources for kalilinux unique packages, others are from debian
         allowed_vcs_urls: https://gitlab.com/kalilinux/packages/
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Kali Linux home
       url: https://www.kali.org/
@@ -37,16 +39,18 @@
   color: '32638f'
   minpackages: 50
   sources:
-    - name: [ contrib, main, non-free, non-free-firmware ]
+    {% for sub in ['contrib', 'main', 'non-free', 'non-free-firmware'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://http.kali.org/kali/dists/kali-bleeding-edge/{source}/source/Sources.gz'
+        url: 'https://http.kali.org/kali/dists/kali-bleeding-edge/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
         # we only need sources for kalilinux unique packages, others are from debian
         allowed_vcs_urls: https://gitlab.com/kalilinux/packages/
-      subrepo: '{source}'
+      subrepo: {{sub}}
+    {% endfor %}
   repolinks:
     - desc: Kali Linux home
       url: https://www.kali.org/
