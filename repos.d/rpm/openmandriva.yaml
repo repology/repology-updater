@@ -2,7 +2,6 @@
 # OpenMandriva
 ###########################################################################
 {% macro openmandriva(version, minpackages, valid_till=Null, archived=False) %}
-{% set subdir = 'release_archives/' if archived else '' %}
 - name: openmandriva_{{version|replace('.', '_')}}
   type: repository
   desc: OpenMandriva {{version}}
@@ -20,7 +19,11 @@
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/{{subdir}}{{version}}/repository/SRPMS/{{sub1}}/{{sub2}}/'
+        {% if archived %}
+        url: 'http://abf-downloads.openmandriva.org/release_archives/{{version}}/SRPMS/{{sub1}}/{{sub2}}/'
+        {% else %}
+        url: 'http://abf-downloads.openmandriva.org/{{version}}/repository/SRPMS/{{sub1}}/{{sub2}}/'
+        {% endif %}
       parser:
         class: RepodataParser
       subrepo: {{sub1}}/{{sub2}}
@@ -43,7 +46,7 @@
 # each release is supported for 1 month after the next release comes out, so we can
 # immediately set valid_till when we add new releases here
 #                                                                V may need archived=True soon, or dropped according to https://github.com/repology/repology-updater/issues/1499
-{{ openmandriva("4.3", minpackages=11000, valid_till="2023-12-25") }}
+{{ openmandriva("4.3", minpackages=11000, valid_till="2023-12-25", archived=True) }}
 {{ openmandriva("5.0", minpackages=14000, valid_till="2024-05-20") }}
 {{ openmandriva("6.0", minpackages=15000) }}
 
