@@ -22,7 +22,7 @@
       parser:
         class: ApkIndexParser
         path_suffix: APKINDEX
-      subrepo: '{source}'
+      subrepo: aarch64
       packagelinks:
         # XXX: want package recipe, but no way to know path under https://gitlab.com/postmarketOS/pmaports/
         - type: PACKAGE_HOMEPAGE

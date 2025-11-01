@@ -15,7 +15,7 @@
     - name: liguros-repo
       fetcher:
         class: GitFetcher
-        url: 'https://gitlab.com/liguros/{source}.git'
+        url: 'https://gitlab.com/liguros/liguros-repo.git'
         branch: stable
         sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       parser:
@@ -51,7 +51,7 @@
     - name: liguros-repo
       fetcher:
         class: GitFetcher
-        url: 'https://gitlab.com/liguros/{source}.git'
+        url: 'https://gitlab.com/liguros/liguros-repo.git'
         branch: develop
         sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       parser:

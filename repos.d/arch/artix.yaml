@@ -16,7 +16,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'http://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'http://archive.artixlinux.org/repos/last/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}
@@ -50,7 +50,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'http://archive.artixlinux.org/repos/last/{source}/os/x86_64/{source}.db.tar.gz'
+        url: 'http://archive.artixlinux.org/repos/last/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}

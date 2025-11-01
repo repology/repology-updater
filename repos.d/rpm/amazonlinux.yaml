@@ -13,7 +13,7 @@
     - name: {{sub}}
       fetcher:
         class: RepodataSqliteFetcher
-        url: 'http://repo.us-west-2.amazonaws.com/latest/{source}/SRPMS/mirror.list'
+        url: 'http://repo.us-west-2.amazonaws.com/latest/{{sub}}/SRPMS/mirror.list'
       parser:
         class: RepodataSqliteParser
         #vertags: amzn  # XXX: not supported in the parser

@@ -3,7 +3,7 @@
 ###########################################################################
 
 # URLs of official package lists are actually like
-# https://downloads.openwrt.org/releases/17.01.7/packages/x86_64/{source}/Packages.manifest
+# https://downloads.openwrt.org/releases/17.01.7/packages/x86_64/{{sub}}/Packages.manifest
 # but e.g. releases/17.01.*/packages are all links to e.g.
 # ../packages-17.01 so use the latter urls directly
 
@@ -33,21 +33,21 @@
   valid_till: {{valid_till}}
   {% endif %}
   sources:
-    {% for subrepo in ['base', 'luci', 'packages', 'routing', 'telephony'] %}
-    - name: {{subrepo}}
+    {% for sub in ['base', 'luci', 'packages', 'routing', 'telephony'] %}
+    - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://downloads.openwrt.org/releases/{{packagesdir}}/{{arch}}/{source}/Packages.manifest'
+        url: 'https://downloads.openwrt.org/releases/{{packagesdir}}/{{arch}}/{{sub}}/Packages.manifest'
       parser:
         class: OpenWrtPackagesParser
-      subrepo: '{source}'
+      subrepo: {{sub}}
       packagelinks:
         - type: PACKAGE_SOURCES
-          url: 'https://github.com/{{subrepos_repos[subrepo]}}/tree/{{branch}}/{path}'
+          url: 'https://github.com/{{subrepos_repos[sub]}}/tree/{{branch}}/{path}'
         - type: PACKAGE_RECIPE
-          url: 'https://github.com/{{subrepos_repos[subrepo]}}/blob/{{branch}}/{path}/Makefile'
+          url: 'https://github.com/{{subrepos_repos[sub]}}/blob/{{branch}}/{path}/Makefile'
         - type: PACKAGE_RECIPE_RAW
-          url: 'https://raw.githubusercontent.com/{{subrepos_repos[subrepo]}}/{{branch}}/{path}/Makefile'
+          url: 'https://raw.githubusercontent.com/{{subrepos_repos[sub]}}/{{branch}}/{path}/Makefile'
     {% endfor %}
   repolinks:
     - desc: OpenWrt home

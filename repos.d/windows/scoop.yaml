@@ -17,7 +17,7 @@
         sparse_checkout: [ 'bucket/*.json' ]
       parser:
         class: ScoopGitParser
-      subrepo: '{source}'
+      subrepo: main
       packagelinks:
         - type: PACKAGE_RECIPE
           url: 'https://github.com/ScoopInstaller/Main/blob/master/{path}'
@@ -30,7 +30,7 @@
         sparse_checkout: [ 'bucket/*.json' ]
       parser:
         class: ScoopGitParser
-      subrepo: '{source}'
+      subrepo: extras
       packagelinks:
         - type: PACKAGE_RECIPE
           url: 'https://github.com/ScoopInstaller/Extras/blob/master/{path}'
@@ -43,7 +43,7 @@
         sparse_checkout: [ 'bucket/*.json' ]
       parser:
         class: ScoopGitParser
-      subrepo: '{source}'
+      subrepo: versions
       packagelinks:
         - type: PACKAGE_RECIPE
           url: 'https://github.com/ScoopInstaller/Versions/blob/master/{path}'
@@ -56,7 +56,7 @@
         sparse_checkout: [ 'bucket/*.json' ]
       parser:
         class: ScoopGitParser
-      subrepo: '{source}'
+      subrepo: games
       packagelinks:
         - type: PACKAGE_RECIPE
           url: 'https://github.com/Calinou/scoop-games/blob/master/{path}'
