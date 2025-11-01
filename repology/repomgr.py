@@ -41,7 +41,7 @@ T = TypeVar('T')
 def _subst_source_recursively(data: T, name: str) -> T:
     if isinstance(data, str):
         if '{source}' in data:
-            warnings.warn('{source} substitution in repo config', DeprecationWarning)
+            raise RuntimeError('{source} substitution in repo config')
         return data.replace('{source}', name)  # type: ignore
     elif isinstance(data, list):
         return [_subst_source_recursively(item, name) for item in data]  # type: ignore
@@ -155,24 +155,25 @@ class RepositoryManager:
                 if sourcedata.get('disabled', False):
                     continue
 
-                for name in _listify(sourcedata['name']):
-                    # if there are multiple names, clone source data for each of them
-                    processed_sourcedata = _subst_source_recursively(copy.deepcopy(sourcedata), name)
-                    sources.append(
-                        Source(
-                            name=name,
-                            subrepo=processed_sourcedata.get('subrepo'),
-                            fetcher=processed_sourcedata['fetcher'],
-                            parser=processed_sourcedata['parser'],
-                            packagelinks=[
-                                PackageLink(
-                                    type=LinkType.from_string(linkdata['type']),
-                                    url=linkdata['url'],
-                                    priority=linkdata.get('priority', 1),
-                                )
-                                for linkdata in processed_sourcedata.get('packagelinks', [])],
-                        )
+                if not isinstance(sourcedata['name'], str):
+                    raise RuntimeError('loops over source name are not supported')
+
+                processed_sourcedata = _subst_source_recursively(copy.deepcopy(sourcedata), '')
+                sources.append(
+                    Source(
+                        name=sourcedata['name'],
+                        subrepo=processed_sourcedata.get('subrepo'),
+                        fetcher=processed_sourcedata['fetcher'],
+                        parser=processed_sourcedata['parser'],
+                        packagelinks=[
+                            PackageLink(
+                                type=LinkType.from_string(linkdata['type']),
+                                url=linkdata['url'],
+                                priority=linkdata.get('priority', 1),
+                            )
+                            for linkdata in processed_sourcedata.get('packagelinks', [])],
                     )
+                )
 
                 extra_groups.add(sourcedata['fetcher']['class'])
                 extra_groups.add(sourcedata['parser']['class'])
