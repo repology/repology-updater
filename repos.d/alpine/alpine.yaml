@@ -68,7 +68,6 @@
 # the existence of a directory for specific release, but actual existence of logs in e.g. 3.11/community
 # Or rather, only enable build_logs for supported alpine releases
 #                                                             V may need package_page=False soon, or dropped according to https://github.com/repology/repology-updater/issues/1499
-{{ alpine('3.15', minpackages=15000, valid_till='2023-11-01') }}
 {{ alpine('3.16', minpackages=16000, valid_till='2024-05-23') }}
 {{ alpine('3.17', minpackages=16000, valid_till='2024-11-22') }}
 {{ alpine('3.18', minpackages=16000, valid_till='2025-05-09') }}
