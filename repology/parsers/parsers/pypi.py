@@ -90,7 +90,7 @@ class PyPiCacheJsonParser(Parser):
 
                 if info['project_urls']:
                     for key, url in info['project_urls'].items():
-                        if (link_type := _url_types.get(key.lower())) and url != 'UNKNOWN':
+                        if (link_type := _url_types.get(key.lower())) is not None and url != 'UNKNOWN':
                             pkg.add_links(link_type, url)
 
                 for version, releasedatas in pkgdata['releases'].items():
