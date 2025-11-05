@@ -48,6 +48,8 @@
 {{ rpmfusion_fedora(39, minpackages=300) }}
 {{ rpmfusion_fedora(40, minpackages=300) }}
 {{ rpmfusion_fedora(41, minpackages=300) }}
+{{ rpmfusion_fedora(42, minpackages=300) }}
+{{ rpmfusion_fedora(43, minpackages=300) }}
 
 - name: rpmfusion_fedora_rawhide
   type: repository
@@ -122,3 +124,4 @@
 {{ rpmfusion_el(7, minpackages=100) }}
 {{ rpmfusion_el(8, minpackages=50) }}
 {{ rpmfusion_el(9, minpackages=50) }}
+{{ rpmfusion_el(10, minpackages=50) }}
