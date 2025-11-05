@@ -73,6 +73,13 @@
   repolinks:
     - desc: RPM Fusion home
       url: https://rpmfusion.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: https://github.com/rpmfusion/{srcname}
+    - type: PACKAGE_RECIPE
+      url: https://github.com/rpmfusion/{srcname}/blob/master/{srcname}.spec
+    - type: PACKAGE_RECIPE_RAW
+      url: https://raw.githubusercontent.com/rpmfusion/{srcname}/master/{srcname}.spec
   groups: [ all, production, rpmfusion ]
 
 ###########################################################################
