@@ -35,6 +35,13 @@
   repolinks:
     - desc: RPM Fusion home
       url: https://rpmfusion.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: https://github.com/rpmfusion/{srcname}/tree/f{{version}}
+    - type: PACKAGE_RECIPE
+      url: https://github.com/rpmfusion/{srcname}/blob/f{{version}}/{srcname}.spec
+    - type: PACKAGE_RECIPE_RAW
+      url: https://raw.githubusercontent.com/rpmfusion/{srcname}/f{{version}}/{srcname}.spec
   groups: [ all, production, rpmfusion ]
 {% endmacro %}
 
@@ -94,6 +101,13 @@
   repolinks:
     - desc: RPM Fusion home
       url: https://rpmfusion.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: https://github.com/rpmfusion/{srcname}/tree/el{{version}}
+    - type: PACKAGE_RECIPE
+      url: https://github.com/rpmfusion/{srcname}/blob/el{{version}}/{srcname}.spec
+    - type: PACKAGE_RECIPE_RAW
+      url: https://raw.githubusercontent.com/rpmfusion/{srcname}/el{{version}}/{srcname}.spec
   groups: [ all, production, rpmfusion ]
 {% endmacro %}
 
