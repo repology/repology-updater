@@ -161,8 +161,10 @@
 {% endif %}
 {% endmacro %}
 
-# valid_till: https://wiki.debian.org/LTS
-# pages: https://buildd.debian.org/status/package.php?p=0ad-data&suite=jessie
+# https://salsa.debian.org/debian/distro-info-data/-/blob/main/debian.csv
+# We use eol-lts not eol-elts
+# backports-sloppy is for Stable - 2; backports is for Stable -1 and Stable -2
+# pages: https://buildd.debian.org/status/package.php?p=0ad-data&suite=trixie
 # list of repos and backports https://packages.debian.org/stable/
 {{ debian(11, 'bullseye', minpackages=30000, valid_till='2026-08-31') }}
 {{ debian(12, 'bookworm', minpackages=33000, valid_till='2028-06-30', backports=True, backports_sloppy=True) }}
