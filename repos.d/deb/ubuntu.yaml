@@ -134,15 +134,13 @@
 {% endmacro %}
 
 # Packages argument refer to availability on https://packages.ubuntu.com/
-# Check News section and Distribution dropdown on the site to see whether
-# a specific release is supported
-# Also https://en.wikipedia.org/wiki/Ubuntu#Releases
-# Note that we use general support (not ESM) end dates here
+# https://salsa.debian.org/debian/distro-info-data/-/blob/main/ubuntu.csv
+# Note that we use general EOL dates not eol-esm or eol-legacy here
 {{ ubuntu('14', '04', 'trusty',   minpackages=23000, valid_till='2019-04-25', packages=false) }}
 {{ ubuntu('16', '04', 'xenial',   minpackages=26000, valid_till='2021-04-30', packages=false) }}
 {{ ubuntu('18', '04', 'bionic',   minpackages=29000, valid_till='2023-05-31', packages=false) }}
 {{ ubuntu('20', '04', 'focal',    minpackages=29000, valid_till='2025-05-29', packages=false) }}
 {{ ubuntu('22', '04', 'jammy',    minpackages=32000, valid_till='2027-06-01') }}
 {{ ubuntu('24', '04', 'noble',    minpackages=33000, valid_till='2029-05-31') }}
-{{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-01') }} # EoL at month precision, needs clarification
-{{ ubuntu('25', '10', 'questing', minpackages=33000, valid_till='2026-07-01', backports=false, proposed=true) }} # EoL at month precision, needs clarification
+{{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-15') }}
+{{ ubuntu('25', '10', 'questing', minpackages=33000, valid_till='2026-07-09', backports=false, proposed=true) }}
