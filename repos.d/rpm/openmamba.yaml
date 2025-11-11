@@ -20,7 +20,7 @@
       subrepo: {{sub}}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
-          url: 'https://openmamba.org/en/packages/?tag={{sub}}&pkg={srcname}.source'  # Note that this does not need |quote for some reason
+          url: 'https://openmamba.org/en/rpms/{{sub}}/{srcname}/'
         - type: PACKAGE_SOURCES
           url: 'https://src.openmamba.org/rpms/{srcname|Plus}'
         - type: PACKAGE_RECIPE
