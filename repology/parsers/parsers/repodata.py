@@ -34,21 +34,16 @@ class RepodataParser(Parser):
     _src: bool
     _binary: bool
 
-    # hack for openmandriva cooker which for some reason specifies binary
-    # architectures in '<arch></arch>' for source packages
-    _arch_from_filename: bool
-
     _vertags: list[str]
 
     _binnames_from_provides: bool
 
-    def __init__(self, src: bool = True, binary: bool = False, arch_from_filename: bool = False, vertags: Any = None, binnames_from_provides: bool = True) -> None:
+    def __init__(self, src: bool = True, binary: bool = False, vertags: Any = None, binnames_from_provides: bool = True) -> None:
         if not src and not binary:
             raise RuntimeError('at least one of "src" and "binary" modes for RepodataParser must be enabled')
 
         self._src = src
         self._binary = binary
-        self._arch_from_filename = arch_from_filename
         self._vertags = parse_rpm_vertags(vertags)
         self._binnames_from_provides = binnames_from_provides
 
@@ -63,36 +58,8 @@ class RepodataParser(Parser):
         skipped_provides_with_parentheses_sample: set[str] = set()
         has_provides = False
 
-        if self._arch_from_filename:
-            factory.log('mitigation for incorrect <arch></arch> enabled', severity=Logger.WARNING)
-
         for entry in iter_xml_elements_at_level(path, 1, ['{http://linux.duke.edu/metadata/common}package']):
-            if self._arch_from_filename:
-                # XXX: openmandriva hack, to be removed when it's fixed
-
-                # From https://t.me/openmandriva:
-                # berolinux: Good catch. The reason is that we're
-                #   now using a different tool for creating the metadata.
-                #   Previously we were using
-                #   https://github.com/rpm-software-management/createrepo_c ,
-                #   but there have been some problems and some lacking
-                #   features (appstream metadata creation at the same
-                #   time etc.) that made us write our own tool for the
-                #   job https://github.com/OpenMandrivaSoftware/repodata-tools
-                # berolinux: The architecture listed there is the one reported by rpm
-                # berolinux: It seems random because the SRPM is
-                #   taken from the first build that finishes
-                # berolinux: We should probably update the tool to
-                #   switch it back to "src" (or better yet, fix rpm to
-                #   not report the architecture for a .src.rpm as the
-                #   architecture it was built on)
-
-                location_elt = entry.find('{http://linux.duke.edu/metadata/common}location')
-                if location_elt is None:
-                    raise RuntimeError('Cannot find <location> element')
-                arch = nevra_parse(safe_getattr(location_elt, 'href'))[4]
-            else:
-                arch = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}arch')
+            arch = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}arch')
 
             is_src = arch == 'src'
 

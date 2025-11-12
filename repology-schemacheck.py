@@ -283,7 +283,6 @@ schemas = {
                         # rpm
                         'src': bool,
                         'binary': bool,
-                        'arch_from_filename': bool,
                         'vertags': Any(str, [str]),
                         'binnames_from_provides': bool,
 
