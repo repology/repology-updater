@@ -143,4 +143,5 @@
 {{ ubuntu('22', '04', 'jammy',    minpackages=32000, valid_till='2027-06-01') }}
 {{ ubuntu('24', '04', 'noble',    minpackages=33000, valid_till='2029-05-31') }}
 {{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-15') }}
-{{ ubuntu('25', '10', 'questing', minpackages=33000, valid_till='2026-07-09', backports=false, proposed=true) }}
+{{ ubuntu('25', '10', 'questing', minpackages=33000, valid_till='2026-07-09') }}
+{{ ubuntu('26', '04', 'resolute', minpackages=33000, valid_till='2031-05-29', backports=false, proposed=true) }}
