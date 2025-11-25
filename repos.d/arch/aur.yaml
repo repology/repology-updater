@@ -15,7 +15,7 @@
       fetcher:
         class: FileFetcher
         url: https://aur.archlinux.org/packages-meta-ext-v1.json.gz
-        # despite what the url says, returns plain JSON with transfer-encoding, thus no compression: is needed
+        compression: gz
       parser:
         class: AURJsonParser
         maintainer_host: aur
