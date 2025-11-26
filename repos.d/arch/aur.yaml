@@ -30,25 +30,3 @@
     - type: PACKAGE_RECIPE_RAW
       url: 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h={srcname|quote}'
   groups: [ all, production ]
-
-- name: chaotic-aur
-  type: repository
-  desc: Chaotic-AUR
-  family: arch
-  ruleset: [ arch, aur, chaotic-aur ]
-  minpackages: 0
-  sources:
-    - name: chaotic-aur-x86_64
-      fetcher:
-        class: TarFetcher
-        url: https://de-1-mirror.chaotic.cx/chaotic-aur/x86_64/chaotic-aur.db.tar.zst
-      parser:
-        class: ArchDBParser
-      # needs arch
-      #packagelinks:
-      #  - type: PACKAGE_HOMEPAGE
-      #    url: 'https://archlinux.pkgs.org/rolling/chaotic-aur-x86_64/{binname}-{rawversion}-x86_64.pkg.tar.zst.html'
-  repolinks:
-    - desc: Chaotic-AUR Home
-      url: https://aur.chaotic.cx/
-  groups: [ all ]  # prone to providing zero-filled desc files (atow, electron15-bin-15.5.7-1/desc)
