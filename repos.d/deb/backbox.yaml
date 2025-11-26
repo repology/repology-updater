@@ -3,19 +3,22 @@
 #
 # https://launchpad.net/~backbox
 ###########################################################################
-- name: backbox_6
+{% macro backbox(version, name, ubuntu_name, minpackages, valid_till) %}
+- name: backbox_{{version}}
+  sortname: backbox_{{'{:02d}'.format(version)}}
   type: repository
-  desc: BackBox 6
+  desc: BackBox {{version}}
   statsgroup: Debian+derivs
   family: debuntu
   ruleset: debuntu
   color: '32638f'
-  minpackages: 10
+  minpackages: {{minpackages}}
+  valid_till: {{valid_till}}
   sources:
     - name: main
       fetcher:
         class: FileFetcher
-        url: https://ppa.launchpadcontent.net/backbox/six/ubuntu/dists/bionic/main/source/Sources.xz
+        url: https://ppa.launchpadcontent.net/backbox/{{name}}/ubuntu/dists/{{ubuntu_name}}/main/source/Sources.xz
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -23,24 +26,10 @@
     - desc: BackBox Linux home
       url: https://linux.backbox.org/
   groups: [ all, production, backbox ]
+{% endmacro %}
 
-- name: backbox_7
-  type: repository
-  desc: BackBox 7
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: debuntu
-  color: '32638f'
-  minpackages: 10
-  sources:
-    - name: main
-      fetcher:
-        class: FileFetcher
-        url: https://ppa.launchpadcontent.net/backbox/seven/ubuntu/dists/focal/main/source/Sources.xz
-        compression: xz
-      parser:
-        class: DebianSourcesParser
-  repolinks:
-    - desc: BackBox Linux home
-      url: https://linux.backbox.org/
-  groups: [ all, production, backbox ]
+# valid_till's were taken from corresponding ubuntu releases
+{{ backbox(6, 'six',   'bionic', minpackages=10, valid_till='2023-05-31') }}
+{{ backbox(7, 'seven', 'focal',  minpackages=10, valid_till='2025-05-29') }}
+{{ backbox(8, 'eight', 'jammy',  minpackages=10, valid_till='2027-06-01') }}
+{{ backbox(9, 'nine',  'noble',  minpackages=10, valid_till='2029-05-31') }}
