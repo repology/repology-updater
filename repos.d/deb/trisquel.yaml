@@ -4,9 +4,6 @@
 
 {% macro trisquel(major, minor, codename, minpackages, valid_till, backports=True) %}
 - name: trisquel_{{major}}_{{minor}}
-  {% if major < 10 %}
-  sortname: trisquel_0{{major}}_{{minor}}
-  {% endif %}
   type: repository
   desc: Trisquel {{major}}.{{minor}}
   statsgroup: Debian+derivs
@@ -38,9 +35,6 @@
 
 {% if backports %}
 - name: trisquel_{{major}}_{{minor}}_backports
-  {% if major < 10 %}
-  sortname: trisquel_0{{major}}_{{minor}}_backports
-  {% endif %}
   type: repository
   desc: Trisquel {{major}}.{{minor}} backports
   statsgroup: Debian+derivs
