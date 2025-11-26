@@ -30,7 +30,7 @@
     - name: {{subrepo}}
       fetcher:
         class: TarFetcher
-        url: 'http://dl-cdn.alpinelinux.org/alpine/{{vversion}}/{{subrepo}}/x86_64/APKINDEX.tar.gz'
+        url: 'https://dl-cdn.alpinelinux.org/alpine/{{vversion}}/{{subrepo}}/x86_64/APKINDEX.tar.gz'
       parser:
         class: ApkIndexParser
         path_suffix: APKINDEX

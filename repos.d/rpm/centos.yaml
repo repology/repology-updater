@@ -23,7 +23,7 @@
     - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://vault.centos.org/centos/6/{{sub}}/Source/'
+        url: 'https://vault.centos.org/centos/6/{{sub}}/Source/'
       parser:
         class: RepodataParser
         vertags: el
@@ -57,7 +57,7 @@
     - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://vault.centos.org/centos/7/{{sub}}/Source/'
+        url: 'https://vault.centos.org/centos/7/{{sub}}/Source/'
       parser:
         class: RepodataParser
         vertags: el
@@ -90,7 +90,7 @@
     - name: {{sub}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://vault.centos.org/centos/8/{{sub}}/Source/'
+        url: 'https://vault.centos.org/centos/8/{{sub}}/Source/'
       parser:
         class: RepodataParser
         vertags: el
@@ -267,7 +267,7 @@
     {% endfor %}
   repolinks:
     - desc: EuroLinux Home
-      url: http://euro-linux.com/
+      url: https://euro-linux.com/
   groups: [ all, production, centos, rpm, eurolinux ]
 {% endmacro %}
 

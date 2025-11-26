@@ -13,15 +13,15 @@
     - name: x86_64
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/msys/x86_64/msys.db.tar.zst
+        url: https://repo.msys2.org/msys/x86_64/msys.db.tar.zst
       parser:
         class: MSYS2DescParser
       subrepo: x86_64
   repolinks:
     - desc: MSYS2 homepage
-      url: http://www.msys2.org/
+      url: https://www.msys2.org/
     - desc: MSYS2 msys repository
-      url: http://repo.msys2.org/msys/
+      url: https://repo.msys2.org/msys/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.msys2.org/package/{binname}?repo=msys&variant={subrepo}'
@@ -44,7 +44,7 @@
     - name: x86_64
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.zst
+        url: https://repo.msys2.org/mingw/x86_64/mingw64.db.tar.zst
       parser:
         class: MSYS2DescParser
       subrepo: x86_64
@@ -54,7 +54,7 @@
     - name: i686
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.zst
+        url: https://repo.msys2.org/mingw/i686/mingw32.db.tar.zst
       parser:
         class: MSYS2DescParser
       subrepo: i686
@@ -63,9 +63,9 @@
           url: 'https://packages.msys2.org/package/{binname}?repo=mingw32'
   repolinks:
     - desc: MSYS2 homepage
-      url: http://www.msys2.org/
+      url: https://www.msys2.org/
     - desc: MSYS2 mingw repository
-      url: http://repo.msys2.org/mingw/mingw64/
+      url: https://repo.msys2.org/mingw/mingw64/
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
@@ -86,14 +86,14 @@
     - name: ucrt64
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/mingw/ucrt64/ucrt64.db.tar.zst
+        url: https://repo.msys2.org/mingw/ucrt64/ucrt64.db.tar.zst
       parser:
         class: MSYS2DescParser
   repolinks:
     - desc: MSYS2 homepage
-      url: http://www.msys2.org/
+      url: https://www.msys2.org/
     - desc: MSYS2 ucrt64 repository
-      url: http://repo.msys2.org/mingw/ucrt64/
+      url: https://repo.msys2.org/mingw/ucrt64/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.msys2.org/package/{binname}?repo=ucrt64'
@@ -116,14 +116,14 @@
     - name: clang64
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/mingw/clang64/clang64.db.tar.zst
+        url: https://repo.msys2.org/mingw/clang64/clang64.db.tar.zst
       parser:
         class: MSYS2DescParser
   repolinks:
     - desc: MSYS2 homepage
-      url: http://www.msys2.org/
+      url: https://www.msys2.org/
     - desc: MSYS2 clang64 repository
-      url: http://repo.msys2.org/mingw/clang64/
+      url: https://repo.msys2.org/mingw/clang64/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.msys2.org/package/{binname}?repo=clang64'
@@ -146,14 +146,14 @@
     - name: clang64
       fetcher:
         class: TarFetcher
-        url: http://repo.msys2.org/mingw/clangarm64/clangarm64.db.tar.zst
+        url: https://repo.msys2.org/mingw/clangarm64/clangarm64.db.tar.zst
       parser:
         class: MSYS2DescParser
   repolinks:
     - desc: MSYS2 homepage
-      url: http://www.msys2.org/
+      url: https://www.msys2.org/
     - desc: MSYS2 clang64 repository
-      url: http://repo.msys2.org/mingw/clangarm64/
+      url: https://repo.msys2.org/mingw/clangarm64/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.msys2.org/package/{binname}?repo=clangarm64'

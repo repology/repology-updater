@@ -17,7 +17,7 @@
         class: GoboLinuxGitParser
   repolinks:
     - desc: GoboLinux home
-      url: http://gobolinux.org/
+      url: https://gobolinux.org/
     - desc: GoboLinux recipes repository
       url: https://github.com/gobolinux/Recipes
   packagelinks:

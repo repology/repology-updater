@@ -14,7 +14,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'http://delta.archlinux.fr/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
+        url: 'https://delta.archlinux.fr/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}
@@ -48,7 +48,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'http://delta.archlinux.fr/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
+        url: 'https://delta.archlinux.fr/{{sub}}/os/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}

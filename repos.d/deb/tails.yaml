@@ -14,7 +14,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: 'http://deb.tails.boum.org/dists/stable/main/source/Sources.bz2'
+        url: https://deb.tails.boum.org/dists/stable/main/source/Sources.bz2
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -36,7 +36,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: 'http://deb.tails.boum.org/dists/devel/main/source/Sources.bz2'
+        url: https://deb.tails.boum.org/dists/devel/main/source/Sources.bz2
         compression: bz2
       parser:
         class: DebianSourcesParser

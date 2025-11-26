@@ -26,7 +26,7 @@
     - desc: pkgsrc.se
       url: https://pkgsrc.se/
     - desc: pkgsrc CVS repository
-      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
+      url: https://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkgsrc.se/{srcname}'
@@ -65,7 +65,7 @@
     - desc: pkgsrc.se
       url: https://pkgsrc.se/
     - desc: pkgsrc CVS repository
-      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
+      url: https://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkgsrc.se/{srcname}'

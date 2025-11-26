@@ -20,7 +20,7 @@
   shadow: true
   repolinks:
     - desc: OS4Depot home
-      url: http://os4depot.net/
+      url: https://os4depot.net/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://os4depot.net/index.php?function=showfile&file={binname}'

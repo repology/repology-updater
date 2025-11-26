@@ -18,7 +18,7 @@
     - name: aarch64
       fetcher:
         class: TarFetcher
-        url: http://mirror.postmarketos.org/postmarketos/{{tag}}/aarch64/APKINDEX.tar.gz
+        url: https://mirror.postmarketos.org/postmarketos/{{tag}}/aarch64/APKINDEX.tar.gz
       parser:
         class: ApkIndexParser
         path_suffix: APKINDEX
@@ -26,12 +26,12 @@
       packagelinks:
         # XXX: want package recipe, but no way to know path under https://gitlab.com/postmarketOS/pmaports/
         - type: PACKAGE_HOMEPAGE
-          url: http://pkgs.postmarketos.org/package/{{tag}}/postmarketos/aarch64/device-pine64-pinetab-phosh
+          url: https://pkgs.postmarketos.org/package/{{tag}}/postmarketos/aarch64/device-pine64-pinetab-phosh
   repolinks:
     - desc: postmarketOS home
       url: https://postmarketos.org/
     - desc: postmarketOS packages
-      url: http://pkgs.postmarketos.org/packages
+      url: https://pkgs.postmarketos.org/packages
     - desc: Recipe repository
       url: https://gitlab.com/postmarketOS/pmaports/
   groups: [ all, production, postmarketos ]

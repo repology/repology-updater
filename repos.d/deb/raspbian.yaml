@@ -14,7 +14,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.raspbian.org/raspbian/dists/oldstable/{{sub}}/source/Sources.xz'
+        url: 'https://archive.raspbian.org/raspbian/dists/oldstable/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -22,7 +22,7 @@
     {% endfor %}
   repolinks:
     - desc: Raspbian home
-      url: http://raspbian.org/
+      url: https://raspbian.org/  # 502, recheck and remove
   groups: [ all, production, raspbian ]
 
 - name: raspbian_stable
@@ -38,7 +38,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.raspbian.org/raspbian/dists/stable/{{sub}}/source/Sources.xz'
+        url: 'https://archive.raspbian.org/raspbian/dists/stable/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -46,7 +46,7 @@
     {% endfor %}
   repolinks:
     - desc: Raspbian home
-      url: http://raspbian.org/
+      url: https://raspbian.org/  # 502, recheck and remove
   groups: [ all, production, raspbian ]
 
 - name: raspbian_testing
@@ -62,7 +62,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.raspbian.org/raspbian/dists/testing/{{sub}}/source/Sources.xz'
+        url: 'https://archive.raspbian.org/raspbian/dists/testing/{{sub}}/source/Sources.xz'
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -70,5 +70,5 @@
     {% endfor %}
   repolinks:
     - desc: Raspbian home
-      url: http://raspbian.org/
+      url: https://raspbian.org/  # 502, recheck and remove
   groups: [ all, production, raspbian ]

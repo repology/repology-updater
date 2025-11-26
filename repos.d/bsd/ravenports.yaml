@@ -19,12 +19,12 @@
         class: RavenportsJsonParser
   repolinks:
     - desc: Ravenports Catalog
-      url: http://www.ravenports.com/catalog/
+      url: https://www.ravenports.com/catalog/
     - desc: Ravenports GitHub repository
       url: https://github.com/Ravenports/Ravenports
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'http://ravenports.ironwolf.systems/catalog/bucket_{bucket}/{binname}/{variant}/'
+      url: 'https://www.ravenports.com/catalog/bucket_{bucket}/{binname}/{variant}/'
     - type: PACKAGE_SOURCES
       url: 'https://github.com/Ravenports/ravensource/tree/master/bucket_{bucket}/{srcname}'
     - type: PACKAGE_RECIPE

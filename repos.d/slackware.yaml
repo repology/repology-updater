@@ -171,14 +171,14 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://slackware.uk/slackwarearm/slackwarearm-14.2/{{sub}}/PACKAGES.TXT'
+        url: 'https://slackware.uk/slackwarearm/slackwarearm-14.2/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: {{sub}}
     {% endfor %}
   repolinks:
     - desc: Slackware ARM / AARCH64
-      url: http://arm.slackware.com/
+      url: https://arm.slackware.com/
   groups: [ all, production, slackware ]
 
 - name: slackwarearm_15_0
@@ -195,12 +195,12 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://slackware.uk/slackwarearm/slackwarearm-15.0/{{sub}}/PACKAGES.TXT'
+        url: 'https://slackware.uk/slackwarearm/slackwarearm-15.0/{{sub}}/PACKAGES.TXT'
       parser:
         class: SlackwarePackagesParser
       subrepo: {{sub}}
     {% endfor %}
   repolinks:
     - desc: Slackware ARM / AARCH64
-      url: http://arm.slackware.com/
+      url: https://arm.slackware.com/
   groups: [ all, production, slackware ]

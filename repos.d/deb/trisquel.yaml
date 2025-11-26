@@ -21,7 +21,7 @@
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
+        url: 'https://archive.trisquel.info/trisquel/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -55,7 +55,7 @@
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://archive.trisquel.info/trisquel/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
+        url: 'https://archive.trisquel.info/trisquel/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser

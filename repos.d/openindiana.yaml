@@ -13,7 +13,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: "http://pkg.openindiana.org/{{sub}}/catalog/1/catalog.summary.C"
+        url: https://pkg.openindiana.org/{{sub}}/catalog/1/catalog.summary.C
       parser:
         class: OpenIndianaSummaryJsonParser
       subrepo: {{sub}}
@@ -22,9 +22,9 @@
     - desc: OpenIndiana home
       url: https://www.openindiana.org/
     - desc: Hipster package repository home
-      url: http://pkg.openindiana.org/hipster/en/index.shtml
+      url: https://pkg.openindiana.org/hipster/en/index.shtml
     - desc: Hipster-encumbered package repository home
-      url: http://pkg.openindiana.org/hipster-encumbered/en/index.shtml
+      url: https://pkg.openindiana.org/hipster-encumbered/en/index.shtml
     - desc: GitHub repository
       url: https://github.com/OpenIndiana/oi-userland
    # XXX: fmri is not the same as path in github repo, so most times these don't work

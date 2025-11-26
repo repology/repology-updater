@@ -60,7 +60,7 @@
         require_xml_metadata: false
   repolinks:
     - desc: Home page
-      url: http://www.pentoo.ch/
+      url: https://www.pentoo.ch/
     - desc: GitHub page
       url: https://github.com/pentoo/pentoo-overlay
   packagelinks:

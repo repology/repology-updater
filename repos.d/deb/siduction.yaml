@@ -14,7 +14,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/extra/dists/unstable/{{sub}}/source/Sources.bz2'
+        url: 'https://packages.siduction.org/extra/dists/unstable/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -24,7 +24,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/fixes/dists/unstable/{{sub}}/source/Sources.bz2'
+        url: 'https://packages.siduction.org/fixes/dists/unstable/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -48,7 +48,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/extra/dists/experimental/{{sub}}/source/Sources.bz2'
+        url: 'https://packages.siduction.org/extra/dists/experimental/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -58,7 +58,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://packages.siduction.org/fixes/dists/experimental/{{sub}}/source/Sources.bz2'
+        url: 'https://packages.siduction.org/fixes/dists/experimental/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser

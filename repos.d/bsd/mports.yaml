@@ -19,9 +19,9 @@
         class: MportsJsonParser
   repolinks:
     - desc: MidnightBSD home
-      url: http://www.midnightbsd.org/
+      url: https://www.midnightbsd.org/
     - desc: Magus, the MidnightBSD package cluster
-      url: 'http://www.midnightbsd.org/magus/'
+      url: https://www.midnightbsd.org/magus/
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://github.com/MidnightBSD/mports/tree/master/{srcname}/'

@@ -14,7 +14,7 @@
         class: FileFetcher
         # https://www.pclinuxos.com/get-pclinuxos/kde/#PCLOS%20mirrors
         #url: https://ftp.heanet.ie/mirrors/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
-        url: http://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
+        url: https://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
         compression: bz2
       parser:
         class: SrcListParser
@@ -22,5 +22,5 @@
         vertags: pclos
   repolinks:
     - desc: PCLinuxOS home
-      url: http://www.pclinuxos.com/
+      url: https://pclinuxos.com/
   groups: [ all, production ]

@@ -21,7 +21,7 @@
         require_xml_metadata: false
   repolinks:
     - desc: Calculate Linux home
-      url: http://www.calculate-linux.org/
+      url: https://www.calculate-linux.org/
     - desc: Calculate Linux git repository
       url: https://github.com/calculatelinux/calculate
   packagelinks:

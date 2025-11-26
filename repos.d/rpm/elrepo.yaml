@@ -13,17 +13,17 @@
     - name: elrepo
       fetcher:
         class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/elrepo/el{{version}}/SRPMS/'
+        url: 'https://mirrors.coreix.net/elrepo/elrepo/el{{version}}/SRPMS/'
       parser:
         class: RepodataParser
         vertags: [elrepo,el]
   repolinks:
     - desc: ELRepo.org
-      url: http://elrepo.org
+      url: https://elrepo.org # dead, recheck and remove
   # not available for all packages and do not correspond to package names
   #packagelinks:
   #  - desc: Package details on elrepo.org
-  #    url: 'http://elrepo.org/tiki/{name}'
+  #    url: 'https://elrepo.org/tiki/{name}'
   groups: [ all, production, elrepo ]
 
 {% if enable_extras %}
@@ -38,16 +38,16 @@
     - name: elrepo
       fetcher:
         class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/extras/el{{version}}/SRPMS/'
+        url: 'https://mirrors.coreix.net/elrepo/extras/el{{version}}/SRPMS/'
       parser:
         class: RepodataParser
         vertags: [elrepo,el]
   repolinks:
     - desc: ELRepo.org
-      url: http://elrepo.org
+      url: https://elrepo.org # dead, recheck and remove
   #packagelinks:
   #  - desc: Package details on elrepo.org
-  #    url: 'http://elrepo.org/tiki/{name}'
+  #    url: 'https://elrepo.org/tiki/{name}'
   groups: [ elrepo, production, elrepo ]
 {% endif %}
 
@@ -63,16 +63,16 @@
     - name: elrepo
       fetcher:
         class: RepodataFetcher
-        url: 'http://mirrors.coreix.net/elrepo/testing/el{{version}}/SRPMS/'
+        url: 'https://mirrors.coreix.net/elrepo/testing/el{{version}}/SRPMS/'
       parser:
         class: RepodataParser
         vertags: [elrepo,el]
   repolinks:
     - desc: ELRepo.org
-      url: http://elrepo.org
+      url: https://elrepo.org # dead, recheck and remove
   #packagelinks:
   #  - desc: Package details on elrepo.org
-  #    url: 'http://elrepo.org/tiki/{name}'
+  #    url: 'https://elrepo.org/tiki/{name}'
   groups: [ all, production, elrepo ]
 {% endif %}
 {% endmacro %}

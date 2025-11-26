@@ -14,15 +14,15 @@
     - name: repo.json
       fetcher:
         class: FileFetcher
-        url: http://mirror1.slitaz.org/packages/cooking/repo.json.gz
+        url: https://mirror1.slitaz.org/packages/cooking/repo.json.gz
         compression: gz
       parser:
         class: SliTazJsonParser
   repolinks:
     - desc: SliTaz home
-      url: http://www.slitaz.org/
+      url: https://www.slitaz.org/
     - desc: SliTaz packages
-      url: http://pkg.slitaz.org/
+      url: https://pkg.slitaz.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkg.slitaz.org/?info={binname|quote}'
@@ -45,15 +45,15 @@
     - name: repo.json
       fetcher:
         class: FileFetcher
-        url: http://mirror1.slitaz.org/packages/next/repo.json.gz
+        url: https://mirror1.slitaz.org/packages/next/repo.json.gz
         compression: gz
       parser:
         class: SliTazJsonParser
   repolinks:
     - desc: SliTaz home
-      url: http://www.slitaz.org/
+      url: https://www.slitaz.org/
     - desc: SliTaz packages
-      url: http://pkg.slitaz.org/
+      url: https://pkg.slitaz.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://cook.slitaz.org/next/{binname}'
@@ -78,15 +78,15 @@
     - name: repo.json
       fetcher:
         class: FileFetcher
-        url: http://mirror1.slitaz.org/packages/current/repo.json.gz
+        url: https://mirror1.slitaz.org/packages/current/repo.json.gz
         compression: gz
       parser:
         class: SliTazJsonParser
   repolinks:
     - desc: SliTaz home
-      url: http://www.slitaz.org/
+      url: https://www.slitaz.org/
     - desc: SliTaz packages
-      url: http://pkg.slitaz.org/
+      url: https://pkg.slitaz.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://pkg.slitaz.org/?info={binname|quote}&version=current'

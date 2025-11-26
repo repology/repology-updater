@@ -13,7 +13,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://www.deb-multimedia.org/dists/unstable/{{sub}}/source/Sources.gz'
+        url: https://www.deb-multimedia.org/dists/unstable/{{sub}}/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -21,5 +21,5 @@
     {% endfor %}
   repolinks:
     - desc: Deb Multimedia home
-      url: http://www.deb-multimedia.org/
+      url: https://www.deb-multimedia.org/
   groups: [ all, production, deb_multimedia ]

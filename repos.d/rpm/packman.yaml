@@ -15,7 +15,7 @@
     - name: all
       fetcher:
         class: RepodataFetcher
-        url: http://mirror.karneval.cz/pub/linux/packman/fedora/30/SRPMS/
+        url: https://mirror.karneval.cz/pub/linux/packman/fedora/30/SRPMS/
       parser:
         class: RepodataParser
   repolinks:
@@ -37,7 +37,7 @@
     - name: all
       fetcher:
         class: RepodataFetcher
-        url: http://mirror.karneval.cz/pub/linux/packman/suse/factory/
+        url: https://mirror.karneval.cz/pub/linux/packman/suse/factory/
       parser:
         class: RepodataParser
   repolinks:
@@ -59,7 +59,7 @@
     - name: all
       fetcher:
         class: RepodataFetcher
-        url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Tumbleweed/
+        url: https://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Tumbleweed/
       parser:
         class: RepodataParser
   repolinks:
@@ -81,7 +81,7 @@
     - name: all
       fetcher:
         class: RepodataFetcher
-        url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_12/
+        url: https://mirror.karneval.cz/pub/linux/packman/suse/SLE_12/
       parser:
         class: RepodataParser
   repolinks:
@@ -103,7 +103,7 @@
     - name: all
       fetcher:
         class: RepodataFetcher
-        url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_15/
+        url: https://mirror.karneval.cz/pub/linux/packman/suse/SLE_15/
       parser:
         class: RepodataParser
   repolinks:

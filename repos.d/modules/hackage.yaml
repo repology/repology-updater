@@ -13,7 +13,7 @@
     - name: hackage
       fetcher:
         class: FileFetcher
-        url: http://hackage.haskell.org/01-index.tar.gz
+        url: https://hackage.haskell.org/01-index.tar.gz
       parser:
         class: HackageParser
   shadow: true
@@ -24,7 +24,7 @@
       url: https://hackage.haskell.org/
   packagelinks:
     - type: PROJECT_HOMEPAGE
-      url: 'http://hackage.haskell.org/package/{srcname}'
+      url: https://hackage.haskell.org/package/{srcname}
   groups: [ all, production ]
 
 - name: stackage_nighly

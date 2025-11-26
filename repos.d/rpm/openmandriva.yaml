@@ -20,9 +20,9 @@
       fetcher:
         class: RepodataFetcher
         {% if archived %}
-        url: 'http://abf-downloads.openmandriva.org/release_archives/{{version}}/SRPMS/{{sub1}}/{{sub2}}/'
+        url: 'https://abf-downloads.openmandriva.org/release_archives/{{version}}/SRPMS/{{sub1}}/{{sub2}}/'
         {% else %}
-        url: 'http://abf-downloads.openmandriva.org/{{version}}/repository/SRPMS/{{sub1}}/{{sub2}}/'
+        url: 'https://abf-downloads.openmandriva.org/{{version}}/repository/SRPMS/{{sub1}}/{{sub2}}/'
         {% endif %}
       parser:
         class: RepodataParser
@@ -64,7 +64,7 @@
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/rolling/repository/SRPMS/{{sub1}}/{{sub2}}/'
+        url: 'https://abf-downloads.openmandriva.org/rolling/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
       subrepo: {{sub1}}/{{sub2}}
@@ -98,7 +98,7 @@
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: RepodataFetcher
-        url: 'http://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{{sub1}}/{{sub2}}/'
+        url: 'https://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{{sub1}}/{{sub2}}/'
       parser:
         class: RepodataParser
       subrepo: {{sub1}}/{{sub2}}

@@ -16,7 +16,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{{sub}}/source/Sources.bz2'
+        url: 'https://depo.pardus.org.tr/pardus/dists/{{codename}}/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -27,7 +27,7 @@
     - name: updates-main
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/{{codename}}/main/source/Sources.bz2'
+        url: 'https://depo.pardus.org.tr/guvenlik/dists/{{codename}}/main/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -35,7 +35,7 @@
     - name: updates-contrib
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/{{codename}}/contrib/source/Sources.bz2'
+        url: 'https://depo.pardus.org.tr/guvenlik/dists/{{codename}}/contrib/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -43,7 +43,7 @@
     - name: updates-non-free
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/guvenlik/dists/{{codename}}/non-free/source/Sources.bz2'
+        url: 'https://depo.pardus.org.tr/guvenlik/dists/{{codename}}/non-free/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -69,7 +69,7 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'http://depo.pardus.org.tr/pardus/dists/{{codename}}/{{sub}}/source/Sources.bz2'
+        url: 'https://depo.pardus.org.tr/pardus/dists/{{codename}}/{{sub}}/source/Sources.bz2'
         compression: bz2
       parser:
         class: DebianSourcesParser
@@ -80,7 +80,7 @@
       url: https://www.pardus.org.tr/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'http://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|lib_and_first_letter}/{srcname}/'
+      url: 'https://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|lib_and_first_letter}/{srcname}/'
   groups: [ all, production, pardus ]
 {% endmacro %}
 

@@ -15,7 +15,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: 'http://ppa.launchpad.net/backbox/six/ubuntu/dists/bionic/main/source/Sources.xz'
+        url: https://ppa.launchpadcontent.net/backbox/six/ubuntu/dists/bionic/main/source/Sources.xz
         compression: xz
       parser:
         class: DebianSourcesParser
@@ -36,7 +36,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: 'http://ppa.launchpad.net/backbox/seven/ubuntu/dists/focal/main/source/Sources.xz'
+        url: https://ppa.launchpadcontent.net/backbox/seven/ubuntu/dists/focal/main/source/Sources.xz
         compression: xz
       parser:
         class: DebianSourcesParser

@@ -18,9 +18,9 @@
         class: T2DescParser
   repolinks:
     - desc: T2 SDE home
-      url: http://t2sde.org/
+      url: https://t2sde.org/
     - desc: T2 packages
-      url: http://t2sde.org/packages/
+      url: https://t2sde.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://t2sde.org/packages/{srcname}'
