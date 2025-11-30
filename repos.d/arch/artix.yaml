@@ -42,7 +42,7 @@
   desc: Artix Testing
   statsgroup: Arch+derivs
   family: arch
-  ruleset: arch
+  ruleset: [arch, artix]
   color: '29add2'
   minpackages: 1
   sources:
