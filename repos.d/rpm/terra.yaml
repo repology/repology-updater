@@ -58,7 +58,6 @@
   groups: [ all, production, terra ]
 {% endmacro %}
 
-{{ terra(39, 500) }}
-{{ terra(40, 500) }}
-{{ terra(41, 500) }}
+{{ terra(42, 500) }}
+{{ terra(43, 500) }}
 {{ terra('rawhide', 500) }}
