@@ -91,7 +91,7 @@
 {{ fedora(38, minpackages=21000, valid_till='2024-05-21', archived=True) }}
 {{ fedora(39, minpackages=21000, valid_till='2024-11-26', archived=True) }}
 {{ fedora(40, minpackages=21000, valid_till='2025-05-13', archived=True) }}
-{{ fedora(41, minpackages=21000, valid_till='2025-11-26') }}
+{{ fedora(41, minpackages=21000, valid_till='2025-12-15') }}
 {{ fedora(42, minpackages=21000, valid_till='2026-05-13') }}
 {{ fedora(43, minpackages=21000, valid_till='2026-12-02') }}
 {# fedora(44, minpackages=21000, valid_till='2027-05-19', development=True) #}
