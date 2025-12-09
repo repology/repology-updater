@@ -29,4 +29,4 @@
       url: 'https://github.com/MidnightBSD/mports/blob/master/{srcname}/Makefile'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://raw.githubusercontent.com/MidnightBSD/mports/master/{srcname}/Makefile'
-  groups: [ all ] # 503
+  groups: [ all, production ]
