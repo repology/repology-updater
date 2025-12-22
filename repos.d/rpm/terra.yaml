@@ -64,6 +64,6 @@
 {{ terra(39, 500, valid_till='2024-11-26') }}
 {{ terra(40, 500, valid_till='2025-05-13') }}
 {{ terra(41, 500, valid_till='2025-11-26') }}
-{{ terra(42, 500, valid_till='2026-05-13') }}
-{{ terra(43, 500, valid_till='2026-12-02') }}
+{# terra(42, 500, valid_till='2026-05-13') #}
+{# terra(43, 500, valid_till='2026-12-02') #}
 {{ terra('rawhide', 500) }}
