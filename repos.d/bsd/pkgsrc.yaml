@@ -39,8 +39,8 @@
 
 # XXX: reenable this starting from 2025_2 as it should've switched to more reliable index generation,
 # see https://github.com/repology/repology-updater/issues/1494
-{{ pkgsrc(2025, 2, minpackages=19000) }}
 {{ pkgsrc(2025, 3, minpackages=19000) }}
+{{ pkgsrc(2025, 4, minpackages=19000) }}
 
 - name: pkgsrc_current
   type: repository
