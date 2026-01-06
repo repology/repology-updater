@@ -33,6 +33,7 @@ _url_types = {
     'changelog': LinkType.UPSTREAM_CHANGELOG,
     'ci': LinkType.UPSTREAM_CI,
     'chat': LinkType.UPSTREAM_DISCUSSION,
+    'code': LinkType.UPSTREAM_REPOSITORY,
     'coverage': LinkType.UPSTREAM_COVERAGE,
     'discord': LinkType.UPSTREAM_DISCUSSION,
     'discussions': LinkType.UPSTREAM_DISCUSSION,
