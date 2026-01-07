@@ -28,6 +28,9 @@
   repolinks:
     - desc: Kali Linux home
       url: https://www.kali.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://pkg.kali.org/pkg/{srcname}'
   groups: [ all, production, kali ]
 
 - name: kali_bleeding_edge
@@ -54,4 +57,7 @@
   repolinks:
     - desc: Kali Linux home
       url: https://www.kali.org/
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://pkg.kali.org/pkg/{srcname}'
   groups: [ all, production, kali ]
