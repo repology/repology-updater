@@ -3,7 +3,7 @@
 ###########################################################################
 
 # https://mirrors.slackware.com/mirrorlist/, without trailing slash
-{% set slackware_mirror = "https://mirror.bytemark.co.uk/slackware" %}
+{% set slackware_mirror = "https://mirror.slackbuilds.org/slackware" %}
 
 - name: slackware_14_2
   sortname: slackware32_14_2
