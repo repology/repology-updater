@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2026 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,52 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Iterable
+from functools import cmp_to_key
+from typing import Iterable
 
-from pyparsing import Empty, Forward, QuotedString, Regex, Suppress, ZeroOrMore
+from libversion import version_compare
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-
-
-def _parse_data(data: str) -> dict[str, Any]:
-    lcur, rcur, lbrk, rbrk, comma, eq = map(Suppress, '{}[],=')
-
-    tablekey = Regex(r'[a-z][a-z0-9_]*') | (lbrk + QuotedString(quoteChar="'") + rbrk)
-    qstring = QuotedString(quoteChar='"')
-
-    value = Forward()
-
-    keyval = (tablekey + eq + value).setParseAction(lambda s, l, t: [(str(t[0]), t[1])])
-
-    array_table = (value + ZeroOrMore(comma + value)).setParseAction(lambda s, l, t: [list(t)])
-    dict_table = (keyval + ZeroOrMore(comma + keyval)).setParseAction(lambda s, l, t: [{k: v for k, v in t}])
-
-    # mypy: Call to untyped function "Empty" in typed context
-    # srsly? why only Empty, why not other pyparsing classes? how can I fix it?
-    table = lcur + (dict_table | array_table | Empty().setParseAction(lambda s, l, t: [None])) + rcur
-    value << (qstring | table)
-
-    root = ZeroOrMore(keyval).setParseAction(lambda s, l, t: {k: v for k, v in t})
-
-    return root.parseString(data, parseAll=True)[0]  # type: ignore
+from repology.parsers.json import iter_json_dict
+from repology.parsers.versions import VersionStripper
 
 
 class LuaRocksParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        with open(path, encoding='utf-8', errors='ignore') as contents:
-            data = contents.read()
+        normalize_version = VersionStripper().strip_right('-')
 
-        for pkgname, pkgdata in _parse_data(data)['repository'].items():
-            with factory.begin() as pkg:
+        for pkgname, pkgversions in iter_json_dict(path, ('repository', None)):
+            with factory.begin(pkgname) as pkg:
                 pkg.add_name(pkgname, NameType.LUAROCKS_NAME)
-
-                for version, versiondatas in pkgdata.items():
-                    for versiondata in versiondatas:
-                        verpkg = pkg.clone()
-
-                        verpkg.set_rawversion(version)
-                        verpkg.set_version(version.rsplit('-', 1)[0])
-                        verpkg.set_arch(versiondata['arch'])
-
-                        yield verpkg
+                # there are also a few cases of `scm`, `main`, `master` versions which
+                # we could include in addition to normal versions as ROLLING, but I
+                # don't see much gain from it
+                version = max(pkgversions.keys(), key=cmp_to_key(version_compare))
+                pkg.set_version(version, normalize_version)
+                yield pkg

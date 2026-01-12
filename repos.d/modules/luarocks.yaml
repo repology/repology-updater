@@ -6,12 +6,12 @@
   desc: LuaRocks
   family: luarocks
   ruleset: luarocks
-  minpackages: 12500  # about 2000 really, but a lot of versions
+  minpackages: 4000
   sources:
     - name: manifest
       fetcher:
         class: FileFetcher
-        url: https://luarocks.org/manifest
+        url: https://luarocks.org/manifest.json
       parser:
         class: LuaRocksParser
   shadow: true
