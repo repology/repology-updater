@@ -29,7 +29,7 @@ WITH preserved_runs AS (
 				ORDER BY start_ts DESC
 			) AS depth,
 			row_number() OVER (
-				PARTITION BY repository_id, status
+				PARTITION BY repository_id, type, status
 				ORDER BY start_ts DESC
 			) AS status_depth
 		FROM runs
@@ -37,7 +37,7 @@ WITH preserved_runs AS (
 	WHERE
 		-- keep failed runs for some time (assuming someone may keep a link to them)
 		(status = 'failed'::run_status AND start_ts > now() - INTERVAL '31' DAY) OR
-		-- keep last run of any kind (limiting age here allows last failed runs to expire)
+		-- keep last run of each kind (limiting age here allows last failed runs to expire)
 		(start_ts > now() - INTERVAL '31' DAY AND status_depth = 1) OR
 		-- keep normal runs for some time
 		(start_ts > now() - INTERVAL '3' DAY) OR
