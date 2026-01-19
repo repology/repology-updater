@@ -186,6 +186,8 @@ class NixJsonParser(Parser):
                 if match is None:
                     pkg.log('cannot parse name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
+                elif match.group(1).endswith('-unstable') and version.startswith('unstable-') and match.group(1)[:-9] == pname and match.group(2) == version[9:]:
+                    pass
                 else:
                     pname = match.group(1)
                     version = match.group(2)
