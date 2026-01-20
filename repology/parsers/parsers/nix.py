@@ -188,7 +188,7 @@ class NixJsonParser(Parser):
                     continue
                 elif match.group(1).endswith('-unstable') and version.startswith('unstable-') and match.group(1)[:-9] == pname and match.group(2) == version[9:]:
                     pass
-                elif key.startswith('sbclPackages.') or re.match('lua([0-9]+|jit)?Packages|rPackages|python[0-9]+Packages|vimPlugins|perl5?Packages|typstPackages|php[0-9]*(Packages|Extensions)', key):
+                elif key.startswith('sbclPackages.') or re.match('lua([0-9]+|jit)?Packages|rPackages|python[0-9]+Packages|vimPlugins|perl5?Packages|typstPackages|php[0-9]*(Packages|Extensions)|coqPackages|ocamlPackages|ocamlPackages_latest', key):
                     pass
                 else:
                     pname = match.group(1)
