@@ -1,13 +1,13 @@
 ###########################################################################
 # NixOS packages
 ###########################################################################
-{% macro nix(branch, minpackages, valid_till, build_logs=False) %}
+{% macro nix(branch, minpackages, valid_till, build_logs=False, use_name=False) %}
 - name: nix_stable_{{branch|replace('.', '_')}}
   type: repository
   desc: nixpkgs stable {{branch}}
   statsgroup: nix
   family: nix
-  ruleset: nix
+  ruleset: [nix, {% if use_name %}nix_name{% else %}nix_no_name{% endif %} ]
   color: '7eb2dd'
   minpackages: {{minpackages}}
   {% if valid_till %}
@@ -47,13 +47,14 @@
 {{ nix('24.11', minpackages=110000, valid_till='2025-06-30') }}
 {{ nix('25.05', minpackages=120000, valid_till='2025-12-31', build_logs=True) }}
 {{ nix('25.11', minpackages=130000, valid_till='2026-06-30', build_logs=True) }}
+# next version must set use_name = true
 
 - name: nix_unstable
   type: repository
   desc: nixpkgs unstable
   statsgroup: nix
   family: nix
-  ruleset: nix
+  ruleset: [nix, nix_name]
   color: '7eb2dd'
   minpackages: 120000
   default_maintainer: fallback-mnt-nix@repology

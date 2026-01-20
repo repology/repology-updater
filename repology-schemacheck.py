@@ -182,6 +182,8 @@ rulesets = families + [
     'msys2_clangarm64',
     'msys2_ucrt64',
     'mx',
+    'nix_name',
+    'nix_no_name',
     'openeuler',
     'packman',
     'parabola',
