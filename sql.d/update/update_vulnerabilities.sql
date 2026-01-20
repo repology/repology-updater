@@ -20,7 +20,6 @@ SET
 	flags = flags | (1 << 16)
 WHERE
 	versionclass != 10 -- ROLLING
-	AND (flags & (1 << 21)) = 0 -- MARKED_BROKEN
 	AND EXISTS (
 		SELECT *
 		FROM vulnerable_projects

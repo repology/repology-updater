@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import logging
 import os
 import re
 import sqlite3
@@ -25,6 +26,9 @@ from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+
+
+logger = logging.getLogger(__name__)
 
 
 def _normalize_version(version: str) -> str:
@@ -161,6 +165,10 @@ class OpenBSDsqlportsParser(Parser):
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for port in _iter_sqlports(os.path.join(path + self._path_to_database)):
+            if port.broken:
+                logger.info('Skipping broken package %s: %s', port.fullpkgpath, port.broken)
+                continue
+
             with factory.begin(port.fullpkgpath) as pkg:
                 # there are a lot of potential name sources in sqlports, namely:
                 # fullpkgpath, fullpkgname, pkgname, pkgspec, pkgstem, pkgpath (comes from Paths table)
@@ -192,8 +200,5 @@ class OpenBSDsqlportsParser(Parser):
                 pkg.add_categories(port.categories.split())
                 pkg.add_categories(port.categories.split())
                 pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, _iter_distfiles(port))
-
-                if port.broken:
-                    pkg.set_flags(PackageFlags.MARKED_BROKEN)
 
                 yield pkg
