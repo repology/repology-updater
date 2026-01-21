@@ -46,7 +46,6 @@
 # each release is supported for 1 month after the next release comes out, so we can
 # immediately set valid_till when we add new releases here
 #                                                                V may need archived=True soon, or dropped according to https://github.com/repology/repology-updater/issues/1499
-{{ openmandriva("4.3", minpackages=11000, valid_till="2023-12-25", archived=True) }}
 {{ openmandriva("5.0", minpackages=14000, valid_till="2024-05-20") }}
 {{ openmandriva("6.0", minpackages=15000) }}
 

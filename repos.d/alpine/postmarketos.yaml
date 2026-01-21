@@ -38,7 +38,6 @@
 {% endmacro %}
 
 # EoLs according to https://endoflife.date/postmarketos
-{{ postmarketos('23.06', minpackages=300, valid_till="2024-01-18") }}
 {{ postmarketos('23.12', minpackages=300, valid_till="2024-06-16") }}
 {{ postmarketos('24.06', minpackages=300, valid_till="2025-01-23") }}
 {{ postmarketos('24.12', minpackages=300) }}

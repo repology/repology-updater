@@ -43,6 +43,5 @@
 
 # https://www.mageia.org/en/support/
 # https://en.wikipedia.org/wiki/Mageia#Version_history
-{{ mageia('8', valid_till='2023-11-30') }}
 {{ mageia('9', valid_till='2025-03-31') }}
 {{ mageia('cauldron') }}

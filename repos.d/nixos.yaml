@@ -42,7 +42,6 @@
 {% endmacro %}
 
 # Note: build logs should only be enabled for alive branches due to enormous amount of links
-{{ nix('23.05', minpackages=90000, valid_till='2023-12-31') }}
 {{ nix('23.11', minpackages=90000, valid_till='2024-06-30') }}
 {{ nix('24.05', minpackages=100000, valid_till='2024-12-31') }}
 {{ nix('24.11', minpackages=110000, valid_till='2025-06-30') }}

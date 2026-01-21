@@ -82,7 +82,6 @@
 {% endmacro %}
 
 # https://en.opensuse.org/Lifetime
-{{ opensuse_leap('15.4', minpackages=19000, valid_till='2023-12-31') }}
 {{ opensuse_leap('15.5', minpackages=18000, valid_till='2024-12-31') }} # expected eol date
 {{ opensuse_leap('15.6', minpackages=15000, valid_till='2025-12-31') }} # expected eol date
 

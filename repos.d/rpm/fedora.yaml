@@ -87,7 +87,6 @@
 {% endmacro %}
 
 # Dates from https://en.wikipedia.org/wiki/Fedora_Linux_release_history
-{{ fedora(37, minpackages=21000, valid_till='2023-12-05', archived=True) }}
 {{ fedora(38, minpackages=21000, valid_till='2024-05-21', archived=True) }}
 {{ fedora(39, minpackages=21000, valid_till='2024-11-26', archived=True) }}
 {{ fedora(40, minpackages=21000, valid_till='2025-05-13', archived=True) }}
