@@ -66,7 +66,7 @@
         url: https://channels.nixos.org/nixos-unstable/packages.json.br
       parser:
         class: NixJsonParser
-        use_pname: false
+        use_pname: true
   repolinks:
     - desc: NixOS home
       url: https://nixos.org
