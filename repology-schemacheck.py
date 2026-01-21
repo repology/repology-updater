@@ -318,6 +318,7 @@ schemas = {
                         # nixos
                         'branch': str,
                         'enable_build_log_links': bool,
+                        'use_pname': bool,
 
                         # homebrew
                         'require_ruby_source_path': bool,

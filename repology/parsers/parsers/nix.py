@@ -103,10 +103,12 @@ _BUILD_LOGS_LINK_TEMPLATES = {
 class NixJsonParser(Parser):
     _branch: str | None
     _enable_build_log_links: bool
+    _use_pname: bool
 
-    def __init__(self, branch: str | None = None, enable_build_log_links: bool = True) -> None:
+    def __init__(self, branch: str | None = None, enable_build_log_links: bool = True, use_pname: bool = False) -> None:
         self._branch = branch
         self._enable_build_log_links = enable_build_log_links
+        self._use_pname = use_pname
 
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         max_maintainers = 0
@@ -190,7 +192,7 @@ class NixJsonParser(Parser):
                     pass
                 elif key.startswith('sbclPackages.') or re.match('lua([0-9]+|jit)?Packages|rPackages|python[0-9]+Packages|vimPlugins|perl5?Packages|typstPackages|php[0-9]*(Packages|Extensions)|coqPackages|ocamlPackages|ocamlPackages_latest|gimpPlugins|gimp2Plugins|octavePackages|fishPlugins|kodiPackages', key):
                     pass
-                else:
+                elif not self._use_pname:
                     pname = match.group(1)
                     version = match.group(2)
 

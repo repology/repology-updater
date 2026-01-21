@@ -1,7 +1,7 @@
 ###########################################################################
 # NixOS packages
 ###########################################################################
-{% macro nix(branch, minpackages, valid_till, build_logs=False, use_name=False) %}
+{% macro nix(branch, minpackages, valid_till, build_logs=False, use_pname=False) %}
 - name: nix_stable_{{branch|replace('.', '_')}}
   type: repository
   desc: nixpkgs stable {{branch}}
@@ -27,6 +27,7 @@
         {% if not build_logs %}
         enable_build_log_links: false
         {% endif %}
+        use_pname: {{ use_pname }}
   repolinks:
     - desc: NixOS home
       url: https://nixos.org
@@ -47,7 +48,7 @@
 {{ nix('24.11', minpackages=110000, valid_till='2025-06-30') }}
 {{ nix('25.05', minpackages=120000, valid_till='2025-12-31', build_logs=True) }}
 {{ nix('25.11', minpackages=130000, valid_till='2026-06-30', build_logs=True) }}
-# next version must set use_name = true
+# next version MUST set use_pname = true
 
 - name: nix_unstable
   type: repository
@@ -65,6 +66,7 @@
         url: https://channels.nixos.org/nixos-unstable/packages.json.br
       parser:
         class: NixJsonParser
+        use_pname: false
   repolinks:
     - desc: NixOS home
       url: https://nixos.org
