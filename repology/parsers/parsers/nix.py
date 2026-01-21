@@ -188,10 +188,6 @@ class NixJsonParser(Parser):
                 if match is None:
                     pkg.log('cannot parse name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
-                elif match.group(1).endswith('-unstable') and version.startswith('unstable-') and match.group(1)[:-9] == pname and match.group(2) == version[9:]:
-                    pass
-                elif key.startswith('sbclPackages.') or re.match('lua([0-9]+|jit)?Packages|rPackages|python[0-9]+Packages|vimPlugins|perl5?Packages|typstPackages|php[0-9]*(Packages|Extensions)|coqPackages|ocamlPackages|ocamlPackages_latest|gimpPlugins|gimp2Plugins|octavePackages|fishPlugins|kodiPackages', key):
-                    pass
                 elif not self._use_pname:
                     pname = match.group(1)
                     version = match.group(2)
