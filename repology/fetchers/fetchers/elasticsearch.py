@@ -54,7 +54,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
     def _do_fetch_scroll(self, statedir: AtomicDir, logger: Logger) -> None:
         numpage = 0
 
-        logger.log('getting page {}'.format(numpage))
+        logger.log(f'getting first page with payload {json.dumps(self._request_data)}')
         response = self._do_http('{}?scroll={}'.format(self._url, self._scroll), json=self._request_data).json()
 
         scroll_id = response['_scroll_id']
@@ -67,7 +67,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
 
             numpage += 1
 
-            logger.log('getting page {}'.format(numpage))
+            logger.log(f'getting page {numpage}')
             response = self._do_http('{}?scroll={}&scroll_id={}'.format(self._scroll_url, self._scroll, scroll_id)).json()
 
         try:
