@@ -87,6 +87,7 @@ class PackageFlags:
     NOLEGACY: ClassVar[int] = 1 << 18
     OUTDATED: ClassVar[int] = 1 << 19
     RECALLED: ClassVar[int] = 1 << 20
+    MARKED_BROKEN: ClassVar[int] = 1 << 21
 
     ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
@@ -133,6 +134,7 @@ class PackageFlags:
                 PackageFlags.NOLEGACY: 'NOLEGACY',
                 PackageFlags.OUTDATED: 'OUTDATED',
                 PackageFlags.RECALLED: 'RECALLED',
+                PackageFlags.MARKED_BROKEN: 'MARKED_BROKEN',
             }.items() if val & var
         )
 
