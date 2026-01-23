@@ -22,7 +22,7 @@ from typing import Any, Iterable
 from libversion import version_compare
 
 from repology.logger import Logger
-from repology.package import PackageFlags
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 
@@ -59,7 +59,7 @@ def _iter_packages(path: str) -> Iterable[dict[str, Any]]:
             continue
 
         with open(os.path.join(path, filename), 'r') as jsonfile:
-            yield from (hit['fields'] for hit in json.load(jsonfile))
+            yield from (hit['_source'] for hit in json.load(jsonfile))
 
 
 def _parse_package(pkg: PackageMaker, fields: dict[str, Any]) -> tuple[str, PackageMaker]:
@@ -75,8 +75,15 @@ def _parse_package(pkg: PackageMaker, fields: dict[str, Any]) -> tuple[str, Pack
 
     pkg.add_licenses(_as_list(fields['license']))
     pkg.set_summary(_as_maybe_str(fields.get('abstract')))
-    pkg.add_homepages(_as_maybe_str(fields.get('resources.homepage')))
-    pkg.add_downloads(_as_list(fields.get('download_url')))
+    pkg.add_links(LinkType.PROJECT_DOWNLOAD, _as_list(fields.get('download_url')))
+
+    if resources := fields.get('resources'):
+        pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, _as_maybe_str(resources.get('homepage')))
+        if repository := resources.get('repository'):
+            for key in ['web', 'url']:
+                if (link := repository.get(key)) is not None:
+                    pkg.add_links(LinkType.UPSTREAM_REPOSITORY, link)
+                    break
 
     name = _as_str(fields['name'])
     if version not in name:

@@ -35,27 +35,29 @@
         url: https://fastapi.metacpan.org/v1/release/_search
         scroll_url: https://fastapi.metacpan.org/_search/scroll
         es_scroll: 1m
-        es_size: 5000
-        es_filter:
-          or:
-            - { term: { status: latest } }
-            - { term: { maturity: developer } }
-        es_fields:
-          # See https://github.com/metacpan/metacpan-api/blob/master/lib/MetaCPAN/Script/Mapping/CPAN/Release.pm
-          - abstract
-          - author
-          - distribution
-          - download_url
-          - license
-          - maturity
-          - resources.homepage
-          - status
-          - version
-          - name
-          # XXX: resources.repository.url
-          # XXX: resources.repository.web  # in most cases same as homepage
-          # XXX: resources.bugtracker.web
-          # XXX: main_module  # == Pod?
+        es_query:
+          _source:
+            # See https://github.com/metacpan/metacpan-api/blob/master/lib/MetaCPAN/Script/Mapping/CPAN/Release.pm
+            - abstract
+            - author
+            - distribution
+            - download_url
+            - license
+            - maturity
+            - resources
+            - status
+            - version
+            - name
+            # XXX: resources.repository.url
+            # XXX: resources.repository.web  # in most cases same as homepage
+            # XXX: resources.bugtracker.web
+            # XXX: main_module  # == Pod?
+          query:
+            bool:
+              should:
+                - { term: { status: latest } }
+                - { term: { maturity: developer } }
+          size: 5000
         fetch_delay: 1
       parser:
         class: MetacpanAPIParser

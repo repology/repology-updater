@@ -252,9 +252,7 @@ schemas = {
                         # elasticsearch
                         'scroll_url': str,
                         'es_scroll': str,
-                        'es_size': int,
-                        'es_filter': dict,
-                        'es_fields': [str],
+                        'es_query': dict,
 
                         # common fetcher args
                         'fetch_timeout': Any(int, float),

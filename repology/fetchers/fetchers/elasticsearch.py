@@ -34,20 +34,14 @@ class ElasticSearchFetcher(ScratchDirFetcher):
     _request_data: dict[str, Any]
     _do_http: PoliteHTTP
 
-    def __init__(self, url: str, scroll_url: str | None = None, es_query: str | None = None, es_filter: str | None = None, es_fields: str | None = None, es_size: int = 5000, es_scroll: str = '1m', fetch_timeout: int = 5, fetch_delay: int | None = None):
+    def __init__(self, url: str, scroll_url: str | None = None, es_query: str | None = None, es_scroll: str = '1m', fetch_timeout: int = 5, fetch_delay: int | None = None):
         self._url = url
         self._scroll_url = scroll_url
         self._scroll = es_scroll
 
         self._request_data = {}
-        if es_fields:
-            self._request_data['fields'] = es_fields
         if es_query:
-            self._request_data['query'] = es_query
-        if es_filter:
-            self._request_data['filter'] = es_filter
-        if es_size:
-            self._request_data['size'] = es_size
+            self._request_data = es_query
 
         self._do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
