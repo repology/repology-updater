@@ -87,6 +87,7 @@ class PackageFlags:
     NOLEGACY: ClassVar[int] = 1 << 18
     OUTDATED: ClassVar[int] = 1 << 19
     RECALLED: ClassVar[int] = 1 << 20
+    RECALLED: ClassVar[int] = 1 << 20
 
     ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
