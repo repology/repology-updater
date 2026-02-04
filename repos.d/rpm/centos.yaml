@@ -228,11 +228,11 @@
       url: https://rockylinux.org/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/tree/r{{version}}'
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/tree/r{{version}}s'
     - type: PACKAGE_RECIPE
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/blob/r{{version}}/SPECS/{srcname}.spec'
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/blob/r{{version}}s/SPECS/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/raw/r{{version}}/SPECS/{srcname}.spec'
+      url: 'https://git.rockylinux.org/staging/rpms/{srcname}/-/raw/r{{version}}s/SPECS/{srcname}.spec'
   groups: [ all, production, centos, rpm, rockylinux ]
 {% endmacro %}
 
