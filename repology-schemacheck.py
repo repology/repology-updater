@@ -253,6 +253,7 @@ schemas = {
                         'scroll_url': str,
                         'es_scroll': str,
                         'es_query': dict,
+                        'max_pages': int,
 
                         # common fetcher args
                         'fetch_timeout': Any(int, float),

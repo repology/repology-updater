@@ -33,8 +33,9 @@ class ElasticSearchFetcher(ScratchDirFetcher):
     _scroll: str | None
     _request_data: dict[str, Any]
     _do_http: PoliteHTTP
+    _max_pages: int | None
 
-    def __init__(self, url: str, scroll_url: str | None = None, es_query: str | None = None, es_scroll: str = '1m', fetch_timeout: int = 5, fetch_delay: int | None = None):
+    def __init__(self, url: str, scroll_url: str | None = None, es_query: str | None = None, es_scroll: str = '1m', fetch_timeout: int = 5, fetch_delay: int | None = None, max_pages: int | None = None):
         self._url = url
         self._scroll_url = scroll_url
         self._scroll = es_scroll
@@ -44,6 +45,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             self._request_data = es_query
 
         self._do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
+        self._max_pages = max_pages
 
     def _do_fetch_scroll(self, statedir: AtomicDir, logger: Logger) -> None:
         numpage = 0
@@ -61,7 +63,10 @@ class ElasticSearchFetcher(ScratchDirFetcher):
 
             numpage += 1
 
-            logger.log(f'getting page {numpage}')
+            if self._max_pages is not None and numpage >= self._max_pages:
+                raise RuntimeError(f'pages limit ({self._max_pages}) exceeded (runaway elasticsearch scroll?)')
+
+            logger.log(f'getting page {numpage} (scroll_id={scroll_id})')
             response = self._do_http('{}?scroll={}&scroll_id={}'.format(self._scroll_url, self._scroll, scroll_id)).json()
 
         try:

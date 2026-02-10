@@ -59,6 +59,7 @@
                 - { term: { maturity: developer } }
           size: 5000
         fetch_delay: 1
+        max_pages: 50
       parser:
         class: MetacpanAPIParser
   shadow: true
