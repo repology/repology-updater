@@ -64,6 +64,7 @@
 
 # no links because there's no 17.01 branch in the repos
 {{ openwrt('23.05', 'x86_64', minpackages=8000, valid_till='2025-08-04') }}
-{{ openwrt('24.10', 'x86_64', minpackages=6000) }}
+{{ openwrt('24.10', 'x86_64', minpackages=6000, valid_till='2026-02-28') }}
+{{ openwrt('25.12', 'x86_64', minpackages=6000) }}
 # disabled because of package flapping
 {{ openwrt('snapshot', 'x86_64', minpackages=0, disabled=True) }}
