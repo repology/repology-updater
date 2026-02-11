@@ -21,7 +21,7 @@ import sqlite3
 from dataclasses import dataclass
 from typing import Iterable, Iterator, Tuple
 
-from repology.package import LinkType
+from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -59,7 +59,8 @@ SELECT
     _Email.Value AS maintainer,
     gh_account,
     gh_project,
-    dist_subdir
+    dist_subdir,
+    _Broken.Value AS broken
 FROM _Ports
     JOIN _Paths
         ON Canonical=_Ports.FullPkgPath
@@ -67,6 +68,8 @@ FROM _Ports
         ON Categories_ordered.FullPkgpath=_Ports.FullPkgpath
     JOIN _Email
         ON _Email.KeyRef=MAINTAINER
+    LEFT JOIN _Broken
+        ON _Broken.FullPkgPath=_Ports.FullPkgPath
 """
 
 
@@ -82,6 +85,7 @@ class Port:
     gh_account: str | None
     gh_project: str | None
     dist_subdir: str | None
+    broken: str | None
     distfiles_cursor: sqlite3.Cursor
 
 
@@ -186,6 +190,10 @@ class OpenBSDsqlportsParser(Parser):
                     pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, f'https://github.com/{port.gh_account}/{port.gh_project}')
                 pkg.add_maintainers(extract_maintainers(port.maintainer))
                 pkg.add_categories(port.categories.split())
+                pkg.add_categories(port.categories.split())
                 pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, _iter_distfiles(port))
+
+                if port.broken:
+                    pkg.set_flags(PackageFlags.MARKED_BROKEN)
 
                 yield pkg
