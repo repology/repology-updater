@@ -26,6 +26,7 @@ from repology.package import LinkType, PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.cpe import split_cpe
 
 
 def _parse_conditional_expr(string: str) -> Iterable[str]:
@@ -204,7 +205,7 @@ class GentooGitParser(Parser):
                 pkg.add_maintainers(xml_metadata.maintainers)
 
                 if xml_metadata.cpe is not None:
-                    cpe = xml_metadata.cpe.split(':')
+                    cpe = split_cpe(xml_metadata.cpe)
                     pkg.add_cpe(cpe[2], cpe[3])
 
                 for ebuild in _iter_ebuilds(path, category, package):

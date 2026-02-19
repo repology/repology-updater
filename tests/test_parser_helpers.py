@@ -17,6 +17,7 @@
 
 import pytest
 
+from repology.parsers.cpe import split_cpe
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import EpochMode, nevra_construct, nevra_parse
 
@@ -170,3 +171,15 @@ class TestSplitMaintainers:
         assert extract_maintainers('http://repology.org') == []
         assert extract_maintainers('Repology <http://repology.org>') == []
         assert extract_maintainers('nobody <really>') == []
+
+
+class TestSplitCpe:
+    def test_simple(self):
+        assert split_cpe('foo') == ['foo']
+        assert split_cpe('foo:bar:baz') == ['foo', 'bar', 'baz']
+
+    def test_escaped(self):
+        assert split_cpe('foo\\:bar:baz') == ['foo\:bar', 'baz']
+
+    def test_escaped_backslash(self):
+        assert split_cpe('foo\\\\:bar:baz') == ['foo\\\\', 'bar', 'baz']
