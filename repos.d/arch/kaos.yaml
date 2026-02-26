@@ -30,9 +30,9 @@
     - type: PACKAGE_HOMEPAGE
       url: "https://kaosx.us/packages/view.php?name={subrepo}/{binname|quote}-{rawversion|quote}"
     - type: PACKAGE_RECIPE
-      url: "https://github.com/KaOSx/{subrepo}/blob/master/{srcname}/PKGBUILD"
+      url: "https://codeberg.org/KaOS/{subrepo}/src/branch/master/{srcname}/PKGBUILD"
     - type: PACKAGE_RECIPE_RAW
-      url: "https://raw.githubusercontent.com/KaOSx/{subrepo}/master/{srcname}/PKGBUILD"
+      url: "https://codeberg.org/KaOS/{subrepo}/raw/branch/master/{srcname}/PKGBUILD"
   groups: [ all, production ]
 
 - name: kaos_build
