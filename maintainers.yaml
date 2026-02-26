@@ -3,3 +3,4 @@
 - { maintainer: nim65s@aur, replace: guilhem.saurel@laas.fr }
 - { maintainer: pandapip1@spack, replace: gavinnjohn@gmail.com }
 - { maintainer: will.t.murphy@gmail.com, hide: true }
+- { maintainer: ilai@aur, replace: ilai-deutel@github }
