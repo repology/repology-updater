@@ -196,6 +196,7 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ almalinux(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ almalinux(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
+{{ almalinux(10, minpackages=2000, valid_till='2035-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','SAP','SAPHANA','extras']) }}
 
 ###########################################################################
 # Rocky
