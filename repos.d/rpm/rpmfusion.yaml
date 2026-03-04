@@ -46,9 +46,6 @@
   groups: [ all, production, rpmfusion ]
 {% endmacro %}
 
-{{ rpmfusion_fedora(39, minpackages=300, valid_till='2024-11-26') }}
-{{ rpmfusion_fedora(40, minpackages=300, valid_till='2025-05-13') }}
-{{ rpmfusion_fedora(41, minpackages=300, valid_till='2025-11-19') }}
 {{ rpmfusion_fedora(42, minpackages=300, valid_till='2026-05-13') }}
 {{ rpmfusion_fedora(43, minpackages=300, valid_till='2026-12-02') }}
 
