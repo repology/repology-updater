@@ -108,6 +108,7 @@ families = [
     'pypi',
     'ravenports',
     'reactos',
+    'ros',
     'rosa',
     'rubygems',
     'rudix',
