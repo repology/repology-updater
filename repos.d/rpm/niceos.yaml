@@ -1,0 +1,55 @@
+###########################################################################
+# NiceOS
+###########################################################################
+# NiceOS is a custom RPM-based Linux distribution developed by NiceSOFT.
+# For Repology, NiceOS 5.2 is represented by its SRPM repository.
+#
+# Primary SRPM base URL:
+#   https://packages.niceos.ru/niceos/5.2/srpm/
+#
+# Public browser UI for the same SRPM set:
+#   https://packages.niceos.ru/?path=niceos%2F5.2%2Fsrpm
+#
+# Public mirror used by Repology fetcher:
+#   https://mirror.yandex.ru/mirrors/niceos/5.2/srpm/
+#
+# Note:
+# We intentionally use the Yandex mirror as the fetch source because it
+# publicly exposes repodata and is reachable by generic external fetchers.
+# The primary packages.niceos.ru SRPM base URL is kept here for reference
+# and should be used as the fetch source later if it becomes publicly
+# accessible without returning 403 to non-browser clients.
+
+- name: niceos_5_2
+  sortname: niceos_05_02
+  type: repository
+  desc: NiceOS 5.2
+  statsgroup: NiceOS
+
+  # Version comparison semantics for this RPM-based distribution.
+  family: fedora
+  ruleset: [fedora, rpm]
+
+  color: '1f8a70'
+  minpackages: 1000
+  update_period: 1d
+
+  sources:
+    - name: srpm
+      fetcher:
+        class: RepodataFetcher
+        url: 'https://mirror.yandex.ru/mirrors/niceos/5.2/srpm/'
+      parser:
+        class: RepodataParser
+
+  repolinks:
+    - desc: NiceOS 5.2 SRPM repository (browser UI)
+      url: https://packages.niceos.ru/?path=niceos%2F5.2%2Fsrpm
+    - desc: NiceOS 5.2 SRPM mirror
+      url: https://mirror.yandex.ru/mirrors/niceos/5.2/srpm/
+    - desc: NiceOS package repositories
+      url: https://packages.niceos.ru
+    - desc: NiceOS project
+      url: https://niceos.ru
+
+  groups: [ all, production, niceos, rpm ]
