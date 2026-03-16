@@ -87,6 +87,7 @@
 ###########################################################################
 {% macro rpmfusion_el(version, minpackages, valid_till=None) %}
 - name: rpmfusion_el_{{version}}
+  sortname: rpmfusion_el_{{'{:02d}'.format(version)}}
   type: repository
   desc: RPM Fusion EL {{version}}
   family: fedora
