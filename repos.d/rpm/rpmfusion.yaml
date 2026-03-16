@@ -121,8 +121,6 @@
   groups: [ all, production, rpmfusion ]
 {% endmacro %}
 
-{{ rpmfusion_el(6, minpackages=50,  valid_till='2020-11-30') }}
-{{ rpmfusion_el(7, minpackages=100, valid_till='2024-06-30') }}
 {{ rpmfusion_el(8, minpackages=50) }}
 {{ rpmfusion_el(9, minpackages=50) }}
 {{ rpmfusion_el(10, minpackages=50) }}
