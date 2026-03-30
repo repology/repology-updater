@@ -37,8 +37,8 @@
   groups: [ all, production, pkgsrc ]
 {% endmacro %}
 
-{{ pkgsrc(2025, 3, minpackages=19000) }}
 {{ pkgsrc(2025, 4, minpackages=19000) }}
+{{ pkgsrc(2026, 1, minpackages=19000) }}
 
 - name: pkgsrc_current
   type: repository
