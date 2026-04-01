@@ -77,13 +77,14 @@
     {% endfor %}
   repolinks:
     - desc: Pardus home
-      url: https://www.pardus.org.tr/
+      url: https://pardus.github.io/
   packagelinks:
     - type: PACKAGE_SOURCES
       url: 'https://depo.pardus.org.tr/pardus/pool/{subrepo}/{srcname|lib_and_first_letter}/{srcname}/'
   groups: [ all, production, pardus ]
 {% endmacro %}
 
-# see https://www.pardus.org.tr/en/version-management/ for valid_till's
-{{ old_pardus(21, 'yirmibir', minpackages=25000, valid_till='2025-05-01') }}
-{{ pardus(23,     'yirmiuc',  minpackages=1,     valid_till='2027-05-01') }}
+# see https://pardus.github.io/lifecycle/ for valid_till's
+{{ old_pardus(21, 'yirmibir', minpackages=25000, valid_till='2026-08-31') }}
+{{ pardus(23,     'yirmiuc',  minpackages=1,     valid_till='2028-06-30') }}
+{{ pardus(25,     'yirmibes', minpackages=1,     valid_till='2030-06-30') }}
