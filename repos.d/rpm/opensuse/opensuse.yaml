@@ -17,7 +17,8 @@
   pessimized: >-
     fails to provide actual links to package sources (for intance,
     https://build.opensuse.org/projects/openSUSE:Leap:15.6:Update/packages/trento-supportconfig-plugin/files/trento-supportconfig-plugin.spec?expand=1
-    has different version than advertised in the repository)
+    has different version than advertised in the repository); redirects to mirror blocked in Russia https://github.com/openSUSE/MirrorCache/issues/648;
+    provides intolerable amount of fake versions
   sources:
     - name: oss
       fetcher:
@@ -93,6 +94,12 @@
   ruleset: [opensuse,rpm]
   color: '6da741'
   minpackages: 10000
+  update_period: 1w
+  pessimized: >-
+    fails to provide actual links to package sources (for intance,
+    https://build.opensuse.org/projects/openSUSE:Leap:15.6:Update/packages/trento-supportconfig-plugin/files/trento-supportconfig-plugin.spec?expand=1
+    has different version than advertised in the repository); redirects to mirror blocked in Russia https://github.com/openSUSE/MirrorCache/issues/648;
+    provides intolerable amount of fake versions
   sources:
     # NOTE1: there are two url schemes, apparently with same contents
     # https://download.opensuse.org/source/tumbleweed/repo/oss/
