@@ -15,11 +15,22 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 import sqlite3
 from typing import Any, Iterable, Sequence
 
 
 def iter_sqlite(path: str, table_expr: str, columns: Sequence[str]) -> Iterable[dict[str, Any]]:
+    identifier_re = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
+
+    if not identifier_re.fullmatch(table_expr):
+        raise ValueError('invalid table name')
+
+    for column in columns:
+        if not identifier_re.fullmatch(column):
+            raise ValueError('invalid column name')
+
+    conn = None
     try:
         conn = sqlite3.connect('file:{}?mode=ro'.format(path))
         cur = conn.cursor()
