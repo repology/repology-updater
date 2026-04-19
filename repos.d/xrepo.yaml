@@ -1,0 +1,29 @@
+###########################################################################
+# xrepo (xmake-repo)
+###########################################################################
+- name: xrepo
+  type: repository
+  desc: xrepo
+  family: xrepo
+  ruleset: xrepo
+  minpackages: 1000
+  sources:
+    - name: xmake-repo-api
+      fetcher:
+        class: FileFetcher
+        url: https://xmake.microblock.cc/api/packages
+      parser:
+        class: XrepoAPIParser
+  repolinks:
+    - desc: xrepo website
+      url: https://xrepo.xmake.io/
+    - desc: xmake-repo on GitHub
+      url: https://github.com/xmake-io/xmake-repo
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/xmake-io/xmake-repo/tree/dev/{xrepo_package_path}'
+    - type: PACKAGE_RECIPE
+      url: 'https://github.com/xmake-io/xmake-repo/blob/dev/{xrepo_package_path}/xmake.lua'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://raw.githubusercontent.com/xmake-io/xmake-repo/dev/{xrepo_package_path}/xmake.lua'
+  groups: [ all, production ]
