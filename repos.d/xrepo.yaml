@@ -10,8 +10,7 @@
   sources:
     - name: xmake-repo-api
       fetcher:
-        class: FileFetcher
-        url: https://xmake.microblock.cc/api/packages
+        class: XrepoFetcher
       parser:
         class: XrepoAPIParser
   repolinks:

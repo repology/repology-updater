@@ -18,6 +18,7 @@
 import json
 from typing import Any, Iterable
 
+from repology.package import LinkType
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 
@@ -42,6 +43,10 @@ class XrepoAPIParser(Parser):
                 pkg.add_name(pkgname, NameType.XREPO_NAME)
                 pkg.set_extra_field('xrepo_package_path', pkgdata.get('packagedir', ''))
 
+                homepage: str | None = pkgdata.get('homepage')
+                if homepage:
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, homepage)
+
                 description: str | None = pkgdata.get('description')
                 if description:
                     pkg.set_summary(description)
@@ -50,7 +55,23 @@ class XrepoAPIParser(Parser):
                 if license_:
                     pkg.add_licenses(license_)
 
+                repo_urls: list[str] = pkgdata.get('repo_urls', [])
+                if repo_urls:
+                    pkg.add_links(LinkType.UPSTREAM_REPOSITORY, repo_urls[0])
+
+                download_direct: list[str] = pkgdata.get('download_direct', [])
+                download_templates: list[str] = pkgdata.get('download_templates', [])
+
                 for version in versions:
                     verpkg = pkg.clone(append_ident=':' + version)
                     verpkg.set_version(version, _normalize_version)
+
+                    normalized = _normalize_version(version)
+
+                    for url in download_direct:
+                        verpkg.add_links(LinkType.UPSTREAM_DOWNLOAD, url)
+
+                    for template in download_templates:
+                        verpkg.add_links(LinkType.UPSTREAM_DOWNLOAD, template.replace('$(version)', normalized))
+
                     yield verpkg
