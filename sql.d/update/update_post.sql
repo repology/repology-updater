@@ -146,3 +146,11 @@ WHERE
     unclassified_p.effname LIKE '%%-unclassified'
     AND unclassified_r.is_actual = false
     AND classified_r.is_actual is null;
+
+--------------------------------------------------------------------------------
+-- We currently use 31 days worth of data for trending projects, and 91 days
+-- for declining projects. Drop older data.
+-- We could also try aggregating older (>week old) events by days, but that
+-- only saves ~10% rows.
+--------------------------------------------------------------------------------
+DELETE FROM project_turnover WHERE ts < now() - interval '91 day';

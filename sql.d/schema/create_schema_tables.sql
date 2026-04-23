@@ -668,6 +668,9 @@ CREATE TABLE project_releases (
 --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS project_turnover CASCADE;
 
+-- Note: this table is indented for full scan, older entries are removed in
+-- post-update. We can't aggregate much here, but we can make it smaller and
+-- faster by switching ti numeric project any family ids.
 CREATE TABLE project_turnover (
 	effname text NOT NULL,
 	delta smallint NOT NULL,
