@@ -1,50 +1,73 @@
 ###########################################################################
 # Devuan
-#
-# See release info on https://www.devuan.org/os/releases
 ###########################################################################
-- name: devuan_4_0
+
+{% macro devuan(version, codename, minpackages, valid_till=None) %}
+{% set subrepos2 = ['main', 'contrib', 'non-free'] %}
+{% set host = 'deb.devuan.org' %}
+
+- name: devuan_{{version}}
   type: repository
-  desc: Devuan 4.0 # Chimaera
+  desc: Devuan {{version}}
   statsgroup: Debian+derivs
   family: debuntu
-  ruleset: debuntu
+  ruleset: [debuntu, devuan]
   color: '88839c'
-  valid_till: 2026-08-15
-  minpackages: 27000
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
-    {% for sub1 in ['chimaera', 'chimaera-updates'] %}
-    {% for sub2 in ['main', 'contrib', 'non-free'] %}
+    {% for sub1 in [codename, codename + '-updates'] %}
+    {% for sub2 in subrepos2 %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://deb.devuan.org/merged/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
-        compression: gz
+        url: 'http://{{host}}/merged/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
+        compression: xz
       parser:
         class: DebianSourcesParser
       subrepo: {{sub1}}/{{sub2}}
     {% endfor %}
+    {% endfor %}
+    {% set sub1 = codename + '-security' %}
+    {% for sub2 in subrepos2 %}
+    - name: {{sub1}}/{{sub2}}
+      fetcher:
+        class: FileFetcher
+        url: 'http://{{host}}/merged/dists/{{sub1}}/{{sub2}}/source/Sources.xz'
+        compression: xz
+      parser:
+        class: DebianSourcesParser
+      subrepo: {{sub1}}/{{sub2}}
     {% endfor %}
   repolinks:
     - desc: Devuan home
       url: https://devuan.org/
   groups: [ all, production, devuan ]
 
+# See release info on https://www.devuan.org/os/releases
+
+{{ devuan(4, 'chimaera', minpackages=30000, valid_till='2026-08-31' }}
+{{ devuan(5, 'daedalus', minpackages=33000, valid_till='2028-06-30' }}
+{{ devuan(6, 'excalibur', minpackages=36000, valid_till='2030-06-30' }}
+
+# Rolling
 - name: devuan_unstable
   type: repository
   desc: Devuan Unstable
   statsgroup: Debian+derivs
   family: debuntu
-  ruleset: debuntu
+  ruleset: [debuntu, devuan]
   color: '88839c'
-  minpackages: 28000
+  minpackages: 36000
   sources:
     {% set sub1 = 'unstable' %}
     {% for sub2 in ['main', 'contrib', 'non-free'] %}
     - name: {{sub1}}/{{sub2}}
       fetcher:
         class: FileFetcher
-        url: 'http://deb.devuan.org/merged/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
+        url: 'http://{{host}}/merged/dists/{{sub1}}/{{sub2}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
