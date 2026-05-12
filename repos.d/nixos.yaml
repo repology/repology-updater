@@ -62,7 +62,7 @@
     - name: packages-unstable.json
       fetcher:
         class: FileFetcher
-        url: https://channels.nixos.org/nixos-unstable/packages.json.br
+        url: https://channels.nixos.org/nixpkgs-unstable/packages.json.br
       parser:
         class: NixJsonParser
         use_pname: true
@@ -75,5 +75,5 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/NixOS/nixpkgs/blob/nixos-unstable/{?posfile}#L{?posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/{?posfile}#L{?posline}'
   groups: [ all, production, have_testdata, nix ]
