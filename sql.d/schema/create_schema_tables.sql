@@ -460,7 +460,11 @@ CREATE TABLE statistics (
 	num_maintainers integer NOT NULL DEFAULT 0,
 	num_urls_checked bigint NOT NULL DEFAULT 0,
 	num_reports_total integer NOT NULL DEFAULT 0,
-	num_reports_open integer NOT NULL DEFAULT 0
+	num_reports_open integer NOT NULL DEFAULT 0,
+	num_links_total integer NOT NULL DEFAULT 0,
+	num_links_checked integer NOT NULL DEFAULT 0,
+	num_links_alive integer NOT NULL DEFAULT 0,
+	num_links_alive_ipv6 integer NOT NULL DEFAULT 0
 );
 
 INSERT INTO statistics VALUES(DEFAULT);
@@ -474,7 +478,13 @@ CREATE TABLE statistics_history (
 	num_packages integer NOT NULL,
 	num_projects integer NOT NULL,
 	num_problems integer NOT NULL,
-	num_maintainers integer NOT NULL
+	num_maintainers integer NOT NULL,
+	num_reports_total integer,
+	num_reports_open integer,
+	num_links_total integer,
+	num_links_checked integer,
+	num_links_alive integer,
+	num_links_alive_ipv6 integer
 );
 
 --------------------------------------------------------------------------------
