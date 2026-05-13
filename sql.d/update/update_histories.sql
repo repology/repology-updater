@@ -50,7 +50,6 @@ WHERE state != 'legacy';
 -- global statistics
 INSERT INTO statistics_history (
 	ts,
-	snapshot,
 	num_packages,
 	num_projects,
 	num_problems,
@@ -64,7 +63,6 @@ INSERT INTO statistics_history (
 )
 SELECT
 	now(),
-	to_jsonb(snapshot),
 	snapshot.num_packages,
 	snapshot.num_metapackages,
 	snapshot.num_problems,
