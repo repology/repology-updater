@@ -12,9 +12,7 @@
     - name: srpms
       fetcher:
         class: FileFetcher
-        # https://www.pclinuxos.com/get-pclinuxos/kde/#PCLOS%20mirrors
-        #url: https://ftp.heanet.ie/mirrors/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
-        url: https://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
+        url: https://ftp.nluug.nl/os/Linux/distr/pclinuxos/srpms/base/srclist.pclos.bz2
         compression: bz2
       parser:
         class: SrcListParser
