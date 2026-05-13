@@ -18,4 +18,6 @@
 UPDATE statistics SET
 	num_metapackages = (SELECT count(*) FROM metapackages WHERE num_repos_nonshadow > 0),
 	num_problems = (SELECT count(*) FROM problems),
-	num_maintainers = (SELECT count(*) FROM maintainers WHERE num_packages > 0);
+	num_maintainers = (SELECT count(*) FROM maintainers WHERE num_packages > 0),
+	num_reports_total = (SELECT count(*) FROM reports),
+	num_reports_open = (SELECT count(*) FROM reports WHERE accepted IS NULL);
