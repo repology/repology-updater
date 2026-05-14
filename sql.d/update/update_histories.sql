@@ -57,10 +57,13 @@ INSERT INTO statistics_history (
 	num_reports_total,
 	num_reports_open,
 	num_links_total,
-	num_links_checkable,
 	num_links_overdue,
+	num_links_checkable,
 	num_links_alive,
-	num_links_alive_ipv6
+	num_links_alive_ipv6,
+	num_links_extracted_checkable,
+	num_links_extracted_alive,
+	num_links_extracted_alive_ipv6
 )
 SELECT
 	now(),
@@ -71,10 +74,13 @@ SELECT
 	snapshot.num_reports_total,
 	snapshot.num_reports_open,
 	snapshot.num_links_total,
-	snapshot.num_links_checkable,
 	snapshot.num_links_overdue,
+	snapshot.num_links_checkable,
 	snapshot.num_links_alive,
-	snapshot.num_links_alive_ipv6
+	snapshot.num_links_alive_ipv6,
+	snapshot.num_links_extracted_checkable,
+	snapshot.num_links_extracted_alive,
+	snapshot.num_links_extracted_alive_ipv6
 FROM (
 	SELECT
 		*

@@ -462,10 +462,13 @@ CREATE TABLE statistics (
 	num_reports_total integer NOT NULL DEFAULT 0,
 	num_reports_open integer NOT NULL DEFAULT 0,
 	num_links_total integer NOT NULL DEFAULT 0,
-	num_links_checkable integer NOT NULL DEFAULT 0,
 	num_links_overdue integer NOT NULL DEFAULT 0,
+	num_links_checkable integer NOT NULL DEFAULT 0,
 	num_links_alive integer NOT NULL DEFAULT 0,
-	num_links_alive_ipv6 integer NOT NULL DEFAULT 0
+	num_links_alive_ipv6 integer NOT NULL DEFAULT 0,
+	num_links_extracted_checkable integer NOT NULL DEFAULT 0,
+	num_links_extracted_alive integer NOT NULL DEFAULT 0,
+	num_links_extracted_alive_ipv6 integer NOT NULL DEFAULT 0
 );
 
 INSERT INTO statistics VALUES(DEFAULT);
@@ -482,10 +485,13 @@ CREATE TABLE statistics_history (
 	num_reports_total integer,
 	num_reports_open integer,
 	num_links_total integer,
-	num_links_checkable integer,
 	num_links_overdue integer,
+	num_links_checkable integer,
 	num_links_alive integer,
-	num_links_alive_ipv6 integer
+	num_links_alive_ipv6 integer,
+	num_links_extracted_checkable integer,
+	num_links_extracted_alive integer,
+	num_links_extracted_alive_ipv6 integer
 );
 
 --------------------------------------------------------------------------------
