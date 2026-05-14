@@ -22,6 +22,7 @@ UPDATE statistics SET
 	num_reports_total = (SELECT count(*) FROM reports),
 	num_reports_open = (SELECT count(*) FROM reports WHERE accepted IS NULL),
 	num_links_total = (SELECT count(*) FROM links WHERE refcount > 0),
-	num_links_checked = (SELECT count(*) FROM links WHERE refcount > 0 AND (ipv4_status_code IS NOT NULL OR ipv6_status_code IS NOT NULL)),
+	num_links_checkable = (SELECT count(*) FROM links WHERE refcount > 0 AND (coalesce(ipv4_status_code, 0) NOT BETWEEN -6 AND 0 OR coalesce(ipv6_status_code, 0) NOT BETWEEN -6 AND 0)),
+	num_links_overdue = (SELECT count(*) FROM links WHERE refcount > 0 AND next_check < now()),
 	num_links_alive = (SELECT count(*) FROM links WHERE refcount > 0 AND (ipv4_status_code = 200 OR ipv6_status_code = 200)),
 	num_links_alive_ipv6 = (SELECT count(*) FROM links WHERE refcount > 0 AND ipv6_status_code = 200);
