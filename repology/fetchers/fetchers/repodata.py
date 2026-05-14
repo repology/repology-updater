@@ -85,7 +85,7 @@ class RepodataFetcher(ScratchFileFetcher):
 
         logger.log('fetching {}'.format(repodata_url))
 
-        save_http_stream(repodata_url, statefile.get_file(), compression=compression, timeout=self.fetch_timeout)
+        save_http_stream(repodata_url, statefile.get_file(), compression=compression, timeout=self.fetch_timeout, headers={'Accept-Encoding': None})
 
         if checksum:
             persdata['open-checksum'] = checksum
