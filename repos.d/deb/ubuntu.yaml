@@ -143,7 +143,7 @@
 {{ ubuntu('20', '04', 'focal',    minpackages=29000, valid_till='2035-04-26', packages=false) }}
 {{ ubuntu('22', '04', 'jammy',    minpackages=32000, valid_till='2037-04-23') }}
 {{ ubuntu('24', '04', 'noble',    minpackages=33000, valid_till='2039-04-28') }}
-{{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-15') }}
+{{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-15', packages=false) }}
 {{ ubuntu('25', '10', 'questing', minpackages=33000, valid_till='2026-07-09') }}
 {{ ubuntu('26', '04', 'resolute', minpackages=33000, valid_till='2041-04-25') }}
 {{ ubuntu('26', '10', 'stonking', minpackages=33000, valid_till='2027-07-08', backports=false, proposed=true) }}
