@@ -31,6 +31,6 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://openports.pl/path/{srcname}'
     - type: PACKAGE_SOURCES
-      url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{srcname}/'
+      url: 'https://cvsweb.openbsd.org/ports/{srcnname}'
     # XXX: no Makefile link as in many cases Makefiles just refer to subports
   groups: [ all, production ]
