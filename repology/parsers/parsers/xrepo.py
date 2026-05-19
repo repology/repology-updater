@@ -1,4 +1,4 @@
-# Copyright (C) 2026 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2026 Aleksandr Kovalko <gistrec@gmail.com>
 #
 # This file is part of repology
 #
