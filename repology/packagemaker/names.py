@@ -252,6 +252,8 @@ class NameType:
 
     OPAM_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
+    XREPO_NAME: ClassVar[int] = GENERIC_SRC_NAME
+
 
 @dataclass
 class _NameMapping:

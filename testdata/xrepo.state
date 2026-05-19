@@ -1,0 +1,32 @@
+{
+  "count": 3,
+  "generated_at": "2026-05-19T00:00:00Z",
+  "packages": [
+    {
+      "name": "abseil",
+      "version": "20260107.1",
+      "description": "C++ Common Libraries",
+      "download_url": "https://github.com/abseil/abseil-cpp/archive/refs/tags/20260107.1.tar.gz",
+      "repository_url": "https://github.com/abseil/abseil-cpp",
+      "homepage": "https://abseil.io",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "ada",
+      "version": "v3.4.4",
+      "description": "WHATWG-compliant and fast URL parser written in modern C++",
+      "download_url": "https://github.com/ada-url/ada/archive/refs/tags/v3.4.4.tar.gz",
+      "repository_url": "https://github.com/ada-url/ada",
+      "homepage": "https://www.ada-url.com",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "alcatraz",
+      "version": "2023.07.14",
+      "description": "x64 binary obfuscator",
+      "download_url": "https://github.com/weak1337/Alcatraz.git",
+      "homepage": "https://github.com/weak1337/Alcatraz",
+      "repository_url": "https://github.com/weak1337/Alcatraz"
+    }
+  ]
+}
