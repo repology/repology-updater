@@ -24,7 +24,7 @@
       url: https://en.altlinux.org/Sisyphus
   groups: [ all, production, sisyphus ]
 
-{% macro alt(number, wikipage, minpackages) %}
+{% macro alt(number, wikipage, minpackages, valid_till=None) %}
 - name: alt_p{{number}}
   sortname: alt_p{{'{:02d}'.format(number)}}
   type: repository
@@ -34,6 +34,9 @@
   ruleset: [sisyphus, rpm]
   color: 'baccdd'
   minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
     - name: p{{number}}
       fetcher:
@@ -50,6 +53,6 @@
   groups: [ all, production, sisyphus ]
 {% endmacro %}
 
-{{ alt(9, wikipage="Ninth_Platform", minpackages=17000) }}
-{{ alt(10, wikipage="PlatformTen", minpackages=18000) }}
+{{ alt(9, wikipage="Ninth_Platform", minpackages=17000, valid_till='2023-12-31') }}
+{{ alt(10, wikipage="PlatformTen", minpackages=18000, valid_till='2024-05-31') }}
 {{ alt(11, wikipage="Eleventh_Platform", minpackages=18000) }}
