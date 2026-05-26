@@ -27,24 +27,19 @@
       url: https://openeuler.org/en/
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/src-openeuler/{srcname}/tree/openEuler-{{version}}/'
+      url: 'https://atomgit.com/src-openeuler/{srcname}/tree/openEuler-{{version}}/'
     - type: PACKAGE_RECIPE
-      url: 'https://gitee.com/src-openeuler/{srcname}/blob/openEuler-{{version}}/{srcname}.spec'
+      url: 'https://atomgit.com/src-openeuler/{srcname}/blob/openEuler-{{version}}/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitee.com/src-openeuler/{srcname}/raw/openEuler-{{version}}/{srcname}.spec'
+      url: 'https://atomgit.com/src-openeuler/{srcname}/raw/openEuler-{{version}}/{srcname}.spec'
   groups: [ all, production, openeuler, rpm ]
 {% endmacro %}
 
 # EoLs: https://www.openeuler.org/en/download/archive/
-{{ openeuler('20.03-LTS-SP3', minpackages=1500, valid_till='2025-12') }}
 {{ openeuler('20.03-LTS-SP4', minpackages=1500, valid_till='2025-12') }}
 
-{{ openeuler('22.03-LTS-SP1', minpackages=3000, valid_till='2024-12') }}
-{{ openeuler('22.03-LTS-SP3', minpackages=3000, valid_till='2025-12') }}
 {{ openeuler('22.03-LTS-SP4', minpackages=3000, valid_till='2026-06') }}
 
 {{ openeuler('24.03-LTS',     minpackages=3000, valid_till='2026-05') }}
 {{ openeuler('24.03-LTS-SP1', minpackages=3000, valid_till='2026-12') }}
-
-{{ openeuler('24.09',         minpackages=3000, valid_till='2025-03') }}
-{{ openeuler('25.03',         minpackages=3000, valid_till='2025-09') }}
+{{ openeuler('24.03-LTS-SP3', minpackages=3000, valid_till='2027-12') }}
