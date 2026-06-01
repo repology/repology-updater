@@ -93,9 +93,9 @@ _BLACKLIST2 = {
 }
 
 _BUILD_LOGS_LINK_TEMPLATES = {
-    ('linux', False): 'https://hydra.nixos.org/job/nixos/trunk-combined/nixpkgs.{key}.{arch}-linux',
+    ('linux', False): 'https://hydra.nixos.org/job/nixpkgs/unstable/{key}.{arch}-linux',
     ('linux', True): 'https://hydra.nixos.org/job/nixos/release-{branch}/nixpkgs.{key}.{arch}-linux',
-    ('darwin', False): 'https://hydra.nixos.org/job/nixpkgs/trunk/{key}.{arch}-darwin',
+    ('darwin', False): 'https://hydra.nixos.org/job/nixpkgs/unstable/{key}.{arch}-darwin',
     ('darwin', True): 'https://hydra.nixos.org/job/nixpkgs/nixpkgs-{branch}-darwin/{key}.{arch}-darwin',
 }
 
