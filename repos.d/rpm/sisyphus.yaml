@@ -53,6 +53,4 @@
   groups: [ all, production, sisyphus ]
 {% endmacro %}
 
-{{ alt(9, wikipage="Ninth_Platform", minpackages=17000, valid_till='2023-12-31') }}
-{{ alt(10, wikipage="PlatformTen", minpackages=18000, valid_till='2024-05-31') }}
 {{ alt(11, wikipage="Eleventh_Platform", minpackages=18000) }}
