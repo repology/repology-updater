@@ -7,7 +7,7 @@
   desc: nixpkgs stable {{branch}}
   statsgroup: nix
   family: nix
-  ruleset: [nix, {% if use_name %}nix_name{% else %}nix_no_name{% endif %} ]
+  ruleset: [nix, {% if use_pname %}nix_name{% else %}nix_no_name{% endif %} ]
   color: '7eb2dd'
   minpackages: {{minpackages}}
   {% if valid_till %}
