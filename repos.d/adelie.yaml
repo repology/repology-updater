@@ -11,7 +11,7 @@
   default_maintainer: fallback-mnt-adelie@repology
   sources:
     # XXX: Enable all arches sometime: ['aarch64', 'armv7', 'pmmx', 'ppc', 'ppc64', 'x86_64']
-    {% for arch in ['ppc64'] %}
+    {% for arch in ['x86_64'] %}
     {% for sub in ['system', 'user'] %}
     - name: {{sub}}_{{arch}}
       fetcher:
