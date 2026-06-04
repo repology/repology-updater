@@ -47,7 +47,8 @@
 {% endmacro %}
 
 {{ rpmfusion_fedora(42, minpackages=300, valid_till='2026-05-13') }}
-{{ rpmfusion_fedora(43, minpackages=300, valid_till='2026-12-02') }}
+{{ rpmfusion_fedora(43, minpackages=300, valid_till='2026-12-09') }}
+{{ rpmfusion_fedora(44, minpackages=300, valid_till='2027-06-02') }}
 
 - name: rpmfusion_fedora_rawhide
   type: repository
