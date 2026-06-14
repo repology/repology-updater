@@ -1,6 +1,35 @@
 ###########################################################################
 # Salix
 ###########################################################################
+
+{% set salix_mirror = "https://download.salixos.org" %}
+
+- name: salix_15_0
+  type: repository
+  desc: Salix 15.0
+  family: salix
+  ruleset: salix
+  color: '7ad37a'
+  minpackages: 600
+  sources:
+    {% for arch in ['x86_64', 'i486'] %}
+    {% for sub in [{'name': 'main', 'dir': '15.0'}, {'name': 'extra', 'dir': 'extra-15.0'}, {'name': 'xfce', 'dir': 'xfce4.18-15.0'}] %}
+    - name: {{arch}}-{{sub.name}}
+      fetcher:
+        class: FileFetcher
+        url: '{{salix_mirror}}/{{arch}}/{{sub.dir}}/PACKAGES.json'
+      parser:
+        class: SalixPackagesJsonParser
+      subrepo: {{sub.name}}
+    {% endfor %}
+    {% endfor %}
+  repolinks:
+    - desc: Salix home
+      url: https://www.salixos.org/
+    - desc: Salix package search
+      url: https://packages.salixos.org/
+  groups: [ all, production, salix ]
+
 - name: salix_14_2
   type: repository
   desc: Salix 14.2
@@ -9,13 +38,17 @@
   color: '7ad37a'
   minpackages: 600
   sources:
-    - name: x86_64-PACKAGES.json
+    {% for arch in ['x86_64', 'i486'] %}
+    {% for sub in [{'name': 'main', 'dir': '14.2'}, {'name': 'extra', 'dir': 'extra-14.2'}] %}
+    - name: {{arch}}-{{sub.name}}
       fetcher:
         class: FileFetcher
-        url: 'https://download.salixos.org/x86_64/14.2/PACKAGES.json'
+        url: '{{salix_mirror}}/{{arch}}/{{sub.dir}}/PACKAGES.json'
       parser:
         class: SalixPackagesJsonParser
-    # XXX: add 32 bit repo
+      subrepo: {{sub.name}}
+    {% endfor %}
+    {% endfor %}
   repolinks:
     - desc: Salix home
       url: https://www.salixos.org/
