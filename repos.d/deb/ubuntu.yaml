@@ -147,3 +147,10 @@
 {{ ubuntu('25', '10', 'questing', minpackages=33000, valid_till='2026-07-09') }}
 {{ ubuntu('26', '04', 'resolute', minpackages=33000, valid_till='2041-04-25') }}
 {{ ubuntu('26', '10', 'stonking', minpackages=33000, valid_till='2027-07-08', backports=false, proposed=true) }}
+# Homepage field tends to disappear from package metadata in 26+:
+# ubuntu_24_10.state    35122
+# ubuntu_25_04.state    36580
+# ubuntu_25_10.state    36837
+# ubuntu_26_04.state    14017
+# ubuntu_26_10.state    12175
+# Unless that's fixed, no new ubuntu versions can be supported by repology
