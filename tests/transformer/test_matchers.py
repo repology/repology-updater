@@ -320,6 +320,18 @@ def test_wwwpart_fragment():
     )
 
 
+def test_wwwprefix():
+    check_transformer(
+        '[ { wwwprefix: "https://example.com/foo", setname: bar } ]',
+        PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://example.com/foo')]).expect(effname='bar'),
+        PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://example.com/foo/index.html')]).expect(effname='bar'),
+        PackageSample(name='p3', version='1.0', links=[(Lt.UPSTREAM_HOMEPAGE, 'https://repology.org/link/https://example.com/foo')]).expect(effname='p3'),
+        PackageSample(name='p1', version='1.0', links=[(Lt.UPSTREAM_DOWNLOAD, 'https://example.com/foo/download.zip')]).expect(effname='bar'),
+        PackageSample(name='p2', version='1.0', links=[(Lt.UPSTREAM_DOWNLOAD, 'https://repology.org/link/https://example.com/foo/download.zip')]).expect(effname='p2'),
+        PackageSample(name='p3', version='2.0').expect(effname='p3'),
+    )
+
+
 def test_sourceforge():
     check_transformer(
         '[ { sourceforge: "foo", setname: bar } ]',

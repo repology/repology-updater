@@ -338,6 +338,24 @@ def wwwpart(ruledata: Any) -> Matcher:
 
 
 @_matcher_generator
+def wwwprefix(ruledata: Any) -> Matcher:
+    wwwprefixes = yaml_as_lowercase_list(ruledata['wwwprefix'])
+
+    def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+        if package.links is not None:
+            for link_type, *url_frag in package.links:
+                if LinkType.is_relevant_for_rule_matching(link_type):
+                    lower_url = '#'.join(url_frag).lower()
+                    for wwwprefix in wwwprefixes:
+                        if lower_url.startswith(wwwprefix):
+                            return True
+
+        return False
+
+    return matcher
+
+
+@_matcher_generator
 def sourceforge(ruledata: Any) -> Matcher:
     url_prefixes = []
     for project in yaml_as_lowercase_list(ruledata['sourceforge']):
