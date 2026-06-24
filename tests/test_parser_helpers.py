@@ -179,7 +179,7 @@ class TestSplitCpe:
         assert split_cpe('foo:bar:baz') == ['foo', 'bar', 'baz']
 
     def test_escaped(self):
-        assert split_cpe('foo\\:bar:baz') == ['foo\:bar', 'baz']
+        assert split_cpe('foo\\:bar:baz') == ['foo\\:bar', 'baz']
 
     def test_escaped_backslash(self):
         assert split_cpe('foo\\\\:bar:baz') == ['foo\\\\', 'bar', 'baz']
