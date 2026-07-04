@@ -1,0 +1,54 @@
+###########################################################################
+# openKylin
+###########################################################################
+
+# Support lifecycle (see https://docs.openkylin.top/zh/3%E7%89%88%E6%9C%AC%E8%A7%84%E5%88%92%E4%B8%8E%E5%8F%91%E5%B8%83/3_1%E7%89%88%E6%9C%AC%E8%A7%84%E5%88%92/2_openKylin%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E8%A7%84%E5%88%92):
+#   - LTS series: "2+3" years of maintenance
+#   - Innovation releases: ~1 year of passive updates.
+# 2.0, 2.0 SP1 and 2.0 SP2 share the same codename "nile" (verified against a real SP2 sources.list),
+# so they are covered by a single repository. valid_till values are derived from the policy above and release dates.
+# verify against the official lifecycle and adjust if needed.
+{% macro openkylin(name, desc, codename, minpackages, valid_till=None) %}
+- name: openkylin_{{name}}
+  type: repository
+  desc: openKylin {{desc}}
+  statsgroup: Debian+derivs
+  family: debuntu
+  ruleset: [debuntu, openkylin]
+  color: 'ffc000'
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
+  minpackages: {{minpackages}}
+  sources:
+    {% for suite in [codename, codename + '-updates', codename + '-security', codename + '-backports', codename + '-proposed'] %}
+    {% for sub in ['main', 'cross', 'pty'] %}
+    - name: {{suite}}/{{sub}}
+      fetcher:
+        class: FileFetcher
+        url: 'https://archive.openkylin.top/openkylin/dists/{{suite}}/{{sub}}/source/Sources.gz'
+        compression: gz
+      parser:
+        class: DebianSourcesParser
+      subrepo: {{suite}}/{{sub}}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://build.openkylin.top/openkylin/+source/{srcname}/'
+        - type: PACKAGE_SOURCES
+          url: 'https://archive.openkylin.top/openkylin/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
+    {% endfor %}
+    {% endfor %}
+  repolinks:
+    - desc: openKylin official website
+      url: https://www.openkylin.top/
+    - desc: official package archive
+      url: https://archive.openkylin.top/openkylin/
+  groups: [ all, production, openkylin ]
+{% endmacro %}
+
+# openKylin 1.0 (yangtze) — released 2023-07-05, no updates since early 2025, treated as end-of-life.
+{{ openkylin('1_0', '1.0', 'yangtze', minpackages=2000, valid_till='2025-07-05') }}
+# openKylin 2.0 (nile)    — released 2024-08-08, covers 2.0, 2.0 SP1 and 2.0 SP2.
+{{ openkylin('2_0', '2.0', 'nile',    minpackages=2500, valid_till='2029-08-08') }}
+# openKylin 3.0 (huanghe) — released 2026-08-28
+{{ openkylin('3_0', '3.0', 'huanghe', minpackages=2500, valid_till='2027-08-28') }}
