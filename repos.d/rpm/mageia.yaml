@@ -32,9 +32,9 @@
     {% endfor %}
   repolinks:
     - desc: Mageia home
-      url: https://www.mageia.org/en/
+      url: https://www.mageia.org/
     - desc: Mageia App Db
-      url: https://madb.mageia.org/
+      url: https://madb.mageialinux-online.org/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://madb.mageialinux-online.org/rpmshow?rpm={srcname|quote}&repo={{version}}-SRPMS-core-release&distribution={{version}}&architecture=x86_64&graphical=0'
