@@ -1,0 +1,27 @@
+###########################################################################
+# deb.griffo.io
+###########################################################################
+- name: deb_griffo_io
+  type: repository
+  desc: deb.griffo.io
+  family: deb_griffo_io
+  ruleset: deb_griffo_io
+  color: 'd70a53'
+  minpackages: 30
+  sources:
+    {% for sub in ['bookworm', 'trixie', 'forky', 'sid', 'jammy', 'noble', 'questing', 'resolute'] %}
+    - name: {{sub}}
+      fetcher:
+        class: FileFetcher
+        url: 'https://deb.griffo.io/apt/dists/{{sub}}/main/binary-amd64/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianPackagesParser
+      subrepo: {{sub}}
+    {% endfor %}
+  repolinks:
+    - desc: deb.griffo.io home
+      url: https://deb.griffo.io/
+    - desc: GitHub repository
+      url: https://github.com/dariogriffo/debian.griffo.io
+  groups: [ all, production ]
