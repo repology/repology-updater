@@ -14,6 +14,10 @@
   valid_till: {{ valid_till }}
   {% endif %}
   minpackages: {{ minpackages }}
+  {% if major >= "26" %}
+  update_period: 1w
+  pessimized: "does not provide upstream homepage URLs, details in https://github.com/repology/repology-updater/issues/1621"
+  {% endif %}
   sources:
     {% for sub1 in [codename, codename + "-updates"] %}
     {% for sub2 in ["main", "multiverse", "restricted", "universe"] %}
