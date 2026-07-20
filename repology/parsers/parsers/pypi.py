@@ -95,6 +95,10 @@ class PyPiCacheJsonParser(Parser):
                             pkg.add_links(link_type, url)
 
                 for version, releasedatas in pkgdata['releases'].items():
+                    if "\n" in version or "\r" in version:
+                        pkg.log(f"Skipping malformed PyPI release version {version!r}", severity=Logger.WARNING)
+                        continue
+
                     verpkg = pkg.clone()
 
                     verpkg.set_version(version)
