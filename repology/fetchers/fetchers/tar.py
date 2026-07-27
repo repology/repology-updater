@@ -44,7 +44,7 @@ class TarFetcher(ScratchDirFetcher):
             with open(tarpath, 'wb') as tarfile:
                 response = save_http_stream(self.url, tarfile, headers=headers, timeout=self.fetch_timeout)
         except NotModifiedException:
-            logger.log('got 403 not modified')
+            logger.log('got 304 not modified')
             return False
 
         # XXX: may be unportable, FreeBSD tar automatically handles compression type,

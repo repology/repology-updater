@@ -67,7 +67,7 @@ class FileFetcher(ScratchFileFetcher):
         try:
             response = save_http_stream(self.url, statefile.get_file(), compression=self.compression, data=self.post, headers=headers, timeout=self.fetch_timeout)
         except NotModifiedException:
-            logger.log('got 403 not modified')
+            logger.log('got 304 not modified')
             return False
 
         size = statefile.get_file().tell()
