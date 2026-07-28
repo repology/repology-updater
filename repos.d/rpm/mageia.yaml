@@ -38,6 +38,17 @@
   packagelinks:
     - type: PACKAGE_HOMEPAGE
       url: 'https://madb.mageialinux-online.org/rpmshow?rpm={srcname|quote}&repo={{version}}-SRPMS-core-release&distribution={{version}}&architecture=x86_64&graphical=0'
+    {% if version == 'cauldron' %}
+    - type: PACKAGE_RECIPE
+      url: 'https://svnweb.mageia.org/packages/cauldron/{srcname}/current/SPECS/{srcname}.spec?view=markup'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://svnweb.mageia.org/packages/cauldron/{srcname}/current/SPECS/{srcname}.spec?view=co'
+    {% else %}
+    - type: PACKAGE_RECIPE
+      url: 'https://svnweb.mageia.org/packages/updates/{{version}}/{srcname}/current/SPECS/{srcname}.spec?view=markup'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://svnweb.mageia.org/packages/updates/{{version}}/{srcname}/current/SPECS/{srcname}.spec?view=co'
+    {% endif %}
   groups: [ all, production, mageia, rpm ]
 {% endmacro %}
 
