@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2026 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,33 +17,25 @@
 
 from typing import Iterable
 
+from repology.package import LinkType
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.parsers.json import iter_json_list
 
 
-class SliTazJsonParser(Parser):
+class SliTazInfoParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
-        for item in iter_json_list(path, ('items', None)):
-            with factory.begin() as pkg:
-                pkg.add_name(item['meta'], NameType.SLITAZ_META)
-                pkg.set_version(item['ver'])
-                pkg.add_maintainers(item['maintainer'])
-                pkg.add_licenses(item['license'])
-                pkg.add_homepages(item['home'])
-                pkg.add_downloads(item.get('src'))
+        with open(path, encoding='utf-8') as infofile:
+            for line in infofile:
+                with factory.begin() as pkg:
+                    fields = line.strip().split('\t')
+                    if len(fields) < 5:
+                        raise RuntimeError(f'unexpected number of fields {len(fields)} < 5')
 
-                if pkg.version == 'latest':
-                    pkg.set_flags(PackageFlags.ROLLING)
+                    pkg.add_name(fields[0], NameType.GENERIC_SRCBIN_NAME)
+                    pkg.set_version(fields[1])
+                    pkg.add_categories(fields[2]) # also tags from [5]?
+                    pkg.set_summary(fields[3])
+                    pkg.add_links(LinkType.UPSTREAM_HOMEPAGE, fields[4])
 
-                for subitem in item['pkgs']:
-                    subpkg = pkg.clone()
-
-                    subpkg.add_categories(subitem['cat'])
-                    subpkg.set_summary(subitem['desc'])
-                    subpkg.add_name(subitem['name'], NameType.SLITAZ_NAME)
-                    subpkg.set_version(subitem.get('ver'))
-                    subpkg.set_arch(subitem.get('arch'))
-
-                    yield subpkg
+                    yield pkg
