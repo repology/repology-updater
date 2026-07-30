@@ -69,7 +69,7 @@
       url: 'https://gitlab.archlinux.org/archlinux/packaging/packages/{srcname}/-/raw/main/PKGBUILD'
   groups: [ all, production ]
 
-{% for arch in ['powerpc', 'powerpc64le', 'riscv64'] %}
+{% for arch in ['powerpc', 'powerpc64le'] %}
 - name: archpower_{{arch}}
   type: repository
   desc: ArchPOWER {{arch}}
