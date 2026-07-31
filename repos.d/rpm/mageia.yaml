@@ -13,7 +13,6 @@
   {% if valid_till %}
   valid_till: {{valid_till}}
   {% endif %}
-  pessimized: "does not provide access (HTTP 403) to package pages under https://madb.mageialinux-online.org"
   sources:
     # */backports_testing and */updates_testing not included, are these needed?
     # cauldron noes not seem to have updates and backports subrepos, is this correct?
