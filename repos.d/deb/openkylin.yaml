@@ -34,7 +34,7 @@
       subrepo: {{suite}}/{{sub}}
       packagelinks:
         - type: PACKAGE_HOMEPAGE
-          url: 'https://build.openkylin.top/openkylin/{{codename}}/+source/{srcname}'
+          url: 'https://build.openkylin.top/openkylin/+source/{srcname}/'
         - type: PACKAGE_SOURCES
           url: 'https://archive.openkylin.top/openkylin/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
     {% endfor %}
@@ -50,8 +50,8 @@
 # openKylin 1.0 (yangtze) — released 2023-07-05, superseded by 2.0 LTS; no
 # updates since early 2025, treated as end-of-life.
 {{ openkylin('1_0', '1.0', 'yangtze', minpackages=2000, color='2E8B57', valid_till='2025-07-05') }}
-# openKylin 2.0 (nile) — LTS, released 2024-07; covers 2.0, 2.0 SP1 and 2.0 SP2.
-{{ openkylin('2_0', '2.0', 'nile',    minpackages=2000, color='3B8B9E', valid_till='2029-08-08') }}
+# openKylin 2.0 (nile) — LTS, released 2024-08-08; covers 2.0, 2.0 SP1 and 2.0 SP2.
+{{ openkylin('2_0', '2.0', 'nile',    minpackages=2500, color='3B8B9E', valid_till='2029-08-08') }}
 # openKylin 3.0 (huanghe) — innovation release; not yet released as of 2026-08,
 # valid_till to be set once it ships.
-{{ openkylin('3_0', '3.0', 'huanghe', minpackages=2000, color='DAA520') }}
+{{ openkylin('3_0', '3.0', 'huanghe', minpackages=2500, color='DAA520') }}
