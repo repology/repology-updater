@@ -2,8 +2,8 @@
 # openKylin
 ###########################################################################
 
-# Support lifecycle (see https://bbs.openkylin.top/t/topic/171502):
-#   - LTS series (2.0): "2+3" years of maintenance (extended 2026-04).
+# Support lifecycle (see https://docs.openkylin.top/zh/3%E7%89%88%E6%9C%AC%E8%A7%84%E5%88%92%E4%B8%8E%E5%8F%91%E5%B8%83/3_1%E7%89%88%E6%9C%AC%E8%A7%84%E5%88%92/2_openKylin%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E8%A7%84%E5%88%92):
+#   - LTS series: "2+3" years of maintenance
 #   - Innovation releases: ~1 year of passive updates.
 # 2.0, 2.0 SP1 and 2.0 SP2 share the same codename "nile" (verified against
 # a real SP2 sources.list), so they are covered by a single repository.
@@ -49,9 +49,9 @@
 
 # openKylin 1.0 (yangtze) — released 2023-07-05, superseded by 2.0 LTS; no
 # updates since early 2025, treated as end-of-life.
-{{ openkylin('1_0', '1.0', 'yangtze', minpackages=2000, color='2E8B57', valid_till='2025-07-31') }}
+{{ openkylin('1_0', '1.0', 'yangtze', minpackages=2000, color='2E8B57', valid_till='2025-07-05') }}
 # openKylin 2.0 (nile) — LTS, released 2024-07; covers 2.0, 2.0 SP1 and 2.0 SP2.
-{{ openkylin('2_0', '2.0', 'nile',    minpackages=2000, color='3B8B9E', valid_till='2029-07-31') }}
+{{ openkylin('2_0', '2.0', 'nile',    minpackages=2000, color='3B8B9E', valid_till='2029-08-08') }}
 # openKylin 3.0 (huanghe) — innovation release; not yet released as of 2026-08,
 # valid_till to be set once it ships.
 {{ openkylin('3_0', '3.0', 'huanghe', minpackages=2000, color='DAA520') }}
