@@ -1,123 +1,57 @@
-# openKylin official archive
+###########################################################################
+# openKylin
+###########################################################################
 
-# openKylin 1.0 (yangtze)
-- name: openkylin_1_0
+# Support lifecycle (see https://bbs.openkylin.top/t/topic/171502):
+#   - LTS series (2.0): "2+3" years of maintenance (extended 2026-04).
+#   - Innovation releases: ~1 year of passive updates.
+# 2.0, 2.0 SP1 and 2.0 SP2 share the same codename "nile" (verified against
+# a real SP2 sources.list), so they are covered by a single repository.
+# valid_till values are derived from the policy above and release dates;
+# verify against the official lifecycle and adjust if needed.
+{% macro openkylin(name, desc, codename, minpackages, color, valid_till=None) %}
+- name: openkylin_{{name}}
   type: repository
-  desc: openKylin 1.0 (yangtze)
+  desc: openKylin {{desc}}
   statsgroup: Debian+derivs
   family: debuntu
-  ruleset: [ debuntu, openkylin ]
-  color: '2E8B57'
-  minpackages: 2000
+  ruleset: [debuntu, openkylin]
+  color: '{{color}}'
+  {% if valid_till %}
+  valid_till: '{{valid_till}}'
+  {% endif %}
+  minpackages: {{minpackages}}
   sources:
+    {% for suite in [codename, codename + '-updates', codename + '-security'] %}
     {% for sub in ['main', 'cross', 'pty'] %}
-    - name: {{sub}}
+    - name: {{suite}}/{{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://archive.openkylin.top/openkylin/dists/yangtze/{{sub}}/source/Sources.gz'
+        url: 'https://archive.openkylin.top/openkylin/dists/{{suite}}/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
-      subrepo: {{sub}}
-    {% endfor %}
-  repolinks:
-    - desc: openKylin official website
-      url: https://www.openkylin.top/
-    - desc: official package archive
-      url: https://archive.openkylin.top/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/openkylin/{srcname}'
-  groups: [ all, production, openkylin ]
-
-# openKylin 2.0 / 2.0 SP1 (nile)
-- name: openkylin_2_0
-  type: repository
-  desc: openKylin 2.0 / 2.0 SP1 (nile)
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [ debuntu, openkylin ]
-  color: '3B8B9E'
-  minpackages: 2300
-  sources:
-    {% for sub in ['main', 'cross', 'pty'] %}
-    - name: {{sub}}
-      fetcher:
-        class: FileFetcher
-        url: 'https://archive.openkylin.top/openkylin/dists/nile/{{sub}}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: {{sub}}
-    {% endfor %}
-  repolinks:
-    - desc: openKylin official website
-      url: https://www.openkylin.top/
-    - desc: official package archive
-      url: https://archive.openkylin.top/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/openkylin/{srcname}'
-  groups: [ all, production, openkylin ]
-
-# openKylin 2.0 SP2 (nile)
-- name: openkylin_2_0_sp2
-  type: repository
-  desc: openKylin 2.0 SP2 (nile)
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [ debuntu, openkylin ]
-  color: '4A8C9E'
-  minpackages: 2300
-  sources:
-    {% for dist in ['nile', 'nile.bedrock'] %}
-    {% for sub in ['main', 'cross', 'pty'] %}
-    - name: {{dist}}/{{sub}}
-      fetcher:
-        class: FileFetcher
-        url: 'https://archive.openkylin.top/openkylin/dists/{{dist}}/{{sub}}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: {{dist}}/{{sub}}
+      subrepo: {{suite}}/{{sub}}
+      packagelinks:
+        - type: PACKAGE_HOMEPAGE
+          url: 'https://build.openkylin.top/openkylin/{{codename}}/+source/{srcname}'
+        - type: PACKAGE_SOURCES
+          url: 'https://archive.openkylin.top/openkylin/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
     {% endfor %}
     {% endfor %}
   repolinks:
     - desc: openKylin official website
       url: https://www.openkylin.top/
     - desc: official package archive
-      url: https://archive.openkylin.top/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/openkylin/{srcname}'
+      url: https://archive.openkylin.top/openkylin/
   groups: [ all, production, openkylin ]
+{% endmacro %}
 
-# openKylin 3.0 (huanghe)
-- name: openkylin_3_0
-  type: repository
-  desc: openKylin 3.0 (huanghe)
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [ debuntu, openkylin ]
-  color: 'DAA520'
-  minpackages: 2300
-  sources:
-    {% for sub in ['main', 'cross', 'pty'] %}
-    - name: {{sub}}
-      fetcher:
-        class: FileFetcher
-        url: 'https://archive.openkylin.top/openkylin/dists/huanghe/{{sub}}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: {{sub}}
-    {% endfor %}
-  repolinks:
-    - desc: openKylin official website
-      url: https://www.openkylin.top/
-    - desc: official package archive
-      url: https://archive.openkylin.top/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://gitee.com/openkylin/{srcname}'
-  groups: [ all, production, openkylin ]
+# openKylin 1.0 (yangtze) — released 2023-07-05, superseded by 2.0 LTS; no
+# updates since early 2025, treated as end-of-life.
+{{ openkylin('1_0', '1.0', 'yangtze', minpackages=2000, color='2E8B57', valid_till='2025-07-31') }}
+# openKylin 2.0 (nile) — LTS, released 2024-07; covers 2.0, 2.0 SP1 and 2.0 SP2.
+{{ openkylin('2_0', '2.0', 'nile',    minpackages=2000, color='3B8B9E', valid_till='2029-07-31') }}
+# openKylin 3.0 (huanghe) — innovation release; not yet released as of 2026-08,
+# valid_till to be set once it ships.
+{{ openkylin('3_0', '3.0', 'huanghe', minpackages=2000, color='DAA520') }}
