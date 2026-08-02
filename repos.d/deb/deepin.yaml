@@ -21,6 +21,9 @@
       parser:
         class: DebianSourcesParser
       subrepo: {{sub}}
+      packagelinks:
+        - type: PACKAGE_SOURCES
+          url: 'https://community-packages.deepin.com/deepin/apricot/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
     {% endfor %}
   repolinks:
     - desc: deepin home
@@ -36,7 +39,6 @@
   color: '949393'
   minpackages: 8000
   update_period: 1w
-  pessimized: "does not provide access (HTTP 404) to package sources (for instance, https://repology.org/link/https://github.com/deepin-community/linux)"
   sources:
     {% for sub in ['main', 'community', 'commercial'] %}
     - name: {{sub}}
@@ -47,15 +49,15 @@
       parser:
         class: DebianSourcesParser
       subrepo: {{sub}}
+      packagelinks:
+        - type: PACKAGE_SOURCES
+          url: 'https://community-packages.deepin.com/deepin/beige/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
     {% endfor %}
   repolinks:
     - desc: deepin home
       url: https://www.deepin.org/
     - desc: deepin open build service instance
       url: https://build.deepin.com/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://github.com/deepin-community/{srcname}'
   groups: [ all, production, deepin ]
 
 - name: deepin_25
@@ -71,18 +73,18 @@
     - name: {{sub}}
       fetcher:
         class: FileFetcher
-        url: 'https://community-packages.deepin.com/beige/dists/crimson/{{sub}}/source/Sources.gz'
+        url: 'https://community-packages.deepin.com/deepin/beige/dists/crimson/{{sub}}/source/Sources.gz'
         compression: gz
       parser:
         class: DebianSourcesParser
       subrepo: {{sub}}
+      packagelinks:
+        - type: PACKAGE_SOURCES
+          url: 'https://community-packages.deepin.com/deepin/beige/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
     {% endfor %}
   repolinks:
     - desc: deepin home
       url: https://www.deepin.org/
     - desc: deepin open build service instance
       url: https://build.deepin.com/
-  packagelinks:
-    - type: PACKAGE_SOURCES
-      url: 'https://github.com/deepin-community/{srcname}'
   groups: [ all, production, deepin ]
