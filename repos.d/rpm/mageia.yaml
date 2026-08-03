@@ -3,6 +3,9 @@
 ###########################################################################
 {% macro mageia(version, valid_till=None) %}
 - name: mageia_{{version}}
+  {% if version == 9 %}
+  sortname: mageia_09
+  {% endif %}
   type: repository
   desc: Mageia {{version}}
   statsgroup: Mageia
