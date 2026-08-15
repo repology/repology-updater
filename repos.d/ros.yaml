@@ -1,0 +1,54 @@
+###########################################################################
+# ROS
+###########################################################################
+{% macro ros(version, name, minpackages, valid_till) %}
+- name: ros_{{version}}_{{name}}
+  type: repository
+  desc: ROS {% if version > 1 %}{{ version }} {% endif %}{{name}}
+  statsgroup: ros
+  family: ros
+  ruleset: ros
+  color: '22314E'
+  minpackages: {{minpackages}}
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
+  default_maintainer: fallback-mnt-ros@repology
+  sources:
+    - name: distribution.yaml
+      fetcher:
+        class: FileFetcher
+        url: https://raw.githubusercontent.com/ros/rosdistro/refs/heads/master/{{name}}/distribution.yaml
+      parser:
+        class: RosYamlParser
+  repolinks:
+    - desc: ROS home
+      url: https://ros.org/
+    - desc: ROS packages
+      url: https://index.ros.org/
+    - desc: {{name}} GitHub repository
+      url: https://github.com/ros/rosdistro/tree/master/{{name}}
+    - desc: {{name}} home
+      url: https://{% if version > 1 %}docs.ros.org/en{% else %}wiki.ros.org{% endif %}/{{name}}
+  groups: [ all, production, ros, ros{{version}} ]
+{% endmacro %}
+
+{{ ros(1, 'groovy', minpackages=200, valid_till='2014-07-31') }}
+{{ ros(1, 'hydro', minpackages=550, valid_till='2015-06-30') }}
+{{ ros(1, 'indigo', minpackages=950, valid_till='2019-04-30') }}
+{{ ros(1, 'jade', minpackages=450, valid_till='2017-05-31') }}
+{{ ros(1, 'kinetic', minpackages=950, valid_till='2021-04-30') }}
+{{ ros(1, 'lunar', minpackages=350, valid_till='2019-05-31') }}
+{{ ros(1, 'melodic', minpackages=850, valid_till='2023-06-27') }}
+{{ ros(1, 'noetic', minpackages=700, valid_till='2025-05-31') }}
+
+{{ ros(2, 'ardent', minpackages=50, valid_till='2018-12-31') }}
+{{ ros(2, 'bouncy', minpackages=50, valid_till='2019-06-30') }}
+{{ ros(2, 'crystal', minpackages=100, valid_till='2019-12-31') }}
+{{ ros(2, 'dashing', minpackages=200, valid_till='2021-05-31') }}
+{{ ros(2, 'eloquent', minpackages=200, valid_till='2020-11-30') }}
+{{ ros(2, 'foxy', minpackages=450, valid_till='2023-05-31') }}
+{{ ros(2, 'galactic', minpackages=350, valid_till='2022-11-30') }}
+{{ ros(2, 'humble', minpackages=650, valid_till='2027-05-31') }}
+{{ ros(2, 'iron', minpackages=500, valid_till='2024-11-30') }}
+{{ ros(2, 'jazzy', minpackages=550, valid_till='2029-05-31') }}
