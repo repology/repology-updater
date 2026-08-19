@@ -1,0 +1,27 @@
+###########################################################################
+# latest-debs
+###########################################################################
+- name: latest_debs
+  type: repository
+  desc: latest-debs
+  family: debuntu
+  ruleset: debuntu
+  color: '1f6feb'
+  minpackages: 20
+  sources:
+    - name: bookworm/amd64
+      fetcher:
+        class: FileFetcher
+        url: 'https://latest-debs.github.io/apt-repo/dists/bookworm/main/binary-amd64/Packages.gz'
+        compression: gz
+      parser:
+        class: DebianPackagesParser
+  repolinks:
+    - desc: latest-debs home
+      url: https://latest-debs.github.io/
+    - desc: latest-debs GitHub organization
+      url: https://github.com/latest-debs
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/latest-debs/{binname}-debian'
+  groups: [ all, production ]
