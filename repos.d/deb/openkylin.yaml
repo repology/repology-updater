@@ -47,8 +47,10 @@
 {% endmacro %}
 
 # openKylin 1.0 (yangtze) — released 2023-07-05, no updates since early 2025, treated as end-of-life.
-{{ openkylin('1_0', '1.0', 'yangtze', minpackages=2000, valid_till='2025-07-05') }}
+{{ openkylin('1_0',         '1.0',          'yangtze',        minpackages=2000,   valid_till='2025-07-05') }}
 # openKylin 2.0 (nile)    — released 2024-08-08, covers 2.0, 2.0 SP1 and 2.0 SP2.
-{{ openkylin('2_0', '2.0', 'nile',    minpackages=2500, valid_till='2029-08-08') }}
+# bedrock is extra repositories for 2.0 SP2; it contains the latest updated packages.
+{{ openkylin('2_0',         '2.0',          'nile',           minpackages=2500,   valid_till='2029-08-08') }}
+{{ openkylin('2_0_bedrock', '2.0-bedrock',  'nile.bedrock',   minpackages=300,    valid_till='2029-08-08') }}
 # openKylin 3.0 (huanghe) — released 2026-08-28
-{{ openkylin('3_0', '3.0', 'huanghe', minpackages=2500, valid_till='2027-08-28') }}
+{{ openkylin('3_0',         '3.0',          'huanghe',        minpackages=2500,   valid_till='2027-08-28') }}
