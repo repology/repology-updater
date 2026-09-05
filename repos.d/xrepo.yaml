@@ -11,7 +11,7 @@
     - name: repology_packages_index.json
       fetcher:
         class: FileFetcher
-        url: https://xmake-io.github.io/xmake-repo/repology_packages_index.json
+        url: https://packages.xmake.io/repology_packages_index.json
       parser:
         class: XrepoJsonParser
   repolinks:
