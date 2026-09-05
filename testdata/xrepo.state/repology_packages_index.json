@@ -1,0 +1,62 @@
+{
+  "count": 5,
+  "generated_at": "2026-08-15T00:00:00Z",
+  "packages": [
+    {
+      "name": "abseil",
+      "version": "20260107.1",
+      "versions": ["20250512.1", "20260107.1"],
+      "description": "C++ Common Libraries",
+      "download_url": "https://github.com/abseil/abseil-cpp/archive/refs/tags/20260107.1.tar.gz",
+      "download_urls": ["https://github.com/abseil/abseil-cpp/archive/refs/tags/20260107.1.tar.gz"],
+      "repository_url": "https://github.com/abseil/abseil-cpp",
+      "homepage": "https://abseil.io",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "ada",
+      "version": "v3.4.4",
+      "versions": ["v3.4.4"],
+      "description": "WHATWG-compliant and fast URL parser written in modern C++",
+      "download_url": "https://github.com/ada-url/ada/archive/refs/tags/v3.4.4.tar.gz",
+      "download_urls": [
+        "https://github.com/ada-url/ada/archive/refs/tags/v3.4.4.tar.gz",
+        "https://mirror.example.org/ada/ada-3.4.4.tar.gz"
+      ],
+      "repository_url": "https://github.com/ada-url/ada",
+      "homepage": "https://www.ada-url.com",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "alcatraz",
+      "version": "2023.07.14",
+      "versions": ["2023.07.14"],
+      "description": "x64 binary obfuscator",
+      "homepage": "https://github.com/weak1337/Alcatraz",
+      "repository_url": "https://github.com/weak1337/Alcatraz"
+    },
+    {
+      "name": "7z",
+      "version": "21.02",
+      "versions": ["19.00", "21.02"],
+      "description": "A file archiver with a high compression ratio.",
+      "download_url": "https://github.com/xmake-mirror/7zip/archive/refs/tags/21.02.tar.gz",
+      "download_urls": ["https://github.com/xmake-mirror/7zip/archive/refs/tags/21.02.tar.gz"],
+      "repository_url": "https://github.com/xmake-mirror/7zip.git",
+      "homepage": "https://www.7-zip.org/",
+      "patches": ["packages/7/7z/patches/21.02/backport-21.03-fix-for-GCC-10.patch"]
+    },
+    {
+      "name": "curl",
+      "version": "8.21.0",
+      "versions": ["8.21.0"],
+      "base": "libcurl",
+      "description": "The multiprotocol file transfer library.",
+      "download_url": "https://curl.haxx.se/download/curl-8.21.0.tar.bz2",
+      "download_urls": ["https://curl.haxx.se/download/curl-8.21.0.tar.bz2"],
+      "repository_url": "https://github.com/curl/curl",
+      "homepage": "https://curl.haxx.se/",
+      "license": "curl"
+    }
+  ]
+}
