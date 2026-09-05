@@ -16,7 +16,7 @@
       fetcher:
         class: FileFetcher
         fetch_timeout: 300
-        url: 'https://query.wikidata.org/sparql'
+        url: 'https://query-main.wikidata.org/sparql'
         post:
           format: json
           query: |
