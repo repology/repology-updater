@@ -23,7 +23,7 @@
       url: https://t2sde.org/packages/
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://t2sde.org/packages/{srcname}'
+      url: 'https://t2linux.com/packages/{srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://svn.exactcode.de/t2/trunk/{path}/'
     - type: PACKAGE_PATCH_RAW
