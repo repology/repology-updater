@@ -1,0 +1,37 @@
+###########################################################################
+# Vylen Linux
+###########################################################################
+- name: vylen
+  type: repository
+  desc: Vylen Linux
+  statsgroup: Vylen Linux
+  family: vylen
+  ruleset: vylen
+  color: '4c8bf5'
+  minpackages: 2000
+  default_maintainer: fallback-mnt-vylen@repology
+  sources:
+    {% for sub in ['core', 'extra', 'community'] %}
+    - name: {{sub}}
+      fetcher:
+        class: FileFetcher
+        url: 'https://gitlab.com/vylen/ports/{{sub}}/-/raw/main/packages.json'
+      parser:
+        class: VylenPackagesJsonParser
+      subrepo: {{sub}}
+    {% endfor %}
+  repolinks:
+    - desc: Vylen Linux home
+      url: https://vylen.gitlab.io/
+    - desc: Vylen Linux package catalog
+      url: https://vylen.gitlab.io/packages
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://vylen.gitlab.io/packages/#{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://gitlab.com/vylen/ports/{subrepo}/-/tree/main/{srcname}'
+    - type: PACKAGE_RECIPE
+      url: 'https://gitlab.com/vylen/ports/{subrepo}/-/blob/main/{srcname}/build.eme'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://gitlab.com/vylen/ports/{subrepo}/-/raw/main/{srcname}/build.eme'
+  groups: [ all, production ]
