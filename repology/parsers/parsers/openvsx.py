@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 from typing import Iterable
 
 from repology.package import LinkType
@@ -25,6 +26,10 @@ from repology.parsers.json import iter_json_list
 
 class OpenVSXParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
+        for pagename in os.listdir(path):
+            yield from self._iter_parse_page(os.path.join(path, pagename), factory)
+
+    def _iter_parse_page(self, path: str, factory: PackageFactory) -> Iterable[PackageMaker]:
         for extension in iter_json_list(path, ('extensions', None)):
             with factory.begin() as pkg:
                 # TODO: More metadata is available, it's just harder to fetch and will require its own fetcher, in all likelihood
