@@ -11,15 +11,15 @@
     - name: yacp
       fetcher:
         class: FileFetcher
-        url: https://fd00.github.io/yacp/packages.json.xz
+        url: https://yacp-dev.github.io/ports/packages.json.xz
         compression: xz
       parser:
         class: YACPJsonParser
   repolinks:
     - desc: Yet Another Cygwin Ports GitHub repository
-      url: https://github.com/fd00/yacp
+      url: https://github.com/yacp-dev/ports
   packagelinks:
     # XXX: ask author to provide raw versions in json dump, so we can link to cygports directly
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/fd00/yacp/tree/master/{srcname}'
-  groups: [ all ]
+      url: 'https://github.com/yacp-dev/ports/tree/master/{srcname}'
+  groups: [ all, production ]
