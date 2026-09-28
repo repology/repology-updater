@@ -7,6 +7,8 @@
   family: t2
   ruleset: t2
   minpackages: 3000
+  update_period: 1w
+  pessimized: "many package pages are not available (for instance, https://t2linux.com/packages/byacc)"
   sources:
     - name: t2sde
       fetcher:
