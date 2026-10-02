@@ -14,13 +14,13 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: https://deb.tails.boum.org/dists/stable/main/source/Sources.bz2
+        url: https://deb.tails.net/dists/stable/main/source/Sources.bz2
         compression: bz2
       parser:
         class: DebianSourcesParser
   repolinks:
     - desc: Tails home
-      url: https://tails.boum.org/
+      url: https://tails.net/
   groups: [ all, production, tails ]
 
 - name: tails_devel
@@ -36,11 +36,11 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: https://deb.tails.boum.org/dists/devel/main/source/Sources.bz2
+        url: https://deb.tails.net/dists/devel/main/source/Sources.bz2
         compression: bz2
       parser:
         class: DebianSourcesParser
   repolinks:
     - desc: Tails home
-      url: https://tails.boum.org/
+      url: https://tails.net/
   groups: [ all, production, tails ]
