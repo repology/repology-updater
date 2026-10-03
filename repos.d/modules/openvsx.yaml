@@ -3,7 +3,8 @@
 ###########################################################################
 # NOTE: API returns more data for individual packages, including upstream
 # url. Unfortunately, we cannot fetch individual API output for every package
-# Also if ?size=10000 breaks at some point, we'll have to disable this
+# The search API caps ?size at 1000, so OpenVSXFetcher pages through it by
+# offset.
 - name: openvsx
   type: modules
   desc: Open VSX
@@ -11,11 +12,10 @@
   ruleset: openvsx
   minpackages: 3500
   sources:
-    - name: search.json
+    - name: search
       fetcher:
-        class: FileFetcher
-        url: https://open-vsx.org/api/-/search?size=10000
-        allow_zero_size: false
+        class: OpenVSXFetcher
+        url: https://open-vsx.org/api/-/search
       parser:
         class: OpenVSXParser
   shadow: true
