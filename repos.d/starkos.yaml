@@ -12,13 +12,13 @@
     - name: ports.json
       fetcher:
         class: FileFetcher
-        url: 'https://starkos.codeberg.page/assets/ports.json'
+        url: 'https://stark-os.codeberg.page/assets/ports.json'
         allow_zero_size: false
       parser:
         class: StarkosJsonParser
   repolinks:
     - desc: StarkOS home
-      url: https://starkos.codeberg.page/
+      url: https://stark-os.codeberg.page/
     - desc: StarkOS ports on Codeberg
       url: https://codeberg.org/stark-OS/
   packagelinks:
