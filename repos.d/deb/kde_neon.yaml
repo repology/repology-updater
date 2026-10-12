@@ -11,7 +11,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: https://archive.neon.kde.org/user/dists/focal/main/source/Sources.gz
+        url: https://archive.neon.kde.org/user/dists/noble/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -61,7 +61,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: https://archive.neon.kde.org/unstable/dists/jammy/main/source/Sources.gz
+        url: https://archive.neon.kde.org/unstable/dists/resolute/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
@@ -86,7 +86,7 @@
     - name: main
       fetcher:
         class: FileFetcher
-        url: https://archive.neon.kde.org/testing/dists/jammy/main/source/Sources.gz
+        url: https://archive.neon.kde.org/testing/dists/noble/main/source/Sources.gz
         compression: gz
       parser:
         class: DebianSourcesParser
