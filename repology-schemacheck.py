@@ -169,6 +169,7 @@ rulesets = families + [
     'hyperbola',
     'kali',
     'kaos_build',
+    'kde_neon',
     'liguros',
     'macosx',
     'macosxbins',
