@@ -190,12 +190,20 @@
   repolinks:
     - desc: AlmaLinux home
       url: https://almalinux.org/
+  packagelinks:
+    - type: PACKAGE_SOURCES
+      url: 'https://git.almalinux.org/rpms/{srcname}/src/branch/c{{version}}'
+    - type: PACKAGE_RECIPE
+      url: 'https://git.almalinux.org/rpms/{srcname}/src/branch/c{{version}}/{srcname}.spec'
+    - type: PACKAGE_RECIPE_RAW
+      url: 'https://git.almalinux.org/rpms/{srcname}/raw/branch/c{{version}}/{srcname}.spec'
   groups: [ all, production, centos, rpm, almalinux ]
 {% endmacro %}
 
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ almalinux(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ almalinux(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
+{{ almalinux(10, minpackages=2000, valid_till='2035-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','SAP','SAPHANA','extras']) }}
 
 ###########################################################################
 # Rocky
@@ -239,6 +247,7 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ rocky(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ rocky(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
+{{ rocky(10, minpackages=2000, valid_till='2035-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','SAP','SAPHANA','extras']) }}
 
 ###########################################################################
 # EuroLinux
@@ -271,6 +280,6 @@
   groups: [ all, production, centos, rpm, eurolinux ]
 {% endmacro %}
 
-# See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
-{{ eurolinux(8, minpackages=5000, valid_till='2029-05-31', subrepos=['appstream', 'baseos', 'highavability', 'powertools', 'resilientstorage']) }}
-{{ eurolinux(9, minpackages=3000, valid_till='2032-05-31', subrepos=['appstream', 'baseos', 'highavailability', 'powertools', 'resilientstorage']) }}
+# See https://docs.euro-linux.com/ for EOL date (it was a RHEL clone)
+{{ eurolinux(8, minpackages=5000, valid_till='2024-10-23', subrepos=['appstream', 'baseos', 'highavability', 'powertools', 'resilientstorage']) }}
+{{ eurolinux(9, minpackages=3000, valid_till='2024-10-23', subrepos=['appstream', 'baseos', 'highavailability', 'powertools', 'resilientstorage']) }}
