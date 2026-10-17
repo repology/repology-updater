@@ -26,31 +26,6 @@
       url: https://community.kde.org/Neon/Git
   groups: [ all, production, kde_neon ]
 
-- name: kde_neon_user_lts
-  type: repository
-  desc: KDE neon User LTS
-  family: debuntu
-  ruleset: [debuntu, kde_neon]
-  minpackages: 400
-  sources:
-    - name: main
-      fetcher:
-        class: FileFetcher
-        url: https://archive.neon.kde.org/user/lts/dists/focal/main/source/Sources.gz
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-        allowed_vcs_urls: 'https://invent.kde.org/neon/'
-      subrepo: main
-  repolinks:
-    - desc: KDE neon home
-      url: https://neon.kde.org/
-    - desc: KDE neon git repositories
-      url: https://invent.kde.org/neon
-    - desc: KDE neon wiki
-      url: https://community.kde.org/Neon/Git
-  groups: [ all, production, kde_neon ]
-
 - name: kde_neon_unstable
   type: repository
   desc: KDE neon Unstable
