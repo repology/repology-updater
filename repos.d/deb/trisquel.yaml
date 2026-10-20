@@ -31,7 +31,7 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
+  groups: [ all, trisquel ]
 
 {% if backports %}
 - name: trisquel_{{major}}_{{minor}}_backports
@@ -62,7 +62,7 @@
   repolinks:
     - desc: Trisquel home
       url: https://trisquel.info/
-  groups: [ all, production, trisquel ]
+  groups: [ all, trisquel ]
 {% endif %}
 {% endmacro %}
 
