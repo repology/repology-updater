@@ -211,7 +211,7 @@
               }
   
               # provides ?projectLabel and ?projectDescription
-              SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. }
+              SERVICE wikibase:label { bd:serviceParam wikibase:language 'mul,en'. }
             }
       parser:
         class: WikidataJsonParser
