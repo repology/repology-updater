@@ -97,7 +97,7 @@
     - desc: GitHub repository
       url: https://github.com/kth5/archpower
   # XXX: could add packagelink to GH repo, but that's not possible
-  groups: [ all, production, arch_extra ]
+  groups: [ all, arch_extra ]
 {% endfor %}
 
 {% for arch in ['i486', 'i686', 'pentium4'] %}
