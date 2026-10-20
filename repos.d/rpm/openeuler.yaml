@@ -48,3 +48,4 @@
 
 {{ openeuler('24.09',         minpackages=3000, valid_till='2025-03') }}
 {{ openeuler('25.03',         minpackages=3000, valid_till='2025-09') }}
+# no new versions are accepted unless issues mentioned in `pessimized` field above are resolved, see also https://github.com/repology/repology-updater/pull/1602

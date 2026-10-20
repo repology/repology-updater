@@ -85,6 +85,7 @@
 # https://en.opensuse.org/Lifetime
 {{ opensuse_leap('15.5', minpackages=18000, valid_till='2024-12-31') }} # expected eol date
 {{ opensuse_leap('15.6', minpackages=15000, valid_till='2025-12-31') }} # expected eol date
+# no new versions are accepted unless issues mentioned in `pessimized` field above are resolved
 
 - name: opensuse_tumbleweed
   type: repository

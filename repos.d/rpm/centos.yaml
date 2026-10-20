@@ -196,6 +196,7 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ almalinux(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ almalinux(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
+# no new versions are accepted unless there are valid spec links for each package, see also https://github.com/repology/repology-updater/pull/1605
 
 ###########################################################################
 # Rocky
@@ -239,6 +240,7 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ rocky(8, minpackages=2500, valid_till='2029-05-31', subrepos=['AppStream','BaseOS','HighAvailability','NFV','PowerTools','RT','ResilientStorage','extras']) }}
 {{ rocky(9, minpackages=2000, valid_till='2032-05-31', subrepos=['AppStream','BaseOS','CRB','HighAvailability','NFV','RT','ResilientStorage','SAP','SAPHANA','extras']) }}
+# no new versions are accepted unless there are valid spec links for each package, see also https://github.com/repology/repology-updater/pull/1605
 
 ###########################################################################
 # EuroLinux
@@ -274,3 +276,4 @@
 # See https://access.redhat.com/support/policy/updates/errata for EOL date (because it's a RHEL clone)
 {{ eurolinux(8, minpackages=5000, valid_till='2029-05-31', subrepos=['appstream', 'baseos', 'highavability', 'powertools', 'resilientstorage']) }}
 {{ eurolinux(9, minpackages=3000, valid_till='2032-05-31', subrepos=['appstream', 'baseos', 'highavailability', 'powertools', 'resilientstorage']) }}
+# no new versions are accepted unless there are valid spec links for each package, see also https://github.com/repology/repology-updater/pull/1605
