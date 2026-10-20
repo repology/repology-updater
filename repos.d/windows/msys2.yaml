@@ -39,7 +39,7 @@
   family: msys2
   ruleset: [msys2, msys2_mingw, windows]
   color: 'ef7f1a'
-  minpackages: 2500
+  minpackages: 1500
   sources:
     - name: x86_64
       fetcher:
