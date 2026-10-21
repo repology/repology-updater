@@ -43,7 +43,7 @@
     - name: contrib
       fetcher:
         class: GitFetcher
-        url: 'https://github.com/pisilinux/contrib.git'
+        url: 'https://git.pisilinux.org/Pisilinux/contrib.git'
         sparse_checkout: [ '**/pspec.xml' ]
       parser:
         class: PisiParser
@@ -54,11 +54,11 @@
       url: https://github.com/pisilinux
   packagelinks:
     - type: PACKAGE_SOURCES
-      url: 'https://github.com/pisilinux/contrib/tree/master/{srcname}'
+      url: 'https://git.pisilinux.org/Pisilinux/contrib/src/branch/main/{srcname}'
     - type: PACKAGE_RECIPE
-      url: 'https://github.com/pisilinux/contrib/blob/master/{srcname}/pspec.xml'
+      url: 'https://git.pisilinux.org/Pisilinux/contrib/src/branch/main/{srcname}/pspec.xml'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://raw.githubusercontent.com/pisilinux/contrib/master/{srcname}/pspec.xml'
+      url: 'https://git.pisilinux.org/Pisilinux/contrib/raw/branch/main/{srcname}/pspec.xml'
   groups: [ all, production, pisi ]
 
 # TODO: add old_contrib if still relevant https://github.com/pisilinux/old_contrib
