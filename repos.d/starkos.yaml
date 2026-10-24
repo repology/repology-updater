@@ -1,9 +1,9 @@
 ###########################################################################
-# StarkOS
+# starkOS
 ###########################################################################
 - name: starkos
   type: repository
-  desc: StarkOS
+  desc: starkOS
   family: starkos
   ruleset: starkos
   minpackages: 2000
@@ -17,9 +17,9 @@
       parser:
         class: StarkosJsonParser
   repolinks:
-    - desc: StarkOS home
+    - desc: starkOS home
       url: https://stark-os.codeberg.page/
-    - desc: StarkOS ports on Codeberg
+    - desc: starkOS ports on Codeberg
       url: https://codeberg.org/stark-OS/
   packagelinks:
     - type: PACKAGE_SOURCES
