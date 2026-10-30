@@ -254,6 +254,8 @@ class NameType:
 
     XREPO_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
+    BCR_MODULE_NAME: ClassVar[int] = GENERIC_SRC_NAME
+
 
 @dataclass
 class _NameMapping:
