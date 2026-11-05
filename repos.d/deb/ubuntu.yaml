@@ -146,4 +146,5 @@
 {{ ubuntu('25', '04', 'plucky',   minpackages=33000, valid_till='2026-01-15', packages=false) }}
 {{ ubuntu('25', '10', 'questing', minpackages=33000, valid_till='2026-07-09') }}
 {{ ubuntu('26', '04', 'resolute', minpackages=33000, valid_till='2041-04-25') }}
-{{ ubuntu('26', '10', 'stonking', minpackages=33000, valid_till='2027-07-08', backports=false, proposed=true) }}
+{{ ubuntu('26', '10', 'stonking', minpackages=33000, valid_till='2027-07-15') }}
+{{ ubuntu('27', '04', 'tenacious', minpackages=33000, valid_till='2028-01-20', backports=false, proposed=true) }}
