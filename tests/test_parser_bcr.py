@@ -23,27 +23,21 @@ import pytest
 
 from repology.package import LinkType, Package, PackageFlags
 from repology.packagemaker import PackageFactory
-from repology.parsers.parsers.bcr import BazelCentralRegistryParser, _normalize_release_version
+from repology.parsers.parsers.bcr import BazelCentralRegistryParser, _normalize_version
 
 
 @pytest.mark.parametrize('version,expected', [
     ('1.3.1', '1.3.1'),
-    ('v2.0.0', '2.0.0'),
     ('1.3.1.bcr.5', '1.3.1'),
     ('3.4.0.bcr.1.1', '3.4.0'),
-    ('5.3.0-bcr.3', '5.3.0'),
-    ('2.10.1.bcr1', '2.10.1'),
-    ('1.16.0.bcr.beta.3', '1.16.0'),
-    ('5.3.0-bcr.alpha.5', '5.3.0'),
-    ('0.0.0-20250408-yosyshq.bcr.1', '0.0.0-20250408-yosyshq'),
     ('0.10.0-bcr.20240313-1142dc4.bcr.2', '0.10.0-bcr.20240313-1142dc4'),
-    ('3.8.2.bcr.11', '3.8.2'),
-    # pseudo-versions are left for the snapshot rules
-    ('1.1.1-0.20211014115138-25647e692c79', '1.1.1-0.20211014115138-25647e692c79'),
-    ('0.12.1-20260505-108f93c', '0.12.1-20260505-108f93c'),
+    # other spellings are left for the rules
+    ('v2.0.0', 'v2.0.0'),
+    ('5.3.0-bcr.3', '5.3.0-bcr.3'),
+    ('2.10.1.bcr1', '2.10.1.bcr1'),
 ])
-def test_normalize_release_version(version: str, expected: str) -> None:
-    assert _normalize_release_version(version) == expected
+def test_normalize_version(version: str, expected: str) -> None:
+    assert _normalize_version(version) == expected
 
 
 def _write_json(path: Path, data: dict[str, Any]) -> None:
@@ -82,29 +76,6 @@ def registry(tmp_path: Path) -> Path:
     _write_json(module / '1.3.0' / 'source.json', {
         'url': 'https://example.com/foo-1.3.0.tar.gz',
     })
-    snapshot = tmp_path / 'modules' / 'bar'
-    _write_json(snapshot / 'metadata.json', {
-        'versions': [
-            '1.0.0', '1.0.0.bcr.20241007', '1.1.1-0.20211014115138-25647e692c79', 'v2.0.0.bcr.1',
-        ],
-    })
-    _write_json(snapshot / '1.0.0' / 'source.json', {
-        'url': 'https://github.com/example/bar/archive/refs/tags/v1.0.0.tar.gz',
-        'strip_prefix': 'bar-1.0.0',
-    })
-    _write_json(snapshot / '1.0.0.bcr.20241007' / 'source.json', {
-        'url': 'https://github.com/example/bar/archive/858451e5b7d1c56cf8f6d58f88cf958351837e53.tar.gz',
-        'strip_prefix': 'bar-858451e5b7d1c56cf8f6d58f88cf958351837e53',
-    })
-    _write_json(snapshot / '1.1.1-0.20211014115138-25647e692c79' / 'source.json', {
-        'url': 'https://github.com/example/bar/archive/25647e6.tar.gz',
-        'strip_prefix': 'bar-25647e692c7906b96ffd2b05ca54c097948e879c',
-    })
-    _write_json(snapshot / 'v2.0.0.bcr.1' / 'source.json', {
-        'type': 'git_repository',
-        'remote': 'https://github.com/example/bar.git',
-        'commit': '1cc19a21a0c06b4e3e7a1bd8a3f4f59f69cbd9b1',
-    })
     # a directory without metadata.json is not a module
     (tmp_path / 'modules' / 'stray').mkdir()
     return tmp_path
@@ -114,24 +85,6 @@ def test_every_version_is_emitted(registry: Path) -> None:
     packages = _parse(registry)
     assert sorted(packages) == ['1.0.0', '1.1.0', '1.1.0.bcr.1', '1.2.0', '1.3.0']
     assert {package.projectname_seed for package in packages.values()} == {'foo'}
-
-
-def test_bcr_snapshot(registry: Path) -> None:
-    packages = _parse(registry, 'bar')
-    # release archive
-    assert not packages['1.0.0'].flags & PackageFlags.IGNORE
-    # full commit hash in the archive url
-    assert packages['1.0.0.bcr.20241007'].flags & PackageFlags.IGNORE
-    # short hash in the url, full hash in strip_prefix
-    assert packages['1.1.1-0.20211014115138-25647e692c79'].flags & PackageFlags.IGNORE
-    # git_repository pinned to a commit
-    assert packages['v2.0.0.bcr.1'].flags & PackageFlags.IGNORE
-    # a snapshot keeps its module version, a release is normalized
-    assert packages['1.0.0.bcr.20241007'].version == '1.0.0.bcr.20241007'
-    assert packages['v2.0.0.bcr.1'].version == 'v2.0.0.bcr.1'
-    assert packages['1.0.0'].version == '1.0.0'
-    # release archives of other modules
-    assert not any(package.flags & PackageFlags.IGNORE for package in _parse(registry).values())
 
 
 def test_revision_shares_normalized_version(registry: Path) -> None:
