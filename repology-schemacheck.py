@@ -37,6 +37,7 @@ families = [
     'arch',
     'ataraxia',
     'baulk',
+    'bcr',
     'buildroot',
     'carbs',
     'centos',
