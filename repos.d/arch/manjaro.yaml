@@ -4,6 +4,7 @@
 # Broken mirrors never to use again:
 # - ipng.mm.fcix.net
 # - mirror.yandex.ru
+# - mirror.kamtv.ru
 - name: manjaro_stable
   type: repository
   desc: Manjaro Stable
@@ -17,7 +18,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.kamtv.ru/manjaro/stable/{{sub}}/x86_64/{{sub}}.db.tar.gz'
+        url: 'https://mirror.dkm.cz/manjaro/stable/{{sub}}/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}
@@ -40,7 +41,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.kamtv.ru/manjaro/testing/{{sub}}/x86_64/{{sub}}.db.tar.gz'
+        url: 'https://mirror.dkm.cz/manjaro/testing/{{sub}}/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}
@@ -63,7 +64,7 @@
     - name: {{sub}}
       fetcher:
         class: TarFetcher
-        url: 'https://mirror.kamtv.ru/manjaro/unstable/{{sub}}/x86_64/{{sub}}.db.tar.gz'
+        url: 'https://mirror.dkm.cz/manjaro/unstable/{{sub}}/x86_64/{{sub}}.db.tar.gz'
       parser:
         class: ArchDBParser
       subrepo: {{sub}}
