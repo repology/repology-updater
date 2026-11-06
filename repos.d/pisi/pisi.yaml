@@ -44,6 +44,7 @@
       fetcher:
         class: GitFetcher
         url: 'https://git.pisilinux.org/Pisilinux/contrib.git'
+        branch: main
         sparse_checkout: [ '**/pspec.xml' ]
       parser:
         class: PisiParser
