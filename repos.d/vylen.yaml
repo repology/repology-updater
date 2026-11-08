@@ -27,7 +27,7 @@
       url: https://vylen.gitlab.io/packages
   packagelinks:
     - type: PACKAGE_HOMEPAGE
-      url: 'https://vylen.gitlab.io/packages/#{srcname}'
+      url: 'https://vylen.gitlab.io/packages/?package={srcname}'
     - type: PACKAGE_SOURCES
       url: 'https://gitlab.com/vylen/ports/{subrepo}/-/tree/main/{srcname}'
     - type: PACKAGE_RECIPE
