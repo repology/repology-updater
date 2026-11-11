@@ -4,7 +4,7 @@ jobs:
   build:
     env:
       REPOLOGY_CONFIG: repology-test.conf.default
-      POSTGRESQL: 16
+      POSTGRESQL: 17
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
