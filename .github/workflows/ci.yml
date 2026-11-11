@@ -12,14 +12,22 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install dependencies
-        # depends for jsonslicer, postgresql-liversion, rpm4 respectively
+      - name: Set up PostgreSQL
         run: |
-          curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main $POSTGRESQL" > /etc/apt/sources.list.d/pgdg.list'
-          sudo apt-get update
+          sudo pg_dropcluster $POSTGRESQL main --stop || true
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
+          sudo apt update
+          sudo apt install postgresql-$POSTGRESQL
+          sudo pg_createcluster $POSTGRESQL main
+          sudo sed -i -e 's|5433|5432|' /etc/postgresql/$POSTGRESQL/main/postgresql.conf
+          sudo sh -c "echo 'local all all trust' > /etc/postgresql/$POSTGRESQL/main/pg_hba.conf"
+          sudo sh -c "echo 'host all all samehost trust' >> /etc/postgresql/$POSTGRESQL/main/pg_hba.conf"
+          sudo pg_ctlcluster $POSTGRESQL main start
+      - name: Install dependencies
+        # depends for jsonslicer, postgresql-liversion, rpm4 respectively; apt update alteady done in previous step
+        run: |
           sudo apt-get install libyajl-dev
-          sudo apt-get install postgresql-$POSTGRESQL postgresql-server-dev-$POSTGRESQL
+          sudo apt-get install postgresql-server-dev-$POSTGRESQL
           sudo apt-get install libnss3-dev libnspr4-dev libmagic-dev libpopt-dev libarchive-dev libdb5.3-dev libgcrypt-dev libxslt1-dev
       - name: Install libversion
         run: |
