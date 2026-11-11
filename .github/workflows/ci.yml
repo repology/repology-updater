@@ -47,8 +47,8 @@ jobs:
           mkdir _postgresql-libversion
           cd _postgresql-libversion
           wget -qO- https://github.com/repology/postgresql-libversion/archive/master.tar.gz | tar -xzf- --strip-components 1
-          make
-          sudo make install
+          make PG_CONFIG=/usr/lib/postgresql/$POSTGRESQL/bin/pg_config
+          sudo make install PG_CONFIG=/usr/lib/postgresql/$POSTGRESQL/bin/pg_config
       - name: Install rpm4
         run: |
           mkdir _rpm
