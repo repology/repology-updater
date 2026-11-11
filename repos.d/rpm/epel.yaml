@@ -31,14 +31,6 @@
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   packagelinks:
-    {% if version == 6 %}
-    - type: PACKAGE_SOURCES
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/tree/el6'
-    - type: PACKAGE_RECIPE
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/el6/f/{srcname}.spec'
-    - type: PACKAGE_RECIPE_RAW
-      url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/el6/f/{srcname}.spec'
-    {% else %}
     - type: PACKAGE_HOMEPAGE
       url: 'https://packages.fedoraproject.org/pkgs/{srcname}/'
     - type: PACKAGE_SOURCES
@@ -47,7 +39,6 @@
       url: 'https://src.fedoraproject.org/rpms/{srcname}/blob/epel{{version}}/f/{srcname}.spec'
     - type: PACKAGE_RECIPE_RAW
       url: 'https://src.fedoraproject.org/rpms/{srcname}/raw/epel{{version}}/f/{srcname}.spec'
-    {% endif %}
     # could be more specific, but we need binname(s) for that
     # see https://github.com/repology/repology-updater/issues/1274
     # see the same for fedora
@@ -60,7 +51,6 @@
 
 # EoLs assumed to be based on corresponding RHEL releases
 # https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux#Product_life_cycle
-{{ epel(6, minpackages=5000, subdir="SRPMS",                  valid_till="2020-11-30", archived=True) }}
 {{ epel(7, minpackages=7000, subdir="SRPMS",                  valid_till="2024-06-30", archived=True) }}
 {{ epel(8, minpackages=5000, subdir="Everything/SRPMS",       valid_till="2029-05-31") }}
 {{ epel(9, minpackages=7000, subdir="Everything/source/tree", valid_till="2032-05-31") }}
