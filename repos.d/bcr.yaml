@@ -1,0 +1,34 @@
+###########################################################################
+# Bazel Central Registry
+###########################################################################
+- name: bcr
+  type: repository
+  desc: Bazel Central Registry
+  family: bcr
+  ruleset: bcr
+  color: '43a047'
+  minpackages: 1000
+  sources:
+    - name: bazel-central-registry
+      fetcher:
+        class: GitFetcher
+        url: https://github.com/bazelbuild/bazel-central-registry.git
+        branch: main
+        sparse_checkout: [ 'modules/*/metadata.json', 'modules/*/*/source.json' ]
+      parser:
+        class: BazelCentralRegistryParser
+  repolinks:
+    - desc: Bazel Central Registry
+      url: https://registry.bazel.build/
+    - desc: Bazel Central Registry repository on GitHub
+      url: https://github.com/bazelbuild/bazel-central-registry
+  packagelinks:
+    - type: PACKAGE_HOMEPAGE
+      url: 'https://registry.bazel.build/modules/{srcname}'
+    - type: PACKAGE_SOURCES
+      url: 'https://github.com/bazelbuild/bazel-central-registry/tree/main/modules/{srcname}/{rawversion}'
+    - type: PACKAGE_PATCH
+      url: 'https://github.com/bazelbuild/bazel-central-registry/blob/main/modules/{srcname}/{rawversion}/patches/{?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/main/modules/{srcname}/{rawversion}/patches/{?patch}'
+  groups: [ all, production ]
