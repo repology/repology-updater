@@ -35,12 +35,11 @@ class VylenPackagesJsonParser(Parser):
                 pkg.add_maintainers(extract_maintainers(pkgdata['maintainer']))
 
                 for source in pkgdata.get('source', []):
-                    url = source.get('url')
+                    url: str = source.get('url')
 
                     if source.get('type') == 'ext':
                         pkg.add_links(LinkType.UPSTREAM_DOWNLOAD, url)
                     elif url.endswith(('.patch', '.diff')):
-                        pkg.add_links(LinkType.PACKAGE_PATCH, url)
-                        pkg.add_links(LinkType.PACKAGE_PATCH_RAW, url.replace('/-/blob/', '/-/raw/'))
+                        pkg.set_extra_field('patch', url)
 
                 yield pkg

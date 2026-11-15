@@ -29,9 +29,13 @@
     - type: PACKAGE_HOMEPAGE
       url: 'https://vylen.gitlab.io/packages/#{srcname}'
     - type: PACKAGE_SOURCES
-      url: 'https://gitlab.com/vylen/ports/{subrepo}/-/tree/main/{srcname}'
+      url: 'https://vylen.gitlab.io/?package={srcname}&repo={subrepo}&view=tree'
     - type: PACKAGE_RECIPE
-      url: 'https://gitlab.com/vylen/ports/{subrepo}/-/blob/main/{srcname}/build.eme'
+      url: 'https://vylen.gitlab.io/?package={srcname}&repo={subrepo}&view=blob'
     - type: PACKAGE_RECIPE_RAW
-      url: 'https://gitlab.com/vylen/ports/{subrepo}/-/raw/main/{srcname}/build.eme'
+      url: 'https://vylen.gitlab.io/?package={srcname}&repo={subrepo}&view=raw'
+    - type: PACKAGE_PATCH
+      url: 'https://vylen.gitlab.io/?package={srcname}&repo={subrepo}&view=blob&file={?patch}'
+    - type: PACKAGE_PATCH_RAW
+      url: 'https://vylen.gitlab.io/?package={srcname}&repo={subrepo}&view=raw&file={?patch}'
   groups: [ all, production ]
