@@ -11,6 +11,7 @@
   ruleset: [ debuntu, deepin ]
   color: '949393'
   minpackages: 22000
+  valid_till: 2024-11-20
   sources:
     {% for sub in ['contrib', 'main', 'non-free'] %}
     - name: {{sub}}
