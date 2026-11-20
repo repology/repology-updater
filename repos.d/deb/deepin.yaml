@@ -2,35 +2,6 @@
 # Deepin Linux
 ###########################################################################
 
-- name: deepin_unstable
-  sortname: deepin_20
-  type: repository
-  desc: deepin 20
-  statsgroup: Debian+derivs
-  family: debuntu
-  ruleset: [ debuntu, deepin ]
-  color: '949393'
-  minpackages: 22000
-  valid_till: 2024-11-20
-  sources:
-    {% for sub in ['contrib', 'main', 'non-free'] %}
-    - name: {{sub}}
-      fetcher:
-        class: FileFetcher
-        url: 'https://community-packages.deepin.com/deepin/apricot/dists/apricot/{{sub}}/source/Sources.gz'
-        compression: gz
-      parser:
-        class: DebianSourcesParser
-      subrepo: {{sub}}
-      packagelinks:
-        - type: PACKAGE_SOURCES
-          url: 'https://community-packages.deepin.com/deepin/apricot/pool/{{sub}}/{srcname|lib_and_first_letter}/{srcname}/'
-    {% endfor %}
-  repolinks:
-    - desc: deepin home
-      url: https://www.deepin.org/
-  groups: [ all, production, deepin ]
-
 - name: deepin_23
   type: repository
   desc: deepin 23
