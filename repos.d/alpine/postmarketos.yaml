@@ -34,7 +34,12 @@
       url: https://pkgs.postmarketos.org/packages
     - desc: Recipe repository
       url: https://gitlab.com/postmarketOS/pmaports/
-  groups: [ all, production, postmarketos ]
+  # Disabled, removal pending.
+  # - PACKAGE_HOMEPAGE link yields 500
+  # - No links to recipes
+  # - Reposititory is archived, new repository too slow to respond
+  # Case: no way to check the source of fake fusefs:sshfs version 999.3.7.7
+  groups: [ all, postmarketos ]
 {% endmacro %}
 
 # EoLs according to https://endoflife.date/postmarketos
