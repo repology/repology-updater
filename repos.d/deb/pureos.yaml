@@ -1,7 +1,7 @@
 ###########################################################################
 # PureOS
 ###########################################################################
-{% macro pureos(codename, minpackages) %}
+{% macro pureos(codename, minpackages, valid_till=None) %}
 - name: pureos_{{codename}}
   type: repository
   desc: PureOS {{codename}}
@@ -10,6 +10,9 @@
   ruleset: [debuntu, pureos]
   color: '000000'
   minpackages: 26000
+  {% if valid_till %}
+  valid_till: {{valid_till}}
+  {% endif %}
   sources:
     {% set subrepos1 = [codename] if codename == 'landing' else [codename, codename + '-updates'] %}
     {% for sub1 in subrepos1 %}
@@ -32,6 +35,6 @@
   groups: [ all, production, pureos ]
 {% endmacro %}
 
-{{ pureos('amber', 26000) }}
-{{ pureos('byzantium', 28000) }}
+{{ pureos('amber', 26000, valid_till='2024-06-30') }}
+{{ pureos('byzantium', 28000, valid_till='2026-08-31') }}
 {{ pureos('landing', 32000) }}
