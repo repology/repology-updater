@@ -35,6 +35,5 @@
   groups: [ all, production, pureos ]
 {% endmacro %}
 
-{{ pureos('amber', 26000, valid_till='2024-06-30') }}
 {{ pureos('byzantium', 28000, valid_till='2026-08-31') }}
 {{ pureos('landing', 32000) }}
